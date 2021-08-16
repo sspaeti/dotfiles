@@ -1,0 +1,147 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+escape",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+alt+cmd+7",
+        "command": "-editor.action.commentLine",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+-",
+        "command": "-workbench.action.navigateBack"
+    },
+    {
+        "key": "ctrl+shift+-",
+        "command": "-workbench.action.navigateForward"
+    },
+    {
+        "key": "shift+cmd+n",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+shift+[Equal]",
+        "command": "-workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "cmd+k d",
+        "command": "editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+cmd+k",
+        "command": "-editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+d",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "shift+cmd+d",
+        "command": "-editor.action.copyLinesDownAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k cmd+u",
+        "command": "-editor.action.transformToUppercase",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+a",
+        "command": "workbench.action.toggleActivityBarVisibility"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "workbench.view.scm",
+        "when": "gitlens:enabled && config.gitlens.keymap == 'chorded'"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "-workbench.view.scm",
+        "when": "gitlens:enabled && config.gitlens.keymap == 'chorded'"
+    },
+    {
+        "key": "alt+o",
+        "command": "commander.runCommands",
+        "args": [
+            "outline.focus",
+            "list.collapseAll",
+            "workbench.action.focusFirstEditorGroup"
+        ]
+    },
+    {
+        "key": "shift+cmd+s",
+        "command": "-workbench.action.files.saveAs"
+    },
+    {
+        "key": "shift+cmd+s",
+        "command": "workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "cmd+k s",
+        "command": "-workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "shift+cmd+m",
+        "command": "workbench.action.toggleStatusbarVisibility"
+    },
+    {
+        "key": "d d",
+        "command": "-notebook.cell.delete",
+        "when": "notebookEditorFocused && !inputFocus && notebookViewType == 'jupyter-notebook'"
+    },
+    {
+        "key": "cmd+k d",
+        "command": "-workbench.files.action.compareWithSaved"
+    },
+    {
+        "key": "alt+left",
+        "command": "-breadcrumbs.focusPreviousWithPicker",
+        "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+    },
+    {
+        "key": "alt+left",
+        "command": "-breadcrumbs.focusPrevious",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "alt+cmd+left",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+cmd+right",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+cmd+left",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "alt+cmd+right",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "alt",
+        "command": "workbench.action.toggleMultiCursorModifier"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "workbench.view.extension.gitlens"
+    }, // Toggle between terminal and editor focus
+    {
+        "key": "ctrl+[Equal]",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+[Equal]",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    }
+]
