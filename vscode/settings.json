@@ -1,0 +1,231 @@
+{
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "window.restoreFullscreen": true,
+    "explorer.confirmDelete": false,
+    "editor.tabSize": 4,
+    "workbench.list.openMode": "singleClick",
+    "editor.largeFileOptimizations": false,
+    "python.pythonPath": "/Users/sspaeti/.venvs/onenote-export/bin/python",
+    "kite.showWelcomeNotificationOnStartup": false,
+    //linging:
+    // "python.linting.pycodestyleEnabled": true,
+    // "python.linting.pylintEnabled": true,
+    // "python.linting.enabled": true,
+    // "python.formatting.provider": "autopep8"
+    "[dockerfile]": {
+        "editor.formatOnSave": false
+    },
+    "autoDocstring.quoteStyle": "'''",
+    "autoDocstring.docstringFormat": "google",
+    "breadcrumbs.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveTimeout": 2000,
+    "editor.formatOnPaste": false,
+    "editor.rulers": [
+        100
+    ],
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.suggestSelection": "first",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    ],
+    "files.autoSave": "off",
+    "files.exclude": {
+        "**/*.egg-info": true,
+        "**/*.pyc": true,
+        "**/.DS_Store": true,
+        "**/.cache": true,
+        "**/.files": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.idea": true,
+        "**/.ipynb_checkpoints": true,
+        "**/.mypy_cache": true,
+        "**/.offline-package-cache": true,
+        "**/.pytest_cache": true,
+        "**/.ropeproject": true,
+        "**/.runs": true,
+        "**/.svn": true,
+        "**/.temp": true,
+        "**/.tox": true,
+        "**/.vscode": true,
+        "**/CVS": true,
+        "**/__pycache__": true,
+        "**/access.log": true,
+        "**/build": true,
+        "**/error.log": true,
+        "**/node_modules": true,
+        "**/settings_comments.txt": true,
+        "**/spark-warehouse": true,
+        "**/tags": true,
+        "*/.coverage": true,
+        "*/coverage.xml": true,
+        "*/dist": true,
+        "*/htmlcov": true,
+        "pulumi/bin": true,
+        "scala_modules/*/target": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "git.ignoreLimitWarning": true,
+    "python.analysis.disabled": [
+        "unresolved-import"
+    ],
+    "python.analysis.memory.keepLibraryAst": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100",
+        "-S",
+        "--fast",
+    ],
+    //"python.jediEnabled": true, #old, new python.languageServer "Jedi"
+    "python.languageServer": "Jedi",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.pycodestyleEnabled": false,
+    "python.linting.pylintArgs": [
+        "--rcfile",
+        "~/.pylintrc",
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.venvPath": "/Users/sspaeti/.venvs/",
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.startupEditor": "newUntitledFile",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "workbench.tree.renderIndentGuides": "onHover",
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "extensions.autoUpdate": true,
+    "explorer.confirmDragAndDrop": false,
+    "git.autofetch": true,
+    //###################################################################
+    // MINIMALISTIC DESIGN
+    //###################################################################
+    "editor.renderLineHighlight": "none", // removes line highlight
+    "editor.overviewRulerBorder": false, // removes border from overview ruler (located on the right, same position as the scrollbar)
+    "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
+    "editor.folding": true, // removes the folding feature
+    "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
+    "editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
+    "editor.glyphMargin": true, // removes the space used mainly for debugging indicators
+    "explorer.openEditors.visible": 0, // removes the activity bar (the 4 icons at the left of the screen), so now you will have to open the explorer, git, debugger and extension with shortcuts or through the Command Palette
+    "workbench.editor.showIcons": false, // removes icon from opened files in tabs
+    "workbench.editor.tabCloseButton": "off", // removes the status bar
+    "indenticator.color.dark": "rgba(255,255,255,.1)", // adds a subtle indent guide (needs Indenticator extension)
+    "workbench.colorCustomizations": { // object that allows you to customize your color theme: https://code.visualstudio.com/docs/getstarted/theme-color-reference
+        "tab.activeBorder": "#0000" // removes border to highlight active tabs (the colors formats are: #RGB, #RGBA, #RRGGBB or #RRGGBBAA)
+    },
+    "editor.wordBasedSuggestions": true, //false,
+    //gitlens icons
+    "gitHistory.showEditorTitleMenuBarIcons": false,
+    "gitlens.menus": {
+        "editor": {
+            "blame": false,
+            "clipboard": true,
+            "compare": true,
+            "details": false,
+            "history": false,
+            "remote": false
+        },
+        "editorGroup": false,
+        "editorTab": false,
+        "explorer": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true
+        },
+        "scmGroup": {
+            "compare": true,
+            "openClose": true,
+            "stash": true,
+            "stashInline": true
+        },
+        "scmItem": {
+            "clipboard": true,
+            "compare": true,
+            "history": true,
+            "remote": true,
+            "stash": true
+        }
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "jupyter.alwaysTrustNotebooks": true,
+    "outline.showVariables": false,
+    "[html]": {
+        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
+    },
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "mssql.connections": [
+        {
+            "server": "{{put-server-name-here}}",
+            "database": "{{put-database-name-here}}",
+            "user": "{{put-username-here}}",
+            "password": "{{put-password-here}}"
+        }
+    ],
+    "grammarly.dialect": "british",
+    "[sql]": {
+        "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "python.defaultInterpreterPath": "/Users/sspaeti/.venvs/onenote-export/bin/python",
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "d",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "<C-n>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "editor.lineNumbers": "relative"
+}
