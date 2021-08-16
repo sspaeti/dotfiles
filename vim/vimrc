@@ -1,0 +1,30 @@
+syntax on
+
+
+" search related
+set hlsearch 
+set ignorecase
+set incsearch
+set smartcase
+
+"general
+colorscheme onedark
+let mapleader = " "
+inoremap jk <ESC>
+filetype plugin indent on
+
+set ruler            " show the cursor position all the time
+set showcmd          " display incomplete commands
+set laststatus=2     " Always display the status line
+
+set number
+set numberwidth=5
+set relativenumber
+
+
+"plugs to intall
+call plug#begin('~/.vim/bundle')
+Plug 'christoomey/vim-system-copy'
+Plug 'valloric/youcompleteme'
+Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+call plug#end()
