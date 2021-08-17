@@ -9,14 +9,14 @@ commands I learned and useful
 
 
 zz -> centers your cursor to the middle
-; -> if you search something with f or t, it will search for the next one 
+; -> if you search something with f or t, it will search for the next one
 gg -> start and G -> end
 w -> goes one word and W goes further, same for back with b and B
 b -> goes one word back
 e -> move to the end of your word
 % -> toggles between parentese forth and back if your inside one
 \* -> toggles through all your variable or word on in your text
-o -> will insert a new line and put you into insert mode directly. O will due it above 
+o -> will insert a new line and put you into insert mode directly. O will due it above
 C -> puts you into insert and replace until end of line
 a -> Insert text after the cursor
 A -> will put you into i mode and jump to end of line
@@ -36,7 +36,7 @@ L: puts cursor into lowest part of your code
 M: puts cursor in the middle part of your code
 H: puts cursort to the top (high?) part of your code
 Ctrl-i: jump to your previous navigation location
-ctrl-r : replace  
+ctrl-r : replace
 Ctrl-o: jump back to where you were
 J: join the current line with the next one (delete what's between)
 
@@ -59,7 +59,7 @@ s -> sentense
 
 [ ( { <	   -> A [], (), or {} block
 t -> tag
-b -> block B-> block in 
+b -> block B-> block in
 R -> Insert mode -> replaces existing text
 r -> replace one character
 
