@@ -13,3 +13,7 @@ brew bundle dump > $git/dotfiles/Brewfile -f
 source $venvs/dagster/bin/activate
 pip freeze > $git/dotfiles/python/venvs/dagster.txt
 deactivate
+
+source $venvs/banking/bin/activate
+pip freeze > $git/dotfiles/python/venvs/banking.txt
+deactivate
