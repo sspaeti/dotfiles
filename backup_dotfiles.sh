@@ -3,6 +3,7 @@
 cp ~/Library/ApplicationSupport/Code/User/settings.json $git/dotfiles/vscode/settings.json
 cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/dotfiles/vscode/keybindings.json
 cp ~/.vimrc $git/dotfiles/vim/vimrc
+cp ~/.config/nvim/init.vim $git/dotfiles/vim/init.vim
 
 brew bundle dump > $git/dotfiles/Brewfile -f
 

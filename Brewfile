@@ -8,9 +8,10 @@ tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
 brew "bash-completion"
-brew "docker"
+brew "docker", link: false
 brew "docker-machine"
 brew "hugo"
+brew "neovim"
 brew "pandoc"
 brew "python@3.8", link: true
 brew "tmux"
