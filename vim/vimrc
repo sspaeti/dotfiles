@@ -53,5 +53,9 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " prettier
 Plug 'sbdchd/neoformat'
 
+"status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 "install with :PlugInstall
