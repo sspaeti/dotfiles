@@ -13,7 +13,7 @@ brew "docker-machine"
 brew "hugo"
 brew "pandoc"
 brew "python@3.8", link: true
-brew "w3m"
+brew "tmux"
 brew "wget"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
