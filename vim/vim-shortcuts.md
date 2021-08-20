@@ -15,7 +15,7 @@ w -> goes one word and W goes further, same for back with b and B
 b -> goes one word back
 e -> move to the end of your word
 % -> toggles between parentese forth and back if your inside one
-\* -> toggles through all your variable or word on in your text
+\* -> toggles through all your variable or word on in your text -> with  # you toggle backwards
 o -> will insert a new line and put you into insert mode directly. O will due it above
 C -> puts you into insert and replace until end of line
 a -> Insert text after the cursor
