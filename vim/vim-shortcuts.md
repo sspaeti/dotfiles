@@ -40,6 +40,26 @@ ctrl-r : replace
 Ctrl-o: jump back to where you were
 J: join the current line with the next one (delete what's between)
 
+## Do even more Navigation
+ctrl+p: fuzzy finding for files
+:e open a new file
+ctrl+ˆ: toggle between two open files 
+### local marks
+m-any-key: set a marker on that key. with '-any-key you can jump back to that marker. you can set multiple markers
+	useful when you work in a file for long!
+### global marks
+same as local also set with m, but this time the any key will be capitalized
+
+## window operations
+ctrl+w: entering window mode
+then:
+v: vertical split
+s: horizontal split
+
+o: closes all except current one that I-m in
+:resize 10 for 10 rows or :resize vertical 10 for columns
+:Ex opens the file-three
+
 ## visual mode
 v -> visual mode (characters)
 V -> line mode
