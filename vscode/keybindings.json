@@ -143,5 +143,9 @@
         "key": "ctrl+[Equal]",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+[Minus]",
+        "command": "workbench.action.closePanel"
     }
 ]
