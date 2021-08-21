@@ -1,6 +1,21 @@
-"set runtimepath^=~/.vim runtimepath+=~/.vim/after
-"let &packpath=&runtimepath
-"source ~/.vimrc
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+
+
 
 " Ignore files
 set wildignore+=*.pyc
@@ -13,7 +28,7 @@ set hlsearch
 set ignorecase
 set incsearch
 
-syntax enable                           " Enables syntax highlighing
+syntax enable          "done in onedark.vim                  Enables syntax highlighing
 set smartcase
 set conceallevel=0                      " So that I can see `` in markdown files
 set tabstop=2                           " Insert 2 spaces for a tab
@@ -30,12 +45,12 @@ set pumheight=10                        " Makes popup menu smaller
 set hidden                              " Required to keep multiple buffers open multiple buffers
 
 "general
-"colorscheme onedark
 let mapleader = "\<Space>"
 inoremap jk <ESC>
 inoremap kj <Esc>
 filetype plugin indent on
-set clipboard=unnamedplus               " Copy paste between vim and everything else
+set clipboard=unnamedplus               " Copy paste between vim and everything else -> inserts all into system clipboard
+noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
 
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
@@ -46,8 +61,8 @@ set numberwidth=5
 set relativenumber
 
 " Easy CAPS
-inoremap <c-u> <ESC>viwUi
-nnoremap <c-u> viwU<Esc>
+"inoremap <c-u> <ESC>viwUi
+"nnoremap <c-u> viwU<Esc>
 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
@@ -102,6 +117,7 @@ call plug#begin('~/.config/nvim/vim-plug')
 Plug 'vim-airline/vim-airline'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'gruvbox-community/gruvbox'
 
 Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
@@ -128,5 +144,11 @@ call plug#end()
 "cusotm stuff just for neovim
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
+"syntax on
+""Gruvbox:
+"colorscheme gruvbox
+"set bg=dark
+""let g:gruvbox_contrast_dark = 'hard'
+
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
