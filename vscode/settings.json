@@ -239,5 +239,6 @@
         "<C-a>": false,
         "<C-f>": false
     },
-    "editor.lineNumbers": "relative"
+    "editor.lineNumbers": "relative",
+    "window.zoomLevel": 1
 }
