@@ -1,5 +1,5 @@
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (empty($TMUX))
   if (has("nvim"))
@@ -43,6 +43,7 @@ set t_Co=256                            " Support 256 colors
 set cmdheight=2                         " More space for displaying messages
 set pumheight=10                        " Makes popup menu smaller
 set hidden                              " Required to keep multiple buffers open multiple buffers
+set timeoutlen=500                      " By default timeoutlen is 1000 ms
 
 "general
 let mapleader = "\<Space>"
@@ -60,7 +61,75 @@ set number
 set numberwidth=5
 set relativenumber
 
+
+" 
+" REMAPS
+" Swiss keyboard remap
+"
+"switch between two buffers -> C-^ does not work with current swiss layout
+nnoremap <C-6> <C-^><cr>
+
+
+
+" Others
+"
+
+"Which-key healper for leader-key mapping
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" Create map to add keys to
+let g:which_key_map =  {}
+" Define a separator
+let g:which_key_sep = '→'
+
+" Not a fan of floating windows for this
+let g:which_key_use_floating_win = 0
+" Hide status line
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+
+" Single mappings
+let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
+let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
+let g:which_key_map['h'] = [ '<C-W>'                      , 'split below']
+let g:which_key_map['j'] = [ ':m .+1<CR>=='               , 'move current line one down']
+let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
+let g:which_key_map['k'] = [ ':m .-2<CR>=='               , 'move current line one up']
+
+" s is for search
+let g:which_key_map.s = {
+      \ 'name' : '+search' ,
+      \ '/' : [':History/'     , 'history'],
+      \ ';' : [':Commands'     , 'commands'],
+      \ 'a' : [':Ag'           , 'text Ag'],
+      \ 'b' : [':BLines'       , 'current buffer'],
+      \ 'B' : [':Buffers'      , 'open buffers'],
+      \ 'c' : [':Commits'      , 'commits'],
+      \ 'C' : [':BCommits'     , 'buffer commits'],
+      \ 'f' : [':Files'        , 'files'],
+      \ 'g' : [':GFiles'       , 'git files'],
+      \ 'G' : [':GFiles?'      , 'modified git files'],
+      \ 'h' : [':History'      , 'file history'],
+      \ 'H' : [':History:'     , 'command history'],
+      \ 'l' : [':Lines'        , 'lines'] ,
+      \ 'm' : [':Marks'        , 'marks'] ,
+      \ 'M' : [':Maps'         , 'normal maps'] ,
+      \ 'p' : [':Helptags'     , 'help tags'] ,
+      \ 'P' : [':Tags'         , 'project tags'],
+      \ 's' : [':Snippets'     , 'snippets'],
+      \ 'S' : [':Colors'       , 'color schemes'],
+      \ 't' : [':Rg'           , 'text Rg'],
+      \ 'T' : [':BTags'        , 'buffer tags'],
+      \ 'w' : [':Windows'      , 'search windows'],
+      \ 'y' : [':Filetypes'    , 'file types'],
+      \ 'z' : [':FZF'          , 'FZF'],
+      \ }
+
+" Register which key map
+call which_key#register('<Space>', "g:which_key_map")
+
 " Easy CAPS
+
 "inoremap <c-u> <ESC>viwUi
 "nnoremap <c-u> viwU<Esc>
 
@@ -104,7 +173,9 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <esc>:m .+1<CR>==
 inoremap <C-k> <esc>:m .-2<CR>==
+" moves current line one down
 nnoremap <leader>j :m .+1<CR>==
+" moves current line one up
 nnoremap <leader>k :m .-2<CR>==
 
 " Commenting blocks of code.
@@ -151,6 +222,7 @@ Plug 'sbdchd/neoformat'
 Plug 'davidhalter/jedi-vim'
 Plug 'jmcantrell/vim-virtualenv'
 
+Plug 'liuchengxu/vim-which-key'
 call plug#end()
 "install with :PlugInstall
 

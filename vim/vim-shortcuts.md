@@ -1,4 +1,3 @@
-
 11.08.2021
 
 # learning VIM
@@ -49,7 +48,10 @@ m-any-key: set a marker on that key. with '-any-key you can jump back to that ma
 	useful when you work in a file for long!
 ### global marks
 same as local also set with m, but this time the any key will be capitalized
-
+### buffer operation
+c-^ switching between latest two files in buffer
+:b starting-file-name <tab> will serach your buffer and let you switch between files
+:bd closes/deletes current buffer (will not delete when you saved, it just unloads from buffer)
 ## window operations
 ctrl+w: entering window mode
 then:
