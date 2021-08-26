@@ -15,6 +15,35 @@ if (empty($TMUX))
 endif
 
 
+"plugs to intall
+call plug#begin('~/.config/nvim/vim-plug')
+"theme
+Plug 'vim-airline/vim-airline'
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'gruvbox-community/gruvbox'
+
+Plug 'christoomey/vim-system-copy'
+"Plug 'valloric/youcompleteme'
+Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+Plug 'ambv/black'
+
+" telescope requirements...
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" prettier
+Plug 'sbdchd/neoformat'
+
+"support for go to defintion and autocompletion
+Plug 'davidhalter/jedi-vim'
+Plug 'jmcantrell/vim-virtualenv'
+
+Plug 'liuchengxu/vim-which-key'
+call plug#end()
+"install with :PlugInstall
 
 
 " Ignore files
@@ -194,37 +223,6 @@ noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader
 
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
-
-
-"plugs to intall
-call plug#begin('~/.config/nvim/vim-plug')
-"theme
-Plug 'vim-airline/vim-airline'
-Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'gruvbox-community/gruvbox'
-
-Plug 'christoomey/vim-system-copy'
-"Plug 'valloric/youcompleteme'
-Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-Plug 'ambv/black'
-
-" telescope requirements...
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
-" prettier
-Plug 'sbdchd/neoformat'
-
-"support for go to defintion and autocompletion
-Plug 'davidhalter/jedi-vim'
-Plug 'jmcantrell/vim-virtualenv'
-
-Plug 'liuchengxu/vim-which-key'
-call plug#end()
-"install with :PlugInstall
 
 
 "cusotm stuff just for neovim
