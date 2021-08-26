@@ -7,6 +7,7 @@ cp ~/.vimrc $git/dotfiles/vim/vimrc #this will be outdated in a while, see nvim 
 cp ~/.config/nvim/init.vim $git/dotfiles/nvim/init.vim
 cp -r ~/.config/nvim/themes $git/dotfiles/nvim/themes
 cp -r ~/.config/nvim/autoload $git/dotfiles/nvim/autoload
+cp -r ~/.aliases.shrc $git/dotfiles/zsh/aliases.shrc
 
 brew bundle dump > $git/dotfiles/Brewfile -f
 
