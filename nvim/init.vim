@@ -25,7 +25,7 @@ Plug 'gruvbox-community/gruvbox'
 
 Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
-Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+Plug 'tpope/vim-surround' " Surrounding ysw)
 Plug 'ambv/black'
 
 " telescope requirements...
@@ -174,6 +174,22 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
+
+" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"tab and airline tabs navigation
+nmap <leader>1 :bfirst<CR>
+nmap <leader>2 :bfirst<CR>:bn<CR>
+nmap <leader>3 :bfirst<CR>:2bn<CR>
+nmap <leader>4 :bfirst<CR>:3bn<CR>
+nmap <leader>5 :bfirst<CR>:4bn<CR>
+nmap <leader>6 :bfirst<CR>:5bn<CR>
+nmap <leader>7 :bfirst<CR>:6bn<CR>
+nmap <leader>8 :bfirst<CR>:7bn<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
