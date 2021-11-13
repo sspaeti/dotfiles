@@ -9,6 +9,9 @@ cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
 cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
 cp -r ~/.aliases.shrc $git/general/dotfiles/zsh/aliases.shrc
 
+cp -r ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
+cp -r ~/ide.sh $git/general/dotfiles/tmux/ide.sh
+
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
 source $venvs/dagster/bin/activate
