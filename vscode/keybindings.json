@@ -147,5 +147,13 @@
     {
         "key": "ctrl+[Minus]",
         "command": "workbench.action.closePanel"
+    },
+    {
+        "key": "alt+[BracketRight]",
+        "command": "editor.action.inlineSuggest.showNext"
+    },
+    {
+        "key": "alt+[BracketLeft]",
+        "command": "editor.action.inlineSuggest.showPrevious"
     }
 ]

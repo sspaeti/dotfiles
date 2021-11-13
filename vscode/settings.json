@@ -240,5 +240,8 @@
         "<C-f>": false
     },
     "editor.lineNumbers": "relative",
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "redhat.telemetry.enabled": false,
+    "editor.inlineSuggest.enabled": true,
+    "security.workspace.trust.untrustedFiles": "open"
 }
