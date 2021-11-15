@@ -1,4 +1,4 @@
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (empty($TMUX))
@@ -42,6 +42,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'liuchengxu/vim-which-key'
+Plug 'github/copilot.vim'
 call plug#end()
 "install with :PlugInstall
 
@@ -176,20 +177,31 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 "tab and airline tabs navigation
-nmap <leader>1 :bfirst<CR>
-nmap <leader>2 :bfirst<CR>:bn<CR>
-nmap <leader>3 :bfirst<CR>:2bn<CR>
-nmap <leader>4 :bfirst<CR>:3bn<CR>
-nmap <leader>5 :bfirst<CR>:4bn<CR>
-nmap <leader>6 :bfirst<CR>:5bn<CR>
-nmap <leader>7 :bfirst<CR>:6bn<CR>
-nmap <leader>8 :bfirst<CR>:7bn<CR>
+" nmap <leader>1 :bfirst<CR>
+" nmap <leader>2 :bfirst<CR>:bn<CR>
+" nmap <leader>3 :bfirst<CR>:2bn<CR>
+" nmap <leader>4 :bfirst<CR>:3bn<CR>
+" nmap <leader>5 :bfirst<CR>:4bn<CR>
+" nmap <leader>6 :bfirst<CR>:5bn<CR>
+" nmap <leader>7 :bfirst<CR>:6bn<CR>
+" nmap <leader>8 :bfirst<CR>:7bn<CR>
+
+" Split window  
+nmap ss :split<Return><C-w>w  
+nmap sv :vsplit<Return><C-w>w" Move window  
+nmap st :tabnew<Return>
+map sh <C-w>h  
+map sk <C-w>k  
+map sj <C-w>j  
+map sl <C-w>l" Switch tab  
+nmap <S-Tab> :tabprev<Return>  
+nmap <Tab> :tabnext<Return>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
