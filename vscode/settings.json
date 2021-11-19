@@ -232,6 +232,46 @@
             "commands": [
                 ":nohl"
             ]
+        },
+        {
+            "before": [
+                "s",
+                "l",
+            ],
+            "after": [],
+            "commands": [
+                "workbench.action.focusRightGroup",
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "h",
+            ],
+            "after": [],
+            "commands": [
+                "workbench.action.focusLeftGroup",
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "s",
+            ],
+            "after": [],
+            "commands": [
+                "workbench.action.splitEditorDown",
+            ]
+        },
+        {
+            "before": [
+                "s",
+                "v",
+            ],
+            "after": [],
+            "commands": [
+                "workbench.action.splitEditorRight",
+            ]
         }
     ],
     "vim.leader": "<space>",
