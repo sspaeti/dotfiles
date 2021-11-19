@@ -12,7 +12,8 @@ brew "bash-completion"
 brew "docker", link: false
 brew "docker-machine"
 brew "hugo"
-brew "neovim"
+brew "neovim", args: ["HEAD"]
+brew "node"
 brew "pandoc"
 brew "postgresql", restart_service: true
 brew "python@3.8", link: true

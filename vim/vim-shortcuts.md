@@ -1,10 +1,9 @@
+latest are in obsidian://open?vault=SecondBrain&file=%F0%9F%92%A1%20Resources%2F%F0%9F%8C%8D%20Wiki%20%F0%9F%93%82%20Files%2F%F0%9F%90%A7%20Linux%2FVim%20%26%20Tmux%2FVim%20and%20Tmux%20Shortcuts
+
 
 # learning VIM
 
-
-
 commands I learned and useful
-
 
 zz -> centers your cursor to the middle
 ; -> if you search something with f or t, it will search for the next one
@@ -28,6 +27,7 @@ f -> find a character, with ; next. with F you find backward
 t -> find to a character. with ; next. With T you find backward
 
 ## More Navigation
+
 ^U: move up half a screen
 ^D: move down half a screen
 L: puts cursor into lowest part of your code
@@ -39,19 +39,28 @@ Ctrl-o: jump back to where you were
 J: join the current line with the next one (delete what's between)
 
 ## Do even more Navigation
+
 ctrl+p: fuzzy finding for files
 :e open a new file
-ctrl+ˆ: toggle between two open files 
+ctrl+ˆ: toggle between two open files
+
 ### local marks
+
 m-any-key: set a marker on that key. with '-any-key you can jump back to that marker. you can set multiple markers
-	useful when you work in a file for long!
+    useful when you work in a file for long!
+
 ### global marks
+
 same as local also set with m, but this time the any key will be capitalized
+
 ### buffer operation
+
 c-^ switching between latest two files in buffer
 :b starting-file-name <tab> will serach your buffer and let you switch between files
 :bd closes/deletes current buffer (will not delete when you saved, it just unloads from buffer)
+
 ## window operations
+
 ctrl+w: entering window mode
 then:
 v: vertical split
@@ -62,27 +71,30 @@ o: closes all except current one that I-m in
 :Ex opens the file-three
 
 ## visual mode
+
 v -> visual mode (characters)
 V -> line mode
 ctrl + v -> column mode!
 ctrl+v and any command after hit ESC -> will do it on all selected lines of columns
 
 ## recording macros
-q -> record macros! after you need to say where to save. e.g. safe on a character. you can applay it with @ and that character. hit q to stop/save the recording.
 
+q -> record macros! after you need to say where to save. e.g. safe on a character. you can applay it with @ and that character. hit q to stop/save the recording.
 
 . -> redo any cmd you did before !!
 
 ## text-objects or nouns
+
 p -> change paragraph
 w -> word
 s -> sentense
 
-[ ( { <	   -> A [], (), or {} block
+[ ( { <       -> A [], (), or {} block
 t -> tag
 b -> block B-> block in
 R -> Insert mode -> replaces existing text
 r -> replace one character
 
 # Learnings
+
 Ctrl+r" - Insert the contents of the " register, aka the last yank/delete. e.g. if you want to replace single quotes with double: ciw'Ctrl+r"'
