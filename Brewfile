@@ -17,6 +17,7 @@ brew "node"
 brew "pandoc"
 brew "postgresql", restart_service: true
 brew "python@3.8", link: true
+brew "tig"
 brew "tmux"
 brew "tree"
 brew "wget"
