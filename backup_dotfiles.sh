@@ -8,6 +8,7 @@ cp ~/.config/nvim/init.vim $git/general/dotfiles/nvim/init.vim
 cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
 cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
 cp -r ~/.aliases.shrc $git/general/dotfiles/zsh/aliases.shrc
+cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
 cp -r ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
 cp -r ~/.tmux/ $git/general/dotfiles/tmux/

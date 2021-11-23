@@ -5,7 +5,14 @@ alias python=/usr/local/bin/python3
 export EDITOR="nvim"
 alias vim=nvim
 
+# that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
+alias pip='noglob pip'
+alias ide=~/.tmux/ide
+alias tmux-session=~/.tmux/tmux-session
+
+
 #git shortcuts
+alias g='git'
 alias ga='git add'
 alias gp='git push'
 alias gl='git log'
@@ -15,12 +22,22 @@ alias gdc='git diff --cached'
 alias gm='git commit -m'
 alias gma='git commit -am'
 alias gb='git branch'
-alias gc='git checkout'
+alias gco='git checkout'
 alias gra='git remote add'
 alias grr='git remote rm'
 alias gpu='git pull'
 alias gf='git fetch'
 alias gcl='git clone'
+
+#alias ghist = log --pretty=format:\"%Cgreen%h %Creset%cd %Cblue[%cn] %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
+alias ghist = log --pretty=format:\"%Cgreen%h %Creset%cd %Creset%s%C(yellow)%d%C(reset)\" --graph --date=relative --decorate --all
+#alias gllog = log --graph --name-status --pretty=format:\"%C(red)%h %C(reset)(%cd) %C(green)%an %Creset%s %C(yellow)%d%Creset\" --date=relative
+alias gopen = "!hub browse"
+alias gfind = "!f() { git log --pretty=format:\"%h %cd [%cn] %s%d\" --date=relative -S'pretty' -S\"$@\" | peco | awk '{print $1}' | xargs -I {} git diff {}^ {}; }; f"
+# edit conflicted file on merge
+alias gedit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+# add conflicted file on merge
+alias gadd-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
 #docker
 alias dkps="docker ps"
