@@ -9,8 +9,10 @@ tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
 brew "bash-completion"
+brew "commitizen"
 brew "docker", link: false
 brew "docker-machine"
+brew "hub"
 brew "hugo"
 brew "neovim", args: ["HEAD"]
 brew "node"
