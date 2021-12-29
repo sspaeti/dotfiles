@@ -10,8 +10,9 @@ cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
 cp -r ~/.aliases.shrc $git/general/dotfiles/zsh/aliases.shrc
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
-cp -r ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
-cp -r ~/.tmux/ $git/general/dotfiles/tmux/
+cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
+cp ~/.tmux/ide $git/general/dotfiles/tmux/ide
+cp ~/.tmux/tmux-session $git/general/dotfiles/tmux/tmux-session
 
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 

@@ -193,8 +193,9 @@ vnoremap > >gv
 " nmap <leader>8 :bfirst<CR>:7bn<CR>
 
 " Split window  
-nmap ss :split<Return><C-w>w  
-nmap sv :vsplit<Return><C-w>w" Move window  
+nmap ss :split<Return>
+nmap sv :vsplit<Return>
+"nmap sv :vsplit<Return><C-w>w" Move window  
 nmap st :tabnew<Return>
 map sh <C-w>h  
 map sk <C-w>k  
