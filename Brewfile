@@ -16,6 +16,7 @@ brew "hub"
 brew "hugo"
 brew "neovim", args: ["HEAD"]
 brew "node"
+brew "okteto", link: false
 brew "pandoc"
 brew "postgresql", restart_service: true
 brew "python@3.8", link: true
