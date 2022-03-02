@@ -1,4 +1,5 @@
 tap "adoptopenjdk/openjdk"
+tap "coursier/formulas"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
@@ -8,6 +9,7 @@ tap "minio/stable"
 tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
+tap "scalacenter/bloop"
 brew "bash-completion"
 brew "commitizen"
 brew "docker", link: false
@@ -20,6 +22,8 @@ brew "okteto", link: false
 brew "pandoc"
 brew "postgresql", restart_service: true
 brew "python@3.8", link: true
+brew "sbt"
+brew "scala"
 brew "tig"
 brew "tmux"
 brew "tree"
@@ -31,4 +35,5 @@ brew "minio/stable/mc"
 brew "minio/stable/minio"
 brew "qmk/qmk/qmk"
 cask "adoptopenjdk11"
+cask "istat-menus"
 cask "mark-text"

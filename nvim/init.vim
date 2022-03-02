@@ -253,6 +253,10 @@ noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
 
+" Custom surrounds
+let w:surround_{char2nr('w')} = "```\r```"
+let b:surround_{char2nr('b')} = "**\r**"
+
 
 "cusotm stuff just for neovim
 source $HOME/.config/nvim/themes/airline.vim
