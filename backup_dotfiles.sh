@@ -14,7 +14,18 @@ cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
 cp ~/.tmux/ide $git/general/dotfiles/tmux/ide
 cp ~/.tmux/tmux-session $git/general/dotfiles/tmux/tmux-session
 
+
+#obsidian
+cp ~/Simon/Sync/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
+cp ~/Simon/Sync/SecondBrain/.obsidian/hotkeys.json $git/general/dotfiles/obsidian/hotkeys.json
+cp ~/Simon/Sync/SecondBrain/.obsidian/core-plugins.json $git/general/dotfiles/obsidian/core-plugins.json
+cp ~/Simon/Sync/SecondBrain/.obsidian/community-plugins.json $git/general/dotfiles/obsidian/community-plugins.json
+cp ~/Simon/Sync/SecondBrain/.obsidian/appearance.json $git/general/dotfiles/obsidian/appearance.json
+cp ~/Simon/Sync/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/app.json
+
 brew bundle dump > $git/general/dotfiles/Brewfile -f
+
+
 
 source $venvs/dagster/bin/activate
 pip freeze > $git/general/dotfiles/python/venvs/dagster.txt

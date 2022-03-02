@@ -1,0 +1,9 @@
+{
+  "baseFontSize": 17,
+  "cssTheme": "Obsidian gruvbox",
+  "theme": "obsidian",
+  "enabledCssSnippets": [
+    "hide_file_in_filetree"
+  ],
+  "translucency": false
+}

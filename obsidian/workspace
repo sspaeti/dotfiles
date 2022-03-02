@@ -1,0 +1,197 @@
+{
+  "main": {
+    "id": "a35d0db2c8ba4ea5",
+    "type": "split",
+    "children": [
+      {
+        "id": "60866eeb15d7097a",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9ca8768b404c499d",
+    "type": "split",
+    "children": [
+      {
+        "id": "2bb45565a393acf5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5753767794e2fe20",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "043896868bb037b1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "duckdb",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "afaca6486017ef41",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 319.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "7b34a42266f03cbc",
+    "type": "split",
+    "children": [
+      {
+        "id": "ea371bd70ce46513",
+        "type": "tabs",
+        "dimension": 23.58490566037736,
+        "children": [
+          {
+            "id": "15a2709836bbd16c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md"
+              }
+            }
+          },
+          {
+            "id": "ddb0bcce15e78a0d",
+            "type": "leaf",
+            "state": {
+              "type": "online.larslockefeer.obsidian-plugin-todo",
+              "state": {}
+            }
+          }
+        ]
+      },
+      {
+        "id": "682b71d3e4b0b542",
+        "type": "tabs",
+        "dimension": 30.424528301886795,
+        "children": [
+          {
+            "id": "f12a4c27da0cfe28",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
+                "options": {
+                  "collapse-filter": false,
+                  "search": "",
+                  "localJumps": 1,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [
+                    {
+                      "query": "tag:#🗃",
+                      "color": {
+                        "a": 1,
+                        "rgb": 2454549
+                      }
+                    },
+                    {
+                      "query": "🔗",
+                      "color": {
+                        "a": 1,
+                        "rgb": 12526114
+                      }
+                    }
+                  ],
+                  "collapse-display": true,
+                  "showArrow": false,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": true,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 0.47791357988681826,
+                  "close": true
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "f02bd5e72b99ee5d",
+        "type": "tabs",
+        "dimension": 45.990566037735846,
+        "children": [
+          {
+            "id": "f6ec3c3761eee3d3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 269.5
+  },
+  "active": "60866eeb15d7097a",
+  "lastOpenFiles": [
+    "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
+    "⚛️ Areas/⌨️ sspaeti-com/✍🏻 Writing/✍🏻 Writing Kanban.md",
+    "⚛️ Areas/📬 Inbox/Obsidian Hotkeys.md",
+    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/Tools/💎 Obsidian/Obsidian.md",
+    "⚛️ Areas/📓 Journal/Dalies/2021 Daily.md",
+    "💡 Resources/🗃 Zettelkasten/Second Brain.md",
+    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/🧠 Second Brain/Zettelkasten Literature/How To Take Smart Notes- 10 Principles to Revolutionize Your Note-Taking and Writing.md",
+    "⚛️ Areas/📬 Inbox/R Readwise/Articles/Building a Second Brain - ReadWise.md",
+    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/🧠 Second Brain/Visual/Building a Second Brain Visual.md",
+    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/🧠 Second Brain/How to build a Second Brain.md"
+  ]
+}
