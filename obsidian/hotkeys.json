@@ -65,5 +65,75 @@
       ],
       "key": "T"
     }
+  ],
+  "workspace:split-vertical": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "S"
+    }
+  ],
+  "workspace:split-horizontal": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "V"
+    }
+  ],
+  "workspace:close": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "W"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "W"
+    }
+  ],
+  "switcher:open": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "O"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "O"
+    }
+  ],
+  "graph:open-local": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "G"
+    }
+  ],
+  "note-folder-autorename:make-folder-note": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "S"
+    }
+  ],
+  "sliding-panes-obsidian:toggle-sliding-panes-leaf-auto-width": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": ";"
+    }
   ]
 }

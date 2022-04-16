@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "60866eeb15d7097a",
+        "id": "342d191483e36d49",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
-            "mode": "source",
+            "file": "💡 Resources/🌍 Wiki 📂 Files/🔗 Data Engineering/Python Pandas Koalas/Python/3_CHEAT SHEETs/5_Create virtual environment (virtualenv)/Create virtual environment (virtualenv).md",
+            "mode": "preview",
             "source": false
           }
         }
@@ -40,7 +40,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "duckdb",
+                "query": "LG 34UC88-B",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -64,7 +64,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 319.5,
+    "width": 240.5,
     "collapsed": true
   },
   "right": {
@@ -74,7 +74,7 @@
       {
         "id": "ea371bd70ce46513",
         "type": "tabs",
-        "dimension": 23.58490566037736,
+        "dimension": 41.26074498567335,
         "children": [
           {
             "id": "15a2709836bbd16c",
@@ -82,12 +82,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md"
+                "file": "💡 Resources/🌍 Wiki 📂 Files/🔗 Data Engineering/Python Pandas Koalas/Python/3_CHEAT SHEETs/5_Create virtual environment (virtualenv)/Create virtual environment (virtualenv).md"
               }
             }
           },
           {
-            "id": "ddb0bcce15e78a0d",
+            "id": "96c102a3d9cbb92b",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "9f49691c0d3e55d3",
             "type": "leaf",
             "state": {
               "type": "online.larslockefeer.obsidian-plugin-todo",
@@ -99,7 +107,7 @@
       {
         "id": "682b71d3e4b0b542",
         "type": "tabs",
-        "dimension": 30.424528301886795,
+        "dimension": 29.441260744985676,
         "children": [
           {
             "id": "f12a4c27da0cfe28",
@@ -107,14 +115,14 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
+                "file": "💡 Resources/🌍 Wiki 📂 Files/🔗 Data Engineering/Python Pandas Koalas/Python/3_CHEAT SHEETs/5_Create virtual environment (virtualenv)/Create virtual environment (virtualenv).md",
                 "options": {
-                  "collapse-filter": false,
+                  "collapse-filter": true,
                   "search": "",
                   "localJumps": 1,
                   "localBacklinks": true,
                   "localForelinks": true,
-                  "localInterlinks": false,
+                  "localInterlinks": true,
                   "showTags": false,
                   "showAttachments": false,
                   "hideUnresolved": false,
@@ -137,15 +145,15 @@
                   ],
                   "collapse-display": true,
                   "showArrow": false,
-                  "textFadeMultiplier": 0,
-                  "nodeSizeMultiplier": 1,
+                  "textFadeMultiplier": -0.4,
+                  "nodeSizeMultiplier": 0.925827991452992,
                   "lineSizeMultiplier": 1,
                   "collapse-forces": true,
-                  "centerStrength": 0.518713248970312,
-                  "repelStrength": 10,
-                  "linkStrength": 1,
-                  "linkDistance": 250,
-                  "scale": 0.47791357988681826,
+                  "centerStrength": 0.692174145299145,
+                  "repelStrength": 10.6383547008547,
+                  "linkStrength": 0.786324786324786,
+                  "linkDistance": 256,
+                  "scale": 0.7590679155213744,
                   "close": true
                 }
               }
@@ -156,7 +164,7 @@
       {
         "id": "f02bd5e72b99ee5d",
         "type": "tabs",
-        "dimension": 45.990566037735846,
+        "dimension": 29.297994269340975,
         "children": [
           {
             "id": "f6ec3c3761eee3d3",
@@ -164,14 +172,14 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
+                "file": "💡 Resources/🌍 Wiki 📂 Files/🔗 Data Engineering/Python Pandas Koalas/Python/3_CHEAT SHEETs/5_Create virtual environment (virtualenv)/Create virtual environment (virtualenv).md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           }
@@ -179,19 +187,20 @@
       }
     ],
     "direction": "horizontal",
-    "width": 269.5
+    "width": 264.5,
+    "collapsed": true
   },
-  "active": "60866eeb15d7097a",
+  "active": "342d191483e36d49",
   "lastOpenFiles": [
-    "⚛️ Areas/📬 Inbox/My Mental Workflow with GTD, SecondBrain and SmartNoteTaking.md",
-    "⚛️ Areas/⌨️ sspaeti-com/✍🏻 Writing/✍🏻 Writing Kanban.md",
-    "⚛️ Areas/📬 Inbox/Obsidian Hotkeys.md",
-    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/Tools/💎 Obsidian/Obsidian.md",
-    "⚛️ Areas/📓 Journal/Dalies/2021 Daily.md",
-    "💡 Resources/🗃 Zettelkasten/Second Brain.md",
-    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/🧠 Second Brain/Zettelkasten Literature/How To Take Smart Notes- 10 Principles to Revolutionize Your Note-Taking and Writing.md",
-    "⚛️ Areas/📬 Inbox/R Readwise/Articles/Building a Second Brain - ReadWise.md",
-    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/🧠 Second Brain/Visual/Building a Second Brain Visual.md",
-    "💡 Resources/🌍 Wiki 📂 Files/🔧 Productivity/🧠 Second Brain/How to build a Second Brain.md"
+    "💡 Resources/🌍 Wiki 📂 Files/🔗 Data Engineering/Python Pandas Koalas/Python/3_CHEAT SHEETs/5_Create virtual environment (virtualenv)/Create virtual environment (virtualenv).md",
+    "⚛️ Areas/📬 Inbox/ctrlsf - vim search in file.md",
+    "⚛️ Areas/📬 Inbox/Steuererkärung 2022 - Simon Stöckli.md",
+    "💡 Resources/🌍 Wiki 📂 Files/🐧 Linux/Vim & Tmux/Vim and Tmux Shortcuts.md",
+    "🌿 Projects/21-08-01 - Personal Finance DWH/21-08-01 - Personal Finance DWH.md",
+    "⚛️ Areas/💻 Computer Stuff/Macbook/3_Monitor/Monitor.md",
+    "⚛️ Areas/📓 Journal/Thoughts On/Side Projects.md",
+    "⚛️ Areas/💳 Finance/Ausgaben/Subscriptions.md",
+    "⚛️ Areas/🐙 Airbyte/Admin/Work Set-Up/Home Office Set-up.md",
+    "💡 Resources/🗃 Zettelkasten/🔩 Tools/Pandera.md"
   ]
 }

@@ -34,6 +34,14 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
+" search
+Plug 'dyng/ctrlsf.vim'
+
+"File Navigation
+Plug 'francoiscabrol/ranger.vim'
+
+"fast async search
+Plug 'dyng/ctrlsf.vim'
 " prettier
 Plug 'sbdchd/neoformat'
 
@@ -183,14 +191,14 @@ vnoremap > >gv
 " nnoremap <C-l> <C-w>l
 
 "tab and airline tabs navigation
-" nmap <leader>1 :bfirst<CR>
-" nmap <leader>2 :bfirst<CR>:bn<CR>
-" nmap <leader>3 :bfirst<CR>:2bn<CR>
-" nmap <leader>4 :bfirst<CR>:3bn<CR>
-" nmap <leader>5 :bfirst<CR>:4bn<CR>
-" nmap <leader>6 :bfirst<CR>:5bn<CR>
-" nmap <leader>7 :bfirst<CR>:6bn<CR>
-" nmap <leader>8 :bfirst<CR>:7bn<CR>
+nmap <leader>1 :bfirst<CR>
+nmap <leader>2 :bfirst<CR>:bn<CR>
+nmap <leader>3 :bfirst<CR>:2bn<CR>
+nmap <leader>4 :bfirst<CR>:3bn<CR>
+nmap <leader>5 :bfirst<CR>:4bn<CR>
+nmap <leader>6 :bfirst<CR>:5bn<CR>
+nmap <leader>7 :bfirst<CR>:6bn<CR>
+nmap <leader>8 :bfirst<CR>:7bn<CR>
 
 " Split window  
 nmap ss :split<Return>

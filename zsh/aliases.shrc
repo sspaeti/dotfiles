@@ -9,7 +9,8 @@ alias vim=nvim
 alias pip='noglob pip'
 alias ide=~/.tmux/ide
 alias tmux-session=~/.tmux/tmux-session
-
+# when closing ranger it will be at the path you were
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 #git shortcuts
 alias g='git'
