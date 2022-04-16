@@ -283,7 +283,6 @@
     "redhat.telemetry.enabled": false,
     "editor.inlineSuggest.enabled": true,
     "security.workspace.trust.untrustedFiles": "open",
-    "window.zoomLevel": 1,
     "github.copilot.enable": {
         "*": true,
         "yaml": false,
@@ -294,5 +293,6 @@
         "**/.bloop": true,
         "**/.metals": true,
         "**/.ammonite": true
-    }
+    },
+    "telemetry.telemetryLevel": "off"
 }

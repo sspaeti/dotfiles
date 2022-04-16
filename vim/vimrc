@@ -36,7 +36,6 @@ nnoremap <C-p> <cmd>Telescope find_files<cr>
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
 
-
 "plugs to intall
 call plug#begin('~/.vim/bundle')
 "theme

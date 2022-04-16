@@ -22,5 +22,7 @@
   "tag-wrangler",
   "extract-highlights-plugin",
   "oz-image-plugin",
-  "obsidian-languagetool-plugin"
+  "obsidian-languagetool-plugin",
+  "obsidian-kindle-plugin",
+  "obsidian-admonition"
 ]

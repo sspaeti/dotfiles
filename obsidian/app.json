@@ -29,7 +29,7 @@
   "newFileLocation": "folder",
   "showUnsupportedFiles": false,
   "attachmentFolderPath": "./",
-  "readableLineLength": false,
+  "readableLineLength": true,
   "pdfExportSettings": {
     "pageSize": "A4",
     "landscape": false,
