@@ -36,6 +36,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " search
 Plug 'dyng/ctrlsf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 "File Navigation
 Plug 'francoiscabrol/ranger.vim'

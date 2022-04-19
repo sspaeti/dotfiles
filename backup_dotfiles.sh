@@ -7,13 +7,18 @@ cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, s
 cp ~/.config/nvim/init.vim $git/general/dotfiles/nvim/init.vim
 cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
 cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
-cp -r ~/.aliases.shrc $git/general/dotfiles/zsh/aliases.shrc
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
 cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
 cp ~/.tmux/ide $git/general/dotfiles/tmux/ide
 cp ~/.tmux/tmux-session $git/general/dotfiles/tmux/tmux-session
 
+#fzf/zsh
+cp ~/.fzf.zsh $git/general/dotfiles/fzf/fzf.zsh
+cp -r ~/.fzf/* $git/general/dotfiles/fzf/
+
+#cp -r ~/.oh-my-zsh/custom/* $git/general/dotfiles/zsh/custom/
+cp -r ~/.aliases.shrc $git/general/dotfiles/zsh/aliases.shrc
 
 #obsidian
 cp ~/Simon/Sync/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
