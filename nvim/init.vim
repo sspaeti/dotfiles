@@ -28,11 +28,11 @@ Plug 'christoomey/vim-system-copy'
 Plug 'tpope/vim-surround' " Surrounding ysw)
 Plug 'ambv/black'
 Plug 'tpope/vim-fugitive'
-" telescope requirements...
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+" " telescope requirements...
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " search
 Plug 'dyng/ctrlsf.vim'
@@ -41,6 +41,9 @@ Plug 'junegunn/fzf.vim'
 
 "File Navigation
 Plug 'francoiscabrol/ranger.vim'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
+Plug 'ryanoasis/vim-devicons' "add file-icons to nerdtree
 
 "fast async search
 Plug 'dyng/ctrlsf.vim'
@@ -129,8 +132,8 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
-let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
+" let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
+" let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
 let g:which_key_map['h'] = [ '<C-W>'                      , 'split below']
 let g:which_key_map['j'] = [ ':m .+1<CR>=='               , 'move current line one down']
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
@@ -202,6 +205,17 @@ nmap <leader>6 :bfirst<CR>:5bn<CR>
 nmap <leader>7 :bfirst<CR>:6bn<CR>
 nmap <leader>8 :bfirst<CR>:7bn<CR>
 
+"NerdTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
+
+" fzf: ctrl f for find files
+nnoremap <C-p> :Files<CR>
+" this will quick search content of files
+nnoremap <C-f> :CtrlSF 
+
 " Split window  
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
@@ -214,12 +228,13 @@ map sl <C-w>l" Switch tab
 nmap <S-Tab> :tabprev<Return>  
 nmap <Tab> :tabnext<Return>
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <C-p> <cmd>Telescope find_files<cr>
+" Find files using Telescope command-line sugar. --> replaced by fzf as faster and more options such as search :Lines :Buffer and .gitignore integration
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <C-p> <cmd>Telescope find_files<cr>
+"
 nnoremap Y y$
 " keeping it centered
 nnoremap n nzzzv
@@ -272,10 +287,14 @@ let b:surround_{char2nr('b')} = "**\r**"
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
 "syntax on
+
 ""Gruvbox:
-"colorscheme gruvbox
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox' "'one'
+
+
 "set bg=dark
-""let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_contrast_dark = 'hard'
 
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
