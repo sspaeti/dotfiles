@@ -28,6 +28,10 @@ cp ~/Simon/Sync/SecondBrain/.obsidian/community-plugins.json $git/general/dotfil
 cp ~/Simon/Sync/SecondBrain/.obsidian/appearance.json $git/general/dotfiles/obsidian/appearance.json
 cp ~/Simon/Sync/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/app.json
 
+
+#kitty
+cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
+
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
 
