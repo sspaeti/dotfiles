@@ -291,7 +291,8 @@ source $HOME/.config/nvim/themes/onedark.vim
 ""Gruvbox:
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox' "'one'
-
+set encoding=utf8
+let g:airline_powerline_fonts = 1
 
 "set bg=dark
 "let g:gruvbox_contrast_dark = 'hard'

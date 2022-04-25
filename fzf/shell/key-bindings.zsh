@@ -66,9 +66,9 @@ fzf-file-widget() {
   return $ret
 }
 zle     -N            fzf-file-widget
-bindkey -M emacs '^T' fzf-file-widget
-bindkey -M vicmd '^T' fzf-file-widget
-bindkey -M viins '^T' fzf-file-widget
+bindkey -M emacs '^E' fzf-file-widget
+bindkey -M vicmd '^E' fzf-file-widget
+bindkey -M viins '^E' fzf-file-widget
 
 # ALT-C - cd into the selected directory
 fzf-cd-widget() {
