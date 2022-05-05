@@ -51,7 +51,8 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'sbdchd/neoformat'
 
 "support for go to defintion and autocompletion
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'liuchengxu/vim-which-key'
@@ -84,6 +85,7 @@ set splitbelow                          " Horizontal splits will automatically b
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
 set cmdheight=2                         " More space for displaying messages
+set updatetime=300                      " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 set pumheight=10                        " Makes popup menu smaller
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
@@ -112,7 +114,43 @@ set relativenumber
 "switch between two buffers -> C-^ does not work with current swiss layout
 nnoremap <C-6> <C-^><cr>
 
+" PYTHON
 
+"auto format on save with Black
+autocmd BufWritePre *.py execute ':Black'
+
+" let g:python3_host_prog = "$venvs/banking/bin/python3"
+
+" coc
+"let g:coc_node_path = "/opt/homebrew/bin/node"
+let g:coc_global_extensions = ['coc-json', 'coc-git']
+nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
+
+" jedi - shortcuts -> replced with coc
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_stubs_command = "<leader>s"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#rename_command = "<leader>r"
+
+" PEP 8 indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" Other Languages and indentaion
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
 
 " Others
 "
@@ -206,9 +244,9 @@ nmap <leader>7 :bfirst<CR>:6bn<CR>
 nmap <leader>8 :bfirst<CR>:7bn<CR>
 
 "NerdTree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-l> :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 
 " fzf: ctrl f for find files
@@ -275,9 +313,6 @@ noremap <silent> <Leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,
 noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 
-"auto format on save with Black
-autocmd BufWritePre *.py execute ':Black'
-
 " Custom surrounds
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
@@ -286,6 +321,7 @@ let b:surround_{char2nr('b')} = "**\r**"
 "cusotm stuff just for neovim
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
+source $HOME/.config/nvim/coc.vim
 "syntax on
 
 ""Gruvbox:
@@ -296,6 +332,9 @@ let g:airline_powerline_fonts = 1
 
 "set bg=dark
 "let g:gruvbox_contrast_dark = 'hard'
+
+
+
 
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
