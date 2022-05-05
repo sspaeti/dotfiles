@@ -1,6 +1,6 @@
 #python 3
-alias python=/usr/local/bin/python3
-#alias pip=//usr/bin/pip3
+alias python=python3
+alias pip=pip3
 #make neovim default vim
 export EDITOR="nvim"
 alias vim=nvim
