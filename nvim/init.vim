@@ -119,7 +119,7 @@ nnoremap <C-6> <C-^><cr>
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
 
-" let g:python3_host_prog = "$venvs/banking/bin/python3"
+"let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3") "expand($VIRTUAL_ENV."/bin/python3")
 
 " coc
 "let g:coc_node_path = "/opt/homebrew/bin/node"

@@ -2,10 +2,11 @@
 
 cp ~/Library/ApplicationSupport/Code/User/settings.json $git/general/dotfiles/vscode/settings.json
 cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles/vscode/keybindings.json
-cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
+#cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
 #using nvim going forward therefore separting configs
 cp ~/.config/nvim/init.vim $git/general/dotfiles/nvim/init.vim
 cp ~/.config/nvim/coc.vim $git/general/dotfiles/nvim/coc.vim
+cp ~/.config/nvim/coc-settings.json $git/general/dotfiles/nvim/coc-settings.json
 cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
 cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
