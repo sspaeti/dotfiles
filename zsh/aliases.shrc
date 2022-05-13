@@ -39,3 +39,6 @@ alias dkcpup="docker-compose up -d"
 alias dkcpdown="docker-compose down"
 alias dkcpstart="docker-compose start"
 alias dkcpstop="docker-compose stop"
+
+
+alias killtmuxsessions="tmux ls -F'#{session_name}'|egrep '^[0-9]+$'|xargs -I% tmux kill-session -t \"=%\""

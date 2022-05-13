@@ -34,6 +34,7 @@ cp ~/Simon/Sync/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vim
 
 #kitty
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
+cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.conf
 
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 

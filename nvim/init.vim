@@ -119,7 +119,8 @@ nnoremap <C-6> <C-^><cr>
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
 
-"let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3") "expand($VIRTUAL_ENV."/bin/python3")
+let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3") 
+"expand($VIRTUAL_ENV."/bin/python3")
 
 " coc
 "let g:coc_node_path = "/opt/homebrew/bin/node"
@@ -257,6 +258,10 @@ nnoremap <C-f> :CtrlSF
 " Split window  
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
+" zoom vim split views
+noremap Zz <c-w>_ \| <c-w>\|
+noremap Zo <c-w>=
+
 "nmap sv :vsplit<Return><C-w>w" Move window  
 nmap st :tabnew<Return>
 map sh <C-w>h  
@@ -302,12 +307,12 @@ nnoremap <leader>k :m .-2<CR>==
 " Commenting blocks of code.
 augroup commenting_blocks_of_code
   autocmd!
-  autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-  autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-  autocmd FileType conf,fstab       let b:comment_leader = '# '
-  autocmd FileType tex              let b:comment_leader = '% '
-  autocmd FileType mail             let b:comment_leader = '> '
-  autocmd FileType vim              let b:comment_leader = '" '
+  autocmd FileType c,cpp,java,scala     let b:comment_leader = '// '
+  autocmd FileType sh,ruby,python,yaml  let b:comment_leader = '# '
+  autocmd FileType conf,fstab           let b:comment_leader = '# '
+  autocmd FileType tex                  let b:comment_leader = '% '
+  autocmd FileType mail                 let b:comment_leader = '> '
+  autocmd FileType vim                  let b:comment_leader = '" '
 augroup END
 noremap <silent> <Leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
