@@ -115,7 +115,7 @@
     "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
     "editor.folding": true, // removes the folding feature
     "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
-    "editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
+    "editor.matchBrackets": "never", // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
     "editor.glyphMargin": true, // removes the space used mainly for debugging indicators
     "explorer.openEditors.visible": 0, // removes the activity bar (the 4 icons at the left of the screen), so now you will have to open the explorer, git, debugger and extension with shortcuts or through the Command Palette
     "workbench.editor.showIcons": false, // removes icon from opened files in tabs

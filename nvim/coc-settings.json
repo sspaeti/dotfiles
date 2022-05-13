@@ -3,15 +3,17 @@
   //python config
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true, 
+  "python.linting.flake8Enabled" : true,
+  "python.linting.mypyEnabled" : true,
   "python.linting.pylintArgs": [
         "--rcfile",
-        "~/.pylintrc",
+        "~/.pylintrc"
   ],
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": [
         "--line-length",
         "100",
         "-S",
-        "--fast",
+        "--fast"
     ]
 }
