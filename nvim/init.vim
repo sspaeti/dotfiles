@@ -26,7 +26,8 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-surround' " Surrounding ysw)
-Plug 'ambv/black'
+"Plug 'ambv/black'
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
 " " telescope requirements...
 " Plug 'nvim-lua/popup.nvim'
@@ -57,9 +58,15 @@ Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
+"Markdown (or any Outline
+Plug 'simrat39/symbols-outline.nvim'
 call plug#end()
 "install with :PlugInstall
 
+
+
+" source coc custom configs
+source $HOME/.config/nvim/coc.vim
 
 " Ignore files
 set wildignore+=*.pyc
@@ -250,6 +257,9 @@ nmap <leader>8 :bfirst<CR>:7bn<CR>
 nnoremap <C-l> :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 
+" Outline Shortcut
+nmap <leader>o :SymbolsOutline<CR>
+
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
 " this will quick search content of files
@@ -307,7 +317,7 @@ nnoremap <leader>k :m .-2<CR>==
 " Commenting blocks of code.
 augroup commenting_blocks_of_code
   autocmd!
-  autocmd FileType c,cpp,java,scala     let b:comment_leader = '// '
+  autocmd FileType c,cpp,java,scala     let b:comment_leadej = '// '
   autocmd FileType sh,ruby,python,yaml  let b:comment_leader = '# '
   autocmd FileType conf,fstab           let b:comment_leader = '# '
   autocmd FileType tex                  let b:comment_leader = '% '
@@ -326,7 +336,6 @@ let b:surround_{char2nr('b')} = "**\r**"
 "cusotm stuff just for neovim
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
-source $HOME/.config/nvim/coc.vim
 "syntax on
 
 ""Gruvbox:

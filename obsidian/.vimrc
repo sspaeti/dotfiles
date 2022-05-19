@@ -14,3 +14,6 @@ nmap k gk
 " nmap $ g$
 " nmap ^ g^
 " nmap 0 g^
+
+"yank to clipboard
+set clipboard=unnamed
