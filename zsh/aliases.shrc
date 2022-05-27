@@ -7,8 +7,13 @@ alias vim=nvim
 
 # that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
 alias pip='noglob pip'
+
+# tmux
 alias ide=~/.tmux/ide
 alias tmux-session=~/.tmux/tmux-session
+alias killtmuxsessions="tmux ls -F'#{session_name}'|egrep '^[0-9]+$'|xargs -I% tmux kill-session -t \"=%\""
+alias ta=tmux attach
+
 # when closing ranger it will be at the path you were
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
@@ -41,4 +46,3 @@ alias dkcpstart="docker-compose start"
 alias dkcpstop="docker-compose stop"
 
 
-alias killtmuxsessions="tmux ls -F'#{session_name}'|egrep '^[0-9]+$'|xargs -I% tmux kill-session -t \"=%\""
