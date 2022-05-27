@@ -31,7 +31,8 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
 " " telescope requirements...
 " Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
@@ -60,6 +61,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
 "Markdown (or any Outline
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 "install with :PlugInstall
 
@@ -104,6 +106,7 @@ inoremap kj <Esc>
 filetype plugin indent on
 set clipboard=unnamedplus               " Copy paste between vim and everything else -> inserts all into system clipboard
 noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
+set nocompatible                        " Recommende for VimWiki
 
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
@@ -255,6 +258,7 @@ nmap <leader>8 :bfirst<CR>:7bn<CR>
 "nnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-l> :NERDTreeToggle<CR>
+nmap <leader>l :NERDTreeToggle<CR>
 " nnoremap <C-f> :NERDTreeFind<CR>
 
 " Outline Shortcut
@@ -287,7 +291,7 @@ nmap <Tab> :tabnext<Return>
 " nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " nnoremap <C-p> <cmd>Telescope find_files<cr>
-"
+
 nnoremap Y y$
 " keeping it centered
 nnoremap n nzzzv
@@ -332,10 +336,17 @@ noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 
+" Open file in Obsidian vault
+command IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:r') . "'"
+nnoremap <leader>io :IO<CR>
 
 "cusotm stuff just for neovim
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
+
+" source settings
+source $HOME/.config/nvim/plugin/harpoon.vim
+
 "syntax on
 
 ""Gruvbox:

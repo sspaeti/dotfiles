@@ -8,6 +8,7 @@ cp ~/.config/nvim/init.vim $git/general/dotfiles/nvim/init.vim
 cp ~/.config/nvim/coc.vim $git/general/dotfiles/nvim/coc.vim
 cp ~/.config/nvim/coc-settings.json $git/general/dotfiles/nvim/coc-settings.json
 cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
+cp -r ~/.config/nvim/plugin $git/general/dotfiles/nvim/plugin
 cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
