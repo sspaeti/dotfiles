@@ -61,7 +61,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
 "Markdown (or any Outline
 Plug 'simrat39/symbols-outline.nvim'
-Plug 'vimwiki/vimwiki'
+"Plug 'vimwiki/vimwiki'
 call plug#end()
 "install with :PlugInstall
 
@@ -128,6 +128,9 @@ nnoremap <C-6> <C-^><cr>
 
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
+
+" Turn off autocomplete for Markdown
+autocmd FileType markdown let b:coc_suggest_disable = 1
 
 let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3") 
 "expand($VIRTUAL_ENV."/bin/python3")
@@ -283,7 +286,8 @@ map sk <C-w>k
 map sj <C-w>j  
 map sl <C-w>l" Switch tab  
 nmap <S-Tab> :tabprev<Return>  
-nmap <Tab> :tabnext<Return>
+" if you map <Tab> also ctrl+l will change!
+"nnoremap <Tab> :tabnext<Return>
 
 " Find files using Telescope command-line sugar. --> replaced by fzf as faster and more options such as search :Lines :Buffer and .gitignore integration
 " nnoremap <leader>ff <cmd>Telescope find_files<cr>
