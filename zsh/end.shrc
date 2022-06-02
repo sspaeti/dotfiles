@@ -1,0 +1,10 @@
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#autocompletion kubernetes
+source <(kubectl completion zsh)
+
+#needs to be on the end:
+source /usr/local/share/zsh-syntax-highlighting-active/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

@@ -1,0 +1,35 @@
+set -o vi
+
+#bash completion
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+#This will create separate history files in your home directory
+MYTTY=`tty`
+HISTFILE=$HOME/.bash_history_`basename $MYTTY`
+
+# #allow e.g. "pip install -e .[full]" to work -> zsh uses square brackets for globbing / pattern matching.
+# #alias pip='noglob pip'
+
+#always move hidden files as well
+#shopt -s dotglob
+
+# bindkey '^r' history-incremental-search-backward
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins 'kj' vi-cmd-mode
+
+# fzf search
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#on slow internet connection brew update takes ages. Disabling it per default here
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+#adoptopenjdk to change java versions with e.g. "jdk 11"
+jdk() {
+        version=$1
+        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+        java -version
+ }
+
