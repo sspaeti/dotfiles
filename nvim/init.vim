@@ -26,6 +26,18 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-surround' " Surrounding ysw)
+
+"Text Objects:
+"Utilities for user-defined text objects
+Plug 'kana/vim-textobj-user'
+"Text objects for indentation levels
+Plug 'kana/vim-textobj-indent'
+"Text objects for Python
+Plug 'bps/vim-textobj-python'
+
+" comment healper
+" Plug 'preservim/nerdcommenter'
+
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
@@ -140,6 +152,23 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 let g:coc_global_extensions = ['coc-json', 'coc-git']
 nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
 
+" This will run a python file by hitting 'enter' and debug it directly in
+" debug mode with -i
+"FileType settings {{{
+augroup mb_filetype
+	autocmd!
+	autocmd FileType brainfuck xmap <buffer> R "xygv*;%s;;<c-r>x;g<left><left>
+	autocmd FileType yaml nnoremap <buffer> <CR> :AnsibleDoc<CR>
+	autocmd FileType python iabbrev <buffer> im import
+	autocmd FileType python iabbrev <buffer> rt return
+	autocmd FileType python iabbrev <buffer> yl yield
+	autocmd FileType python iabbrev <buffer> fa False
+	autocmd FileType python iabbrev <buffer> tr True
+	autocmd FileType python iabbrev <buffer> br break
+	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
+augroup 
+"}}}
+
 " jedi - shortcuts -> replced with coc
 " let g:jedi#goto_command = "<leader>d"
 " let g:jedi#goto_assignments_command = "<leader>g"
@@ -151,14 +180,14 @@ nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter
 " let g:jedi#rename_command = "<leader>r"
 
 " PEP 8 indentation
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+" au BufNewFile,BufRead *.py
+"      \ set tabstop=4
+"      \ set softtabstop=4
+"      \ set shiftwidth=4
+"      \ set textwidth=79
+"      \ set expandtab
+"      \ set autoindent
+"      \ set fileformat=unix
 
 " Other Languages and indentaion
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -261,8 +290,8 @@ nmap <leader>8 :bfirst<CR>:7bn<CR>
 "nnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-l> :NERDTreeToggle<CR>
-nmap <leader>l :NERDTreeToggle<CR>
-" nnoremap <C-f> :NERDTreeFind<CR>
+"nmap <leader>l :NERDTreeToggle<CR>
+nmap <leader>l :NERDTreeFind<CR>
 
 " Outline Shortcut
 nmap <leader>o :SymbolsOutline<CR>

@@ -1,0 +1,37 @@
+
+# my shortcuts
+export git=~/Documents/git
+export de=$git/de
+export general=$git/general
+export sspaeticom=$git/sspaeti.com
+export venvs=~/.venvs/
+export sync=~/Simon/Sync
+export secondbrain=/Users/sspaeti/Simon/Sync/SecondBrain/
+export areas=/Users/sspaeti/Simon/Sync/SecondBrain/⚛️\ Areas
+export blog=/Users/sspaeti/Simon/Sync/SecondBrain/⚛️\ Areas/⌨️\ sspaeti-com/🅱️\ Blog 
+export hugo=/Users/sspaeti/Simon/Sync/SecondBrain/⚛️\ Areas/⌨️\ sspaeti-com/🅱️\ Blog 
+export docs=~/Documents
+export SPARK_HOME=~/Documents/spark/spark-3.0.1-bin-hadoop3.2
+export VS_Projects=/Users/sspaeti/Documents/VS_Projects/
+export PYSPARK_PYTHON=python3
+#export DATASETS=/Users/sspaeti/Simon/Sync/Business/13_sspaeti/Real-estate/_DATASETS
+
+export DAGSTER_HOME=~/.dagster
+
+#vim stuff
+export MYVIMRC=~/.config/nvim/init.vim
+export VIMRC=$MYVIMRC
+export RC=$MYVIMRC
+
+# PROTOC_HOME=/Users/zekexu/Documents/protoc
+# export PATH=$PATH:$PROTOC_HOME/bin
+
+# HADOOP_HOME=/usr/local/hadoop
+# export PATH=$PATH:$HADOOP_HOME/bin
+
+# #local hadoop
+# export HADOOP_OPTS="-Djava.library.path=${HADOOP_HOME}/lib/native"
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HADOOP_HOME}/lib/native
+# export JAVA_LIBRARY_PATH=$JAVA_LIBRARY_PATH:${HADOOP_HOME}/lib/native
+# alias hstart="/usr/local/Cellar/hadoop/3.2.1/sbin/start-all.sh"
+# alias hstop="/usr/local/Cellar/hadoop/3.2.1/sbin/stop-all.sh"
