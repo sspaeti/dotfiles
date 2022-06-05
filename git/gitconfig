@@ -5,6 +5,14 @@
 	user = sspaeti
 [core]
 	excludesfile = /Users/sspaeti/.gitignore_global
+[diff]
+  tool = meld
+  #nvimdiff
+[difftool]
+  prompt = false
+[difftool "meld"]
+  cmd = meld "$REMOTE" "$LOCAL"
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
