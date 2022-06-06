@@ -38,9 +38,13 @@ Plug 'bps/vim-textobj-python'
 " comment healper
 " Plug 'preservim/nerdcommenter'
 
+" should be installed out of the box by neovim?
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
+Plug 'kdheepak/lazygit.nvim'
 " " telescope requirements...
 " Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -54,7 +58,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "File Navigation
-Plug 'francoiscabrol/ranger.vim'
+Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
 Plug 'ryanoasis/vim-devicons' "add file-icons to nerdtree
@@ -325,6 +329,12 @@ nmap <S-Tab> :tabprev<Return>
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " nnoremap <C-p> <cmd>Telescope find_files<cr>
 
+"ranger nvim
+nnoremap <leader>f :RnvimrToggl<CR> 
+" setup mapping to call :LazyGit
+nnoremap <silent> <leader>gg :LazyGit<CR>
+nnoremap <silent> <leader>lg :LazyGit<CR>
+
 nnoremap Y y$
 " keeping it centered
 nnoremap n nzzzv
@@ -340,6 +350,9 @@ inoremap ( (<c-g>u
 " jumplist mutations
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+" binding j and k to gj and gk
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 "Moving text
 vnoremap J :m '>+1<CR>gv=gv

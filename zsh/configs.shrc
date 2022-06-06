@@ -4,8 +4,8 @@ set -o vi
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 #This will create separate history files in your home directory
-MYTTY=`tty`
-HISTFILE=$HOME/.bash_history_`basename $MYTTY`
+#MYTTY=`tty`
+#HISTFILE=$HOME/.bash_history_`basename $MYTTY`
 
 # #allow e.g. "pip install -e .[full]" to work -> zsh uses square brackets for globbing / pattern matching.
 # #alias pip='noglob pip'
