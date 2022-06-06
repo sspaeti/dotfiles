@@ -5,6 +5,9 @@ alias pip=pip3
 export EDITOR="nvim"
 alias vim=nvim
 
+# show hidden files by default
+alias ll='ls -la'
+
 # that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
 alias pip='noglob pip'
 
@@ -34,6 +37,9 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gf='git fetch'
 alias gcl='git clone'
+
+alias lg=lazygit
+
 
 #docker
 alias dkps="docker ps"

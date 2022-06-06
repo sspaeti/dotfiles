@@ -35,3 +35,4 @@ export RC=$MYVIMRC
 # export JAVA_LIBRARY_PATH=$JAVA_LIBRARY_PATH:${HADOOP_HOME}/lib/native
 # alias hstart="/usr/local/Cellar/hadoop/3.2.1/sbin/start-all.sh"
 # alias hstop="/usr/local/Cellar/hadoop/3.2.1/sbin/stop-all.sh"
+

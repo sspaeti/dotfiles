@@ -42,6 +42,11 @@ cp ~/Simon/Sync/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vim
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
 cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.conf
 
+#ranger
+cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf
+
+
+
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
 
