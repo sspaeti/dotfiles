@@ -23,6 +23,9 @@ bindkey -M viins 'kj' vi-cmd-mode
 #on slow internet connection brew update takes ages. Disabling it per default here
 export HOMEBREW_NO_AUTO_UPDATE=1
 
+#add homebrew
+export PATH=/opt/homebrew/bin:$PATH
+
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 

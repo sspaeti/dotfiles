@@ -14,7 +14,6 @@ if (empty($TMUX))
   endif
 endif
 
-
 "plugs to intall
 call plug#begin('~/.config/nvim/vim-plug')
 "theme
@@ -45,12 +44,16 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
 Plug 'kdheepak/lazygit.nvim'
+Plug 'mhinz/vim-signify' "highlighing changes not commited to last commit
+Plug 'APZelos/blamer.nvim' "gitlens blame style
 " " telescope requirements...
 " Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
+"terminal
+Plug 'voldikss/vim-floaterm'
 
 " search
 Plug 'dyng/ctrlsf.vim'
@@ -81,8 +84,6 @@ Plug 'simrat39/symbols-outline.nvim'
 call plug#end()
 "install with :PlugInstall
 
-
-
 " source coc custom configs
 source $HOME/.config/nvim/coc.vim
 
@@ -110,7 +111,7 @@ set splitbelow                          " Horizontal splits will automatically b
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
 set cmdheight=2                         " More space for displaying messages
-set updatetime=300                      " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
+set updatetime=200                      " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 set pumheight=10                        " Makes popup menu smaller
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
@@ -154,7 +155,7 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 " coc
 "let g:coc_node_path = "/opt/homebrew/bin/node"
 let g:coc_global_extensions = ['coc-json', 'coc-git']
-nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
+
 
 " This will run a python file by hitting 'enter' and debug it directly in
 " debug mode with -i
@@ -290,12 +291,28 @@ nmap <leader>6 :bfirst<CR>:5bn<CR>
 nmap <leader>7 :bfirst<CR>:6bn<CR>
 nmap <leader>8 :bfirst<CR>:7bn<CR>
 
+nmap gt :bnext<CR>
+nmap gT :bprevious<CR>
+
+nmap 1gt :bfirst<CR>
+nmap 2gt :bfirst<CR>:bn<CR>
+nmap 3gt :bfirst<CR>:2bn<CR>
+nmap 4gt :bfirst<CR>:3bn<CR>
+nmap 5gt :bfirst<CR>:4bn<CR>
+nmap 6gt :bfirst<CR>:5bn<CR>
+nmap 7gt :bfirst<CR>:6bn<CR>
+nmap 8gt :bfirst<CR>:7bn<CR>
 "NerdTree
 "nnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-l> :NERDTreeToggle<CR>
-"nmap <leader>l :NERDTreeToggle<CR>
 nmap <leader>l :NERDTreeFind<CR>
+"nmap <leader>l :NERDTreeToggle<CR>
+nnoremap <C-l> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=50
+
+"floatterm
+nmap <leader>n :FloatermNew<CR>
+nmap <leader>^ :FloatermToggle<CR>
 
 " Outline Shortcut
 nmap <leader>o :SymbolsOutline<CR>
@@ -331,9 +348,19 @@ nmap <S-Tab> :tabprev<Return>
 
 "ranger nvim
 nnoremap <leader>f :RnvimrToggl<CR> 
+" Replace `$EDITOR` candidate with this command to open the selected file
+let g:rnvimr_edit_cmd = 'drop'
+
+
+"coc git
+nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
+
 " setup mapping to call :LazyGit
 nnoremap <silent> <leader>gg :LazyGit<CR>
 nnoremap <silent> <leader>lg :LazyGit<CR>
+
+"git blame
+nnoremap <silent> <leader>gb :BlamerToggle<CR>
 
 nnoremap Y y$
 " keeping it centered
@@ -392,6 +419,7 @@ source $HOME/.config/nvim/themes/onedark.vim
 
 " source settings
 source $HOME/.config/nvim/plugin/harpoon.vim
+source $HOME/.config/nvim/plugin/copilot.vim
 
 "syntax on
 
@@ -405,6 +433,8 @@ let g:airline_powerline_fonts = 1
 "let g:gruvbox_contrast_dark = 'hard'
 
 
+"lua plugins
+"lua require('~/.config/nvim/plugin/copilot')
 
 
 

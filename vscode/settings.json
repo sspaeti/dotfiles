@@ -78,12 +78,12 @@
     ],
     "python.analysis.memory.keepLibraryAst": true,
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "--line-length",
-        "100",
-        "-S",
-        "--fast",
-    ],
+    // "python.formatting.blackArgs": [
+    //     "--line-length",
+    //     "140",
+    //     "-S",
+    //     "--fast",
+    // ],
     //"python.jediEnabled": true, #old, new python.languageServer "Jedi"
     "python.languageServer": "Jedi",
     "python.linting.enabled": true,
@@ -294,5 +294,6 @@
         "**/.metals": true,
         "**/.ammonite": true
     },
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "window.zoomLevel": 1
 }

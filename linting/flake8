@@ -1,0 +1,24 @@
+[flake8]
+max-line-length = 140 #see also black config
+
+extend-exclude = [
+    "*/lib/*/site-packages",
+    ".venv",
+    "build",
+    "models",
+    ".eggs",
+    "airbyte-cdk/python/airbyte_cdk/models/__init__.py",
+    ".tox",
+    "airbyte_api_client",
+]
+
+max-complexity = 20
+max-line-length = 140
+
+extend-ignore = [
+  "E203",  # whitespace before ':' (conflicts with Black)
+  "E231",  # Bad trailing comma (conflicts with Black)
+  "E501",  # line too long (conflicts with Black)
+  "W503",  # line break before binary operator (conflicts with Black)
+]
+
