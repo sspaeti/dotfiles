@@ -46,6 +46,13 @@ cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.
 cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf
 
 
+#linting and formatting
+
+cp -r ~/.pylintrc $git/general/dotfiles/linting/pylintrc
+cp -r ~/.config/flake8 $git/general/dotfiles/linting/flake8
+cp -r ~/.isort.cfg $git/general/dotfiles/linting/issort.cfg
+cp -r ~/.pyproject_example.toml $git/general/dotfiles/linting/pyproject_example.toml
+
 
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
