@@ -18,10 +18,12 @@ endif
 call plug#begin('~/.config/nvim/vim-plug')
 "theme
 Plug 'vim-airline/vim-airline'
-Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
+"themes
+Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
-
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'rebelot/kanagawa.nvim'
 Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-surround' " Surrounding ysw)
@@ -116,6 +118,7 @@ set pumheight=10                        " Makes popup menu smaller
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 
+
 "general
 let mapleader = "\<Space>"
 inoremap jk <ESC>
@@ -195,10 +198,10 @@ augroup
 "      \ set fileformat=unix
 
 " Other Languages and indentaion
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+" au BufNewFile,BufRead *.js, *.html, *.css
+"     \ set tabstop=2
+"     \ set softtabstop=2
+"     \ set shiftwidth=2
 
 " Others
 "
@@ -416,6 +419,7 @@ nnoremap <leader>io :IO<CR>
 "cusotm stuff just for neovim
 source $HOME/.config/nvim/themes/airline.vim
 source $HOME/.config/nvim/themes/onedark.vim
+source $HOME/.config/nvim/themes/tokyonight.vim
 
 " source settings
 source $HOME/.config/nvim/plugin/harpoon.vim
@@ -423,11 +427,38 @@ source $HOME/.config/nvim/plugin/copilot.vim
 
 "syntax on
 
-""Gruvbox:
-colorscheme gruvbox
-let g:airline_theme = 'gruvbox' "'one'
+lua require('themes.kanagawa') 
+"colorscheme kanagawa
+
+""Theme configs - tokyonight gruvbox onedark kanagawa
+let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
+" let g:tokyonight_style = "night"
+" let g:tokyonight_italic_functions = 1
+" let g:tokyonight_comments = 1
+" let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+" 
+" " Change the "hint" color to the "orange" color, and make the "error" color bright red
+" let g:tokyonight_colors = {
+"   \ 'hint': 'orange',
+"   \ 'error': '#ff0000'
+" \ }
+
+
+
+" lua basic settings
+lua require('my_basic')
+ 
+
 set encoding=utf8
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1 "If you want the powerline symbols
+" let g:airline_filetype_overrides = {
+"       \ 'coc-explorer':  [ 'CoC Explorer', '' ],
+"       \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
+"       \ 'help':  [ 'Help', '%f' ],
+"       \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
+"       \ 'vim-plug': [ 'Plugins', '' ],
+"       \ }
+
 
 "set bg=dark
 "let g:gruvbox_contrast_dark = 'hard'
@@ -438,4 +469,4 @@ let g:airline_powerline_fonts = 1
 
 
 
-au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au! BufWritePost $RC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
