@@ -17,7 +17,6 @@ endif
 "plugs to intall
 call plug#begin('~/.config/nvim/vim-plug')
 "theme
-Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
 "themes
 Plug 'joshdick/onedark.vim'
@@ -38,6 +37,7 @@ Plug 'bps/vim-textobj-python'
 
 " comment healper
 " Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 " should be installed out of the box by neovim?
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -63,10 +63,14 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "File Navigation
+Plug 'vim-airline/vim-airline'
+"Plug 'kyazdani42/nvim-web-devicons' "Im using vim-devicons without color as it uses by nerdtree as well " Recommended (for coloured icons)
+Plug 'ryanoasis/vim-devicons' "Icons without colours and used by NerdTree
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+
 Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
-Plug 'ryanoasis/vim-devicons' "add file-icons to nerdtree
 
 "fast async search
 Plug 'dyng/ctrlsf.vim'
@@ -290,14 +294,24 @@ vnoremap > >gv
 " nnoremap <C-l> <C-w>l
 
 "tab and airline tabs navigation
-nmap <leader>1 :bfirst<CR>
-nmap <leader>2 :bfirst<CR>:bn<CR>
-nmap <leader>3 :bfirst<CR>:2bn<CR>
-nmap <leader>4 :bfirst<CR>:3bn<CR>
-nmap <leader>5 :bfirst<CR>:4bn<CR>
-nmap <leader>6 :bfirst<CR>:5bn<CR>
-nmap <leader>7 :bfirst<CR>:6bn<CR>
-nmap <leader>8 :bfirst<CR>:7bn<CR>
+" nmap <leader>1 :bfirst<CR>
+" nmap <leader>2 :bfirst<CR>:bn<CR>
+" nmap <leader>3 :bfirst<CR>:2bn<CR>
+" nmap <leader>4 :bfirst<CR>:3bn<CR>
+" nmap <leader>5 :bfirst<CR>:4bn<CR>
+" nmap <leader>6 :bfirst<CR>:5bn<CR>
+" nmap <leader>7 :bfirst<CR>:6bn<CR>
+" nmap <leader>8 :bfirst<CR>:7bn<CR>
+" for bufferline navigation
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 nmap gt :bnext<CR>
 nmap gT :bprevious<CR>
@@ -464,9 +478,12 @@ let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
 
 " lua basic settings
 lua require('my_basic')
+" lua plugins settings
+lua require('plugins.bufferline')
  
 
 set encoding=utf8
+let g:airline#extensions#tabline#enabled = 0 "because using bufferline
 let g:airline_powerline_fonts = 1 "If you want the powerline symbols
 " let g:airline_filetype_overrides = {
 "       \ 'coc-explorer':  [ 'CoC Explorer', '' ],
@@ -475,7 +492,6 @@ let g:airline_powerline_fonts = 1 "If you want the powerline symbols
 "       \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
 "       \ 'vim-plug': [ 'Plugins', '' ],
 "       \ }
-
 
 "set bg=dark
 "let g:gruvbox_contrast_dark = 'hard'
