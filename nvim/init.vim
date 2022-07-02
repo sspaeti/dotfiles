@@ -119,6 +119,9 @@ set hidden                              " Required to keep multiple buffers open
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 
 
+"set foldmethod=line
+
+
 "general
 let mapleader = "\<Space>"
 inoremap jk <ESC>
@@ -267,6 +270,8 @@ call which_key#register('<Space>', "g:which_key_map")
 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
+" Select all
+nmap <C-a> gg<S-v>G
 " Alternate way to quit
 " nnoremap <C-Q> :wq!<CR>
 " Use control-c instead of escape
@@ -332,14 +337,24 @@ nmap sv :vsplit<Return>
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
-"nmap sv :vsplit<Return><C-w>w" Move window  
-nmap st :tabnew<Return>
+"Move window  
 map sh <C-w>h  
 map sk <C-w>k  
 map sj <C-w>j  
 map sl <C-w>l" Switch tab  
-nmap <S-Tab> :tabprev<Return>  
-" if you map <Tab> also ctrl+l will change!
+" Resize window
+nmap <C-w><left> <C-w>5<
+nmap <C-w><right> <C-w>5>
+nmap <C-w><up> <C-w>5+
+nmap <C-w><down> <C-w>5-
+
+" Open current directory
+nmap te :tabedit 
+" Attention, sometimes when you map <Tab> also ctrl+l will change!
+nmap st :tabnew<Return>
+nmap <S-Tab> :tabprev<Return>
+nmap <Tab> :tabnext<Return>
+
 "nnoremap <Tab> :tabnext<Return>
 
 " Find files using Telescope command-line sugar. --> replaced by fzf as faster and more options such as search :Lines :Buffer and .gitignore integration
