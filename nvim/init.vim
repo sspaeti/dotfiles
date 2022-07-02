@@ -67,10 +67,10 @@ Plug 'vim-airline/vim-airline'
 "Plug 'kyazdani42/nvim-web-devicons' "Im using vim-devicons without color as it uses by nerdtree as well " Recommended (for coloured icons)
 Plug 'ryanoasis/vim-devicons' "Icons without colours and used by NerdTree
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-
 Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 "fast async search
 Plug 'dyng/ctrlsf.vim'
@@ -480,6 +480,7 @@ let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
 lua require('my_basic')
 " lua plugins settings
 lua require('plugins.bufferline')
+lua require('plugins.indent-blankline')
  
 
 set encoding=utf8
