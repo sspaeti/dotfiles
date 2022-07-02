@@ -448,9 +448,9 @@ command IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . exp
 nnoremap <leader>io :IO<CR>
 
 "cusotm stuff just for neovim
-source $HOME/.config/nvim/themes/airline.vim
-source $HOME/.config/nvim/themes/onedark.vim
-source $HOME/.config/nvim/themes/tokyonight.vim
+"source $HOME/.config/nvim/themes/airline.vim
+"source $HOME/.config/nvim/themes/onedark.vim
+"source $HOME/.config/nvim/themes/tokyonight.vim
 
 " source settings
 source $HOME/.config/nvim/plugin/harpoon.vim
