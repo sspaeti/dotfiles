@@ -16,6 +16,18 @@ require('kanagawa').setup({
     overrides = {},
 })
 
+vim.opt.laststatus = 3
+vim.opt.fillchars:append({
+    horiz = '━',
+    horizup = '┻',
+    horizdown = '┳',
+    vert = '┃',
+    vertleft = '┨',
+    vertright = '┣',
+    verthoriz = '╋',
+})
+require'kanagawa'.setup({ globalStatus = true, ... })
+
 -- setup must be called before loading
 vim.cmd("colorscheme kanagawa")
 
