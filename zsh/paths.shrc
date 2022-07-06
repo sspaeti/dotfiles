@@ -36,3 +36,5 @@ export RC=$MYVIMRC
 # alias hstart="/usr/local/Cellar/hadoop/3.2.1/sbin/start-all.sh"
 # alias hstop="/usr/local/Cellar/hadoop/3.2.1/sbin/stop-all.sh"
 
+#ruby
+export GEM_HOME="$HOME/.gem"

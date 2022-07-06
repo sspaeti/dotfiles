@@ -20,6 +20,7 @@ bindkey -M viins 'kj' vi-cmd-mode
 # fzf search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
 #on slow internet connection brew update takes ages. Disabling it per default here
 export HOMEBREW_NO_AUTO_UPDATE=1
 
