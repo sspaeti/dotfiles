@@ -1,5 +1,3 @@
-print('this also works')
-
 vim.cmd [[highlight IndentBlanklineIndent1 guibg=#1F1F28 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent2 guibg=#252535 gui=nocombine]]
 

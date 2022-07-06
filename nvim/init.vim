@@ -94,10 +94,7 @@ call plug#end()
 source $HOME/.config/nvim/coc.vim
 
 " Ignore files
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=**/coverage/*
-set wildignore+=**/.git/*
+set wildignore=*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*
 
 " search related
 set hlsearch 
@@ -354,11 +351,15 @@ noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
 "Move window  
-map sh <C-w>h  
-map sk <C-w>k  
-map sj <C-w>j  
-map sl <C-w>l" Switch tab  
+noremap sh <C-w>h  
+noremap sk <C-w>k  
+noremap sj <C-w>j  
+noremap sl <C-w>l" Switch tab  
 " Resize window
+nnoremap <C-w>h <C-w>5>
+nnoremap <C-w>l <C-w>5<
+nnoremap <C-w>k <C-w>5+
+nnoremap <C-w>j <C-w>5-
 nmap <C-w><left> <C-w>5<
 nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+

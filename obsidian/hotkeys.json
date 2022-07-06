@@ -144,5 +144,13 @@
       ],
       "key": "B"
     }
+  ],
+  "obsidian-admonition:insert-callout": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "C"
+    }
   ]
 }
