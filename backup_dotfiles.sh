@@ -37,11 +37,13 @@ cp ~/Simon/Sync/SecondBrain/.obsidian/community-plugins.json $git/general/dotfil
 cp ~/Simon/Sync/SecondBrain/.obsidian/appearance.json $git/general/dotfiles/obsidian/appearance.json
 cp ~/Simon/Sync/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/app.json
 cp ~/Simon/Sync/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vimrc
+cp ~/Simon/Sync/SecondBrain/.obsidian/themes/custom_kanagawa.css $git/general/dotfiles/obsidian/themes/custom_kanagawa.css
 
 
 #kitty
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
 cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.conf
+cp ~/.config/kitty/custom_kitty.conf $git/general/dotfiles/kitty/custom_kitty.conf
 
 #ranger
 cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf

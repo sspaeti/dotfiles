@@ -26,6 +26,7 @@ brew "fzf"
 brew "helm"
 brew "hub"
 brew "hugo"
+brew "ipython"
 brew "kubernetes-cli"
 brew "lastpass-cli", args: ["HEAD"]
 brew "lazygit"
