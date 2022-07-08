@@ -1,6 +1,6 @@
 {
   "baseFontSize": 18,
-  "cssTheme": "custom_kanagawa",
+  "cssTheme": "Kanagawa",
   "theme": "system",
   "enabledCssSnippets": [
     "hide_file_in_filetree"
