@@ -120,7 +120,7 @@
     --text-highlight-bg:          var(--waveBlue1);
     --interactive-accent:         var(--dragonBlue); /* vim cursor background AND highilight on right*/
     --interactive-before:         var(--sumiInk4);
-    --background-modifier-border: var(--sumiInk2);
+    --background-modifier-border: var(--dragonBlue);
     --text-accent:                var(--autumnGreen);
     --interactive-accent-rgb:     var(--springGreen);
     --inline-code:                var(--springGreen);
