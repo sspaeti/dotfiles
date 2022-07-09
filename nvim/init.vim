@@ -41,6 +41,13 @@ Plug 'tpope/vim-commentary'
 
 " should be installed out of the box by neovim?
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" cmp plugins
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
@@ -85,7 +92,8 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
 "Markdown (or any Outline
-Plug 'simrat39/symbols-outline.nvim'
+"Plug 'simrat39/symbols-outline.nvim'
+Plug 'stevearc/aerial.nvim'
 "Plug 'vimwiki/vimwiki'
 call plug#end()
 "install with :PlugInstall
@@ -120,8 +128,6 @@ set hidden                              " Required to keep multiple buffers open
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
 
 
-"set foldmethod=line
-
 
 "general
 let mapleader = "\<Space>"
@@ -140,7 +146,21 @@ set number
 set numberwidth=5
 set relativenumber
 
-
+"fold settings
+"set foldnestmax=2
+set foldmethod=indent
+set foldlevel=3
+nnoremap <Leader>z za
+vnoremap <Leader>z zf
+map z1  :set foldlevel=0<CR><Esc>
+map z2  :set foldlevel=1<CR><Esc>
+map z3  :set foldlevel=2<CR><Esc>
+map z4  :set foldlevel=3<CR><Esc>
+map z5  :set foldlevel=4<CR><Esc>
+map z6  :set foldlevel=5<CR><Esc>
+map z7  :set foldlevel=6<CR><Esc>
+map z8  :set foldlevel=7<CR><Esc>
+map z9  :set foldlevel=8<CR><Esc>
 " 
 " REMAPS
 " Swiss keyboard remap
@@ -271,6 +291,9 @@ call which_key#register('<Space>', "g:which_key_map")
 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
+nnoremap <C-r> q:
+
+
 " Select all
 nmap <C-a> gg<S-v>G
 " Alternate way to quit
@@ -336,12 +359,14 @@ let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F10>'
 
 " Outline Shortcut
-nmap <leader>o :SymbolsOutline<CR>
+nmap <leader>oo :CocList outline methods<CR>
+nmap <leader>o :AerialToggle<CR>
+autocmd FileType markdown nmap <leader>o :SymbolsOutline<CR>
 
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
 " this will quick search content of files
-nnoremap <C-f> :CtrlSF 
+nnoremap <leader>f :CtrlSF 
 
 " Split window  
 nmap ss :split<Return>
@@ -382,7 +407,8 @@ nmap <Tab> :tabnext<Return>
 " nnoremap <C-p> <cmd>Telescope find_files<cr>
 
 "ranger nvim
-nnoremap <leader>f :RnvimrToggl<CR> 
+nnoremap <leader>e :RnvimrToggl<CR> 
+"
 " Replace `$EDITOR` candidate with this command to open the selected file
 let g:rnvimr_edit_cmd = 'drop'
 
@@ -482,6 +508,10 @@ lua require('my_basic')
 " lua plugins settings
 lua require('plugins.bufferline')
 lua require('plugins.indent-blankline')
+"lua require('plugins.symbols-outline')
+lua require('plugins.aerial')
+lua require('plugins.treesitter')
+lua require('plugins.cmp')
  
 
 set encoding=utf8
