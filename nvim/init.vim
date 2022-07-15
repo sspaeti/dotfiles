@@ -59,6 +59,7 @@ Plug 'APZelos/blamer.nvim' "gitlens blame style
 " Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 "terminal
@@ -149,7 +150,7 @@ set relativenumber
 "fold settings
 "set foldnestmax=2
 set foldmethod=indent
-set foldlevel=3
+set foldlevel=5
 nnoremap <Leader>z za
 vnoremap <Leader>z zf
 map z1  :set foldlevel=0<CR><Esc>
@@ -173,6 +174,9 @@ nnoremap <C-6> <C-^><cr>
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
 
+"null-ls formatting, diagnostic and linting configs
+map <Leader>lf :lua vim.lsp.buf.format()<CR>
+
 " Turn off autocomplete for Markdown
 autocmd FileType markdown let b:coc_suggest_disable = 1
 
@@ -189,7 +193,7 @@ let g:coc_global_extensions = ['coc-json', 'coc-git']
 "FileType settings {{{
 augroup mb_filetype
 	autocmd!
-	autocmd FileType brainfuck xmap <buffer> R "xygv*;%s;;<c-r>x;g<left><left>
+	autocmd FileType brainfuck xmap <buffern R "xygv*;%s;;<c-r>x;g<left><left>
 	autocmd FileType yaml nnoremap <buffer> <CR> :AnsibleDoc<CR>
 	autocmd FileType python iabbrev <buffer> im import
 	autocmd FileType python iabbrev <buffer> rt return
@@ -291,7 +295,7 @@ call which_key#register('<Space>', "g:which_key_map")
 
 " Alternate way to save
 nnoremap <C-s> :w<CR>
-nnoremap <C-r> q:
+nnoremap <leader>r q:
 
 
 " Select all
@@ -392,10 +396,10 @@ nmap <C-w><down> <C-w>5-
 
 " Open current directory
 nmap te :tabedit 
-" Attention, sometimes when you map <Tab> also ctrl+l will change!
 nmap st :tabnew<Return>
 nmap <S-Tab> :tabprev<Return>
-nmap <Tab> :tabnext<Return>
+" Attention, sometimes when you map <Tab> also ctrl+i will change!
+"nmap <Tab> :tabnext<Return>
 
 "nnoremap <Tab> :tabnext<Return>
 
@@ -512,7 +516,8 @@ lua require('plugins.indent-blankline')
 lua require('plugins.aerial')
 lua require('plugins.treesitter')
 lua require('plugins.cmp')
- 
+lua require('plugins.pyright')
+lua require('plugins.null-ls')
 
 set encoding=utf8
 let g:airline#extensions#tabline#enabled = 0 "because using bufferline
