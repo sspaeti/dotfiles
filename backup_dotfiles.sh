@@ -56,10 +56,17 @@ cp -r ~/.config/flake8 $git/general/dotfiles/linting/flake8
 cp -r ~/.isort.cfg $git/general/dotfiles/linting/issort.cfg
 cp -r ~/.pyproject_example.toml $git/general/dotfiles/linting/pyproject_example.toml
 
+#dbbeaver vrapper configs
+cp ~/.vrapperrc $git/general/dotfiles/dbeaver/vrapperrc 
 
+
+#homebrew
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
 
+
+#delete unwanted files
+rm nvim/plugin/plugin/packer_compiled.lua
 
 # source $venvs/dagster/bin/activate
 # pip freeze > $git/general/dotfiles/python/venvs/dagster.txt
