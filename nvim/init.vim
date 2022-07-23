@@ -71,7 +71,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "File Navigation
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
+
 "Plug 'kyazdani42/nvim-web-devicons' "Im using vim-devicons without color as it uses by nerdtree as well " Recommended (for coloured icons)
 Plug 'ryanoasis/vim-devicons' "Icons without colours and used by NerdTree
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
@@ -100,7 +103,14 @@ call plug#end()
 "install with :PlugInstall
 
 " source coc custom configs
-source $HOME/.config/nvim/coc.vim
+" source $HOME/.config/nvim/coc.vim
+" I will try lsp commands -> Should be moved to ~/.config/nvim/lua/lsp/config.lua
+nmap <silent> K :lua vim.lsp.buf.hover()<CR>
+nmap <silent> gd :lua vim.lsp.buf.definition()<CR>
+nmap <silent> gD :lua vim.lsp.buf.declaration()<CR>
+nmap <silent> gr :lua vim.lsp.buf.references()<CR>
+nmap <silent> gI :lua vim.lsp.buf.implementation()<CR>
+nmap <silent> gs :lua vim.lsp.buf.signature_help()<CR>
 
 " Ignore files
 set wildignore=*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*
@@ -506,9 +516,12 @@ let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
 " \ }
 
 
+"lua plugins installing with packer.nvim
+lua require('plugins')
 
 " lua basic settings
 lua require('my_basic')
+lua require('lsp.config')
 " lua plugins settings
 lua require('plugins.bufferline')
 lua require('plugins.indent-blankline')
@@ -518,10 +531,12 @@ lua require('plugins.treesitter')
 lua require('plugins.cmp')
 lua require('plugins.pyright')
 lua require('plugins.null-ls')
+lua require('plugins.lualine')
+lua require('plugins.github')
 
 set encoding=utf8
-let g:airline#extensions#tabline#enabled = 0 "because using bufferline
-let g:airline_powerline_fonts = 1 "If you want the powerline symbols
+" let g:airline#extensions#tabline#enabled = 0 "because using bufferline
+" let g:airline_powerline_fonts = 1 "If you want the powerline symbols
 " let g:airline_filetype_overrides = {
 "       \ 'coc-explorer':  [ 'CoC Explorer', '' ],
 "       \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
