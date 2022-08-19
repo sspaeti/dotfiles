@@ -5,6 +5,7 @@
 	user = sspaeti
 [core]
 	excludesfile = /Users/sspaeti/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
   tool = meld
   #nvimdiff
@@ -58,3 +59,20 @@
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 [hub]
 	protocol = https
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
