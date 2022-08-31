@@ -21,6 +21,7 @@ alias ta="tmux attach"
 
 # when closing ranger it will be at the path you were
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias r=ranger
 
 #git shortcuts
 alias g='git'
@@ -41,6 +42,7 @@ alias gf='git fetch'
 alias gcl='git clone'
 
 alias lg=lazygit
+alias cat=bat
 
 
 #docker

@@ -1,4 +1,12 @@
 
+
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+#go path
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 # my shortcuts
 export git=~/Documents/git
 export de=$git/de
@@ -7,6 +15,9 @@ export sspaeticom=$git/sspaeti.com
 export venvs=~/.venvs/
 export sync=~/Simon/Sync
 export secondbrain=/Users/sspaeti/Simon/Sync/SecondBrain/
+export public_secondbrain=$git/sspaeti.com/second-brain-public/content
+
+
 export areas=/Users/sspaeti/Simon/Sync/SecondBrain/⚛️\ Areas
 export blog=/Users/sspaeti/Documents/git/sspaeti.com/sspaeti-hugo-blog
 export hugo=$blog

@@ -116,12 +116,14 @@ source $ZSH/oh-my-zsh.sh
 #
 # sspaeti customized properties
 #
+source ~/.dotfiles/zsh/configs.shrc
+source ~/.dotfiles/zsh/paths.shrc
 source ~/.dotfiles/zsh/aliases.shrc
 source ~/.dotfiles/zsh/.secrets
-source ~/.dotfiles/zsh/paths.shrc
-source ~/.dotfiles/zsh/configs.shrc
+#airbyte
+source ~/.dotfiles/zsh/.secrets_airbyte
+source ~/.dotfiles/zsh/paths_airbyte.shrc
+
 source ~/.dotfiles/zsh/end.shrc
 
 
-source ~/.dotfiles/zsh/.secrets_airbyte
-source ~/.dotfiles/zsh/paths_airbyte.shrc

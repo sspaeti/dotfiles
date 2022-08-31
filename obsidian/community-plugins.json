@@ -23,5 +23,8 @@
   "extract-highlights-plugin",
   "obsidian-languagetool-plugin",
   "obsidian-kindle-plugin",
-  "obsidian-admonition"
+  "obsidian-admonition",
+  "obsidian-hover-editor",
+  "excalibrain",
+  "obsidian-excalidraw-plugin"
 ]
