@@ -34,6 +34,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 "Text objects for Python
 Plug 'bps/vim-textobj-python'
+"preview CSS colors inline
+Plug 'ap/vim-css-color'
 
 " comment healper
 " Plug 'preservim/nerdcommenter'
@@ -403,6 +405,9 @@ nmap <C-w><left> <C-w>5<
 nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
+
+" closing buffers "https://stackoverflow.com/a/8585343/5246670
+map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Open current directory
 nmap te :tabedit 
