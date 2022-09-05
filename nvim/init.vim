@@ -83,6 +83,9 @@ Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
+"nerdtree in lua
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 "fast async search
@@ -361,11 +364,10 @@ nmap 6gt :bfirst<CR>:5bn<CR>
 nmap 7gt :bfirst<CR>:6bn<CR>
 nmap 8gt :bfirst<CR>:7bn<CR>
 "NerdTree
-"nnoremap <leader>n :NERDTreeFocus<CR>
-"nnoremap <C-n> :NERDTree<CR>
-nmap <leader>l :NERDTreeFind<CR>
-"nmap <leader>l :NERDTreeToggle<CR>
-nnoremap <C-l> :NERDTreeToggle<CR>
+" nmap <leader>l :NERDTreeFind<CR>
+nmap <leader>l :NvimTreeFindFile<CR>
+" nnoremap <C-l> :NERDTreeToggle<CR>
+nnoremap <C-l> :NvimTreeToggle<CR>
 let g:NERDTreeWinSize=50
 
 "floatterm
@@ -391,11 +393,6 @@ nmap sv :vsplit<Return>
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
-"Move window  
-noremap sh <C-w>h  
-noremap sk <C-w>k  
-noremap sj <C-w>j  
-noremap sl <C-w>l" Switch tab  
 " Resize window
 nnoremap <C-w>h <C-w>5>
 nnoremap <C-w>l <C-w>5<
@@ -405,6 +402,12 @@ nmap <C-w><left> <C-w>5<
 nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
+
+"Move window  
+noremap sh <C-w>h  
+noremap sk <C-w>k  
+noremap sj <C-w>j  
+noremap sl <C-w>l
 
 " closing buffers "https://stackoverflow.com/a/8585343/5246670
 map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -538,6 +541,7 @@ lua require('plugins.pyright')
 lua require('plugins.null-ls')
 lua require('plugins.lualine')
 lua require('plugins.github')
+lua require('plugins.nvim-tree')
 
 set encoding=utf8
 " let g:airline#extensions#tabline#enabled = 0 "because using bufferline
