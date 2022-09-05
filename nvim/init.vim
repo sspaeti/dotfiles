@@ -77,12 +77,8 @@ Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
 
-"Plug 'kyazdani42/nvim-web-devicons' "Im using vim-devicons without color as it uses by nerdtree as well " Recommended (for coloured icons)
-Plug 'ryanoasis/vim-devicons' "Icons without colours and used by NerdTree
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin' "git status in nerdtree
 "nerdtree in lua
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
@@ -363,12 +359,9 @@ nmap 5gt :bfirst<CR>:4bn<CR>
 nmap 6gt :bfirst<CR>:5bn<CR>
 nmap 7gt :bfirst<CR>:6bn<CR>
 nmap 8gt :bfirst<CR>:7bn<CR>
-"NerdTree
-" nmap <leader>l :NERDTreeFind<CR>
+"file navigation nvim-tree
 nmap <leader>l :NvimTreeFindFile<CR>
-" nnoremap <C-l> :NERDTreeToggle<CR>
 nnoremap <C-l> :NvimTreeToggle<CR>
-let g:NERDTreeWinSize=50
 
 "floatterm
 let g:floaterm_keymap_new    = '<F7>'
