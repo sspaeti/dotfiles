@@ -386,9 +386,15 @@ nmap sv :vsplit<Return>
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
+"Move window  
+noremap sh <C-w>h  
+noremap sk <C-w>k  
+noremap sj <C-w>j  
+noremap sl <C-w>l
+
 " Resize window
-nnoremap <C-w>h <C-w>5>
-nnoremap <C-w>l <C-w>5<
+nnoremap <C-w>l <C-w>5>
+nnoremap <C-w>h <C-w>5<
 nnoremap <C-w>k <C-w>5+
 nnoremap <C-w>j <C-w>5-
 nmap <C-w><left> <C-w>5<
@@ -396,11 +402,6 @@ nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
 
-"Move window  
-noremap sh <C-w>h  
-noremap sk <C-w>k  
-noremap sj <C-w>j  
-noremap sl <C-w>l
 
 " closing buffers "https://stackoverflow.com/a/8585343/5246670
 map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
