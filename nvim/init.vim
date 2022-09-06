@@ -35,7 +35,8 @@ Plug 'kana/vim-textobj-indent'
 "Text objects for Python
 Plug 'bps/vim-textobj-python'
 "preview CSS colors inline
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " comment healper
 " Plug 'preservim/nerdcommenter'
@@ -99,7 +100,7 @@ Plug 'github/copilot.vim'
 "Markdown (or any Outline
 "Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
-"Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 "install with :PlugInstall
 
@@ -148,7 +149,11 @@ inoremap kj <Esc>
 filetype plugin indent on
 set clipboard=unnamedplus               " Copy paste between vim and everything else -> inserts all into system clipboard
 noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
+
+" VimWiki
 set nocompatible                        " Recommende for VimWiki
+" connect with Obsidian Second Brain
+let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
 
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
@@ -536,6 +541,7 @@ lua require('plugins.null-ls')
 lua require('plugins.lualine')
 lua require('plugins.github')
 lua require('plugins.nvim-tree')
+lua require('plugins.colorizer')
 
 set encoding=utf8
 " let g:airline#extensions#tabline#enabled = 0 "because using bufferline
