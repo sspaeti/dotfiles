@@ -160,8 +160,11 @@ set nocompatible                        " Recommende for VimWiki
 let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
 
-" create WikiLink in Markdown
+" create WikiLink and paste clipboard as link when in visual mode 
 autocmd FileType markdown vnoremap <c-k> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
+" create empty wikilink when in normal mode
+autocmd FileType markdown nmap <c-k> i[]()<Esc>hhi
+
 
 " Turn off autocomplete for Markdown
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
