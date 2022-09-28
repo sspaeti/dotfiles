@@ -4,7 +4,7 @@
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 #go path
-export GOPATH=$HOME/go
+export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # my shortcuts

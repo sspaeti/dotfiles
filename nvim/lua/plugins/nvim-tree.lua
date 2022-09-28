@@ -13,6 +13,15 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
+    actions = {
+      expand_all = {
+        max_folder_discovery = 300,
+      },
+    },
   },
+  git = {
+    ignore = false
+  }
 })
+

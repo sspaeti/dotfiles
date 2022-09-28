@@ -81,7 +81,7 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/h
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
-plugins=(git macos docker docker-compose virtualenv vi-mode)
+plugins=(git macos docker docker-compose virtualenv vi-mode poetry)
 #installed with brew therefor not in above list: zsh-syntax-highlighting zsh-autosuggestions
 
 source $ZSH/oh-my-zsh.sh

@@ -1,5 +1,5 @@
 {
-  "git.enableGutters": false,
+  "git.enableGutters": true,
   //python config
   "python.linting.pylintEnabled": false,
   "python.linting.enabled": true,

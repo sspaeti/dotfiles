@@ -98,7 +98,7 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
 "Markdown (or any Outline
-"Plug 'simrat39/symbols-outline.nvim'
+Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
 Plug 'vimwiki/vimwiki'
 call plug#end()
@@ -154,6 +154,16 @@ noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
 set nocompatible                        " Recommende for VimWiki
 " connect with Obsidian Second Brain
 let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
+
+" Turn off autocomplete for Markdown
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+" Highlights for headers in markdown -> doesn't really work
+highlight htmlH1 guifg=#50fa7b gui=bold
+highlight htmlH2 guifg=#ff79c6 gui=bold
+highlight htmlH3 guifg=#ffb86c gui=bold
+highlight htmlH4 guifg=#8be9fd gui=bold
+highlight htmlH5 guifg=#f1fa8c gui=bold
 
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
@@ -193,9 +203,6 @@ autocmd BufWritePre *.py execute ':Black'
 "null-ls formatting, diagnostic and linting configs
 map <Leader>lf :lua vim.lsp.buf.format()<CR>
 
-" Turn off autocomplete for Markdown
-autocmd FileType markdown let b:coc_suggest_disable = 1
-
 let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3") 
 "expand($VIRTUAL_ENV."/bin/python3")
 
@@ -220,6 +227,12 @@ augroup mb_filetype
 	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
 augroup 
 "}}}
+
+" auto create a folder if we save a file in a non existing folder
+augroup Mkdir
+  autocmd!
+  autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
+augroup END
 
 " jedi - shortcuts -> replced with coc
 " let g:jedi#goto_command = "<leader>d"
@@ -316,6 +329,10 @@ nnoremap <leader>r q:
 
 " Select all
 nmap <C-a> gg<S-v>G
+
+" replace without losing what I hade in the clipboard
+xnoremap("<leader>p", "\"_dP")
+
 " Alternate way to quit
 " nnoremap <C-Q> :wq!<CR>
 " Use control-c instead of escape
@@ -474,15 +491,16 @@ nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
 
 " Commenting blocks of code.
-augroup commenting_blocks_of_code
-  autocmd!
-  autocmd FileType c,cpp,java,scala     let b:comment_leadej = '// '
-  autocmd FileType sh,ruby,python,yaml  let b:comment_leader = '# '
-  autocmd FileType conf,fstab           let b:comment_leader = '# '
-  autocmd FileType tex                  let b:comment_leader = '% '
-  autocmd FileType mail                 let b:comment_leader = '> '
-  autocmd FileType vim                  let b:comment_leader = '" '
-augroup END
+" replaced with vim-commentary
+" augroup commenting_blocks_of_code
+"   autocmd!
+"   autocmd FileType c,cpp,java,scala     let b:comment_leadej = '// '
+"   autocmd FileType sh,ruby,python,yaml  let b:comment_leader = '# '
+"   autocmd FileType conf,fstab           let b:comment_leader = '# '
+"   autocmd FileType tex                  let b:comment_leader = '% '
+"   autocmd FileType mail                 let b:comment_leader = '> '
+"   autocmd FileType vim                  let b:comment_leader = '" '
+" augroup END
 noremap <silent> <Leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
@@ -532,7 +550,7 @@ lua require('lsp.config')
 " lua plugins settings
 lua require('plugins.bufferline')
 lua require('plugins.indent-blankline')
-"lua require('plugins.symbols-outline')
+lua require('plugins.symbols-outline')
 lua require('plugins.aerial')
 lua require('plugins.treesitter')
 lua require('plugins.cmp')
