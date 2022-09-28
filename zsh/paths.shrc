@@ -3,6 +3,9 @@
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# Add docker: Had trouble after restart
+export PATH="$PATH:/usr/local/bin/"
+
 #go path
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

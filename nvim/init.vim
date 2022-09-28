@@ -101,6 +101,10 @@ Plug 'github/copilot.vim'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
 Plug 'vimwiki/vimwiki'
+"dbt
+" Plug 'pedramnavid/dbt.nvim'
+Plug 'ivanovyordan/dbt.vim'
+
 call plug#end()
 "install with :PlugInstall
 
@@ -155,6 +159,9 @@ set nocompatible                        " Recommende for VimWiki
 " connect with Obsidian Second Brain
 let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
+
+" create WikiLink in Markdown
+autocmd FileType markdown vnoremap <c-k> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 
 " Turn off autocomplete for Markdown
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
@@ -399,7 +406,8 @@ autocmd FileType markdown nmap <leader>o :SymbolsOutline<CR>
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
 " this will quick search content of files
-nnoremap <leader>f :CtrlSF 
+nnoremap <leader>ff :CtrlSF 
+nnoremap <leader>fl :CtrlSFToggle<CR>
 
 " Split window  
 nmap ss :split<Return>
@@ -425,8 +433,13 @@ nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
 
 
+
 " closing buffers "https://stackoverflow.com/a/8585343/5246670
 map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
+" Close current window
+nnoremap <leader>x <C-w>c
 
 " Open current directory
 nmap te :tabedit 
@@ -460,6 +473,8 @@ nnoremap <silent> <leader>lg :LazyGit<CR>
 
 "git blame
 nnoremap <silent> <leader>gb :BlamerToggle<CR>
+"let blame default be on
+let g:blamer_enabled = 1
 
 nnoremap Y y$
 " keeping it centered

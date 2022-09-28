@@ -14,11 +14,6 @@ require("nvim-tree").setup({
   },
   filters = {
     dotfiles = false,
-    actions = {
-      expand_all = {
-        max_folder_discovery = 300,
-      },
-    },
   },
   git = {
     ignore = false
