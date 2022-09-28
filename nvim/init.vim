@@ -19,7 +19,7 @@ call plug#begin('~/.config/nvim/vim-plug')
 "theme
 Plug 'sheerun/vim-polyglot'
 "themes
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
@@ -102,8 +102,10 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
 Plug 'vimwiki/vimwiki'
 "dbt
-" Plug 'pedramnavid/dbt.nvim'
-Plug 'ivanovyordan/dbt.vim'
+Plug 'lepture/vim-jinja'
+Plug 'pedramnavid/dbt.nvim'
+" Plug 'ivanovyordan/dbt.vim'
+
 
 call plug#end()
 "install with :PlugInstall
@@ -168,6 +170,7 @@ autocmd FileType markdown nmap <c-k> i[]()<Esc>hhi
 
 " Turn off autocomplete for Markdown
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
 " Highlights for headers in markdown -> doesn't really work
 highlight htmlH1 guifg=#50fa7b gui=bold
 highlight htmlH2 guifg=#ff79c6 gui=bold
@@ -546,7 +549,7 @@ lua require('themes.kanagawa')
 "colorscheme kanagawa
 
 ""Theme configs - tokyonight gruvbox onedark kanagawa
-let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
+" let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
 " let g:tokyonight_style = "night"
 " let g:tokyonight_italic_functions = 1
 " let g:tokyonight_comments = 1
