@@ -25,5 +25,12 @@ return require('packer').startup(function()
     'ldelossa/gh.nvim',
     requires = { { 'ldelossa/litee.nvim' } }
   }
+  --instaling plugs
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
+  --rust
+  use 'neovim/nvim-lspconfig' 
+  use 'simrat39/rust-tools.nvim'
+  use 'puremourning/vimspector'
 
 end)

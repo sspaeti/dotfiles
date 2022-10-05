@@ -44,13 +44,19 @@ Plug 'tpope/vim-commentary'
 
 " should be installed out of the box by neovim?
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" cmp plugins
-Plug 'neovim/nvim-lspconfig'
+"" cmp plugins
+" Completion framework:
+Plug 'hrsh7th/nvim-cmp' 
+" LSP completion source:
 Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
+" Useful completion sources:
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/vim-vsnip'
+
 
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
@@ -102,10 +108,9 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
 Plug 'vimwiki/vimwiki'
 "dbt
-Plug 'lepture/vim-jinja'
+" Plug 'lepture/vim-jinja' "needed for dbt below but errors in hugo htmls...
 Plug 'pedramnavid/dbt.nvim'
 " Plug 'ivanovyordan/dbt.vim'
-
 
 call plug#end()
 "install with :PlugInstall
@@ -180,7 +185,7 @@ highlight htmlH5 guifg=#f1fa8c gui=bold
 
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
-set laststatus=2     " Always display the status line
+set laststatus=3     " 3: Only show global status line in acitve window 2: Always display the status line
 
 set number
 set numberwidth=5
@@ -363,15 +368,6 @@ vnoremap > >gv
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
 
-"tab and airline tabs navigation
-" nmap <leader>1 :bfirst<CR>
-" nmap <leader>2 :bfirst<CR>:bn<CR>
-" nmap <leader>3 :bfirst<CR>:2bn<CR>
-" nmap <leader>4 :bfirst<CR>:3bn<CR>
-" nmap <leader>5 :bfirst<CR>:4bn<CR>
-" nmap <leader>6 :bfirst<CR>:5bn<CR>
-" nmap <leader>7 :bfirst<CR>:6bn<CR>
-" nmap <leader>8 :bfirst<CR>:7bn<CR>
 " for bufferline navigation
 nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
 nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
@@ -414,6 +410,7 @@ nnoremap <C-p> :Files<CR>
 " this will quick search content of files
 nnoremap <leader>ff :CtrlSF 
 nnoremap <leader>fl :CtrlSFToggle<CR>
+nnoremap <leader>ft :CtrlSFToggle<CR>
 
 " Split window  
 nmap ss :split<Return>
@@ -535,7 +532,6 @@ command IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . exp
 nnoremap <leader>io :IO<CR>
 
 "cusotm stuff just for neovim
-"source $HOME/.config/nvim/themes/airline.vim
 "source $HOME/.config/nvim/themes/onedark.vim
 "source $HOME/.config/nvim/themes/tokyonight.vim
 
@@ -549,7 +545,6 @@ lua require('themes.kanagawa')
 "colorscheme kanagawa
 
 ""Theme configs - tokyonight gruvbox onedark kanagawa
-" let g:airline_theme = 'onedark' "'tokyonight' "'gruvbox' "'onedark'
 " let g:tokyonight_style = "night"
 " let g:tokyonight_italic_functions = 1
 " let g:tokyonight_comments = 1
@@ -566,7 +561,7 @@ lua require('themes.kanagawa')
 lua require('plugins')
 
 " lua basic settings
-lua require('my_basic')
+lua require('init')
 lua require('lsp.config')
 " lua plugins settings
 lua require('plugins.bufferline')
@@ -581,17 +576,12 @@ lua require('plugins.lualine')
 lua require('plugins.github')
 lua require('plugins.nvim-tree')
 lua require('plugins.colorizer')
+" plugin installations
+lua require('plugins.mason')
+
+
 
 set encoding=utf8
-" let g:airline#extensions#tabline#enabled = 0 "because using bufferline
-" let g:airline_powerline_fonts = 1 "If you want the powerline symbols
-" let g:airline_filetype_overrides = {
-"       \ 'coc-explorer':  [ 'CoC Explorer', '' ],
-"       \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
-"       \ 'help':  [ 'Help', '%f' ],
-"       \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
-"       \ 'vim-plug': [ 'Plugins', '' ],
-"       \ }
 
 "set bg=dark
 "let g:gruvbox_contrast_dark = 'hard'

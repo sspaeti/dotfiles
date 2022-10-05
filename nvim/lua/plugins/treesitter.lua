@@ -4,7 +4,8 @@ if not status_ok then
 end
 
 configs.setup({
-	ensure_installed = {"python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim"}, -- one of "all" or a list of languages
+	ensure_installed = {"python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust"}, -- one of "all" or a list of languages
+	auto_install = true,
 	ignore_install = { "" }, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
@@ -14,4 +15,9 @@ configs.setup({
 		enable = true,
 	},
 	indent = { enable = true, disable = { "yaml", "python" } },
+	rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  }
 })
