@@ -218,6 +218,10 @@ nnoremap <C-6> <C-^><cr>
 "auto format on save with Black
 autocmd BufWritePre *.py execute ':Black'
 
+" format JSON
+:command Formatj :%!jq .
+:command Unformatj :%!jq -c .
+
 "null-ls formatting, diagnostic and linting configs
 map <Leader>lf :lua vim.lsp.buf.format()<CR>
 
@@ -399,6 +403,9 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F10>'
+let g:floaterm_width = 160
+let g:floaterm_height = 45
+
 
 " Outline Shortcut
 nmap <leader>oo :CocList outline methods<CR>
