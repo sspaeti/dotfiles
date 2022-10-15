@@ -170,5 +170,22 @@
       "key": "O"
     }
   ],
-  "editor:delete-paragraph": []
+  "editor:delete-paragraph": [],
+  "omnisearch:show-modal-infile": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "F"
+    }
+  ],
+  "omnisearch:show-modal": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "7"
+    }
+  ]
 }
