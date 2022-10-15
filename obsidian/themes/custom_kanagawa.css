@@ -501,6 +501,8 @@ h6 a
     font-weight: 500 !important;
     font-size: 2.0em !important;
     color: var(--text-title-h2) !important;
+    /* text-transform: uppercase; */
+
 }
 
 .HyperMD-header-3,
