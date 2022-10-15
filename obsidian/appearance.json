@@ -5,5 +5,8 @@
   "enabledCssSnippets": [
     "hide_file_in_filetree"
   ],
-  "translucency": false
+  "translucency": false,
+  "accentColor": "",
+  "showViewHeader": false,
+  "nativeMenus": true
 }
