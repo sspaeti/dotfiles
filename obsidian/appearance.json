@@ -1,5 +1,5 @@
 {
-  "baseFontSize": 16,
+  "baseFontSize": 17,
   "cssTheme": "Kanagawa",
   "theme": "obsidian",
   "enabledCssSnippets": [
@@ -8,5 +8,8 @@
   "translucency": false,
   "accentColor": "",
   "showViewHeader": false,
-  "nativeMenus": true
+  "nativeMenus": true,
+  "interfaceFontFamily": "iA Writer Quattro S,Iosevka,Atkinson Hyperlegible",
+  "textFontFamily": "Atkinson Hyperlegible,iA Writer Quattro S,Inter,Iosevka",
+  "monospaceFontFamily": "Iosevka"
 }
