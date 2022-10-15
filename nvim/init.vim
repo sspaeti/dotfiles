@@ -56,7 +56,8 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/vim-vsnip'
-
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-cmdline' "used?
 
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
@@ -98,7 +99,7 @@ Plug 'sbdchd/neoformat'
 
 "support for go to defintion and autocompletion
 "Plug 'davidhalter/jedi-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'liuchengxu/vim-which-key'
@@ -230,7 +231,7 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 
 " coc
 "let g:coc_node_path = "/opt/homebrew/bin/node"
-let g:coc_global_extensions = ['coc-json', 'coc-git']
+" let g:coc_global_extensions = ['coc-json', 'coc-git']
 
 
 " This will run a python file by hitting 'enter' and debug it directly in
@@ -475,7 +476,7 @@ let g:rnvimr_edit_cmd = 'drop'
 
 
 "coc git
-nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
+" nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
 
 " setup mapping to call :LazyGit
 nnoremap <silent> <leader>gg :LazyGit<CR>
