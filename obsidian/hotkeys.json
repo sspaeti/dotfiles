@@ -45,9 +45,10 @@
   "editor:focus-left": [
     {
       "modifiers": [
-        "Ctrl"
+        "Ctrl",
+        "Shift"
       ],
-      "key": "H"
+      "key": "Tab"
     }
   ],
   "editor:focus-right": [
@@ -55,7 +56,7 @@
       "modifiers": [
         "Ctrl"
       ],
-      "key": "L"
+      "key": "Tab"
     }
   ],
   "templater-obsidian:insert-templater": [
@@ -186,6 +187,71 @@
         "Shift"
       ],
       "key": "7"
+    }
+  ],
+  "workspace:new-tab": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "T"
+    }
+  ],
+  "editor:toggle-checklist-status": [],
+  "workspace:toggle-stacked-tabs": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": ";"
+    }
+  ],
+  "workspace:next-tab": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "L"
+    }
+  ],
+  "workspace:previous-tab": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "H"
+    }
+  ],
+  "editor:focus-top": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "K"
+    }
+  ],
+  "editor:focus-bottom": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "J"
+    }
+  ],
+  "workspaces:save-and-load": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "E"
+    }
+  ],
+  "readwise-official:readwise-official-sync": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "R"
     }
   ]
 }

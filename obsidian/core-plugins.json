@@ -4,14 +4,17 @@
   "switcher",
   "graph",
   "backlink",
+  "outgoing-link",
   "tag-pane",
   "page-preview",
   "note-composer",
   "command-palette",
+  "editor-status",
   "markdown-importer",
   "zk-prefixer",
   "outline",
   "word-count",
+  "workspaces",
   "file-recovery",
   "sync"
 ]
