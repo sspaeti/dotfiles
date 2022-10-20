@@ -419,6 +419,34 @@ autocmd FileType markdown nmap <leader>o :SymbolsOutline<CR>
 
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
+nnoremap <C-f> :Rg<CR>
+nnoremap <silent> <Leader>fr :Rg<CR>
+nnoremap <silent> <Leader>fb :Buffers<CR>
+nnoremap <silent> <Leader>f/ :BLines<CR>
+nnoremap <silent> <Leader>fm :Marks<CR>
+nnoremap <silent> <Leader>fc :Commits<CR>
+nnoremap <silent> <Leader>fH :Helptags<CR>
+nnoremap <silent> <Leader>hh :History<CR>
+nnoremap <silent> <Leader>h: :History:<CR>
+nnoremap <silent> <Leader>h/ :History/<CR>
+" find in a specific repo
+command! -bang -nargs=* Rg2
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+nnoremap <silent> <Leader>fd :Rg2 search folder
+" :Rg2 apple ./folder_test
+" :Rg2 "apple teste" ./folder_test
+" :Rg2 --type=js "apple" 
+" :Rg2 --fixed-strings "apple"
+" :Rg2 -e -foo          
+" :Rg2 apple
+" :Rg2 '^port'                                       # Search for lines beginning with 'port'
+" :Rg2 '^\s*port'                                   # Search for lines beginning with 'port', possibly after initial whitespace
+" :Rg2 Apple --case-sensitive
+" :Rg2 Apple --sortr=created             #   (none, created, path, modified, accessed)   descending order
+" :Rg2 Apple --sort=created               #  (none, created, path, modified, accessed)   ascending order
+" :Rg2 --passthru 'blue' -r 'red' test.txt  > tmp.txt && mv tmp.txt test.txt                       #Replace example
+" :Rg2 'port|http'                                     # Search for string 'port' OR string 'http':
+" :Rg2 --passthru 'blue' -r 'red' test.txt  | sponge test.txt                       # Replace example If you have moreutils installed
 " this will quick search content of files
 nnoremap <leader>ff :CtrlSF 
 nnoremap <leader>fl :CtrlSFToggle<CR>
