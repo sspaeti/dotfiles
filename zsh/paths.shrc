@@ -55,3 +55,7 @@ export RC=$MYVIMRC
 
 #ruby
 export GEM_HOME="$HOME/.gem"
+
+#asdf
+. /opt/homebrew/opt/asdf/asdf.sh
+
