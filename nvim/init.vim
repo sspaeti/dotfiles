@@ -63,6 +63,7 @@ Plug 'hrsh7th/cmp-cmdline' "used?
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
 Plug 'kdheepak/lazygit.nvim'
+Plug 'sindrets/diffview.nvim' "nvim gitdiff
 Plug 'mhinz/vim-signify' "highlighing changes not commited to last commit
 Plug 'APZelos/blamer.nvim' "gitlens blame style
 " " telescope requirements...
@@ -125,6 +126,9 @@ nmap <silent> gD :lua vim.lsp.buf.declaration()<CR>
 nmap <silent> gr :lua vim.lsp.buf.references()<CR>
 nmap <silent> gI :lua vim.lsp.buf.implementation()<CR>
 nmap <silent> gs :lua vim.lsp.buf.signature_help()<CR>
+
+nmap <silent> ga :lua vim.lsp.buf.code_action()<CR>
+
 
 " Ignore files
 set wildignore=*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*
@@ -484,6 +488,11 @@ nnoremap <silent> <leader>lg :LazyGit<CR>
 
 "git blame
 nnoremap <silent> <leader>gb :BlamerToggle<CR>
+"git diffview.nvim
+nnoremap <silent> <leader>go :DiffviewOpen<CR>
+nnoremap <silent> <leader>gc :DiffviewClose<CR>
+nnoremap <silent> <leader>gh :DiffviewFileHistory<CR>
+"
 "let blame default be on
 let g:blamer_enabled = 1
 
