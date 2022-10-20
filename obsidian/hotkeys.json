@@ -49,6 +49,13 @@
         "Shift"
       ],
       "key": "Tab"
+    },
+    {
+      "modifiers": [
+        "Ctrl",
+        "Shift"
+      ],
+      "key": "H"
     }
   ],
   "editor:focus-right": [
@@ -57,6 +64,13 @@
         "Ctrl"
       ],
       "key": "Tab"
+    },
+    {
+      "modifiers": [
+        "Ctrl",
+        "Shift"
+      ],
+      "key": "L"
     }
   ],
   "templater-obsidian:insert-templater": [
@@ -222,22 +236,6 @@
       "key": "H"
     }
   ],
-  "editor:focus-top": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "K"
-    }
-  ],
-  "editor:focus-bottom": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "J"
-    }
-  ],
   "workspaces:save-and-load": [
     {
       "modifiers": [
@@ -249,9 +247,12 @@
   "readwise-official:readwise-official-sync": [
     {
       "modifiers": [
-        "Ctrl"
+        "Ctrl",
+        "Shift"
       ],
       "key": "R"
     }
-  ]
+  ],
+  "obsidian-excalidraw-plugin:insert-link-to-element": [],
+  "obsidian-excalidraw-plugin:save": []
 }

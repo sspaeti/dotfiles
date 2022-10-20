@@ -10,6 +10,9 @@ export PATH="$PATH:/usr/local/bin/"
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+#poetry version: installed with `brew install asdf \n asdf plugin add poetry asdf install poetry 1.2.2`
+export PATH="/Users/sspaeti/.asdf/installs/poetry/1.2.2/bin:$PATH"
+
 # my shortcuts
 export git=~/Documents/git
 export de=$git/de
