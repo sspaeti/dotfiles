@@ -32,5 +32,6 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig' 
   use 'simrat39/rust-tools.nvim'
   use 'puremourning/vimspector'
+	use 'christoomey/vim-tmux-navigator'
 
 end)

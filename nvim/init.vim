@@ -83,6 +83,7 @@ Plug 'junegunn/fzf.vim'
 
 "File Navigation
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'christoomey/vim-tmux-navigator'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
 
@@ -400,8 +401,10 @@ nmap 6gt :bfirst<CR>:5bn<CR>
 nmap 7gt :bfirst<CR>:6bn<CR>
 nmap 8gt :bfirst<CR>:7bn<CR>
 "file navigation nvim-tree
-nmap <leader>l :NvimTreeFindFile<CR>
-nnoremap <C-l> :NvimTreeToggle<CR>
+nmap <leader>lf :NvimTreeFindFile<CR>
+nnoremap <leader>ll :NvimTreeToggle<CR>
+
+
 
 "floatterm
 let g:floaterm_keymap_new    = '<F7>'
@@ -420,6 +423,8 @@ autocmd FileType markdown nmap <leader>o :SymbolsOutline<CR>
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
 nnoremap <C-f> :Rg<CR>
+nnoremap <leader>fw
+  \ :call fzf#vim#files('.', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>
 nnoremap <silent> <Leader>fr :Rg<CR>
 nnoremap <silent> <Leader>fb :Buffers<CR>
 nnoremap <silent> <Leader>f/ :BLines<CR>
@@ -465,6 +470,15 @@ noremap sk <C-w>k
 noremap sj <C-w>j  
 noremap sl <C-w>l
 
+" move window with christoomey/vim-tmux-navigator to align tmux and nvim
+let g:tmux_navigator_no_mappings = 1
+noremap <silent> <c-h> :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <c-j> :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <c-k> :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <c-l> :<C-U>TmuxNavigateRight<cr>
+noremap <silent> <c-t> :<C-U>TmuxNavigatePrevious<cr>
+
+
 " Resize window
 nnoremap <C-w>l <C-w>5>
 nnoremap <C-w>h <C-w>5<
@@ -486,7 +500,7 @@ nnoremap <leader>x <C-w>c
 
 " Open current directory
 nmap te :tabedit 
-nmap st :tabnew<Return>
+" nmap st :tabnew<Return>
 nmap <S-Tab> :tabprev<Return>
 " Attention, sometimes when you map <Tab> also ctrl+i will change!
 "nmap <Tab> :tabnext<Return>
@@ -520,6 +534,7 @@ nnoremap <silent> <leader>gb :BlamerToggle<CR>
 nnoremap <silent> <leader>go :DiffviewOpen<CR>
 nnoremap <silent> <leader>gc :DiffviewClose<CR>
 nnoremap <silent> <leader>gh :DiffviewFileHistory<CR>
+nnoremap <silent> <leader>gf :DiffviewFileHistory %<CR>
 "
 "let blame default be on
 let g:blamer_enabled = 1
@@ -546,8 +561,9 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 "Moving text
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-inoremap <C-j> <esc>:m .+1<CR>==
-inoremap <C-k> <esc>:m .-2<CR>==
+" inoremap <C-j> <esc>:m .+1<CR>==
+" inoremap <C-k> <esc>:m .-2<CR>==
+
 " moves current line one down
 nnoremap <leader>j :m .+1<CR>==
 " moves current line one up
