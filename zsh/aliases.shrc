@@ -7,8 +7,14 @@ alias vim=nvim
 #This is a great way of always being sure that the ipython instance always belongs to the virtualenv's python version.
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
+alias c=clear
+
 # show hidden files by default
 alias ll='ls -la'
+function chpwd() {
+    emulate -L zsh
+    ll
+}
 
 # that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
 alias pip='noglob pip'
