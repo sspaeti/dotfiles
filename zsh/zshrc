@@ -125,5 +125,3 @@ source ~/.dotfiles/zsh/.secrets_airbyte
 source ~/.dotfiles/zsh/paths_airbyte.shrc
 
 source ~/.dotfiles/zsh/end.shrc
-
-

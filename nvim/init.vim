@@ -401,8 +401,10 @@ nmap 6gt :bfirst<CR>:5bn<CR>
 nmap 7gt :bfirst<CR>:6bn<CR>
 nmap 8gt :bfirst<CR>:7bn<CR>
 "file navigation nvim-tree
+" nnoremap <leader>ll :NvimTreeToggle<CR>
 nmap <leader>lf :NvimTreeFindFile<CR>
 nnoremap <leader>ll :NvimTreeToggle<CR>
+nnoremap <leader>e :NvimTreeToggle<CR>
 
 
 
@@ -515,7 +517,7 @@ nmap <S-Tab> :tabprev<Return>
 " nnoremap <C-p> <cmd>Telescope find_files<cr>
 
 "ranger nvim
-nnoremap <leader>e :RnvimrToggl<CR> 
+" nnoremap <leader>e :RnvimrToggl<CR> 
 "
 " Replace `$EDITOR` candidate with this command to open the selected file
 let g:rnvimr_edit_cmd = 'drop'
