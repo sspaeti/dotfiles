@@ -113,6 +113,7 @@ Plug 'vimwiki/vimwiki'
 "dbt
 " Plug 'lepture/vim-jinja' "needed for dbt below but errors in hugo htmls...
 Plug 'pedramnavid/dbt.nvim'
+Plug 'glench/vim-jinja2-syntax'
 " Plug 'ivanovyordan/dbt.vim'
 
 call plug#end()
@@ -211,7 +212,7 @@ map z5  :set foldlevel=4<CR><Esc>
 map z6  :set foldlevel=5<CR><Esc>
 map z7  :set foldlevel=6<CR><Esc>
 map z8  :set foldlevel=7<CR><Esc>
-map z9  :set foldlevel=8<CR><Esc>
+nnoremap z9 zR
 " 
 " REMAPS
 " Swiss keyboard remap
@@ -305,45 +306,6 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-" Single mappings
-" let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
-" let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
-let g:which_key_map['h'] = [ '<C-W>'                      , 'split below']
-let g:which_key_map['j'] = [ ':m .+1<CR>=='               , 'move current line one down']
-let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['k'] = [ ':m .-2<CR>=='               , 'move current line one up']
-
-" s is for search
-let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
-      \ 'a' : [':Ag'           , 'text Ag'],
-      \ 'B' : [':BLines'       , 'current buffer'],
-      \ 'b' : [':Buffers'      , 'open buffers'],
-      \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : [':Files'        , 'files'],
-      \ 'g' : [':GFiles'       , 'git files'],
-      \ 'G' : [':GFiles?'      , 'modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'lines'] ,
-      \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Helptags'     , 'help tags'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
-      \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 't' : [':Rg'           , 'text Rg'],
-      \ 'T' : [':BTags'        , 'buffer tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
-      \ }
-
-" Register which key map
-call which_key#register('<Space>', "g:which_key_map")
 
 " Easy CAPS
 
@@ -462,15 +424,85 @@ nnoremap <leader>ft :CtrlSFToggle<CR>
 " Split window  
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
+
+" Single mappings
+" let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
+" let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
+let g:which_key_map['h'] = [ '<C-W>'                      , 'split below']
+let g:which_key_map['j'] = [ ':m .+1<CR>=='               , 'move current line one down']
+let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
+let g:which_key_map['k'] = [ ':m .-2<CR>=='               , 'move current line one up']
+
+" s-shortcuts is for search -> without leader, directly with s
+nnoremap sb :Buffers<CR>
+nnoremap s/ :History/<CR>
+nnoremap s; :Commands<CR>
+nnoremap sa :Ag<CR>
+nnoremap sB :BLines<CR>
+nnoremap sb :Buffers<CR>
+nnoremap sc :Commits<CR>
+nnoremap sC :BCommits<CR>
+" nnoremap sf :Files<CR>
+nnoremap sg :GFiles<CR>
+nnoremap sG :GFiles?<CR>
+nnoremap sh :History<CR>
+nnoremap sH :History:<CR>
+nnoremap sl :Lines<CR>
+" nnoremap sm :Marms<CR>
+nnoremap sM :Maps<CR>
+nnoremap <silent>se :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent>sm :lua require("harpoon.mark").add_file()<CR>
+nnoremap sp :Helptags<CR>
+nnoremap sP :Tags<CR>
+" nnoremap ss :Snippets<CR>
+nnoremap sS :Colors<CR>
+nnoremap sf :Rg<CR>
+nnoremap sT :BTags<CR>
+nnoremap sw :Windows<CR>
+nnoremap sy :Filetypes<CR>
+nnoremap sz :FZF<CR>
+nnoremap sl :FZF<CR>
+
+" s-shortcuts is for search -> uses leader+s..
+let g:which_key_map.s = {
+      \ 'name' : '+search' ,
+      \ '/' : [':History/'     , 'history'],
+      \ ';' : [':Commands'     , 'commands'],
+      \ 'a' : [':Ag'           , 'text Ag'],
+      \ 'B' : [':BLines'       , 'current buffer'],
+      \ 'b' : [':Buffers'      , 'open buffers'],
+      \ 'c' : [':Commits'      , 'commits'],
+      \ 'C' : [':BCommits'     , 'buffer commits'],
+      \ 'f' : [':Files'        , 'files'],
+      \ 'g' : [':GFiles'       , 'git files'],
+      \ 'G' : [':GFiles?'      , 'modified git files'],
+      \ 'h' : [':History'      , 'file history'],
+      \ 'H' : [':History:'     , 'command history'],
+      \ 'l' : [':Lines'        , 'lines'] ,
+      \ 'm' : [':Marms'        , 'marks'] ,
+      \ 'M' : [':Maps'         , 'normal maps'] ,
+      \ 'p' : [':Helptags'     , 'help tags'] ,
+      \ 'P' : [':Tags'         , 'project tags'],
+      \ 's' : [':Snippets'     , 'snippets'],
+      \ 'S' : [':Colors'       , 'color schemes'],
+      \ 't' : [':Rg'           , 'text Rg'],
+      \ 'T' : [':BTags'        , 'buffer tags'],
+      \ 'w' : [':Windows'      , 'search windows'],
+      \ 'y' : [':Filetypes'    , 'file types'],
+      \ 'z' : [':FZF'          , 'FZF'],
+      \ }
+
+" Register which key map
+call which_key#register('<Space>', "g:which_key_map")
 " zoom vim split views
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
 "Move window  
-noremap sh <C-w>h  
-noremap sk <C-w>k  
-noremap sj <C-w>j  
-noremap sl <C-w>l
+" noremap sh <C-w>h  
+" noremap sk <C-w>k  
+" noremap sj <C-w>j  
+" noremap sl <C-w>l
 
 " move window with christoomey/vim-tmux-navigator to align tmux and nvim
 let g:tmux_navigator_no_mappings = 1
@@ -479,7 +511,6 @@ noremap <silent> <c-j> :<C-U>TmuxNavigateDown<cr>
 noremap <silent> <c-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <c-l> :<C-U>TmuxNavigateRight<cr>
 noremap <silent> <c-t> :<C-U>TmuxNavigatePrevious<cr>
-
 
 " Resize window
 nnoremap <C-w>l <C-w>5>
@@ -561,8 +592,8 @@ nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 "Moving text
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+" vnoremap J :m '>+1<CR>gv=gv
+" vnoremap K :m '<-2<CR>gv=gv
 " inoremap <C-j> <esc>:m .+1<CR>==
 " inoremap <C-k> <esc>:m .-2<CR>==
 
