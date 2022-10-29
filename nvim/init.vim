@@ -364,8 +364,10 @@ nmap 7gt :bfirst<CR>:6bn<CR>
 nmap 8gt :bfirst<CR>:7bn<CR>
 "file navigation nvim-tree
 " nnoremap <leader>ll :NvimTreeToggle<CR>
-nmap <leader>lf :NvimTreeFindFile<CR>
+"not needed anymore, maped to sl 
+nmap <leader>lf :NvimTreeFindFile<CR> 
 nnoremap <leader>ll :NvimTreeToggle<CR>
+"not needed anymore, maped to se 
 nnoremap <leader>e :NvimTreeToggle<CR>
 
 
@@ -395,9 +397,6 @@ nnoremap <silent> <Leader>f/ :BLines<CR>
 nnoremap <silent> <Leader>fm :Marks<CR>
 nnoremap <silent> <Leader>fc :Commits<CR>
 nnoremap <silent> <Leader>fH :Helptags<CR>
-nnoremap <silent> <Leader>hh :History<CR>
-nnoremap <silent> <Leader>h: :History:<CR>
-nnoremap <silent> <Leader>h/ :History/<CR>
 " find in a specific repo
 command! -bang -nargs=* Rg2
   \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
@@ -425,6 +424,12 @@ nnoremap <leader>ft :CtrlSFToggle<CR>
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
 
+"Move window  
+" noremap sh <C-w>h  
+" noremap sk <C-w>k  
+" noremap sj <C-w>j  
+" noremap sl <C-w>l
+
 " Single mappings
 " let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
 " let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
@@ -445,13 +450,16 @@ nnoremap sC :BCommits<CR>
 " nnoremap sf :Files<CR>
 nnoremap sg :GFiles<CR>
 nnoremap sG :GFiles?<CR>
-nnoremap sh :History<CR>
-nnoremap sH :History:<CR>
-nnoremap sl :Lines<CR>
+nnoremap sr :History<CR>
+nnoremap s: :History:<CR>
+nnoremap s/ :History/<CR>
+nnoremap sL :Lines<CR>
 " nnoremap sm :Marms<CR>
 nnoremap sM :Maps<CR>
-nnoremap <silent>se :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent>sh :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <silent>sm :lua require("harpoon.mark").add_file()<CR>
+nnoremap se :NvimTreeToggle<CR>
+nnoremap sl :NvimTreeFindFile<CR>
 nnoremap sp :Helptags<CR>
 nnoremap sP :Tags<CR>
 " nnoremap ss :Snippets<CR>
@@ -461,7 +469,6 @@ nnoremap sT :BTags<CR>
 nnoremap sw :Windows<CR>
 nnoremap sy :Filetypes<CR>
 nnoremap sz :FZF<CR>
-nnoremap sl :FZF<CR>
 
 " s-shortcuts is for search -> uses leader+s..
 let g:which_key_map.s = {
@@ -498,14 +505,11 @@ call which_key#register('<Space>', "g:which_key_map")
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
 
-"Move window  
-" noremap sh <C-w>h  
-" noremap sk <C-w>k  
-" noremap sj <C-w>j  
-" noremap sl <C-w>l
-
 " move window with christoomey/vim-tmux-navigator to align tmux and nvim
 let g:tmux_navigator_no_mappings = 1
+" If the tmux window is zoomed, keep it zoomed when moving from Vim to another pane
+let g:tmux_navigator_preserve_zoom = 1
+
 noremap <silent> <c-h> :<C-U>TmuxNavigateLeft<cr>
 noremap <silent> <c-j> :<C-U>TmuxNavigateDown<cr>
 noremap <silent> <c-k> :<C-U>TmuxNavigateUp<cr>
@@ -522,8 +526,15 @@ nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
 
+" Harpoon
+nnoremap <silent><leader>hh :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent><leader>hm :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent><leader>hc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
 
-
+nnoremap <silent><leader>hj :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent><leader>hk :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent><leader>hl :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent><leader>hö :lua require("harpoon.ui").nav_file(4)<CR>
 " closing buffers "https://stackoverflow.com/a/8585343/5246670
 map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -630,7 +641,6 @@ nnoremap <leader>io :IO<CR>
 "source $HOME/.config/nvim/themes/tokyonight.vim
 
 " source settings
-source $HOME/.config/nvim/plugin/harpoon.vim
 source $HOME/.config/nvim/plugin/copilot.vim
 
 "syntax on
