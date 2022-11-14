@@ -96,7 +96,7 @@
     ],
     "python.testing.pytestEnabled": true,
     "python.venvPath": "/Users/sspaeti/.venvs/",
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Kanagawa",
     "workbench.iconTheme": "vscode-icons",
     "workbench.startupEditor": "newUntitledFile",
     "typescript.updateImportsOnFileMove.enabled": "always",

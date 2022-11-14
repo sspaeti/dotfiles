@@ -116,6 +116,9 @@ Plug 'pedramnavid/dbt.nvim'
 Plug 'glench/vim-jinja2-syntax'
 " Plug 'ivanovyordan/dbt.vim'
 
+" Java
+Plug 'mfussenegger/nvim-jdtls'
+
 call plug#end()
 "install with :PlugInstall
 
@@ -175,9 +178,9 @@ let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown',
 let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
 
 " create WikiLink and paste clipboard as link when in visual mode 
-autocmd FileType markdown vnoremap <c-k> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
+autocmd FileType markdown vnoremap <leader>k <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 " create empty wikilink when in normal mode
-autocmd FileType markdown nmap <c-k> i[]()<Esc>hhi
+autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi
 
 
 " Turn off autocomplete for Markdown
@@ -189,6 +192,9 @@ highlight htmlH2 guifg=#ff79c6 gui=bold
 highlight htmlH3 guifg=#ffb86c gui=bold
 highlight htmlH4 guifg=#8be9fd gui=bold
 highlight htmlH5 guifg=#f1fa8c gui=bold
+
+" Highlight what I yanked
+autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=500 }
 
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
@@ -242,20 +248,20 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 
 " This will run a python file by hitting 'enter' and debug it directly in
 " debug mode with -i
-"FileType settings {{{
-augroup mb_filetype
-	autocmd!
-	autocmd FileType brainfuck xmap <buffern R "xygv*;%s;;<c-r>x;g<left><left>
-	autocmd FileType yaml nnoremap <buffer> <CR> :AnsibleDoc<CR>
-	autocmd FileType python iabbrev <buffer> im import
-	autocmd FileType python iabbrev <buffer> rt return
-	autocmd FileType python iabbrev <buffer> yl yield
-	autocmd FileType python iabbrev <buffer> fa False
-	autocmd FileType python iabbrev <buffer> tr True
-	autocmd FileType python iabbrev <buffer> br break
-	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
-augroup 
-"}}}
+""FileType settings {{{
+"augroup mb_filetype
+"	autocmd!
+"	autocmd FileType brainfuck xmap <buffern R "xygv*;%s;;<c-r>x;g<left><left>
+"	autocmd FileType yaml nnoremap <buffer> <CR> :AnsibleDoc<CR>
+"	autocmd FileType python iabbrev <buffer> im import
+"	autocmd FileType python iabbrev <buffer> rt return
+"	autocmd FileType python iabbrev <buffer> yl yield
+"	autocmd FileType python iabbrev <buffer> fa False
+"	autocmd FileType python iabbrev <buffer> tr True
+"	autocmd FileType python iabbrev <buffer> br break
+"	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
+"augroup 
+""}}}
 
 " auto create a folder if we save a file in a non existing folder
 augroup Mkdir
@@ -368,7 +374,7 @@ nmap 8gt :bfirst<CR>:7bn<CR>
 nmap <leader>lf :NvimTreeFindFile<CR> 
 nnoremap <leader>ll :NvimTreeToggle<CR>
 "not needed anymore, maped to se 
-nnoremap <leader>e :NvimTreeToggle<CR>
+nnoremap <leader>l :NvimTreeToggle<CR>
 
 
 
@@ -388,7 +394,7 @@ autocmd FileType markdown nmap <leader>o :SymbolsOutline<CR>
 
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
-nnoremap <C-f> :Rg<CR>
+" nnoremap <C-f> :Rg<CR> "-> now on sf
 nnoremap <leader>fw
   \ :call fzf#vim#files('.', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>
 nnoremap <silent> <Leader>fr :Rg<CR>
@@ -458,10 +464,12 @@ nnoremap sL :Lines<CR>
 nnoremap sM :Maps<CR>
 nnoremap <silent>sh :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <silent>sm :lua require("harpoon.mark").add_file()<CR>
-nnoremap se :NvimTreeToggle<CR>
-nnoremap sl :NvimTreeFindFile<CR>
-nnoremap sp :Helptags<CR>
-nnoremap sP :Tags<CR>
+nnoremap sl :NvimTreeToggle<CR>
+nnoremap se :NvimTreeFindFile<CR>
+nnoremap sp :Files<CR>
+nnoremap sz :Helptags<CR>
+nnoremap sZ :Tags<CR>
+
 " nnoremap ss :Snippets<CR>
 nnoremap sS :Colors<CR>
 nnoremap sf :Rg<CR>
@@ -538,6 +546,8 @@ nnoremap <silent><leader>hö :lua require("harpoon.ui").nav_file(4)<CR>
 " closing buffers "https://stackoverflow.com/a/8585343/5246670
 map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+" close all buffers execpt current one
+" nnoremap <leader>wa :%bd|e#<Return>
 
 " Close current window
 nnoremap <leader>x <C-w>c
@@ -609,9 +619,9 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 " inoremap <C-k> <esc>:m .-2<CR>==
 
 " moves current line one down
-nnoremap <leader>j :m .+1<CR>==
+" nnoremap <leader>j :m .+1<CR>==
 " moves current line one up
-nnoremap <leader>k :m .-2<CR>==
+" nnoremap <leader>k :m .-2<CR>==
 
 " Commenting blocks of code.
 " replaced with vim-commentary

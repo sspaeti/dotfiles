@@ -48,13 +48,6 @@
         "Ctrl",
         "Shift"
       ],
-      "key": "Tab"
-    },
-    {
-      "modifiers": [
-        "Ctrl",
-        "Shift"
-      ],
       "key": "H"
     }
   ],
@@ -228,14 +221,6 @@
       "key": "L"
     }
   ],
-  "workspace:previous-tab": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "H"
-    }
-  ],
   "workspaces:save-and-load": [
     {
       "modifiers": [
@@ -263,6 +248,23 @@
         "Mod"
       ],
       "key": "Enter"
+    }
+  ],
+  "editor:toggle-highlight": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "H"
+    }
+  ],
+  "workspace:previous-tab": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "H"
     }
   ]
 }

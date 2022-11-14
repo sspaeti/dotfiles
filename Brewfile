@@ -35,6 +35,8 @@ brew "helm"
 brew "hub"
 brew "hugo"
 brew "ipython"
+brew "openjdk"
+brew "jdtls"
 brew "jq"
 brew "kubernetes-cli"
 brew "kubie"
@@ -42,13 +44,12 @@ brew "lastpass-cli", args: ["HEAD"]
 brew "lazygit"
 brew "lua"
 brew "mdcat"
-brew "node"
+brew "node", link: false
 brew "nativefier"
 brew "neovim", args: ["HEAD"]
-brew "node@16"
+brew "node@16", link: true
 brew "okteto"
-brew "openjdk"
-brew "openjdk@17"
+brew "openjdk@17", link: true
 brew "openssl@3"
 brew "ossp-uuid"
 brew "tcl-tk"

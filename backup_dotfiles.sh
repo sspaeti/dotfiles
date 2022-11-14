@@ -16,6 +16,7 @@ cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
 cp ~/.tmux/ide $git/general/dotfiles/tmux/ide
 cp ~/.tmux/tmux-session $git/general/dotfiles/tmux/tmux-session
+cp ~/.tmux/themes/tmux-kanagawa-dark.conf $git/general/dotfiles/tmux/themes/tmux-kanagawa-dark.conf
 
 #fzf/zsh
 cp ~/.fzf.zsh $git/general/dotfiles/fzf/fzf.zsh
@@ -43,6 +44,7 @@ cp -r ~/Simon/Sync/SecondBrain/.obsidian/snippets/* $git/general/dotfiles/obsidi
 #kitty
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
 cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.conf
+cp ~/.config/kitty/kanagawa-kitty.conf $git/general/dotfiles/kitty/kanagawa-kitty.conf
 cp ~/.config/kitty/custom_kitty.conf $git/general/dotfiles/kitty/custom_kitty.conf
 
 #ranger

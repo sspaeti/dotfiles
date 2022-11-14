@@ -1,9 +1,5 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-	return
-end
 
-configs.setup({
+require("nvim-treesitter.configs").setup {
 	ensure_installed = {"python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust"}, -- one of "all" or a list of languages
 	auto_install = true,
 	ignore_install = { "" }, -- List of parsers to ignore installing
@@ -16,8 +12,11 @@ configs.setup({
 	},
 	indent = { enable = true, disable = { "yaml", "python" } },
 	rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = nil,
-  }
-})
+		enable = true,
+		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+		max_file_lines = nil, -- Do not enable for files with more than n lines, int
+		-- colors = {}, -- table of hex strings
+		-- termcolors = {} -- table of colour name strings
+		}
+}
