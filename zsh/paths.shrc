@@ -39,6 +39,8 @@ export DAGSTER_HOME=~/.dagster
 export MYVIMRC=~/.config/nvim/init.vim
 export VIMRC=$MYVIMRC
 export RC=$MYVIMRC
+#vim in browser
+export XDG_DATA_HOME=$HOME/.local/share/
 
 # PROTOC_HOME=/Users/zekexu/Documents/protoc
 # export PATH=$PATH:$PROTOC_HOME/bin
