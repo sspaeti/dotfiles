@@ -188,6 +188,18 @@ autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi
 " Turn off autocomplete for Markdown
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
+" Autocomplete with ctrl space
+if has("gui_running")
+    " C-Space seems to work under gVim on both Linux and win32
+    inoremap <C-Space> <C-n>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <C-n>
+  else
+  " I have no idea of the name of Ctrl-Space elsewhere
+  endif
+endif
+
 " Highlights for headers in markdown -> doesn't really work
 highlight htmlH1 guifg=#50fa7b gui=bold
 highlight htmlH2 guifg=#ff79c6 gui=bold
