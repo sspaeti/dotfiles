@@ -46,7 +46,7 @@ Plug 'tpope/vim-commentary'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "" cmp plugins
 " Completion framework:
-Plug 'hrsh7th/nvim-cmp' 
+Plug 'hrsh7th/nvim-cmp'
 " LSP completion source:
 Plug 'hrsh7th/cmp-nvim-lsp'
 " Useful completion sources:
@@ -87,7 +87,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
 
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+" Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
 "nerdtree in lua
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
@@ -109,7 +109,7 @@ Plug 'github/copilot.vim'
 "Markdown (or any Outline
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 "dbt
 " Plug 'lepture/vim-jinja' "needed for dbt below but errors in hugo htmls...
 Plug 'pedramnavid/dbt.nvim'
@@ -118,6 +118,8 @@ Plug 'glench/vim-jinja2-syntax'
 
 " Java
 Plug 'mfussenegger/nvim-jdtls'
+"use nvim in browser
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 "install with :PlugInstall
@@ -139,7 +141,7 @@ nmap <silent> ga :lua vim.lsp.buf.code_action()<CR>
 set wildignore=*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*
 
 " search related
-set hlsearch 
+set hlsearch
 set ignorecase
 set incsearch
 
@@ -171,13 +173,13 @@ filetype plugin indent on
 set clipboard=unnamedplus               " Copy paste between vim and everything else -> inserts all into system clipboard
 noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
 
-" VimWiki
-set nocompatible                        " Recommende for VimWiki
+" " VimWiki
+" set nocompatible                        " Recommende for VimWiki
 " connect with Obsidian Second Brain
-let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
+" let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
 
-" create WikiLink and paste clipboard as link when in visual mode 
+" create WikiLink and paste clipboard as link when in visual mode
 autocmd FileType markdown vnoremap <leader>k <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 " create empty wikilink when in normal mode
 autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi
@@ -219,7 +221,7 @@ map z6  :set foldlevel=5<CR><Esc>
 map z7  :set foldlevel=6<CR><Esc>
 map z8  :set foldlevel=7<CR><Esc>
 nnoremap z9 zR
-" 
+"
 " REMAPS
 " Swiss keyboard remap
 "
@@ -238,7 +240,7 @@ autocmd BufWritePre *.py execute ':Black'
 "null-ls formatting, diagnostic and linting configs
 map <Leader>lf :lua vim.lsp.buf.format()<CR>
 
-let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3") 
+let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 "expand($VIRTUAL_ENV."/bin/python3")
 
 " coc
@@ -260,7 +262,7 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 "	autocmd FileType python iabbrev <buffer> tr True
 "	autocmd FileType python iabbrev <buffer> br break
 "	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
-"augroup 
+"augroup
 ""}}}
 
 " auto create a folder if we save a file in a non existing folder
@@ -370,10 +372,10 @@ nmap 7gt :bfirst<CR>:6bn<CR>
 nmap 8gt :bfirst<CR>:7bn<CR>
 "file navigation nvim-tree
 " nnoremap <leader>ll :NvimTreeToggle<CR>
-"not needed anymore, maped to sl 
-nmap <leader>lf :NvimTreeFindFile<CR> 
+"not needed anymore, maped to sl
+nmap <leader>lf :NvimTreeFindFile<CR>
 nnoremap <leader>ll :NvimTreeToggle<CR>
-"not needed anymore, maped to se 
+"not needed anymore, maped to se
 nnoremap <leader>l :NvimTreeToggle<CR>
 
 
@@ -383,6 +385,7 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F10>'
+" let g:floaterm_keymap_toggle = '<C-x>'
 let g:floaterm_width = 160
 let g:floaterm_height = 45
 
@@ -390,7 +393,7 @@ let g:floaterm_height = 45
 " Outline Shortcut
 nmap <leader>oo :CocList outline methods<CR>
 nmap <leader>o :AerialToggle<CR>
-autocmd FileType markdown nmap <leader>o :SymbolsOutline<CR>
+autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>
 
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
@@ -409,9 +412,9 @@ command! -bang -nargs=* Rg2
 nnoremap <silent> <Leader>fd :Rg2 search folder
 " :Rg2 apple ./folder_test
 " :Rg2 "apple teste" ./folder_test
-" :Rg2 --type=js "apple" 
+" :Rg2 --type=js "apple"
 " :Rg2 --fixed-strings "apple"
-" :Rg2 -e -foo          
+" :Rg2 -e -foo
 " :Rg2 apple
 " :Rg2 '^port'                                       # Search for lines beginning with 'port'
 " :Rg2 '^\s*port'                                   # Search for lines beginning with 'port', possibly after initial whitespace
@@ -422,18 +425,18 @@ nnoremap <silent> <Leader>fd :Rg2 search folder
 " :Rg2 'port|http'                                     # Search for string 'port' OR string 'http':
 " :Rg2 --passthru 'blue' -r 'red' test.txt  | sponge test.txt                       # Replace example If you have moreutils installed
 " this will quick search content of files
-nnoremap <leader>ff :CtrlSF 
+nnoremap <leader>ff :CtrlSF
 nnoremap <leader>fl :CtrlSFToggle<CR>
 nnoremap <leader>ft :CtrlSFToggle<CR>
 
-" Split window  
+" Split window
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
 
-"Move window  
-" noremap sh <C-w>h  
-" noremap sk <C-w>k  
-" noremap sj <C-w>j  
+"Move window
+" noremap sh <C-w>h
+" noremap sk <C-w>k
+" noremap sj <C-w>j
 " noremap sl <C-w>l
 
 " Single mappings
@@ -553,7 +556,7 @@ nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>x <C-w>c
 
 " Open current directory
-nmap te :tabedit 
+nmap te :tabedit
 " nmap st :tabnew<Return>
 nmap <S-Tab> :tabprev<Return>
 " Attention, sometimes when you map <Tab> also ctrl+i will change!
@@ -569,14 +572,14 @@ nmap <S-Tab> :tabprev<Return>
 " nnoremap <C-p> <cmd>Telescope find_files<cr>
 
 "ranger nvim
-" nnoremap <leader>e :RnvimrToggl<CR> 
+" nnoremap <leader>e :RnvimrToggl<CR>
 "
 " Replace `$EDITOR` candidate with this command to open the selected file
 let g:rnvimr_edit_cmd = 'drop'
 
 
 "coc git
-" nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter 
+" nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter
 
 " setup mapping to call :LazyGit
 nnoremap <silent> <leader>gg :LazyGit<CR>
@@ -604,6 +607,10 @@ inoremap , ,<c-g>u
 inoremap . .<c-g>u
 inoremap [ [<c-g>u
 inoremap ( (<c-g>u
+
+" set undofile to keep undo history unlimited (even if buffer is closed)
+set undofile
+
 
 " jumplist mutations
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
@@ -652,10 +659,14 @@ nnoremap <leader>io :IO<CR>
 
 " source settings
 source $HOME/.config/nvim/plugin/copilot.vim
+" configure firenvim for the browser
+if exists("g:started_by_firenvim")
+  source $HOME/.config/nvim/plugin/firenvim.vim
+endif
 
 "syntax on
 
-lua require('themes.kanagawa') 
+lua require('themes.kanagawa')
 "colorscheme kanagawa
 
 ""Theme configs - tokyonight gruvbox onedark kanagawa
@@ -663,7 +674,7 @@ lua require('themes.kanagawa')
 " let g:tokyonight_italic_functions = 1
 " let g:tokyonight_comments = 1
 " let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-" 
+"
 " " Change the "hint" color to the "orange" color, and make the "error" color bright red
 " let g:tokyonight_colors = {
 "   \ 'hint': 'orange',
@@ -672,7 +683,7 @@ lua require('themes.kanagawa')
 
 
 "lua plugins installing with packer.nvim
-lua require('plugins')
+lua require('plugins') --these are specified in lua/plugins.lua
 
 " lua basic settings
 lua require('init')
@@ -690,6 +701,7 @@ lua require('plugins.lualine')
 lua require('plugins.github')
 lua require('plugins.nvim-tree')
 lua require('plugins.colorizer')
+lua require('plugins.alpha-nvim')
 " plugin installations
 lua require('plugins.mason')
 
