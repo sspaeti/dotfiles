@@ -93,6 +93,7 @@ Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'mbbill/undotree'
 
 "fast async search
 Plug 'dyng/ctrlsf.vim'
@@ -391,7 +392,6 @@ nnoremap <leader>ll :NvimTreeToggle<CR>
 nnoremap <leader>l :NvimTreeToggle<CR>
 
 
-
 "floatterm
 let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
@@ -484,6 +484,9 @@ nnoremap se :NvimTreeFindFile<CR>
 nnoremap sp :Files<CR>
 nnoremap sz :Helptags<CR>
 nnoremap sZ :Tags<CR>
+"undo tree
+nnoremap su :UndotreeToggle<CR>
+
 
 " nnoremap ss :Snippets<CR>
 nnoremap sS :Colors<CR>
