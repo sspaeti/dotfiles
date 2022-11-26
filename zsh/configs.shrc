@@ -34,3 +34,5 @@ jdk() {
         java -version
  }
 
+#gradle: from: https://docs.airbyte.com/contributing-to-airbyte/developing-locally#build-with-gradle
+export GRADLE_OPTS="-Dorg.gradle.workers.max=6"
