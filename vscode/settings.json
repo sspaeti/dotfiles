@@ -284,8 +284,8 @@
     "editor.inlineSuggest.enabled": true,
     "security.workspace.trust.untrustedFiles": "open",
     "github.copilot.enable": {
-        "*": true,
-        "yaml": false,
+        "*": false,
+        "yaml": true,
         "plaintext": true,
         "markdown": false
     },
