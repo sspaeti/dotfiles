@@ -3,15 +3,12 @@
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-# Add docker: Had trouble after restart
-export PATH="$PATH:/usr/local/bin/"
-
 #go path
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 #poetry version: installed with `brew install asdf \n asdf plugin add poetry asdf install poetry 1.2.2`
-export PATH="/Users/sspaeti/.asdf/installs/poetry/1.2.2/bin:$PATH"
+#export PATH="/Users/sspaeti/.asdf/installs/poetry/1.2.2/bin:$PATH"
 
 # my shortcuts
 export git=~/Documents/git
@@ -58,6 +55,15 @@ export XDG_DATA_HOME=$HOME/.local/share/
 #ruby
 export GEM_HOME="$HOME/.gem"
 
-#asdf
-. /opt/homebrew/opt/asdf/asdf.sh
-
+# # openssl and new M1 chip
+export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@3
+# #export PATH="/opt/homebrew/opt/openssl@1.1/bin:$PATH"
+# export LDFLAGS="-L $(brew --prefix openssl)/lib"
+# export CFLAGS="-I $(brew --prefix openssl)/include"
+# export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig"
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/opt/homebrew/opt/openssl@1.1"
+# 
+# # fix grpcio on M1: https://github.com/grpc/grpc/issues/30064#issuecomment-1236072966
+# export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=true 
+# export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true

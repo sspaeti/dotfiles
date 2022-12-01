@@ -20,12 +20,19 @@ bindkey -M viins 'kj' vi-cmd-mode
 # fzf search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 #on slow internet connection brew update takes ages. Disabling it per default here
 export HOMEBREW_NO_AUTO_UPDATE=1
 
+# . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
 #add homebrew
 export PATH=/opt/homebrew/bin:$PATH
+# following https://earthly.dev/blog/homebrew-on-m1/
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+
+# add this after homebrew to use m1 /opt/homebrew before old homebrew that was in /usr/local/bin 
+export PATH="$PATH:/usr/local/bin/"
 
 #adoptopenjdk to change java versions with e.g. "jdk 11"
 jdk() {
@@ -36,3 +43,8 @@ jdk() {
 
 #gradle: from: https://docs.airbyte.com/contributing-to-airbyte/developing-locally#build-with-gradle
 export GRADLE_OPTS="-Dorg.gradle.workers.max=6"
+
+
+#asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+

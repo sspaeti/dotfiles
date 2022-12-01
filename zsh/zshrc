@@ -117,7 +117,6 @@ source $ZSH/oh-my-zsh.sh
 #
 # sspaeti customized properties
 #
-source ~/.dotfiles/zsh/configs.shrc
 source ~/.dotfiles/zsh/paths.shrc
 source ~/.dotfiles/zsh/aliases.shrc
 source ~/.dotfiles/zsh/.secrets
@@ -125,5 +124,14 @@ source ~/.dotfiles/zsh/.secrets
 source ~/.dotfiles/zsh/.secrets_airbyte
 source ~/.dotfiles/zsh/paths_airbyte.shrc
 
+source ~/.dotfiles/zsh/configs.shrc
 source ~/.dotfiles/zsh/end.shrc
 
+
+# OCTAVIA CLI 0.40.22
+OCTAVIA_ENV_FILE=/Users/sspaeti/.octavia
+export OCTAVIA_ENABLE_TELEMETRY=False
+alias octavia="docker run -i --rm -v \$(pwd):/home/octavia-project --network host --env-file \${OCTAVIA_ENV_FILE} --user \$(id -u):\$(id -g) airbyte/octavia-cli:0.40.22"
+
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
