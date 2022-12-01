@@ -107,9 +107,14 @@ Plug 'jmcantrell/vim-virtualenv'
 
 Plug 'liuchengxu/vim-which-key'
 Plug 'github/copilot.vim'
-"Markdown (or any Outline
+"Markdown (or any Outline)
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'stevearc/aerial.nvim'
+""Obsidian
+" (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
+Plug 'preservim/vim-markdown'
+Plug 'godlygeek/tabular'  " needed by 'preservim/vim-markdown'
+Plug 'epwalsh/obsidian.nvim' "using neovim with the Obsidian vault 
 " Plug 'vimwiki/vimwiki'
 "dbt
 " Plug 'lepture/vim-jinja' "needed for dbt below but errors in hugo htmls...
@@ -184,6 +189,11 @@ noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
 autocmd FileType markdown vnoremap <leader>k <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 " create empty wikilink when in normal mode
 autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi
+
+" Open file in Obsidian vault
+command IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:r') . "'"
+nnoremap <leader>io :IO<CR>
+
 
 
 " Turn off autocomplete for Markdown
@@ -441,6 +451,8 @@ nnoremap <leader>ff :CtrlSF
 nnoremap <leader>fl :CtrlSFToggle<CR>
 nnoremap <leader>ft :CtrlSFToggle<CR>
 
+"plug for search and replace
+nnoremap S :s%//g<Left><Left>
 " Split window
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
@@ -572,7 +584,7 @@ nnoremap <leader>x <C-w>c
 
 " Open current directory
 nmap te :tabedit
-" nmap st :tabnew<Return>
+nmap <leader>t :tabnew<Return>
 nmap <S-Tab> :tabprev<Return>
 " Attention, sometimes when you map <Tab> also ctrl+i will change!
 "nmap <Tab> :tabnext<Return>
@@ -626,7 +638,6 @@ inoremap ( (<c-g>u
 " set undofile to keep undo history unlimited (even if buffer is closed)
 set undofile
 
-
 " jumplist mutations
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
@@ -663,10 +674,6 @@ noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader
 " Custom surrounds
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
-
-" Open file in Obsidian vault
-command IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:r') . "'"
-nnoremap <leader>io :IO<CR>
 
 "cusotm stuff just for neovim
 "source $HOME/.config/nvim/themes/onedark.vim
@@ -717,6 +724,7 @@ lua require('plugins.github')
 lua require('plugins.nvim-tree')
 lua require('plugins.colorizer')
 lua require('plugins.alpha-nvim')
+lua require('plugins.obsidian')
 " plugin installations
 lua require('plugins.mason')
 
