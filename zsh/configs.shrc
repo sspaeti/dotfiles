@@ -30,6 +30,9 @@ export PATH=/opt/homebrew/bin:$PATH
 # following https://earthly.dev/blog/homebrew-on-m1/
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+# m1 issue building python with asdf/pyenv
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # add this after homebrew to use m1 /opt/homebrew before old homebrew that was in /usr/local/bin 
 export PATH="$PATH:/usr/local/bin/"
@@ -43,7 +46,6 @@ jdk() {
 
 #gradle: from: https://docs.airbyte.com/contributing-to-airbyte/developing-locally#build-with-gradle
 export GRADLE_OPTS="-Dorg.gradle.workers.max=6"
-
 
 #asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
