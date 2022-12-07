@@ -27,7 +27,6 @@ Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-surround' " Surrounding ysw)
 
-
 "Text Objects:
 "Utilities for user-defined text objects
 Plug 'kana/vim-textobj-user'
@@ -45,20 +44,19 @@ Plug 'tpope/vim-commentary'
 
 " should be installed out of the box by neovim?
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"" cmp plugins
+"" cmp plugins - TODO: trying to move to lua
 " Completion framework:
-Plug 'hrsh7th/nvim-cmp'
-" LSP completion source:
-Plug 'hrsh7th/cmp-nvim-lsp'
-" Useful completion sources:
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/cmp-cmdline' "used?
+" Plug 'hrsh7th/nvim-cmp'
+" " LSP completion source:
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" " Useful completion sources:
+" Plug 'hrsh7th/cmp-nvim-lua'
+" Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+" Plug 'hrsh7th/cmp-vsnip'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-cmdline' "used?
 
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
@@ -753,6 +751,9 @@ set encoding=utf8
 "lua plugins
 "lua require('~/.config/nvim/plugin/copilot')
 
-
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
 
 au! BufWritePost $RC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
