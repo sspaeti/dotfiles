@@ -47,10 +47,10 @@ brew "lazygit"
 brew "llvm"
 brew "lua"
 brew "mdcat"
-brew "node"
+brew "node", link: false
 brew "nativefier"
 brew "neovim", args: ["HEAD"]
-brew "node@16"
+brew "node@16", link: true
 brew "okteto"
 brew "openjdk@17", link: true
 brew "openssl@3"
