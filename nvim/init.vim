@@ -27,6 +27,7 @@ Plug 'christoomey/vim-system-copy'
 "Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-surround' " Surrounding ysw)
 
+
 "Text Objects:
 "Utilities for user-defined text objects
 Plug 'kana/vim-textobj-user'
@@ -62,6 +63,8 @@ Plug 'hrsh7th/cmp-cmdline' "used?
 "Plug 'ambv/black'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+
 Plug 'kdheepak/lazygit.nvim'
 Plug 'sindrets/diffview.nvim' "nvim gitdiff
 Plug 'mhinz/vim-signify' "highlighing changes not commited to last commit
@@ -365,6 +368,13 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 vnoremap < <gv
 vnoremap > >gv
 
+"better scrolling and searching with centered always
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <n> nzzzv
+nnoremap <N> Nzzzv
+
+
 " Better window navigation
 " nnoremap <C-h> <C-w>h
 " nnoremap <C-j> <C-w>j
@@ -378,8 +388,8 @@ nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
 nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
 nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
 nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
 nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
 nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 nmap gt :bnext<CR>
@@ -452,7 +462,8 @@ nnoremap <leader>fl :CtrlSFToggle<CR>
 nnoremap <leader>ft :CtrlSFToggle<CR>
 
 "plug for search and replace
-nnoremap S :s%//g<Left><Left>
+nnoremap S :%s//g<Left><Left>
+
 " Split window
 nmap ss :split<Return>
 nmap sv :vsplit<Return>
@@ -619,6 +630,8 @@ nnoremap <silent> <leader>go :DiffviewOpen<CR>
 nnoremap <silent> <leader>gc :DiffviewClose<CR>
 nnoremap <silent> <leader>gh :DiffviewFileHistory<CR>
 nnoremap <silent> <leader>gf :DiffviewFileHistory %<CR>
+nnoremap <leader>gw :GBrowse<CR>
+
 "
 "let blame default be on
 let g:blamer_enabled = 1
@@ -636,6 +649,7 @@ inoremap [ [<c-g>u
 inoremap ( (<c-g>u
 
 " set undofile to keep undo history unlimited (even if buffer is closed)
+set undodir=$HOME/.undodir
 set undofile
 
 " jumplist mutations
