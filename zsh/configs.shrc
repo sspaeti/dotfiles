@@ -25,8 +25,14 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 # . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
+# zoxide is a smarter cd command, inspired by z and autojump.
+# source ~/.dotfiles/zsh/zoxide.sh
+eval "$(zoxide init zsh)"
+export PATH=~/.dotfiles/helpers/bin:$PATH
+
 #add homebrew
 export PATH=/opt/homebrew/bin:$PATH
+
 # following https://earthly.dev/blog/homebrew-on-m1/
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
