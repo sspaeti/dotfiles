@@ -25,7 +25,7 @@ alias tmux-session=~/.tmux/tmux-session
 alias killtmuxsessions="tmux ls -F'#{session_name}'|egrep '^[0-9]+$'|xargs -I% tmux kill-session -t \"=%\""
 alias ta="tmux attach"
 # opening a new tmux session from current directory and name it like last part of pwd path
-alias tn="tmux new -s \"$((pwd) | sed 's/.*\///g')\""
+alias tn='tmux new -s `eval echo $(pwd) | sed "s/.*\///"`'
 # when closing ranger it will be at the path you were
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias r=ranger

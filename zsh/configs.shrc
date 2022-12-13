@@ -25,11 +25,6 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 # . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
-# zoxide is a smarter cd command, inspired by z and autojump.
-# source ~/.dotfiles/zsh/zoxide.sh
-eval "$(zoxide init zsh)"
-export PATH=~/.dotfiles/helpers/bin:$PATH
-
 #add homebrew
 export PATH=/opt/homebrew/bin:$PATH
 
@@ -52,6 +47,12 @@ jdk() {
 
 #gradle: from: https://docs.airbyte.com/contributing-to-airbyte/developing-locally#build-with-gradle
 export GRADLE_OPTS="-Dorg.gradle.workers.max=6"
+
+# zoxide is a smarter cd command, inspired by z and autojump.
+source ~/.dotfiles/zsh/zoxide.sh
+eval "$(zoxide init zsh)"
+export PATH=~/.dotfiles/helpers/bin:$PATH
+
 
 #asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
