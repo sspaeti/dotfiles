@@ -289,6 +289,9 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 "augroup
 ""}}}
 
+" set filetype bash when file ending wih .shrc
+autocmd BufNewFile,BufRead *.shrc,.secrets,.secrets_airbyte set filetype=bash
+
 " auto create a folder if we save a file in a non existing folder
 augroup Mkdir
   autocmd!
@@ -467,10 +470,10 @@ nmap ss :split<Return>
 nmap sv :vsplit<Return>
 
 "Move window
-" noremap sh <C-w>h
-" noremap sk <C-w>k
-" noremap sj <C-w>j
-" noremap sl <C-w>l
+noremap sh <C-w>h
+noremap sk <C-w>k
+noremap sj <C-w>j
+noremap sl <C-w>l
 
 " Single mappings
 " let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
@@ -498,9 +501,9 @@ nnoremap s/ :History/<CR>
 nnoremap sL :Lines<CR>
 " nnoremap sm :Marms<CR>
 nnoremap sM :Maps<CR>
-nnoremap <silent>sh :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent>si :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <silent>sm :lua require("harpoon.mark").add_file()<CR>
-nnoremap sl :NvimTreeToggle<CR>
+nnoremap st :NvimTreeToggle<CR>
 nnoremap se :NvimTreeFindFile<CR>
 nnoremap sp :Files<CR>
 nnoremap sz :Helptags<CR>
