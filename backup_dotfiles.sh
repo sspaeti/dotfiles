@@ -27,6 +27,7 @@ cp -r ~/.dotfiles/zsh/aliases.shrc $git/general/dotfiles/zsh/aliases.shrc
 cp -r ~/.dotfiles/zsh/paths.shrc $git/general/dotfiles/zsh/paths.shrc
 cp -r ~/.dotfiles/zsh/configs.shrc $git/general/dotfiles/zsh/configs.shrc
 cp -r ~/.dotfiles/zsh/end.shrc $git/general/dotfiles/zsh/end.shrc
+cp -r ~/.dotfiles/helpers/* $git/general/dotfiles/zsh/helpers/
 
 #obsidian
 cp ~/Simon/Sync/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
