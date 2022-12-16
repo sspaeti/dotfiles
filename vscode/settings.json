@@ -287,7 +287,8 @@
         "*": false,
         "yaml": true,
         "plaintext": true,
-        "markdown": false
+        "markdown": false,
+        "lua": true
     },
     "files.watcherExclude": {
         "**/.bloop": true,

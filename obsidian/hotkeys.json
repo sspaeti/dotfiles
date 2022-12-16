@@ -204,7 +204,6 @@
       "key": "T"
     }
   ],
-  "editor:toggle-checklist-status": [],
   "workspace:toggle-stacked-tabs": [
     {
       "modifiers": [
@@ -265,6 +264,15 @@
         "Ctrl"
       ],
       "key": "H"
+    }
+  ],
+  "editor:toggle-checklist-status": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "X"
     }
   ]
 }
