@@ -4,7 +4,6 @@ cp ~/Library/ApplicationSupport/Code/User/settings.json $git/general/dotfiles/vs
 cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles/vscode/keybindings.json
 #cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
 #using nvim going forward therefore separting configs
-cp ~/.config/nvim/init.vim $git/general/dotfiles/nvim/init.vim
 cp -r ~/.config/nvim/lua $git/general/dotfiles/nvim/
 cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
 cp -r ~/.config/nvim/plugin $git/general/dotfiles/nvim/plugin

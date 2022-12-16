@@ -1,3 +1,4 @@
+print("set.lua")
 --Set completeopt to have a better completion experience
 -- :help completeopt
 -- menuone: popup even when there's only one match
@@ -8,6 +9,14 @@
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
 vim.api.nvim_set_option('updatetime', 300) 
+
+-- set undofile to keep undo history unlimited (even if buffer is closed)
+vim.opt.undodir = os.getenv("HOME") .. "/.undodir"
+vim.opt.undofile = true
+vim.opt.clipboard = "unnamedplus" --" Copy paste between vim and everything else -> inserts all into system clipboard
+
+vim.opt.relativenumber = true
+
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range

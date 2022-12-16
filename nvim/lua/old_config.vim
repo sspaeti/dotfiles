@@ -14,135 +14,6 @@ if (empty($TMUX))
   endif
 endif
 
-"plugs to intall
-call plug#begin('~/.config/nvim/vim-plug')
-"theme
-Plug 'sheerun/vim-polyglot'
-"themes
-" Plug 'joshdick/onedark.vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-Plug 'rebelot/kanagawa.nvim'
-Plug 'christoomey/vim-system-copy'
-"Plug 'valloric/youcompleteme'
-Plug 'tpope/vim-surround' " Surrounding ysw)
-
-"Text Objects:
-"Utilities for user-defined text objects
-Plug 'kana/vim-textobj-user'
-"Text objects for indentation levels
-Plug 'kana/vim-textobj-indent'
-"Text objects for Python
-Plug 'bps/vim-textobj-python'
-"preview CSS colors inline
-" Plug 'ap/vim-css-color'
-Plug 'norcalli/nvim-colorizer.lua'
-
-" comment healper
-" Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-commentary'
-
-" should be installed out of the box by neovim?
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"" cmp plugins - TODO: trying to move to lua
-" Completion framework:
-" Plug 'hrsh7th/nvim-cmp'
-" " LSP completion source:
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" " Useful completion sources:
-" Plug 'hrsh7th/cmp-nvim-lua'
-" Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-" Plug 'hrsh7th/cmp-vsnip'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/vim-vsnip'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-cmdline' "used?
-
-"Plug 'ambv/black'
-Plug 'psf/black', { 'branch': 'stable' }
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-
-Plug 'kdheepak/lazygit.nvim'
-Plug 'sindrets/diffview.nvim' "nvim gitdiff
-Plug 'mhinz/vim-signify' "highlighing changes not commited to last commit
-Plug 'APZelos/blamer.nvim' "gitlens blame style
-" " telescope requirements...
-" Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/harpoon'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzy-native.nvim'
-"terminal
-Plug 'voldikss/vim-floaterm'
-
-" search
-Plug 'dyng/ctrlsf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-"File Navigation
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'christoomey/vim-tmux-navigator'
-" If you want to have icons in your statusline choose one of these
-Plug 'kyazdani42/nvim-web-devicons'
-
-" Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'kevinhwang91/rnvimr' "replaces 'francoiscabrol/ranger.vim'
-"nerdtree in lua
-Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'mbbill/undotree'
-
-"fast async search
-Plug 'dyng/ctrlsf.vim'
-" prettier
-Plug 'sbdchd/neoformat'
-
-"support for go to defintion and autocompletion
-"Plug 'davidhalter/jedi-vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jmcantrell/vim-virtualenv'
-
-Plug 'liuchengxu/vim-which-key'
-Plug 'github/copilot.vim'
-"Markdown (or any Outline)
-Plug 'simrat39/symbols-outline.nvim'
-Plug 'stevearc/aerial.nvim'
-""Obsidian
-" (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
-Plug 'preservim/vim-markdown'
-Plug 'godlygeek/tabular'  " needed by 'preservim/vim-markdown'
-Plug 'epwalsh/obsidian.nvim' "using neovim with the Obsidian vault 
-" Plug 'vimwiki/vimwiki'
-"dbt
-" Plug 'lepture/vim-jinja' "needed for dbt below but errors in hugo htmls...
-Plug 'pedramnavid/dbt.nvim'
-Plug 'glench/vim-jinja2-syntax'
-" Plug 'ivanovyordan/dbt.vim'
-
-" Java
-Plug 'mfussenegger/nvim-jdtls'
-"use nvim in browser
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
-call plug#end()
-"install with :PlugInstall
-
-" source coc custom configs
-" source $HOME/.config/nvim/coc.vim
-" I will try lsp commands -> Should be moved to ~/.config/nvim/lua/lsp/config.lua
-nmap <silent> K :lua vim.lsp.buf.hover()<CR>
-nmap <silent> gd :lua vim.lsp.buf.definition()<CR>
-nmap <silent> gD :lua vim.lsp.buf.declaration()<CR>
-nmap <silent> gr :lua vim.lsp.buf.references()<CR>
-nmap <silent> gI :lua vim.lsp.buf.implementation()<CR>
-nmap <silent> gs :lua vim.lsp.buf.signature_help()<CR>
-
-nmap <silent> ga :lua vim.lsp.buf.code_action()<CR>
-
 
 " Ignore files
 set wildignore=*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*
@@ -177,8 +48,7 @@ let mapleader = "\<Space>"
 inoremap jk <ESC>
 inoremap kj <Esc>
 filetype plugin indent on
-set clipboard=unnamedplus               " Copy paste between vim and everything else -> inserts all into system clipboard
-noremap <Leader>ca ggVG"*y              " Copy all in file to system clipboard
+set clipboard=unnamedplus               
 
 " " VimWiki
 " set nocompatible                        " Recommende for VimWiki
@@ -462,18 +332,6 @@ nnoremap <leader>ff :CtrlSF
 nnoremap <leader>fl :CtrlSFToggle<CR>
 nnoremap <leader>ft :CtrlSFToggle<CR>
 
-"plug for search and replace
-nnoremap S :%s//g<Left><Left>
-
-" Split window
-nmap ss :split<Return>
-nmap sv :vsplit<Return>
-
-"Move window
-noremap sh <C-w>h
-noremap sk <C-w>k
-noremap sj <C-w>j
-noremap sl <C-w>l
 
 " Single mappings
 " let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
@@ -612,6 +470,8 @@ nmap <S-Tab> :tabprev<Return>
 
 "ranger nvim
 " nnoremap <leader>e :RnvimrToggl<CR>
+nnoremap <leader>e :Explore<CR>
+
 "
 " Replace `$EDITOR` candidate with this command to open the selected file
 let g:rnvimr_edit_cmd = 'drop'
@@ -649,10 +509,6 @@ inoremap . .<c-g>u
 inoremap [ [<c-g>u
 inoremap ( (<c-g>u
 
-" set undofile to keep undo history unlimited (even if buffer is closed)
-set undodir=$HOME/.undodir
-set undofile
-
 " jumplist mutations
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
@@ -660,28 +516,6 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
-"Moving text
-" vnoremap J :m '>+1<CR>gv=gv
-" vnoremap K :m '<-2<CR>gv=gv
-" inoremap <C-j> <esc>:m .+1<CR>==
-" inoremap <C-k> <esc>:m .-2<CR>==
-
-" moves current line one down
-" nnoremap <leader>j :m .+1<CR>==
-" moves current line one up
-" nnoremap <leader>k :m .-2<CR>==
-
-" Commenting blocks of code.
-" replaced with vim-commentary
-" augroup commenting_blocks_of_code
-"   autocmd!
-"   autocmd FileType c,cpp,java,scala     let b:comment_leadej = '// '
-"   autocmd FileType sh,ruby,python,yaml  let b:comment_leader = '# '
-"   autocmd FileType conf,fstab           let b:comment_leader = '# '
-"   autocmd FileType tex                  let b:comment_leader = '% '
-"   autocmd FileType mail                 let b:comment_leader = '> '
-"   autocmd FileType vim                  let b:comment_leader = '" '
-" augroup END
 noremap <silent> <Leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
@@ -690,9 +524,6 @@ noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 
-"cusotm stuff just for neovim
-"source $HOME/.config/nvim/themes/onedark.vim
-"source $HOME/.config/nvim/themes/tokyonight.vim
 
 " source settings
 source $HOME/.config/nvim/plugin/copilot.vim
@@ -700,11 +531,6 @@ source $HOME/.config/nvim/plugin/copilot.vim
 if exists("g:started_by_firenvim")
   source $HOME/.config/nvim/plugin/firenvim.vim
 endif
-
-"syntax on
-
-lua require('themes.kanagawa')
-"colorscheme kanagawa
 
 ""Theme configs - tokyonight gruvbox onedark kanagawa
 " let g:tokyonight_style = "night"
@@ -717,31 +543,6 @@ lua require('themes.kanagawa')
 "   \ 'hint': 'orange',
 "   \ 'error': '#ff0000'
 " \ }
-
-
-"lua plugins installing with packer.nvim
-lua require('plugins') --these are specified in lua/plugins.lua
-
-" lua basic settings
-lua require('init')
-lua require('lsp.config')
-" lua plugins settings
-lua require('plugins.bufferline')
-lua require('plugins.indent-blankline')
-lua require('plugins.symbols-outline')
-lua require('plugins.aerial')
-lua require('plugins.treesitter')
-lua require('plugins.cmp')
-lua require('plugins.pyright')
-lua require('plugins.null-ls')
-lua require('plugins.lualine')
-lua require('plugins.github')
-lua require('plugins.nvim-tree')
-lua require('plugins.colorizer')
-lua require('plugins.alpha-nvim')
-lua require('plugins.obsidian')
-" plugin installations
-lua require('plugins.mason')
 
 
 
