@@ -5,9 +5,9 @@ cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles
 #cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
 #using nvim going forward therefore separting configs
 cp -r ~/.config/nvim/lua $git/general/dotfiles/nvim/
-cp -r ~/.config/nvim/themes $git/general/dotfiles/nvim/themes
+cp -r ~/.config/nvim/after $git/general/dotfiles/nvim/after
 cp -r ~/.config/nvim/plugin $git/general/dotfiles/nvim/plugin
-cp -r ~/.config/nvim/autoload $git/general/dotfiles/nvim/autoload
+cp -r ~/.config/nvim/ftplugin/ $git/general/dotfiles/nvim/ftplugin
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
 cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
