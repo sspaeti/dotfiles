@@ -1,211 +1,18 @@
-" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+
+" " Autocomplete with ctrl space
+" if has("gui_running")
+"     " C-Space seems to work under gVim on both Linux and win32
+"     inoremap <C-Space> <C-n>
+" else " no gui
+"   if has("unix")
+"     inoremap <Nul> <C-n>
+"   else
+"   " I have no idea of the name of Ctrl-Space elsewhere
+"   endif
+" endif
 
 
 
-
-"general
-filetype plugin indent on
-
-" " VimWiki
-" set nocompatible                        " Recommende for VimWiki
-" connect with Obsidian Second Brain
-" let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
-" let g:vimwiki_global_ext = 0 " only mark files in the second brain as vim viki, rest are standard markdown
-
-" create WikiLink and paste clipboard as link when in visual mode
-autocmd FileType markdown vnoremap <leader>k <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
-" create empty wikilink when in normal mode
-autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi
-
-" Open file in Obsidian vault
-command! IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:r') . "'"
-nnoremap <leader>io :IO<CR>
-
-
-" Turn off autocomplete for Markdown
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-
-" Autocomplete with ctrl space
-if has("gui_running")
-    " C-Space seems to work under gVim on both Linux and win32
-    inoremap <C-Space> <C-n>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <C-n>
-  else
-  " I have no idea of the name of Ctrl-Space elsewhere
-  endif
-endif
-
-" Highlights for headers in markdown -> doesn't really work
-highlight htmlH1 guifg=#50fa7b gui=bold
-highlight htmlH2 guifg=#ff79c6 gui=bold
-highlight htmlH3 guifg=#ffb86c gui=bold
-highlight htmlH4 guifg=#8be9fd gui=bold
-highlight htmlH5 guifg=#f1fa8c gui=bold
-
-" Highlight what I yanked
-autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=500 }
-
-nnoremap <Leader>z za
-vnoremap <Leader>z zf
-map z1  :set foldlevel=0<CR><Esc>
-map z2  :set foldlevel=1<CR><Esc>
-map z3  :set foldlevel=2<CR><Esc>
-map z4  :set foldlevel=3<CR><Esc>
-map z5  :set foldlevel=4<CR><Esc>
-map z6  :set foldlevel=5<CR><Esc>
-map z7  :set foldlevel=6<CR><Esc>
-map z8  :set foldlevel=7<CR><Esc>
-nnoremap z9 zR
-"
-" REMAPS
-" Swiss keyboard remap
-"
-"switch between two buffers -> C-^ does not work with current swiss layout
-nnoremap <C-6> <C-^><cr>
-
-" PYTHON
-
-"auto format on save with Black
-autocmd BufWritePre *.py execute ':Black'
-
-" format JSON
-:command! Formatj :%!jq .
-:command! Unformatj :%!jq -c .
-
-
-
-
-let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
-"expand($VIRTUAL_ENV."/bin/python3")
-
-" This will run a python file by hitting 'enter' and debug it directly in
-" debug mode with -i
-""FileType settings {{{
-"augroup mb_filetype
-"	autocmd!
-"	autocmd FileType brainfuck xmap <buffern R "xygv*;%s;;<c-r>x;g<left><left>
-"	autocmd FileType yaml nnoremap <buffer> <CR> :AnsibleDoc<CR>
-"	autocmd FileType python iabbrev <buffer> im import
-"	autocmd FileType python iabbrev <buffer> rt return
-"	autocmd FileType python iabbrev <buffer> yl yield
-"	autocmd FileType python iabbrev <buffer> fa False
-"	autocmd FileType python iabbrev <buffer> tr True
-"	autocmd FileType python iabbrev <buffer> br break
-"	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
-"augroup
-""}}}
-
-" set filetype bash when file ending wih .shrc
-autocmd BufNewFile,BufRead *.shrc,.secrets,.secrets_airbyte set filetype=bash
-
-" auto create a folder if we save a file in a non existing folder
-augroup Mkdir
-  autocmd!
-  autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
-augroup END
-
-
-
-" Easy CAPS
-
-"inoremap <c-u> <ESC>viwUi
-"nnoremap <c-u> viwU<Esc>
-
-" Alternate way to save
-nnoremap <C-s> :w<CR>
-nnoremap <leader>r q:
-
-
-" Select all
-nmap <C-a> gg<S-v>G
-
-" replace without losing what I hade in the clipboard
-xnoremap("<leader>p", "\"_dP")
-
-" Alternate way to quit
-" nnoremap <C-Q> :wq!<CR>
-" Use control-c instead of escape
-nnoremap <C-c> <Esc>
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Better tabbing
-vnoremap < <gv
-vnoremap > >gv
-
-"better scrolling and searching with centered always
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-nnoremap <n> nzzzv
-nnoremap <N> Nzzzv
-
-
-" Better window navigation
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
-
-" for bufferline navigation
-nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-
-nmap gt :bnext<CR>
-nmap gT :bprevious<CR>
-
-nmap 1gt :bfirst<CR>
-nmap 2gt :bfirst<CR>:bn<CR>
-nmap 3gt :bfirst<CR>:2bn<CR>
-nmap 4gt :bfirst<CR>:3bn<CR>
-nmap 5gt :bfirst<CR>:4bn<CR>
-nmap 6gt :bfirst<CR>:5bn<CR>
-nmap 7gt :bfirst<CR>:6bn<CR>
-nmap 8gt :bfirst<CR>:7bn<CR>
-"file navigation nvim-tree
-" nnoremap <leader>ll :NvimTreeToggle<CR>
-"not needed anymore, maped to sl
-nmap <leader>lf :NvimTreeFindFile<CR>
-nnoremap <leader>ll :NvimTreeToggle<CR>
-"not needed anymore, maped to se
-nnoremap <leader>l :NvimTreeToggle<CR>
-
-
-"floatterm
-let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_keymap_prev   = '<F8>'
-let g:floaterm_keymap_next   = '<F9>'
-let g:floaterm_keymap_toggle = '<F10>'
-" let g:floaterm_keymap_toggle = '<C-x>'
-let g:floaterm_width = 160
-let g:floaterm_height = 45
-
-
-" Outline Shortcut
-nmap <leader>o :AerialToggle<CR>
-autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>
 
 " fzf: ctrl f for find files
 nnoremap <C-p> :Files<CR>
@@ -241,46 +48,6 @@ nnoremap <leader>ff :CtrlSF
 nnoremap <leader>fl :CtrlSFToggle<CR>
 nnoremap <leader>ft :CtrlSFToggle<CR>
 
-
-" s-shortcuts is for search -> without leader, directly with s
-nnoremap sb :Buffers<CR>
-nnoremap s/ :History/<CR>
-nnoremap s; :Commands<CR>
-nnoremap sa :Ag<CR>
-nnoremap sB :BLines<CR>
-nnoremap sb :Buffers<CR>
-nnoremap sc :Commits<CR>
-nnoremap sC :BCommits<CR>
-" nnoremap sf :Files<CR>
-nnoremap sg :GFiles<CR>
-nnoremap sG :GFiles?<CR>
-nnoremap sr :History<CR>
-nnoremap s: :History:<CR>
-nnoremap s/ :History/<CR>
-nnoremap sL :Lines<CR>
-" nnoremap sm :Marms<CR>
-nnoremap sM :Maps<CR>
-" si and sm are mapped to harpoon
-nnoremap st :NvimTreeToggle<CR>
-nnoremap se :NvimTreeFindFile<CR>
-nnoremap sp :Files<CR>
-nnoremap sz :Helptags<CR>
-nnoremap sZ :Tags<CR>
-"undo tree
-nnoremap su :UndotreeToggle<CR>
-
-
-" nnoremap ss :Snippets<CR>
-nnoremap sS :Colors<CR>
-nnoremap sf :Rg<CR>
-nnoremap sT :BTags<CR>
-nnoremap sw :Windows<CR>
-nnoremap sy :Filetypes<CR>
-nnoremap sz :FZF<CR>
-
-" zoom vim split views
-noremap Zz <c-w>_ \| <c-w>\|
-noremap Zo <c-w>=
 
 " move window with christoomey/vim-tmux-navigator to align tmux and nvim
 let g:tmux_navigator_no_mappings = 1
@@ -340,7 +107,6 @@ let g:rnvimr_edit_cmd = 'drop'
 "let blame default be on
 let g:blamer_enabled = 1
 
-nnoremap Y y$
 " keeping it centered
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -359,48 +125,16 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
-noremap <silent> <Leader>cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <Leader>cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-
-
 " Custom surrounds
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 
 
-" source settings
-source $HOME/.config/nvim/plugin/copilot.vim
 " configure firenvim for the browser
 if exists("g:started_by_firenvim")
   source $HOME/.config/nvim/plugin/firenvim.vim
 endif
 
-""Theme configs - tokyonight gruvbox onedark kanagawa
-" let g:tokyonight_style = "night"
-" let g:tokyonight_italic_functions = 1
-" let g:tokyonight_comments = 1
-" let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-"
-" " Change the "hint" color to the "orange" color, and make the "error" color bright red
-" let g:tokyonight_colors = {
-"   \ 'hint': 'orange',
-"   \ 'error': '#ff0000'
-" \ }
 
-
-
-set encoding=utf8
-
-"set bg=dark
-"let g:gruvbox_contrast_dark = 'hard'
-
-
-"lua plugins
-"lua require('~/.config/nvim/plugin/copilot')
-
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
 
 au! BufWritePost $RC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC

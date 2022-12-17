@@ -13,6 +13,9 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 -- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
 
+--set `filetype` in lua
+vim.cmd("filetype plugin indent on")
+
 vim.g.mapleader = " "
 vim.opt.ruler = true -- show the cursor position all the time
 vim.opt.showcmd = true -- display incomplete commands
@@ -21,6 +24,8 @@ vim.opt.laststatus = 3 -- 3: Only show global status line in acitve window 2: Al
 --fold settings
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 5
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- search related
 vim.opt.hlsearch = true
@@ -54,17 +59,67 @@ vim.opt.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 
 vim.opt.scrolloff = 8
 
+vim.opt.encoding = "utf8"
+
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
 -- Goto previous / next diagnostic warning / error
 -- Show inlay_hints more frequently
+vim.opt.signcolumn = "yes"
 vim.cmd([[
-set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
-vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+
+
+-- MISC
+--> autocmd and buff
+
+-- Highlight what I yanked
+vim.cmd("autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=500 }")
+
+--set filetype bash when file ending wih .shrc
+vim.cmd('autocmd BufNewFile,BufRead *.shrc,.secrets,.secrets_airbyte set filetype=bash')
+
+-- auto create a folder if we save a file in a non existing folder
+vim.cmd([[
+augroup Mkdir
+  autocmd!
+  autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
+augroup END
+]])
+
+
+vim.cmd([[
+" Python: auto format on save with Black
+autocmd BufWritePre *.py execute ':Black'
+" set virtual env -> still needed with lsp? 
+let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
+" format JSON
+:command! Formatj :%!jq .
+:command! Unformatj :%!jq -c .
+]])
+
+
+-- vim.cmd([[
+-- debug mode with -i
+-- "FileType settings {{{
+-- augroup mb_filetype
+-- 	autocmd!
+-- 	autocmd FileType brainfuck xmap <buffern R "xygv*;%s;;<c-r>x;g<left><left>
+-- 	autocmd FileType yaml nnoremap <buffer> <CR> :AnsibleDoc<CR>
+-- 	autocmd FileType python iabbrev <buffer> im import
+-- 	autocmd FileType python iabbrev <buffer> rt return
+-- 	autocmd FileType python iabbrev <buffer> yl yield
+-- 	autocmd FileType python iabbrev <buffer> fa False
+-- 	autocmd FileType python iabbrev <buffer> tr True
+-- 	autocmd FileType python iabbrev <buffer> br break
+-- 	autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
+-- augroup
+-- "}}}
+-- ]])
+
+-- DEBUG
 
 -- Vimspector options
 vim.cmd([[
