@@ -15,32 +15,6 @@ if (empty($TMUX))
 endif
 
 
-" Ignore files
-set wildignore=*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*
-
-" search related
-set hlsearch
-set ignorecase
-set incsearch
-
-syntax enable          "done in onedark.vim                  Enables syntax highlighing
-set smartcase
-set conceallevel=0                      " So that I can see `` in markdown files
-set tabstop=2                           " Insert 2 spaces for a tab
-set shiftwidth=2                        " Change the number of space characters inserted for indentation
-set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
-set expandtab                           " Converts tabs to spaces
-set smartindent                         " Makes indenting smart
-set autoindent                          " Good auto indent
-set splitbelow                          " Horizontal splits will automatically be below
-set splitright                          " Vertical splits will automatically be to the right
-set t_Co=256                            " Support 256 colors
-set cmdheight=2                         " More space for displaying messages
-set updatetime=200                      " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-set pumheight=10                        " Makes popup menu smaller
-set hidden                              " Required to keep multiple buffers open multiple buffers
-set timeoutlen=500                      " By default timeoutlen is 1000 ms
-
 
 
 "general
@@ -87,18 +61,6 @@ highlight htmlH5 guifg=#f1fa8c gui=bold
 " Highlight what I yanked
 autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=500 }
 
-set ruler            " show the cursor position all the time
-set showcmd          " display incomplete commands
-set laststatus=3     " 3: Only show global status line in acitve window 2: Always display the status line
-
-set number
-set numberwidth=5
-set relativenumber
-
-"fold settings
-"set foldnestmax=2
-set foldmethod=indent
-set foldlevel=5
 nnoremap <Leader>z za
 vnoremap <Leader>z zf
 map z1  :set foldlevel=0<CR><Esc>
@@ -125,19 +87,6 @@ autocmd BufWritePre *.py execute ':Black'
 " format JSON
 :command! Formatj :%!jq .
 :command! Unformatj :%!jq -c .
-
-"null-ls formatting, diagnostic and linting configs
-map <Leader>lf :lua vim.lsp.buf.format()<CR>
-
-" I will try lsp commands -> Should be moved to ~/.config/nvim/lua/lsp/config.lua
-" nmap <silent> K :lua vim.lsp.buf.hover()<CR>
-" nmap <silent> gd :lua vim.lsp.buf.definition()<CR>
-" nmap <silent> gD :lua vim.lsp.buf.declaration()<CR>
-" nmap <silent> gr :lua vim.lsp.buf.references()<CR>
-" nmap <silent> gI :lua vim.lsp.buf.implementation()<CR>
-" nmap <silent> gs :lua vim.lsp.buf.signature_help()<CR>
-
-" nmap <silent> ga :lua vim.lsp.buf.code_action()<CR>
 
 
 
@@ -170,27 +119,6 @@ augroup Mkdir
   autocmd!
   autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
 augroup END
-
-
-" PEP 8 indentation
-" au BufNewFile,BufRead *.py
-"      \ set tabstop=4
-"      \ set softtabstop=4
-"      \ set shiftwidth=4
-"      \ set textwidth=79
-"      \ set expandtab
-"      \ set autoindent
-"      \ set fileformat=unix
-
-" Other Languages and indentaion
-" au BufNewFile,BufRead *.js, *.html, *.css
-"     \ set tabstop=2
-"     \ set softtabstop=2
-"     \ set shiftwidth=2
-
-" Others
-"
-
 
 
 

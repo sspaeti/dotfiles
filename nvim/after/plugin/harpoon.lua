@@ -3,7 +3,7 @@ local ui = require("harpoon.ui")
 
 vim.keymap.set("n", "<leader>hh", ui.toggle_quick_menu)
 vim.keymap.set("n", "<leader>hm", mark.add_file)
---fast access with s
+--fast access with `s`
 vim.keymap.set("n", "<leader>si", ui.toggle_quick_menu)
 vim.keymap.set("n", "<leader>sm", mark.add_file)
 
