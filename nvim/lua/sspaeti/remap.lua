@@ -1,9 +1,6 @@
-
-
-
-
 --general
 vim.g.mapleader = " "
+local map = vim.api.nvim_set_keymap
 vim.keymap.set('n', "<leader>e", ":Explore<CR>") --netrw file explorer
 
 vim.keymap.set('i', "jk", "<Esc>")

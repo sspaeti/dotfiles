@@ -1,7 +1,7 @@
-require('sspaeti.set')
-require('sspaeti.remap')
+require('sspaeti.packer')
 require('theme.kanagawa')
-
+require('sspaeti.remap')
+require('sspaeti.set')
 vim.cmd('source $HOME/.config/nvim/lua/old_config.vim')
 
 

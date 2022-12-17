@@ -44,11 +44,7 @@ set timeoutlen=500                      " By default timeoutlen is 1000 ms
 
 
 "general
-let mapleader = "\<Space>"
-inoremap jk <ESC>
-inoremap kj <Esc>
 filetype plugin indent on
-set clipboard=unnamedplus               
 
 " " VimWiki
 " set nocompatible                        " Recommende for VimWiki
@@ -62,9 +58,8 @@ autocmd FileType markdown vnoremap <leader>k <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc
 autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi
 
 " Open file in Obsidian vault
-command IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:r') . "'"
+command! IO execute "silent !open 'obsidian://open?vault=SecondBrain&file=" . expand('%:r') . "'"
 nnoremap <leader>io :IO<CR>
-
 
 
 " Turn off autocomplete for Markdown
@@ -128,19 +123,27 @@ nnoremap <C-6> <C-^><cr>
 autocmd BufWritePre *.py execute ':Black'
 
 " format JSON
-:command Formatj :%!jq .
-:command Unformatj :%!jq -c .
+:command! Formatj :%!jq .
+:command! Unformatj :%!jq -c .
 
 "null-ls formatting, diagnostic and linting configs
 map <Leader>lf :lua vim.lsp.buf.format()<CR>
 
+" I will try lsp commands -> Should be moved to ~/.config/nvim/lua/lsp/config.lua
+" nmap <silent> K :lua vim.lsp.buf.hover()<CR>
+" nmap <silent> gd :lua vim.lsp.buf.definition()<CR>
+" nmap <silent> gD :lua vim.lsp.buf.declaration()<CR>
+" nmap <silent> gr :lua vim.lsp.buf.references()<CR>
+" nmap <silent> gI :lua vim.lsp.buf.implementation()<CR>
+" nmap <silent> gs :lua vim.lsp.buf.signature_help()<CR>
+
+" nmap <silent> ga :lua vim.lsp.buf.code_action()<CR>
+
+
+
+
 let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 "expand($VIRTUAL_ENV."/bin/python3")
-
-" coc
-"let g:coc_node_path = "/opt/homebrew/bin/node"
-" let g:coc_global_extensions = ['coc-json', 'coc-git']
-
 
 " This will run a python file by hitting 'enter' and debug it directly in
 " debug mode with -i
@@ -168,15 +171,6 @@ augroup Mkdir
   autocmd BufWritePre * call mkdir(expand("<afile>:p:h"), "p")
 augroup END
 
-" jedi - shortcuts -> replced with coc
-" let g:jedi#goto_command = "<leader>d"
-" let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_stubs_command = "<leader>s"
-" let g:jedi#goto_definitions_command = ""
-" let g:jedi#documentation_command = "K"
-" let g:jedi#usages_command = "<leader>n"
-" let g:jedi#completions_command = "<C-Space>"
-" let g:jedi#rename_command = "<leader>r"
 
 " PEP 8 indentation
 " au BufNewFile,BufRead *.py
@@ -197,19 +191,7 @@ augroup END
 " Others
 "
 
-"Which-key healper for leader-key mapping
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-" Create map to add keys to
-let g:which_key_map =  {}
-" Define a separator
-let g:which_key_sep = '→'
 
-" Not a fan of floating windows for this
-let g:which_key_use_floating_win = 0
-" Hide status line
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 
 " Easy CAPS
@@ -294,7 +276,6 @@ let g:floaterm_height = 45
 
 
 " Outline Shortcut
-nmap <leader>oo :CocList outline methods<CR>
 nmap <leader>o :AerialToggle<CR>
 autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>
 
@@ -333,14 +314,6 @@ nnoremap <leader>fl :CtrlSFToggle<CR>
 nnoremap <leader>ft :CtrlSFToggle<CR>
 
 
-" Single mappings
-" let g:which_key_map['ff'] = [ 'Telescope'                 , 'find files' ]
-" let g:which_key_map['fb'] = [ 'Telescope'                 , 'find buffer' ]
-let g:which_key_map['h'] = [ '<C-W>'                      , 'split below']
-let g:which_key_map['j'] = [ ':m .+1<CR>=='               , 'move current line one down']
-let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['k'] = [ ':m .-2<CR>=='               , 'move current line one up']
-
 " s-shortcuts is for search -> without leader, directly with s
 nnoremap sb :Buffers<CR>
 nnoremap s/ :History/<CR>
@@ -359,8 +332,7 @@ nnoremap s/ :History/<CR>
 nnoremap sL :Lines<CR>
 " nnoremap sm :Marms<CR>
 nnoremap sM :Maps<CR>
-nnoremap <silent>si :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <silent>sm :lua require("harpoon.mark").add_file()<CR>
+" si and sm are mapped to harpoon
 nnoremap st :NvimTreeToggle<CR>
 nnoremap se :NvimTreeFindFile<CR>
 nnoremap sp :Files<CR>
@@ -378,37 +350,6 @@ nnoremap sw :Windows<CR>
 nnoremap sy :Filetypes<CR>
 nnoremap sz :FZF<CR>
 
-" s-shortcuts is for search -> uses leader+s..
-let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
-      \ 'a' : [':Ag'           , 'text Ag'],
-      \ 'B' : [':BLines'       , 'current buffer'],
-      \ 'b' : [':Buffers'      , 'open buffers'],
-      \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : [':Files'        , 'files'],
-      \ 'g' : [':GFiles'       , 'git files'],
-      \ 'G' : [':GFiles?'      , 'modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'lines'] ,
-      \ 'm' : [':Marms'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Helptags'     , 'help tags'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
-      \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 't' : [':Rg'           , 'text Rg'],
-      \ 'T' : [':BTags'        , 'buffer tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
-      \ }
-
-" Register which key map
-call which_key#register('<Space>', "g:which_key_map")
 " zoom vim split views
 noremap Zz <c-w>_ \| <c-w>\|
 noremap Zo <c-w>=
@@ -434,15 +375,6 @@ nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
 
-" Harpoon
-nnoremap <silent><leader>hh :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <silent><leader>hm :lua require("harpoon.mark").add_file()<CR>
-nnoremap <silent><leader>hc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
-
-nnoremap <silent><leader>hj :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <silent><leader>hk :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <silent><leader>hl :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <silent><leader>hö :lua require("harpoon.ui").nav_file(4)<CR>
 " closing buffers "https://stackoverflow.com/a/8585343/5246670
 map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
@@ -475,23 +407,6 @@ nnoremap <leader>e :Explore<CR>
 "
 " Replace `$EDITOR` candidate with this command to open the selected file
 let g:rnvimr_edit_cmd = 'drop'
-
-
-"coc git
-" nnoremap <Leader>tg :CocCommand git.toggleGutters<CR>  " toggle coc-git gutter
-
-" setup mapping to call :LazyGit
-nnoremap <silent> <leader>gg :LazyGit<CR>
-nnoremap <silent> <leader>lg :LazyGit<CR>
-
-"git blame
-nnoremap <silent> <leader>gb :BlamerToggle<CR>
-"git diffview.nvim
-nnoremap <silent> <leader>go :DiffviewOpen<CR>
-nnoremap <silent> <leader>gc :DiffviewClose<CR>
-nnoremap <silent> <leader>gh :DiffviewFileHistory<CR>
-nnoremap <silent> <leader>gf :DiffviewFileHistory %<CR>
-nnoremap <leader>gw :GBrowse<CR>
 
 "
 "let blame default be on

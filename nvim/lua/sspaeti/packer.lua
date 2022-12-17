@@ -1,20 +1,17 @@
--- local status, packer = pcall(require, "packer")
--- if (not status) then
---   print("Packer is not installed")
---   return
--- end
--- local util = require'packer.util'
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
 
--- local vim = vim
--- local execute = vim.api.nvim_command
--- local fn = vim.fn
--- -- ensure that packer is installed
--- local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
--- if fn.empty(fn.glob(install_path)) > 0 then
---     execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
---     execute 'packadd packer.nvim'
--- end
+local packer_bootstrap = ensure_packer()
 
+--
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
@@ -53,9 +50,9 @@ return require('packer').startup(function(use)
       -- Snippets
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
- -- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/lspkind-nvim
- -- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/vim-vsnip
- -- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/cmp-vsnip
+      -- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/lspkind-nvim
+      -- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/vim-vsnip
+      -- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/cmp-vsnip
     }
   }
 
@@ -63,7 +60,6 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'simrat39/rust-tools.nvim'
   use 'puremourning/vimspector'
-	use 'christoomey/vim-tmux-navigator'
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
   -- use 'simrat39/symbols-outline.nvim'
   use 'goolord/alpha-nvim' --does not work!?
@@ -97,8 +93,8 @@ return require('packer').startup(function(use)
   --preview CSS colors inline
   -- use 'ap/vim-css-color'
   use 'norcalli/nvim-colorizer.lua'
-
   -- comment healper
+
   -- use 'preservim/nerdcommenter'
   use 'tpope/vim-commentary'
 
@@ -133,8 +129,6 @@ return require('packer').startup(function(use)
   --File Navigation
   use 'nvim-lualine/lualine.nvim'
   use 'christoomey/vim-tmux-navigator'
-  -- If you want to have icons in your statusline choose one of these
-  use 'kyazdani42/nvim-web-devicons'
 
   -- use 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
   use 'kevinhwang91/rnvimr' --replaces 'francoiscabrol/ranger.vim'
@@ -144,8 +138,6 @@ return require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mbbill/undotree'
 
-  --fast async search
-  use 'dyng/ctrlsf.vim'
   -- prettier
   use 'sbdchd/neoformat'
 
@@ -154,7 +146,16 @@ return require('packer').startup(function(use)
   -- use 'neoclide/coc.nvim', {'branch': 'release'}
   use 'jmcantrell/vim-virtualenv'
 
-  use 'liuchengxu/vim-which-key'
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
   use 'github/copilot.vim'
   --Markdown (or any Outline)
   use 'simrat39/symbols-outline.nvim'

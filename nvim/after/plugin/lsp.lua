@@ -1,4 +1,3 @@
-print('lsp.lua')
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
@@ -19,7 +18,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-d>'] = cmp.mapping.scroll_docs(-4),
   ['<C-u>'] = cmp.mapping.scroll_docs(4),
   ['<C-e>'] = cmp.mapping.close(),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }), --my mapping was disable this:     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
 })
@@ -50,10 +48,6 @@ vim.diagnostic.config({
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
-  if client.name == "eslint" then
-      vim.cmd [[ LspStop eslint ]]
-      return
-  end
   --mine
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)

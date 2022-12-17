@@ -4,10 +4,11 @@ cp ~/Library/ApplicationSupport/Code/User/settings.json $git/general/dotfiles/vs
 cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles/vscode/keybindings.json
 #cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
 #using nvim going forward therefore separting configs
-cp -r ~/.config/nvim/lua $git/general/dotfiles/nvim/
-cp -r ~/.config/nvim/after $git/general/dotfiles/nvim/after
-cp -r ~/.config/nvim/plugin $git/general/dotfiles/nvim/plugin
-cp -r ~/.config/nvim/ftplugin/ $git/general/dotfiles/nvim/ftplugin
+rm -r $git/general/dotfiles/nvim/ && mkdir -p $git/general/dotfiles/nvim/after/plugin && mkdir $git/general/dotfiles/nvim/lua/
+cp -r ~/.config/nvim/lua/ $git/general/dotfiles/nvim/lua/
+cp -r ~/.config/nvim/after/ $git/general/dotfiles/nvim/after/
+cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
+cp -r ~/.config/nvim/ftplugin/ $git/general/dotfiles/nvim/ftplugin/
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
 cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
@@ -63,10 +64,6 @@ cp ~/.vrapperrc $git/general/dotfiles/dbeaver/vrapperrc
 #homebrew
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
-
-
-#delete unwanted files
-rm nvim/plugin/plugin/packer_compiled.lua
 
 # source $venvs/dagster/bin/activate
 # pip freeze > $git/general/dotfiles/python/venvs/dagster.txt

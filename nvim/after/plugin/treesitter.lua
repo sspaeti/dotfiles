@@ -1,8 +1,7 @@
-
 require("nvim-treesitter.configs").setup {
-	ensure_installed = {"python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust"}, -- one of "all" or a list of languages
+	ensure_installed = {"help", "python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust"}, -- one of "all" or a list of languages
+	sync_install = false,
 	auto_install = true,
-	ignore_install = { "" }, -- List of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
 		disable = { "css" }, -- list of language that will be disabled
@@ -10,7 +9,7 @@ require("nvim-treesitter.configs").setup {
 	autopairs = {
 		enable = true,
 	},
-	indent = { enable = true, disable = { "yaml", "python" } },
+	-- indent = { enable = true, disable = { "yaml", "python" } },
 	rainbow = {
 		enable = true,
 		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
