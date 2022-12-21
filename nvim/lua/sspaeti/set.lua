@@ -43,7 +43,11 @@ vim.opt.conceallevel = 0 -- So that I can see `` in markdown files
 vim.opt.tabstop = 2 -- Insert 2 spaces for a tab
 vim.opt.shiftwidth = 2 -- Change the number of space characters inserted for indentation
 vim.opt.softtabstop = 2 --Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
+
+--wrap lines for markdown only
 vim.opt.wrap = false -- Display long lines as just one line
+vim.cmd("autocmd FileType markdown setlocal wrap")
+
 vim.opt.expandtab = true -- Converts tabs to spaces
 vim.opt.smarttab = true -- Makes tabbing smarter will realize you have 2 vs 4
 vim.opt.smartindent = true -- Makes indenting smart

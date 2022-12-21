@@ -33,7 +33,7 @@ export PYSPARK_PYTHON=python3
 export DAGSTER_HOME=~/.dagster
 
 #vim stuff
-export MYVIMRC=~/.config/nvim/init.vim
+export MYVIMRC=~/.config/nvim/init.lua
 export VIMRC=$MYVIMRC
 export RC=$MYVIMRC
 #vim in browser

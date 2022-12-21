@@ -25,7 +25,8 @@ return require("packer").startup(function(use)
 
 	--color scheme
 	use("rebelot/kanagawa.nvim")
-
+	use("gruvbox-community/gruvbox")
+	-- use 'joshdick/onedark.vim'
 	use({
 		"ldelossa/gh.nvim",
 		requires = { { "ldelossa/litee.nvim" } },
@@ -73,10 +74,6 @@ return require("packer").startup(function(use)
 
 	--theme
 	use("sheerun/vim-polyglot")
-	--themes
-	-- use 'joshdick/onedark.vim'
-	use("gruvbox-community/gruvbox")
-	use("rebelot/kanagawa.nvim")
 	use("christoomey/vim-system-copy")
 	--use 'valloric/youcompleteme'
 	use("tpope/vim-surround") -- Surrounding ysw)
@@ -144,12 +141,12 @@ return require("packer").startup(function(use)
 	-- use 'neoclide/coc.nvim', {'branch': 'release'}
 	use("jmcantrell/vim-virtualenv")
 
-	use({
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup({})
-		end,
-	})
+	-- use({
+	-- 	"folke/which-key.nvim",
+	-- 	config = function()
+	-- 		require("which-key").setup({})
+	-- 	end,
+	-- })
 	use("github/copilot.vim")
 	--Markdown (or any Outline)
 	use("simrat39/symbols-outline.nvim")

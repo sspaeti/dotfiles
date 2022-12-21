@@ -97,7 +97,6 @@ nmap <S-Tab> :tabprev<Return>
 
 "ranger nvim
 " nnoremap <leader>e :RnvimrToggl<CR>
-nnoremap <leader>e :Explore<CR>
 
 "
 " Replace `$EDITOR` candidate with this command to open the selected file
@@ -129,11 +128,6 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 
-
-" configure firenvim for the browser
-if exists("g:started_by_firenvim")
-  source $HOME/.config/nvim/plugin/firenvim.vim
-endif
 
 
 

@@ -1,10 +1,9 @@
 --general
-local map = vim.api.nvim_set_keymap
-vim.keymap.set("n", "<leader>e", ":Explore<CR>") --netrw file explorer
+vim.keymap.set("n", "<leader>e", ":Explore<CR>")
 
 
 -- s-shortcuts is for search -> without leader, directly with s
-vim.keymap.set('n','sb', ':Buffers<CR>')
+vim.keymap.set('n', 'sb', ':Buffers<CR>')
 vim.keymap.set('n', 's/', ':History/<CR>')
 vim.keymap.set('n', 's;', ':Commands<CR>')
 vim.keymap.set('n', 'sa', ':Ag<CR>')
@@ -59,6 +58,7 @@ vim.keymap.set("n", "S", ":%s//g<Left><Left>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 --vim.keymap.set("n", "<Leader>lf", "vim.lsp.buf.format()<CR>")
+vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 
 -- moving blocks with automatically indenting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

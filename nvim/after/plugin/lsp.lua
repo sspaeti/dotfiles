@@ -5,8 +5,19 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   'eslint',
   'rust_analyzer',
+  'sumneko_lua',
 })
 
+-- Fix Undefined global 'vim'
+lsp.configure('sumneko_lua', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -45,6 +56,7 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
+
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
@@ -65,19 +77,12 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
+  -- turn on grammarly language server only for filetype=markdown
+  if client.name == "grammarly" then
+    vim.api.nvim_buf_set_option(bufnr, "filetype", "markdown")
+  end
 end)
 
 lsp.setup()
 
 
---lua 
-require'lspconfig'.sumneko_lua.setup {
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-    },
-  },
-}
