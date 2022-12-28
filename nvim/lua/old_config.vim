@@ -70,14 +70,6 @@ nmap <C-w><right> <C-w>5>
 nmap <C-w><up> <C-w>5+
 nmap <C-w><down> <C-w>5-
 
-" closing buffers "https://stackoverflow.com/a/8585343/5246670
-map <C-w>q :bp<bar>sp<bar>bn<bar>bd<CR>
-nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
-" close all buffers execpt current one
-" nnoremap <leader>wa :%bd|e#<Return>
-
-" Close current window
-nnoremap <leader>x <C-w>c
 
 " Open current directory
 nmap te :tabedit

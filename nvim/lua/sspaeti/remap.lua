@@ -60,6 +60,16 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 --vim.keymap.set("n", "<Leader>lf", "vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 
+-- closing buffers "https://stackoverflow.com/a/8585343/5246670
+vim.keymap.set("n", "<C-w>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
+vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
+
+-- close all buffers execpt current one
+-- nnoremap <leader>wa :%bd|e#<Return>
+
+-- Close current window
+vim.keymap.set("n", "<leader>x", "<C-w>c")
+
 -- moving blocks with automatically indenting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -93,6 +103,27 @@ vim.keymap.set("n", "c-c", "<Esc>")
 vim.keymap.set("n", "gt", ":bnext<CR>")
 vim.keymap.set("n", "gT", ":bprevious<CR>")
 
+--quickfix toggle_qf
+local toggle_qf = function()
+  local qf_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    end
+  end
+  if qf_exists == true then
+    vim.cmd "cclose"
+    return
+  end
+  if not vim.tbl_isempty(vim.fn.getqflist()) then
+    vim.cmd "copen"
+  end
+end
+
+vim.keymap.set("n", "<Leader>cc", ":call toggle_qf()<CR>")
+vim.keymap.set("n", "<Leader>co", ":copen<CR>")
+vim.keymap.set("n", "<Leader>cc", ":cclose<CR>")
+
 -- <TAB>: completion -> still needed?
 -- inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 -- -- switching between tmux session from vim
@@ -122,3 +153,4 @@ vim.keymap.set("n", "z9", "zR")
 vim.keymap.set("n", "<leader>Db", ":call vimspector#ToggleBreakpoint()<cr>")
 vim.keymap.set("n", "<leader>Dw", ":call vimspector#AddWatch()<cr>")
 vim.keymap.set("n", "<leader>De", ":call vimspector#Evaluate()<cr>")
+

@@ -398,11 +398,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/vimspector",
     url = "https://github.com/puremourning/vimspector"
-  },
-  vimwiki = {
-    loaded = true,
-    path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/vimwiki",
-    url = "https://github.com/vimwiki/vimwiki"
   }
 }
 

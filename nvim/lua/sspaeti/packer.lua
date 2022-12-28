@@ -160,19 +160,19 @@ return require("packer").startup(function(use)
 
 	-- connect with Obsidian Second Brain
   -- vim.opt.nocompatible = true --Recommende for VimWiki
-	use({
-		"vimwiki/vimwiki"
-		-- config = function()
-		-- 	vim.g.vimwiki_list = {
-		-- 		{
-		-- 			path = "~/Simon/Sync/SecondBrain",
-		-- 			syntax = "markdown",
-		-- 			ext = ".md",
-		-- 		},
-		-- 	}
-			--vim.g.vimwiki_global_ext = 0 --only mark files in the second brain as vim viki, rest are standard markdown
-		-- end,
-	})
+	--use({
+	--	"vimwiki/vimwiki"
+	--	-- config = function()
+	--	-- 	vim.g.vimwiki_list = {
+	--	-- 		{
+	--	-- 			path = "~/Simon/Sync/SecondBrain",
+	--	-- 			syntax = "markdown",
+	--	-- 			ext = ".md",
+	--	-- 		},
+	--	-- 	}
+	--		--vim.g.vimwiki_global_ext = 0 --only mark files in the second brain as vim viki, rest are standard markdown
+	--	-- end,
+	--})
 
 	--dbt
 	-- use 'lepture/vim-jinja' --needed for dbt below but errors in hugo htmls...
