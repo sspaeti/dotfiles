@@ -33,14 +33,28 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
+-- remove buffer (that suggests words from current buffer): https://stackoverflow.com/a/73144320
+-- full list: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
+local sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'luasnip' },
+    { name = 'obsidian' },
+    { name = 'obsidian_new' },
+    { name = 'nvim_lsp:sumneko_lua' },
+    { name = 'nvim_lsp:null-ls' },
+  }
+
 -- disable completion with tab
 -- this helps with copilot setup
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
+    mapping = cmp_mappings,
+    sources = sources
+  })
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
@@ -56,7 +70,6 @@ vim.diagnostic.config({
     virtual_text = true,
 })
 
-
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
@@ -71,11 +84,13 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format() end, opts)
   vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
+  vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.enable() end, opts)
   --prime
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+  vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.open_float() end, opts)
+  vim.keymap.set("n", "[p", function() vim.diagnostic.goto_next() end, opts)
+  vim.keymap.set("n", "]p", function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
   -- turn on grammarly language server only for filetype=markdown
