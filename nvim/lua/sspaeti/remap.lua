@@ -70,6 +70,17 @@ vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 -- Close current window
 vim.keymap.set("n", "<leader>x", "<C-w>c")
 
+-- Writing / Markdown
+--
+-- Zenmode
+vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
+
+-- Spell checker
+vim.keymap.set("n", "<leader>so", "<c-o>:set spell<cr>")
+vim.keymap.set("n", "<leader>so", ":set spell<cr>")
+vim.keymap.set("n", "<leader>sc", "<c-o>:set nospell<cr>")
+vim.keymap.set("n", "<leader>sc", ":set nospell<cr>")
+
 -- moving blocks with automatically indenting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -130,8 +141,8 @@ vim.keymap.set("n", "<Leader>cc", ":cclose<CR>")
 -- vim.keymap.set("n", "<leader>ss", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 --folding
-vim.keymap.set("n", "<leader>z", "za")
-vim.keymap.set("v", "<leader>z", "zf")
+vim.keymap.set("n", "zz", "za")
+vim.keymap.set("v", "zz", "zf")
 vim.keymap.set("n", "z2", ":set foldlevel=0<CR><Esc>")
 vim.keymap.set('n', 'z2', ':set foldlevel=1<CR><Esc>', {silent = true})
 vim.keymap.set('n', 'z3', ':set foldlevel=2<CR><Esc>', {silent = true})

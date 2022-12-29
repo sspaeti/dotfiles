@@ -1,4 +1,5 @@
-vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+-- vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+vim.opt.completeopt = { "menu" }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.api.nvim_set_option("updatetime", 300)
 
@@ -11,6 +12,7 @@ vim.opt.clipboard = "unnamedplus" --" Copy paste between vim and everything else
 
 vim.opt.relativenumber = true
 vim.opt.number = true
+
 -- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
 
 --set `filetype` in lua
@@ -33,6 +35,9 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 
 vim.opt.updatetime = 200 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
+
+--language settings
+-- vim.opt.spelllang = "en_us,de_ch"
 
 -- Ignore files
 vim.opt.wildignore = "*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*"

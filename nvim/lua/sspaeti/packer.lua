@@ -151,6 +151,17 @@ return require("packer").startup(function(use)
 	--Markdown (or any Outline)
 	use("simrat39/symbols-outline.nvim")
 	use("stevearc/aerial.nvim")
+	use {
+		"folke/zen-mode.nvim",
+		config = function()
+			require("zen-mode").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	}
+
 	----Obsidian
 	-- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
 	use("preservim/vim-markdown")
