@@ -5,8 +5,6 @@ let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown',
 let g:vimwiki_global_ext = 0 " o
 ]])
 
---Aerial
-vim.keymap.set("n", "<leader>o", ":AerialToggle<CR>", { noremap = true, silent = true })
 -- Outline Shortcut
 vim.cmd('autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>')
 

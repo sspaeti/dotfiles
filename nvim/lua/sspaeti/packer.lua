@@ -139,7 +139,7 @@ return require("packer").startup(function(use)
 	--support for go to defintion and autocompletion
 	--use 'davidhalter/jedi-vim'
 	-- use 'neoclide/coc.nvim', {'branch': 'release'}
-	use("jmcantrell/vim-virtualenv")
+	use("jmcantrell/vim-virtualenv") --very slow: check if still needed?
 
 	-- use({
 	-- 	"folke/which-key.nvim",
@@ -161,7 +161,13 @@ return require("packer").startup(function(use)
 			}
 		end
 	}
+	-- install without yarn or npm
+	use({
+			"iamcco/markdown-preview.nvim",
+			run = function() vim.fn["mkdp#util#install"]() end,
+		})
 
+	-- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 	----Obsidian
 	-- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
 	use("preservim/vim-markdown")
@@ -200,4 +206,6 @@ return require("packer").startup(function(use)
 			vim.fn["firenvim#install"](0)
 		end,
 	})
+	--to delete later
+	use("dstein64/vim-startuptime")
 end)

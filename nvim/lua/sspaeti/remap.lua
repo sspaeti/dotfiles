@@ -17,6 +17,7 @@ vim.keymap.set('n', 'sr', ':History<CR>')
 vim.keymap.set('n', 's:', ':History:<CR>')
 vim.keymap.set('n', 's/', ':History/<CR>')
 vim.keymap.set('n', 'sL', ':Lines<CR>')
+vim.keymap.set('n', 'sn', ':enew<CR>')
 vim.keymap.set('n', 'sM', ':Maps<CR>')
 vim.keymap.set('n', 'st', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', 'se', ':NvimTreeFindFile<CR>')
@@ -70,16 +71,20 @@ vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 -- Close current window
 vim.keymap.set("n", "<leader>x", "<C-w>c")
 
--- Writing / Markdown
+-- Writing / Markdown (see also markdown.lua)
 --
 -- Zenmode
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
-
 -- Spell checker
 vim.keymap.set("n", "<leader>so", "<c-o>:set spell<cr>")
 vim.keymap.set("n", "<leader>so", ":set spell<cr>")
 vim.keymap.set("n", "<leader>sc", "<c-o>:set nospell<cr>")
 vim.keymap.set("n", "<leader>sc", ":set nospell<cr>")
+--Aerial
+vim.keymap.set("n", "<leader>o", ":AerialToggle<CR>", { noremap = true, silent = true })
+--preview
+
+vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
 
 -- moving blocks with automatically indenting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
