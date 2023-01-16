@@ -146,8 +146,8 @@ vim.keymap.set("n", "<Leader>cc", ":cclose<CR>")
 -- vim.keymap.set("n", "<leader>ss", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 --folding
-vim.keymap.set("n", "zz", "za")
-vim.keymap.set("v", "zz", "zf")
+vim.keymap.set("n", "z1", "za")
+vim.keymap.set("v", "z1", "zf")
 vim.keymap.set("n", "z2", ":set foldlevel=0<CR><Esc>")
 vim.keymap.set('n', 'z2', ':set foldlevel=1<CR><Esc>', {silent = true})
 vim.keymap.set('n', 'z3', ':set foldlevel=2<CR><Esc>', {silent = true})

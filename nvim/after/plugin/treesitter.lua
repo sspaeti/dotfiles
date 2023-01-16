@@ -10,6 +10,7 @@ require("nvim-treesitter.configs").setup {
 		enable = true,
 	},
 	-- indent = { enable = true, disable = { "yaml", "python" } },
+	-- rainbow is no longer maintained
 	rainbow = {
 		enable = true,
 		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for

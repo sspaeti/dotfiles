@@ -274,5 +274,47 @@
       ],
       "key": "X"
     }
+  ],
+  "editor:fold-more": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "-"
+    }
+  ],
+  "editor:fold-less": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "\\"
+    }
+  ],
+  "editor:fold-all": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "0"
+    }
+  ],
+  "obsidian-focus-mode:toggle-focus-mode": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "Z"
+    }
+  ],
+  "editor:toggle-blockquote": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "P"
+    }
   ]
 }

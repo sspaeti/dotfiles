@@ -139,7 +139,7 @@ return require("packer").startup(function(use)
 	--support for go to defintion and autocompletion
 	--use 'davidhalter/jedi-vim'
 	-- use 'neoclide/coc.nvim', {'branch': 'release'}
-	use("jmcantrell/vim-virtualenv") --very slow: check if still needed?
+	-- use("jmcantrell/vim-virtualenv") --very slow: check if still needed?
 
 	-- use({
 	-- 	"folke/which-key.nvim",
@@ -198,7 +198,7 @@ return require("packer").startup(function(use)
 	-- use 'ivanovyordan/dbt.vim'
 
 	-- Java
-	use("mfussenegger/nvim-jdtls")
+	--use("mfussenegger/nvim-jdtls") --removed until https://github.com/neovim/neovim/issues/20795 is fixed
 	--use nvim in browser
 	use({
 		"glacambre/firenvim",

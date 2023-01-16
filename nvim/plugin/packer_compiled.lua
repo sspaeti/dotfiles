@@ -249,11 +249,6 @@ _G.packer_plugins = {
     path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
-  ["nvim-jdtls"] = {
-    loaded = true,
-    path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
-    url = "https://github.com/mfussenegger/nvim-jdtls"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -398,11 +393,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
     url = "https://github.com/christoomey/vim-tmux-navigator"
-  },
-  ["vim-virtualenv"] = {
-    loaded = true,
-    path = "/Users/sspaeti/.local/share/nvim/site/pack/packer/start/vim-virtualenv",
-    url = "https://github.com/jmcantrell/vim-virtualenv"
   },
   vimspector = {
     loaded = true,
