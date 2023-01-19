@@ -5,9 +5,10 @@
 	user = sspaeti
 [core]
 	excludesfile = /Users/sspaeti/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 [diff]
   tool = nvimdiff #meld
+  colorMoved = default
   #nvimdiff
 [difftool]
   prompt = false
@@ -59,7 +60,12 @@
 [hub]
 	protocol = https
 [interactive]
-	diffFilter = diff-so-fancy --patch
+	diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+[merge]
+    conflictstyle = diff3
 [color]
 	ui = true
 [color "diff-highlight"]
