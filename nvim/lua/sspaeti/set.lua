@@ -18,7 +18,6 @@ vim.opt.number = true
 --set `filetype` in lua
 vim.cmd("filetype plugin indent on")
 
-vim.g.mapleader = " "
 vim.opt.ruler = true -- show the cursor position all the time
 vim.opt.showcmd = true -- display incomplete commands
 vim.opt.laststatus = 3 -- 3: Only show global status line in acitve window 2: Always display the status line

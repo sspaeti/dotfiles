@@ -1,40 +1,36 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
+vim.g.mapleader = " "
 --
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
--- Only required if you have packer configured as `opt`
-vim.cmd([[packadd packer.nvim]])
+return require("lazy").setup({
 
-return require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
-
-	use("ldelossa/litee.nvim")
+	'ldelossa/litee.nvim',
 
 	--color scheme
-	use("rebelot/kanagawa.nvim")
-	use("gruvbox-community/gruvbox")
-	-- use 'joshdick/onedark.vim'
-	use({
+	'rebelot/kanagawa.nvim',
+	'gruvbox-community/gruvbox',
+	-- 'joshdick/onedark.vim',
+	{
 		"ldelossa/gh.nvim",
-		requires = { { "ldelossa/litee.nvim" } },
-	})
+		dependencies = { { "ldelossa/litee.nvim" } },
+	},
 
-	use({
+	{
 		"VonHeikemen/lsp-zero.nvim",
-		requires = {
+		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
@@ -51,107 +47,111 @@ return require("packer").startup(function(use)
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
-			-- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/lspkind-nvim
-			-- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/vim-vsnip
-			-- - Removed /Users/sspaeti/.local/share/nvim/site/pack/packer/start/cmp-vsnip
 		},
-	})
+	},
 
 	--rust
-	use("neovim/nvim-lspconfig")
-	use("simrat39/rust-tools.nvim")
-	use("puremourning/vimspector")
-	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
-	-- use 'simrat39/symbols-outline.nvim'
-	use("goolord/alpha-nvim") --does not work!?
+	'neovim/nvim-lspconfig',
+	'simrat39/rust-tools.nvim',
+	'puremourning/vimspector',
+	{ "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+	-- 'simrat39/symbols-outline.nvim',
+	'goolord/alpha-nvim', --does not work!?
 
-	use({
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.0",
 		-- or                            , branch = '0.1.x',
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
 
 	--theme
-	use("sheerun/vim-polyglot")
-	use("christoomey/vim-system-copy")
-	--use 'valloric/youcompleteme'
-	use("tpope/vim-surround") -- Surrounding ysw)
+	'sheerun/vim-polyglot',
+	'christoomey/vim-system-copy',
+	--'valloric/youcompleteme',
+	'tpope/vim-surround', -- Surrounding ys',
 
 	--Text Objects:
 	--Utilities for user-defined text objects
-	use("kana/vim-textobj-user")
+	'kana/vim-textobj-user',
 	--Text objects for indentation levels
-	use("kana/vim-textobj-indent")
+	'kana/vim-textobj-indent',
 	--Text objects for Python
-	use("bps/vim-textobj-python")
+	'bps/vim-textobj-python',
 	--preview CSS colors inline
-	-- use 'ap/vim-css-color'
-	use("norcalli/nvim-colorizer.lua")
+	-- 'ap/vim-css-color',
+	'norcalli/nvim-colorizer.lua',
 	-- comment healper
 
-	-- use 'preservim/nerdcommenter'
-	use("tpope/vim-commentary")
+	-- 'preservim/nerdcommenter',
+	'tpope/vim-commentary',
 
 	-- should be installed out of the box by neovim?
-	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("nvim-treesitter/playground")
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = function()
+			pcall(require('nvim-treesitter.install').update { with_sync = true })
+		end,
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter-textobjects' ,
+		}
+	},
 
-	--use 'ambv/black'
-	use("psf/black")
-	use("tpope/vim-fugitive")
-	use("tpope/vim-rhubarb")
+	--'ambv/black',
+	'psf/black',
+	'tpope/vim-fugitive',
+	'tpope/vim-rhubarb',
 
-	use("kdheepak/lazygit.nvim")
-	use("sindrets/diffview.nvim") --nvim gitdiff
-	use("mhinz/vim-signify") --highlighing changes not commited to last commit
-	use("APZelos/blamer.nvim") --gitlens blame style
+	'kdheepak/lazygit.nvim',
+	'sindrets/diffview.nvim', --nvim gitdi',
+	'mhinz/vim-signify', --highlighing changes not commited to last comm',
+	'APZelos/blamer.nvim', --gitlens blame sty',
 	-- -- telescope requirements...
-	-- use 'nvim-lua/popup.nvim'
-	use("nvim-lua/plenary.nvim")
-	use("ThePrimeagen/harpoon")
-	use("jose-elias-alvarez/null-ls.nvim")
-	-- use 'nvim-telescope/telescope.nvim'
-	-- use 'nvim-telescope/telescope-fzy-native.nvim'
+	-- 'nvim-lua/popup.nvim',
+	'nvim-lua/plenary.nvim',
+	'ThePrimeagen/harpoon',
+	'jose-elias-alvarez/null-ls.nvim',
+	-- 'nvim-telescope/telescope.nvim',
+	-- 'nvim-telescope/telescope-fzy-native.nvim',
 	--terminal
-	use("voldikss/vim-floaterm")
+	'voldikss/vim-floaterm',
 
 	-- search
-	use("dyng/ctrlsf.vim")
-	use({ "junegunn/fzf", run = ":call fzf#install()" })
-	use({ "junegunn/fzf.vim" })
+	'dyng/ctrlsf.vim',
+	{ "junegunn/fzf", build = ":call fzf#install()" },
+	'junegunn/fzf.vim',
 
 	--File Navigation
-	use("nvim-lualine/lualine.nvim")
-	use("christoomey/vim-tmux-navigator")
+	'nvim-lualine/lualine.nvim',
+	'christoomey/vim-tmux-navigator',
 
-	-- use 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-	use("kevinhwang91/rnvimr") --replaces 'francoiscabrol/ranger.vim'
+	-- 'akinsho/bufferline.nvim', { 'tag': 'v2.*', }
+	'kevinhwang91/rnvimr',
 	--nerdtree in lua
-	use("kyazdani42/nvim-web-devicons") -- optional, for file icons
-	use("kyazdani42/nvim-tree.lua")
-	use("lukas-reineke/indent-blankline.nvim")
-	use("mbbill/undotree")
+	-- 'kyazdani42/nvim-web-devicons', -- optional, for file ico',
+	'kyazdani42/nvim-tree.lua',
+	'lukas-reineke/indent-blankline.nvim',
+	'mbbill/undotree',
 
 	-- prettier
-	use("sbdchd/neoformat")
+	'sbdchd/neoformat',
 
 	--support for go to defintion and autocompletion
-	--use 'davidhalter/jedi-vim'
-	-- use 'neoclide/coc.nvim', {'branch': 'release'}
-	-- use("jmcantrell/vim-virtualenv") --very slow: check if still needed?
+	--'davidhalter/jedi-vim',
+	-- 'neoclide/coc.nvim', {'branch': 'release',}
+	-- "jmcantrell/vim-virtualenv", --very slow: check if still needed?
 
-	-- use({
+	-- {
 	-- 	"folke/which-key.nvim",
 	-- 	config = function()
 	-- 		require("which-key").setup({})
 	-- 	end,
-	-- })
-	use("github/copilot.vim")
+	-- },
+	'github/copilot.vim',
 	--Markdown (or any Outline)
-	use("simrat39/symbols-outline.nvim")
-	use("stevearc/aerial.nvim")
-	use {
+	'simrat39/symbols-outline.nvim',
+	'stevearc/aerial.nvim',
+	{
 		"folke/zen-mode.nvim",
 		config = function()
 			require("zen-mode").setup {
@@ -160,24 +160,24 @@ return require("packer").startup(function(use)
 				-- refer to the configuration section below
 			}
 		end
-	}
+	},
 	-- install without yarn or npm
-	use({
+	{
 			"iamcco/markdown-preview.nvim",
-			run = function() vim.fn["mkdp#util#install"]() end,
-		})
+			build = function() vim.fn["mkdp#util#install"]() end,
+		},
 
-	-- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+	-- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 	----Obsidian
 	-- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
-	use("preservim/vim-markdown")
-	use("godlygeek/tabular") -- needed by 'preservim/vim-markdown'
-	use("epwalsh/obsidian.nvim") --using neovim with the Obsidian vault
-	-- use 'vimwiki/vimwiki'
+	'preservim/vim-markdown',
+	'godlygeek/tabular', -- needed by 'preservim/vim-markdown'
+	'epwalsh/obsidian.nvim', --using neovim with the Obsidian vau'
+	-- 'vimwiki/vimwiki',
 
 	-- connect with Obsidian Second Brain
   -- vim.opt.nocompatible = true --Recommende for VimWiki
-	--use({
+	--{
 	--	"vimwiki/vimwiki"
 	--	-- config = function()
 	--	-- 	vim.g.vimwiki_list = {
@@ -189,23 +189,23 @@ return require("packer").startup(function(use)
 	--	-- 	}
 	--		--vim.g.vimwiki_global_ext = 0 --only mark files in the second brain as vim viki, rest are standard markdown
 	--	-- end,
-	--})
+	--},
 
 	--dbt
-	-- use 'lepture/vim-jinja' --needed for dbt below but errors in hugo htmls...
-	use("pedramnavid/dbt.nvim")
-	use("glench/vim-jinja2-syntax")
-	-- use 'ivanovyordan/dbt.vim'
+	-- 'lepture/vim-jinja', --needed for dbt below but errors in hugo htmls...
+	'pedramnavid/dbt.nvim',
+	'glench/vim-jinja2-syntax',
+	-- 'ivanovyordan/dbt.vim',
 
 	-- Java
-	--use("mfussenegger/nvim-jdtls") --removed until https://github.com/neovim/neovim/issues/20795 is fixed
+	--"mfussenegger/nvim-jdtls", --removed until https://github.com/neovim/neovim/issues/20795 is fixed
 	--use nvim in browser
-	use({
+	{
 		"glacambre/firenvim",
-		run = function()
+		build = function()
 			vim.fn["firenvim#install"](0)
 		end,
-	})
+	},
 	--to delete later
-	use("dstein64/vim-startuptime")
-end)
+	'dstein64/vim-startuptime',
+})
