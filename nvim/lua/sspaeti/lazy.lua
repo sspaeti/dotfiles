@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " "
+vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 --
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
@@ -75,7 +75,7 @@ return require("lazy").setup({
 	--Utilities for user-defined text objects
 	'kana/vim-textobj-user',
 	--Text objects for indentation levels
-	'kana/vim-textobj-indent',
+	-- 'kana/vim-textobj-indent',
 	--Text objects for Python
 	'bps/vim-textobj-python',
 	--preview CSS colors inline

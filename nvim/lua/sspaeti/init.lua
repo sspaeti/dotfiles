@@ -1,4 +1,4 @@
-require("sspaeti.packer")
+require("sspaeti.lazy")
 require("theme.kanagawa")
 vim.cmd("source $HOME/.config/nvim/lua/old_config.vim")
 require("sspaeti.set")
