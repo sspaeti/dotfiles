@@ -5,6 +5,7 @@ cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles
 #cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
 #using nvim going forward therefore separting configs
 rm -r $git/general/dotfiles/nvim/ && mkdir -p $git/general/dotfiles/nvim/after/plugin && mkdir $git/general/dotfiles/nvim/lua/
+cp ~/.config/nvim/lazy-lock.json $git/general/dotfiles/nvim/lazy-lock.json
 cp -r ~/.config/nvim/lua/ $git/general/dotfiles/nvim/lua/
 cp -r ~/.config/nvim/after/ $git/general/dotfiles/nvim/after/
 cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
