@@ -60,6 +60,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 --vim.keymap.set("n", "<Leader>lf", "vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
+vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 
 -- closing buffers "https://stackoverflow.com/a/8585343/5246670
 vim.keymap.set("n", "<C-w>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
