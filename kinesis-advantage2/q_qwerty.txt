@@ -3,20 +3,24 @@
 [kp=]>[kp=mac]
 [home]>[lalt]
 [end]>[lctrl]
-[lalt]>[tab]
 [lctrl]>[delete]
+[lalt]>[escape]
 [kp-lctrl]>[kp-lwin]
-[rctrl]>[lalt]
-[kp-rctrl]>[kp-rwin]
+[rctrl]>[caps]
 [ralt]>[lshift]
+[kp-rctrl]>[kp-rwin]
 [kp-ralt]>[kp-rctrl]
 [delete]>[lwin]
 * Using US layout but with qwertz instead of default qwerty
 [Y]>[Z]
 [Z]>[Y]
-
 * ----- Remap Caps-Lock to ESC for short presses. Hold CAPS for 250ms to toggle caps-lock -----
-[caps]>[escape][t&h500][caps]
+* does not work properly. Karabiner elements works better
+*[caps]>[escape][t&h250][caps]
+
+* marcro for hype key (cmd shift alt ctrl)
+* [ralt]>{-lctrl}{-lshift}{-lalt}{-lwin}(+lwin}{+lalt}{+lshift}{+lctrl}
+* alt and shift for amnesyst
 
 * ----- Up / Down Arrow Fix -----
 * map arrow key on home row with caps lock
@@ -24,40 +28,4 @@
 [down]>[up]
 [kp-up]>[kp-down]
 [kp-down]>[kp-up]
-* By default the up and down arrow keys are opposite of the VIM J/K movement.
-* This fixes that problem. You may also use your key cap puller to physically
-* swap the keys on your keyboard if you wish.
-{caps}{h}>[left]
-{caps}{h}>[down]
-{caps}{h}>[up]
-{caps}{h}>[right]
 
-* change caps number keys to f1-f10
-{caps}{1}>[f1]
-{caps}{2}>[f2]
-{caps}{3}>[f3]
-{caps}{4}>[f4]
-{caps}{5}>[f5]
-{caps}{6}>[f6]
-{caps}{7}>[f7]
-{caps}{8}>[f8]
-{caps}{9}>[f9]
-{caps}{0}>[f10]
-
-{caps}{a}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{e}{4}{enter}
-{lctrl}{lshift}{a}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{c}{4}{enter}
-
-* oe
-{caps}{o}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{f}{6}{enter}
-{lctrl}{lshift}{o}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{d}{6}{enter}
-
-* ue
-{caps}{u}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{f}{c}{enter}
-{lctrl}{lshift}{u}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{d}{c}{enter}
-
-* sz
-{caps}{s}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{0}{0}{d}{f}{enter}
-
-* fancy quotes
-{caps}{'}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{2}{0}{1}{e}{enter}
-{lctrl}{lshift}{'}>{speed9}{-lctrl}{-lshift}{u}{+lshift}{+lctrl}{2}{0}{1}{c}{enter}
