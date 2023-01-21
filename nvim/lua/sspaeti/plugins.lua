@@ -3,7 +3,7 @@ return {
 
   --color scheme
   'rebelot/kanagawa.nvim',
-  'gruvbox-community/gruvbox',
+  {'gruvbox-community/gruvbox', event = "VeryLazy"},
   -- 'joshdick/onedark.vim',
   {
     "ldelossa/gh.nvim",
@@ -34,11 +34,11 @@ return {
 
   --rust
   'neovim/nvim-lspconfig',
-  'simrat39/rust-tools.nvim',
+  {'simrat39/rust-tools.nvim', event = "VeryLazy"},
   -- 'puremourning/vimspector', --debugging in vim
   { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
   -- 'simrat39/symbols-outline.nvim',
-  'goolord/alpha-nvim', --does not work!?
+  {'goolord/alpha-nvim', event = "VeryLazy"}, --does not work!?
 
   {
     "nvim-telescope/telescope.nvim",
@@ -48,7 +48,7 @@ return {
   },
   'christoomey/vim-system-copy',
   --'valloric/youcompleteme',
-  'tpope/vim-surround', -- Surrounding ys',
+  {'tpope/vim-surround', event = "VeryLazy"}, -- Surrounding ys',
 
   --Text Objects:
   --Utilities for user-defined text objects
@@ -76,28 +76,29 @@ return {
     }
   },
 
-  'psf/black',
+  -- 'psf/black',
   -- {'psf/black', lazy = true},
+  {'psf/black', event = "VeryLazy"},
 
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  {'tpope/vim-fugitive', event = "VeryLazy"},
+  {'tpope/vim-rhubarb', event = "VeryLazy"},
 
-  'kdheepak/lazygit.nvim',
-  'sindrets/diffview.nvim', --nvim gitdi',
-  'mhinz/vim-signify', --highlighing changes not commited to last comm',
-  'APZelos/blamer.nvim', --gitlens blame sty',
+  {'kdheepak/lazygit.nvim', event = "VeryLazy"},
+  {'sindrets/diffview.nvim', event = "VeryLazy"}, --nvim gitdi',
+  {'mhinz/vim-signify', event = "VeryLazy"}, --highlighing changes not commited to last comm',
+  {'APZelos/blamer.nvim', event = "VeryLazy"}, --gitlens blame sty',
   -- -- telescope requirements...
   -- 'nvim-lua/popup.nvim',
-  'nvim-lua/plenary.nvim',
-  'ThePrimeagen/harpoon',
-  'jose-elias-alvarez/null-ls.nvim',
+  {'nvim-lua/plenary.nvim', event = "VeryLazy"},
+  {'ThePrimeagen/harpoon', event = "VeryLazy"},
+  {'jose-elias-alvarez/null-ls.nvim', event = "VeryLazy"},
   -- 'nvim-telescope/telescope.nvim',
   -- 'nvim-telescope/telescope-fzy-native.nvim',
   --terminal
-  'voldikss/vim-floaterm',
+  {'voldikss/vim-floaterm', event = "VeryLazy"},
 
   -- search
-  'dyng/ctrlsf.vim',
+  {'dyng/ctrlsf.vim', event = "VeryLazy"},
   { "junegunn/fzf", build = ":call fzf#install()" },
   'junegunn/fzf.vim',
 
@@ -106,15 +107,15 @@ return {
   'christoomey/vim-tmux-navigator',
 
   -- 'akinsho/bufferline.nvim', { 'tag': 'v2.*', }
-  'kevinhwang91/rnvimr',
+  {'kevinhwang91/rnvimr', event = "VeryLazy"},
   --nerdtree in lua
   -- 'kyazdani42/nvim-web-devicons', -- optional, for file ico',
   'kyazdani42/nvim-tree.lua',
   'lukas-reineke/indent-blankline.nvim',
-  'mbbill/undotree',
+  {'mbbill/undotree', event = "VeryLazy"},
 
   -- prettier
-  'sbdchd/neoformat',
+  {'sbdchd/neoformat', event = "VeryLazy"},
 
   --support for go to defintion and autocompletion
   --'davidhalter/jedi-vim',
@@ -127,12 +128,13 @@ return {
       -- 		require("which-key").setup({})
       -- 	end,
       -- },
-      'github/copilot.vim',
+      {'github/copilot.vim', event = "VeryLazy"},
       --Markdown (or any Outline)
-      'simrat39/symbols-outline.nvim',
-      'stevearc/aerial.nvim',
+      {'simrat39/symbols-outline.nvim', event = "VeryLazy"},
+      {'stevearc/aerial.nvim', event = "VeryLazy"},
       {
         "folke/zen-mode.nvim",
+        event = "VeryLazy",
         config = function()
           require("zen-mode").setup {
             -- your configuration comes here
@@ -144,15 +146,16 @@ return {
       -- install without yarn or npm
       {
         "iamcco/markdown-preview.nvim",
+        event = "VeryLazy",
         build = function() vim.fn["mkdp#util#install"]() end,
       },
 
       -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
       ----Obsidian
       -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
-      'preservim/vim-markdown',
-      'godlygeek/tabular', -- needed by 'preservim/vim-markdown'
-      'epwalsh/obsidian.nvim', --using neovim with the Obsidian vau'
+      {'preservim/vim-markdown', event = "VeryLazy"},
+      {'godlygeek/tabular', event = "VeryLazy"}, -- needed by 'preservim/vim-markdown'
+      {'epwalsh/obsidian.nvim', event = "VeryLazy"}, --using neovim with the Obsidian vau'
       -- 'vimwiki/vimwiki',
 
       -- connect with Obsidian Second Brain
@@ -173,8 +176,8 @@ return {
 
               --dbt
               -- 'lepture/vim-jinja', --needed for dbt below but errors in hugo htmls...
-              'pedramnavid/dbt.nvim',
-              'glench/vim-jinja2-syntax',
+              {'pedramnavid/dbt.nvim', event = "VeryLazy"},
+              {'glench/vim-jinja2-syntax', event = "VeryLazy"},
               -- 'ivanovyordan/dbt.vim',
 
               -- Java
@@ -182,10 +185,11 @@ return {
               --use nvim in browser
               {
                 "glacambre/firenvim",
+                event = "VeryLazy",
                 build = function()
                   vim.fn["firenvim#install"](0)
                 end,
               },
               --to delete later
-              'dstein64/vim-startuptime',
+              {'dstein64/vim-startuptime', event = "VeryLazy"},
             }
