@@ -121,13 +121,6 @@ return {
       "MunifTanjim/nui.nvim",
     }, 
     event = "VeryLazy",
-    window = {
-      mappings = {
-        ["S"] = "open_split",
-        ["s"] = nil,
-        ["SS"] = "open_vsplit",
-      }
-    }
   },
 
   'lukas-reineke/indent-blankline.nvim',
