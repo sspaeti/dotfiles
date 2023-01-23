@@ -4,6 +4,11 @@ require('bufferline').setup {
     close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
     right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
+    -- indicator = {style = "icon", icon = "▎" },
+    -- indicator = {style = "icon", icon = "|" },
+    buffer_close_icon = "",
+    show_close_icon = false,
+    diagnostics = "nvim_lsp",
   }
 }
 -- navigation

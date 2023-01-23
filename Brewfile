@@ -20,6 +20,7 @@ brew "sqlite"
 brew "python@3.10"
 brew "asciinema"
 brew "coreutils"
+brew "openssl@3"
 brew "asdf"
 brew "awscli"
 brew "bash-completion"
@@ -49,13 +50,12 @@ brew "lazygit"
 brew "llvm"
 brew "lua"
 brew "mdcat"
-brew "node", link: false
+brew "node"
 brew "nativefier"
 brew "neovim", args: ["HEAD"]
-brew "node@16", link: true
+brew "node@16"
 brew "okteto"
 brew "openjdk@17", link: true
-brew "openssl@3"
 brew "ossp-uuid"
 brew "pam-reattach"
 brew "tcl-tk"
