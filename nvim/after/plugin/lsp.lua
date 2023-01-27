@@ -83,15 +83,15 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
   vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
   vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format() end, opts)
+  vim.keymap.set("n", "<Leader>lf", function() vim.lsp.buf.format() end, opts)
   vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
   vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.enable() end, opts)
   --prime
-  vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "[p", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "]p", function() vim.diagnostic.goto_prev() end, opts)
+  vim.keymap.set("n", "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, opts)
+  -- vim.keymap.set("n", "<Leader>lt", function() vim.diagnostic.open_float() end, opts) --done with :TroubleToggle
+  vim.keymap.set("n", "<Leader>ln", function() vim.diagnostic.goto_next() end, opts)
+  vim.keymap.set("n", "<Leader>lp", function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
   -- turn on grammarly language server only for filetype=markdown

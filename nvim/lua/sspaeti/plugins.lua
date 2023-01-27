@@ -1,4 +1,4 @@
-return {
+eturn {
   'ldelossa/litee.nvim',
 
   --color scheme
@@ -34,12 +34,12 @@ return {
       { "rafamadriz/friendly-snippets" },
     },
   },
-
+  { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "VeryLazy" }, --nice diagnostic errors
   --rust
   'neovim/nvim-lspconfig',
   {'simrat39/rust-tools.nvim', event = "VeryLazy"},
   -- 'puremourning/vimspector', --debugging in vim
-  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+  { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
   -- 'simrat39/symbols-outline.nvim',
   {'goolord/alpha-nvim', event = "VeryLazy"}, --does not work!?
 
@@ -132,13 +132,23 @@ return {
   --'davidhalter/jedi-vim',
   -- 'neoclide/coc.nvim', {'branch': 'release',}
   -- "jmcantrell/vim-virtualenv", --very slow: check if still needed?
-
-  -- {
-    -- 	"folke/which-key.nvim",
-    -- 	config = function()
-      -- 		require("which-key").setup({})
-      -- 	end,
-      -- },
+      {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        config = function()
+          vim.o.timeout = true
+          vim.o.timeoutlen = 300
+          require("which-key").setup({
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            triggers_blacklist = {
+              n = { "s" },
+              v = { "s" },
+            },
+          })
+        end,
+      },
       {'github/copilot.vim', event = "VeryLazy"},
       --Markdown (or any Outline)
       {'simrat39/symbols-outline.nvim', event = "VeryLazy"},
