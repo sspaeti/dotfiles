@@ -10,7 +10,8 @@ return {
   -- 'joshdick/onedark.vim',
   {
     "ldelossa/gh.nvim",
-    dependencies = { { "ldelossa/litee.nvim" } },
+    event = "VeryLazy",
+    dependencies = { "ldelossa/litee.nvim"},
   },
   {
     "VonHeikemen/lsp-zero.nvim",
@@ -64,6 +65,7 @@ return {
 
   {
     "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     tag = "0.1.0",
     -- or                            , branch = '0.1.x',
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -85,10 +87,11 @@ return {
   -- comment healper
 
   -- 'preservim/nerdcommenter',
-  'tpope/vim-commentary',
+  {'tpope/vim-commentary', event = "VeryLazy"},
 
   {
     'nvim-treesitter/nvim-treesitter',
+    event = "VeryLazy",
     build = function()
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
@@ -120,8 +123,8 @@ return {
   {'voldikss/vim-floaterm', event = "VeryLazy"},
 
   -- search
-  { "junegunn/fzf", build = ":call fzf#install()" },
-  'junegunn/fzf.vim',
+  { "junegunn/fzf", build = ":call fzf#install()", event = "VeryLazy"},
+  { 'junegunn/fzf.vim', event = "VeryLazy"},
 
   --File Navigation
   {'nvim-lualine/lualine.nvim', event = "VeryLazy"},
