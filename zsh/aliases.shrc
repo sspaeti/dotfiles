@@ -16,6 +16,19 @@ function chpwd() {
     ll
 }
 
+
+# Pomodoro timer
+# ->Requires brew install caarlos0/tap/timer terminal-notifier
+alias pomo_work="timer 50m && terminal-notifier -message 'Pomodoro'\
+        -title 'Work Timer is up! Take a Break 😊'\
+        -appIcon '/Users/sspaeti/Simon/Sync/Pics/Desktop/Misc/CCE1041_1_A2_Frame_quer_finish.jpg'\
+        -sound Crystal"
+
+alias pomo_rest="timer 10m && terminal-notifier -message 'Pomodoro'\
+        -title 'Break is over! Get back to work 😬'\
+        -appIcon '/Users/sspaeti/Simon/Sync/Pics/Desktop/Misc/CCE1041_1_A2_Frame_quer_finish.jpg'\
+        -sound Crystal"
+
 # that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
 alias pip='noglob pip'
 
