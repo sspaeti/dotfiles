@@ -162,15 +162,3 @@ vim.keymap.set('n', 'z7', ':set foldlevel=6<CR><Esc>', {silent = true})
 vim.keymap.set('n', 'z8', ':set foldlevel=7<CR><Esc>', {silent = true})
 vim.keymap.set("n", "z9", "zR")
 
--- Vimspector
--- vim.keymap.set("n", "<F5>", "<cmd>call vimspector#StepOver()<cr>")
--- vim.keymap.set("n", "<F8>", "<cmd>call vimspector#Reset()<cr>")
--- vim.keymap.set("n", "<F9>", "<cmd>call vimspector#Launch()<cr>")
--- vim.keymap.set("n", "<F10>", "<cmd>call vimspector#StepInto()<cr>")
--- vim.keymap.set("n", "<F11>", "<cmd>call vimspector#StepOver()<cr>")
--- vim.keymap.set("n", "<F12>", "<cmd>call vimspector#StepOut()<cr>")
-
-vim.keymap.set("n", "<leader>Db", ":call vimspector#ToggleBreakpoint()<cr>")
-vim.keymap.set("n", "<leader>Dw", ":call vimspector#AddWatch()<cr>")
-vim.keymap.set("n", "<leader>De", ":call vimspector#Evaluate()<cr>")
-
