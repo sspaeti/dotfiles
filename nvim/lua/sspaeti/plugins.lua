@@ -68,7 +68,6 @@ return {
   -- 'preservim/nerdcommenter',
   'tpope/vim-commentary',
 
-  -- should be installed out of the box by neovim?
   {
     'nvim-treesitter/nvim-treesitter',
     build = function()
@@ -76,6 +75,7 @@ return {
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects' ,
+      'nvim-treesitter/nvim-treesitter-context',  -- sticky functions
     }
   },
 
@@ -101,7 +101,6 @@ return {
   {'voldikss/vim-floaterm', event = "VeryLazy"},
 
   -- search
-  {'dyng/ctrlsf.vim', event = "VeryLazy"},
   { "junegunn/fzf", build = ":call fzf#install()" },
   'junegunn/fzf.vim',
 

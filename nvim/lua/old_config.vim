@@ -44,9 +44,6 @@ nnoremap <silent> <Leader>fd :Rg2 search folder
 " :Rg2 'port|http'                                     # Search for string 'port' OR string 'http':
 " :Rg2 --passthru 'blue' -r 'red' test.txt  | sponge test.txt                       # Replace example If you have moreutils installed
 " this will quick search content of files
-nnoremap <leader>ff :CtrlSF
-nnoremap <leader>fl :CtrlSFToggle<CR>
-nnoremap <leader>ft :CtrlSFToggle<CR>
 
 
 " move window with christoomey/vim-tmux-navigator to align tmux and nvim
