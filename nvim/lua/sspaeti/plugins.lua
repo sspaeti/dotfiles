@@ -1,8 +1,8 @@
 return {
-  'ldelossa/litee.nvim',
+  {'ldelossa/litee.nvim', event = "VeryLazy"},
 
   --color scheme
-  'rebelot/kanagawa.nvim',
+  {'rebelot/kanagawa.nvim', event = "VeryLazy"},
   {'AlexvZyl/nordic.nvim', event = "VeryLazy"},
   --add one dark theme
   { 'navarasu/onedark.nvim', event = "VeryLazy"},
@@ -14,6 +14,7 @@ return {
   },
   {
     "VonHeikemen/lsp-zero.nvim",
+    event = "VeryLazy",
     dependencies = {
       -- LSP Support
       { "neovim/nvim-lspconfig" },
@@ -33,7 +34,7 @@ return {
       { "rafamadriz/friendly-snippets" },
     },
   },
-  { 
+  {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
     event = "VeryLazy",
@@ -54,7 +55,7 @@ return {
     end
   },
   --rust
-  'neovim/nvim-lspconfig',
+  {'neovim/nvim-lspconfig', event = "VeryLazy"},
   {'simrat39/rust-tools.nvim', event = "VeryLazy"},
   -- 'puremourning/vimspector', --debugging in vim
   { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
@@ -65,22 +66,22 @@ return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.0",
     -- or                            , branch = '0.1.x',
-    dependencies = { { "nvim-lua/plenary.nvim" } },
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
-  'christoomey/vim-system-copy',
+  {'christoomey/vim-system-copy', event = "VeryLazy"},
   --'valloric/youcompleteme',
   {'tpope/vim-surround', event = "VeryLazy"}, -- Surrounding ys',
 
   --Text Objects:
   --Utilities for user-defined text objects
-  'kana/vim-textobj-user',
+  {'kana/vim-textobj-user', event = "VeryLazy"},
   --Text objects for indentation levels
   -- 'kana/vim-textobj-indent',
   --Text objects for Python
-  'bps/vim-textobj-python',
+  {'bps/vim-textobj-python', event = "VeryLazy"},
   --preview CSS colors inline
   -- 'ap/vim-css-color',
-  'norcalli/nvim-colorizer.lua',
+  {'norcalli/nvim-colorizer.lua', event = "VeryLazy"},
   -- comment healper
 
   -- 'preservim/nerdcommenter',
@@ -123,8 +124,8 @@ return {
   'junegunn/fzf.vim',
 
   --File Navigation
-  'nvim-lualine/lualine.nvim',
-  'christoomey/vim-tmux-navigator',
+  {'nvim-lualine/lualine.nvim', event = "VeryLazy"},
+  {'christoomey/vim-tmux-navigator', event = "VeryLazy"},
 
   -- 'akinsho/bufferline.nvim', { 'tag': 'v2.*', }
   {'kevinhwang91/rnvimr', event = "VeryLazy"},
@@ -139,7 +140,7 @@ return {
     },
     event = "VeryLazy",
   },
-  'lukas-reineke/indent-blankline.nvim',
+  {'lukas-reineke/indent-blankline.nvim', event = "VeryLazy"},
   {'mbbill/undotree', event = "VeryLazy"},
 
   -- prettier
