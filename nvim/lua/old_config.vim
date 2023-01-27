@@ -70,7 +70,7 @@ nmap <C-w><down> <C-w>5-
 
 " Open current directory
 nmap te :tabedit
-nmap <leader>t :tabnew<Return>
+nmap <leader>tn :tabnew<Return>
 nmap <S-Tab> :tabprev<Return>
 " Attention, sometimes when you map <Tab> also ctrl+i will change!
 "nmap <Tab> :tabnext<Return>

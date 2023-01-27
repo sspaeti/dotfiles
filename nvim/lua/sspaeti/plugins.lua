@@ -1,4 +1,4 @@
-eturn {
+return {
   'ldelossa/litee.nvim',
 
   --color scheme
@@ -12,7 +12,6 @@ eturn {
     "ldelossa/gh.nvim",
     dependencies = { { "ldelossa/litee.nvim" } },
   },
-
   {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
@@ -34,7 +33,26 @@ eturn {
       { "rafamadriz/friendly-snippets" },
     },
   },
-  { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "VeryLazy" }, --nice diagnostic errors
+  { 
+    "folke/trouble.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    event = "VeryLazy",
+    config = function()
+      require("todo-comments").setup {
+        vim.keymap.set("n", "<leader>lt", ":TroubleToggle<CR>", { noremap = true, silent = true })
+      }
+    end
+  }, --nice diagnostic errors
+  {
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        vim.keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { noremap = true, silent = true })
+      }
+    end
+  },
   --rust
   'neovim/nvim-lspconfig',
   {'simrat39/rust-tools.nvim', event = "VeryLazy"},
@@ -114,14 +132,13 @@ eturn {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
-    dependencies = { 
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
-    }, 
+    },
     event = "VeryLazy",
   },
-
   'lukas-reineke/indent-blankline.nvim',
   {'mbbill/undotree', event = "VeryLazy"},
 
