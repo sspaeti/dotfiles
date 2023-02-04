@@ -295,5 +295,6 @@
         "**/.metals": true,
         "**/.ammonite": true
     },
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "window.zoomLevel": 1
 }

@@ -332,5 +332,14 @@
       ],
       "key": "ArrowLeft"
     }
+  ],
+  "obsidian-excalidraw-plugin:toggle-lock": [],
+  "markdown:toggle-preview": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "E"
+    }
   ]
 }

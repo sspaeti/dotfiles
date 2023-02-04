@@ -11,6 +11,7 @@
 [kp-rctrl]>[kp-rwin]
 [kp-ralt]>[kp-rctrl]
 [delete]>[lwin]
+[rshift]>[escape]
 * Using US layout but with qwertz instead of default qwerty
 [Y]>[Z]
 [Z]>[Y]
