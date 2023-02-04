@@ -51,6 +51,8 @@ local active_lsp = {
     icon = '',
     cond = function() return #vim.lsp.get_active_clients() > 0 and hide_in_width(100)() end
 }
+--word per minute
+local wpm = require("wpm")
 
 require'lualine'.setup {
   options = {
@@ -65,7 +67,7 @@ require'lualine'.setup {
     lualine_a = {'mode'},
     lualine_b = {},
     lualine_c = {branch, active_lsp, filename},
-    lualine_x = {diff, diagnostics, filetype},
+    lualine_x = {wpm.historic_graph, diff, diagnostics, filetype},
     lualine_y = {},
     lualine_z = {progress, location}
   },

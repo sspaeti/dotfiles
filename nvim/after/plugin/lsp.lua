@@ -51,6 +51,14 @@ local sources = {
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
+--Copilot cycle through suggestions
+vim.cmd([[
+imap <silent> <Leader>cn <Plug>(copilot-next)
+imap <silent> <Leader>cp <Plug>(copilot-previous)
+imap <silent> <Leader>cd <Plug>(copilot-dismiss)
+]])
+
+
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
     sources = sources
@@ -83,6 +91,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
   vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
   vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set("n", "<Leader>la", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<Leader>lf", function() vim.lsp.buf.format() end, opts)
   vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
