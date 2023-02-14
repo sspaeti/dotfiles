@@ -47,6 +47,11 @@ cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.
 cp ~/.config/kitty/kanagawa-kitty.conf $git/general/dotfiles/kitty/kanagawa-kitty.conf
 cp ~/.config/kitty/custom_kitty.conf $git/general/dotfiles/kitty/custom_kitty.conf
 
+# yabai and skhd - tiling window manager
+# start with `brew services start yabai skhd`
+cp ~/.config/yabai/yabairc $git/general/dotfiles/yabai/yabairc
+cp ~/.config/skhd/skhdrc $git/general/dotfiles/skhd/skhdrc
+
 #ranger
 cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf
 
