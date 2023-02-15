@@ -1,3 +1,5 @@
+# more on https://www.josean.com/posts/yabai-setup
+
 # change window focus within space
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
@@ -15,14 +17,17 @@ alt - d: yabai -m display --focus south
 # rotate layout clockwise
 shift + alt -k : yabai -m space --rotate 270
 
-## flip along y-axis
-#shift + alt - y : yabai -m space --mirror y-axis
+# rotate layout clockwise
+shift + alt -j : yabai -m space --rotate 90
 
-## flip along x-axis
-#shift + alt - x : yabai -m space --mirror x-axis
+# flip along y-axis
+shift + alt - y : yabai -m space --mirror y-axis
+
+# flip along x-axis
+shift + alt - x : yabai -m space --mirror x-axis
 
 # toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:The BSD2 License (BSD2)
+shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # maximize a window
 shift + alt - f : yabai -m window --toggle zoom-fullscreen
