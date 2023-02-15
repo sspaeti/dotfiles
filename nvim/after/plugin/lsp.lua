@@ -97,6 +97,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
   vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.enable() end, opts)
   --prime
+  vim.keymap.set("n", "sC", function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set("n", "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, opts)
   -- vim.keymap.set("n", "<Leader>lt", function() vim.diagnostic.open_float() end, opts) --done with :TroubleToggle
   vim.keymap.set("n", "<Leader>ln", function() vim.diagnostic.goto_next() end, opts)

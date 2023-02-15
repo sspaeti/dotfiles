@@ -40,7 +40,7 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     event = "VeryLazy",
     config = function()
-      require("todo-comments").setup({
+      require("trouble").setup({
         vim.keymap.set("n", "<leader>lt", ":TroubleToggle<CR>", { noremap = true, silent = true }),
       })
     end,
@@ -52,6 +52,7 @@ return {
     config = function()
       require("todo-comments").setup({
         vim.keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { noremap = true, silent = true }),
+        vim.keymap.set("n", "<leader>tc", ":TodoTelescope<CR>", { noremap = true, silent = true }),
       })
     end,
   },
