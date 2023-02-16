@@ -3,9 +3,8 @@
 # change window focus within space
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
-alt - h : /opt/homebrew/bin/yabai -m window --focus west
+alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
-
 
 #change focus between external displays (left and right)
 alt - a: yabai -m display --focus west
@@ -13,12 +12,18 @@ alt - g: yabai -m display --focus east
 alt - f: yabai -m display --focus north
 alt - d: yabai -m display --focus south
 
+# rotate layout clockwise
+shift + alt -d : yabai -m space --rotate 270
 
 # rotate layout clockwise
-shift + alt -k : yabai -m space --rotate 270
+shift + alt -f : yabai -m space --rotate 90
 
-# rotate layout clockwise
-shift + alt -j : yabai -m space --rotate 90
+# resize windows
+shift + alt -l : yabai -m window --resize right:20:0 --resize left:20:0
+shift + alt -h : yabai -m window --resize right:-20:0 --resize left:-20:0
+shift + alt -k : yabai -m window --resize top:0:-20 --resize bottom:0:-20
+
+shift + alt -j : yabai -m window --resize top:0:20 --resize bottom:0:20
 
 # flip along y-axis
 shift + alt - y : yabai -m space --mirror y-axis
@@ -35,6 +40,25 @@ shift + alt - f : yabai -m window --toggle zoom-fullscreen
 # balance out tree of windows (resize to occupy same area)
 shift + alt - e : yabai -m space --balance
 
+## move window to space #
+shift + alt - 1 : yabai -m window --space 1;
+shift + alt - 2 : yabai -m window --space 2;
+shift + alt - 3 : yabai -m window --space 3;
+shift + alt - 4 : yabai -m window --space 4;
+shift + alt - 5 : yabai -m window --space 5;
+shift + alt - 6 : yabai -m window --space 6;
+shift + alt - q : yabai -m window --space 6;
+shift + alt - 7 : yabai -m window --space 7;
+shift + alt - w : yabai -m window --space 7;
+shift + alt - 8 : yabai -m window --space 8;
+shift + alt - 9 : yabai -m window --space 9;
+
+## stop/start/restart yabai
+ctrl + alt - q : brew services stop yabai
+ctrl + alt - s : brew services start yabai
+ctrl + alt - r : brew services restart yabai
+
+# more from josean that I do not use yet
 ## swap windows
 #shift + alt - j : yabai -m window --swap south
 #shift + alt - k : yabai -m window --swap north
@@ -55,19 +79,3 @@ shift + alt - e : yabai -m space --balance
 ##move window to prev and next space
 #shift + alt - p : yabai -m window --space prev;
 #shift + alt - n : yabai -m window --space next;
-
-## move window to space #
-ctrl + shift + alt - 1 : yabai -m window --space 1;
-ctrl + shift + alt - 2 : yabai -m window --space 2;
-ctrl + shift + alt - 3 : yabai -m window --space 3;
-ctrl + shift + alt - 4 : yabai -m window --space 4;
-ctrl + shift + alt - 5 : yabai -m window --space 5;
-ctrl + shift + alt - 6 : yabai -m window --space 6;
-ctrl + shift + alt - 7 : yabai -m window --space 7;
-ctrl + shift + alt - 8 : yabai -m window --space 8;
-ctrl + shift + alt - 9 : yabai -m window --space 9;
-
-## stop/start/restart yabai
-#ctrl + alt - q : brew services stop yabai
-#ctrl + alt - s : brew services start yabai
-#ctrl + alt - r : brew services restart yabai

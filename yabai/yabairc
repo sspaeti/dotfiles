@@ -29,3 +29,5 @@ yabai -m mouse_drop_action swap
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Snagit 2022$" manage=off
+yabai -m rule --add app="^Nirvana$" manage=off
