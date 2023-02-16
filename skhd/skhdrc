@@ -13,16 +13,15 @@ alt - f: yabai -m display --focus north
 alt - d: yabai -m display --focus south
 
 # rotate layout clockwise
-shift + alt -d : yabai -m space --rotate 270
+shift + alt -u : yabai -m space --rotate 270
 
 # rotate layout clockwise
-shift + alt -f : yabai -m space --rotate 90
+shift + alt -i : yabai -m space --rotate 90
 
 # resize windows
 shift + alt -l : yabai -m window --resize right:20:0 --resize left:20:0
 shift + alt -h : yabai -m window --resize right:-20:0 --resize left:-20:0
 shift + alt -k : yabai -m window --resize top:0:-20 --resize bottom:0:-20
-
 shift + alt -j : yabai -m window --resize top:0:20 --resize bottom:0:20
 
 # flip along y-axis
