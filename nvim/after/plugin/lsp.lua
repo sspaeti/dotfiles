@@ -45,7 +45,6 @@ local sources = {
     { name = 'nvim_lsp:sumneko_lua' },
     { name = 'nvim_lsp:null-ls' },
   }
-
 -- disable completion with tab
 -- this helps with copilot setup
 cmp_mappings['<Tab>'] = nil
