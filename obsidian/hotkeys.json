@@ -113,9 +113,10 @@
     },
     {
       "modifiers": [
-        "Mod"
+        "Mod",
+        "Shift"
       ],
-      "key": "O"
+      "key": "7"
     }
   ],
   "graph:open-local": [
@@ -190,10 +191,9 @@
   "omnisearch:show-modal": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Mod"
       ],
-      "key": "7"
+      "key": "O"
     }
   ],
   "workspace:new-tab": [
