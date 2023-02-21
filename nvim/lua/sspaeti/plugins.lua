@@ -2,7 +2,7 @@ return {
   { "ldelossa/litee.nvim", event = "VeryLazy" },
 
   --color scheme
-  { "rebelot/kanagawa.nvim", event = "VeryLazy" },
+  { "rebelot/kanagawa.nvim", event = "VeryLazy", priority = 1000, },
   { "AlexvZyl/nordic.nvim", event = "VeryLazy" },
   --add one dark theme
   { "navarasu/onedark.nvim", event = "VeryLazy" },
@@ -87,8 +87,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
-    tag = "0.1.0",
-    -- or                            , branch = '0.1.x',
+    version = "*",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   { "christoomey/vim-system-copy", event = "VeryLazy" },
@@ -151,11 +150,11 @@ return {
   { "nvim-lualine/lualine.nvim", event = "VeryLazy" },
   { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
 
-  -- 'akinsho/bufferline.nvim', { 'tag': 'v2.*', }
+  -- 'akinsho/bufferline.nvim', { 'version': '*', }
   --nerdtreein lua
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    version = "*",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -172,7 +171,6 @@ return {
 
   --support for go to defintion and autocompletion
   --'davidhalter/jedi-vim',
-  -- 'neoclide/coc.nvim', {'branch': 'release',}
   -- "jmcantrell/vim-virtualenv", --very slow: check if still needed?
   {
     "folke/which-key.nvim",
