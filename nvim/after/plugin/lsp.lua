@@ -5,7 +5,7 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   'eslint',
   'rust_analyzer',
-  'sumneko_lua',
+
 })
 
 -- Fix Undefined global 'vim'
@@ -84,8 +84,8 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-  vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set("n", "gR", require('telescope.builtin').lsp_references, {})
+  vim.keymap.set("n", "gR", function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, {})
   vim.keymap.set("n", "gC", require('telescope.builtin').lsp_document_symbols, {})
   vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
   vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)

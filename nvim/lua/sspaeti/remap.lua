@@ -58,8 +58,9 @@ vim.keymap.set("n", "sj", "<C-w>j")
 vim.keymap.set("n", "sl", "<C-w>l")
 
 --search and replace
-vim.keymap.set("n", "S", ":%s//g<Left><Left>")
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "S", ":%s//g<Left><Left>") --used for lazy.
+vim.keymap.set("n", "<leader>s", ":%s//g<Left><Left>")
+vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 --vim.keymap.set("n", "<Leader>lf", "vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")

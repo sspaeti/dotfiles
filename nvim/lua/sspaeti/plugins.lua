@@ -119,6 +119,9 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context", -- sticky functions
     },
+    --test
+    --test L3MON4D3
+    --make some changes
   },
 
   -- 'psf/black',
@@ -201,9 +204,6 @@ return {
         --   }
         -- end
       },
-      --Markdown (or any Outline)
-      { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
-      { "stevearc/aerial.nvim", event = "VeryLazy" },
       {
         "folke/zen-mode.nvim",
         event = "VeryLazy",
@@ -238,6 +238,9 @@ return {
         end,
       },
 
+      --Markdown (or any Outline)
+      { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
+      { "stevearc/aerial.nvim", event = "VeryLazy" },
       -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
       ----Obsidian
       -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:

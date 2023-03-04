@@ -51,6 +51,7 @@ brew "lastpass-cli", args: ["HEAD"]
 brew "lazygit"
 brew "llvm"
 brew "lua"
+brew "marksman"
 brew "mdcat"
 brew "node"
 brew "nativefier"
