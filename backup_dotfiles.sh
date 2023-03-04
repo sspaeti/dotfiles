@@ -1,5 +1,6 @@
 #this script is done to automatically backup alls my dotsfiles
 
+#nvim
 cp ~/Library/ApplicationSupport/Code/User/settings.json $git/general/dotfiles/vscode/settings.json
 cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles/vscode/keybindings.json
 #cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
@@ -12,6 +13,7 @@ cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
 cp -r ~/.config/nvim/ftplugin/ $git/general/dotfiles/nvim/ftplugin/
 cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
+#tmux
 cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
 cp ~/.tmux/ide $git/general/dotfiles/tmux/ide
 cp ~/.tmux/tmux-session $git/general/dotfiles/tmux/tmux-session
@@ -30,8 +32,12 @@ cp -r ~/.dotfiles/zsh/configs.shrc $git/general/dotfiles/zsh/configs.shrc
 cp -r ~/.dotfiles/zsh/end.shrc $git/general/dotfiles/zsh/end.shrc
 cp -r ~/.dotfiles/helpers/* $git/general/dotfiles/zsh/helpers/
 
+#helix
+cp ~/.config/helix/config.toml $git/general/dotfiles/helix/config.toml
+
 #obsidian
 cp ~/Simon/Sync/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
+cp ~/Simon/Sync/SecondBrain/.obsidian/workspace.json $git/general/dotfiles/obsidian/workspace.json
 cp ~/Simon/Sync/SecondBrain/.obsidian/hotkeys.json $git/general/dotfiles/obsidian/hotkeys.json
 cp ~/Simon/Sync/SecondBrain/.obsidian/core-plugins.json $git/general/dotfiles/obsidian/core-plugins.json
 cp ~/Simon/Sync/SecondBrain/.obsidian/community-plugins.json $git/general/dotfiles/obsidian/community-plugins.json
