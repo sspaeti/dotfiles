@@ -1,5 +1,5 @@
 -- setup must be called before loading
-vim.cmd("colorscheme gruvbox") --#kanagawa
+vim.cmd("colorscheme kanagawa") --#kanagawa
 
 -- vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.opt.completeopt = { "menu" }
