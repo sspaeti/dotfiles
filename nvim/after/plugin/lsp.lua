@@ -5,7 +5,7 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   'eslint',
   'rust_analyzer',
-
+  'lua_ls',
 })
 
 -- Fix Undefined global 'vim'
