@@ -33,5 +33,7 @@
   "obsidian-journey-plugin",
   "obsidian-tasks-plugin",
   "obsidian-style-settings",
-  "quickadd"
+  "quickadd",
+  "remember-cursor-position",
+  "obsidian-scroll-offset"
 ]
