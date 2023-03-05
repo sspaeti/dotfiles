@@ -53,6 +53,7 @@ brew "llvm"
 brew "lua"
 brew "marksman"
 brew "mdcat"
+brew "mercurial"
 brew "node"
 brew "nativefier"
 brew "neovim", args: ["HEAD"]
