@@ -6,7 +6,7 @@ return {
   { "AlexvZyl/nordic.nvim", event = "VeryLazy" },
   --add one dark theme
   { "navarasu/onedark.nvim", event = "VeryLazy" },
-  { "gruvbox-community/gruvbox", event = "VeryLazy" },
+  { "gruvbox-community/gruvbox", event = "VeryLazy" , priority = 1000, },
   -- 'joshdick/onedark.vim',
   {
     "ldelossa/gh.nvim",
@@ -267,10 +267,8 @@ return {
 
               --dbt
               -- 'lepture/vim-jinja', --needed for dbt below but errors in hugo htmls...
-              { "pedramnavid/dbt.nvim", event = "VeryLazy" },
               { "glench/vim-jinja2-syntax", event = "VeryLazy" },
-              -- 'ivanovyordan/dbt.vim',
-
+              { "PedramNavid/dbtpal", event = "VeryLazy" },
               -- Java
               --"mfussenegger/nvim-jdtls", --removed until https://github.com/neovim/neovim/issues/20795 is fixed
               --use nvim in browser
