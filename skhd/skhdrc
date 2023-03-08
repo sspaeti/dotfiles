@@ -37,7 +37,7 @@ shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
 shift + alt - f : yabai -m window --toggle zoom-fullscreen
 
 # balance out tree of windows (resize to occupy same area)
-shift + alt - e : yabai -m space --balance
+shift + alt - w : yabai -m space --balance
 
 ## move window to space #
 shift + alt - 1 : yabai -m window --space 1;
@@ -48,6 +48,7 @@ shift + alt - 5 : yabai -m window --space 5;
 shift + alt - 6 : yabai -m window --space 6;
 shift + alt - q : yabai -m window --space 6;
 shift + alt - e : yabai -m window --space 6;
+
 shift + alt - 7 : yabai -m window --space 7;
 shift + alt - w : yabai -m window --space 7;
 shift + alt - r : yabai -m window --space 7;
@@ -55,9 +56,9 @@ shift + alt - 8 : yabai -m window --space 8;
 shift + alt - 9 : yabai -m window --space 9;
 
 ## stop/start/restart yabai
-ctrl + alt - q : brew services stop yabai
-ctrl + alt - s : brew services start yabai
-ctrl + alt - r : brew services restart yabai
+shift + alt + ctrl - q : brew services stop yabai
+shift + alt + ctrl - s : brew services start yabai
+shift + alt + ctrl - r : brew services restart yabai
 
 # more from josean that I do not use yet
 ## swap windows
