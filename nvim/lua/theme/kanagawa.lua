@@ -9,3 +9,4 @@ vim.opt.fillchars:append({
     verthoriz = '╋',
 })
 require'kanagawa'.setup({ globalStatus = true, ... })
+

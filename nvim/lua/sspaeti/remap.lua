@@ -70,6 +70,9 @@ vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 vim.keymap.set("n", "<C-w>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 
+--color themes
+vim.keymap.set("n", "<leader>ts", ":Telescope colorscheme<CR>")
+
 -- close all buffers execpt current one
 -- nnoremap <leader>wa :%bd|e#<Return>
 

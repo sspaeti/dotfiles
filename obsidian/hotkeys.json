@@ -117,6 +117,13 @@
         "Shift"
       ],
       "key": "7"
+    },
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
     }
   ],
   "graph:open-local": [
@@ -170,15 +177,7 @@
       "key": "I"
     }
   ],
-  "app:open-vault": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "O"
-    }
-  ],
+  "app:open-vault": [],
   "editor:delete-paragraph": [],
   "omnisearch:show-modal-infile": [
     {

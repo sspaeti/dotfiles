@@ -1,13 +1,12 @@
 return {
   { "ldelossa/litee.nvim", event = "VeryLazy" },
 
-  --color scheme
+  --color theme
   { "rebelot/kanagawa.nvim", event = "VeryLazy", priority = 1000, },
   { "AlexvZyl/nordic.nvim", event = "VeryLazy" },
-  --add one dark theme
   { "navarasu/onedark.nvim", event = "VeryLazy" },
+  { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy"  }, --light theme
   { "gruvbox-community/gruvbox", event = "VeryLazy" , priority = 1000, },
-  -- 'joshdick/onedark.vim',
   {
     "ldelossa/gh.nvim",
     event = "VeryLazy",
