@@ -1,6 +1,6 @@
 {
   "baseFontSize": 21,
-  "cssTheme": "Obsidian gruvbox",
+  "cssTheme": "custom_kanagawa",
   "theme": "obsidian",
   "enabledCssSnippets": [
     "hide_file_in_filetree"

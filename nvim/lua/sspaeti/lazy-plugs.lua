@@ -131,7 +131,7 @@ return {
   { "tpope/vim-rhubarb", event = "VeryLazy" },
 
   { "kdheepak/lazygit.nvim", event = "VeryLazy" },
-  { "sindrets/diffview.nvim", event = "VeryLazy" }, --nvim gitdi',
+  { "sindrets/diffview.nvim"}, --nvim gitdi',
   { "mhinz/vim-signify", event = "VeryLazy" }, --highlighing changes not commited to last comm',
   { "APZelos/blamer.nvim", event = "VeryLazy" }, --gitlens blame sty',
   -- -- telescope requirements...
@@ -267,7 +267,29 @@ return {
               --dbt
               -- 'lepture/vim-jinja', --needed for dbt below but errors in hugo htmls...
               { "glench/vim-jinja2-syntax", event = "VeryLazy" },
-              { "PedramNavid/dbtpal", event = "VeryLazy" },
+              { "PedramNavid/dbtpal", 
+              event = "VeryLazy",
+              config = function()
+                require("dbtpal").setup({
+              -- Path to the dbt executable
+              path_to_dbt = "dbt",
+    
+              -- Path to the dbt project, if blank, will auto-detect
+              -- using currently open buffer for all sql,yml, and md files
+              path_to_dbt_project = "",
+    
+              -- Path to dbt profiles directory
+              path_to_dbt_profiles_dir = vim.fn.expand "~/.dbt",
+    
+              -- Search for ref/source files in macros and models folders
+              extended_path_search = true,
+    
+              -- Prevent modifying sql files in target/(compiled|run) folders
+              protect_compiled_files = true
+    
+              })
+              end,
+            },
               -- Java
               --"mfussenegger/nvim-jdtls", --removed until https://github.com/neovim/neovim/issues/20795 is fixed
               --use nvim in browser

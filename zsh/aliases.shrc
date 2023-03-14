@@ -60,6 +60,9 @@ alias grr='git remote rm'
 alias gpu='git pull'
 alias gf='git fetch'
 alias gcl='git clone'
+alias gt='vim -c ":DiffviewOpen"' --diff current changes
+# alias gtb = '! args=$@; shift $#; nvim -c \"DiffviewOpen $args\"'
+
 
 alias lg=lazygit
 alias cat=bat
