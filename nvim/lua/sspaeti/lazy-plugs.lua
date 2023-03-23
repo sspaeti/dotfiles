@@ -7,6 +7,7 @@ return {
   { "navarasu/onedark.nvim", event = "VeryLazy" },
   { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy"  }, --light theme
   { "gruvbox-community/gruvbox", event = "VeryLazy" , priority = 1000, },
+  { 'projekt0n/github-nvim-theme', event = "VeryLazy", version = "*", },
   {
     "ldelossa/gh.nvim",
     event = "VeryLazy",
@@ -34,6 +35,17 @@ return {
       { "rafamadriz/friendly-snippets" },
     },
   },
+  -- { --doesn't work well with trouble below
+  --   "folke/todo-comments.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = "nvim-lua/plenary.nvim",
+  --   config = function()
+  --     require("todo-comments").setup({
+  --       vim.keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { noremap = true, silent = true }),
+  --       vim.keymap.set("n", "<leader>tc", ":TodoTelescope<CR>", { noremap = true, silent = true }),
+  --     })
+  --   end,
+  -- },
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
@@ -44,17 +56,6 @@ return {
       })
     end,
   }, --nice diagnostic errors
-  {
-    "folke/todo-comments.nvim",
-    event = "VeryLazy",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup({
-        vim.keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { noremap = true, silent = true }),
-        vim.keymap.set("n", "<leader>tc", ":TodoTelescope<CR>", { noremap = true, silent = true }),
-      })
-    end,
-  },
   --rust
   { "neovim/nvim-lspconfig", event = "VeryLazy" },
   {
@@ -81,8 +82,13 @@ return {
   --'puremourning/vimspector', --debugging in vim
   { "akinsho/bufferline.nvim", dependencies = "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
   -- 'simrat39/symbols-outline.nvim',
-  { "goolord/alpha-nvim", event = "VeryLazy" }, --does not work!?
-
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function ()
+        require'alpha'.setup(require'alpha.themes.startify'.config)
+    end
+  },
   {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
@@ -131,9 +137,10 @@ return {
   { "tpope/vim-rhubarb", event = "VeryLazy" },
 
   { "kdheepak/lazygit.nvim", event = "VeryLazy" },
-  { "sindrets/diffview.nvim"}, --nvim gitdi',
-  { "mhinz/vim-signify", event = "VeryLazy" }, --highlighing changes not commited to last comm',
-  { "APZelos/blamer.nvim", event = "VeryLazy" }, --gitlens blame sty',
+  { "sindrets/diffview.nvim"}, --nvim gitdiff like vscode',
+  { "mhinz/vim-signify", event = "VeryLazy" }, --highlighing changes not commited to last commmit
+
+  { "APZelos/blamer.nvim", event = "VeryLazy" }, --gitlens blame style',
   -- -- telescope requirements...
   -- 'nvim-lua/popup.nvim',
   { "nvim-lua/plenary.nvim", event = "VeryLazy" },
@@ -299,6 +306,4 @@ return {
                   vim.fn["firenvim#install"](0)
                 end,
               },
-              --to delete later
-              { "dstein64/vim-startuptime", event = "VeryLazy" },
             }
