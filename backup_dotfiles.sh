@@ -18,6 +18,7 @@ cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf
 cp ~/.tmux/ide $git/general/dotfiles/tmux/ide
 cp ~/.tmux/tmux-session $git/general/dotfiles/tmux/tmux-session
 cp ~/.tmux/themes/tmux-kanagawa-dark.conf $git/general/dotfiles/tmux/themes/tmux-kanagawa-dark.conf
+cp ~/.tmux/tmux-switch-session.sh $git/general/dotfiles/tmux/tmux-switch-session.sh
 
 #fzf/zsh
 cp ~/.fzf.zsh $git/general/dotfiles/fzf/fzf.zsh
