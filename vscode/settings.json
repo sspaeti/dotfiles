@@ -296,5 +296,7 @@
         "**/.ammonite": true
     },
     "telemetry.telemetryLevel": "off",
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/sspaeti/.config/nvim/"
 }
