@@ -2,7 +2,7 @@ return {
   { "ldelossa/litee.nvim", event = "VeryLazy" },
 
   --color theme
-  { "rebelot/kanagawa.nvim", event = "VeryLazy", priority = 1000, },
+  { "rebelot/kanagawa.nvim", lazy = false},
   { "AlexvZyl/nordic.nvim", event = "VeryLazy" },
   { "navarasu/onedark.nvim", event = "VeryLazy" },
   { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy"  }, --light theme
@@ -15,6 +15,7 @@ return {
   },
   {
     "VonHeikemen/lsp-zero.nvim",
+    lazy = false,
     -- event = "VeryLazy",
     dependencies = {
       -- LSP Support
@@ -157,7 +158,7 @@ return {
 
   --File Navigation
   { "nvim-lualine/lualine.nvim", event = "VeryLazy" },
-  { "christoomey/vim-tmux-navigator", event = "VeryLazy" },
+  { "christoomey/vim-tmux-navigator", lazy = false },
 
   -- 'akinsho/bufferline.nvim', { 'version': '*', }
   --nerdtreein lua
