@@ -1,0 +1,18 @@
+set folder = "imaps://simu@sspaeti.com@imap.mail.hostpoint.ch:993"
+set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
+
+# set smtp_pass = "password"
+# set imap_pass = "password"
+
+set from = "simu@sspaeti.com"
+set realname = "Simon Späti"
+
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+
+mailboxes =INBOX =Sent =Trash =Drafts =Junk =Archive =Others
+
+source ~/.config/mutt/color.muttrc
+
