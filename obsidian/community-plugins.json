@@ -35,5 +35,7 @@
   "obsidian-style-settings",
   "quickadd",
   "remember-cursor-position",
-  "obsidian-scroll-offset"
+  "obsidian-scroll-offset",
+  "obsidian-plugin-toc",
+  "obsidian-dynamic-toc"
 ]

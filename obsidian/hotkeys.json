@@ -107,12 +107,6 @@
   "switcher:open": [
     {
       "modifiers": [
-        "Ctrl"
-      ],
-      "key": "O"
-    },
-    {
-      "modifiers": [
         "Mod",
         "Shift"
       ],
