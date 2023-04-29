@@ -1,0 +1,4 @@
+text/html; firefox %s; test=test -n "$display"; needsterminal;
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump -width=1024 %s; nametemplate=%s.html; copiousoutput;
+text/plain; cat %s; copiousoutput
+application/pdf; firefox %s; test=test -n "$display"; needsterminal;

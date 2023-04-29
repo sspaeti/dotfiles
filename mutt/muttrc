@@ -4,8 +4,9 @@ set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
 
 # set smpt password with ENV variable
 # set smtp_pass = "$HOSTSPINT_SMTP_PASSWORD_SIMU"
-
 # set imap_pass = "password"
+source ~/.dotfiles/zsh/.secret.muttrc
+
 
 set from = "simu@sspaeti.com"
 set realname = "Simon Späti"
@@ -15,7 +16,31 @@ set record = "+Sent"
 set trash = "+Trash"
 set postponed = "+Drafts"
 
-mailboxes =INBOX =Sent =Trash =Drafts =Junk =Archive =Others
+# Ensure TLS is enforced
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+mailboxes =INBOX =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others
+
+# Where to put the stuff
+set header_cache = "~/.cache/mutt/headers"
+set message_cachedir = "~/.cache/mutt/bodies"
+set certificate_file = "~/.cache/mutt/certificates"
+#unset record
+
+set signature = "~/.config/mutt/signature"
+
+# link to mailcap file
+set mailcap_path = "~/.config/mutt/mailcap"
+# open attachments with mailcap with <return>
+bind attach <return> view-mailcap             
+# save attachments to a folder
+macro attach s '<save-entry> <bol>~/Documents/attachments/<eol>' 'save attachment'
+auto_view text/html		# automatically show html (mailcap uses lynx)
+
+#urlscan: open urls
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
 source ~/.config/mutt/color.muttrc
 
@@ -26,6 +51,7 @@ bind index,pager M noop
 bind index,pager C noop
 
 # General rebindings
+set editor = "nvim"
 bind index gg first-entry
 bind index j next-entry
 bind index k previous-entry
@@ -51,6 +77,8 @@ bind browser gg top-page
 bind browser G bottom-page
 bind pager gg top
 bind pager G bottom
+# bind attach,index,pager \CD next-page
+# bind attach,index,pager \CU previous-page
 bind index,pager,browser d half-down
 bind index,pager,browser u half-up
 bind index,pager S sync-mailbox
@@ -87,7 +115,8 @@ set sidebar_width = 20
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
 set mail_check_stats
-set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
+# set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
 bind index,pager \Ck sidebar-prev
 bind index,pager \Cj sidebar-next
 bind index,pager \Co sidebar-open
@@ -95,4 +124,46 @@ bind index,pager \Cp sidebar-prev-new
 bind index,pager \Cn sidebar-next-new
 bind index,pager B sidebar-toggle-visible
 
+
+# general settings from seniormars
+set pager_index_lines = 10          
+set pager_context = 3                # show 3 lines of context
+set pager_stop                       # stop at end of message
+set menu_scroll                      # scroll menu
+set tilde                            # use ~ to pad mutt
+set move=no                          # don't move messages when marking as read
+set mail_check = 30                  # check for new mail every 30 seconds
+set imap_keepalive = 900             # 15 minutes
+set sleep_time = 0                   # don't sleep when idle
+set wait_key = no		     # mutt won't ask "press key to continue"
+set envelope_from                    # which from?
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set forward_quote                    # include message in forwards
+set mime_forward                     # forward attachments as part of body
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set text_flowed=yes                  # correct indentation for plain text
+unset sig_dashes                     # no dashes before sig
+unset markers
+
+# Sort by newest conversation first.
+set charset = "utf-8"
+set uncollapse_jump
+set sort_re
+set sort = reverse-threads
+set sort_aux = last-date-received
+# How we reply and quote emails.
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set send_charset = "utf-8:iso-8859-1:us-ascii" # send in utf-8
+
 # more configs at https://raw.githubusercontent.com/LukeSmithxyz/mutt-wizard/1c5085d3f203fbd4eef8813e0915fd6e3c899570/share/mutt-wizard.muttrc
+# and: https://seniormars.github.io/posts/neomutt/#motivation
+#
