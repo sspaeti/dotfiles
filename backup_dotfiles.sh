@@ -59,6 +59,11 @@ cp ~/.config/kitty/custom_kitty.conf $git/general/dotfiles/kitty/custom_kitty.co
 cp ~/.config/yabai/yabairc $git/general/dotfiles/yabai/yabairc
 cp ~/.config/skhd/skhdrc $git/general/dotfiles/skhd/skhdrc
 
+
+# neomutt - email client
+cp -r ~/.config/mutt/* $git/general/dotfiles/mutt/
+
+
 #ranger
 cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf
 
