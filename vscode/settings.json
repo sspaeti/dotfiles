@@ -284,10 +284,11 @@
     "editor.inlineSuggest.enabled": true,
     "security.workspace.trust.untrustedFiles": "open",
     "github.copilot.enable": {
-        "*": false,
-        "yaml": true,
+        "*": true,
         "plaintext": true,
         "markdown": false,
+        "scminput": false,
+        "yaml": true,
         "lua": true
     },
     "files.watcherExclude": {
@@ -296,7 +297,7 @@
         "**/.ammonite": true
     },
     "telemetry.telemetryLevel": "off",
-    "window.zoomLevel": 1,
     "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/sspaeti/.config/nvim/"
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/sspaeti/.config/nvim/",
+    "codegpt.apiKey": "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"
 }
