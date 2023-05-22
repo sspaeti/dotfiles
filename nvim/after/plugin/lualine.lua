@@ -72,6 +72,8 @@ end
 --word per minute
 local wpm = require("wpm")
 
+
+--old config
 require'lualine'.setup {
   options = {
     icons_enabled = true,
@@ -100,3 +102,68 @@ require'lualine'.setup {
   tabline = {},
   extensions = {}
 }
+
+--non distracting
+-- local colors = {
+--   fg = "#76787d",
+--   bg = "#252829",
+-- }
+
+-- local copilot = function()
+--   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+--   if #buf_clients == 0 then
+--     return "LSP Inactive"
+--   end
+
+--   local buf_ft = vim.bo.filetype
+--   local buf_client_names = {}
+--   local copilot_active = false
+
+--   -- add client
+--   for _, client in pairs(buf_clients) do
+--     if client.name ~= "null-ls" and client.name ~= "copilot" then
+--       table.insert(buf_client_names, client.name)
+--     end
+
+--     if client.name == "copilot" then
+--       copilot_active = true
+--     end
+--   end
+
+--   if copilot_active then
+--     return lvim.icons.git.Octoface
+--   end
+--   return ""
+-- end
+
+-- require'lualine'.setup {
+--   options = {
+--     theme = {
+--       normal = {
+--         a = { fg = colors.fg, bg = colors.bg },
+--         b = { fg = colors.fg, bg = colors.bg },
+--         c = { fg = colors.fg, bg = colors.bg },
+--       },
+--       insert = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+--       visual = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+--       command = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+--       replace = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+
+--       inactive = {
+--         a = { bg = colors.fg, fg = colors.bg },
+--         b = { bg = colors.fg, fg = colors.bg },
+--         c = { bg = colors.fg, fg = colors.bg },
+--       },
+--     }
+--   },
+--   sections = {
+--     lualine_a = { "branch" },
+--     lualine_b = { "filename" },
+--     lualine_c = {
+--       diagnostics,
+--     },
+--     lualine_x = { wpm.historic_graph, {get_venv, color={gui='bold'}}, location },
+--     lualine_y = { copilot, filetype },
+--     lualine_z = { "progress" },
+--   },
+-- }
