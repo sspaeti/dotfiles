@@ -9,10 +9,10 @@ let g:vimwiki_global_ext = 0 " o
 vim.cmd('autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>')
 
 -- create WikiLink and paste clipboard as link when in visual mode
-vim.cmd('autocmd FileType markdown vnoremap <leader>k <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>')
+vim.cmd('autocmd FileType markdown vnoremap <leader>K <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>')
 
 -- create empty wikilink when in normal mode
-vim.cmd('autocmd FileType markdown nmap <leader>k i[]()<Esc>hhi')
+vim.cmd('autocmd FileType markdown nmap <leader>K i[]()<Esc>hhi')
 
 -- Open file in Obsidian vault
 vim.cmd("command! IO execute \"silent !open 'obsidian://open?vault=SecondBrain&file=\" . expand('%:r') . \"'\"")
