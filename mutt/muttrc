@@ -42,6 +42,10 @@ auto_view text/html		# automatically show html (mailcap uses lynx)
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
+# query
+set query_command="/opt/homebrew/bin/lbdbq '%s'"
+bind editor <Tab> complete-query
+
 source ~/.config/mutt/color.muttrc
 
 bind index,pager i noop
