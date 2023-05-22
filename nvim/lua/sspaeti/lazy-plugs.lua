@@ -159,9 +159,6 @@ return {
   --File Navigation
   { "nvim-lualine/lualine.nvim", event = "VeryLazy" },
   { "christoomey/vim-tmux-navigator", lazy = false },
-
-  -- 'akinsho/bufferline.nvim', { 'version': '*', }
-  --nerdtreein lua
   {
     "nvim-neo-tree/neo-tree.nvim",
     version = "*",
@@ -171,6 +168,12 @@ return {
       "MunifTanjim/nui.nvim",
     },
     event = "VeryLazy",
+  },
+  {
+    'stevearc/oil.nvim',
+    event = "VeryLazy",
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy" },
   { "mbbill/undotree", event = "VeryLazy" },

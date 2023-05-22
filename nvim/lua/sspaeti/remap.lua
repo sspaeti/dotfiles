@@ -1,5 +1,6 @@
 --general
 vim.keymap.set("n", "<leader>e", ":Explore<CR>")
+vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
 
 -- s-shortcuts is for search -> without leader, directly with s
