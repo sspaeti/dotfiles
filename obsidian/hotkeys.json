@@ -163,14 +163,6 @@
       "key": "C"
     }
   ],
-  "editor:insert-wikilink": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "I"
-    }
-  ],
   "app:open-vault": [],
   "editor:delete-paragraph": [],
   "omnisearch:show-modal-infile": [
@@ -351,6 +343,16 @@
         "Shift"
       ],
       "key": "="
+    }
+  ],
+  "ava:ava-generative-search": [],
+  "editor:insert-wikilink": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "I"
     }
   ]
 }
