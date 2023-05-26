@@ -12,7 +12,7 @@ Used in this screenshot:
 * Indent-color with [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
 * Tabs for buffers with [bufferline](https://github.com/akinsho/bufferline.nvim)
 * Terminal Multiplexer: [Tmux](https://github.com/tmux/tmux/wiki)
-* Terminal: [Kitty](https://github.com/tmux/tmux/wiki)
+* Terminal: [Kitty](https://github.com/kovidgoyal/kitty)
 
 
 ## [Obsidian](https://github.com/sspaeti/dotfiles/tree/master/obsidian) with [Kanagawa](https://github.com/sspaeti/obsidian_kanagawa) theme:
