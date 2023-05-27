@@ -33,6 +33,10 @@ cp -r ~/.dotfiles/zsh/configs.shrc $git/general/dotfiles/zsh/configs.shrc
 cp -r ~/.dotfiles/zsh/end.shrc $git/general/dotfiles/zsh/end.shrc
 cp -r ~/.dotfiles/helpers/* $git/general/dotfiles/zsh/helpers/
 
+# only locally
+cp -r ~/.ssh/* $git/general/dotfiles/.ssh/
+
+
 #helix
 cp ~/.config/helix/config.toml $git/general/dotfiles/helix/config.toml
 
