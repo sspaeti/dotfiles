@@ -34,3 +34,4 @@ yabai -m rule --add app="^Nirvana$" manage=off
 yabai -m rule --add app="^Signal$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
 yabai -m rule --add app="^WhatsApp$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
