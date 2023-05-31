@@ -146,7 +146,18 @@ return {
   -- 'nvim-lua/popup.nvim',
   { "nvim-lua/plenary.nvim", event = "VeryLazy" },
   { "ThePrimeagen/harpoon", event = "VeryLazy" },
-  { "jose-elias-alvarez/null-ls.nvim"},
+  -- { "jose-elias-alvarez/null-ls.nvim"},
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    -- config = function()
+    --   require("~/.config/nvim/after/plugin/null-ls.lua") -- require your null-ls config here (example below)
+    -- end,
+  },
   -- 'nvim-telescope/telescope.nvim',
   -- 'nvim-telescope/telescope-fzy-native.nvim',
   --terminal

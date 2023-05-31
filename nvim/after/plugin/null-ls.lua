@@ -1,3 +1,11 @@
+require("mason").setup()
+
+require("mason-null-ls").setup({
+  ensure_installed = { "stylua", "jq" },
+  automatic_setup = true,
+})
+
+
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
     return
@@ -25,4 +33,5 @@ require("null-ls").setup({
         diagnostics.write_good
     },
 })
+
 
