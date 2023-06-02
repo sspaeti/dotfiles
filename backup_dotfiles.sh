@@ -82,6 +82,8 @@ cp -r ~/.pyproject_example.toml $git/general/dotfiles/linting/pyproject_example.
 #dbbeaver vrapper configs
 cp ~/.vrapperrc $git/general/dotfiles/dbeaver/vrapperrc 
 
+# karabiner
+cp -r ~/.config/karabiner/* $git/general/dotfiles/karabiner/
 
 #homebrew
 brew bundle dump > $git/general/dotfiles/Brewfile -f
