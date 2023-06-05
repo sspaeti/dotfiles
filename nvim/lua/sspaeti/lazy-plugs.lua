@@ -109,7 +109,8 @@ return {
   { "bps/vim-textobj-python", event = "VeryLazy" },
   --preview CSS colors inline
   -- 'ap/vim-css-color',
-  { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
+  -- { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
+  { "brenoprata10/nvim-highlight-colors", event = "VeryLazy" },
   -- comment healper
 
   -- 'preservim/nerdcommenter',
