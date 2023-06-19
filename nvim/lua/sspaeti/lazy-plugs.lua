@@ -216,6 +216,20 @@ return {
     end,
   },
   {
+    "jackMort/ChatGPT.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("chatgpt").setup({
+          async_api_key_cmd = "echo 'OPENAI_API_KEY'",
+        })
+      end,
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
+  },
+  {
     "github/copilot.vim",
     event = "VeryLazy",
     -- config = function()
@@ -262,7 +276,13 @@ return {
 
       --Markdown (or any Outline)
       { "simrat39/symbols-outline.nvim", event = "VeryLazy" },
-      { "stevearc/aerial.nvim", event = "VeryLazy" },
+      { "stevearc/aerial.nvim",
+         event = "VeryLazy",
+         dependencies = {
+          "nvim-treesitter/nvim-treesitter",
+          "nvim-tree/nvim-web-devicons"
+         }
+      },
       -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
       ----Obsidian
       -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
