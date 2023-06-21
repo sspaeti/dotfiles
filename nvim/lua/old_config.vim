@@ -57,16 +57,16 @@ noremap <silent> <c-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <c-l> :<C-U>TmuxNavigateRight<cr>
 noremap <silent> <c-t> :<C-U>TmuxNavigatePrevious<cr>
 
-" Resize window
-nnoremap <C-w>l <C-w>5>
-nnoremap <C-w>h <C-w>5<
-nnoremap <C-w>k <C-w>5+
-nnoremap <C-w>j <C-w>5-
-nmap <C-w><left> <C-w>5<
-nmap <C-w><right> <C-w>5>
-nmap <C-w><up> <C-w>5+
-nmap <C-w><down> <C-w>5-
+" Resize window ABSOLUTE (doing it the same direction wheter in right or left
+" split)
+nnoremap <C-w>l :if winnr() == winnr('$') \| vertical resize -5 \| else \| vertical resize +5 \| endif<CR>
+nnoremap <C-w>h :if winnr() == 1 \| vertical resize -5 \| else \| vertical resize +5 \| endif<CR>
 
+" resize window RELATIVE (Haven't found a absoulte way)
+" nnoremap <C-w>k :wincmd k \| if winnr() == winnr('$') \| resize -5 \| else \| resize +5 \| endif<CR>
+" nnoremap <C-w>j :wincmd j \| if winnr() == 1 \| resize +5 \| else \| resize -5 \| endif<CR>
+nnoremap <C-w>k :resize -5<CR>
+nnoremap <C-w>j :resize +5<CR>
 
 " Open current directory
 nmap te :tabedit
