@@ -25,7 +25,7 @@ vim.opt.ruler = true -- show the cursor position all the time
 vim.opt.showcmd = true -- display incomplete commands
 vim.opt.laststatus = 3 -- 3: Only show global status line in acitve window 2: Always display the status line
 
---fold settings
+--foldlevel settings
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 5
 vim.wo.foldmethod = "expr"

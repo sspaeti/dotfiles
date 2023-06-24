@@ -139,7 +139,21 @@ return {
   { "tpope/vim-rhubarb", event = "VeryLazy" },
 
   { "kdheepak/lazygit.nvim", event = "VeryLazy" },
-  { "sindrets/diffview.nvim"}, --nvim gitdiff like vscode',
+  { "sindrets/diffview.nvim",
+      -- fix autofolding diffs, see https://github.com/sindrets/diffview.nvim/issues/132#issuecomment-1121020729
+      config = function()
+        require("diffview").setup({
+          hooks = {
+            diff_buf_read = function(bufnr)
+              vim.cmd("norm! gg]ckzt") -- Set cursor on the first hunk
+            end,
+            diff_buf_win_enter = function(bufnr)
+              vim.opt_local.foldlevel = 99
+            end,
+          },
+        }) 
+      end,
+    }, --nvim gitdiff like vscode',
   { "mhinz/vim-signify", event = "VeryLazy" }, --highlighing changes not commited to last commmit
 
   { "APZelos/blamer.nvim", event = "VeryLazy" }, --gitlens blame style',
@@ -221,6 +235,7 @@ return {
       config = function()
         require("chatgpt").setup({
           async_api_key_cmd = "echo 'OPENAI_API_KEY'",
+          -- predefined_chat_gpt_prompts = "https://gist.githubusercontent.com/sspaeti/ede00414a3862bbd46d944106f83a1d9/raw/77fea556976ca1692d95c17ad0e425851303376c/prompt-roles-chatgpt.csv"
         })
       end,
       dependencies = {
