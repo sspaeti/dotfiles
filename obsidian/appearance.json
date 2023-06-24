@@ -1,7 +1,7 @@
 {
   "baseFontSize": 17,
   "cssTheme": "Kanagawa",
-  "theme": "obsidian",
+  "theme": "moonstone",
   "enabledCssSnippets": [
     "hide_file_in_filetree"
   ],
