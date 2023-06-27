@@ -72,7 +72,11 @@ vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 
 -- closing buffers "https://stackoverflow.com/a/8585343/5246670
 vim.keymap.set("n", "<C-w>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
-vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
+--vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
+----close buffers except current
+vim.keymap.set("n", "<leader>q", "<cmd>%bd|e#|bd#<cr>|'<cr>", { desc = "Delete surrounding buffers" })
+-- Close current window
+vim.keymap.set("n", "<leader>x", "<C-w>c")
 
 --color themes
 vim.keymap.set("n", "<leader>ts", ":Telescope colorscheme<CR>")
@@ -80,8 +84,6 @@ vim.keymap.set("n", "<leader>ts", ":Telescope colorscheme<CR>")
 -- close all buffers execpt current one
 -- nnoremap <leader>wa :%bd|e#<Return>
 
--- Close current window
-vim.keymap.set("n", "<leader>x", "<C-w>c")
 
 -- Writing / Markdown (see also markdown.lua)
 --
