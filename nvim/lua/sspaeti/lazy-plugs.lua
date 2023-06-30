@@ -203,6 +203,20 @@ return {
   },
   { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy" },
   { "mbbill/undotree", event = "VeryLazy" },
+  {
+      'tzachar/highlight-undo.nvim',
+      event = "VeryLazy",
+      config = function()
+        require('highlight-undo').setup({
+            hlgroup = 'HighlightUndo',
+            duration = 600,
+            keymaps = {
+              {'n', 'u', 'undo', {}},
+              {'n', '<C-r>', 'redo', {}},
+            }
+          })
+      end
+  },
   "farmergreg/vim-lastplace", --remember last cursor position
 
   -- prettier
