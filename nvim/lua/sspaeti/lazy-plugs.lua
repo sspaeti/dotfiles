@@ -6,7 +6,8 @@ return {
   { "AlexvZyl/nordic.nvim", event = "VeryLazy" },
   { "navarasu/onedark.nvim", event = "VeryLazy" },
   { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy"  }, --light theme
-  { "gruvbox-community/gruvbox", event = "VeryLazy" , priority = 1000, },
+  { "ellisonleao/gruvbox.nvim", event = "VeryLazy" , priority = 1000, },
+
   { 'projekt0n/github-nvim-theme', event = "VeryLazy", version = "*", },
   {
     "ldelossa/gh.nvim",
