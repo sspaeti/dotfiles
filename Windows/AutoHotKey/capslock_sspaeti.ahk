@@ -470,8 +470,9 @@ CapsLock & o::
   return
 }
 ;---------------------------------------------------------------------o
-;this is only used if keyboard has not switched it automatically 
-;default is switching it, as US layout has z and y not like qwery as I want
+; this is only used if keyboard has not switched it automatically     o
+; default is switching it, as US layout has z and y not like QWERY as o
+; I want                                                              o
 SC015::z                                                            ;|
 SC02C::y                                                            ;|
 ;---------------------------------------------------------------------o
