@@ -1,6 +1,7 @@
 ;=====================================================================o
 ;                   Feng Ruohang's AHK Script                         |
 ;                      CapsLock Enhancement                           |
+;                      Updated Simon Späti                            |
 ;---------------------------------------------------------------------o
 ;Description:                                                         |
 ;    This Script is wrote by Feng Ruohang via AutoHotKey Script. It   |
@@ -405,25 +406,70 @@ CapsLock & 0:: Send,+0                                               ;|
 ;                        Umlaut Char Mapping                       ;|
 ;-----------------------------------o---------------------------------o
 ;                     CapsLock + a  |  ä                             ;|
+;                     CapsLock + a  |  ä                             ;|
 ;                     CapsLock + u  |  ü                             ;|
-;                     CapsLock + o  |  ö                             ;|
+;                     LAlt + o      |  ö                             ;|
+;                     LAlt + u      |  ü                             ;|
+;                     LAlt + o      |  ö                             ;|
 ;                     z             |  y                             ;|
 ;                     y             |  z                             ;|
 ;-----------------------------------o---------------------------------o
-;CapsLock & a:: Send, ä                                              ;|
 CapsLock & a::
 {
   GetKeyState, state, Lshift
   if state = D
-;    sendinput, Ä
-    Send, Ä
+    SendInput, {U+00C4}
   else
-;    sendinput, ä
-    Send, ä
+    SendInput, {U+00E4}
   return
 }
-CapsLock & u:: Send, ü                                              ;|
-CapsLock & o:: Send, ö                                              ;|
-;z:: Send, y                                                         ;|
-;y:: Send, z                                                         ;|
+CapsLock & u::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    SendInput, {U+00DC}
+  else
+    SendInput, {U+00FC}
+  return
+}
+CapsLock & o::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    SendInput, {U+00D6}
+  else
+    SendInput, {U+00F6}
+  return
+}
+;---------------------------------------------------------------------o
+<!a::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    SendInput, {U+00C4}
+  else
+    SendInput, {U+00E4}
+  return
+}
+<!u::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    SendInput, {U+00DC}
+  else
+    SendInput, {U+00FC}
+  return
+}
+<!o::
+{
+  GetKeyState, state, Lshift
+  if state = D
+    SendInput, {U+00D6}
+  else
+    SendInput, {U+00F6}
+  return
+}
+;---------------------------------------------------------------------o
+;SC015::z                                                            ;|
+;SC02C::y                                                            ;|
 ;---------------------------------------------------------------------o
