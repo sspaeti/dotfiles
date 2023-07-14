@@ -1,6 +1,7 @@
 ;=====================================================================o
 ;                   Feng Ruohang's AHK Script                         |
 ;                      CapsLock Enhancement                           |
+;                      Updated Simon Späti                            |
 ;---------------------------------------------------------------------o
 ;Description:                                                         |
 ;    This Script is wrote by Feng Ruohang via AutoHotKey Script. It   |
@@ -468,6 +469,10 @@ CapsLock & o::
     SendInput, {U+00F6}
   return
 }
+;---------------------------------------------------------------------o 
+; this is only used if keyboard has not switched it automatically     o
+; default is switching it, as US layout has z and y not like QWERY as o
+; I want                                                              o
 ;---------------------------------------------------------------------o
 SC015::z                                                            ;|
 SC02C::y                                                            ;|
