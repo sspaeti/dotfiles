@@ -1,7 +1,6 @@
 ;=====================================================================o
 ;                   Feng Ruohang's AHK Script                         |
 ;                      CapsLock Enhancement                           |
-;                      Updated Simon Späti                            |
 ;---------------------------------------------------------------------o
 ;Description:                                                         |
 ;    This Script is wrote by Feng Ruohang via AutoHotKey Script. It   |
@@ -469,10 +468,112 @@ CapsLock & o::
     SendInput, {U+00F6}
   return
 }
-;---------------------------------------------------------------------o 
-; this is only used if keyboard has not switched it automatically     o
-; default is switching it, as US layout has z and y not like QWERY as o
-; I want                                                              o
+;---------------------------------------------------------------------o
 SC015::z                                                            ;|
 SC02C::y                                                            ;|
 ;---------------------------------------------------------------------o
+
+
+;=====================================================================o
+;                  Delta Phoenix's AHK Script                         |
+;                      Virtual Desktop Enhancement                    |
+;---------------------------------------------------------------------o
+;from: https://superuser.com/a/1050690
+;IMPORTANT:
+;
+;In order for it to work you must ONLY use hotkeys for opening, closing, and changing desktops because the script listens for these hotkeys to know the current and total number of desktops.
+;
+;If you do create, close, or change desktops via the WIN+TAB menu with the mouse the script will stop working. In order to get it working again you will need to edit the first two lines to reflect the current state of your desktops. (desktopcount/currentdesktop)
+;
+;This doesn't mean you can't use the WIN+TAB screen as an overview of your current desktops. You can actually use it in combination of the hotkeys to organize your desktops. Yes, the hotkeys still work when the windows task viewer is open! (WIN+TAB) Just DO NOT use the mouse!!!
+;
+;Also, wait for the script to load after Windows startup before creating new desktops or it will not work. This could take a moment depending on how many startup programs you have.
+;
+;Ok, I added one more thing to make it easier to re-sync the script with your desktop state. There is now a hotkey that will display the state the script believes the desktops to be in so all you have to do is adjust your desktops with the mouse to fit the script and it will be all synced up again! For me with a Swiss keyboard it worked out nicely having the '? key next to 0 and it makes sense with a ? on it, but on other keyboards you may wish to change this which can be done easily by changing the line right after the hotkey for 0/10 (starting with #') to whatever you like.
+;
+;Actually, I just realized.... as long as the Desktop Count is correct than creating a new desktop will automatically re-sync the Current Desktop value.
+;
+#NoTrayIcon
+;If the script stops working:
+;Change the following values to reflect your current desktop state and reload the script.
+;Remember to change them back to 1 after reloading the script if you have it set to start with Windows
+
+desktopcount := 1
+currentdesktop := 1
+
+;You can change the hotkeys for creating, closing, and switching desktops bellow.
+;The current hotkeys are CTRL+WIN+D for new desktop, CTRL+WIN+F4 to close desktop
+;and ALT+NUMBER for switching desktops.
+;For example, to change the hotkey for new desktop replace !^#D bellow with the desired hotkey.
+;Refer to the autohotkey documentation for a full list of symbols refering to modifier keys,
+;as you can see ! is ALT (^ would be CTRL) and # is WIN key.
+;If you wanted to change the switch desktop from WIN key to CTRL for example you would have
+
+!^D::NewDesktop()
+!^w::CloseDesktop()
+!1::SwitchDesktop(1)
+!2::SwitchDesktop(2)
+!3::SwitchDesktop(3)
+!4::SwitchDesktop(4)
+!5::SwitchDesktop(5)
+!6::SwitchDesktop(6)
+!7::SwitchDesktop(7)
+!8::SwitchDesktop(8)
+!9::SwitchDesktop(9)
+!0::SwitchDesktop(10)
+!'::MsgBox Desktop Count = %desktopcount%`nCurrent Desktop = %currentdesktop%
+
+;Do not change anything after this line, unless you know what you are doing ;)
+;-----------------------------------------------------------------------------------------------
+SwitchDesktop(desktop)
+{
+
+    global desktopcount
+    global currentdesktop
+    desktopdiff := desktop - currentdesktop
+    if (desktop > desktopcount)
+    {
+        return
+    }
+    if (desktopdiff < 0)
+    {
+        desktopdiff *= -1
+        Loop %desktopdiff%
+        {
+        Send ^#{Left}
+        }
+    }
+    else if (desktopdiff > 0)
+    {
+        Loop %desktopdiff%
+        {
+        Send ^#{Right}
+        }
+    }
+    currentdesktop := desktop
+}
+
+NewDesktop()
+{
+    global desktopcount
+    global currentdesktop
+    if (desktopcount > 9)
+    {
+        return
+    }
+    desktopcount ++
+    currentdesktop := desktopcount
+    Send ^#d
+}
+
+CloseDesktop()
+{
+    global desktopcount
+    global currentdesktop
+    desktopcount --
+    if (currentdesktop != 1)
+    {
+        currentdesktop --
+    }
+    Send ^#{f4}
+}
