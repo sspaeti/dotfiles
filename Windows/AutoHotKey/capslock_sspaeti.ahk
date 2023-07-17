@@ -469,7 +469,7 @@ CapsLock & o::
     SendInput, {U+00F6}
   return
 }
-;---------------------------------------------------------------------o 
+;---------------------------------------------------------------------o
 ; this is only used if keyboard has not switched it automatically     o
 ; default is switching it, as US layout has z and y not like QWERY as o
 ; I want                                                              o
@@ -582,3 +582,177 @@ CloseDesktop()
     }
     Send ^#{f4}
 }
+;=====================================================================o
+;                  Jump to App                                        |
+;---------------------------------------------------------------------o
+;start apps with hotkey
+;from: https://gist.github.com/datmt/5b7d17e8886d14bb0024f8e6c45dabcd
+;
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+; #Warn  ; Enable warnings to assist with detecting common errors.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+;
+;
+SetTitleMatchMode, 2
+!b::
+
+if WinExist("ahk_exe brave.exe")
+{
+    WinActivate
+} else
+{
+	Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+}
+
+Return
+
+
+!n::
+
+if WinExist("ahk_exe Obsidian.exe")
+{
+    WinActivate
+} else
+{
+	Run "C:\Users\rah9\AppData\Local\Obsidian\Obsidian.exe"
+}
+
+Return
+
+
+!w::
+
+if WinExist("ahk_exe wt.exe")
+{
+    WinActivate
+} else
+{
+	Run "C:\Users\rah9\AppData\Local\Microsoft\WindowsApps\wt.exe"
+}
+
+Return
+
+!t::
+
+if WinExist("ahk_exe wt.exe")
+{
+    WinActivate
+} else
+{
+	Run "C:\Users\rah9\AppData\Local\Microsoft\WindowsApps\wt.exe"
+}
+
+Return
+
+
+!v::
+
+if WinExist("ahk_exe Code.exe")
+{
+    WinActivate
+} else
+{
+	Run "C:\Users\rah9\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+}
+
+Return
+
+; DOES NOT WORK YET - therefore commented out
+;;=====================================================================o
+;;                  VD.akh: Virtual Desktop AHK Script                   |
+;;                      Move apps to Virtual Desktops                    |
+;;---------------------------------------------------------------------o
+;;from: https://github.com/FuPeiJiang/VD.ahk
+;;
+;;#SETUP START
+;#NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
+;#SingleInstance force
+;ListLines Off
+;SetBatchLines -1
+;SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
+;SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
+;#KeyHistory 0
+;#WinActivateForce
+;
+;Process, Priority,, H
+;
+;SetWinDelay -1
+;SetControlDelay -1
+;
+;;START of gui stuff
+;Gui,Font, s12, Segoe UI
+;explanation=
+;(
+;Numpad0 to pin this Window on all desktops
+;you can spam (Numpad2,Numpad1,Numpad2,Numpad1) for fun
+;
+;here's a challenge (you might lose this window):
+;Unpin this using Numpad0
+;go to Desktop 3 (Numpad3)
+;this time, use Win + * on Numpad to come back to this window wherever you are
+;(and wherever this window is)
+;so you can move this window to desktop 2 (Numpad5), you go to desktop 1, and use Win + * on Numpad
+;(if you want to search in this script, the hotkey is #NumpadMult)
+;
+;Numpad9 to throw a window to Desktop 3 (and not follow it)
+;
+;getters:
+;f1 to see which desktop you currently are in
+;f6 to see which desktop this window is in
+;f2 to see the total number of virtual desktops
+;
+;(You might want to pin this window for this part):
+;!NumpadAdd (Alt + Numpad+) to createDesktop and go to it
+;f1 to see which desktop you currently are in
+;
+;but at this point, just use Win + Tab..
+;these functions are mostly for script only,
+;for example: I used VD.createUntil(3)
+;at the start of this tutorial, to make sure we have at least 3 VD
+;
+;^+NumpadAdd (Ctrl Alt + Numpad+) to create until you have 3 desktops
+;!NumpadSub (Alt + Numpad-) to remove the current desktop
+;^+NumpadSub (Ctrl ALt + Numpad-) to delete the 3rd desktop
+;
+;more below, look at the hotkeys in code.
+;)
+;gui, add, Edit, -vscroll -E0x200 +hwndHWndExplanation_Edit, % explanation ; https://www.autohotkey.com/boards/viewtopic.php?t=3956#p21359
+;;deselect edit text BY moving caret to start
+;Postmessage,0xB1,0,0,, % "ahk_id " HWndExplanation_Edit
+;gui, show,, VD.ahk examples WinTitle
+;;END of gui stuff
+;
+;;include the library
+;#Include %A_LineFile%\..\VD.ahk
+;; or
+;; #Include %A_LineFile%\..\_VD.ahk
+;; ...{startup code}
+;; VD.init()
+;
+;; VD.ahk : calls `VD.init()` on #Include
+;; _VD.ahk : `VD.init()` when you want, like after a GUI has rendered, for startup performance reasons
+;
+;
+;;you should WinHide invisible programs that have a window.
+;WinHide, % "Malwarebytes Tray Application"
+;;#SETUP END
+;
+;VD.createUntil(3) ;create until we have at least 3 VD
+;
+;return
+;;
+;;
+;!^1::VD.MoveWindowToDesktopNum("A",1), VD.goToDesktopNum(1)
+;!^2::VD.MoveWindowToDesktopNum("A",2), VD.goToDesktopNum(2)
+;!^3::VD.MoveWindowToDesktopNum("A",3), VD.goToDesktopNum(3)
+;!^4::VD.MoveWindowToDesktopNum("A",4), VD.goToDesktopNum(4)
+;!^5::VD.MoveWindowToDesktopNum("A",5), VD.goToDesktopNum(5)
+;!^6::VD.MoveWindowToDesktopNum("A",6), VD.goToDesktopNum(6)
+;!^7::VD.MoveWindowToDesktopNum("A",7), VD.goToDesktopNum(7)
+;!^8::VD.MoveWindowToDesktopNum("A",8), VD.goToDesktopNum(8)
+;!^9::VD.MoveWindowToDesktopNum("A",9), VD.goToDesktopNum(9)
+;; move window to left and follow it
+;!^left::VD.goToDesktopNum(VD.MoveWindowToRelativeDesktopNum("A", -1))
+;; move window to right and follow it
+;!^right::VD.goToDesktopNum(VD.MoveWindowToRelativeDesktopNum("A", 1))
