@@ -130,3 +130,19 @@ let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
 -- "}}}
 -- ]])
 
+
+-- move window with christoomey/vim-tmux-navigator to align tmux and nvim
+vim.g.tmux_navigator_no_mappings = 1
+vim.g.tmux_navigator_preserve_zoom = 1
+
+-- Replace `$EDITOR` candidate with this command to open the selected file
+vim.g.rnvimr_edit_cmd = 'drop'
+
+-- let blame default be on
+vim.g.blamer_enabled = 1
+
+-- Custom surrounds
+vim.cmd[[
+let w:surround_{char2nr('w')} = "```\r```"
+let b:surround_{char2nr('b')} = "**\r**"
+]]

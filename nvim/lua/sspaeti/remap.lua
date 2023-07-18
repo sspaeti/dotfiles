@@ -177,14 +177,10 @@ vim.g.netrw_browser_split = 4 -- open in previous window
 vim.g.netrw_altv = 1 -- open splits to the right
 
 
-
-
-
-
 --
---converted from old_configs.vim (with ChatGPT - caughtion if something does not work)
+--below: converted from old_configs.vim (with ChatGPT - caughtion if something does not work)
+--2023-07-18
 --
-
 -- fzf: ctrl f for find files
 vim.keymap.set('n', '<C-p>', ':Files<CR>')
 vim.keymap.set('n', '<leader>fw', ":call fzf#vim#files('.', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>")
@@ -202,10 +198,6 @@ vim.cmd[[
     command! -bang -nargs=* Rg2
       \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
 ]]
-
--- move window with christoomey/vim-tmux-navigator to align tmux and nvim
-vim.g.tmux_navigator_no_mappings = 1
-vim.g.tmux_navigator_preserve_zoom = 1
 
 vim.keymap.set('', '<silent> <c-h>', ':<C-U>TmuxNavigateLeft<cr>')
 vim.keymap.set('', '<silent> <c-j>', ':<C-U>TmuxNavigateDown<cr>')
@@ -226,12 +218,6 @@ vim.keymap.set('n', 'te', ':tabedit')
 vim.keymap.set('n', '<leader>tn', ':tabnew<Return>')
 vim.keymap.set('n', '<S-Tab>', ':tabprev<Return>')
 
--- Replace `$EDITOR` candidate with this command to open the selected file
-vim.g.rnvimr_edit_cmd = 'drop'
-
--- let blame default be on
-vim.g.blamer_enabled = 1
-
 -- undo break points
 vim.keymap.set('i', ',', ',<c-g>u')
 vim.keymap.set('i', '.', '.<c-g>u')
@@ -246,11 +232,5 @@ vim.cmd[[
     nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
     nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
     nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-]]
-
--- Custom surrounds
-vim.cmd[[
-let w:surround_{char2nr('w')} = "```\r```"
-let b:surround_{char2nr('b')} = "**\r**"
 ]]
 
