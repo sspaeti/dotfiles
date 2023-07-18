@@ -175,3 +175,82 @@ vim.keymap.set("n", "z9", "zR")
 vim.g.netrw_banner = 0 -- disable annoying banner
 vim.g.netrw_browser_split = 4 -- open in previous window
 vim.g.netrw_altv = 1 -- open splits to the right
+
+
+
+
+
+
+--
+--converted from old_configs.vim (with ChatGPT - caughtion if something does not work)
+--
+
+-- fzf: ctrl f for find files
+vim.keymap.set('n', '<C-p>', ':Files<CR>')
+vim.keymap.set('n', '<leader>fw', ":call fzf#vim#files('.', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>")
+vim.keymap.set('n', '<silent> <Leader>fr', ':Rg<CR>')
+vim.keymap.set('n', '<silent> <Leader>fb', ':Buffers<CR>')
+vim.keymap.set('n', '<silent> <Leader>f/', ':BLines<CR>')
+vim.keymap.set('n', '<silent> <Leader>fm', ':Marks<CR>')
+vim.keymap.set('n', '<silent> <Leader>fc', ':Commits<CR>')
+vim.keymap.set('n', '<silent> <Leader>fH', ':Helptags<CR>')
+vim.keymap.set('n', '<silent> <Leader>fd', ':Rg2 search folder')
+
+-- find in a specific repo
+-- I'm not converting this command because Lua doesn't handle vim commands yet as of my knowledge cut-off in September 2021
+vim.cmd[[
+    command! -bang -nargs=* Rg2
+      \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+]]
+
+-- move window with christoomey/vim-tmux-navigator to align tmux and nvim
+vim.g.tmux_navigator_no_mappings = 1
+vim.g.tmux_navigator_preserve_zoom = 1
+
+vim.keymap.set('', '<silent> <c-h>', ':<C-U>TmuxNavigateLeft<cr>')
+vim.keymap.set('', '<silent> <c-j>', ':<C-U>TmuxNavigateDown<cr>')
+vim.keymap.set('', '<silent> <c-k>', ':<C-U>TmuxNavigateUp<cr>')
+vim.keymap.set('', '<silent> <c-l>', ':<C-U>TmuxNavigateRight<cr>')
+vim.keymap.set('', '<silent> <c-t>', ':<C-U>TmuxNavigatePrevious<cr>')
+
+-- Resize window ABSOLUTE (doing it the same direction wheter in right or left split)
+vim.keymap.set('n', '<C-w>l', ':if winnr() == winnr(\'$\') \\| vertical resize -5 \\| else \\| vertical resize +5 \\| endif<CR>')
+vim.keymap.set('n', '<C-w>h', ':if winnr() == 1 \\| vertical resize -5 \\| else \\| vertical resize +5 \\| endif<CR>')
+
+-- resize window RELATIVE (Haven't found a absoulte way)
+vim.keymap.set('n', '<C-w>k', ':resize -5<CR>')
+vim.keymap.set('n', '<C-w>j', ':resize +5<CR>')
+
+-- Open current directory
+vim.keymap.set('n', 'te', ':tabedit')
+vim.keymap.set('n', '<leader>tn', ':tabnew<Return>')
+vim.keymap.set('n', '<S-Tab>', ':tabprev<Return>')
+
+-- Replace `$EDITOR` candidate with this command to open the selected file
+vim.g.rnvimr_edit_cmd = 'drop'
+
+-- let blame default be on
+vim.g.blamer_enabled = 1
+
+-- undo break points
+vim.keymap.set('i', ',', ',<c-g>u')
+vim.keymap.set('i', '.', '.<c-g>u')
+vim.keymap.set('i', '[', '[<c-g>u')
+vim.keymap.set('i', '(', '(<c-g>u')
+
+-- jumplist mutations
+-- These mappings are not directly convertible to Lua since they involve an expression.
+-- Until Neovim's Lua API provides a method to create expression-based mappings, you'll have to use vim.cmd
+vim.cmd[[
+    nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+    nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+    nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+    nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+]]
+
+-- Custom surrounds
+vim.cmd[[
+let w:surround_{char2nr('w')} = "```\r```"
+let b:surround_{char2nr('b')} = "**\r**"
+]]
+

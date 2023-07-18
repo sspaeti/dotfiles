@@ -188,7 +188,7 @@ return {
   { "christoomey/vim-tmux-navigator", lazy = false },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    version = "*",
+    version = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -196,12 +196,12 @@ return {
     },
     event = "VeryLazy",
   },
-  {
-    'stevearc/oil.nvim',
-    event = "VeryLazy",
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+  -- {
+  --   'stevearc/oil.nvim',
+  --   event = "VeryLazy",
+  --   -- Optional dependencies
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- },
   { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy" },
   { "mbbill/undotree", event = "VeryLazy" },
   {
