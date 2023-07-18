@@ -1,6 +1,6 @@
 --general
 vim.keymap.set("n", "<leader>e", ":Explore<CR>")
-vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+-- vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
 
 -- s-shortcuts is for search -> without leader, directly with s
@@ -21,10 +21,9 @@ vim.keymap.set('n', 'sL', ':Lines<CR>')
 vim.keymap.set('n', 'sn', ':enew<CR>')
 vim.keymap.set('n', 'sM', ':Maps<CR>')
 -- vim.keymap.set('n', 'st', ':NvimTreeToggle<CR>')
-vim.keymap.set('n', 'st', ':NeoTreeFloatToggle<CR>')
+vim.keymap.set('n', 'st', ':Neotree position=float toggle=true<CR>')
 -- vim.keymap.set('n', 'se', ':NvimTreeFindFile<CR>')
-vim.keymap.set('n', 'se', ':NeoTreeRevealToggle<CR>')
-vim.keymap.set('n', 'sE', ':NeoTreeShowToggle<CR>')
+vim.keymap.set('n', 'se', ':Neotree position=left toggle=true<CR>')
 vim.keymap.set('n', 'sp', ':Files<CR>')
 vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
@@ -172,3 +171,7 @@ vim.keymap.set('n', 'z7', ':set foldlevel=6<CR><Esc>', {silent = true})
 vim.keymap.set('n', 'z8', ':set foldlevel=7<CR><Esc>', {silent = true})
 vim.keymap.set("n", "z9", "zR")
 
+-- netwr explorer
+vim.g.netrw_banner = 0 -- disable annoying banner
+vim.g.netrw_browser_split = 4 -- open in previous window
+vim.g.netrw_altv = 1 -- open splits to the right
