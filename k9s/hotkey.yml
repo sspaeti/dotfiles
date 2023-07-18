@@ -1,0 +1,21 @@
+hotKey:
+  f1:
+    shortCut: F1
+    description: View pods
+    command: pods
+  f2:
+    shortCut: F2
+    description: View deployments
+    command: dp
+  f3:
+    shortCut: F3
+    description: View statefulsets
+    command: sts
+  f4:
+    shortCut: F4
+    description: View services
+    command: service
+  f5:
+    shortCut: F5
+    description: View ingresses
+    command: ingress
