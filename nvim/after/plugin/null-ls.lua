@@ -28,7 +28,7 @@ require("null-ls").setup({
         -- W0231 disable super-init-not-called - pylint doesn't understand six.with_metaclass(ABCMeta)
         -- W0707 disable raise-missing-from which we cant use because py2 back compat
         -- C0301 Line too long => disabled as black-formatter handles long lines automatically
-        diagnostics.flake8.with({extra_args = {"--max-line-length=140", "--disable=R,duplicate-code,W0231,W0511,W1201,W1202,W0707,C0301,no-init"}}),
+        diagnostics.flake8.with({extra_args = {"--max-line-length=88", "--disable=R,duplicate-code,W0231,W0511,W1201,W1202,W0707,C0301,no-init"}}),
         diagnostics.mypy.with({extra_args = {"--ignore-missing-imports"}}),
         diagnostics.write_good
     },

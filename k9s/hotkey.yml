@@ -19,3 +19,7 @@ hotKey:
     shortCut: F5
     description: View ingresses
     command: ingress
+  f6:
+    shortCut: F6
+    description: View ingresses
+    command: secret

@@ -39,5 +39,7 @@
   "obsidian-plugin-toc",
   "obsidian-dynamic-toc",
   "obsidian-advanced-uri",
-  "obsidian-list-callouts"
+  "obsidian-list-callouts",
+  "mrj-jump-to-link",
+  "obsidian-projects"
 ]

@@ -74,22 +74,6 @@
       "key": "T"
     }
   ],
-  "workspace:split-vertical": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "S"
-    }
-  ],
-  "workspace:split-horizontal": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "V"
-    }
-  ],
   "workspace:close": [
     {
       "modifiers": [
@@ -165,14 +149,6 @@
   ],
   "app:open-vault": [],
   "editor:delete-paragraph": [],
-  "omnisearch:show-modal-infile": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "F"
-    }
-  ],
   "omnisearch:show-modal": [
     {
       "modifiers": [
@@ -355,5 +331,22 @@
       "key": "I"
     }
   ],
-  "app:open-help": []
+  "app:open-help": [],
+  "mrj-jump-to-link:activate-jump-to-anywhere": [],
+  "mrj-jump-to-link:activate-jump-to-link": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "F"
+    }
+  ],
+  "obsidian-projects:show-projects": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "P"
+    }
+  ]
 }

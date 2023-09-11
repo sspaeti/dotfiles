@@ -35,3 +35,5 @@ yabai -m rule --add app="^Signal$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
 yabai -m rule --add app="^WhatsApp$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Microsoft Teams$" manage=off
+yabai -m rule --add app="^Microsoft Remote Desktop$" manage=off

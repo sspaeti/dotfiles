@@ -33,4 +33,4 @@ load-plugins=dagster.utils.linter
 generated-members=pyspark.*
 ignored-modules=pyspark.sql.functions
 
-max-line-length = 150
+max-line-length = 80

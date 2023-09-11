@@ -88,6 +88,11 @@ cp -r ~/.config/karabiner/* $git/general/dotfiles/karabiner/
 #homebrew
 brew bundle dump > $git/general/dotfiles/Brewfile -f
 
+#ansible
+cp ~/.ansible.cfg $git/general/dotfiles/ansible/ansible.cfg
+
+#ansible
+cp ~/.k9s/hotkey.yml $git/general/dotfiles/k9s/hotkey.yml
 
 # source $venvs/dagster/bin/activate
 # pip freeze > $git/general/dotfiles/python/venvs/dagster.txt

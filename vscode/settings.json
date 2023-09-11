@@ -78,12 +78,12 @@
     ],
     "python.analysis.memory.keepLibraryAst": true,
     "python.formatting.provider": "black",
-    // "python.formatting.blackArgs": [
-    //     "--line-length",
-    //     "140",
-    //     "-S",
-    //     "--fast",
-    // ],
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "88",
+        "-S",
+        "--fast",
+    ],
     //"python.jediEnabled": true, #old, new python.languageServer "Jedi"
     "python.languageServer": "Jedi",
     "python.linting.enabled": true,
@@ -299,5 +299,8 @@
     "telemetry.telemetryLevel": "off",
     "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "/Users/sspaeti/.config/nvim/",
-    "codegpt.apiKey": "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"
+    "codegpt.apiKey": "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",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }

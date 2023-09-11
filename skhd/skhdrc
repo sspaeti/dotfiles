@@ -7,10 +7,10 @@ alt - h : yabai -m window --focus west
 alt - l : yabai -m window --focus east
 
 # rotate layout clockwise
-shift + alt -u : yabai -m space --rotate 270
+shift + alt -u : yabai -m space --rotate 90
 
 # rotate layout clockwise
-shift + alt -i : yabai -m space --rotate 90
+shift + alt -i : yabai -m space --rotate 270
 
 # resize windows
 shift + alt -l : yabai -m window --resize right:20:0 --resize left:20:0
