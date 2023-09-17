@@ -11,7 +11,9 @@ cp -r ~/.config/nvim/lua/ $git/general/dotfiles/nvim/lua/
 cp -r ~/.config/nvim/after/ $git/general/dotfiles/nvim/after/
 cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
 cp -r ~/.config/nvim/ftplugin/ $git/general/dotfiles/nvim/ftplugin/
-cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
+
+# might contain sensitive information
+# cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
 #tmux
 cp ~/.tmux.conf $git/general/dotfiles/tmux/tmux.conf

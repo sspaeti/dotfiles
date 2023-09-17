@@ -386,4 +386,21 @@ return {
                   vim.fn["firenvim#install"](0)
                 end,
               },
+              {'tpope/vim-dadbod', event = "VeryLazy"},
+              {'kristijanhusak/vim-dadbod-ui', event = "VeryLazy"},
+              {'kristijanhusak/vim-dadbod-completion', event = "VeryLazy"},
+              -- Database
+              {
+                "tpope/vim-dadbod",
+                opt = true,
+                requires = {
+                  "kristijanhusak/vim-dadbod-ui",
+                  "kristijanhusak/vim-dadbod-completion",
+                },
+                event = "VeryLazy",
+              },
+
+
+
+
             }

@@ -78,6 +78,10 @@ vim.keymap.set("n", "<leader>x", "<C-w>c")
 --color themes
 vim.keymap.set("n", "<leader>ts", ":Telescope colorscheme<CR>")
 
+
+--databaes
+vim.keymap.set("n", "<leader>dd", ":DBUIToggle<CR>")
+
 -- close all buffers execpt current one
 -- nnoremap <leader>wa :%bd|e#<Return>
 
