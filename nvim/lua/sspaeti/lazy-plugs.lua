@@ -110,7 +110,7 @@ return {
   { "bps/vim-textobj-python", event = "VeryLazy" },
   --preview CSS colors inline
   -- 'ap/vim-css-color',
-  -- { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
+  -- { "NvChad/nvim-colorizer.lua", event = "VeryLazy" },
   { "brenoprata10/nvim-highlight-colors", event = "VeryLazy" },
   -- comment healper
 
@@ -202,7 +202,7 @@ return {
   --   -- Optional dependencies
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
   -- },
-  { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy" },
+  { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy", main = "ibl", version = "2.20.8" },
   { "mbbill/undotree", event = "VeryLazy" },
   {
       'tzachar/highlight-undo.nvim',
