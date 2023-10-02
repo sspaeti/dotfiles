@@ -1,6 +1,8 @@
 vim.g.neo_tree_remove_legacy_commands = 1
 
 require("neo-tree").setup({
+  enable_git_status = true,
+  enable_diagnostics = false,
   window = {
     mappings = {
       ["S"] = "open_vsplit",
