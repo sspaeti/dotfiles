@@ -33,10 +33,17 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
+cmp.setup({
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  }
+})
+
 -- remove buffer (that suggests words from current buffer): https://stackoverflow.com/a/73144320
 -- full list: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
 local sources = {
-    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp', priority = 1},
     { name = 'vsnip' },
     { name = 'path' },
     { name = 'luasnip' },
@@ -44,6 +51,7 @@ local sources = {
     { name = 'obsidian_new' },
     { name = 'nvim_lsp:sumneko_lua' },
     { name = 'nvim_lsp:null-ls' },
+    { name = "dictionary", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] }, -- from uga-rosa/cmp-dictionary plug
   }
 -- disable completion with tab
 -- this helps with copilot setup
