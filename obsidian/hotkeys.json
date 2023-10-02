@@ -244,14 +244,6 @@
       "key": "-"
     }
   ],
-  "editor:fold-less": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "\\"
-    }
-  ],
   "editor:fold-all": [
     {
       "modifiers": [
@@ -347,6 +339,14 @@
         "Ctrl"
       ],
       "key": "P"
+    }
+  ],
+  "editor:fold-less": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "="
     }
   ]
 }
