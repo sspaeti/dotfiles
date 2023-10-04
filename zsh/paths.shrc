@@ -25,12 +25,16 @@ export areas=/Users/sspaeti/Simon/Sync/SecondBrain/⚛️\ Areas
 export blog=/Users/sspaeti/Documents/git/sspaeti.com/sspaeti-hugo-blog
 export hugo=$blog
 export docs=~/Documents
-export SPARK_HOME=~/Documents/spark/spark-3.0.1-bin-hadoop3.2
 export VS_Projects=/Users/sspaeti/Documents/VS_Projects/
+# export SPARK_HOME=~/Documents/spark/spark-3.0.1-bin-hadoop3.2
+export SPARK_HOME="/opt/homebrew/opt/apache-spark/libexec/"
+export PATH="$SPARK_HOME/bin/:$PATH"
 export PYSPARK_PYTHON=python3
 #export DATASETS=/Users/sspaeti/Simon/Sync/Business/13_sspaeti/Real-estate/_DATASETS
 
 export DAGSTER_HOME=~/.dagster
+#set default deployment to local (staging or prod are usually others, check dagster code)
+export DAGSTER_DEPLOYMENT=local
 
 #vim stuff
 export MYVIMRC=~/.config/nvim/init.lua
