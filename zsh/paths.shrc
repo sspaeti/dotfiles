@@ -35,6 +35,7 @@ export PYSPARK_PYTHON=python3
 export DAGSTER_HOME=~/.dagster
 #set default deployment to local (staging or prod are usually others, check dagster code)
 export DAGSTER_DEPLOYMENT=local
+export AIRFLOW_HOME=~/.airflow
 
 #vim stuff
 export MYVIMRC=~/.config/nvim/init.lua
