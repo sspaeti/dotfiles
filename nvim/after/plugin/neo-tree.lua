@@ -8,6 +8,7 @@ require("neo-tree").setup({
       ["S"] = "open_vsplit",
       ["s"] = "",
       ["E"] = "open_split",
+      ["-"] = "navigate_up",
       ["h"] = function(state)
         local node = state.tree:get_node()
         if node.type == 'directory' and node:is_expanded() then
