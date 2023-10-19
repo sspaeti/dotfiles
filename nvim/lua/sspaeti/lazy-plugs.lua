@@ -162,13 +162,15 @@ return {
   -- 'nvim-lua/popup.nvim',
   { "nvim-lua/plenary.nvim", event = "VeryLazy" },
   { "ThePrimeagen/harpoon", event = "VeryLazy" },
-  -- { "jose-elias-alvarez/null-ls.nvim"},
+  { "nvimtools/none-ls.nvim" --before: jose-elias-alvarez/null-ls.nvim"
+  },
+
   {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim", --before: "jose-elias-alvarez/null-ls.nvim",
     },
     -- config = function()
     --   require("~/.config/nvim/after/plugin/null-ls.lua") -- require your null-ls config here (example below)
@@ -318,7 +320,7 @@ return {
       -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
       { "preservim/vim-markdown", event = "VeryLazy" },
       { "godlygeek/tabular", event = "VeryLazy" }, -- needed by 'preservim/vim-markdown'
-      { "epwalsh/obsidian.nvim", event = "VeryLazy" }, --using neovim with the Obsidian vau'
+      -- { "epwalsh/obsidian.nvim", event = "VeryLazy" }, --using neovim with the Obsidian vau'
       -- 'vimwiki/vimwiki',
 
       -- connect with Obsidian Second Brain
