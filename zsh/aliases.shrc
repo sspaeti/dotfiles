@@ -63,6 +63,12 @@ alias gcl='git clone'
 alias gt='vim -c ":DiffviewOpen"' --diff current changes
 # alias gtb = '! args=$@; shift $#; nvim -c \"DiffviewOpen $args\"'
 
+#kuberentes
+alias k=kubectl
+alias kn="kubectl config set-context --current --namespace "
+alias kc="kubectl config use-context "
+alias ko="kubectl --dry-run=client -o yaml "
+alias dps="docker ps --format \"table {{.Image}}\t{{.Status}}\t{{.Names}}\" --all"
 
 alias lg=lazygit
 alias cat=bat
