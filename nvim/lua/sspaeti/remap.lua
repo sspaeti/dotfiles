@@ -63,6 +63,13 @@ vim.keymap.set("n", "S", ":%s//g<Left><Left>") --used for lazy.
 vim.keymap.set("n", "<leader>s", ":%s//g<Left><Left>")
 vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+--remove commands
+--
+--remove empty line
+-- vim.keymap.set("n", "<leader>rl", ":%s/^$\n*//g")
+vim.api.nvim_set_keymap('n', '<leader>rl', ':%s/^$\\n*//<CR>', { noremap = true, silent = true })
+
+
 --vim.keymap.set("n", "<Leader>lf", "vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
@@ -95,6 +102,7 @@ vim.keymap.set("n", "<leader>so", "<c-o>:set spell<cr>")
 vim.keymap.set("n", "<leader>so", ":set spell<cr>")
 vim.keymap.set("n", "<leader>sc", "<c-o>:set nospell<cr>")
 vim.keymap.set("n", "<leader>sc", ":set nospell<cr>")
+
 --Aerial
 vim.keymap.set("n", "<leader>o", ":AerialToggle<CR>", { noremap = true, silent = true })
 --preview
