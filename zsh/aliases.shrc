@@ -72,7 +72,7 @@ alias dps="docker ps --format \"table {{.Image}}\t{{.Status}}\t{{.Names}}\" --al
 
 alias lg=lazygit
 alias cat=bat
-
+alias cato=/bin/cat
 
 #docker
 alias dkps="docker ps"
