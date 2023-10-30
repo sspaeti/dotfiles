@@ -7,11 +7,10 @@ set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
 # set imap_pass = "password"
 source ~/.dotfiles/zsh/.secret.muttrc
 
-
 set from = "simu@sspaeti.com"
 set realname = "Simon Späti"
 
-set spoolfile = "+INBOX"
+set spoolfile = "+Inbox"
 set record = "+Sent"
 set trash = "+Trash"
 set postponed = "+Drafts"
@@ -20,7 +19,40 @@ set postponed = "+Drafts"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-mailboxes =INBOX =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others
+mailboxes =Inbox =ScreenedIn =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =ScreenedOut
+
+
+# SCREENER
+# handling screening of senders (hide not important senders out of my inbox)
+# --> ignored emails are in .secret.muttrc above, but these are not moved to folder, just ignored in inbox
+
+# Define a pattern for filtering emails from the specified sender
+# pattern index,sent,browser "from:"jack@jacksflightclub\.com "ScreenedOut"
+
+
+# # Define a macro to mark matching emails for deletion
+# macro index,pager X "|~b %s^$sender@example\.com\n" "Mark emails from sender@example.com for deletion"
+
+# # Redirect marked emails to the "Blocked" folder (change the folder name if needed)
+# folder-hook . 'push -f +ScreenedOut ~b $sender@example\.com'
+
+
+
+# macro index O "<save-message>+ScreenedOut<enter>" "Screen out this email"
+
+# macro index,pager O "<save-message>=ScreenedOut<enter><next-undeleted>" "Screen out based on list"
+# macro index,pager A "<save-message>=Inbox<enter><next-undeleted>" "Accept based on list"
+# macro index,pager L ":limit ~f `cat ~/.config/mutt/screen_out.txt | tr '\n' '|'`<enter>" "Limit view to screen-out list"
+# macro index,pager U ":unlimit<enter>" "Remove limit"
+# :set limit="~f `cat ~/.config/mutt/screen_out.txt | tr '\n' '|' | sed 's/|$//'`"
+# macro index L ":exec pattern ~f `cat ~/.config/mutt/screen_out.txt | tr '\n' '|' | sed 's/|$//'`<enter>" "Limit view to screen-out list"
+# macro index U ":exec pattern .<enter>" "Remove limit"
+
+# macro index,pager L "T!~f bla@bla\.com !~f no-reply@dsb-email\.dk<enter>" "Exclude emails from two addresses"
+
+macro index,pager L "T`~/.config/mutt/generate_pattern.sh`<enter>" "Exclude emails from screen_out.txt"
+macro index,pager O "T`~/.config/mutt/generate_pattern_in.sh`<enter>" "Select accepted emails from screen_in.txt"
+
 
 # Where to put the stuff
 set header_cache = "~/.cache/mutt/headers"
@@ -68,8 +100,8 @@ bind pager j next-line
 bind pager k previous-line
 bind pager l view-attachments
 bind index D delete-message
-bind index U undelete-message
-bind index L limit
+# bind index U undelete-message
+# bind index L limit
 bind index h noop
 bind index l display-message
 bind index,query <space> tag-entry
@@ -93,6 +125,9 @@ bind pager \031 previous-line		# Mouse wheel
 bind pager \005 next-line		# Mouse wheel
 bind editor <Tab> complete-query
 
+
+
+
 macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
 macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
 macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
@@ -111,6 +146,19 @@ macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
 macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
 macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to archive"
 macro index,pager Ca ";<copy-message>=Archive<enter>" "copy mail to archive"
+
+macro index,pager gw "<change-folder>=Waiting<enter>" "go to waiting"
+macro index,pager Mw ";<save-message>=Waiting<enter>" "move mail to waiting"
+macro index,pager Cw ";<copy-message>=Waiting<enter>" "copy mail to waiting"
+
+
+macro index,pager gg "<change-folder>=ScreenedIn<enter>" "go to screened in"
+macro index,pager Mg ";<save-message>=ScreenedIn<enter>" "move mail to screened in"
+
+macro index,pager go "<change-folder>=ScreenedOut<enter>" "go to screened out"
+macro index,pager Mo ";<save-message>=ScreenedOut<enter>" "move mail to screened out"
+
+macro index,pager gl "<show-log-messages><enter>" "go to log messages"
 
 # Sidebar mappings
 set sidebar_visible = yes
