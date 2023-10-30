@@ -27,8 +27,8 @@ vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
 vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
 vim.keymap.set('n', 'sS', ':Colors<CR>')
-vim.keymap.set('n', 'sF', ':Rg<CR>')
-vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
+vim.keymap.set('n', 'sf', ':Rg<CR>')
+vim.keymap.set('n', 'sF', ':Telescope live_grep<CR>') --search for typing string
 vim.keymap.set('n', 'sd', ':Telescope grep_string<CR>') --search for string under cursor
 
 vim.keymap.set('n', 'sT', ':BTags<CR>')
