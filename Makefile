@@ -3,6 +3,7 @@
 backup-dotfiles: 
 	./backup_dotfiles.sh
 	echo "backup done.."
+	python _utils/remove_data.py
 
 
 help: ## Show all Makefile targets

@@ -8,13 +8,8 @@
     "editor.largeFileOptimizations": false,
     "python.pythonPath": "/Users/sspaeti/.venvs/onenote-export/bin/python",
     "kite.showWelcomeNotificationOnStartup": false,
-    //linging:
-    // "python.linting.pycodestyleEnabled": true,
-    // "python.linting.pylintEnabled": true,
-    // "python.linting.enabled": true,
-    // "python.formatting.provider": "autopep8"
     "[dockerfile]": {
-        "editor.formatOnSave": false
+        "editor.formatOnSave": false,
     },
     "autoDocstring.quoteStyle": "'''",
     "autoDocstring.docstringFormat": "google",
@@ -23,7 +18,7 @@
     "editor.formatOnSaveTimeout": 2000,
     "editor.formatOnPaste": false,
     "editor.rulers": [
-        100
+        100,
     ],
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "none",
@@ -68,13 +63,13 @@
         "*/dist": true,
         "*/htmlcov": true,
         "pulumi/bin": true,
-        "scala_modules/*/target": true
+        "scala_modules/*/target": true,
     },
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "git.ignoreLimitWarning": true,
     "python.analysis.disabled": [
-        "unresolved-import"
+        "unresolved-import",
     ],
     "python.analysis.memory.keepLibraryAst": true,
     "python.formatting.provider": "black",
@@ -84,7 +79,6 @@
         "-S",
         "--fast",
     ],
-    //"python.jediEnabled": true, #old, new python.languageServer "Jedi"
     "python.languageServer": "Jedi",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
@@ -102,88 +96,84 @@
     "typescript.updateImportsOnFileMove.enabled": "always",
     "workbench.tree.renderIndentGuides": "onHover",
     "[typescript]": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     },
     "extensions.autoUpdate": true,
     "explorer.confirmDragAndDrop": false,
     "git.autofetch": true,
-    //###################################################################
-    // MINIMALISTIC DESIGN
-    //###################################################################
-    "editor.renderLineHighlight": "none", // removes line highlight
-    "editor.overviewRulerBorder": false, // removes border from overview ruler (located on the right, same position as the scrollbar)
-    "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
-    "editor.folding": true, // removes the folding feature
-    "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
-    "editor.matchBrackets": "never", // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
-    "editor.glyphMargin": true, // removes the space used mainly for debugging indicators
-    "explorer.openEditors.visible": 0, // removes the activity bar (the 4 icons at the left of the screen), so now you will have to open the explorer, git, debugger and extension with shortcuts or through the Command Palette
-    "workbench.editor.showIcons": false, // removes icon from opened files in tabs
-    "workbench.editor.tabCloseButton": "off", // removes the status bar
-    "indenticator.color.dark": "rgba(255,255,255,.1)", // adds a subtle indent guide (needs Indenticator extension)
-    "workbench.colorCustomizations": { // object that allows you to customize your color theme: https://code.visualstudio.com/docs/getstarted/theme-color-reference
-        "tab.activeBorder": "#0000" // removes border to highlight active tabs (the colors formats are: #RGB, #RGBA, #RRGGBB or #RRGGBBAA)
+    "editor.renderLineHighlight": "none",
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.folding": true,
+    "editor.occurrencesHighlight": false,
+    "editor.matchBrackets": "never",
+    "editor.glyphMargin": true,
+    "explorer.openEditors.visible": 0,
+    "workbench.editor.showIcons": false,
+    "workbench.editor.tabCloseButton": "off",
+    "indenticator.color.dark": "rgba(255,255,255,.1)",
+    "workbench.colorCustomizations": {
+        "tab.activeBorder": "#0000",
     },
-    "editor.wordBasedSuggestions": true, //false,
-    //gitlens icons
+    "editor.wordBasedSuggestions": true,
     "gitHistory.showEditorTitleMenuBarIcons": false,
     "gitlens.menus": {
-        "editor": {
-            "blame": false,
-            "clipboard": true,
-            "compare": true,
-            "details": false,
-            "history": false,
-            "remote": false
+        editor: {
+            blame: false,
+            clipboard: true,
+            compare: true,
+            details: false,
+            history: false,
+            remote: false,
         },
-        "editorGroup": false,
-        "editorTab": false,
-        "explorer": {
-            "clipboard": true,
-            "compare": true,
-            "history": true,
-            "remote": true
+        editorGroup: false,
+        editorTab: false,
+        explorer: {
+            clipboard: true,
+            compare: true,
+            history: true,
+            remote: true,
         },
-        "scmGroup": {
-            "compare": true,
-            "openClose": true,
-            "stash": true,
-            "stashInline": true
+        scmGroup: {
+            compare: true,
+            openClose: true,
+            stash: true,
+            stashInline: true,
         },
-        "scmItem": {
-            "clipboard": true,
-            "compare": true,
-            "history": true,
-            "remote": true,
-            "stash": true
-        }
+        scmItem: {
+            clipboard: true,
+            compare: true,
+            history: true,
+            remote: true,
+            stash: true,
+        },
     },
     "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
+        "editor.defaultFormatter": "vscode.json-language-features",
     },
     "jupyter.alwaysTrustNotebooks": true,
     "outline.showVariables": false,
     "[html]": {
-        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
+        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter",
     },
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
+        "*.ipynb": "jupyter-notebook",
     },
     "mssql.connections": [
         {
-            "server": "{{put-server-name-here}}",
-            "database": "{{put-database-name-here}}",
-            "user": "{{put-username-here}}",
-            "password": "{{put-password-here}}"
-        }
+            server: "{{put-server-name-here}}",
+            database: "{{put-database-name-here}}",
+            user: "{{put-username-here}}",
+            password: "{{put-password-here}}",
+        },
     ],
     "grammarly.dialect": "british",
     "[sql]": {
-        "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
+        "editor.defaultFormatter": "dorzey.vscode-sqlfluff",
     },
     "notebook.cellToolbarLocation": {
         "default": "right",
-        "jupyter-notebook": "left"
+        "jupyter-notebook": "left",
     },
     "python.defaultInterpreterPath": "/Users/sspaeti/.venvs/onenote-export/bin/python",
     "vim.easymotion": true,
@@ -193,91 +183,91 @@
     "vim.hlsearch": true,
     "vim.insertModeKeyBindings": [
         {
-            "before": [
+            before: [
                 "j",
-                "k"
+                "k",
             ],
-            "after": [
-                "<Esc>"
-            ]
-        }
+            after: [
+                "<Esc>",
+            ],
+        },
     ],
     "vim.visualModeKeyBindings": [
         {
-            "before": [
+            before: [
                 "<leader>",
-                "c"
+                "c",
             ],
-            "commands": [
-                "editor.action.commentLine"
+            commands: [
+                "editor.action.commentLine",
             ],
-            "when": "editorTextFocus && !editorReadonly"
-        }
+            when: "editorTextFocus && !editorReadonly",
+        },
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": [
+            before: [
                 "<leader>",
-                "d"
-            ],
-            "after": [
                 "d",
-                "d"
-            ]
-        },
-        {
-            "before": [
-                "<C-n>"
             ],
-            "commands": [
-                ":nohl"
-            ]
+            after: [
+                "d",
+                "d",
+            ],
         },
         {
-            "before": [
+            before: [
+                "<C-n>",
+            ],
+            commands: [
+                ":nohl",
+            ],
+        },
+        {
+            before: [
                 "s",
                 "l",
             ],
-            "after": [],
-            "commands": [
+            after: [],
+            commands: [
                 "workbench.action.focusRightGroup",
-            ]
+            ],
         },
         {
-            "before": [
+            before: [
                 "s",
                 "h",
             ],
-            "after": [],
-            "commands": [
+            after: [],
+            commands: [
                 "workbench.action.focusLeftGroup",
-            ]
+            ],
         },
         {
-            "before": [
+            before: [
                 "s",
                 "s",
             ],
-            "after": [],
-            "commands": [
+            after: [],
+            commands: [
                 "workbench.action.splitEditorDown",
-            ]
+            ],
         },
         {
-            "before": [
+            before: [
                 "s",
                 "v",
             ],
-            "after": [],
-            "commands": [
+            after: [],
+            commands: [
                 "workbench.action.splitEditorRight",
-            ]
-        }
+            ],
+        },
     ],
     "vim.leader": "<space>",
     "vim.handleKeys": {
         "<C-a>": false,
-        "<C-f>": false
+        "<C-f>": false,
     },
     "editor.lineNumbers": "relative",
     "redhat.telemetry.enabled": false,
@@ -285,23 +275,22 @@
     "security.workspace.trust.untrustedFiles": "open",
     "github.copilot.enable": {
         "*": true,
-        "plaintext": true,
-        "markdown": false,
-        "scminput": false,
-        "yaml": true,
-        "lua": true
+        plaintext: true,
+        markdown: false,
+        scminput: false,
+        yaml: true,
+        lua: true,
     },
     "files.watcherExclude": {
         "**/.bloop": true,
         "**/.metals": true,
-        "**/.ammonite": true
+        "**/.ammonite": true,
     },
     "telemetry.telemetryLevel": "off",
     "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.darwin": "/Users/sspaeti/.config/nvim/",
-    "codegpt.apiKey": "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",
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "ms-python.black-formatter",
     },
-    "codegpt.model": "ChatGPT"
+    "codegpt.model": "ChatGPT",
 }
