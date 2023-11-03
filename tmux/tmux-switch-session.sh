@@ -13,4 +13,8 @@ tmux_switch_to_session() {
 choice=$(sort -rfu <<< "$tmuxsessions" \
     | fzf-tmux \
     | tr -d '\n')
-tmux_switch_to_session "$choice"
+
+# Check if $choice has content before trying to switch sessions: e.g. if hitting ESC, it will go back to existing session
+if [[ -n "$choice" ]]; then
+    tmux_switch_to_session "$choice"
+fi
