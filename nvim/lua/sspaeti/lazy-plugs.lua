@@ -8,7 +8,10 @@ return {
   { "catppuccin/nvim", name = "catppuccin", event = "VeryLazy"  }, --light theme
   { "ellisonleao/gruvbox.nvim", event = "VeryLazy" , priority = 1000, },
 
+  { "ellisonleao/gruvbox.nvim", event = "VeryLazy",  priority = 1000, },
+  { "craftzdog/solarized-osaka.nvim", lazy = false, priority = 1000, },
   { 'projekt0n/github-nvim-theme', event = "VeryLazy", version = "*", },
+  { 'sainnhe/gruvbox-material', event = "VeryLazy", version = "*", },
   {
     "ldelossa/gh.nvim",
     event = "VeryLazy",
