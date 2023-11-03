@@ -1,7 +1,6 @@
 [
   "obsidian-plugin-todo",
   "obsidian-reading-time",
-  "obsidian-zoom",
   "nldates-obsidian",
   "txt-as-md-obsidian",
   "obsidian-vimrc-support",
@@ -12,13 +11,10 @@
   "dataview",
   "notetweet",
   "obsidian-kanban",
-  "workbench-obsidian",
-  "taskbone-ocr-plugin",
   "obsidian-relative-line-numbers",
   "obsidian-pandoc",
   "tag-wrangler",
   "extract-highlights-plugin",
-  "obsidian-languagetool-plugin",
   "obsidian-kindle-plugin",
   "obsidian-admonition",
   "excalibrain",
@@ -26,10 +22,7 @@
   "omnisearch",
   "obsidian-auto-link-title",
   "calendar",
-  "ava",
-  "obsidian42-strange-new-worlds",
   "obsidian-focus-mode",
-  "cm-typewriter-scroll-obsidian",
   "obsidian-journey-plugin",
   "obsidian-tasks-plugin",
   "obsidian-style-settings",
@@ -41,8 +34,7 @@
   "obsidian-advanced-uri",
   "obsidian-list-callouts",
   "mrj-jump-to-link",
-  "obsidian-projects",
   "settings-search",
-  "obsidian-advanced-slides",
-  "obsidian-importer"
+  "obsidian-importer",
+  "obsidian42-strange-new-worlds"
 ]
