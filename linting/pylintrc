@@ -33,4 +33,7 @@ load-plugins=dagster.utils.linter
 generated-members=pyspark.*
 ignored-modules=pyspark.sql.functions
 
-max-line-length = 80
+max-line-length = 88
+
+# Check also Ruff when migrated over, this file might not be needed anylonger?
+# ~/.config/ruff/pyproject.toml

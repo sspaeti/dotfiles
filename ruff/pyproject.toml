@@ -1,0 +1,4 @@
+[tool.ruff]
+# select = ["E", "F", "B", "W", "Q"]
+# fix = true
+line-length = 88

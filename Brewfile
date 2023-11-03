@@ -104,11 +104,12 @@ brew "tcl-tk", link: false
 brew "webp"
 brew "pillow"
 brew "pipenv"
-brew "postgresql@14", restart_service: true
+brew "postgresql@14"
 brew "pyenv"
 brew "python@3.8"
 brew "ranger"
 brew "ripgrep"
+brew "ruff"
 brew "rust"
 brew "sbt"
 brew "scala"

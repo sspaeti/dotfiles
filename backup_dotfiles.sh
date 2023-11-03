@@ -80,6 +80,7 @@ cp -r ~/.pylintrc $git/general/dotfiles/linting/pylintrc
 cp -r ~/.config/flake8 $git/general/dotfiles/linting/flake8
 cp -r ~/.isort.cfg $git/general/dotfiles/linting/issort.cfg
 cp -r ~/.pyproject_example.toml $git/general/dotfiles/linting/pyproject_example.toml
+cp -r ~/.config/ruff/pyproject.toml $git/general/dotfiles/ruff/pyproject.toml
 
 #dbbeaver vrapper configs
 cp ~/.vrapperrc $git/general/dotfiles/dbeaver/vrapperrc 
