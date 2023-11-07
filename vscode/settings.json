@@ -106,7 +106,7 @@
     "editor.hideCursorInOverviewRuler": true,
     "editor.folding": true,
     "editor.occurrencesHighlight": false,
-    "editor.matchBrackets": "never",
+    "editor.matchBrackets": false,
     "editor.glyphMargin": true,
     "explorer.openEditors.visible": 0,
     "workbench.editor.showIcons": false,
