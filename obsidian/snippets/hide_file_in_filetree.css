@@ -1,21 +1,21 @@
-div[data-path$='assets'], 
-div[data-path$='assets'] + div.nav-folder-children 
-{
+div[data-path$='assets'],
+div[data-path$='assets']+div.nav-folder-children {
 	display: none;
 }
 
 
-.backlink-pane 
-{
-	font-size:12px;
+.backlink-pane {
+	font-size: 12px;
 }
 
-div[data-path$='.png']{
+div[data-path$='.png'] {
 	display: none;
 }
-div[data-path$='.jpg']{
+
+div[data-path$='.jpg'] {
 	display: none;
 }
-div[data-path$='.jpeg']{
+
+div[data-path$='.jpeg'] {
 	display: none;
 }
