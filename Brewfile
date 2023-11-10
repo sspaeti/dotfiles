@@ -104,6 +104,7 @@ brew "tcl-tk", link: false
 brew "webp"
 brew "pillow"
 brew "pipenv"
+brew "pngpaste"
 brew "postgresql@14"
 brew "pyenv"
 brew "python@3.8"

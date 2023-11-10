@@ -114,6 +114,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+#set arch to native mac
+#env /usr/bin/arch -arm64 /opt/homebrew/bin/zsh --login
+
 #
 # sspaeti customized properties
 #
@@ -121,8 +124,8 @@ source ~/.dotfiles/zsh/paths.shrc
 source ~/.dotfiles/zsh/aliases.shrc
 source ~/.dotfiles/zsh/.secrets
 #airbyte
-source ~/.dotfiles/zsh/.secrets_airbyte
-source ~/.dotfiles/zsh/paths_airbyte.shrc
+# source ~/.dotfiles/zsh/.secrets_airbyte
+# source ~/.dotfiles/zsh/paths_airbyte.shrc
 
 source ~/.dotfiles/zsh/.secrets_bed
 
