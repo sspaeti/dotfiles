@@ -1,5 +1,22 @@
 -- setup must be called before loading
-vim.cmd("colorscheme gruvbox") --#kanagawa --gruvbox
+-- manual set
+-- vim.cmd("colorscheme gruvbox") --#kanagawa --gruvbox
+--dynamically set
+-- define session name and theme
+local sessionThemes = {
+    ["bed-setup"] = "gruvbox",
+    ["hellodata"] = "gruvbox",
+    ["dotfiles"] = "solarized-osaka",
+    --default is kanagawa
+}
+
+-- Call the function when Neovim starts, passing the session themes
+vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = "*",
+    callback = function()
+        SetThemeBasedOnTmuxSession(sessionThemes)
+    end
+})
 
 -- vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.opt.completeopt = { "menu" }

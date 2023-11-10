@@ -1,4 +1,5 @@
 require("sspaeti.lazy")
+require("sspaeti.custom")
 require("theme.kanagawa")
 require("sspaeti.set")
 require("sspaeti.remap")
