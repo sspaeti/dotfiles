@@ -1,5 +1,4 @@
 [
-  "obsidian-plugin-todo",
   "obsidian-reading-time",
   "nldates-obsidian",
   "txt-as-md-obsidian",
@@ -24,7 +23,6 @@
   "calendar",
   "obsidian-focus-mode",
   "obsidian-journey-plugin",
-  "obsidian-tasks-plugin",
   "obsidian-style-settings",
   "quickadd",
   "remember-cursor-position",
@@ -36,5 +34,7 @@
   "mrj-jump-to-link",
   "settings-search",
   "obsidian-importer",
-  "obsidian42-strange-new-worlds"
+  "obsidian-day-planner",
+  "obsidian-plugin-todo",
+  "ollama"
 ]

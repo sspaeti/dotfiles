@@ -348,5 +348,13 @@
       ],
       "key": "="
     }
+  ],
+  "obsidian-day-planner:show-weekly-view": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "P"
+    }
   ]
 }
