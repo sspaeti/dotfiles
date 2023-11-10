@@ -3,10 +3,10 @@ return {
 
 	--color theme
 	{ "rebelot/kanagawa.nvim", lazy = false },
+	{ "ellisonleao/gruvbox.nvim", lazy = false },
 	{ "AlexvZyl/nordic.nvim", event = "VeryLazy" },
 	{ "navarasu/onedark.nvim", event = "VeryLazy" },
 	{ "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" }, --light theme
-	{ "ellisonleao/gruvbox.nvim", event = "VeryLazy", priority = 1000 },
 	{ "craftzdog/solarized-osaka.nvim", lazy = false, priority = 1000 },
 	{ "projekt0n/github-nvim-theme", event = "VeryLazy", version = "*" },
 	{ "sainnhe/gruvbox-material", event = "VeryLazy", version = "*" },
@@ -415,4 +415,5 @@ return {
 		},
 		event = "VeryLazy",
 	},
+  { "ekickx/clipboard-image.nvim", event = "VeryLazy"},
 }
