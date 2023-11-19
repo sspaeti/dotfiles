@@ -19,10 +19,33 @@ set postponed = "+Drafts"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-mailboxes =Inbox =ScreenedIn =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =ScreenedOut
+mailboxes =Inbox =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others
+
 
 
 # SCREENER
+#
+## Step 3: Decision Making Macros
+# macro index,pager I "<shell-escape>echo %:from-email >> ~/.config/mutt/screened_in.txt<enter><save-message>=Inbox<enter>" "Screen in this sender"
+macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>=Inbox<enter>" "Screen in this sender"
+
+# macro index,pager O "<shell-escape>echo %:from-email >> ~/.config/mutt/screened_out.txt<enter><save-message>=ScreenedOut<enter>" "Screen out this sender"
+macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>=ScreenedOut<enter>" "Screen out this sender"
+
+
+## Step 4: Filtering Views in Mutt
+macro index,pager L "<shell-escape>~/.config/mutt/generate_pattern.sh<enter>" "Exclude emails from screen_out.txt"
+macro index,pager A "<shell-escape>~/.config/mutt/generate_pattern_in.sh<enter>" "Select accepted emails from screen_in.txt"
+
+## Step 6: Updating Lists and Filters
+set my_screen_update_macro="<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
+# macro index F5 "<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
+
+
+
+
+
+#
 # handling screening of senders (hide not important senders out of my inbox)
 # --> ignored emails are in .secret.muttrc above, but these are not moved to folder, just ignored in inbox
 
@@ -42,16 +65,18 @@ mailboxes =Inbox =ScreenedIn =Waiting =Scheduled =Someday =Sent =Trash =Drafts =
 
 # macro index,pager O "<save-message>=ScreenedOut<enter><next-undeleted>" "Screen out based on list"
 # macro index,pager A "<save-message>=Inbox<enter><next-undeleted>" "Accept based on list"
-# macro index,pager L ":limit ~f `cat ~/.config/mutt/screen_out.txt | tr '\n' '|'`<enter>" "Limit view to screen-out list"
+# macro index,pager L ":limit ~f `cat ~/.config/mutt/screened_out.txt | tr '\n' '|'`<enter>" "Limit view to screen-out list"
 # macro index,pager U ":unlimit<enter>" "Remove limit"
-# :set limit="~f `cat ~/.config/mutt/screen_out.txt | tr '\n' '|' | sed 's/|$//'`"
-# macro index L ":exec pattern ~f `cat ~/.config/mutt/screen_out.txt | tr '\n' '|' | sed 's/|$//'`<enter>" "Limit view to screen-out list"
+# :set limit="~f `cat ~/.config/mutt/screened_out.txt | tr '\n' '|' | sed 's/|$//'`"
+# macro index L ":exec pattern ~f `cat ~/.config/mutt/screened_out.txt | tr '\n' '|' | sed 's/|$//'`<enter>" "Limit view to screen-out list"
 # macro index U ":exec pattern .<enter>" "Remove limit"
 
 # macro index,pager L "T!~f bla@bla\.com !~f no-reply@dsb-email\.dk<enter>" "Exclude emails from two addresses"
 
-macro index,pager L "T`~/.config/mutt/generate_pattern.sh`<enter>" "Exclude emails from screen_out.txt"
-macro index,pager O "T`~/.config/mutt/generate_pattern_in.sh`<enter>" "Select accepted emails from screen_in.txt"
+# worked best
+# macro index,pager L "T`~/.config/mutt/generate_pattern.sh`<enter>" "Exclude emails from screened_out.txt"
+# macro index,pager O "T`~/.config/mutt/generate_pattern_in.sh`<enter>" "Select accepted emails from screened_in.txt"
+
 
 
 # Where to put the stuff
@@ -151,9 +176,7 @@ macro index,pager gw "<change-folder>=Waiting<enter>" "go to waiting"
 macro index,pager Mw ";<save-message>=Waiting<enter>" "move mail to waiting"
 macro index,pager Cw ";<copy-message>=Waiting<enter>" "copy mail to waiting"
 
-
-macro index,pager gg "<change-folder>=ScreenedIn<enter>" "go to screened in"
-macro index,pager Mg ";<save-message>=ScreenedIn<enter>" "move mail to screened in"
+macro index,pager gk "<change-folder>=ToScreen<enter>" "go to screener"
 
 macro index,pager go "<change-folder>=ScreenedOut<enter>" "go to screened out"
 macro index,pager Mo ";<save-message>=ScreenedOut<enter>" "move mail to screened out"
