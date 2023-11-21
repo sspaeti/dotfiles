@@ -87,3 +87,9 @@ alias dkcpstop="docker-compose stop"
 alias arm="env /usr/bin/arch -arm64 /opt/homebrew/bin/zsh --login"
 alias intel="env /usr/bin/arch -x86_64 /bin/zsh --login"
 
+
+# Neomutt
+alias mutt="neomutt"
+# alias mscreener="~/.config/mutt/initial_screening.sh"
+alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"
+alias msync="offlineimap -a sspaeti.com"

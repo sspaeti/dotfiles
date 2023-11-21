@@ -36,5 +36,6 @@
   "obsidian-importer",
   "obsidian-day-planner",
   "obsidian-plugin-todo",
-  "ollama"
+  "ollama",
+  "obsidian-hider"
 ]
