@@ -352,7 +352,9 @@ return {
 	--		--vim.g.vimwiki_global_ext = 0 --only mark files in the second brain as vim viki, rest are standard markdown
 	--	-- end,
 	--},
-
+  --align markdown tables or others
+  { "junegunn/vim-easy-align", event = "VeryLazy" },
+ 
 	--dbt
 	-- 'lepture/vim-jinja', --needed for dbt below but errors in hugo htmls...
 	{ "glench/vim-jinja2-syntax", event = "VeryLazy" },
