@@ -29,17 +29,26 @@ set postponed = "+Drafts"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-mailboxes =Inbox =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others
+mailboxes =Inbox =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail"
 
 
 
 # SCREENER
 #
 ## Step 3: Decision Making Macros
-# macro index,pager I "<shell-escape>echo %:from-email >> ~/.config/mutt/screened_in.txt<enter><save-message>=Inbox<enter>" "Screen in this sender"
+
+# this does:
+# 1. Takes the current message and sends it through a pipeline for processing.
+# 2. Uses awk to extract the last field (email address) from the line that starts with From: . The $NF is a special awk variable that represents the last field in a record.
+# 3. Removes angle brackets from around the email address, which are commonly used in email headers.
+# 4. Appends the email address to the screened_in.txt file.
+# 5. Saves the message to the Inbox after the macro executes.
 macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>=Inbox<enter>" "Screen in this sender"
 
-# macro index,pager O "<shell-escape>echo %:from-email >> ~/.config/mutt/screened_out.txt<enter><save-message>=ScreenedOut<enter>" "Screen out this sender"
+
+# this does:
+# 1. Appends the email address to the screened_out.txt file.
+# 2. Saves the message to a folder named ScreenedOut after execution.
 macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>=ScreenedOut<enter>" "Screen out this sender"
 
 
@@ -50,43 +59,6 @@ macro index,pager A "<shell-escape>~/.config/mutt/generate_pattern_in.sh<enter>"
 ## Step 6: Updating Lists and Filters
 set my_screen_update_macro="<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
 # macro index F5 "<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
-
-
-
-
-
-#
-# handling screening of senders (hide not important senders out of my inbox)
-# --> ignored emails are in .secret.muttrc above, but these are not moved to folder, just ignored in inbox
-
-# Define a pattern for filtering emails from the specified sender
-# pattern index,sent,browser "from:"jack@jacksflightclub\.com "ScreenedOut"
-
-
-# # Define a macro to mark matching emails for deletion
-# macro index,pager X "|~b %s^$sender@example\.com\n" "Mark emails from sender@example.com for deletion"
-
-# # Redirect marked emails to the "Blocked" folder (change the folder name if needed)
-# folder-hook . 'push -f +ScreenedOut ~b $sender@example\.com'
-
-
-
-# macro index O "<save-message>+ScreenedOut<enter>" "Screen out this email"
-
-# macro index,pager O "<save-message>=ScreenedOut<enter><next-undeleted>" "Screen out based on list"
-# macro index,pager A "<save-message>=Inbox<enter><next-undeleted>" "Accept based on list"
-# macro index,pager L ":limit ~f `cat ~/.config/mutt/screened_out.txt | tr '\n' '|'`<enter>" "Limit view to screen-out list"
-# macro index,pager U ":unlimit<enter>" "Remove limit"
-# :set limit="~f `cat ~/.config/mutt/screened_out.txt | tr '\n' '|' | sed 's/|$//'`"
-# macro index L ":exec pattern ~f `cat ~/.config/mutt/screened_out.txt | tr '\n' '|' | sed 's/|$//'`<enter>" "Limit view to screen-out list"
-# macro index U ":exec pattern .<enter>" "Remove limit"
-
-# macro index,pager L "T!~f bla@bla\.com !~f no-reply@dsb-email\.dk<enter>" "Exclude emails from two addresses"
-
-# worked best
-# macro index,pager L "T`~/.config/mutt/generate_pattern.sh`<enter>" "Exclude emails from screened_out.txt"
-# macro index,pager O "T`~/.config/mutt/generate_pattern_in.sh`<enter>" "Select accepted emails from screened_in.txt"
-
 
 
 # Where to put the stuff
@@ -155,6 +127,7 @@ bind index,pager,browser u half-up
 #sync
 macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox>"
 # bind index,pager S sync-mailbox
+macro index,pager U "<shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
 
 
 bind index,pager R group-reply
@@ -165,8 +138,7 @@ bind pager \005 next-line		# Mouse wheel
 bind editor <Tab> complete-query
 
 
-
-
+## Move, copy and go to folders mappings
 macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
 macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
 macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
@@ -191,6 +163,15 @@ macro index,pager Mw ";<save-message>=Waiting<enter>" "move mail to waiting"
 macro index,pager Cw ";<copy-message>=Waiting<enter>" "copy mail to waiting"
 
 macro index,pager gk "<change-folder>=ToScreen<enter>" "go to screener"
+
+macro index,pager gf "<change-folder>=Feed<enter>" "go to Feed"
+macro index,pager Mf ";<save-message>=Feed<enter>" "move mail to Feed"
+macro index,pager Cf ";<copy-message>=Feed<enter>" "copy mail to Feed"
+
+macro index,pager gp "<change-folder>=Feed<enter>" "go to PaterTrail"
+macro index,pager Mp ";<save-message>=Feed<enter>" "move mail to PaterTrail"
+macro index,pager Cp ";<copy-message>=Feed<enter>" "copy mail to PaterTrail"
+
 
 macro index,pager go "<change-folder>=ScreenedOut<enter>" "go to screened out"
 macro index,pager Mo ";<save-message>=ScreenedOut<enter>" "move mail to screened out"

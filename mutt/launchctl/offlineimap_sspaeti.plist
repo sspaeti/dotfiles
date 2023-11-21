@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.offlineimap_sspaeti</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/offlineimap</string>
+        <string>-a</string>
+        <string>sspaeti.com</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>1800</integer> <!-- 30 minutes -->
+    <key>StandardErrorPath</key>
+    <string>~/Library/Logs/offlineimap_sspaeti_error.log</string>
+    <key>StandardOutPath</key>
+    <string>~/Library/Logs/offlineimap_sspaeti_output.log</string>
+</dict>
+</plist>
