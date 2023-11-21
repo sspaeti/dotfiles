@@ -1,6 +1,16 @@
-set folder = "imaps://simu@sspaeti.com@imap.mail.hostpoint.ch:993"
-set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
 
+
+### offline email -------------------------
+set sendmail = "/usr/bin/msmtp -a sspaeti.com"
+set folder = "~/Documents/mutt/sspaeti.com/"
+alias me "Simon Späti" "simu@sspaeti.com"
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+### Direct -------------------------------
+# set folder = "imaps://simu@sspaeti.com@imap.mail.hostpoint.ch:993"
+# set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
 
 # set smpt password with ENV variable
 # set smtp_pass = "$HOSTSPINT_SMTP_PASSWORD_SIMU"
@@ -142,7 +152,11 @@ bind pager G bottom
 # bind attach,index,pager \CU previous-page
 bind index,pager,browser d half-down
 bind index,pager,browser u half-up
-bind index,pager S sync-mailbox
+#sync
+macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox>"
+# bind index,pager S sync-mailbox
+
+
 bind index,pager R group-reply
 bind index \031 previous-undeleted	# Mouse wheel
 bind index \005 next-undeleted		# Mouse wheel
