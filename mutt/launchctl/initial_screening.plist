@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/bin/sh</string>
-        <string>~/.config/mutt/initial_screening.sh</string>
+        <string>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1</string>
     </array>
     <key>StartInterval</key>
     <integer>1800</integer> <!-- 30 minutes -->
