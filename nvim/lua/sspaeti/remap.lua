@@ -162,6 +162,7 @@ end
 vim.keymap.set("n", "<Leader>cc", ":call toggle_qf()<CR>")
 vim.keymap.set("n", "<Leader>co", ":copen<CR>")
 vim.keymap.set("n", "<Leader>cc", ":cclose<CR>")
+vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
 
 -- <TAB>: completion -> still needed?
 -- inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
