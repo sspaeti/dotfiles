@@ -78,6 +78,8 @@ cp ~/.config/mutt/mailcap $git/general/dotfiles/mutt/mailcap
 cp ~/.config/mutt/signature $git/general/dotfiles/mutt/signature
 cp ~/.config/mutt/update_screen_lists.sh $git/general/dotfiles/mutt/update_screen_lists.sh
 
+cp ~/.config/mutt/get_hey_emails/get_screener_emails_from_hey.py $git/general/dotfiles/mutt/get_hey_emails/get_screener_emails_from_hey.py
+
 
 #ranger
 cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf
