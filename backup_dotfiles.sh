@@ -68,7 +68,7 @@ cp ~/.config/skhd/skhdrc $git/general/dotfiles/skhd/skhdrc
 
 # neomutt - email client
 cp ~/.config/mutt/muttrc $git/general/dotfiles/mutt/muttrc
-cp ~/.config/mutt/initial_screening.sh $git/general/dotfiles/mutt/update_screen_lists.sh
+cp ~/.config/mutt/initial_screening.sh $git/general/dotfiles/mutt/initial_screening.sh
 
 cp ~/.config/mutt/color.muttrc $git/general/dotfiles/mutt/color.muttrc
 cp ~/.config/mutt/generate_pattern.sh $git/general/dotfiles/mutt/generate_pattern.sh

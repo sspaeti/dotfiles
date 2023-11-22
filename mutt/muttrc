@@ -29,7 +29,7 @@ set postponed = "+Drafts"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-mailboxes =Inbox =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail"
+mailboxes =Inbox =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail =Spam"
 
 
 

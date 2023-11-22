@@ -34,8 +34,12 @@ for email in $(find "$mail_dir" -maxdepth 3 -type f \( -path "*/new/*" -o -path 
         printf -- "----------------------------------------\n"
         printf "Sender: %s\n" "$sender"
         printf "Moving to ScreenedOut/new: '%s'\n" "$email"
+        mv "$email" "$mail_dir/ScreenedOut/new/"
     else
-        # printf "Else: Nothing should be done here: %s\n" "$email"
+        printf -- "----------------------------------------\n"
+        printf "Sender: %s\n" "$sender"
+        printf "New Emails (not in IN/OUT list): Moving to ToScreen/new: %s\n" "$email"
+        mv "$email" "$mail_dir/ToScreen/new/"
         :
     fi
 done
