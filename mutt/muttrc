@@ -51,17 +51,19 @@ macro compose <F3> "<enter-command>set sendmail='/usr/bin/msmtp -a simu@sspaeti.
 # 5. Saves the message to the Inbox after the macro executes.
 macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>Inbox<enter>y" "Screen in this sender"
 
-
-
 # this does:
 # 1. Appends the email address to the screened_out.txt file.
 # 2. Saves the message to a folder named ScreenedOut after execution.
 macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>ScreenedOut<enter>y" "Screen out this sender"
 
+# add to Feed list
+macro index,pager F "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>Feed<enter>y" "Add sender to Feed"
 
-## Step 4: Filtering Views in Mutt
-macro index,pager L "<shell-escape>~/.config/mutt/generate_pattern.sh<enter>" "Exclude emails from screen_out.txt"
-macro index,pager A "<shell-escape>~/.config/mutt/generate_pattern_in.sh<enter>" "Select accepted emails from screen_in.txt"
+# add to papertrail list
+macro index,pager P "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>PaperTrail<enter>y" "Add sender to PaperTrail"
+
+
+
 
 ## Step 6: Updating Lists and Filters
 set my_screen_update_macro="<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
@@ -148,41 +150,39 @@ bind editor <Tab> complete-query
 
 ## Move, copy and go to folders mappings
 macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-macro index,pager Mi ";<save-message>=INBOX<enter>" "move mail to inbox"
-macro index,pager Ci ";<copy-message>=INBOX<enter>" "copy mail to inbox"
+macro index,pager Mi ";<save-message>=INBOX<enter>y" "move mail to inbox"
+
 macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
-macro index,pager Md ";<save-message>=Drafts<enter>" "move mail to drafts"
-macro index,pager Cd ";<copy-message>=Drafts<enter>" "copy mail to drafts"
+macro index,pager Md ";<save-message>=Drafts<enter>y" "move mail to drafts"
+
 macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
-macro index,pager Mj ";<save-message>=Junk<enter>" "move mail to junk"
-macro index,pager Cj ";<copy-message>=Junk<enter>" "copy mail to junk"
+macro index,pager Mj ";<save-message>=Junk<enter>y" "move mail to junk"
+
 macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
-macro index,pager Mt ";<save-message>=Trash<enter>" "move mail to trash"
-macro index,pager Ct ";<copy-message>=Trash<enter>" "copy mail to trash"
+macro index,pager Mt ";<save-message>=Trash<enter>y" "move mail to trash"
+
 macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
-macro index,pager Ms ";<save-message>=Sent<enter>" "move mail to sent"
-macro index,pager Cs ";<copy-message>=Sent<enter>" "copy mail to sent"
+
+macro index,pager gm "<change-folder>=Someday<enter>" "go to Someday"
+macro index,pager Mm ";<save-message>=Someday<enter>" "move mail to Someday"
+
 macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
-macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to archive"
-macro index,pager Ca ";<copy-message>=Archive<enter>" "copy mail to archive"
+macro index,pager Ma ";<save-message>=Archive<enter>y" "move mail to archive"
 
 macro index,pager gw "<change-folder>=Waiting<enter>" "go to waiting"
-macro index,pager Mw ";<save-message>=Waiting<enter>" "move mail to waiting"
-macro index,pager Cw ";<copy-message>=Waiting<enter>" "copy mail to waiting"
+macro index,pager Mw ";<save-message>=Waiting<enter>y" "move mail to waiting"
 
 macro index,pager gk "<change-folder>=ToScreen<enter>" "go to screener"
 
 macro index,pager gf "<change-folder>=Feed<enter>" "go to Feed"
-macro index,pager Mf ";<save-message>=Feed<enter>" "move mail to Feed"
-macro index,pager Cf ";<copy-message>=Feed<enter>" "copy mail to Feed"
+macro index,pager Mf ";<save-message>=Feed<enter>y" "move mail to Feed"
 
-macro index,pager gp "<change-folder>=Feed<enter>" "go to PaterTrail"
-macro index,pager Mp ";<save-message>=Feed<enter>" "move mail to PaterTrail"
-macro index,pager Cp ";<copy-message>=Feed<enter>" "copy mail to PaterTrail"
+macro index,pager gp "<change-folder>=PapterTrail<enter>" "go to PaterTrail"
+macro index,pager Mp ";<save-message>=PapterTrail<enter>y" "move mail to PaterTrail"
 
 
 macro index,pager go "<change-folder>=ScreenedOut<enter>" "go to screened out"
-macro index,pager Mo ";<save-message>=ScreenedOut<enter>" "move mail to screened out"
+macro index,pager Mo ";<save-message>=ScreenedOut<enter>y" "move mail to screened out"
 
 macro index,pager gl "<show-log-messages><enter>" "go to log messages"
 

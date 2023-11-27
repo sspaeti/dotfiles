@@ -3,10 +3,15 @@
 # Paths to screened lists
 screened_in="$HOME/.config/mutt/screened_in.txt"
 screened_out="$HOME/.config/mutt/screened_out.txt"
+feed_list="$HOME/.config/mutt/feed.txt"
+papertrail_list="$HOME/.config/mutt/papertrail.txt"
 
 ## trim trailing spaces
 sed -i '' 's/[[:space:]]*$//' "$screened_in"
 sed -i '' 's/[[:space:]]*$//' "$screened_out"
+sed -i '' 's/[[:space:]]*$//' "$feed_list"
+sed -i '' 's/[[:space:]]*$//' "$papertrail_list"
+
 
 # Function to check if an email sender is in a file
 in_file() {
@@ -18,7 +23,7 @@ in_file() {
 # Correct the path to your mail directory (remove the trailing /)
 mail_dir="$HOME/Documents/mutt/sspaeti.com"
 
-printf "Starting initial screening...\n"
+printf "Starting initial screening at $(date '+%Y-%m-%d %H:%M:%S')...\n"
 
 # Process each new email in the 'new' directory and 'cur' directory of INBOX only
 for email in $(find "$mail_dir" -maxdepth 3 -type f \( -path "*/new/*" -o -path "*/INBOX/cur/*" \)); do
@@ -35,7 +40,19 @@ for email in $(find "$mail_dir" -maxdepth 3 -type f \( -path "*/new/*" -o -path 
         printf "Sender: %s\n" "$sender"
         printf "Moving to ScreenedOut/new: '%s'\n" "$email"
         mv "$email" "$mail_dir/ScreenedOut/new/"
+
+     elif in_file "$sender" "$feed_list"; then
+        printf -- "----------------------------------------\n"
+        printf "Sender: %s\n" "$sender"
+        printf "Moving to Feed/new: '%s'\n" "$email"
+        mv "$email" "$mail_dir/Feed/new/"
+    elif in_file "$sender" "$papertrail_list"; then
+        printf -- "----------------------------------------\n"
+        printf "Sender: %s\n" "$sender"
+        printf "Moving to PaperTrail/new: '%s'\n" "$email"
+        mv "$email" "$mail_dir/PaperTrail/new/"       mv "$email" "$mail_dir/ScreenedOut/new/"
     else
+        # not in any list
         printf -- "----------------------------------------\n"
         printf "Sender: %s\n" "$sender"
         printf "New Emails (not in IN/OUT list): Moving to ToScreen/new: %s\n" "$email"
