@@ -50,7 +50,7 @@ for email in $(find "$mail_dir" -maxdepth 3 -type f \( -path "*/new/*" -o -path 
         printf -- "----------------------------------------\n"
         printf "Sender: %s\n" "$sender"
         printf "Moving to PaperTrail/new: '%s'\n" "$email"
-        mv "$email" "$mail_dir/PaperTrail/new/"       mv "$email" "$mail_dir/ScreenedOut/new/"
+        mv "$email" "$mail_dir/PaperTrail/new/"
     else
         # not in any list
         printf -- "----------------------------------------\n"
