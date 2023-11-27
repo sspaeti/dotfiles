@@ -128,6 +128,7 @@ source ~/.dotfiles/zsh/.secrets
 # source ~/.dotfiles/zsh/paths_airbyte.shrc
 
 source ~/.dotfiles/zsh/.secrets_bed
+source ~/.dotfiles/zsh/aliases_bedag.sh
 
 source ~/.dotfiles/zsh/configs.shrc
 source ~/.dotfiles/zsh/end.shrc
