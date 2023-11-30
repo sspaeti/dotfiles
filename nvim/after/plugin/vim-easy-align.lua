@@ -1,3 +1,5 @@
+-- Tool to align Markwodn tables
+-- e.g. markdown table with : `ga*|`
 -- Start interactive EasyAlign in visual mode (e.g. vipga)
 vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', { noremap = false, silent = true })
 
