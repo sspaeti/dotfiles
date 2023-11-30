@@ -178,7 +178,7 @@ macro index,pager gf "<change-folder>=Feed<enter>" "go to Feed"
 macro index,pager Mf ";<save-message>=Feed<enter>y" "move mail to Feed"
 
 macro index,pager gp "<change-folder>=PaperTrail<enter>" "go to PaperTrail"
-macro index,pager Mp ";<save-message>=PapperTrail<enter>y" "move mail to PaperTrail"
+macro index,pager Mp ";<save-message>=PaperTrail<enter>y" "move mail to PaperTrail"
 
 macro index,pager go "<change-folder>=ScreenedOut<enter>" "go to screened out"
 macro index,pager Mo ";<save-message>=ScreenedOut<enter>y" "move mail to screened out"
