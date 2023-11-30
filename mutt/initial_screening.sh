@@ -28,14 +28,10 @@ printf "Starting initial screening at $(date '+%Y-%m-%d %H:%M:%S')...\n"
 # Process each new email in the 'new' directory and 'cur' directory of INBOX only
 for email in $(find "$mail_dir" -maxdepth 3 -type f \( -path "*/new/*" -o -path "*/INBOX/cur/*" \)); do
 #only new
-# for email in $(find "$mail_dir" -maxdepth 3 -type f -path "*/new/*"); do
     sender=$(grep "^From:" "$email" | head -1 | sed 's/.*<\(.*\)>/\1/')
     # printf "Sender: %s\n" "$sender"
 
-    if in_file "$sender" "$screened_in"; then
-        # printf "Not moved (Screened In): %s\n" "$email"
-        : # No operation, placeholder
-    elif in_file "$sender" "$screened_out"; then
+    if in_file "$sender" "$screened_out"; then
         printf -- "----------------------------------------\n"
         printf "Sender: %s\n" "$sender"
         printf "Moving to ScreenedOut/new: '%s'\n" "$email"
@@ -51,6 +47,9 @@ for email in $(find "$mail_dir" -maxdepth 3 -type f \( -path "*/new/*" -o -path 
         printf "Sender: %s\n" "$sender"
         printf "Moving to PaperTrail/new: '%s'\n" "$email"
         mv "$email" "$mail_dir/PaperTrail/new/"
+    elif in_file "$sender" "$screened_in"; then
+        # printf "Not moved (Screened In): %s\n" "$email"
+        : # No operation, placeholder
     else
         # not in any list
         printf -- "----------------------------------------\n"
