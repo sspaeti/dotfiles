@@ -148,10 +148,22 @@ bind pager G bottom
 # bind attach,index,pager \CU previous-page
 bind index,pager,browser d half-down
 bind index,pager,browser u half-up
-#sync
-macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox>"
-# bind index,pager S sync-mailbox
-macro index,pager U "<shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
+#sync & screener
+macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox><shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
+# both are seperate:
+## macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox>"
+## # bind index,pager S sync-mailbox
+## macro index,pager U "<shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
+## 
+
+
+# reomve selection
+# macro index U "T.t<enter>"
+# macro index U "<tag-pattern>.<enter>;<tag-toggle><enter>" 
+macro index U "<tag-pattern>.<enter>;t<enter>"
+
+
+
 
 
 bind index,pager R group-reply
