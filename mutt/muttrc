@@ -9,6 +9,7 @@ set ssl_starttls = yes
 set ssl_force_tls = yes
 
 
+
 ### Direct -------------------------------
 # set folder = "imaps://simu@sspaeti.com@imap.mail.hostpoint.ch:993"
 # set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
@@ -21,7 +22,7 @@ source ~/.dotfiles/zsh/.secret.muttrc
 set from = "simu@sspaeti.com"
 set realname = "Simon Späti"
 
-set spoolfile = "+Inbox"
+set spoolfile = "+INBOX"
 set record = "+Sent"
 set trash = "+Trash"
 set postponed = "+Drafts"
@@ -30,7 +31,7 @@ set postponed = "+Drafts"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-mailboxes =Inbox =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail =Spam"
+mailboxes =INBOX =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail =Spam"
 
 
 #Create Macros for Switching Accounts:
@@ -49,20 +50,33 @@ macro compose <F3> "<enter-command>set sendmail='/usr/bin/msmtp -a simu@sspaeti.
 # 3. Removes angle brackets from around the email address, which are commonly used in email headers.
 # 4. Appends the email address to the screened_in.txt file.
 # 5. Saves the message to the Inbox after the macro executes.
-macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>Inbox<enter>y" "Screen in this sender"
+
+macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
+
+# macro index,pager I "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
+
 
 # this does:
 # 1. Appends the email address to the screened_out.txt file.
 # 2. Saves the message to a folder named ScreenedOut after execution.
-macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>ScreenedOut<enter>y" "Screen out this sender"
+macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+# macro index,pager O "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+
 
 # add to Feed list
-macro index,pager F "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>Feed<enter>y" "Add sender to Feed"
+# macro index,pager F "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+
+macro index,pager F "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+
+
+# macro index,pager F "<pipe-message>awk '/^From: / { match(\$0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}/, arr); if(arr[0] != \"\") print arr[0] }' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+
+# macro index,pager F "<pipe-message>echo %{from}<enter> | ./extract_email.sh | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+
 
 # add to papertrail list
-macro index,pager P "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>PaperTrail<enter>y" "Add sender to PaperTrail"
-
-
+macro index,pager P "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
+# macro index,pager P "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
 
 
 ## Step 6: Updating Lists and Filters
@@ -149,8 +163,8 @@ bind editor <Tab> complete-query
 
 
 ## Move, copy and go to folders mappings
-macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
-macro index,pager Mi ";<save-message>=INBOX<enter>y" "move mail to inbox"
+macro index,pager gi "<change-folder>=INBOX<enter>" "go to INBOX"
+macro index,pager Mi ";<save-message>=INBOX<enter>y" "move mail to INBOX"
 
 macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
 macro index,pager Md ";<save-message>=Drafts<enter>y" "move mail to drafts"
