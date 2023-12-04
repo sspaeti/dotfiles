@@ -53,6 +53,7 @@ cp ~/Simon/Sync/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/ap
 cp ~/Simon/Sync/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vimrc
 cp ~/Simon/Sync/SecondBrain/.obsidian/themes/custom_kanagawa.css $git/general/dotfiles/obsidian/themes/custom_kanagawa.css
 cp -r ~/Simon/Sync/SecondBrain/.obsidian/snippets/* $git/general/dotfiles/obsidian/snippets/
+cp -r ~/Simon/Sync/SecondBrain/.obsidian/exports/* $git/general/dotfiles/obsidian/exports/
 
 #kitty
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
