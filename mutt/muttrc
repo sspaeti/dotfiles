@@ -1,14 +1,15 @@
 
 
 ### offline email -------------------------
-set sendmail = "/usr/bin/msmtp -a simon@sspaeti.com"
 set folder = "~/Documents/mutt/sspaeti.com/"
 alias me "Simon Späti" "simu@sspaeti.com"
 set mbox_type = Maildir
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-
+# Neomutt will actively add CR or LF after the exact characters. As I'm doing them myself, I set it to 0.
+# set wrap=0
+set text_flowed
 
 ### Direct -------------------------------
 # set folder = "imaps://simu@sspaeti.com@imap.mail.hostpoint.ch:993"
@@ -19,8 +20,17 @@ set ssl_force_tls = yes
 # set imap_pass = "password"
 source ~/.dotfiles/zsh/.secret.muttrc
 
-set from = "simu@sspaeti.com"
 set realname = "Simon Späti"
+set from = "simon@sspaeti.com"
+set sendmail = "msmtp -a simon@sspaeti.com"
+#Create Macros for Switching Accounts:
+macro compose <F1> "<enter-command>set sendmail='msmtp -a simon@sspaeti.com'<enter><enter-command>set from='simu@sspaeti.com'<enter>"
+macro compose <F2> "<enter-command>set sendmail='msmtp -a simon@ssp.sh'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+macro compose <F3> "<enter-command>set sendmail='msmtp -a simu@sspaeti.com'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+
+macro index <F1> ":set from='simu@sspaeti.com'\n:set sendmail='msmtp -a simu@sspaeti.com'\n"
+macro index <F2> ":set from='simon@ssp.sh'\n:set sendmail='mssmtp -a simon@ssp.sh'\n"
+macro index <F3> ":set from='simon@sspaeti.com'\n:set sendmail='msmtp -a simon@sspaeti.com'\n"
 
 set spoolfile = "+INBOX"
 set record = "+Sent"
@@ -34,10 +44,7 @@ set ssl_force_tls = yes
 mailboxes =INBOX =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail =Spam"
 
 
-#Create Macros for Switching Accounts:
-macro compose <F1> "<enter-command>set sendmail='/usr/bin/msmtp -a simon@sspaeti.com'<enter><enter-command>set from='simu@sspaeti.com'<enter>"
-macro compose <F2> "<enter-command>set sendmail='/usr/bin/msmtp -a simon@ssp.sh'<enter><enter-command>set from='simon@ssp.sh'<enter>"
-macro compose <F3> "<enter-command>set sendmail='/usr/bin/msmtp -a simu@sspaeti.com'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+
 # macro compose <F4> "<enter-command>set sendmail='/usr/bin/msmtp -a gmail.com'<enter><enter-command>set from='simon.spaeti@gmail.com'<enter>"
 
 # SCREENER
@@ -118,7 +125,12 @@ bind index,pager M noop
 bind index,pager C noop
 
 # General rebindings
-set editor = "nvim"
+# set editor = "nvim"
+set editor="nvim -c 'setlocal filetype=markdown'"
+# for proper quoting
+set indent_string="> "
+
+
 bind index gg first-entry
 bind index j next-entry
 bind index k previous-entry
@@ -266,6 +278,24 @@ set sort_aux = last-date-received
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set send_charset = "utf-8:iso-8859-1:us-ascii" # send in utf-8
+
+#Convert to HTML when hitting `m` for composing email
+# from: https://tom.wemyss.net/posts/neomutt-markdown-email/#2-set-up-a-pandoc-template-for-html-emails
+#
+# how it works:
+# Before pressing ‘y’ to send the message:
+# 1. Press ‘m’ to run the macro. All being well, this will automatically create another inline attachment containing both the HTML and the plain text.
+# 2. If you’re happy with the new attachment that got generated, then delete your markdown file by using the arrow keys to navigate the list of attachments and detaching the original text (pressing Shift and D with the default key bindings).
+# 3. Press send!
+macro compose m \
+"<enter-command>set pipe_decode<enter>\
+<pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter>\
+<pipe-message>pandoc -s -f gfm --self-contained -o /tmp/msg.html --resource-path ~/.config/mutt/templates/ --template email.html<enter>\
+<enter-command>unset pipe_decode<enter>\
+<attach-file>/tmp/msg.txt<enter>\
+<attach-file>/tmp/msg.html<enter>\
+<tag-entry><previous-entry><tag-entry><group-alternatives>" \
+"Convert markdown to HTML5 and plaintext alternative content types"
 
 # more configs at https://raw.githubusercontent.com/LukeSmithxyz/mutt-wizard/1c5085d3f203fbd4eef8813e0915fd6e3c899570/share/mutt-wizard.muttrc
 # and: https://seniormars.github.io/posts/neomutt/#motivation
