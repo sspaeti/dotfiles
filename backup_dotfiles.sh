@@ -76,6 +76,7 @@ cp ~/.config/mutt/generate_pattern.sh $git/general/dotfiles/mutt/generate_patter
 cp ~/.config/mutt/generate_pattern_in.sh $git/general/dotfiles/mutt/generate_pattern_in.sh
 cp -r ~/.config/mutt/launchctl/* $git/general/dotfiles/mutt/launchctl/
 cp -r ~/.config/mutt/tests/* $git/general/dotfiles/mutt/tests/
+cp -r ~/.config/mutt/templates/* $git/general/dotfiles/mutt/templates/
 cp ~/.config/mutt/mailcap $git/general/dotfiles/mutt/mailcap
 cp ~/.config/mutt/signature $git/general/dotfiles/mutt/signature
 cp ~/.config/mutt/update_screen_lists.sh $git/general/dotfiles/mutt/update_screen_lists.sh

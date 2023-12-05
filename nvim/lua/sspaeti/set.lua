@@ -163,3 +163,4 @@ vim.cmd[[
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 ]]
+
