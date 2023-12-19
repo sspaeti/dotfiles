@@ -38,3 +38,4 @@ yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^Microsoft Teams$" manage=off
 yabai -m rule --add app="^Microsoft Remote Desktop$" manage=off
 yabai -m rule --add app="^GIMP$" manage=off
+yabai -m rule --add app="^Preview$" manage=off

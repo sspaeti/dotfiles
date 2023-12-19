@@ -71,6 +71,8 @@ alias ko="kubectl --dry-run=client -o yaml "
 alias dps="docker ps --format \"table {{.Image}}\t{{.Status}}\t{{.Names}}\" --all"
 
 alias lg=lazygit
+alias ldd=lazydocker
+alias lk=k9s
 alias cat=bat
 alias cato=/bin/cat
 
