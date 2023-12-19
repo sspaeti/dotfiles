@@ -22,7 +22,7 @@ I have many dotfiles, but most imprantly for my workflow I leverage a combinatio
 
 ![](obsidian.jpeg)
 
-I made my own Thme, it's called [Kanagawa](https://github.com/sspaeti/obsidian_kanagawa).
+I made two of my own Themes, they are called [Kanagawa](https://github.com/sspaeti/obsidian_kanagawa) and [Rosé Pine](https://github.com/sspaeti/obsidian_rose_pine).
 Also check my YT video [how I use Obsidian](https://youtu.be/LQasaw4MkqE), in case that's interest you.
 
 ## Screen alignment
