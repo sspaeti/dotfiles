@@ -105,8 +105,8 @@
     "editor.overviewRulerBorder": false,
     "editor.hideCursorInOverviewRuler": true,
     "editor.folding": true,
-    "editor.occurrencesHighlight": false,
-    "editor.matchBrackets": false,
+    "editor.occurrencesHighlight": "off",
+    "editor.matchBrackets": "never",
     "editor.glyphMargin": true,
     "explorer.openEditors.visible": 0,
     "workbench.editor.showIcons": false,
@@ -115,7 +115,7 @@
     "workbench.colorCustomizations": {
         "tab.activeBorder": "#0000",
     },
-    "editor.wordBasedSuggestions": true,
+    "editor.wordBasedSuggestions": "matchingDocuments",
     "gitHistory.showEditorTitleMenuBarIcons": false,
     "gitlens.menus": {
         editor: {
@@ -293,4 +293,5 @@
         "editor.defaultFormatter": "ms-python.black-formatter",
     },
     "codegpt.model": "ChatGPT",
+    "workbench.editor.tabActionCloseVisibility": false,
 }
