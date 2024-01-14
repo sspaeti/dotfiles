@@ -1,9 +1,9 @@
 
 # Dotfiles
 
-Welcome to my realm of dotfiles, the cornerstone of my development and [personal knowledge management (PKM) workflows](https://www.ssp.sh/blog/pkm-workflow-for-a-deeper-life/). Each dotfile here are fine-tuned to create an environment that's efficient for me, and, most importantly, give me joy workin in.
+Welcome to my dotfiles, the backbone of my development and [personal knowledge management (PKM) workflows](https://www.ssp.sh/blog/pkm-workflow-for-a-deeper-life/). Each dotfile here are fine-tuned to create an environment that's efficient for me, and, most importantly, give me joy workin in.
 
-I have many dotfiles, but most imprantly for my workflow I leverage a combination of `nvim`, `tmux`, and a tiling window manager orchestrated with `skhd` and `yabai`.
+Most imprantant for my workflow I leverage a combination of `nvim`, `tmux`, and a tiling window manager orchestrated with `skhd` and `yabai`.
 
 ![Neovim, Tmux, and Kitty](nvim_tmux_220701.png)
 
@@ -42,7 +42,5 @@ I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-o
 Above you'll find all my dotfiles repository. Each file and directory is it's own software.
 
 
-Enjoy navigating my digital workspace, tailored for efficiency, learning, and a bit of fun!
-
-Remember to replace the image paths with the actual URLs where your images are hosted, and adjust the links to point to the correct resources if they differ from the placeholders provided.
+Enjoy navigating my digital workspace, tailored for efficiency, learning, and a bit of fun.
 
