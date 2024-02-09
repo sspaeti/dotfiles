@@ -147,7 +147,16 @@
       "key": "C"
     }
   ],
-  "app:open-vault": [],
+  "app:open-vault": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
+  ],
   "editor:delete-paragraph": [],
   "omnisearch:show-modal": [
     {
@@ -355,6 +364,14 @@
         "Ctrl"
       ],
       "key": "P"
+    }
+  ],
+  "obsidian-day-planner:show-day-planner-today-note": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "D"
     }
   ]
 }

@@ -141,6 +141,13 @@ vim.keymap.set("n", "c-c", "<Esc>")
 --tab navigation
 vim.keymap.set("n", "gt", ":bnext<CR>")
 vim.keymap.set("n", "gT", ":bprevious<CR>")
+vim.keymap.set("n", "<Tab>", ":bnext<CR>")
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>")
+
+--macro recordings
+vim.keymap.set("n", "Q", "@qj") --apply macro on q and jump a line done, so you do not need to add line donw at the end
+vim.keymap.set("x", "Q", ":norm @q<CR>") --applyies saved macro on q on selected lines
+
 
 --quickfix toggle_qf
 local toggle_qf = function()
@@ -227,7 +234,7 @@ vim.keymap.set('n', '<C-w>j', ':resize +5<CR>')
 -- Open current directory
 vim.keymap.set('n', 'te', ':tabedit')
 vim.keymap.set('n', '<leader>tn', ':tabnew<Return>')
-vim.keymap.set('n', '<S-Tab>', ':tabprev<Return>')
+-- vim.keymap.set('n', '<S-Tab>', ':tabprev<Return>')
 
 -- undo break points
 vim.keymap.set('i', ',', ',<c-g>u')

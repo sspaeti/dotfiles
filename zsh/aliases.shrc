@@ -4,6 +4,7 @@ alias pip=pip3
 #make neovim default vim
 export EDITOR="nvim"
 alias vim=nvim
+alias v=nvim
 #This is a great way of always being sure that the ipython instance always belongs to the virtualenv's python version.
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
@@ -29,7 +30,7 @@ alias pomo_rest="timer 10m && terminal-notifier -message 'Pomodoro'\
         -appIcon '/Users/sspaeti/Simon/Sync/Pics/Desktop/Misc/CCE1041_1_A2_Frame_quer_finish.jpg'\
         -sound Crystal"
 
-# that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
+# # that  pip install strawberry-graphql[debug-server] will not fail (square brackets are used for globbing: https://stackoverflow.com/a/30539963/5246670)
 alias pip='noglob pip'
 
 # tmux

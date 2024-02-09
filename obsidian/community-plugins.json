@@ -5,7 +5,6 @@
   "obsidian-vimrc-support",
   "templater-obsidian",
   "table-editor-obsidian",
-  "readwise-official",
   "note-folder-autorename",
   "dataview",
   "notetweet",
@@ -37,5 +36,6 @@
   "obsidian-day-planner",
   "obsidian-plugin-todo",
   "ollama",
-  "obsidian-hider"
+  "obsidian-hider",
+  "readwise-official"
 ]
