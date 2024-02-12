@@ -81,7 +81,7 @@ return {
         { name = "nvim_lsp", priority = 1 },
         { name = "vsnip" },
         { name = "path" },
-        -- { name = "luasnip" },
+        { name = "luasnip" },
         { name = "obsidian" },
         { name = "obsidian_new" },
         { name = "nvim_lsp:lua_ls" },
@@ -161,6 +161,7 @@ return {
 
         vim.diagnostic.config({
           virtual_text = true,
+          severity_sort =true,
         })
 
         --mine
