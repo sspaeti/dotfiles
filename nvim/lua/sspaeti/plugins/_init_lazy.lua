@@ -1,13 +1,5 @@
 return {
-  { "ldelossa/litee.nvim", event = "VeryLazy" },
-
-  {
-    "ldelossa/gh.nvim",
-    event = "VeryLazy",
-    dependencies = { "ldelossa/litee.nvim" },
-  },
   --rust
-  { "neovim/nvim-lspconfig", event = "VeryLazy" },
   {
     "simrat39/rust-tools.nvim",
     event = "VeryLazy",
@@ -61,7 +53,6 @@ return {
   --preview CSS colors inline
   -- 'ap/vim-css-color',
   -- { "NvChad/nvim-colorizer.lua", event = "VeryLazy" },
-  { "brenoprata10/nvim-highlight-colors", event = "VeryLazy" },
   -- comment healper
 
   -- 'preservim/nerdcommenter',

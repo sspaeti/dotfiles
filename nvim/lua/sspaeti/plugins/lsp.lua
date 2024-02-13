@@ -12,6 +12,9 @@ return {
       neodev.setup()
     end,
   },
+  { "neovim/nvim-lspconfig",
+     event = "VeryLazy"
+  },
   {
     "VonHeikemen/lsp-zero.nvim",
     event = { "BufReadPre", "BufNewFile" },
