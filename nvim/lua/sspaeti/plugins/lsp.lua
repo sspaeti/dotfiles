@@ -33,7 +33,35 @@ return {
       { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lua" },
-
+    },
+    keys = {
+      {"K", function() vim.lsp.buf.hover() end, desc = "LSP Hover" },
+      {"gd", function() vim.lsp.buf.definition() end, desc = "LSP Definition" },
+      {"gD", function() vim.lsp.buf.declaration() end, desc = "LSP Declaration" },
+      {"gR", function() vim.lsp.buf.references() end, desc = "LSP References" },
+      {"gr", require("telescope.builtin").lsp_references, desc = "Telescope LSP References" },
+      {"gC", require("telescope.builtin").lsp_document_symbols, desc = "Telescope LSP Document Symbols" },
+      {"gI", function() vim.lsp.buf.implementation() end, desc = "LSP Implementation" },
+      {"gs", function() vim.lsp.buf.signature_help() end, desc = "LSP Signature Help" },
+      {"ga", function() vim.lsp.buf.code_action() end, desc = "LSP Code Action" },
+      {"<Leader>la", function() vim.lsp.buf.code_action() end, desc = "LSP Code Action (Leader)" },
+      {"<Leader>lf", function() vim.lsp.buf.format() end, desc = "LSP Format" },
+      {"<Leader>lr", function() vim.lsp.buf.rename() end, desc = "LSP Rename" },
+      {"<Leader>lc", function() vim.diagnostic.disable() end, desc = "Diagnostic Disable" },
+      {"<Leader>le", function() vim.diagnostic.enable() end, desc = "Diagnostic Enable" },
+      { "<leader>lo", function() vim.diagnostic.open_float() end, desc = "Diagnostic Open (Float)" },
+      { "<Leader>ln", function() vim.diagnostic.goto_next() end, desc = "Diagnostic Go To Next" },
+      { "]d", function() vim.diagnostic.goto_next() end, desc = "Diagnostic Go To Next (Shortcut)" },
+      { "]]", function() vim.diagnostic.goto_next() end, desc = "Diagnostic Go To Next (Shortcut Alt)" },
+      { "<Leader>lp", function() vim.diagnostic.goto_prev() end, desc = "Diagnostic Go To Previous" },
+      { "[d", function() vim.diagnostic.goto_prev() end, desc = "Diagnostic Go To Previous (Shortcut)" },
+      { "[[", function() vim.diagnostic.goto_prev() end, desc = "Diagnostic Go To Previous (Shortcut Alt)" },
+      { "<C-h>", function() vim.lsp.buf.signature_help() end, mode = "i", desc = "LSP Signature Help (Insert Mode)" },
+      { "<C-h>", function() vim.lsp.buf.signature_help() end, mode = "n", desc = "LSP Signature Help (Insert Mode)" },
+      { "<leader>lh", function() vim.lsp.buf.signature_help() end, desc = "LSP Signature Help (Leader)" },
+      --prime
+      { "sC", function() vim.lsp.buf.workspace_symbol() end, desc = "LSP Workspace Symbol" },
+      { "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, desc = "LSP Workspace Symbol (Leader)" },
     },
     config = function()
       local lsp = require("lsp-zero")
@@ -174,35 +202,36 @@ return {
           severity_sort =true,
         })
 
-        --mine
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-        vim.keymap.set("n", "gR", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {})
-        vim.keymap.set("n", "gC", require("telescope.builtin").lsp_document_symbols, {})
-        vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
-        vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
-        vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "<Leader>la", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "<Leader>lf", function() vim.lsp.buf.format() end, opts)
-        vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
-        vim.keymap.set("n", "<Leader>le", function() vim.diagnostic.enable() end, opts)
-        --prime
-        vim.keymap.set("n", "sC", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.open_float() end, opts) --done with :TroubleToggle
+        --TODO: moved to lazy.nvim keys above: delete if works as expected
+        ----mine
+        --vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        --vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        --vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+        --vim.keymap.set("n", "gR", function() vim.lsp.buf.references() end, opts)
+        --vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {})
+        --vim.keymap.set("n", "gC", require("telescope.builtin").lsp_document_symbols, {})
+        --vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
+        --vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
+        --vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
+        --vim.keymap.set("n", "<Leader>la", function() vim.lsp.buf.code_action() end, opts)
+        --vim.keymap.set("n", "<Leader>lf", function() vim.lsp.buf.format() end, opts)
+        --vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
+        --vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
+        --vim.keymap.set("n", "<Leader>le", function() vim.diagnostic.enable() end, opts)
+        ----prime
+        --vim.keymap.set("n", "sC", function() vim.lsp.buf.workspace_symbol() end, opts)
+        --vim.keymap.set("n", "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, opts)
+        ---- vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.open_float() end, opts) --done with :TroubleToggle
 
-        vim.keymap.set("n", "<Leader>ln", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "]]", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "<Leader>lp", function() vim.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-        vim.keymap.set("n", "[[", function() vim.diagnostic.goto_prev() end, opts)
+        --vim.keymap.set("n", "<Leader>ln", function() vim.diagnostic.goto_next() end, opts)
+        --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+        --vim.keymap.set("n", "]]", function() vim.diagnostic.goto_next() end, opts)
+        --vim.keymap.set("n", "<Leader>lp", function() vim.diagnostic.goto_prev() end, opts)
+        --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+        --vim.keymap.set("n", "[[", function() vim.diagnostic.goto_prev() end, opts)
 
-        vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-        vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
+        --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+        --vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
 
         -- turn on grammarly language server only for filetype=markdown
         if client.name == "grammarly" then

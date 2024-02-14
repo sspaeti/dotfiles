@@ -1,25 +1,20 @@
 return {
   "ThePrimeagen/harpoon",
-  event = "VeryLazy" ,
+  event = "VeryLazy",
+  keys = {
+    { "si", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon: Toggle Quick Menu" },
+    { "sm", function() require("harpoon.mark").add_file() end, desc = "Harpoon: Add File Mark" },
+    { "<leader>j", function() require("harpoon.ui").nav_file(1) end, desc = "Harpoon: Navigate File 1" },
+    { "<leader>k", function() require("harpoon.ui").nav_file(2) end, desc = "Harpoon: Navigate File 2" },
+    -- { "<leader>l", function() require("harpoon.ui").nav_file(3) end, desc = "Harpoon: Navigate File 3" }, --move down
+    { "<leader>;", function() require("harpoon.ui").nav_file(4) end, desc = "Harpoon: Navigate File 4" },
+    { "<leader>hj", function() require("harpoon.ui").nav_file(5) end, desc = "Harpoon: Navigate File 5" },
+    { "<leader>hk", function() require("harpoon.ui").nav_file(6) end, desc = "Harpoon: Navigate File 6" }
+  },
   config = function()
-    local mark = require("harpoon.mark")
     local ui = require("harpoon.ui")
-
-    vim.keymap.set("n", "<leader>hh", ui.toggle_quick_menu)
-    vim.keymap.set("n", "<leader>hm", mark.add_file)
-    --fait access with `s`
-    vim.keymap.set("n", "si", ui.toggle_quick_menu)
-    vim.keymap.set("n", "sm", mark.add_file)
-
-
-    vim.keymap.set("n", "<leader>hj", function() ui.nav_file(1) end)
-    vim.keymap.set("n", "<leader>hk", function() ui.nav_file(2) end)
-    vim.keymap.set("n", "<leader>hl", function() ui.nav_file(3) end)
-    vim.keymap.set("n", "<leader>h;", function() ui.nav_file(4) end)
-
-    vim.keymap.set("n", "<leader>j", function() ui.nav_file(1) end)
-    vim.keymap.set("n", "<leader>k", function() ui.nav_file(2) end)
+    --set here, so I can use <leader>li for Mason and <leader>l for Harpoon. Does not work with lazy.nvim `keys` above
     vim.keymap.set("n", "<leader>l", function() ui.nav_file(3) end)
-    vim.keymap.set("n", "<leader>;", function() ui.nav_file(4) end)
   end
+
 }
