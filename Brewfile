@@ -71,7 +71,7 @@ brew "helix"
 brew "helm"
 brew "htop"
 brew "hub"
-brew "hugo"
+brew "hugo", link: false
 brew "ipython"
 brew "isync"
 brew "jdtls"

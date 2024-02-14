@@ -6,6 +6,7 @@ return {
     -- install jsregexp (optional!).
     build = "make install_jsregexp",
     event = "VeryLazy",
+    --adding additional snippets
+    dependencies = { "rafamadriz/friendly-snippets" },
   },
-  { "rafamadriz/friendly-snippets" },
 }
