@@ -5,11 +5,12 @@ return {
     event = "VeryLazy",
     config = function()
       require("trouble").setup({
-        vim.keymap.set("n", "<leader>lt", ":TroubleToggle<CR>", { noremap = true, silent = true }),
+        -- document_diagnostics needed, otherwise todo-comments below breaks it: https://github.com/folke/todo-comments.nvim/issues/158
+        vim.keymap.set("n", "<leader>lt", ":Trouble document_diagnostics<CR>", { noremap = true, silent = true }),
       })
     end,
   },
-  { --doesn't work well with trouble below
+  {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = "nvim-lua/plenary.nvim",
