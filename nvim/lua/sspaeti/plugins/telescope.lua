@@ -18,13 +18,13 @@ return
       },
       {
         "<leader>fg",
-        function() require("telescope.builtin").builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
+        function() require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") }) end,
         desc = "Grep String",
       },
       {
         "<leader>?",
-        function() require("telescope.builtin").builtin.keymaps({}) end,
-        desc = "Grep String",
+        function() require("telescope.builtin").keymaps({}) end,
+        desc = "Telescope: Grep Keymaps",
       },
     },
 	}
