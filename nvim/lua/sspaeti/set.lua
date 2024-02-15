@@ -110,16 +110,6 @@ augroup END
 ]])
 
 
-vim.cmd([[
-" Python: auto format on save with Black
-autocmd BufWritePre *.py execute ':Black'
-" set virtual env -> still needed with lsp? 
-let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
-" format JSON
-:command! Formatj :%!jq .
-:command! Unformatj :%!jq -c .
-]])
-
 
 -- vim.cmd([[
 -- debug mode with -i

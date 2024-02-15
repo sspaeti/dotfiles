@@ -49,8 +49,8 @@ return {
       { "<Leader>lp", function() vim.diagnostic.goto_prev() end,                            desc = "Diagnostic Go To Previous" },
       { "[d",         function() vim.diagnostic.goto_prev() end,                            desc = "Diagnostic Go To Previous" },
       { "[[",         function() vim.diagnostic.goto_prev() end,                            desc = "Diagnostic Go To Previous" },
-      { "<C-h>",      function() vim.lsp.buf.signature_help() end,                          mode = "i",                                       desc = "LSP Signature Help (Insert Mode)" },
-      { "<C-h>",      function() vim.lsp.buf.signature_help() end,                          mode = "n",                                       desc = "LSP Signature Help (Insert Mode)" },
+      { "<C-h>",      function() vim.lsp.buf.signature_help() end,                          mode = "i",                             desc = "LSP Signature Help (Insert Mode)" },
+      { "<C-h>",      function() vim.lsp.buf.signature_help() end,                          mode = "n",                             desc = "LSP Signature Help (Insert Mode)" },
       { "<leader>lh", function() vim.lsp.buf.signature_help() end,                          desc = "LSP Signature Help" },
       { "<leader>ls", ":LspRestart<CR>",                                                    desc = "LSP Restart" },
       --prime
@@ -70,57 +70,57 @@ return {
       local on_attach = function(client, bufnr)
         opts.buffer = bufnr
 
-         --TODO: Check if still needed? Was done for Rust config
-         -- -- Disable hover in favor of Pyright
-         -- client.server_capabilities.hoverProvider = false
+        --TODO: Check if still needed? Was done for Rust config
+        -- -- Disable hover in favor of Pyright
+        -- client.server_capabilities.hoverProvider = false
 
-         -- Fixed column for diagnostics to appear
-         vim.opt.signcolumn = "yes"
-         -- Show autodiagnostic popup on cursor hover_range
-         -- vim.cmd([[
-         -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-         -- ]])
+        -- Fixed column for diagnostics to appear
+        vim.opt.signcolumn = "yes"
+        -- Show autodiagnostic popup on cursor hover_range
+        -- vim.cmd([[
+        -- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+        -- ]])
 
-         vim.diagnostic.config({
-           virtual_text = true,
-           severity_sort =true,
-         })
+        vim.diagnostic.config({
+          virtual_text = true,
+          severity_sort = true,
+        })
 
-         --TODO: moved to lazy.nvim keys above: delete if works as expected
-         ----mine
-         --vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-         --vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-         --vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-         --vim.keymap.set("n", "gR", function() vim.lsp.buf.references() end, opts)
-         --vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {})
-         --vim.keymap.set("n", "gC", require("telescope.builtin").lsp_document_symbols, {})
-         --vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
-         --vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
-         --vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
-         --vim.keymap.set("n", "<Leader>la", function() vim.lsp.buf.code_action() end, opts)
-         --vim.keymap.set("n", "<Leader>lf", function() vim.lsp.buf.format() end, opts)
-         --vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
-         --vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
-         --vim.keymap.set("n", "<Leader>le", function() vim.diagnostic.enable() end, opts)
-         ----prime
-         --vim.keymap.set("n", "sC", function() vim.lsp.buf.workspace_symbol() end, opts)
-         --vim.keymap.set("n", "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, opts)
-         --vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.open_float() end, opts) --done with :TroubleToggle
+        --TODO: moved to lazy.nvim keys above: delete if works as expected
+        ----mine
+        --vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        --vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        --vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+        --vim.keymap.set("n", "gR", function() vim.lsp.buf.references() end, opts)
+        --vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {})
+        --vim.keymap.set("n", "gC", require("telescope.builtin").lsp_document_symbols, {})
+        --vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
+        --vim.keymap.set("n", "gs", function() vim.lsp.buf.signature_help() end, opts)
+        --vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
+        --vim.keymap.set("n", "<Leader>la", function() vim.lsp.buf.code_action() end, opts)
+        --vim.keymap.set("n", "<Leader>lf", function() vim.lsp.buf.format() end, opts)
+        --vim.keymap.set("n", "<Leader>lr", function() vim.lsp.buf.rename() end, opts)
+        --vim.keymap.set("n", "<Leader>lc", function() vim.diagnostic.disable() end, opts)
+        --vim.keymap.set("n", "<Leader>le", function() vim.diagnostic.enable() end, opts)
+        ----prime
+        --vim.keymap.set("n", "sC", function() vim.lsp.buf.workspace_symbol() end, opts)
+        --vim.keymap.set("n", "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end, opts)
+        --vim.keymap.set("n", "<Leader>lo", function() vim.diagnostic.open_float() end, opts) --done with :TroubleToggle
 
-         --vim.keymap.set("n", "<Leader>ln", function() vim.diagnostic.goto_next() end, opts)
-         --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-         --vim.keymap.set("n", "]]", function() vim.diagnostic.goto_next() end, opts)
-         --vim.keymap.set("n", "<Leader>lp", function() vim.diagnostic.goto_prev() end, opts)
-         --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-         --vim.keymap.set("n", "[[", function() vim.diagnostic.goto_prev() end, opts)
+        --vim.keymap.set("n", "<Leader>ln", function() vim.diagnostic.goto_next() end, opts)
+        --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+        --vim.keymap.set("n", "]]", function() vim.diagnostic.goto_next() end, opts)
+        --vim.keymap.set("n", "<Leader>lp", function() vim.diagnostic.goto_prev() end, opts)
+        --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+        --vim.keymap.set("n", "[[", function() vim.diagnostic.goto_prev() end, opts)
 
-         --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-         --vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
+        --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+        --vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
 
-         -- turn on grammarly language server only for filetype=markdown
-         if client.name == "grammarly" then
-           vim.api.nvim_buf_set_option(bufnr, "filetype", "markdown")
-         end
+        -- turn on grammarly language server only for filetype=markdown
+        if client.name == "grammarly" then
+          vim.api.nvim_buf_set_option(bufnr, "filetype", "markdown")
+        end
       end
 
       -- used to enable autocompletion (assign to every lsp server config)
@@ -195,32 +195,35 @@ return {
         on_attach = on_attach,
       })
 
-     -- Configure `ruff-lsp`.
-     -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-     -- For the default config, along with instructions on how to customize the settings
-     lspconfig["ruff_lsp"].setup {
-       capabilities = capabilities,
-       on_attach = on_attach,
-       init_options = {
-         settings = {
-           -- Any extra CLI arguments for `ruff` go here.
-           args = {},
-         }
-       }
-     }
+      -- Configure `ruff-lsp`.
+      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+      -- For the default config, along with instructions on how to customize the settings
+      lspconfig["ruff_lsp"].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        init_options = {
+          settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+          }
+        }
+      }
       -- configure lua server (with special settings)
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
         settings = { -- custom settings for lua
           Lua = {
-           format = {
-             enable = true,
-             defaultConfig = {
-               indent_style = "space",
-               indent_size = "2",
-             },
-           },
+            format = {
+              enable = true,
+              defaultConfig = {
+                indent_style = "space",
+                indent_size = "2",
+                align_continuous_assign_statement = false,
+                align_continuous_rect_table_field = false,
+                align_array_table = false
+              },
+            },
             -- make the language server recognize "vim" global
             diagnostics = {
               globals = { "vim" },
@@ -247,9 +250,6 @@ return {
           }
         }
       })
-
-
-
     end,
   }
 }
