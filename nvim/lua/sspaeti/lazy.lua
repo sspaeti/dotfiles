@@ -13,10 +13,16 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 
-require("lazy").setup("sspaeti.plugins", {
-  defaults = { lazy = false },
+require("lazy").setup({ { import = "sspaeti.plugins" }, { import = "sspaeti.plugins.lsp" } }, {
+  install = {
+    colorscheme = { "kanagawa" },
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
   --autoreload notification
   change_detection = {
-  	notify = false,
+    notify = false,
   },
 })

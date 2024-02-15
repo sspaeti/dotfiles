@@ -15,12 +15,23 @@ return {
 		"nvimtools/none-ls.nvim", --before: jose-elias-alvarez/null-ls.nvim"
     config = function()
       require("mason").setup()
+      local null_ls = require("null-ls")
+      local mason_null_ls = require("mason-null-ls")
 
-      require("mason-null-ls").setup({
+      mason_null_ls.setup({
         ensure_installed = { "stylua", "jq" },
         automatic_setup = true,
       })
 
+      mason_null_ls.setup({
+        ensure_installed = {
+          -- "prettier", -- prettier formatter
+          "stylua", -- lua formatter
+          "black", -- python formatter
+          "pylint", -- python linter
+          "eslint_d", -- js linter
+        },
+      })
 
       local null_ls_status_ok, null_ls = pcall(require, "null-ls")
       if not null_ls_status_ok then
@@ -31,7 +42,7 @@ return {
       local diagnostics = null_ls.builtins.diagnostics
       local completion = null_ls.builtins.completion
 
-      require("null-ls").setup({
+      null_ls.setup({
           sources = {
               formatting.black.with({extra_args = {"--fast"}}),
               formatting.isort,
