@@ -1,6 +1,15 @@
 return {
 	{ "rebelot/kanagawa.nvim", lazy = false },
 	{ "ellisonleao/gruvbox.nvim", lazy = false },
+	{ "rose-pine/neovim",
+    lazy = false,
+    config = function()
+      require("rose-pine").setup({
+         variant = "auto", -- auto, main, moon, or dawn
+         dark_variant = "main" -- main, moon, or dawn
+       })
+    end
+  },
 	{ "AlexvZyl/nordic.nvim", event = "VeryLazy" },
 	{ "navarasu/onedark.nvim", event = "VeryLazy" },
 	{ "catppuccin/nvim", name = "catppuccin", event = "VeryLazy" }, --light theme

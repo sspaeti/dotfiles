@@ -12,8 +12,8 @@ function SetThemeBasedOnTmuxSession(sessionThemes)
         -- Set the specified theme
         vim.cmd("colorscheme " .. theme)
     else
-        -- Default theme 'kanagawa' if the session is not in the table
-        vim.cmd("colorscheme kanagawa")
+        -- Default theme from dictionary
+        vim.cmd("colorscheme " .. sessionThemes["default"])
     end
 end
 
