@@ -1,3 +1,4 @@
+--color scheme, themes,
 return {
 	{ "rebelot/kanagawa.nvim", lazy = false },
 	{ "ellisonleao/gruvbox.nvim", lazy = false },
