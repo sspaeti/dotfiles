@@ -250,6 +250,27 @@ return {
           }
         }
       })
+
+      --java setup
+      local project_files = {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}
+      local root_dir = require('lspconfig/util').root_pattern(unpack(project_files))
+
+      lspconfig['jdtls'].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        root_dir = root_dir,
+        --on_attach = function(client, bufnr)
+        --  on_attach(client, bufnr)
+
+        --  --TODO: not yet correct? root_dir need to be set?
+        --  --also file types need to be added (?):
+        --  --util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
+
+        --  root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1])
+        --end
+      })
+
     end,
+
   }
 }

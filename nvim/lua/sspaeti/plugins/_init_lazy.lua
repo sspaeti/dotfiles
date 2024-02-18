@@ -188,8 +188,6 @@ return {
       })
     end,
   },
-  -- Java
-  --"mfussenegger/nvim-jdtls", --removed until https://github.com/neovim/neovim/issues/20795 is fixed
   --use nvim in browser
   { "tpope/vim-dadbod",                     event = "VeryLazy" },
   { "kristijanhusak/vim-dadbod-ui",         event = "VeryLazy" },
