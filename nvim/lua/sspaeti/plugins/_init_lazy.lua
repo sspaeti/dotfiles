@@ -90,9 +90,6 @@ return {
   -- search
   { "junegunn/fzf",                   build = ":call fzf#install()", event = "VeryLazy" },
   { "junegunn/fzf.vim",               event = "VeryLazy" },
-
-  --File Navigation
-  { "christoomey/vim-tmux-navigator", lazy = false },
   -- {
   --   'stevearc/oil.nvim',
   --   event = "VeryLazy",
