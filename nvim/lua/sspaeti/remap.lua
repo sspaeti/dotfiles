@@ -112,10 +112,23 @@ vim.keymap.set("n", "<leader>dd", ":DBUIToggle<CR>")
 -- nnoremap <leader>wa :%bd|e#<Return>
 
 
+--Markdown
 -- Writing / Markdown (see also markdown.lua)
---
+ vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
 -- Zenmode
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
+
+-- Bold
+vim.api.nvim_set_keymap('n', '<leader>b', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/**&**/<CR>:noh<CR>', {desc = "Bold Markdown", noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<leader>b', 'y:let @+=@"<CR>gv:s/.*/**&**/<CR>:noh<CR>', {desc = "Bold Markdown", noremap = true, silent = true})
+-- Italic
+vim.api.nvim_set_keymap('n', '<leader>i', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/*&*/<CR>:noh<CR>', {desc = "Italic Markdown", noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<leader>i', 'y:let @+=@"<CR>gv:s/.*/*&*/<CR>:noh<CR>', {desc = "Italic Markdown", noremap = true, silent = true})
+-- Link in visual mode
+vim.api.nvim_set_keymap('v', '<leader>l', 'y:let @+=@"<CR>gv:s/.*/[&](url)/<CR>:noh<CR>gi', {desc = "Add Link Markdown", noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>l', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/[&](url)/<CR>:noh<CR>gi', {desc = "Add Link Markdown", noremap = true, silent = true})
+--End: Markdown
+
 -- Spell checker
 vim.keymap.set("n", "<leader>so", "<c-o>:set spell<cr>")
 vim.keymap.set("n", "<leader>so", ":set spell<cr>")
@@ -126,7 +139,6 @@ vim.keymap.set("n", "<leader>sc", ":set nospell<cr>")
 vim.keymap.set("n", "<leader>o", ":AerialToggle<CR>", { noremap = true, silent = true })
 --preview
 
-vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
 
 -- moving blocks with automatically indenting
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -235,12 +247,6 @@ vim.cmd[[
     command! -bang -nargs=* Rg2
       \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
 ]]
-
-vim.keymap.set('', '<silent> <c-h>', ':<C-U>TmuxNavigateLeft<cr>')
-vim.keymap.set('', '<silent> <c-j>', ':<C-U>TmuxNavigateDown<cr>')
-vim.keymap.set('', '<silent> <c-k>', ':<C-U>TmuxNavigateUp<cr>')
-vim.keymap.set('', '<silent> <c-l>', ':<C-U>TmuxNavigateRight<cr>')
-vim.keymap.set('', '<silent> <c-t>', ':<C-U>TmuxNavigatePrevious<cr>')
 
 -- Resize window ABSOLUTE (doing it the same direction wheter in right or left split)
 vim.keymap.set('n', '<C-w>l', ':if winnr() == winnr(\'$\') \\| vertical resize -5 \\| else \\| vertical resize +5 \\| endif<CR>')
