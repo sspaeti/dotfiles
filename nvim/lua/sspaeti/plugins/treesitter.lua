@@ -16,10 +16,10 @@ return {
       ensure_installed = {"vimdoc", "python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust"}, -- one of "all" or a list of languages
       sync_install = false,
       auto_install = true,
-      highlight = {
-        enable = true, -- false will disable the whole extension
-        disable = { "css" }, -- list of language that will be disabled
-      },
+     -- highlight = {
+      --   enable = true, -- false will disable the whole extension
+      --   disable = { "css" }, -- list of language that will be disabled
+      -- },
       autopairs = {
         enable = true,
       },
@@ -32,6 +32,9 @@ return {
         max_file_lines = nil, -- Do not enable for files with more than n lines, int
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
+      },
+      autotag = {
+        enable = true,
       },
       ignore_install = {  },
       modules = {}
