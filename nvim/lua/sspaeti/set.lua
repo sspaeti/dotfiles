@@ -3,7 +3,6 @@
 -- vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.opt.completeopt = { "menu" }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
-vim.api.nvim_set_option("updatetime", 300)
 
 -- set undofile to keep undo history unlimited (even if buffer is closed)
 vim.opt.undodir = os.getenv("HOME") .. "/.undodir"
@@ -65,7 +64,8 @@ vim.opt.termguicolors = true -- True color support
 vim.opt.cmdheight = 2 -- More space for displaying messages
 vim.opt.pumheight = 10 -- Makes popup menu smaller
 vim.opt.hidden = true -- Required to keep multiple buffers open multiple buffers
-vim.opt.timeoutlen = 500 -- By default timeoutlen is 1000 ms
+-- also see whcih-key.lua, which sets up the same config
+vim.opt.timeoutlen = 300 -- By default timeoutlen is 1000 ms
 
 vim.opt.scrolloff = 8
 
@@ -127,7 +127,3 @@ vim.cmd[[
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 ]]
-
-
---to be used in lazy.lua
-return sessionThemes
