@@ -49,8 +49,6 @@ return {
       { "<Leader>lp", function() vim.diagnostic.goto_prev() end,                            desc = "Diagnostic Go To Previous" },
       { "[d",         function() vim.diagnostic.goto_prev() end,                            desc = "Diagnostic Go To Previous" },
       { "[[",         function() vim.diagnostic.goto_prev() end,                            desc = "Diagnostic Go To Previous" },
-      { "<C-h>",      function() vim.lsp.buf.signature_help() end,                          mode = "i",                             desc = "LSP Signature Help (Insert Mode)" },
-      { "<C-h>",      function() vim.lsp.buf.signature_help() end,                          mode = "n",                             desc = "LSP Signature Help (Insert Mode)" },
       { "<leader>lh", function() vim.lsp.buf.signature_help() end,                          desc = "LSP Signature Help" },
       { "<leader>ls", ":LspRestart<CR>",                                                    desc = "LSP Restart" },
       --prime
