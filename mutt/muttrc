@@ -24,9 +24,12 @@ source ~/.dotfiles/zsh/.secret.muttrc
 set realname = "Simon Späti"
 set from = "simon@sspaeti.com"
 set sendmail = "msmtp -a simon@sspaeti.com"
+# send each mail bcc to hey email in order to have the full picture there too
+send-hook . "my_hdr Bcc: sspaeti@hey.com"
+
 #Create Macros for Switching Accounts:
-macro compose <F1> "<enter-command>set sendmail='msmtp -a simon@sspaeti.com'<enter><enter-command>set from='simu@sspaeti.com'<enter>"
-macro compose <F2> "<enter-command>set sendmail='msmtp -a simon@ssp.sh'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+macro compose <F1> "<enter-command>set sendmail='msmtp -a simon@ssp.sh'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+macro compose <F2> "<enter-command>set sendmail='msmtp -a simon@sspaeti.com'<enter><enter-command>set from='simu@sspaeti.com'<enter>"
 macro compose <F3> "<enter-command>set sendmail='msmtp -a simu@sspaeti.com'<enter><enter-command>set from='simon@ssp.sh'<enter>"
 
 macro index <F1> ":set from='simu@sspaeti.com'\n:set sendmail='msmtp -a simu@sspaeti.com'\n"
