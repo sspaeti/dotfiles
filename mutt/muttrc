@@ -6,6 +6,7 @@ alias me "Simon Späti" "simu@sspaeti.com"
 set mbox_type = Maildir
 set ssl_starttls = yes
 set ssl_force_tls = yes
+# set bcc="sspaeti@hey.com"
 
 # Neomutt will actively add CR or LF after the exact characters. As I'm doing them myself, I set it to 0.
 # set wrap=0
@@ -51,40 +52,38 @@ mailboxes =INBOX =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Tras
 #
 ## Step 3: Decision Making Macros
 
-# this does:
+# Screen In and move to Inbox
 # 1. Takes the current message and sends it through a pipeline for processing.
 # 2. Uses awk to extract the last field (email address) from the line that starts with From: . The $NF is a special awk variable that represents the last field in a record.
 # 3. Removes angle brackets from around the email address, which are commonly used in email headers.
 # 4. Appends the email address to the screened_in.txt file.
 # 5. Saves the message to the Inbox after the macro executes.
-
-macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
-
-# macro index,pager I "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
-
+#works better with MIME types. done with formail
+macro index,pager I "<pipe-message>formail -zx From: | awk '/@/ {print \$NF}' | tr -d '<>' | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
 
 # this does:
 # 1. Appends the email address to the screened_out.txt file.
 # 2. Saves the message to a folder named ScreenedOut after execution.
-macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
-# macro index,pager O "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
-
+# macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+macro index,pager O "<pipe-message>formail -zx From: | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
 
 # add to Feed list
-# macro index,pager F "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
-
-macro index,pager F "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
-
-
-# macro index,pager F "<pipe-message>awk '/^From: / { match(\$0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}/, arr); if(arr[0] != \"\") print arr[0] }' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
-
-# macro index,pager F "<pipe-message>echo %{from}<enter> | ./extract_email.sh | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager F "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+macro index,pager F "<pipe-message>formail -zx From: | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
 
 
 # add to papertrail list
-macro index,pager P "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
-# macro index,pager P "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
+# macro index,pager P "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
+macro index,pager P "<pipe-message>formail -zx From: | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
 
+
+# ## old / archive
+# macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
+# macro index,pager O "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+# macro index,pager F "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager F "<pipe-message>awk '/^From: / { match(\$0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}/, arr); if(arr[0] != \"\") print arr[0] }' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager F "<pipe-message>echo %{from}<enter> | ./extract_email.sh | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager P "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
 
 ## Step 6: Updating Lists and Filters
 set my_screen_update_macro="<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
