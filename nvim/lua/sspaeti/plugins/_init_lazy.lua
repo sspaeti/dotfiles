@@ -203,4 +203,5 @@ return {
     "hiphish/rainbow-delimiters.nvim",
     event = "VeryLazy",
   },
+  {"alexlafroscia/tree-sitter-glimmer", event = "VeryLazy"}
 }

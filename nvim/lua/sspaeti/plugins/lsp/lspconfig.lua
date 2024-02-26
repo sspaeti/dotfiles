@@ -249,6 +249,12 @@ return {
         }
       })
 
+      lspconfig["bashls"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+
       --java setup
       local project_files = {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}
       local root_dir = require('lspconfig/util').root_pattern(unpack(project_files))

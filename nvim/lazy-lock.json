@@ -62,6 +62,7 @@
   "tabular": { "branch": "master", "commit": "339091ac4dd1f17e225fe7d57b48aff55f99b23a" },
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
   "todo-comments.nvim": { "branch": "main", "commit": "833d8dd8b07eeda37a09e99460f72a02616935cb" },
+  "tree-sitter-glimmer": { "branch": "main", "commit": "f9746dc1d0707717fbba84cb5c22a71586af23e1" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "undotree": { "branch": "master", "commit": "9dbbf3b7d19dda0d22ceca461818e4739ad8154d" },
   "vim-commentary": { "branch": "master", "commit": "f67e3e67ea516755005e6cccb178bc8439c6d402" },
