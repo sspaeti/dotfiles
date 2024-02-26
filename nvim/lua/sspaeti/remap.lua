@@ -249,12 +249,12 @@ vim.cmd[[
 ]]
 
 -- Resize window ABSOLUTE (doing it the same direction wheter in right or left split)
-vim.keymap.set('n', '<C-w>l', ':if winnr() == winnr(\'$\') \\| vertical resize -5 \\| else \\| vertical resize +5 \\| endif<CR>')
-vim.keymap.set('n', '<C-w>h', ':if winnr() == 1 \\| vertical resize -5 \\| else \\| vertical resize +5 \\| endif<CR>')
+vim.keymap.set('n', '<C-w>l', function() if vim.fn.winnr() == vim.fn.winnr('$') then vim.cmd('vertical resize -10') else vim.cmd('vertical resize +10') end end)
+vim.keymap.set('n', '<C-w>h', function() if vim.fn.winnr() == 1 then vim.cmd('vertical resize -10') else vim.cmd('vertical resize +10') end end)
 
 -- resize window RELATIVE (Haven't found a absoulte way)
-vim.keymap.set('n', '<C-w>k', ':resize -5<CR>')
-vim.keymap.set('n', '<C-w>j', ':resize +5<CR>')
+vim.keymap.set('n', '<C-w>k', ':resize -10<CR>')
+vim.keymap.set('n', '<C-w>j', ':resize +10<CR>')
 
 -- Open current directory
 vim.keymap.set('n', 'te', ':tabedit')
