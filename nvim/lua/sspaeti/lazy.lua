@@ -18,12 +18,10 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 local sessionThemes = {
     ["bed-setup"] = "gruvbox",
     ["hellodata"] = "gruvbox",
-    ["dotfiles"]  = "rose-pine-moon", --before "solarizev-osaka",
+    ["dotfiles"]  = "rose-pine-moon", --also "solarizev-osaka",
     ["DEDP"]      = "rose-pine",
-    ["default"]   = "kanagawa",  --default theme, required
+    ["default"]   = "kanagawa",  --required: default theme
 }
-
-print("defaultTheme: ", sessionThemes["default"])
 
 
 --lazy stuff

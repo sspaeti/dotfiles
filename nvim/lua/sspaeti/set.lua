@@ -53,6 +53,9 @@ vim.opt.softtabstop = 2 --Number of spaces that a <Tab> counts for while perform
 vim.opt.wrap = false -- Display long lines as just one line
 vim.cmd("autocmd FileType markdown setlocal wrap")
 
+--handlebar files should be treated as html
+vim.cmd('autocmd BufRead,BufNewFile *.hbs set filetype=html')
+
 vim.opt.expandtab = true -- Converts tabs to spaces
 vim.opt.smarttab = true -- Makes tabbing smarter will realize you have 2 vs 4
 vim.opt.smartindent = true -- Makes indenting smart
