@@ -1,0 +1,33 @@
+[manager]
+
+keymap = [
+
+	# Help
+	{ on = [ "?" ], exec = "help", desc = "Open help" },
+]
+
+[tasks]
+
+keymap = [
+	{ on = [ "?" ], exec = "help", desc = "Open help" }
+]
+
+[select]
+
+keymap = [
+	{ on = [ "?" ], exec = "help", desc = "Open help" }
+]
+
+[input]
+
+keymap = [
+	# Help
+	{ on = [ "?" ], exec = "help", desc = "Open help" }
+]
+
+[completion]
+
+keymap = [
+	{ on = [ "?" ], exec = "help", desc = "Open help" }
+]
+
