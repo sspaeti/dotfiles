@@ -13,6 +13,12 @@ set -o vi
 #always move hidden files as well
 #shopt -s dotglob
 
+# ignore certification setings to add to history file
+# export HISTIGNORE='*TMP_CERT*:*BEGIN CERTIFICATE*' #does not work for zsh
+# ignore commands you don't want stored in the history with a space
+setopt HIST_IGNORE_SPACE
+
+
 # bindkey '^r' history-incremental-search-backward
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
