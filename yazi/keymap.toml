@@ -1,33 +1,33 @@
-[manager]
+# [manager]
 
-keymap = [
+# keymap = [
 
-	# Help
-	{ on = [ "?" ], exec = "help", desc = "Open help" },
-]
+# 	# Help
+# 	{ on = [ "?" ], exec = "help", desc = "Open help" },
+# ]
 
-[tasks]
+# [tasks]
 
-keymap = [
-	{ on = [ "?" ], exec = "help", desc = "Open help" }
-]
+# keymap = [
+# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
+# ]
 
-[select]
+# [select]
 
-keymap = [
-	{ on = [ "?" ], exec = "help", desc = "Open help" }
-]
+# keymap = [
+# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
+# ]
 
-[input]
+# [input]
 
-keymap = [
-	# Help
-	{ on = [ "?" ], exec = "help", desc = "Open help" }
-]
+# keymap = [
+# 	# Help
+# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
+# ]
 
-[completion]
+# [completion]
 
-keymap = [
-	{ on = [ "?" ], exec = "help", desc = "Open help" }
-]
+# keymap = [
+# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
+# ]
 
