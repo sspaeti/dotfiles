@@ -30,5 +30,20 @@ return
     --{"gr", function() require("telescope.builtin").lsp_references() end, desc = "Telescope LSP References" },
     --{"gC", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Telescope LSP Document Symbols" },
   },
-  opts = {}
+  opts = {},
+  config = function()
+    require("telescope").setup({
+      defaults = {
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case'
+          },
+        },
+    })
+  end,
 }
