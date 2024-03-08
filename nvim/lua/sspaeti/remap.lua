@@ -40,10 +40,8 @@ vim.keymap.set('n', 'sz', ':FZF<CR>')
 -- vim.keymap.set(' ss :Snippets<CR>
 
 -- zoom vim split views
-vim.cmd([[
-noremap Zz <c-w>_ \| <c-w>\|
-noremap Zo <c-w>=
-]])
+vim.api.nvim_set_keymap('n', 'Zz', '<C-w>_| <C-w>|', {noremap = true})
+vim.api.nvim_set_keymap('n', 'Zo', '<C-w>=', {noremap = true})
 
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("i", "kj", "<Esc>")

@@ -34,7 +34,7 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 
-vim.opt.updatetime = 200 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
+vim.opt.updatetime = 400 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
 
 --language settings
 -- vim.opt.spelllang = "en_us,de_ch"
@@ -94,6 +94,19 @@ augroup Mkdir
 augroup END
 ]])
 
+
+-- Automatically set activated virtual environment for Python
+vim.g.python3_host_prog = vim.fn.expand("$HOME/.venvs/nvim/bin/python3")
+
+-- Register a command in Neovim to format JSON using jq
+vim.api.nvim_create_user_command('Formatj', function()
+  vim.cmd('%!jq .')
+end, {})
+
+-- Register a command to "unformat" JSON using jq
+vim.api.nvim_create_user_command('Unformatj', function()
+  vim.cmd('%!jq -c .')
+end, {})
 
 
 -- vim.cmd([[

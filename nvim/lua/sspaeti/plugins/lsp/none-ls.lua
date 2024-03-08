@@ -30,17 +30,11 @@ return {
     -- to setup format on save
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-    -- old autoformat: TODO: still needed?
+    -- old black autoformat
     -- vim.cmd([[
     -- " Python: auto format on save with Black
-    -- autocmd BufWritePre *.py execute ':Black'
-    -- " set virtual env -> still needed with lsp? 
-    -- let g:python3_host_prog = expand($HOME."/.venvs/nvim/bin/python3")
-    -- " format JSON
-    -- :command! Formatj :%!jq .
-    -- :command! Unformatj :%!jq -c .
+    -- "autocmd BufWritePre *.py execute ':Black'
     -- ]])
-
 
     -- configure null_ls
     null_ls.setup({
