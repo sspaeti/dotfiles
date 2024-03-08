@@ -373,5 +373,22 @@
       ],
       "key": "D"
     }
+  ],
+  "editor:open-search": [],
+  "global-search:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
+  "workspace:close-others": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "Q"
+    }
   ]
 }
