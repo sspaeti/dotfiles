@@ -41,6 +41,7 @@ yabai -m rule --add app="^GIMP$" manage=off
 yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Slack$" manage=off
+yabai -m rule --add app="^Microsoft Outlook$" manage=off
 
 #does not work..
 yabai -m rule --add app="^dbeaver$" manage=off

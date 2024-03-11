@@ -50,15 +50,15 @@ shift + alt - 8 : yabai -m window --space 8;
 shift + alt - 9 : yabai -m window --space 9;
 
 #change focus between external displays (left and right)
-alt - u: yabai -m display --focus north #up
+alt - s: yabai -m display --focus north #s for screen: external monitor
 alt - d: yabai -m display --focus south #down
 alt - a: yabai -m display --focus west
 alt - g: yabai -m display --focus east
 
 ## stop/start/restart yabai
-shift + alt + ctrl - q : brew services stop yabai
-shift + alt + ctrl - s : brew services start yabai
-shift + alt + ctrl - r : brew services restart yabai
+# shift + alt + ctrl - q : brew services stop yabai
+# shift + alt + ctrl - s : brew services start yabai
+# shift + alt + ctrl - r : brew services restart yabai
 
 # more from josean that I do not use yet
 ## swap windows
