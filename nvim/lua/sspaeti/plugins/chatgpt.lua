@@ -19,11 +19,41 @@ return {
     "github/copilot.vim",
     event = "VeryLazy",
     -- config = function()
-      --   require("copilot").setup {
-        --     vim.keymap.set("n", "<leader>cn", "<Plug>(copilot-next)", { noremap = true, silent = true }),
-        --     vim.keymap.set("n", "<leader>cp", "<Plug>(copilot-previous)", { noremap = true, silent = true }),
-        --     vim.keymap.set("n", "<leader>cd", "<Plug>(copilot-dismiss)", { noremap = true, silent = true })
-        --   }
-        -- end
-      },
-    }
+    --   require("copilot").setup {
+    --     vim.keymap.set("n", "<leader>cn", "<Plug>(copilot-next)", { noremap = true, silent = true }),
+    --     vim.keymap.set("n", "<leader>cp", "<Plug>(copilot-previous)", { noremap = true, silent = true }),
+    --     vim.keymap.set("n", "<leader>cd", "<Plug>(copilot-dismiss)", { noremap = true, silent = true })
+    --   }
+    -- end
+  },
+{
+  "jackMort/ChatGPT.nvim",
+  event = "VeryLazy",
+  config = function()
+    require("chatgpt").setup()
+  end,
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+    "folke/trouble.nvim",
+    "nvim-telescope/telescope.nvim"
+  },
+  keys = {
+    { "<leader><leader>", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
+  }
+}
+-- local defaults = {
+--   api_key_cmd = nil,
+--   yank_register = "+",
+--   edit_with_instructions = {
+--     diff = false,
+--     keymaps = {
+--       close = "<C-c>",
+--       accept = "<C-y>",
+--       toggle_diff = "<C-d>",
+--       toggle_settings = "<C-o>",
+--       toggle_help = "<C-h>",
+--       cycle_windows = "<Tab>",
+--     }
+--   }
+}
