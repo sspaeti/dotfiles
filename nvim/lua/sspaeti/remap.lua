@@ -2,7 +2,6 @@
 vim.keymap.set("n", "<leader>e", ":Explore<CR>")
 -- vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
-
 -- s-shortcuts is for search -> without leader, directly with s
 vim.keymap.set('n', 'sb', ':Buffers<CR>')
 vim.keymap.set('n', 's/', ':History/<CR>')
@@ -170,8 +169,10 @@ vim.keymap.set("n", "c-c", "<Esc>")
 --tab navigation
 vim.keymap.set("n", "gt", ":bnext<CR>")
 vim.keymap.set("n", "gT", ":bprevious<CR>")
-vim.keymap.set("n", "<Tab>", ":bnext<CR>")
-vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>")
+
+-- ! do not set tab, it will also change ctrl+i due to keyboard inputs are handled. Ctrl+i is used for jumping back in history
+-- vim.keymap.set("n", "<Tab>", ":bnext<CR>")
+-- vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>")
 
 --macro recordings
 vim.keymap.set("n", "Q", "@qj") --apply macro on q and jump a line done, so you do not need to add line donw at the end

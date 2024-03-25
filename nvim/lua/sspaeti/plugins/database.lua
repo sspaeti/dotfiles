@@ -13,6 +13,7 @@ return {
     event = "VeryLazy",
     config = function()
       vim.g.db_ui_execute_on_save = 0 --do not execute on save
+      vim.g.db_ui_win_position = "right"
     end,
   },
 

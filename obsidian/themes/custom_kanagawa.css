@@ -134,6 +134,7 @@
     --table-row-even:             hsl(0, 0%, 17%);
     --table-row-odd:              hsl(0, 0%, 20%);
     --table-hover:                var(--sumiInk2);
+    --bold-color:                 var(--autumnYellow);
 }
 
 .theme-light,
@@ -607,5 +608,10 @@ input.task-list-item-checkbox:checked
 .mermaid .note
 {
     fill: var(--dark3) !important;
+}
+
+.cm-line .cm-strong
+{
+    color: var(--bold-color) !important;
 }
 
