@@ -68,12 +68,20 @@ return {
   { "kdheepak/lazygit.nvim",       event = "VeryLazy" },
   {
     "sindrets/diffview.nvim",
-    -- fix autofolding diffs, see https://github.com/sindrets/diffview.nvim/issues/132#issuecomment-1121020729
     config = function()
       require("diffview").setup({
         hooks = {
+          hooks = {
+            diff_buf_win_enter = function(bufnr)
+              vim.cmd("norm! gg]c")
+            end,
+          },
           diff_buf_read = function(bufnr)
-            vim.cmd("norm! gg]ckzt") -- Set cursor on the first hunk
+            -- print("Opening diff buffer...")
+            vim.cmd("norm! gg]c")
+            if vim.fn.search("]c") ~= 0 then
+              vim.cmd("norm! zz")
+            end
           end,
           diff_buf_win_enter = function(bufnr)
             vim.opt_local.foldlevel = 99
@@ -81,7 +89,7 @@ return {
         },
       })
     end,
-  },                                            --nvim gitdiff like vscode',
+  },
   { "mhinz/vim-signify",              event = "VeryLazy" }, --highlighing changes not commited to last commmit
 
   { "APZelos/blamer.nvim",            event = "VeryLazy" }, --gitlens blame style',

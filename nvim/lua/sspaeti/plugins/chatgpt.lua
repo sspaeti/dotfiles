@@ -15,6 +15,7 @@ return {
   --     "nvim-telescope/telescope.nvim",
   --   },
   -- },
+  -- 
   {
     "github/copilot.vim",
     event = "VeryLazy",
@@ -39,7 +40,7 @@ return {
     "nvim-telescope/telescope.nvim"
   },
   keys = {
-    { "<leader><leader>", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
+    { "<leader>ai", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
   }
 }
 -- local defaults = {
