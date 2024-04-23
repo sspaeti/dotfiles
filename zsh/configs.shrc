@@ -64,6 +64,13 @@ source ~/.dotfiles/zsh/zoxide.sh
 eval "$(zoxide init zsh)"
 export PATH=~/.dotfiles/helpers/bin:$PATH
 
+# function to automatically upgrade pip when creating a venv. Crate with create_venv ~/.venvs/my-env
+create_venv() {
+    python -m venv "$1"
+    source "$1/bin/activate"
+    pip install --upgrade pip
+}
+
 
 #asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh

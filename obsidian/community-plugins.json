@@ -20,7 +20,6 @@
   "omnisearch",
   "obsidian-auto-link-title",
   "calendar",
-  "obsidian-focus-mode",
   "obsidian-journey-plugin",
   "obsidian-style-settings",
   "quickadd",
@@ -38,5 +37,7 @@
   "ollama",
   "obsidian-hider",
   "readwise-official",
-  "obsidian-vault-changelog"
+  "better-word-count",
+  "obsidian-footnotes",
+  "obsidian-prozen"
 ]

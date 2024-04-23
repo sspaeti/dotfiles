@@ -390,5 +390,14 @@
       ],
       "key": "Q"
     }
+  ],
+  "obsidian-prozen:zenmode": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "Z"
+    }
   ]
 }

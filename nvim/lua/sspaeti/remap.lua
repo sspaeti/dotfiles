@@ -269,10 +269,24 @@ vim.keymap.set('i', '(', '(<c-g>u')
 -- jumplist mutations
 -- These mappings are not directly convertible to Lua since they involve an expression.
 -- Until Neovim's Lua API provides a method to create expression-based mappings, you'll have to use vim.cmd
-vim.cmd[[
-    nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-    nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
-    nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-    nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-]]
+-- vim.cmd[[
+--     nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+--     nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+--     nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+--     nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+-- ]]
+
+--TODO:count on each keypress above seems to be slow, let's try this for a while:
+vim.api.nvim_set_keymap('n', 'j', 'gj', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
+
+--
+--
+-- vim.cmd[[
+--   nnoremap <expr> k v:count > 5 ? 'k' : 'gk'
+--   nnoremap <expr> j v:count > 5 ? 'j' : 'gj'
+-- ]]
+
+--copy path of current file into clipboard
+vim.keymap.set('n', '<leader>y', ':let @+=expand("%:p")<CR>')
 

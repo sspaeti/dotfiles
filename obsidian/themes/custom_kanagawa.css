@@ -134,7 +134,7 @@
     --table-row-even:             hsl(0, 0%, 17%);
     --table-row-odd:              hsl(0, 0%, 20%);
     --table-hover:                var(--sumiInk2);
-    --bold-color:                 var(--autumnYellow);
+    --bold-color:                 var(--light1);
 }
 
 .theme-light,

@@ -164,7 +164,7 @@
             server: "{{put-server-name-here}}",
             database: "{{put-database-name-here}}",
             user: "{{put-username-here}}",
-            password: "{{put-password-here}}",
+            password: "",
         },
     ],
     "grammarly.dialect": "british",
@@ -294,4 +294,11 @@
     },
     "codegpt.model": "ChatGPT",
     "workbench.editor.tabActionCloseVisibility": false,
+    "mssql.objectExplorer.groupBySchema": true,
+    "grammarly.files.include": [
+        "**/readme.md",
+        "**/README.md",
+        "**/*.txt",
+        "*.md",
+    ],
 }
