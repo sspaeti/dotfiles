@@ -104,7 +104,7 @@ cp ~/.vrapperrc $git/general/dotfiles/dbeaver/vrapperrc
 cp -r ~/.config/karabiner/* $git/general/dotfiles/karabiner/
 
 #homebrew
-brew bundle dump > $git/general/dotfiles/Brewfile -f
+brew bundle dump --file=$git/general/dotfiles/Brewfile --force
 
 #ansible
 cp ~/.ansible.cfg $git/general/dotfiles/ansible/ansible.cfg
