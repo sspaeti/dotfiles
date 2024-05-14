@@ -21,7 +21,8 @@ vim.keymap.set('n', 'sn', ':enew<CR>')
 vim.keymap.set('n', 'sM', ':Maps<CR>')
 vim.keymap.set('n', 'st', ':Neotree position=float toggle=true reveal<CR>')
 vim.keymap.set('n', 'se', ':Neotree position=left toggle=true reveal<CR>')
-vim.keymap.set('n', 'sp', ':Files<CR>')
+-- this will include hidden files and work on none git directories. Also fuzzy search works better than telecope
+vim.keymap.set('n', 'c-p', ':Files<CR>') --> sp is in telecope.lua
 vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
 vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
@@ -230,7 +231,7 @@ vim.g.netrw_altv = 1 -- open splits to the right
 --2023-07-18
 --
 -- fzf: ctrl f for find files
-vim.keymap.set('n', '<C-p>', ':Files<CR>')
+-- vim.keymap.set('n', '<c-P>', ':Files<CR>')
 vim.keymap.set('n', '<leader>fw', ":call fzf#vim#files('.', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>")
 vim.keymap.set('n', '<silent> <Leader>fr', ':Rg<CR>')
 vim.keymap.set('n', '<silent> <Leader>fb', ':Buffers<CR>')
