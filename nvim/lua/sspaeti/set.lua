@@ -13,6 +13,7 @@ vim.opt.clipboard = "unnamedplus" --" Copy paste between vim and everything else
 
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.colorcolumn = "100"
 
 -- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
 
