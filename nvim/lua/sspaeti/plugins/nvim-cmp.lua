@@ -63,7 +63,8 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         -- ["<C-e>"] = cmp.mapping.close(),
-        ["C-y"] = cmp.mapping.confirm({ select = false }),
+        ["<C-y>"] = cmp.mapping.confirm({ select = false }),
+        ["<C-x>"] = cmp.mapping.confirm({ select = false }),
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         -- disable completion with tab this helps with copilot setup
         ["<Tab>"] = nil,

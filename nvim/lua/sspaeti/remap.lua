@@ -22,7 +22,7 @@ vim.keymap.set('n', 'sM', ':Maps<CR>')
 vim.keymap.set('n', 'st', ':Neotree position=float toggle=true reveal<CR>')
 vim.keymap.set('n', 'se', ':Neotree position=left toggle=true reveal<CR>')
 -- this will include hidden files and work on none git directories. Also fuzzy search works better than telecope
-vim.keymap.set('n', 'c-p', ':Files<CR>') --> sp is in telecope.lua
+vim.keymap.set('n', '<c-p>', ':Files<CR>') --> sp is in telecope.lua
 vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
 vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
