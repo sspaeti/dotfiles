@@ -1,0 +1,2 @@
+[default_session]
+startup_command = "vim -c ':Telescope find_files'"

@@ -10,6 +10,7 @@ cp ~/.config/nvim/lazy-lock.json $git/general/dotfiles/nvim/lazy-lock.json
 cp -r ~/.config/nvim/lua/ $git/general/dotfiles/nvim/lua/
 cp -r ~/.config/nvim/after/ $git/general/dotfiles/nvim/after/
 cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
+cp -r ~/.config/sesh/ $git/general/dotfiles/sesh/
 
 # might contain sensitive information
 # cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig

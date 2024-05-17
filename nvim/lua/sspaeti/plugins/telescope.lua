@@ -1,7 +1,9 @@
 return
 {
   "nvim-telescope/telescope.nvim",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  lazy = false,
+  priority = 1000,
   tag = "0.1.5",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
