@@ -3,7 +3,8 @@
   "cssTheme": "Kanagawa",
   "theme": "obsidian",
   "enabledCssSnippets": [
-    "hide_file_in_filetree"
+    "hide_file_in_filetree",
+    "mermaid"
   ],
   "translucency": false,
   "accentColor": "#658594",
