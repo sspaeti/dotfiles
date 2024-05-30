@@ -180,7 +180,7 @@ vim.keymap.set("n", "Q", "@qj") --apply macro on q and jump a line done, so you 
 vim.keymap.set("x", "Q", ":norm @q<CR>") --applyies saved macro on q on selected lines
 
 
---quickfix toggle_qf
+-- Quickfix toggle function
 local toggle_qf = function()
   local qf_exists = false
   for _, win in pairs(vim.fn.getwininfo()) do
@@ -188,18 +188,22 @@ local toggle_qf = function()
       qf_exists = true
     end
   end
-  if qf_exists == true then
+  if qf_exists then
     vim.cmd "cclose"
-    return
-  end
-  if not vim.tbl_isempty(vim.fn.getqflist()) then
-    vim.cmd "copen"
+  else
+    if not vim.tbl_isempty(vim.fn.getqflist()) then
+      vim.cmd "copen"
+    end
   end
 end
 
-vim.keymap.set("n", "<Leader>cc", ":call toggle_qf()<CR>")
+vim.keymap.set("n", "<Leader>cc", toggle_qf)
 vim.keymap.set("n", "<Leader>co", ":copen<CR>")
-vim.keymap.set("n", "<Leader>cc", ":cclose<CR>")
+vim.keymap.set("n", "<Leader>cq", ":cclose<CR>")
+vim.keymap.set("n", "<Leader>cn", ":cnext<CR>")
+vim.keymap.set("n", "<Leader>cp", ":cprevious<CR>")
+vim.keymap.set("n", "]q", ":cnext<CR>")
+vim.keymap.set("n", "[q", ":cprevious<CR>")
 vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
 
 -- <TAB>: completion -> still needed?
