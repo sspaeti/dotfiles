@@ -141,7 +141,7 @@ brew "tfenv"
 brew "the_platinum_searcher"
 brew "the_silver_searcher"
 brew "tig"
-brew "tinyproxy", restart_service: true
+brew "tinyproxy"
 brew "tldr"
 brew "utf8proc"
 brew "tmux"

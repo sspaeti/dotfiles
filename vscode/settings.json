@@ -301,4 +301,5 @@
         "**/*.txt",
         "*.md",
     ],
+    "github.copilot.editor.enableAutoCompletions": true,
 }

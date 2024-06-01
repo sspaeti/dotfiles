@@ -57,6 +57,7 @@ return {
 
   -- 'preservim/nerdcommenter',
   { "tpope/vim-commentary",        event = "VeryLazy" },
+  { "tpope/vim-abolish", event = "VeryLazy"},
 
   -- 'psf/black',
   -- {'psf/black', lazy = true},
