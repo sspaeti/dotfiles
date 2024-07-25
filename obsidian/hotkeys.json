@@ -304,15 +304,6 @@
       "key": "E"
     }
   ],
-  "theme:switch": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "ArrowRight"
-    }
-  ],
   "window:zoom-in": [
     {
       "modifiers": [
@@ -356,14 +347,6 @@
         "Ctrl"
       ],
       "key": "="
-    }
-  ],
-  "obsidian-day-planner:show-weekly-view": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "P"
     }
   ],
   "obsidian-day-planner:show-day-planner-today-note": [
