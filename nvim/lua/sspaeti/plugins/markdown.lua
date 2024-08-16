@@ -1,6 +1,77 @@
 return {
   {
-    "iamcco/markdown-preview.nvim",
+    "OXY2DEV/markview.nvim", --live - preview similar to Obsidian
+    lazy = false,            -- Recommended
+    -- ft = "markdown" -- If you decide to lazy-load anyway
+
+    keys = {
+      { "<Leader>mm", ":Markview toggleAll<CR>", desc = "Toggle Markdown/view " }
+    },
+    dependencies = {
+      -- You will not need this if you installed the
+      -- parsers manually
+      -- Or if the parsers are in your $RUNTIMEPATH
+      "nvim-treesitter/nvim-treesitter",
+
+      "nvim-tree/nvim-web-devicons"
+    },
+    -- config = function()
+    --   require("markview").setup({
+    --     links = {
+    --       enable = true,
+    --       icon = nil,
+
+    --       hyperlinks = {},
+    --       images = {},
+    --       emails = {}
+    --     },
+    --     headings = {
+    --       enable = true,
+    --       shift_width = 1,
+
+    --       heading_1 = {
+    --         heading_1 = {
+    --           style = "icon",
+    --           shift_char = "",
+    --           shift_hl = nil,
+
+    --           sign = nil,
+    --           sign_hl = nil,
+
+    --           hl = nil
+    --         }
+    --       },
+    --       heading_2 = {
+    --         style = "label",
+    --         shift_char = " ",
+    --         sign = "+++",
+    --         sign_hl = nil,
+
+    --         hl = "DiagnosticOk",
+
+    --         corner_left = nil,
+    --         corner_left_hl = nil,
+
+    --         padding_left = " ",
+    --         padding_left_hl = nil,
+
+    --         icon = "==",
+    --         icon_hl = nil,
+    --       },
+    --       heading_3 = {},
+    --       heading_4 = {},
+    --       heading_5 = {},
+    --       heading_6 = {},
+
+    --       setext_1 = {},
+    --       setext_2 = {}
+    --     }
+    --   })
+    -- end,
+  },
+
+  {
+    "iamcco/markdown-preview.nvim", -- preview with a Browser
     event = "VeryLazy",
     build = function()
       vim.fn["mkdp#util#install"]()
@@ -9,7 +80,7 @@ return {
       --VimWiki
       vim.cmd([[
       set nocompatible
-      let g:vimwiki_list = [{'path': '~/Simon/Sync/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
+      let g:vimwiki_list = [{'path': '~/Simon/SecondBrain', 'syntax': 'markdown', 'ext': '.md'}]
       let g:vimwiki_global_ext = 0 " o
       ]])
 
@@ -24,7 +95,7 @@ return {
 
       -- Open file in Obsidian vault
       vim.cmd(
-      "command! IO execute \"silent !open 'obsidian://open?vault=SecondBrain&file=\" . expand('%:r') . \"'\""
+        "command! IO execute \"silent !open 'obsidian://open?vault=SecondBrain&file=\" . expand('%:r') . \"'\""
       )
       vim.keymap.set("n", "<leader>io", ":IO<CR>", { noremap = true, silent = true })
 
@@ -48,7 +119,7 @@ return {
   --  config = function()
   --    vim.g.vimwiki_list = {
   --      {
-  --        path = "~/Simon/Sync/SecondBrain",
+  --        path = "~/Simon/SecondBrain",
   --        syntax = "markdown",
   --        ext = ".md",
   --      },
@@ -78,7 +149,7 @@ return {
         fold_markers = { '', '' },
         wrap = false,
         keymaps = { -- These keymaps can be a string or a table for multiple keys
-          close = {"<Esc>", "q"},
+          close = { "<Esc>", "q" },
           goto_location = "<Cr>",
           focus_location = "o",
           hover_symbol = "<C-space>",
@@ -94,48 +165,48 @@ return {
         lsp_blacklist = {},
         symbol_blacklist = {},
         symbols = {
-          File = {icon = "", hl = "TSURI"},
-          Module = {icon = "", hl = "TSNamespace"},
-          Namespace = {icon = "", hl = "TSNamespace"},
-          Package = {icon = "", hl = "TSNamespace"},
-          Class = {icon = "𝓒", hl = "TSType"},
-          Method = {icon = "ƒ", hl = "TSMethod"},
-          Property = {icon = "", hl = "TSMethod"},
-          Field = {icon = "", hl = "TSField"},
-          Constructor = {icon = "", hl = "TSConstructor"},
-          Enum = {icon = "ℰ", hl = "TSType"},
-          Interface = {icon = "ﰮ", hl = "TSType"},
-          Function = {icon = "", hl = "TSFunction"},
-          Variable = {icon = "", hl = "TSConstant"},
-          Constant = {icon = "", hl = "TSConstant"},
-          String = {icon = "𝓐", hl = "TSString"},
-          Number = {icon = "#", hl = "TSNumber"},
-          Boolean = {icon = "⊨", hl = "TSBoolean"},
-          Array = {icon = "", hl = "TSConstant"},
-          Object = {icon = "⦿", hl = "TSType"},
-          Key = {icon = "🔐", hl = "TSType"},
-          Null = {icon = "NULL", hl = "TSType"},
-          EnumMember = {icon = "", hl = "TSField"},
-          Struct = {icon = "𝓢", hl = "TSType"},
-          Event = {icon = "🗲", hl = "TSType"},
-          Operator = {icon = "+", hl = "TSOperator"},
-          TypeParameter = {icon = "𝙏", hl = "TSParameter"}
+          File = { icon = "", hl = "TSURI" },
+          Module = { icon = "", hl = "TSNamespace" },
+          Namespace = { icon = "", hl = "TSNamespace" },
+          Package = { icon = "", hl = "TSNamespace" },
+          Class = { icon = "𝓒", hl = "TSType" },
+          Method = { icon = "ƒ", hl = "TSMethod" },
+          Property = { icon = "", hl = "TSMethod" },
+          Field = { icon = "", hl = "TSField" },
+          Constructor = { icon = "", hl = "TSConstructor" },
+          Enum = { icon = "ℰ", hl = "TSType" },
+          Interface = { icon = "ﰮ", hl = "TSType" },
+          Function = { icon = "", hl = "TSFunction" },
+          Variable = { icon = "", hl = "TSConstant" },
+          Constant = { icon = "", hl = "TSConstant" },
+          String = { icon = "𝓐", hl = "TSString" },
+          Number = { icon = "#", hl = "TSNumber" },
+          Boolean = { icon = "⊨", hl = "TSBoolean" },
+          Array = { icon = "", hl = "TSConstant" },
+          Object = { icon = "⦿", hl = "TSType" },
+          Key = { icon = "🔐", hl = "TSType" },
+          Null = { icon = "NULL", hl = "TSType" },
+          EnumMember = { icon = "", hl = "TSField" },
+          Struct = { icon = "𝓢", hl = "TSType" },
+          Event = { icon = "🗲", hl = "TSType" },
+          Operator = { icon = "+", hl = "TSOperator" },
+          TypeParameter = { icon = "𝙏", hl = "TSParameter" }
         }
       }
 
       require("symbols-outline").setup({
-          sources = opts,
+        sources = opts,
       })
     end
   },
   { -- needed by 'preservim/vim-markdown'
-  "godlygeek/tabular",
-  event = "VeryLazy",
-},
-{
-  -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-  -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
-  "preservim/vim-markdown",
-  event = "VeryLazy",
-},
+    "godlygeek/tabular",
+    event = "VeryLazy",
+  },
+  {
+    -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
+    "preservim/vim-markdown",
+    event = "VeryLazy",
+  },
 }

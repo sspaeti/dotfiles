@@ -302,4 +302,5 @@
         "*.md",
     ],
     "github.copilot.editor.enableAutoCompletions": true,
+    "git.ignoreMissingGitWarning": true,
 }

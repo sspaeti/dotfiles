@@ -13,6 +13,14 @@ return {
     require("neo-tree").setup({
       enable_git_status = true,
       enable_diagnostics = false,
+      position = "right",
+      filesystem = {
+        follow_current_file = {
+          enabled = true, -- This will find and focus the file in the active buffer every time
+          --              -- the current file is changed while the tree is open.
+          leave_dirs_open = true,   -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+        },
+      },
       window = {
         mappings = {
           ["S"] = "open_vsplit",
@@ -22,18 +30,18 @@ return {
           ["h"] = function(state)
             local node = state.tree:get_node()
             if node.type == 'directory' and node:is_expanded() then
-              require'neo-tree.sources.filesystem'.toggle_directory(state, node)
+              require 'neo-tree.sources.filesystem'.toggle_directory(state, node)
             else
-              require'neo-tree.ui.renderer'.focus_node(state, node:get_parent_id())
+              require 'neo-tree.ui.renderer'.focus_node(state, node:get_parent_id())
             end
           end,
           ["l"] = function(state)
             local node = state.tree:get_node()
             if node.type == 'directory' then
               if not node:is_expanded() then
-                require'neo-tree.sources.filesystem'.toggle_directory(state, node)
+                require 'neo-tree.sources.filesystem'.toggle_directory(state, node)
               elseif node:has_children() then
-                require'neo-tree.ui.renderer'.focus_node(state, node:get_child_ids()[1])
+                require 'neo-tree.ui.renderer'.focus_node(state, node:get_child_ids()[1])
               end
             end
           end,

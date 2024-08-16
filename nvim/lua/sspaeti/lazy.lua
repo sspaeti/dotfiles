@@ -16,8 +16,8 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 
 -- define colorscheme based on session name
 local sessionThemes = {
-    ["bed-setup"]   = "gruvbox",
-    ["hellodata"]   = "gruvbox",
+    ["bed-setup"]   = "gruvbox-material",
+    ["hellodata"]   = "gruvbox-material",
     ["susa"]        = "rose-pine",
     ["dotfiles"]    = "rose-pine-moon", --also "solarizev-osaka",
     ["de-projects"] = "rose-pine",

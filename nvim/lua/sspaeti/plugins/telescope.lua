@@ -26,9 +26,9 @@ return
       desc = "Find Open Files",
     },
     {
-      "<leader>fg",
+      "<leader>fw",
       function() require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") }) end,
-      desc = "Grep String",
+      desc = "Grep Word/String under Cursor",
     },
     {
       "<leader>?",

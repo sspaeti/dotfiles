@@ -51,7 +51,9 @@ shift + alt - 9 : yabai -m window --space 9;
 
 #change focus between external displays (left and right)
 alt - s: yabai -m display --focus north #s for screen: external monitor
+# alt - u: yabai -m display --focus north
 alt - d: yabai -m display --focus south #down
+# alt - m: yabai -m display --focus south
 alt - a: yabai -m display --focus west
 alt - g: yabai -m display --focus east
 

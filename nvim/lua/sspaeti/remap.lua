@@ -20,7 +20,7 @@ vim.keymap.set('n', 'sL', ':Lines<CR>')
 vim.keymap.set('n', 'sn', ':enew<CR>')
 vim.keymap.set('n', 'sM', ':Maps<CR>')
 vim.keymap.set('n', 'st', ':Neotree position=float toggle=true reveal<CR>')
-vim.keymap.set('n', 'se', ':Neotree position=left toggle=true reveal<CR>')
+vim.keymap.set('n', 'se', ':Neotree position=right toggle=true reveal<CR>')
 -- this will include hidden files and work on none git directories. Also fuzzy search works better than telecope
 vim.keymap.set('n', '<c-p>', ':Files<CR>') --> sp is in telecope.lua
 vim.keymap.set('n', 'sz', ':Helptags<CR>')
@@ -29,10 +29,10 @@ vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
 vim.keymap.set('n', 'sS', ':Colors<CR>')
 vim.keymap.set('n', 'sF', ':Rg<CR>')
 vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
-vim.keymap.set('n', 'sd', ':Telescope grep_string<CR>') --search for string under cursor
+vim.keymap.set('n', 'sw', ':Telescope grep_string<CR>') --search for word/string under cursor
 
 vim.keymap.set('n', 'sT', ':BTags<CR>')
-vim.keymap.set('n', 'sw', ':Windows<CR>')
+vim.keymap.set('n', 'sd', ':Windows<CR>')
 vim.keymap.set('n', 'sy', ':Filetypes<CR>')
 vim.keymap.set('n', 'sz', ':FZF<CR>')
 	-- si and sm are mapped to harpoon
@@ -112,7 +112,27 @@ vim.keymap.set("n", "<leader>dd", ":DBUIToggle<CR>")
 
 --Markdown
 -- Writing / Markdown (see also markdown.lua)
- vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
+vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
+
+-- Set shortcut to switch between showing markdown formatting level (conceallevel)
+vim.api.nvim_set_keymap('n', '<leader>m0', ':set conceallevel=0<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>m1', ':set conceallevel=1<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>m2', ':set conceallevel=2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>m3', ':set conceallevel=3<CR>', { noremap = true, silent = true })
+
+-- Function to toggle conceallevel
+function ToggleConceallevel()
+    if vim.wo.conceallevel == 0 then
+        vim.wo.conceallevel = 2
+    else
+        vim.wo.conceallevel = 0
+    end
+end
+
+-- Shortcut to toggle conceallevel
+vim.api.nvim_set_keymap('n', '<leader>mt', ':lua ToggleConceallevel()<CR>', { noremap = true, silent = true })
+
+
 -- Zenmode
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
 
