@@ -43,17 +43,16 @@ cp -r ~/.ssh/* $git/general/dotfiles/.ssh/
 cp ~/.config/helix/config.toml $git/general/dotfiles/helix/config.toml
 
 #obsidian
-cp ~/Simon/Sync/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
-cp ~/Simon/Sync/SecondBrain/.obsidian/workspace.json $git/general/dotfiles/obsidian/workspace.json
-cp ~/Simon/Sync/SecondBrain/.obsidian/hotkeys.json $git/general/dotfiles/obsidian/hotkeys.json
-cp ~/Simon/Sync/SecondBrain/.obsidian/core-plugins.json $git/general/dotfiles/obsidian/core-plugins.json
-cp ~/Simon/Sync/SecondBrain/.obsidian/community-plugins.json $git/general/dotfiles/obsidian/community-plugins.json
-cp ~/Simon/Sync/SecondBrain/.obsidian/appearance.json $git/general/dotfiles/obsidian/appearance.json
-cp ~/Simon/Sync/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/app.json
-cp ~/Simon/Sync/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vimrc
-cp ~/Simon/Sync/SecondBrain/.obsidian/themes/custom_kanagawa.css $git/general/dotfiles/obsidian/themes/custom_kanagawa.css
-cp -r ~/Simon/Sync/SecondBrain/.obsidian/snippets/* $git/general/dotfiles/obsidian/snippets/
-cp -r ~/Simon/Sync/SecondBrain/.obsidian/exports/* $git/general/dotfiles/obsidian/exports/
+cp ~/Simon/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
+cp ~/Simon/SecondBrain/.obsidian/workspace.json $git/general/dotfiles/obsidian/workspace.json
+cp ~/Simon/SecondBrain/.obsidian/hotkeys.json $git/general/dotfiles/obsidian/hotkeys.json
+cp ~/Simon/SecondBrain/.obsidian/core-plugins.json $git/general/dotfiles/obsidian/core-plugins.json
+cp ~/Simon/SecondBrain/.obsidian/community-plugins.json $git/general/dotfiles/obsidian/community-plugins.json
+cp ~/Simon/SecondBrain/.obsidian/appearance.json $git/general/dotfiles/obsidian/appearance.json
+cp ~/Simon/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/app.json
+cp ~/Simon/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vimrc
+cp -r ~/Simon/SecondBrain/.obsidian/snippets/* $git/general/dotfiles/obsidian/snippets/
+cp -r ~/Simon/SecondBrain/.obsidian/exports/* $git/general/dotfiles/obsidian/exports/
 
 #kitty
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf

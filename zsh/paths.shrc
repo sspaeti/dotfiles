@@ -17,11 +17,11 @@ export general=$git/general
 export sspaeticom=$git/sspaeti.com
 export venvs=~/.venvs/
 export sync=~/Simon/Sync
-export secondbrain=/Users/sspaeti/Simon/Sync/SecondBrain/
+export secondbrain=/Users/sspaeti/Simon/SecondBrain/
 export public_secondbrain=$git/sspaeti.com/second-brain-public/content
 
 
-export areas=/Users/sspaeti/Simon/Sync/SecondBrain/⚛️\ Areas
+export areas=/Users/sspaeti/Simon/SecondBrain/⚛️\ Areas
 export blog=/Users/sspaeti/Documents/git/sspaeti.com/sspaeti-hugo-blog
 export hugo=$blog
 export docs=~/Documents
