@@ -4,7 +4,7 @@
   "theme": "obsidian",
   "enabledCssSnippets": [
     "hide_file_in_filetree",
-    "mermaid"
+    "better_pdf"
   ],
   "translucency": false,
   "accentColor": "#658594",

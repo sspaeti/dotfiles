@@ -166,14 +166,7 @@
       "key": "O"
     }
   ],
-  "workspace:new-tab": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "T"
-    }
-  ],
+  "workspace:new-tab": [],
   "workspace:toggle-stacked-tabs": [
     {
       "modifiers": [
@@ -381,6 +374,14 @@
         "Shift"
       ],
       "key": "Z"
+    }
+  ],
+  "theme:switch": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "T"
     }
   ]
 }

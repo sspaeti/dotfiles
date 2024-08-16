@@ -1,0 +1,9 @@
+@media print {
+    body {
+        --font-interface-override: "Atkinson Hyperlegible" !important;
+        --font-text-override: "Atkinson Hyperlegible" !important;
+        --font-print-override: "Atkinson Hyperlegible" !important;
+        --font-monospace-override: "Iosevka" !important;
+        font-family: "Atkinson Hyperlegible" !important;
+    }
+}
