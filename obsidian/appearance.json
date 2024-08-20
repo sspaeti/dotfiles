@@ -1,7 +1,7 @@
 {
-  "baseFontSize": 16,
-  "cssTheme": "Kanagawa",
-  "theme": "obsidian",
+  "baseFontSize": 14,
+  "cssTheme": "Obsidian gruvbox",
+  "theme": "moonstone",
   "enabledCssSnippets": [
     "hide_file_in_filetree",
     "better_pdf"
@@ -10,7 +10,7 @@
   "accentColor": "#658594",
   "showViewHeader": false,
   "nativeMenus": true,
-  "interfaceFontFamily": "iA Writer Quattro S,Iosevka,Atkinson Hyperlegible",
+  "interfaceFontFamily": "Atkinson Hyperlegible,American Typewriter,iA Writer Quattro S,Iosevka,Inter",
   "textFontFamily": "Atkinson Hyperlegible,iA Writer Quattro S,Inter,Iosevka",
   "monospaceFontFamily": "Iosevka"
 }
