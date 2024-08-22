@@ -1,7 +1,7 @@
 {
-  "baseFontSize": 14,
-  "cssTheme": "Obsidian gruvbox",
-  "theme": "moonstone",
+  "baseFontSize": 16,
+  "cssTheme": "Kanagawa",
+  "theme": "obsidian",
   "enabledCssSnippets": [
     "hide_file_in_filetree",
     "better_pdf"

@@ -144,7 +144,26 @@ bind pager,attach h exit
 bind pager j next-line
 bind pager k previous-line
 bind pager l view-attachments
+
+
+#Vim navigation
+# Changed bindings for scrolling and deleting
+bind index,pager,browser \Cd half-down
+bind index,pager,browser \Cu half-up
 bind index D delete-message
+bind index d noop
+# bind attach,index,pager \CD next-page
+# bind attach,index,pager \CU previous-page
+#bind index,pager,browser d half-down
+#bind index,pager,browser u half-up
+
+# Global search macro (excluding ScreenedOut folder)
+macro index \Cf "<limit>~B " "search in all folders"
+# appendix to add: <search term> & !~f ScreenedOut
+
+# Unbind ESC+q from sort
+unbind index,pager \eq
+
 # bind index U undelete-message
 # bind index L limit
 bind index h noop
@@ -158,10 +177,6 @@ bind browser gg top-page
 bind browser G bottom-page
 bind pager gg top
 bind pager G bottom
-# bind attach,index,pager \CD next-page
-# bind attach,index,pager \CU previous-page
-bind index,pager,browser d half-down
-bind index,pager,browser u half-up
 #sync & screener
 # macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox><shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
 # both are seperate:
