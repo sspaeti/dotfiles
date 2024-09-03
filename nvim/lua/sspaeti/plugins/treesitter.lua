@@ -17,10 +17,11 @@ return {
         ensure_installed = { "vimdoc", "python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust", "glimmer" }, -- one of "all" or a list of languages
         sync_install = false,
         auto_install = true,
-        -- highlight = {
-        --   enable = true, -- false will disable the whole extension
-        --   disable = { "css" }, -- list of language that will be disabled
-        -- },
+        highlight = {
+            enable = true, -- false will disable the whole extension
+            additional_vim_regex_highlighting = false,
+            --   disable = { "css" }, -- list of language that will be disabled
+        },
         autopairs = {
           enable = true,
         },

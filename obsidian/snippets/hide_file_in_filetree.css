@@ -19,3 +19,8 @@ div[data-path$='.jpg'] {
 div[data-path$='.jpeg'] {
 	display: none;
 }
+
+div[data-path$='.webp'] {
+	display: none;
+}
+
