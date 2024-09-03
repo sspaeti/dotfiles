@@ -5,7 +5,7 @@ Welcome to my dotfiles, the backbone of my development and [personal knowledge m
 
 Most imprantant for my workflow I leverage a combination of `nvim`, `tmux`, and a tiling window manager orchestrated with `skhd` and `yabai`.
 
-![Neovim, Tmux, and Kitty](nvim_tmux_220701.png)
+![Neovim, Tmux, and Kitty](_images/nvim_tmux_220701.png)
 
 
 ## Key Components
@@ -18,9 +18,25 @@ Most imprantant for my workflow I leverage a combination of `nvim`, `tmux`, and 
 - **Terminal**: [Kitty](https://github.com/kovidgoyal/kitty)
 - **Note-Taking**: Obsidian, where my Second Brain thrives
 
+#### Terminal Powered Workflow [[More Images](https://www.ssp.sh/brain/neovim/#my-setup-images)]
+![power of terminal bases workflow](_images/neovim-and-terminal-power.png)
+
+In one screen:
+1. data integration/dbt code
+2. analysis of SQL queries
+3. db connections/browser
+4. result of queries
+5. docker build
+6. dbt run
+7. postgres
+8. more windows/sessions (Tmux)
+
+
+
+
 ## [Obsidian](https://www.ssp.sh/brain/obsidian) 
 
-![](obsidian.jpeg)
+![](_images/obsidian.jpeg)
 
 I made two of my own Themes, they are called [Kanagawa](https://github.com/sspaeti/obsidian_kanagawa) and [Rosé Pine](https://github.com/sspaeti/obsidian_rose_pine).
 Also check my YT video [how I use Obsidian](https://youtu.be/LQasaw4MkqE), in case that's interest you.
