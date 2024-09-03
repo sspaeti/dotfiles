@@ -1,7 +1,7 @@
 
 # Dotfiles
 
-Welcome to my dotfiles, the backbone of my development and [personal knowledge management (PKM) workflows](https://www.ssp.sh/blog/pkm-workflow-for-a-deeper-life/). Each dotfile here are fine-tuned to create an environment that's efficient for me, and, most importantly, give me joy workin in.
+Welcome to my dotfiles, the backbone of my development and [PKM](https://www.ssp.sh/blog/pkm-workflow-for-a-deeper-life/) and [Obsidian Note-Taking](https://www.ssp.sh/blog/obsidian-note-taking-workflow/) workflow. Each dotfile here are fine-tuned to create an environment that's efficient for me, and, most importantly, give me joy workin in.
 
 Most imprantant for my workflow I leverage a combination of `nvim`, `tmux`, and a tiling window manager orchestrated with `skhd` and `yabai`.
 
