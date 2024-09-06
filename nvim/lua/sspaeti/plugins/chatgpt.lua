@@ -35,6 +35,7 @@ return {
     config = function()
       require("avante").setup({
         provider = "claude",
+        hints = { enabled = false },
       })
     end,
     -- keys = {
