@@ -1,75 +1,32 @@
 return {
-  {
-    "OXY2DEV/markview.nvim", --live - preview similar to Obsidian
-    lazy = false,            -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
-
+  { --nice markdown inline rendering
+    'MeanderingProgrammer/render-markdown.nvim',
+    event = "VeryLazy",
+    opts = {},
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     keys = {
-      { "<Leader>mm", ":Markview toggleAll<CR>", desc = "Toggle Markdown/view " }
+      { "<leader>mm", ":RenderMarkdown toggle<CR>", desc = "Markdown Render Toggle" }
     },
-    dependencies = {
-      -- You will not need this if you installed the
-      -- parsers manually
-      -- Or if the parsers are in your $RUNTIMEPATH
-      "nvim-treesitter/nvim-treesitter",
-
-      "nvim-tree/nvim-web-devicons"
-    },
-    -- config = function()
-    --   require("markview").setup({
-    --     links = {
-    --       enable = true,
-    --       icon = nil,
-
-    --       hyperlinks = {},
-    --       images = {},
-    --       emails = {}
-    --     },
-    --     headings = {
-    --       enable = true,
-    --       shift_width = 1,
-
-    --       heading_1 = {
-    --         heading_1 = {
-    --           style = "icon",
-    --           shift_char = "",
-    --           shift_hl = nil,
-
-    --           sign = nil,
-    --           sign_hl = nil,
-
-    --           hl = nil
-    --         }
-    --       },
-    --       heading_2 = {
-    --         style = "label",
-    --         shift_char = " ",
-    --         sign = "+++",
-    --         sign_hl = nil,
-
-    --         hl = "DiagnosticOk",
-
-    --         corner_left = nil,
-    --         corner_left_hl = nil,
-
-    --         padding_left = " ",
-    --         padding_left_hl = nil,
-
-    --         icon = "==",
-    --         icon_hl = nil,
-    --       },
-    --       heading_3 = {},
-    --       heading_4 = {},
-    --       heading_5 = {},
-    --       heading_6 = {},
-
-    --       setext_1 = {},
-    --       setext_2 = {}
-    --     }
-    --   })
-    -- end,
+    config = function()
+      require("render-markdown").setup({
+        heading = {
+          sign = false,
+          position = "inline",
+          icons = { '# ', '## ', '### ', '#### ', '##### ', '###### ' },
+          width = 'block',
+          left_pad = 2,
+          right_pad = 4,
+        },
+        code = {
+          sign = false,
+          left_pad = 2,
+          right_pad = 4,
+          border = "thick",
+        },
+        bullet = { right_pad = 2 },
+      })
+    end,
   },
-
   {
     "iamcco/markdown-preview.nvim", -- preview with a Browser
     event = "VeryLazy",
