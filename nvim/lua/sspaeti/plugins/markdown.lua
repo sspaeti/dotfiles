@@ -2,6 +2,8 @@ return {
   { --nice markdown inline rendering
     'MeanderingProgrammer/render-markdown.nvim',
     event = "VeryLazy",
+    priority = 1000,
+    ft = { "markdown" },
     opts = {},
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     keys = {
