@@ -156,6 +156,12 @@ return {
         on_attach = on_attach,
       })
 
+      lspconfig["helm_ls"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = { "helm", "yaml" },
+      })
+
       -- configure svelte server
       lspconfig["svelte"].setup({
         capabilities = capabilities,

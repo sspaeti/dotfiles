@@ -57,7 +57,7 @@ return {
 
   -- 'preservim/nerdcommenter',
   { "tpope/vim-commentary",        event = "VeryLazy" },
-  { "tpope/vim-abolish", event = "VeryLazy"},
+  { "tpope/vim-abolish",           event = "VeryLazy" },
 
   -- 'psf/black',
   -- {'psf/black', lazy = true},
@@ -91,21 +91,21 @@ return {
       })
     end,
   },
-  { "mhinz/vim-signify",              event = "VeryLazy" }, --highlighing changes not commited to last commmit
+  { "mhinz/vim-signify",     event = "VeryLazy" },          --highlighing changes not commited to last commmit
 
-  { "APZelos/blamer.nvim",            event = "VeryLazy" }, --gitlens blame style',
+  { "APZelos/blamer.nvim",   event = "VeryLazy" },          --gitlens blame style',
   -- 'nvim-lua/popup.nvim',
-  { "nvim-lua/plenary.nvim",          event = "VeryLazy" },
+  { "nvim-lua/plenary.nvim", event = "VeryLazy" },
   -- search
-  { "junegunn/fzf",                   build = ":call fzf#install()", event = "VeryLazy" },
-  { "junegunn/fzf.vim",               event = "VeryLazy" },
+  { "junegunn/fzf",          build = ":call fzf#install()", event = "VeryLazy" },
+  { "junegunn/fzf.vim",      event = "VeryLazy" },
   -- {
   --   'stevearc/oil.nvim',
   --   event = "VeryLazy",
   --   -- Optional dependencies
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
   -- },
-  { "mbbill/undotree",                event = "VeryLazy" },
+  { "mbbill/undotree",       event = "VeryLazy" },
   {
     "tzachar/highlight-undo.nvim",
     event = "VeryLazy",
@@ -177,6 +177,7 @@ return {
     "hiphish/rainbow-delimiters.nvim",
     event = "VeryLazy",
   },
-  {"alexlafroscia/tree-sitter-glimmer", event = "VeryLazy"},
-  {"LunarVim/bigfile.nvim", event = "VeryLazy"}
+  { "alexlafroscia/tree-sitter-glimmer", event = "VeryLazy" },
+  { "LunarVim/bigfile.nvim",             event = "VeryLazy" },
+  { "towolf/vim-helm",                   event = "VeryLazy", ft = "helm" }
 }
