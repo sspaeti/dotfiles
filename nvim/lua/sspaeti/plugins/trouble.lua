@@ -6,7 +6,7 @@ return {
     keys = {
       -- document_diagnostics needed, otherwise todo-comments below breaks it: https://github.com/folke/todo-comments.nvim/issues/158
       {
-        "<leader>lt", ":Trouble document_diagnostics<CR>", desc = "Trouble Open Diagnostics", noremap = true, silent = true,
+        "<leader>lt", ":Trouble diagnostics toggle<CR>", desc = "Trouble Open Diagnostics", noremap = true, silent = true,
       },
     },
     opts = {}
