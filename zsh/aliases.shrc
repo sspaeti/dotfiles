@@ -42,7 +42,20 @@ alias ta="tmux attach"
 alias tn='tmux new -s `eval echo $(pwd) | sed "s/.*\///"`'
 # when closing ranger it will be at the path you were
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+
 alias r=ranger
+
+# same as ranger above, leaves you at currrent directory when quitting
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+alias r=y
 
 #git shortcuts
 alias g='git'
