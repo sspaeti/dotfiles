@@ -12,7 +12,7 @@ yabai -m config right_padding 0
 yabai -m config window_gap 5
 
 # center mouse on window with focus
-yabai -m config mouse_follows_focus on
+# yabai -m config mouse_follows_focus on
 
 # modifier for clicking and dragging with mouse
 yabai -m config mouse_modifier alt
