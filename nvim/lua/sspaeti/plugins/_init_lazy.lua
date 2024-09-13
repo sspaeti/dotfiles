@@ -34,6 +34,7 @@ return {
   --'puremourning/vimspector', --debugging in vim
   {
     "goolord/alpha-nvim",
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("alpha").setup(require("alpha.themes.startify").config)
@@ -42,7 +43,6 @@ return {
   { "christoomey/vim-system-copy", event = "VeryLazy" },
   --'valloric/youcompleteme',
   { "tpope/vim-surround",          event = "VeryLazy" }, -- Surrounding ys',
-
   --Text Objects:
   --Utilities for user-defined text objects
   { "kana/vim-textobj-user",       event = "VeryLazy" },
