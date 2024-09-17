@@ -16,6 +16,17 @@ noremap <c-u> <C-u>zz
 noremap <n> nzzzv
 noremap <N> Nzzzv
 
+" vim fold navigation
+exmap unfoldall obcommand editor:unfold-all
+nmap zR :unfoldall
+
+exmap foldall obcommand editor:fold-all
+nmap zM :foldall
+
+exmap foldtoggle obcommand editor:toggle-fold
+nmap za :foldtoggle
+
+
 " set scrolloff=8
 
 "yank to clipboard
