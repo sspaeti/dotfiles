@@ -61,6 +61,18 @@ vim.keymap.set("n", "S", ":%s//g<Left><Left>") --used for lazy.
 vim.keymap.set("n", "<leader>s", ":%s//g<Left><Left>")
 vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+
+--improve cmd line completion (: mode or wildmenu) - allow c-j and c-n to accept completion (tab)
+-- Map Ctrl+n to wildmenu completion in command mode
+vim.keymap.set('c', '<C-n>', '<C-z>', { noremap = true })
+vim.keymap.set('c', '<C-j>', '<C-z>', { noremap = true })
+vim.keymap.set('c', '<C-p>', '<S-Tab>', { noremap = true })
+vim.keymap.set('c', '<C-k>', '<S-Tab>', { noremap = true })
+
+-- Optional: Enhance command-line completion behavior
+vim.opt.wildmode = "longest:full,full"
+vim.opt.wildmenu = true
+
 --remove commands
 --
 --remove empty line
@@ -314,4 +326,3 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
 
 --copy path of current file into clipboard
 vim.keymap.set('n', '<leader>y', ':let @+=expand("%:p")<CR>')
-
