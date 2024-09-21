@@ -71,6 +71,11 @@ create_venv() {
     pip install --upgrade pip
 }
 
+# search content with fzf and open return directly with vim
+fzfvim() {
+  vim "$(rg . | fzf)"
+}
+
 
 #asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh

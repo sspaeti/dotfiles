@@ -83,6 +83,8 @@ alias kn="kubectl config set-context --current --namespace "
 alias kc="kubectl config use-context "
 alias ko="kubectl --dry-run=client -o yaml "
 alias dps="docker ps --format \"table {{.Image}}\t{{.Status}}\t{{.Names}}\" --all"
+alias docker-compose="docker compose"
+
 
 alias lg=lazygit
 alias ldd=lazydocker
