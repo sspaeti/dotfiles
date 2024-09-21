@@ -139,6 +139,11 @@ vim.g.rnvimr_edit_cmd = 'drop'
 -- let blame default be on
 vim.g.blamer_enabled = 1
 
+--TODO: not sure if that works yet
+--disable match parentes as it's super slow on larger files (e.g. log files)
+vim.g.loaded_matchparen = 1
+
+
 -- Custom surrounds
 vim.cmd[[
 let w:surround_{char2nr('w')} = "```\r```"
