@@ -45,8 +45,12 @@ return {
   {
     "github/copilot.vim",
     event = "VeryLazy",
+    init = function()
+      --Copilot: disables by default
+      vim.g.copilot_enabled = false
+    end,
     -- config = function()
-    --   require("copilot").setup {
+    --  require("copilot").setup {
     --     vim.keymap.set("n", "<leader>cn", "<Plug>(copilot-next)", { noremap = true, silent = true }),
     --     vim.keymap.set("n", "<leader>cp", "<Plug>(copilot-previous)", { noremap = true, silent = true }),
     --     vim.keymap.set("n", "<leader>cd", "<Plug>(copilot-dismiss)", { noremap = true, silent = true })
