@@ -29,7 +29,7 @@ return {
     opts = {},
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     keys = {
-      { "<leader>mm", ":RenderMarkdown toggle<CR>", desc = "Markdown Render Toggle" }
+      { "<leader>mt", ":RenderMarkdown toggle<CR>", desc = "Markdown Render Toggle" }
     },
     config = function()
       require("render-markdown").setup({
@@ -94,7 +94,7 @@ return {
     end,
   },
   --{
-  --  --connect with Obsidian Second Brain
+  --  --connect with vimwiki with Obsidian Second Brain (see obsidian.lua for native plugin)
   --  --vim.opt.nocompatible = true --Recommende for VimWiki
   --  "vimwiki/vimwiki",
   --  config = function()
@@ -179,15 +179,16 @@ return {
         sources = opts,
       })
     end
-  },
-  { -- needed by 'preservim/vim-markdown'
-    "godlygeek/tabular",
-    event = "VeryLazy",
-  },
-  {
-    -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-    -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
-    "preservim/vim-markdown",
-    event = "VeryLazy",
-  },
+  }
+  -- , Replaced by markdown.nvim??
+  -- { -- needed by 'preservim/vim-markdown'
+  --   "godlygeek/tabular",
+  --   event = "VeryLazy",
+  -- },
+  -- {
+  --   -- use({ "iamcco/markdown-preview.nvim", build = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+  --   -- (optional) recommended for syntax highlighting, folding, etc if you're not using nvim-treesitter:
+  --   "preservim/vim-markdown",
+  --   event = "VeryLazy",
+  -- },
 }
