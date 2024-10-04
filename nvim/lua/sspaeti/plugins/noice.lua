@@ -3,9 +3,16 @@ return {
   event = "VeryLazy",
   opts = {
     -- add any options here
+    messages = {
+      -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+      -- This is a current Neovim limitation.
+      view = "mini", --show default operation in lover right corner. Warn/Errors are still as popu (notify). options: notify, split, vsplit, popup, mini, cmdline, cmdline_popup, cmdline_output, messages, confirm, hover, popupmenu
+    }
+
   },
   keys = {
     { "<leader>mm", ":Noice<CR>", desc = "Show recent messages" },
+    { "<leader>lm", ":Noice<CR>", desc = "Show recent messages" },
   },
 
   dependencies = {
