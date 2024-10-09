@@ -7,13 +7,9 @@ function SetThemeBasedOnTmuxSession(sessionThemes)
 
     session_name = session_name:gsub("%s+", "")
 
-    local theme = sessionThemes[session_name]
-    if theme then
-        -- Set the specified theme
-        vim.cmd("colorscheme " .. theme)
-    else
-        -- Default theme from dictionary
-        vim.cmd("colorscheme " .. sessionThemes["default"])
-    end
+    local theme = sessionThemes[session_name] or sessionThemes["default"]
+    vim.cmd("colorscheme " .. theme)
+    
+    -- Call the transparency function after setting the colorscheme
+    -- require("sspaeti.transparency").set_transparency()
 end
-
