@@ -7,11 +7,11 @@ return {
     {"<leader>2", function() require('bufferline').go_to_buffer(2) end, desc = "Go to buffer 2"},
     {"<leader>3", function() require('bufferline').go_to_buffer(3) end, desc = "Go to buffer 3"},
     {"<leader>4", function() require('bufferline').go_to_buffer(4) end, desc = "Go to buffer 4"},
-    {"<leader>5", function() require('bufferline').go_to_buffer(5) end, desc = "Go to buffer 5"},
-    {"<leader>6", function() require('bufferline').go_to_buffer(6) end, desc = "Go to buffer 6"},
-    {"<leader>7", function() require('bufferline').go_to_buffer(7) end, desc = "Go to buffer 7"},
-    {"<leader>8", function() require('bufferline').go_to_buffer(8) end, desc = "Go to buffer 8"},
-    {"<leader>9", function() require('bufferline').go_to_buffer(9) end, desc = "Go to buffer 9"},
+    -- {"<leader>5", function() require('bufferline').go_to_buffer(5) end, desc = "Go to buffer 5"},
+    -- {"<leader>6", function() require('bufferline').go_to_buffer(6) end, desc = "Go to buffer 6"},
+    -- {"<leader>7", function() require('bufferline').go_to_buffer(7) end, desc = "Go to buffer 7"},
+    -- {"<leader>8", function() require('bufferline').go_to_buffer(8) end, desc = "Go to buffer 8"},
+    -- {"<leader>9", function() require('bufferline').go_to_buffer(9) end, desc = "Go to buffer 9"},
   },
 
   config = function()
