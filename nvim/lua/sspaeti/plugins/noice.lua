@@ -1,6 +1,7 @@
 return {
   "folke/noice.nvim",
-  event = "VeryLazy",
+  -- if activated, recording mode will not show
+  -- event = { "VeryLazy"},
   opts = {
     -- add any options here
     messages = {
