@@ -112,6 +112,8 @@ cp ~/.ansible.cfg $git/general/dotfiles/ansible/ansible.cfg
 #ansible
 cp ~/.k9s/hotkey.yml $git/general/dotfiles/k9s/hotkey.yml
 
+#Lazygit: location could be changed: `export XDG_CONFIG_HOME="$HOME/.config` (but that would affect all apps)
+cp -r ~/Library/Application\ Support/lazygit/config.yml $git/general/dotfiles/lazygit/config.yml
 # source $venvs/dagster/bin/activate
 # pip freeze > $git/general/dotfiles/python/venvs/dagster.txt
 # deactivate
