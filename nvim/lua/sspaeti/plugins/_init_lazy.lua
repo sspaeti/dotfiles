@@ -32,14 +32,6 @@ return {
     ft = { "rust", "rs" },
   },
   --'puremourning/vimspector', --debugging in vim
-  {
-    "goolord/alpha-nvim",
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("alpha").setup(require("alpha.themes.startify").config)
-    end,
-  },
   { "christoomey/vim-system-copy", event = "VeryLazy" },
   --'valloric/youcompleteme',
   { "tpope/vim-surround",          event = "VeryLazy" }, -- Surrounding ys',
