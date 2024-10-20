@@ -410,16 +410,15 @@
       "key": "D"
     }
   ],
-  "theme:use-light": [
+  "editor:toggle-source": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Ctrl"
       ],
-      "key": "L"
+      "key": "`"
     }
   ],
-  "theme:use-dark": [
+  "theme:use-light": [
     {
       "modifiers": [
         "Mod",
@@ -428,12 +427,13 @@
       "key": ";"
     }
   ],
-  "editor:toggle-source": [
+  "theme:use-dark": [
     {
       "modifiers": [
-        "Ctrl"
+        "Mod",
+        "Shift"
       ],
-      "key": "`"
+      "key": "'"
     }
   ]
 }
