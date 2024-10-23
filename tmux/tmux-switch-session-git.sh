@@ -31,7 +31,7 @@ tmux_switch_or_create_session() {
 }
 
 # Use fzf-tmux to select folder
-choice=$(echo "$folders" | fzf-tmux -p --reverse --header="Select Git Directory" \
+choice=$(echo "$folders" | fzf-tmux -p --reverse --header="Select Git Directory" --preview-window=hidden | tr -d '\n')
     --preview 'ls -la {}' \
     --preview-window=right:50% \
     | tr -d '\n')
