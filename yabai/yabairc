@@ -25,6 +25,19 @@ yabai -m config mouse_action2 resize
 # when window is dropped in center of another window, swap them (on edges it will split it)
 yabai -m mouse_drop_action swap
 
+
+# default apps on screen number
+yabai -m rule --add app="kitty" space=^1
+yabai -m rule --add app="^Brave Browser$" space=^2
+yabai -m rule --add app="Obsidian" space=^3
+yabai -m rule --add app="Slack" space=^4
+yabai -m rule --add app="Zulip" space=^4
+yabai -m rule --add app="HEY" space=^4
+yabai -m rule --add app="Nirvana" space=^4
+yabai -m rule --add app="Basecamp 3" space=^4
+yabai -m rule --add app="Discord" space=^4
+yabai -m rule --add app="Spotify" space=^5
+
 # disable certain apps
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
