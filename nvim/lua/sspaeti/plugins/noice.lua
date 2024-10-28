@@ -1,5 +1,7 @@
 return {
   "folke/noice.nvim",
+  lazy = false,
+  priority = 1005,
   -- if activated, recording mode will not show
   -- event = { "VeryLazy"},
   opts = {

@@ -35,7 +35,7 @@ return {
     config = function()
       require("avante").setup({
         ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-        provider = "openai", --"claude",
+        provider = "claude",
         hints = { enabled = false },
       })
     end,
