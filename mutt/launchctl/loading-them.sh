@@ -1,3 +1,6 @@
+launchctl unload ~/Library/LaunchAgents/offlineimap_sspaeti.plist
+rm ~/Library/LaunchAgents/offlineimap_sspaeti.plist
+
 ## should be run manaully in mutt wth `S` (sync)
 # cp ./offlineimap_sspaeti.plist ~/Library/LaunchAgents/
 # launchctl load ~/Library/LaunchAgents/offlineimap_sspaeti.plist
@@ -7,5 +10,5 @@
 launchctl unload ~/Library/LaunchAgents/initial_screening.plist
 rm ~/Library/LaunchAgents/initial_screening.plist
 
-cp ./initial_screening.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/initial_screening.plist
+# cp ./initial_screening.plist ~/Library/LaunchAgents/
+# launchctl load ~/Library/LaunchAgents/initial_screening.plist

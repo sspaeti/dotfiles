@@ -44,6 +44,9 @@ nmap <Space>s :search_replace
 exmap theme_switch obcommand theme:switch
 nmap <Space>ts :theme_switch
 
+exmap quick_switch obcommand switcher:open
+nmap <Space>O :quick_switch
+
 exmap theme_dark obcommand theme:use-dark
 exmap theme_light obcommand theme:use-light
 nmap <Space>td :theme_dark

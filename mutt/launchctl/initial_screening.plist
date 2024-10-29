@@ -6,15 +6,25 @@
     <string>com.user.initial_screening</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/sh</string>
-        <string>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1</string>
+        <string>/bin/zsh</string>
+        <string>-l</string>
+        <string>-c</string>
+        <string>source $HOME/.zshrc && $HOME/.config/mutt/initial_screening.sh >> $HOME/.config/mutt/logs/screening.log 2>&1</string>
     </array>
     <key>StartInterval</key>
-    <integer>1800</integer> <!-- 30 minutes -->
+    <integer>1800</integer>
+    <key>RunAtLoad</key>
+    <true/>
     <key>StandardErrorPath</key>
-    <string>~/Library/Logs/initial_screening_error.log</string>
+    <string>/Users/sspaeti/Library/Logs/initial_screening_error.log</string>
     <key>StandardOutPath</key>
-    <string>~/Library/Logs/initial_screening_output.log</string>
+    <string>/Users/sspaeti/Library/Logs/initial_screening_output.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/sbin</string>
+        <key>HOME</key>
+        <string>/Users/sspaeti</string>
+    </dict>
 </dict>
 </plist>
-

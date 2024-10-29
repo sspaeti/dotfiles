@@ -148,14 +148,12 @@ bind pager l view-attachments
 
 #Vim navigation
 # Changed bindings for scrolling and deleting
+bind index,pager d noop
 bind index,pager,browser \Cd half-down
 bind index,pager,browser \Cu half-up
+bind index,pager d half-down
+bind index,pager u half-up
 bind index D delete-message
-bind index d noop
-# bind attach,index,pager \CD next-page
-# bind attach,index,pager \CU previous-page
-#bind index,pager,browser d half-down
-#bind index,pager,browser u half-up
 
 # Global search macro (excluding ScreenedOut folder)
 macro index \Cf "<limit>~B " "search in all folders"
