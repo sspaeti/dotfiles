@@ -350,7 +350,15 @@
       "key": "D"
     }
   ],
-  "editor:open-search": [],
+  "editor:open-search": [
+    {
+      "modifiers": [
+        "Ctrl",
+        "Shift"
+      ],
+      "key": "F"
+    }
+  ],
   "global-search:open": [
     {
       "modifiers": [
