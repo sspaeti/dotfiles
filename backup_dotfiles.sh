@@ -59,6 +59,7 @@ cp -r ~/Simon/SecondBrain/.obsidian/exports/* $git/general/dotfiles/obsidian/exp
 cp ~/.config/kitty/kitty.conf $git/general/dotfiles/kitty/kitty.conf
 cp ~/.config/kitty/gruvbox-kitty.conf $git/general/dotfiles/kitty/gruvbox-kitty.conf
 cp ~/.config/kitty/kanagawa-kitty.conf $git/general/dotfiles/kitty/kanagawa-kitty.conf
+cp ~/.config/kitty/kanagawa-paper-kitty.conf $git/general/dotfiles/kitty/kanagawa-paper-kitty.conf
 cp ~/.config/kitty/custom_kitty.conf $git/general/dotfiles/kitty/custom_kitty.conf
 
 # yabai and skhd - tiling window manager
