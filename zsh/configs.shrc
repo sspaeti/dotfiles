@@ -47,6 +47,9 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 # add this after homebrew to use m1 /opt/homebrew before old homebrew that was in /usr/local/bin 
 export PATH="$PATH:/usr/local/bin/"
 
+# add path from uv
+export PATH="/Users/sspaeti/.local/share/../bin:$PATH"
+
 #adoptopenjdk to change java versions with e.g. "jdk 11"
 jdk() {
         version=$1
