@@ -18,7 +18,8 @@ return {
   --
   {
     "yetone/avante.nvim",
-    event = "VeryLazy",
+    lazy = false,
+    priority = 1005,
     opts = {},
     build = "make",
     dependencies = {
@@ -34,7 +35,7 @@ return {
     },
     config = function()
       require("avante").setup({
-        ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+        ---Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
         provider = "claude",
         hints = { enabled = false },
       })
