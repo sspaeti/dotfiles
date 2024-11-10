@@ -74,3 +74,11 @@ export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@3
 # # fix grpcio on M1: https://github.com/grpc/grpc/issues/30064#issuecomment-1236072966
 # export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=true 
 # export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true
+#
+#greetings
+# Use printf instead of multiple echo commands (faster):
+display_greeting() {
+    printf '\033[36m      **   **\033[35m_________    \033[34m___       __       \033[0m\n\033[36m      \ \ / **\033[35m/ **/ * \  \033[34m/ * \___ */ /*___ _ \033[0m\n\033[36m       > >\ \_\033[35m\ \/ ___/ \033[34m/ // / * *`/ _/ _ `/ \033[0m\n\033[36m      /_/___/\033[35m___/_/    \033[34m/____/\_,_/\__/\_,_/  \033[0m\n\n'
+}
+display_greeting
+
