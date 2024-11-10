@@ -28,7 +28,7 @@ yabai -m mouse_drop_action swap
 
 # default apps on screen number
 yabai -m rule --add app="kitty" space=^1
-yabai -m rule --add app="^Brave Browser$" space=^2
+# yabai -m rule --add app="^Brave Browser$" space=^2
 yabai -m rule --add app="Obsidian" space=^3
 yabai -m rule --add app="Slack" space=^4
 yabai -m rule --add app="Zulip" space=^4
