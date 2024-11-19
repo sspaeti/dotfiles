@@ -1,3 +1,11 @@
+# To profile where time is spent, add at the very top of .zshrc:
+zmodload zsh/zprof
+
+# Add at the very bottom of .zshrc:
+if [[ "${ZPROF}" == true ]]; then
+    zprof
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -75,6 +83,19 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+
+
+# Performance Improvements
+# Add to your .zshrc to disable oh-my-zsh updates
+DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT="true"
+
+# Optimize autosuggestions
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+# ZSH_AUTOSUGGEST_STRATEGY=(history)  # Removed completion to speed it up
+
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
