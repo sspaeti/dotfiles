@@ -1,4 +1,7 @@
-# [manager]
+[manager]
+prepend_keymap = [
+	{ on = "?", run = 'help', desc = "Help" },
+]
 
 # keymap = [
 
