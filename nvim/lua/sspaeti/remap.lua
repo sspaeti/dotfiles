@@ -307,6 +307,9 @@ vim.keymap.set('i', '.', '.<c-g>u')
 vim.keymap.set('i', '[', '[<c-g>u')
 vim.keymap.set('i', '(', '(<c-g>u')
 
+-- word count
+vim.keymap.set('n', '<leader>cw', 'g<c-g><CR>', {desc="count words"})
+
 -- jumplist mutations
 -- These mappings are not directly convertible to Lua since they involve an expression.
 -- Until Neovim's Lua API provides a method to create expression-based mappings, you'll have to use vim.cmd

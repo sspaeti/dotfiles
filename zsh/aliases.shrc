@@ -44,6 +44,7 @@ alias tn='tmux new -s `eval echo $(pwd) | sed "s/.*\///"`'
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
 alias r=ranger
+alias zed="open -a /Applications/Zed.app -n"
 
 # same as ranger above, leaves you at currrent directory when quitting
 function y() {
