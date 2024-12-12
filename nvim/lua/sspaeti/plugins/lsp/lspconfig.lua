@@ -40,7 +40,7 @@ return {
       { "<Leader>la", vim.lsp.buf.code_action,                              desc = "LSP Code Action" },
       { "<Leader>lf", vim.lsp.buf.format,                                   desc = "LSP Format" },
       { "<Leader>lr", vim.lsp.buf.rename,                                   desc = "LSP Rename" },
-      { "<Leader>lc", vim.diagnostic.disable,                               desc = "Diagnostic Disable" },
+      { "<Leader>lc", vim.diagnostic.enable(false),                         desc = "Diagnostic Disable" },
       { "<Leader>le", vim.diagnostic.enable,                                desc = "Diagnostic Enable" },
       { "<leader>lo", vim.diagnostic.open_float,                            desc = "Diagnostic Open (Float)" },
       { "<Leader>ln", vim.diagnostic.goto_next,                             desc = "Diagnostic Go To Next" },
@@ -143,6 +143,12 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      --
+      -- -- not suggested with ts_ls together
+      -- lspconfig["denols"].setup({
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      -- })
 
       -- configure css server
       lspconfig["cssls"].setup({
@@ -202,7 +208,7 @@ return {
       -- Configure `ruff-lsp`.
       -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
       -- For the default config, along with instructions on how to customize the settings
-      lspconfig["ruff_lsp"].setup {
+      lspconfig["ruff"].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         init_options = {
