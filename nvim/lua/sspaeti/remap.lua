@@ -242,10 +242,10 @@ vim.keymap.set("n", "]q", ":cnext<CR>")
 vim.keymap.set("n", "[q", ":cprevious<CR>")
 vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
 
--- <TAB>: completion -> still needed?
--- inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
--- -- switching between tmux session from vim
--- vim.keymap.set("n", "<leader>ss", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+--<TAB>: completion -> still needed?
+--inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+-- switching between tmux session from vim
+--vim.keymap.set("n", "<leader>ss", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 --folding
 vim.keymap.set("n", "z1", "za")
@@ -333,3 +333,11 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
 
 --copy path of current file into clipboard
 vim.keymap.set('n', '<leader>y', ':let @+=expand("%:p")<CR>')
+
+--forth and back: Needed, if I remove, c-o and c-i are not working anylonger!!?
+-- vim.keymap.set("n", "<leader>o", "<C-o>")
+-- vim.keymap.set("n", "<leader>i", "<C-i>")
+-- -- needed for c-o and c-i to work in Kitty (?):
+-- vim.api.nvim_set_keymap('n', '<C-i>', '\x1b[105;5u', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<C-o>', '\x1b[111;5u', { noremap = true })
+
