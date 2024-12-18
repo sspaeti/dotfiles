@@ -1,4 +1,5 @@
 --general
+--
 vim.keymap.set("n", "<leader>e", ":Explore<CR>")
 -- vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
@@ -334,10 +335,12 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
 --copy path of current file into clipboard
 vim.keymap.set('n', '<leader>y', ':let @+=expand("%:p")<CR>')
 
---forth and back: Needed, if I remove, c-o and c-i are not working anylonger!!?
--- vim.keymap.set("n", "<leader>o", "<C-o>")
--- vim.keymap.set("n", "<leader>i", "<C-i>")
--- -- needed for c-o and c-i to work in Kitty (?):
+--! jumping forth and back: Needed, if I remove, c-o and c-i are not working anylonger
+vim.keymap.set("n", "<leader>O", "<C-o>", { noremap = true })
+vim.keymap.set("n", "<leader>I", "<C-i>", { noremap = true })
+
+-- needed for c-o and c-i to work in Kitty (?):
 -- vim.api.nvim_set_keymap('n', '<C-i>', '\x1b[105;5u', { noremap = true })
 -- vim.api.nvim_set_keymap('n', '<C-o>', '\x1b[111;5u', { noremap = true })
-
+-- potentially add to kitty:
+-- map ctrl+i send_text all \x1b[105;5u
