@@ -1,6 +1,7 @@
 [manager]
 prepend_keymap = [
 	{ on = "?", run = 'help', desc = "Help" },
+	# { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
 ]
 
 # keymap = [

@@ -62,6 +62,9 @@ cp ~/.config/kitty/kanagawa-kitty.conf $git/general/dotfiles/kitty/kanagawa-kitt
 cp ~/.config/kitty/kanagawa-paper-kitty.conf $git/general/dotfiles/kitty/kanagawa-paper-kitty.conf
 cp ~/.config/kitty/custom_kitty.conf $git/general/dotfiles/kitty/custom_kitty.conf
 
+# Ghostty
+cp ~/.config/ghostty/config $git/general/dotfiles/ghostty/config
+
 # yabai and skhd - tiling window manager
 # start with `brew services start yabai skhd`
 cp ~/.config/yabai/yabairc $git/general/dotfiles/yabai/yabairc
