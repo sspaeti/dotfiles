@@ -401,14 +401,6 @@
     }
   ],
   "file-explorer:new-file-in-new-pane": [],
-  "calendar:open-weekly-note": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "D"
-    }
-  ],
   "editor:toggle-source": [
     {
       "modifiers": [
@@ -459,6 +451,15 @@
         "Mod"
       ],
       "key": "H"
+    }
+  ],
+  "calendar:open-weekly-note": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "W"
     }
   ]
 }

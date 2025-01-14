@@ -336,8 +336,24 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
 vim.keymap.set('n', '<leader>y', ':let @+=expand("%:p")<CR>')
 
 --! jumping forth and back: Needed, if I remove, c-o and c-i are not working anylonger
-vim.keymap.set("n", "<leader>O", "<C-o>", { noremap = true })
-vim.keymap.set("n", "<leader>I", "<C-i>", { noremap = true })
+-- vim.keymap.set("n", "<leader>O", "<C-o>", { noremap = true })
+-- vim.keymap.set("n", "<leader>I", "<C-i>", { noremap = true })
+-- -- needed for c-o and c-i to work in Kitty (?):
+-- vim.api.nvim_set_keymap('n', '<C-i>', '\x1b[105;5u', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<C-o>', '\x1b[111;5u', { noremap = true })
+
+-- vim.api.nvim_set_keymap('n', '<C-o>', '<C-S-O>', { noremap = true, silent = true })
+-- test with `:verbose map <C-o>`
+--
+--
+
+vim.api.nvim_set_keymap('n', '<C-o>', '<C-O>', { noremap = true })
+
+
+-- Debug key codes
+-- vim.api.nvim_set_keymap('n', '<C-o>', ':lua print("C-o pressed")<CR><C-o>', {silent = false})
+-- vim.api.nvim_set_keymap('n', '<C-i>', ':lua print("C-i pressed")<CR><C-i>', {sjilent = false})
+
 
 -- needed for c-o and c-i to work in Kitty (?):
 -- vim.api.nvim_set_keymap('n', '<C-i>', '\x1b[105;5u', { noremap = true })
