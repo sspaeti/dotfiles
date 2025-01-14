@@ -57,7 +57,7 @@ jdk() {
         # java -version
  }
 # Set a default Java version for every new terminal session
-# jdk 17
+jdk 17
 
 
 #gradle: from: https://docs.airbyte.com/contributing-to-airbyte/developing-locally#build-with-gradle
@@ -79,7 +79,6 @@ create_venv() {
 fzfvim() {
   vim "$(rg . | fzf)"
 }
-
 
 #asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
