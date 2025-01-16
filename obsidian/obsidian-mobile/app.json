@@ -1,0 +1,37 @@
+{
+  "mobilePullAction": "switcher:open",
+  "mobileToolbarCommands": [
+    "command-palette:open",
+    "editor:toggle-bullet-list",
+    "editor:indent-list",
+    "editor:unindent-list",
+    "editor:insert-wikilink",
+    "editor:set-heading",
+    "editor:toggle-bold",
+    "editor:toggle-italics",
+    "editor:toggle-strikethrough",
+    "editor:attach-file",
+    "editor:toggle-highlight",
+    "editor:undo",
+    "editor:redo",
+    "editor:toggle-code",
+    "editor:toggle-blockquote",
+    "editor:insert-link",
+    "editor:insert-embed",
+    "editor:insert-tag",
+    "editor:toggle-numbered-list",
+    "editor:toggle-checklist-status",
+    "editor:configure-toolbar"
+  ],
+  "attachmentFolderPath": "./",
+  "userIgnoreFilters": [
+    ".png",
+    ".jpg"
+  ],
+  "showInlineTitle": false,
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "💡 Resources/🗃 Zettelkasten/📬 Inbox",
+  "showUnsupportedFiles": true
+}
