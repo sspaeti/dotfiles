@@ -168,22 +168,22 @@ return {
         filetypes = { "helm", "yaml" },
       })
 
-      -- configure svelte server
-      lspconfig["svelte"].setup({
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
+      -- -- configure svelte server
+      -- lspconfig["svelte"].setup({
+      --   capabilities = capabilities,
+      --   on_attach = function(client, bufnr)
+      --     on_attach(client, bufnr)
 
-          vim.api.nvim_create_autocmd("BufWritePost", {
-            pattern = { "*.js", "*.ts" },
-            callback = function(ctx)
-              if client.name == "svelte" then
-                client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-              end
-            end,
-          })
-        end,
-      })
+      --     vim.api.nvim_create_autocmd("BufWritePost", {
+      --       pattern = { "*.js", "*.ts" },
+      --       callback = function(ctx)
+      --         if client.name == "svelte" then
+      --           client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+      --         end
+      --       end,
+      --     })
+      --   end,
+      -- })
 
       -- configure graphql language server
       lspconfig["graphql"].setup({
@@ -266,6 +266,10 @@ return {
         on_attach = on_attach,
       })
 
+      -- lspconfig["ruby_lsp"].setup({
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      -- })
 
       --java setup
       local project_files = {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}
