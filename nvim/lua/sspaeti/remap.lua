@@ -270,6 +270,12 @@ vim.g.netrw_altv = 1 -- open splits to the right
 --
 --below: converted from old_configs.vim (with ChatGPT - caughtion if something does not work)
 --2023-07-18
+-- find in a specific repo
+-- I'm not converting this command because Lua doesn't handle vim commands yet as of my knowledge cut-off in September 2021
+vim.cmd[[
+    command! -bang -nargs=* Rg2
+      \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+]]
 --
 -- fzf: ctrl f for find files
 -- vim.keymap.set('n', '<c-P>', ':Files<CR>')
@@ -280,14 +286,7 @@ vim.keymap.set('n', '<silent> <Leader>f/', ':BLines<CR>')
 vim.keymap.set('n', '<silent> <Leader>fm', ':Marks<CR>')
 vim.keymap.set('n', '<silent> <Leader>fc', ':Commits<CR>')
 vim.keymap.set('n', '<silent> <Leader>fH', ':Helptags<CR>')
-vim.keymap.set('n', '<silent> <Leader>fd', ':Rg2 search folder')
-
--- find in a specific repo
--- I'm not converting this command because Lua doesn't handle vim commands yet as of my knowledge cut-off in September 2021
-vim.cmd[[
-    command! -bang -nargs=* Rg2
-      \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
-]]
+vim.keymap.set('n', '<silent> <Leader>fg', ':Rg2 search folder')
 
 -- Resize window ABSOLUTE (doing it the same direction wheter in right or left split)
 vim.keymap.set('n', '<C-w>l', function() if vim.fn.winnr() == vim.fn.winnr('$') then vim.cmd('vertical resize -10') else vim.cmd('vertical resize +10') end end)
