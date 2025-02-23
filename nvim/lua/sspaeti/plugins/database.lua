@@ -1,6 +1,21 @@
 return {
-  --use nvim in browser
-  { "kristijanhusak/vim-dadbod-ui",         event = "VeryLazy" },
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod',                     lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql' }, lazy = true }, -- Optional
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
   { "kristijanhusak/vim-dadbod-completion", event = "VeryLazy" },
   -- Database
   {
@@ -17,11 +32,11 @@ return {
 
       -- nmap <expr> <C-Q> db#op_exec()
       -- xmap <expr> <C-Q> db#op_exec()
-      vim.api.nvim_set_keymap('n', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', {noremap = true})
-      vim.api.nvim_set_keymap('n', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', {noremap = true})
+      vim.api.nvim_set_keymap('n', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
-      vim.api.nvim_set_keymap('x', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', {noremap = true})
-      vim.api.nvim_set_keymap('x', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', {noremap = true})
+      vim.api.nvim_set_keymap('x', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
+      vim.api.nvim_set_keymap('x', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
 
       -- Does not work: Define the custom key mapping for executing the query under the cursor
@@ -30,7 +45,6 @@ return {
       -- Remap default action to open in vertical split
       -- vim.api.nvim_set_keymap('n', 'o', '<Plug>(DBUI_SelectLineVsplit)', {noremap = true})
       -- vim.api.nvim_set_keymap('n', '<CR>', '<Plug>(DBUI_SelectLineVsplit)', {noremap = true})
-
     end,
   },
 
