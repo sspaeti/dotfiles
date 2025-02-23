@@ -5,6 +5,8 @@ alias pip=pip3
 export EDITOR="nvim"
 alias vim=nvim
 alias v=nvim
+#set original vim to vim o(riginal)
+alias vimo=/usr/bin/vim
 #This is a great way of always being sure that the ipython instance always belongs to the virtualenv's python version.
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
@@ -113,4 +115,6 @@ alias m="neomutt"
 # alias mscreener="~/.config/mutt/initial_screening.sh"
 alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"
 alias msync="offlineimap -a sspaeti.com"
+
+alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 

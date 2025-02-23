@@ -159,3 +159,6 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
