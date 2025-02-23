@@ -237,14 +237,6 @@
       "key": "-"
     }
   ],
-  "editor:fold-all": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "0"
-    }
-  ],
   "obsidian-focus-mode:toggle-focus-mode": [
     {
       "modifiers": [
@@ -460,6 +452,22 @@
         "Mod"
       ],
       "key": "W"
+    }
+  ],
+  "editor:unfold-all": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "0"
+    }
+  ],
+  "editor:fold-all": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "1"
     }
   ]
 }

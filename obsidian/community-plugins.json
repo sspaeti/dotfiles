@@ -14,14 +14,12 @@
   "settings-search",
   "obsidian-style-settings",
   "tag-wrangler",
-  "image-converter",
   "obsidian-auto-link-title",
   "better-export-pdf",
   "dataview",
   "obsidian-advanced-uri",
   "obsidian-excalidraw-plugin",
   "excalibrain",
-  "mrj-jump-to-link",
   "obsidian-kanban",
   "obsidian-kindle-plugin",
   "numerals",
@@ -30,7 +28,7 @@
   "obsidian-charts",
   "obsidian-heading-shifter",
   "copy-image",
-  "obsidian42-brat",
-  "nlp",
-  "obsidian-footnotes"
+  "obsidian-footnotes",
+  "image-converter",
+  "text-extractor"
 ]
