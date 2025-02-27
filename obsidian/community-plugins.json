@@ -30,5 +30,7 @@
   "copy-image",
   "obsidian-footnotes",
   "image-converter",
-  "text-extractor"
+  "text-extractor",
+  "nlp",
+  "graph-analysis"
 ]
