@@ -74,7 +74,7 @@ return {
     keys = {
       { "<leader>ai", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
     }
-  }
+  },
   -- local defaults = {
   --   api_key_cmd = nil,
   --   yank_register = "+",
@@ -89,4 +89,29 @@ return {
   --       cycle_windows = "<Tab>",
   --     }
   --   }
+  { --requires brew install chatblade (https://github.com/npiv/chatblade)
+    "cmpadden/chatblade.nvim",
+    keys = {
+      { "<leader>ac", ":Chatblade",                 mode = "v" },
+      -- Keymap to start a chat session
+      { "<leader>cs", ":ChatbladeSessionStart<CR>", mode = "n", desc = "Start Chatblade session" },
+      -- Keymap to stop a chat session
+      { "<leader>ce", ":ChatbladeSessionStop<CR>",  mode = "n", desc = "Stop Chatblade session" },
+    },
+    cmd = {
+      "Chatblade",
+      "ChatbladeSessionStart",
+      "ChatbladeSessionStop",
+      "ChatbladeSessionDelete",
+    },
+    opts = {
+      prompt            = "programmer",
+      raw               = true,
+      extract           = true,
+      only              = true,
+      temperature       = 0.8,
+      include_filetype  = true,
+      insert_as_comment = true,
+    }
+  }
 }
