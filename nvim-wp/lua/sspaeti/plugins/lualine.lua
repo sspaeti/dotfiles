@@ -54,6 +54,7 @@ return {
         return #vim.lsp.get_active_clients() > 0 and hide_in_width(100)()
       end,
     }
+    local prose = require 'nvim-prose'
 
     --get python virtual env
     function split(input, delimiter)
@@ -91,7 +92,12 @@ return {
         lualine_a = { "mode" },
         lualine_b = {},
         lualine_c = { branch, active_lsp, filename },
-        lualine_x = { wpm.historic_graph, diff, diagnostics, { get_venv, color = { gui = "bold" } }, filetype },
+        lualine_x = { { prose.word_count, cond = prose.is_available }, 
+                      { prose.reading_time, cond = prose.is_available },
+                       wpm.historic_graph, 
+                       diff, diagnostics, 
+                      { get_venv, color = { gui = "bold" } }
+                    },
         lualine_y = {},
         lualine_z = { progress, location },
       },
@@ -109,67 +115,67 @@ return {
 
     --non distracting
     -- local colors = {
-      --   fg = "#76787d",
-      --   bg = "#252829",
-      -- }
+    --   fg = "#76787d",
+    --   bg = "#252829",
+    -- }
 
-      -- local copilot = function()
-        --   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
-        --   if #buf_clients == 0 then
-        --     return "LSP Inactive"
-        --   end
+    -- local copilot = function()
+    --   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+    --   if #buf_clients == 0 then
+    --     return "LSP Inactive"
+    --   end
 
-        --   local buf_ft = vim.bo.filetype
-        --   local buf_client_names = {}
-        --   local copilot_active = false
+    --   local buf_ft = vim.bo.filetype
+    --   local buf_client_names = {}
+    --   local copilot_active = false
 
-        --   -- add client
-        --   for _, client in pairs(buf_clients) do
-        --     if client.name ~= "null-ls" and client.name ~= "copilot" then
-        --       table.insert(buf_client_names, client.name)
-        --     end
+    --   -- add client
+    --   for _, client in pairs(buf_clients) do
+    --     if client.name ~= "null-ls" and client.name ~= "copilot" then
+    --       table.insert(buf_client_names, client.name)
+    --     end
 
-        --     if client.name == "copilot" then
-        --       copilot_active = true
-        --     end
-        --   end
+    --     if client.name == "copilot" then
+    --       copilot_active = true
+    --     end
+    --   end
 
-        --   if copilot_active then
-        --     return lvim.icons.git.Octoface
-        --   end
-        --   return ""
-        -- end
+    --   if copilot_active then
+    --     return lvim.icons.git.Octoface
+    --   end
+    --   return ""
+    -- end
 
-        -- require'lualine'.setup {
-          --   options = {
-            --     theme = {
-              --       normal = {
-                --         a = { fg = colors.fg, bg = colors.bg },
-                --         b = { fg = colors.fg, bg = colors.bg },
-                --         c = { fg = colors.fg, bg = colors.bg },
-                --       },
-                --       insert = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
-                --       visual = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
-                --       command = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
-                --       replace = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+    -- require'lualine'.setup {
+    --   options = {
+    --     theme = {
+    --       normal = {
+    --         a = { fg = colors.fg, bg = colors.bg },
+    --         b = { fg = colors.fg, bg = colors.bg },
+    --         c = { fg = colors.fg, bg = colors.bg },
+    --       },
+    --       insert = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+    --       visual = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+    --       command = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
+    --       replace = { a = { fg = colors.fg, bg = colors.bg }, b = { fg = colors.fg, bg = colors.bg } },
 
-                --       inactive = {
-                  --         a = { bg = colors.fg, fg = colors.bg },
-                  --         b = { bg = colors.fg, fg = colors.bg },
-                  --         c = { bg = colors.fg, fg = colors.bg },
-                  --       },
-                  --     }
-                  --   },
-                  --   sections = {
-                    --     lualine_a = { "branch" },
-                    --     lualine_b = { "filename" },
-                    --     lualine_c = {
-                      --       diagnostics,
-                      --     },
-                      --     lualine_x = { wpm.historic_graph, {get_venv, color={gui='bold'}}, location },
-                      --     lualine_y = { copilot, filetype },
-                      --     lualine_z = { "progress" },
-                      --   },
-                      -- }
-                    end,
-                  }
+    --       inactive = {
+    --         a = { bg = colors.fg, fg = colors.bg },
+    --         b = { bg = colors.fg, fg = colors.bg },
+    --         c = { bg = colors.fg, fg = colors.bg },
+    --       },
+    --     }
+    --   },
+    --   sections = {
+    --     lualine_a = { "branch" },
+    --     lualine_b = { "filename" },
+    --     lualine_c = {
+    --       diagnostics,
+    --     },
+    --     lualine_x = { wpm.historic_graph, {get_venv, color={gui='bold'}}, location },
+    --     lualine_y = { copilot, filetype },
+    --     lualine_z = { "progress" },
+    --   },
+    -- }
+  end,
+}

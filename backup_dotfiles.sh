@@ -1,17 +1,14 @@
 #this script is done to automatically backup alls my dotsfiles
 
-#nvim
+# VS Code
 cp ~/Library/ApplicationSupport/Code/User/settings.json $git/general/dotfiles/vscode/settings.json
 cp ~/Library/ApplicationSupport/Code/User/keybindings.json $git/general/dotfiles/vscode/keybindings.json
+
+# old vimrc
 #cp ~/.vimrc $git/general/dotfiles/vim/vimrc #this will be outdated in a while, see nvim init.vim
-#using nvim going forward therefore separting configs
-rm -r $git/general/dotfiles/nvim/ && mkdir -p $git/general/dotfiles/nvim/after/plugin && mkdir $git/general/dotfiles/nvim/lua/
-
-cp ~/.config/nvim/lazy-lock.json $git/general/dotfiles/nvim/lazy-lock.json
-cp -r ~/.config/nvim/lua/ $git/general/dotfiles/nvim/lua/
-cp -r ~/.config/nvim/after/ $git/general/dotfiles/nvim/after/
-cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
-
+#nvim
+rm -rf $git/general/dotfiles/nvim/
+cp -r ~/.config/nvim/ $git/general/dotfiles/nvim/
 
 
 #nvim wordprocessor config
