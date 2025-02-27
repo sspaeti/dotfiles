@@ -5,6 +5,10 @@ alias pip=pip3
 export EDITOR="nvim"
 alias vim=nvim
 alias v=nvim
+
+#word processor
+alias wp='NVIM_APPNAME=nvim-wp nvim'
+
 #set original vim to vim o(riginal)
 alias vimo=/usr/bin/vim
 #This is a great way of always being sure that the ipython instance always belongs to the virtualenv's python version.
