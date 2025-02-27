@@ -11,16 +11,15 @@ cp ~/.config/nvim/lazy-lock.json $git/general/dotfiles/nvim/lazy-lock.json
 cp -r ~/.config/nvim/lua/ $git/general/dotfiles/nvim/lua/
 cp -r ~/.config/nvim/after/ $git/general/dotfiles/nvim/after/
 cp -r ~/.config/nvim/plugin/ $git/general/dotfiles/nvim/plugin/
-cp -r ~/.config/sesh/ $git/general/dotfiles/sesh/
+
 
 
 #nvim wordprocessor config
-rm -r $git/general/dotfiles/nvim-wp/ && mkdir -p $git/general/dotfiles/nvim-wp/after/plugin && mkdir $git/general/dotfiles/nvim-wp/lua/
-cp ~/.config/nvim-wp/lazy-lock.json $git/general/dotfiles/nvim-wp/lazy-lock.json
-cp -r ~/.config/nvim-wp/lua/ $git/general/dotfiles/nvim-wp/lua/
-cp -r ~/.config/nvim-wp/after/ $git/general/dotfiles/nvim-wp/after/
-cp -r ~/.config/sesh/ $git/general/dotfiles/sesh/
+rm -rf $git/general/dotfiles/nvim-wp/
+cp -r ~/.config/nvim-wp/ $git/general/dotfiles/nvim-wp/
 
+
+cp -r ~/.config/sesh/ $git/general/dotfiles/sesh/
 # might contain sensitive information
 # cp -r ~/.gitconfig $git/general/dotfiles/git/gitconfig
 
