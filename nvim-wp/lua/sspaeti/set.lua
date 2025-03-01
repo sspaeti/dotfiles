@@ -43,16 +43,10 @@ vim.opt.updatetime = 400 -- Having longer updatetime (default is 4000 ms = 4 s) 
 -- Ignore files
 vim.opt.wildignore = "*.pyc,*_build/*,**/coverage/*,**/.git/*,**/__pycache__/*"
 
-vim.opt.syntax = "on" -- Enables syntax highlighing
-vim.opt.smartcase = true -- Do not ignore case with capitals
-vim.opt.conceallevel = 2 -- Markdown files behave like Obsidian, *italic*, **bold** and even [links](https...) are hidden. Amaziing!
 vim.opt.tabstop = 2 -- Insert 2 spaces for a tab
 vim.opt.shiftwidth = 2 -- Change the number of space characters inserted for indentation
 vim.opt.softtabstop = 2 --Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
 
---wrap lines for markdown only
-vim.opt.wrap = false -- Display long lines as just one line
-vim.cmd("autocmd FileType markdown setlocal wrap")
 
 --handlebar files should be treated as html
 vim.cmd('autocmd BufRead,BufNewFile *.hbs set filetype=html')

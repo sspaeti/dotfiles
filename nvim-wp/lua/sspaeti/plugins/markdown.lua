@@ -29,7 +29,7 @@ return {
     opts = {},
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     keys = {
-      { "<leader>mt", ":RenderMarkdown toggle<CR>", desc = "Markdown Render Toggle" }
+      { "<leader>mr", ":RenderMarkdown toggle<CR>", desc = "Markdown Render Toggle" }
     },
     config = function()
       require("render-markdown").setup({

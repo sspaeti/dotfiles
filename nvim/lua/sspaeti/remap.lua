@@ -147,7 +147,7 @@ function ToggleConceallevel()
 end
 
 -- Shortcut to toggle conceallevel
-vim.api.nvim_set_keymap('n', '<leader>mc', ':lua ToggleConceallevel()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>mt', ':lua ToggleConceallevel()<CR>', { noremap = true, silent = true })
 
 
 -- Zenmode
