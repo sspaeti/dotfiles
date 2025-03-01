@@ -1,4 +1,6 @@
-# this settings are additional for wordprocessor config, optimized for markdown
+-- this settings are additional for wordprocessor config, optimized for markdown
+-- overwriting default settings
+
 
 --markdown
 vim.opt.syntax = "on" -- Enables syntax highlighing
