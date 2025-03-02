@@ -153,15 +153,19 @@ vim.api.nvim_set_keymap('n', '<leader>mt', ':lua ToggleConceallevel()<CR>', { no
 -- Zenmode
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
 
--- Bold
-vim.api.nvim_set_keymap('n', '<leader>b', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/**&**/<CR>:noh<CR>', {desc = "Bold Markdown", noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<leader>b', 'y:let @+=@"<CR>gv:s/.*/**&**/<CR>:noh<CR>', {desc = "Bold Markdown", noremap = true, silent = true})
--- Italic
-vim.api.nvim_set_keymap('n', '<leader>i', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/*&*/<CR>:noh<CR>', {desc = "Italic Markdown", noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<leader>i', 'y:let @+=@"<CR>gv:s/.*/*&*/<CR>:noh<CR>', {desc = "Italic Markdown", noremap = true, silent = true})
--- Link in visual mode
-vim.api.nvim_set_keymap('v', '<leader>l', 'y:let @+=@"<CR>gv:s/.*/[&](url)/<CR>:noh<CR>gi', {desc = "Add Link Markdown", noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>l', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/[&](url)/<CR>:noh<CR>gi', {desc = "Add Link Markdown", noremap = true, silent = true})
+--! the plugin markdown.nvim has all the mappings, but they are used with `gs{motion}{style}`, where `{style}` 
+--  is the key corresponding to the style to toggle (by default "i", "b", "s", or "c")
+-- Bold text (works on word in normal mode, or selection in visual mode)
+vim.api.nvim_set_keymap('n', '<leader>b', 'ciw**<C-r>"**<Esc>', {desc = "Bold Word", noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>b', 'c**<C-r>"**<Esc>', {desc = "Bold Selection", noremap = true})
+
+-- Italic text
+vim.api.nvim_set_keymap('n', '<leader>i', 'ciw*<C-r>"*<Esc>', {desc = "Italic Word", noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>i', 'c*<C-r>"*<Esc>', {desc = "Italic Selection", noremap = true})
+
+-- Links
+vim.api.nvim_set_keymap('n', '<leader>l', 'ciw[<C-r>"]()<Esc>T)i', {desc = "Link Word", noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>l', 'c[<C-r>"]()<Esc>T)i', {desc = "Link Selection", noremap = true})
 --End: Markdown
 
 -- Spell checker
@@ -249,16 +253,17 @@ vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
 --vim.keymap.set("n", "<leader>ss", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 --folding
-vim.keymap.set("n", "z1", "za")
-vim.keymap.set("v", "z1", "zf")
-vim.keymap.set("n", "z2", ":set foldlevel=0<CR><Esc>")
-vim.keymap.set('n', 'z2', ':set foldlevel=1<CR><Esc>', {silent = true})
-vim.keymap.set('n', 'z3', ':set foldlevel=2<CR><Esc>', {silent = true})
-vim.keymap.set('n', 'z4', ':set foldlevel=3<CR><Esc>', {silent = true})
-vim.keymap.set('n', 'z5', ':set foldlevel=4<CR><Esc>', {silent = true})
-vim.keymap.set('n', 'z6', ':set foldlevel=5<CR><Esc>', {silent = true})
-vim.keymap.set('n', 'z7', ':set foldlevel=6<CR><Esc>', {silent = true})
-vim.keymap.set('n', 'z8', ':set foldlevel=7<CR><Esc>', {silent = true})
+-- vim.keymap.set("n", "z1", "za")
+-- vim.keymap.set("v", "z1", "zf")
+-- vim.keymap.set("n", "z2", ":set foldlevel=0<CR><Esc>")
+vim.keymap.set('n', 'z1', ':set foldlevel=1<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z2', ':set foldlevel=2<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z3', ':set foldlevel=3<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z4', ':set foldlevel=4<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z5', ':set foldlevel=5<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z6', ':set foldlevel=6<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z7', ':set foldlevel=7<CR><Esc>', {silent = true})
+vim.keymap.set('n', 'z8', ':set foldlevel=8<CR><Esc>', {silent = true})
 vim.keymap.set("n", "z9", "zR")
 
 -- netwr explorer

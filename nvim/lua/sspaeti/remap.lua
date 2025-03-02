@@ -154,14 +154,16 @@ vim.api.nvim_set_keymap('n', '<leader>mt', ':lua ToggleConceallevel()<CR>', { no
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>")
 
 -- Bold
-vim.api.nvim_set_keymap('n', '<leader>b', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/**&**/<CR>:noh<CR>', {desc = "Bold Markdown", noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<leader>b', 'y:let @+=@"<CR>gv:s/.*/**&**/<CR>:noh<CR>', {desc = "Bold Markdown", noremap = true, silent = true})
--- Italic
-vim.api.nvim_set_keymap('n', '<leader>i', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/*&*/<CR>:noh<CR>', {desc = "Italic Markdown", noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<leader>i', 'y:let @+=@"<CR>gv:s/.*/*&*/<CR>:noh<CR>', {desc = "Italic Markdown", noremap = true, silent = true})
--- Link in visual mode
-vim.api.nvim_set_keymap('v', '<leader>l', 'y:let @+=@"<CR>gv:s/.*/[&](url)/<CR>:noh<CR>gi', {desc = "Add Link Markdown", noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>l', '"xyiw:let @+=@x<CR>:s/\\<C-r>x\\>/[&](url)/<CR>:noh<CR>gi', {desc = "Add Link Markdown", noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>b', 'ciw**<C-r>"**<Esc>', {desc = "Bold Word", noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>b', 'c**<C-r>"**<Esc>', {desc = "Bold Selection", noremap = true})
+
+-- Italic text
+vim.api.nvim_set_keymap('n', '<leader>i', 'ciw*<C-r>"*<Esc>', {desc = "Italic Word", noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>i', 'c*<C-r>"*<Esc>', {desc = "Italic Selection", noremap = true})
+
+-- Links
+vim.api.nvim_set_keymap('n', '<leader>l', 'ciw[<C-r>"]()<Esc>T)i', {desc = "Link Word", noremap = true})
+vim.api.nvim_set_keymap('v', '<leader>l', 'c[<C-r>"]()<Esc>T)i', {desc = "Link Selection", noremap = true})
 --End: Markdown
 
 -- Spell checker

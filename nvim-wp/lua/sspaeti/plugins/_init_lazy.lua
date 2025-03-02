@@ -2,7 +2,7 @@ return {
   { "christoomey/vim-system-copy", event = "VeryLazy" },
   { "tpope/vim-surround",          event = "VeryLazy" }, -- Surrounding ys',
   { "nvim-lua/plenary.nvim",       event = "VeryLazy" }, -- Needed for obsidian.nvim
-  
+
   --Text Objects:
   --Utilities for user-defined text objects
   { "kana/vim-textobj-user",       event = "VeryLazy" },
@@ -26,17 +26,6 @@ return {
   },
   "farmergreg/vim-lastplace", --remember last cursor position
 
-  {
-    "folke/zen-mode.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("zen-mode").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  },
   {
     "jcdickinson/wpm.nvim",
     event = "VeryLazy",

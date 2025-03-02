@@ -13,3 +13,10 @@ vim.opt.breakindent = true     -- Preserve indentation of virtual lines
 vim.opt.breakindentopt = "shift:2" -- Add extra indent for wrapped lines
 vim.opt.showbreak = "↪ "       -- Show a symbol at the start of wrapped lines
 
+
+-- Custom fold text function
+vim.opt.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ']]
+vim.opt.fillchars = { fold = " " }  -- Remove the default fold characters
+vim.opt.foldcolumn = "0"           -- Hide the fold column
+
+
