@@ -11,8 +11,8 @@ vim.opt.swapfile = false --instead have unlimited undo's
 vim.opt.backup = false --instead have unlimited undo's
 vim.opt.clipboard = "unnamedplus" --" Copy paste between vim and everything else -> inserts all into system clipboard
 
-vim.opt.relativenumber = true
-vim.opt.number = true
+-- vim.opt.relativenumber = true
+vim.opt.number = false
 vim.opt.colorcolumn = "100"
 
 -- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
