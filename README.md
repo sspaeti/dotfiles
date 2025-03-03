@@ -54,6 +54,11 @@ I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-o
 - `Alt+7`: Extra (when laptop screen is open)
 
 
+## Neovim as a Word Processor
+
+For my Micro Journal I converted my Neovim config to a minimal config soley for writing. My goal was to reproduce my Obsidian environment within Neovim, running on a small, distraction-free typewriter.
+See all details in [Neovim as a WordProcessor](./nvim-wp/)
+
 ## Dive into My Dotfiles
 Above you'll find all my dotfiles repository. Each file and directory is it's own software.
 
