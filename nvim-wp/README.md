@@ -4,6 +4,11 @@ This config is Neovim configured to act as a classical wordprocessor to write te
 
 ![](wordprocessor.jpg) 
 
+This markdown optimized config will be used on a [Micro Journal](https://github.com/unkyulee/micro-journal) device, a modern distraction-free type writer.
+
+![](micro-journal.webp) 
+
+
 ## Font
 I was searching for a font for writing and reading optimized, but still compatible with the terminal (mono-space). As I use Iosevka already for programming, I am trying **Iosevka Etoiole**.
 
