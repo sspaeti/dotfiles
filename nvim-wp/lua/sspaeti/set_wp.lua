@@ -1,6 +1,7 @@
 -- this settings are additional for wordprocessor config, optimized for markdown
 -- overwriting default settings
 
+vim.opt.listchars = { tab = "→  ", trail = "·", extends = "$" }
 
 --markdown
 vim.opt.syntax = "on" -- Enables syntax highlighing
@@ -21,4 +22,10 @@ vim.opt.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop)
 vim.opt.fillchars = { fold = " " }  -- Remove the default fold characters
 vim.opt.foldcolumn = "0"           -- Hide the fold column
 
+--Hide tab status
+vim.opt.showtabline = 1
+
+
+--enter text vertically to maximize focus on current line
+vim.opt.scrolloff = 5 --default: 8
 
