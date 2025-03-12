@@ -29,3 +29,22 @@ vim.opt.showtabline = 1
 --enter text vertically to maximize focus on current line
 vim.opt.scrolloff = 5 --default: 8
 
+
+-- This removes the currly underline below a Markdown link, but keeps the color and icon effect
+vim.defer_fn(function()
+  -- Get current highlight attributes
+  local current_hl = vim.api.nvim_get_hl(0, { name = "@string.special.url" })
+  
+  -- Create new highlight with same colors but no underline
+  local new_hl = {
+    fg = current_hl.fg,
+    bg = current_hl.bg,
+    sp = current_hl.sp,
+    bold = current_hl.bold,
+    italic = current_hl.italic,
+    underline = false  -- Explicitly remove underline
+  }
+  
+  -- Apply the modified highlight
+  vim.api.nvim_set_hl(0, "@string.special.url", new_hl)
+end, 100)
