@@ -48,3 +48,13 @@ vim.defer_fn(function()
   -- Apply the modified highlight
   vim.api.nvim_set_hl(0, "@string.special.url", new_hl)
 end, 100)
+
+
+-- Auto-enable ZenMode on startup with a slight delay
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.defer_fn(function()
+      vim.cmd("ZenMode")
+    end, 0.1) -- delay to ensure plugin is loaded
+  end
+})

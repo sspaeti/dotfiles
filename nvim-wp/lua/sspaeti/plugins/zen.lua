@@ -1,6 +1,7 @@
 return {
   "folke/zen-mode.nvim",
-  event = "VeryLazy",
+  lazy = false,
+  priority = 1000,
   config = function()
     require("zen-mode").setup({
       on_open = function(_)
