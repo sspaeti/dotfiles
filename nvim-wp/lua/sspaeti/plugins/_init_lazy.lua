@@ -9,6 +9,7 @@ return {
   { "tpope/vim-commentary",        event = "VeryLazy" },
   { "tpope/vim-abolish",           event = "VeryLazy" },
 
+  { "kdheepak/lazygit.nvim",       event = "VeryLazy" },
 
   -- search
   { "junegunn/fzf",                build = ":call fzf#install()", event = "VeryLazy" },
@@ -25,7 +26,6 @@ return {
     end,
   },
   "farmergreg/vim-lastplace", --remember last cursor position
-
   {
     "jcdickinson/wpm.nvim",
     event = "VeryLazy",
