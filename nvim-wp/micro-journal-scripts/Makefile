@@ -6,11 +6,15 @@ PI_NVIM_CONFIG_DIR = $(HOME)/config/nvim
 PI_CONFIG_DIR = $(HOME)/microjournal/config
 PI_SECONDBRAIN_DIR = $(HOME)/microjournal/SecondBrain
 
-# Path definitions for Mac
-MAC_NVIM_CONFIG_GIT = $(HOME)/Documents/git/general/dotfiles/nvim-wp
-MAC_TYPEWRITER_CONFIG = $(HOME)/Documents/git/general/dotfiles/nvim-wp/micro-journal-scripts
-MAC_WRITING_DIR = $(HOME)/Simon/SecondBrain/⚛️\ Areas/✍🏻\ Writing/micro-journal
-MAC_SECONDBRAIN_DIR = $(HOME)/Simon/SecondBrain
+# Mac connection details
+MAC_USER = your_mac_username
+MAC_HOST = your_mac_hostname_or_ip
+
+# Path definitions for Mac (remote)
+MAC_NVIM_CONFIG_GIT = $(MAC_USER)@$(MAC_HOST):$(HOME)/Documents/git/general/dotfiles/nvim-wp
+MAC_TYPEWRITER_CONFIG = $(MAC_USER)@$(MAC_HOST):$(HOME)/Documents/git/general/dotfiles/nvim-wp/micro-journal-scripts
+MAC_WRITING_DIR = $(MAC_USER)@$(MAC_HOST):$(HOME)/Simon/SecondBrain/⚛️\ Areas/✍🏻\ Writing/micro-journal
+MAC_SECONDBRAIN_DIR = $(MAC_USER)@$(MAC_HOST):$(HOME)/Simon/SecondBrain
 
 # Default target
 .PHONY: help
