@@ -18,7 +18,6 @@
   "better-export-pdf",
   "dataview",
   "obsidian-advanced-uri",
-  "obsidian-excalidraw-plugin",
   "excalibrain",
   "obsidian-kanban",
   "obsidian-kindle-plugin",
@@ -32,5 +31,7 @@
   "image-converter",
   "text-extractor",
   "nlp",
-  "graph-analysis"
+  "graph-analysis",
+  "blockreffer",
+  "obsidian-excalidraw-plugin"
 ]

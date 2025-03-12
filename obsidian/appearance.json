@@ -11,8 +11,8 @@
   "accentColor": "#658594",
   "showViewHeader": false,
   "nativeMenus": true,
-  "interfaceFontFamily": "Atkinson Hyperlegible,American Typewriter,iA Writer Quattro S,Iosevka,Inter",
-  "textFontFamily": "Atkinson Hyperlegible,iA Writer Quattro S,Inter,Iosevka",
+  "interfaceFontFamily": "Atkinson Hyperlegible,American Typewriter,iA Writer Quattro S,Iosevka,Iosevka Etoile",
+  "textFontFamily": "Atkinson Hyperlegible,iA Writer Quattro S,Iosevka",
   "monospaceFontFamily": "Iosevka",
   "showRibbon": false
 }

@@ -11,7 +11,7 @@ vim.opt.swapfile = false --instead have unlimited undo's
 vim.opt.backup = false --instead have unlimited undo's
 vim.opt.clipboard = "unnamedplus" --" Copy paste between vim and everything else -> inserts all into system clipboard
 
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.number = true
 vim.opt.colorcolumn = "100"
 
