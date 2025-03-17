@@ -11,7 +11,7 @@ vim.opt.conceallevel = 2 -- Markdown files behave like Obsidian, *italic*, **bol
 -- vim.opt.textwidth = 80
 
 vim.opt.wrap = true
-vim.opt.linebreak = true       -- Break lines at word boundaries
+vim.opt.linebreak = true       -- Break lines at word boundaries. Avoids cuting words at end of the line
 vim.opt.breakindent = true     -- Preserve indentation of virtual lines
 vim.opt.breakindentopt = "shift:1" -- Add extra indent for wrapped lines
 vim.opt.showbreak = "↪ "       -- Show a symbol at the start of wrapped lines
