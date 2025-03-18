@@ -1,5 +1,5 @@
 neovim
-yazi
+#yazi -> need to be installed manually
 ripgrep
 fd-find
 fzf

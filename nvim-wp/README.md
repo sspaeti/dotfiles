@@ -2,6 +2,8 @@
 
 This config is Neovim configured to act as a classical wordprocessor to write text and especially markdown.
 
+Move this config to `~/.config/nvim` after you installed neovim (see `make install`  in [/install](/install) directory).
+
 
 
 ### Zen Mode
