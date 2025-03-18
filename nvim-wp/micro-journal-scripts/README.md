@@ -1,6 +1,16 @@
 
 # Micro Journal Scripts
 
+## Troubleshoot
+### Size
+
+Only 3.2 GB was used, instead of full 32GB. 
+```sh
+sudo raspi-config
+```
+Then select `Advanced Options -> Expand Filesystem`.
+
+That extended the partition to 32 GB.
 
 ## Prepare scripts for syncing
 
