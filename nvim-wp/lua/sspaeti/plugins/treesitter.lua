@@ -14,7 +14,8 @@ return {
         return
       end
       treesitter.setup {
-        ensure_installed = { "vimdoc", "python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust", "glimmer" }, -- one of "all" or a list of languages
+        -- ensure_installed = { "vimdoc", "python", "markdown", "markdown_inline", "css", "html", "javascript", "yaml", "bash", "json", "lua", "regex", "sql", "toml", "vim", "rust", "glimmer" }, -- one of "all" or a list of languages
+        ensure_installed = { "markdown", "markdown_inline" }, 
         sync_install = false,
         auto_install = true,
         highlight = {

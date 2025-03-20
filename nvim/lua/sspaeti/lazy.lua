@@ -30,7 +30,7 @@ require("lazy").setup({ { import = "sspaeti.plugins" }, { import = "sspaeti.plug
     colorscheme = { sessionThemes["default"] },
   },
   checker = {
-    enabled = true,
+    enabled = false, --shoots 10's of lookups to github for checking if new update...
     notify = false,
   },
   --autoreload notification

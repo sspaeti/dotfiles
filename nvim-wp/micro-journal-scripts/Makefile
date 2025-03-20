@@ -4,17 +4,18 @@
 PI_WRITING_DIR = $(HOME)/microjournal/writing
 PI_NVIM_CONFIG_DIR = $(HOME)/config/nvim
 PI_CONFIG_DIR = $(HOME)/microjournal/config
-PI_SECONDBRAIN_DIR = $(HOME)/microjournal/SecondBrain
+PI_SECONDBRAIN_DIR = ~/microjournal/documents/SecondBrain
 
 # Mac connection details
 MAC_USER = your_mac_username
 MAC_HOST = your_mac_hostname_or_ip
-
+PI_USER = microjournal
+PI_HOST = mj
 # Path definitions for Mac (remote)
 MAC_NVIM_CONFIG_GIT = $(MAC_USER)@$(MAC_HOST):$(HOME)/Documents/git/general/dotfiles/nvim-wp
 MAC_TYPEWRITER_CONFIG = $(MAC_USER)@$(MAC_HOST):$(HOME)/Documents/git/general/dotfiles/nvim-wp/micro-journal-scripts
 MAC_WRITING_DIR = $(MAC_USER)@$(MAC_HOST):$(HOME)/Simon/SecondBrain/⚛️\ Areas/✍🏻\ Writing/micro-journal
-MAC_SECONDBRAIN_DIR = $(MAC_USER)@$(MAC_HOST):$(HOME)/Simon/SecondBrain
+MAC_SECONDBRAIN_DIR = ~/Simon/SecondBrain
 
 # Default target
 .PHONY: help
@@ -32,26 +33,26 @@ help:
 	@echo "  help         : Show this help information"
 
 # Network management
-.PHONY: network-on
-network-on:
-	@echo "Starting network connection..."
-	@./startnetwork.sh
-	@echo "Waiting for network connection..."
-	@for i in $$(seq 1 15); do \
-		if ping -c 1 google.com > /dev/null 2>&1; then \
-			echo "Network is ready."; \
-			break; \
-		fi; \
-		if [ $$i -eq 15 ]; then \
-			echo "WARNING: Network may not be fully ready, but continuing..."; \
-		fi; \
-		sleep 1; \
-	done
+# .PHONY: network-on
+# network-on:
+# 	@echo "Starting network connection..."
+# 	@./startnetwork.sh
+# 	@echo "Waiting for network connection..."
+# 	@for i in $$(seq 1 15); do \
+# 		if ping -c 1 google.com > /dev/null 2>&1; then \
+# 			echo "Network is ready."; \
+# 			break; \
+# 		fi; \
+# 		if [ $$i -eq 15 ]; then \
+# 			echo "WARNING: Network may not be fully ready, but continuing..."; \
+# 		fi; \
+# 		sleep 1; \
+# 	done
 
-.PHONY: network-off
-network-off:
-	@echo "Stopping network connection..."
-	@./stopnetwork.sh
+# .PHONY: network-off
+# network-off:
+# 	@echo "Stopping network connection..."
+# 	@./stopnetwork.sh
 
 # Time synchronization
 .PHONY: time-sync
@@ -60,27 +61,31 @@ time-sync: network-on
 	@sudo ./time.sh
 
 # Sync from Pi to Mac
-.PHONY: to-mac
-to-mac: network-on time-sync
-	@echo "=== Starting Pi to Mac sync process ==="
-	@echo "Syncing writing files - writing..."
-	@rsync -avz --delete "$(PI_WRITING_DIR)/" "$(MAC_WRITING_DIR)/"
-	@echo "Syncing nvim-wp files..."
-	@rsync -avz --delete "$(PI_NVIM_CONFIG_DIR)/" "$(MAC_NVIM_CONFIG_GIT)/"
-	@echo "Writing files sync completed!"
-	@make -s network-off
-	@echo "=== Pi to Mac sync process completed successfully! ==="
+# .PHONY: to-mac
+# to-mac: network-on time-sync
+# 	@echo "=== Starting Pi to Mac sync process ==="
+# 	@echo "Syncing writing files - writing..."
+# 	@rsync -avz --delete "$(PI_WRITING_DIR)/" "$(MAC_WRITING_DIR)/"
+# 	@echo "Syncing nvim-wp files..."
+# 	@rsync -avz --delete "$(PI_NVIM_CONFIG_DIR)/" "$(MAC_NVIM_CONFIG_GIT)/"
+# 	@echo "Writing files sync completed!"
+# 	@make -s network-off
+# 	@echo "=== Pi to Mac sync process completed successfully! ==="
 
 # Sync from Mac to Pi
-.PHONY: from-mac
-from-mac: network-on time-sync
+
+.PHONY: sync-secondbrain-to-mj
+sync-secondbrain-to-mj: 
 	@echo "=== Starting Mac to Pi sync process ==="
 	
 	@echo "Syncing SecondBrain contents..."
-	@rsync -avz "$(MAC_SECONDBRAIN_DIR)/" "$(PI_SECONDBRAIN_DIR)/"
+	@rsync -avz --delete --include="*.md" --include="*.txt" --include="*/" --exclude="*" $(MAC_SECONDBRAIN_DIR)/ mj:$(PI_SECONDBRAIN_DIR)/
 	@echo "SecondBrain contents sync completed!"
+
+	@echo "Creating last-loaded.md file with timestamp..."
+	@ssh mj "echo '$$(date)' > $(PI_SECONDBRAIN_DIR)/last-loaded.md"
+	@echo "Timestamp file created!"
 	
-	@make -s network-off
 	@echo "=== Mac to Pi sync process completed successfully! ==="
 
 # Complete sync in both directions

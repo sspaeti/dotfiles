@@ -30,7 +30,7 @@ require("lazy").setup({ { import = "sspaeti.plugins" }, { import = "sspaeti.plug
     colorscheme = { sessionThemes["default"] },
   },
   checker = {
-    enabled = true,
+    enabled = false,
     notify = false,
   },
   --autoreload notification
