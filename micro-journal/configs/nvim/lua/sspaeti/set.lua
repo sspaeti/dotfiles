@@ -5,7 +5,7 @@ vim.opt.completeopt = { "menu" }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
 -- set undofile to keep undo history unlimited (even if buffer is closed)
-vim.opt.undodir = "~/.undodir"
+vim.opt.undodir = vim.fn.expand("~/.undodir")
 vim.opt.undofile = true
 vim.opt.swapfile = false --instead have unlimited undo's
 vim.opt.backup = false --instead have unlimited undo's
