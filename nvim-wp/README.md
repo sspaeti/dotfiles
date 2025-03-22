@@ -14,9 +14,8 @@ Move this config to `~/.config/nvim` after you installed neovim (see `make insta
 ![](wordprocessor-outline.jpg) 
 
 ### Micro Journal
-This markdown optimized config will be used on a [Micro Journal](https://github.com/unkyulee/micro-journal) device, a modern distraction-free type writer.
 
-![](micro-journal.webp) 
+Debian, low-power and tty (low color) nvim dotfiles are in [micro-journal/configs/nvim](../micro-journal/configs/nvim). This folder here `nvim-wp` is the wordprocessor on a high-power or normal laptop.
 
 
 ## Font
