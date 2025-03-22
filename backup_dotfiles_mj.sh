@@ -6,3 +6,4 @@ find ~/microjournal -maxdepth 1 -type f -exec cp {} ~/configs/dotfiles/micro-jou
 
 # copy dotfiles
 cp ~/.bashrc ~/.aliases.shrc ~/configs/dotfiles/micro-journal/dotfiles/
+
