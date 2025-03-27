@@ -4,6 +4,10 @@ prepend_keymap = [
 	# { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
 ]
 
+[help]
+prepend_keymap = [
+	{ on = "/", run = 'filter', desc = "Filter" },
+]
 # keymap = [
 
 # 	# Help
