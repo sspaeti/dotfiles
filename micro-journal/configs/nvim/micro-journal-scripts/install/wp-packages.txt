@@ -1,0 +1,12 @@
+neovim
+yazi
+ripgrep
+fd-find
+fzf
+zoxide
+jq
+poppler-utils
+# Heavier packages - uncomment if needed
+# imagemagick
+# p7zip-full
+# ffmpeg
