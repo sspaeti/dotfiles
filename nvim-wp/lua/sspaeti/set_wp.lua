@@ -50,11 +50,11 @@ vim.defer_fn(function()
 end, 100)
 
 
--- Auto-enable ZenMode on startup with a slight delay
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.defer_fn(function()
-      vim.cmd("ZenMode")
-    end, 0.1) -- delay to ensure plugin is loaded
-  end
-})
+-- -- Auto-enable ZenMode on startup with a slight delay
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     vim.defer_fn(function()
+--       vim.cmd("ZenMode")
+--     end, 0.1) -- delay to ensure plugin is loaded
+--   end
+-- })

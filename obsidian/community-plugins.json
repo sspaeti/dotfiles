@@ -33,5 +33,7 @@
   "nlp",
   "graph-analysis",
   "blockreffer",
-  "obsidian-excalidraw-plugin"
+  "obsidian-excalidraw-plugin",
+  "obsidian-plantuml",
+  "obsidian-book-search-plugin"
 ]
