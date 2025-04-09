@@ -32,8 +32,9 @@ return {
       { "gd",         vim.lsp.buf.definition,                               desc = "LSP Definition" },
       { "gD",         vim.lsp.buf.declaration,                              desc = "LSP Declaration" },
       { "gR",         vim.lsp.buf.references,                               desc = "LSP References" },
-      { "gr",         require("telescope.builtin").lsp_references,          desc = "Telescope LSP References" },
-      { "gC",         require("telescope.builtin").lsp_document_symbols,    desc = "Telescope LSP Document Symbols" },
+      -- defined in rempa.lua
+      -- { "gr",         require("telescope.builtin").lsp_references,          desc = "Telescope LSP References" },
+      -- { "so",         require("telescope.builtin").lsp_document_symbols,    desc = "Telescope LSP Document Symbols" },
       { "gI",         vim.lsp.buf.implementation,                           desc = "LSP Implementation" },
       { "gs",         vim.lsp.buf.signature_help,                           desc = "LSP Signature Help" },
       --{ "ga",         vim.lsp.buf.code_action,                              desc = "LSP Code Action" }, -- easy alignment
