@@ -38,6 +38,7 @@ yabai -m rule --add app="Basecamp" space=^5 manage=off
 yabai -m rule --add app="Morgen" space=^5 manage=off
 yabai -m rule --add app="Discord" space=^4
 yabai -m rule --add app="Spotify" space=^5
+yabai -m rule --add app="focusatwill" space=^5 manage=off
 
 # disable certain apps
 yabai -m rule --add app="^System Settings$" manage=off
