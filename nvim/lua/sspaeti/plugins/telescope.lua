@@ -38,7 +38,6 @@ return
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope Help Tags" },
     ----lsp
     --{"gr", function() require("telescope.builtin").lsp_references() end, desc = "Telescope LSP References" },
-    --{"gC", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Telescope LSP Document Symbols" },
   },
   opts = {},
   config = function()

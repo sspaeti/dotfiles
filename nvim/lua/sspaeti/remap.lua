@@ -11,10 +11,32 @@ vim.keymap.set('n', 'sa', ':Ag<CR>')
 vim.keymap.set('n', 'sB', ':BLines<CR>')
 vim.keymap.set('n', 'sb', ':Buffers<CR>')
 vim.keymap.set('n', 'sc', ':Commits<CR>')
--- vim.keymap.set('n', 'sC', ':BCommits<CR>') --> changed to lsp symbol/class name search (see lsp.lua)
+vim.keymap.set('n', 'sC', ':BCommits<CR>')
+vim.keymap.set('n', 'sS', ':Telescope lsp_document_symbols<CR>')
+vim.keymap.set('n', 'so', ':Telescope lsp_document_symbols<CR>')
 vim.keymap.set('n', 'sg', ':GFiles<CR>')
 vim.keymap.set('n', 'sG', ':GFiles?<CR>')
-vim.keymap.set('n', 'sr', ':History<CR>')
+-- toggle depending if reference is there
+-- vim.keymap.set('n', 'sr', function()
+--   -- Check if LSP is attached to current buffer
+--   local has_lsp = false
+--   for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+--     if client.server_capabilities.referencesProvider then
+--       has_lsp = true
+--       break
+--     end
+--   end
+
+--   -- If we have an LSP client that can find references, use that
+--   if has_lsp then
+--     vim.cmd(':Telescope lsp_references')
+--   else
+--     -- Otherwise fall back to history
+--     vim.cmd(':History')
+--   end
+-- end)
+vim.keymap.set('n', 'sR', ':History<CR>')
+vim.keymap.set('n', 'sr', ':Telescope lsp_references<CR>')
 vim.keymap.set('n', 's:', ':History:<CR>')
 vim.keymap.set('n', 's/', ':History/<CR>')
 vim.keymap.set('n', 'sL', ':Lines<CR>')
@@ -27,7 +49,6 @@ vim.keymap.set('n', '<c-p>', ':Files<CR>') --> sp is in telecope.lua
 vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
 vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
-vim.keymap.set('n', 'sS', ':Colors<CR>')
 vim.keymap.set('n', 'sF', ':Rg<CR>')
 vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
 vim.keymap.set('n', 'sw', ':Telescope grep_string<CR>') --search for word/string under cursor
