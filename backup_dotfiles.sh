@@ -96,7 +96,7 @@ cp ~/.config/mutt/get_hey_emails/get_screener_emails_from_hey.py $git/general/do
 #ranger
 cp ~/.config/ranger/rc.conf $git/general/dotfiles/ranger/rc.conf
 #yazi
-cp -r ~/.config/yazi/*  $git/general/dotfiles/yazi/
+cp -r ~/.config/yazi/[^p]* $git/general/dotfiles/yazi/
 
 
 #linting and formatting
