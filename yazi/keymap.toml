@@ -1,8 +1,12 @@
 [manager]
 prepend_keymap = [
 	{ on = "?", run = 'help', desc = "Help" },
+	{ on = "H", run = 'plugin duckdb -1', desc = "Scroll one column to the left" },
+	{ on = "L", run = 'plugin duckdb +1', desc = "Scroll one column to the right" },
 	# { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
 ]
+
+
 
 [help]
 prepend_keymap = [
