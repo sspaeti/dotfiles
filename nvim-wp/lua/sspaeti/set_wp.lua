@@ -25,6 +25,8 @@ vim.opt.foldcolumn = "0"           -- Hide the fold column
 --Hide tab status
 vim.opt.showtabline = 1
 
+vim.opt.relativenumber = false
+
 
 --enter text vertically to maximize focus on current line
 vim.opt.scrolloff = 5 --default: 8
