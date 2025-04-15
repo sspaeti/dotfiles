@@ -35,5 +35,6 @@
   "blockreffer",
   "obsidian-excalidraw-plugin",
   "obsidian-plantuml",
-  "obsidian-book-search-plugin"
+  "obsidian-book-search-plugin",
+  "copy-document-as-html"
 ]

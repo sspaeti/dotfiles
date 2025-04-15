@@ -469,5 +469,14 @@
       ],
       "key": "1"
     }
+  ],
+  "copy-document-as-html:copy-selection-as-html": [
+    {
+      "modifiers": [
+        "Ctrl",
+        "Mod"
+      ],
+      "key": "C"
+    }
   ]
 }
