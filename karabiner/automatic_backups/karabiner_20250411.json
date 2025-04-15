@@ -1081,23 +1081,6 @@
                         "product_id": 258,
                         "vendor_id": 10730
                     }
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 5156,
-                        "vendor_id": 17498
-                    },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "y" },
-                            "to": [{ "key_code": "z" }]
-                        },
-                        {
-                            "from": { "key_code": "z" },
-                            "to": [{ "key_code": "y" }]
-                        }
-                    ]
                 }
             ],
             "fn_function_keys": [
