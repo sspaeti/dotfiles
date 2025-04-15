@@ -7,14 +7,14 @@ return
   tag = "0.1.5",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
-    { "<leader>ft", "<cmd>Telescope resume<cr>", desc = "Resume Telescope" },
+    -- { "<leader>fT", "<cmd>Telescope resume<cr>", desc = "Resume Telescope" },
     -- {
     --   "<leader>ff",
     --   function() require("telescope.builtin").find_files({}) end,
     --   desc = "Find Plugin File",
     -- },
     {
-      "sp", --> fzf: c-p see in remap.lua
+      "sP", --> fzf: c-p see in remap.lua:w
       function()
         local is_git = os.execute('git') == 0
         if is_git then

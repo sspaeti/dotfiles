@@ -27,12 +27,15 @@ vim.keymap.set('n', 'sM', ':Maps<CR>')
 vim.keymap.set('n', 'st', ':Neotree position=float toggle=true reveal<CR>')
 vim.keymap.set('n', 'se', ':Neotree position=right toggle=true reveal<CR>')
 -- this will include hidden files and work on none git directories. Also fuzzy search works better than telecope
-vim.keymap.set('n', '<c-p>', ':Files<CR>') --> sp is in telecope.lua
+vim.keymap.set('n', '<c-p>', ':Files<CR>') --> s is in telecope.lua
 vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
 vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
 vim.keymap.set('n', 'sF', ':Rg<CR>')
-vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
+vim.keymap.set('n', 'sp', function() Snacks.picker.smart() end, { desc = "Smart Find Files" }) --search for typing string
+vim.keymap.set('n', 'sf', function() Snacks.picker.grep() end, { desc = "Grep" })
+vim.keymap.set('n', '<leader>ft', function() Snacks.picker.resume() end, { desc = "Resume Find" })
+-- vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
 vim.keymap.set('n', 'sw', ':Telescope grep_string<CR>') --search for word/string under cursor
 
 vim.keymap.set('n', 'sT', ':BTags<CR>')

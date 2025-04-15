@@ -97,6 +97,8 @@ return {
   --   -- Optional dependencies
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
   -- },
+  --
+  { 'echasnovski/mini.icons', version = '*',  event = "VeryLazy"  }, --for snacks.nvim
   { "mbbill/undotree",       event = "VeryLazy" },
   {
     "tzachar/highlight-undo.nvim",
