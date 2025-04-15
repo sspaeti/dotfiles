@@ -16,7 +16,7 @@ return {
     event = { "VeryLazy"},
     dependencies = "nvim-lua/plenary.nvim",
     keys = {
-      { "<leader>tt", ":TodoTrouble<CR>", desc = "TodoTrouble", noremap = true, silent = true },
+      { "<leader>tb", ":TodoTrouble<CR>", desc = "TodoTrouble", noremap = true, silent = true },
       { "<leader>tc", ":TodoTelescope<CR>", desc = "TodoTelescope", noremap = true, silent = true },
     },
     opts = {} --needed!

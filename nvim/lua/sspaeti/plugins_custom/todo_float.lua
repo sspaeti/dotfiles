@@ -78,6 +78,7 @@ end
 
 local function setup_keymaps()
 	vim.keymap.set("n", "<leader>mt", ":Td<CR>", { desc = "open my todo file", silent = true })
+	vim.keymap.set("n", "<leader>tt", ":Td<CR>", { desc = "open my todo file", silent = true })
 end
 
 M.setup = function(opts)
