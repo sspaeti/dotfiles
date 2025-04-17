@@ -109,8 +109,7 @@ vim.keymap.set("n", "<leader>ts", ":Telescope colorscheme<CR>")
 --GIT: Start
 --
 -- LazyGit
-vim.api.nvim_set_keymap('n', '<leader>gg', ':LazyGit<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>lg', ':LazyGit<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>lG', ':LazyGit<CR>', {noremap = true, silent = true}) --> replaces with snack.nvim
 --Blamer
 vim.api.nvim_set_keymap('n', '<leader>gb', ':BlamerToggle<CR>', {noremap = true, silent = true})
 --Diffview.nvim

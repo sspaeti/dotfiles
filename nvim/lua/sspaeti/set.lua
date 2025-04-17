@@ -149,3 +149,72 @@ vim.cmd[[
 let w:surround_{char2nr('w')} = "```\r```"
 let b:surround_{char2nr('b')} = "**\r**"
 ]]
+
+
+-- Configure a special handler for lazygit specifically to still move with `vim-tmux-navigator`
+-- -> if Lazygit open as floating window, when c-l c-r etc used for navigation, it will close lazygit first and then navigate. Instead of showing the error
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*lazygit*",
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    local term_job_id = vim.b.terminal_job_id
+    local opts = {buffer = buf, silent = true}
+    
+    -- Helper function to send keys to terminal
+    local function send_keys(keys)
+      vim.fn.chansend(term_job_id, keys)
+    end
+    
+    -- Define special mappings that will quit lazygit first, then perform tmux navigation
+    vim.keymap.set('t', '<C-h>', function()
+      send_keys('q')  -- Send 'q' to quit lazygit
+      vim.defer_fn(function()
+        -- Exit terminal mode properly and then run the command
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), 'n', false)
+        vim.defer_fn(function() 
+          vim.cmd("TmuxNavigateLeft")
+        end, 50)
+      end, 100)  -- Small delay to ensure lazygit closes first
+    end, opts)
+    
+    vim.keymap.set('t', '<C-j>', function()
+      send_keys('q')
+      vim.defer_fn(function()
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), 'n', false)
+        vim.defer_fn(function() 
+          vim.cmd("TmuxNavigateDown")
+        end, 50)
+      end, 100)
+    end, opts)
+    
+    vim.keymap.set('t', '<C-k>', function()
+      send_keys('q')
+      vim.defer_fn(function()
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), 'n', false)
+        vim.defer_fn(function() 
+          vim.cmd("TmuxNavigateUp")
+        end, 50)
+      end, 100)
+    end, opts)
+    
+    vim.keymap.set('t', '<C-l>', function()
+      send_keys('q')
+      vim.defer_fn(function()
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), 'n', false)
+        vim.defer_fn(function() 
+          vim.cmd("TmuxNavigateRight")
+        end, 50)
+      end, 100)
+    end, opts)
+    
+    vim.keymap.set('t', '<C-\\>', function()
+      send_keys('q')
+      vim.defer_fn(function()
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), 'n', false)
+        vim.defer_fn(function() 
+          vim.cmd("TmuxNavigatePrevious")
+        end, 50)
+      end, 100)
+    end, opts)
+  end
+})
