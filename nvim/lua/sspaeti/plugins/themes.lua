@@ -19,7 +19,8 @@ return {
   { "catppuccin/nvim",                name = "catppuccin", event = "VeryLazy" }, --light theme
   { "craftzdog/solarized-osaka.nvim", lazy = false,        priority = 1000 },
   { "projekt0n/github-nvim-theme",    event = "VeryLazy",  version = "*" },
-  { "sho-87/kanagawa-paper.nvim"    , lazy = false, priority = 1000, opts = {}, }
+  { "sho-87/kanagawa-paper.nvim"    , lazy = false, priority = 1000, opts = {}, },
+  { "vague2k/vague.nvim", lazy = false, priority = 1000}
   -- { "ColorMyPencil",
   --   function ColorMyPencils(color)
   --     color = color or "kanagawa"

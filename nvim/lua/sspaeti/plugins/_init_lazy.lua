@@ -119,17 +119,6 @@ return {
   --'davidhalter/jedi-vim',
   -- "jmcantrell/vim-virtualenv", --very slow: check if still needed?
   {
-    "folke/zen-mode.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("zen-mode").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  },
-  {
     "jcdickinson/wpm.nvim",
     event = "VeryLazy",
     config = function()
