@@ -36,5 +36,6 @@
   "obsidian-excalidraw-plugin",
   "obsidian-plantuml",
   "obsidian-book-search-plugin",
-  "copy-document-as-html"
+  "copy-document-as-html",
+  "obsidian-linter"
 ]

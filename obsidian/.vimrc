@@ -47,6 +47,10 @@ nmap <Space>ts :theme_switch<CR>
 exmap quick_switch obcommand switcher:open
 nmap <Space>O :quick_switch<CR>
 
+exmap lint_current_file obcommand obsidian-linter:lint-file
+nmap <Space>lf :lint_current_file<CR>
+
+
 exmap theme_dark obcommand theme:use-dark
 exmap theme_light obcommand theme:use-light
 nmap <Space>td :theme_dark<CR>
@@ -75,9 +79,9 @@ exmap close_others obcommand workspace:close-others
 nmap <Space>q :close_others<CR>
 
 " Explorer/file tree (<leader>e)
-exmap toggle_sidebar obcommand app:toggle-left-sidebar
-nmap <Space>e :toggle_sidebar<CR>
-nmap <Space>l :toggle_sidebar<CR>
+" exmap toggle_sidebar obcommand app:toggle-left-sidebar
+" nmap <Space>e :toggle_sidebar<CR>
+" nmap <Space>l :toggle_sidebar<CR>
 
 
 " set scrolloff=8
