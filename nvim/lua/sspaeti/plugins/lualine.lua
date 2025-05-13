@@ -40,7 +40,7 @@ return {
     }
 
     local function attached_lsp()
-      local clients = vim.lsp.get_active_clients()
+      local clients = vim.lsp.get_clients()
       if #clients > 0 then
         return clients[1].name
       end
@@ -51,7 +51,7 @@ return {
       attached_lsp,
       icon = "",
       cond = function()
-        return #vim.lsp.get_active_clients() > 0 and hide_in_width(100)()
+        return #vim.lsp.get_clients() > 0 and hide_in_width(100)()
       end,
     }
 
@@ -114,7 +114,7 @@ return {
       -- }
 
       -- local copilot = function()
-        --   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+        --   local buf_clients = vim.lsp.get_clients { bufnr = 0 }
         --   if #buf_clients == 0 then
         --     return "LSP Inactive"
         --   end
