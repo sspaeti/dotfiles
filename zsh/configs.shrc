@@ -80,7 +80,5 @@ fzfvim() {
   vim "$(rg . | fzf)"
 }
 
-#asdf
-# . /opt/homebrew/opt/asdf/libexec/asdf.sh
-# . /opt/homebrew/opt/asdf
-# . "$(brew --prefix asdf)"/libexec/asdf.sh
+#asdf: Source asdf in my path to use before brew for Python
+. "$(brew --prefix asdf)"/libexec/asdf.sh
