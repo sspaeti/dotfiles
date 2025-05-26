@@ -122,6 +122,9 @@ cp ~/.ansible.cfg $git/general/dotfiles/ansible/ansible.cfg
 #ansible
 cp ~/.k9s/hotkey.yml $git/general/dotfiles/k9s/hotkey.yml
 
+#presenterm
+cp ~/.config/presenterm/config.yaml $git/general/dotfiles/presenterm/config.yaml
+
 #Lazygit: location could be changed: `export XDG_CONFIG_HOME="$HOME/.config` (but that would affect all apps)
 cp -r ~/Library/Application\ Support/lazygit/config.yml $git/general/dotfiles/lazygit/config.yml
 # source $venvs/dagster/bin/activate
