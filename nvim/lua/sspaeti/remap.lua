@@ -229,6 +229,10 @@ vim.keymap.set("n", "<c-u>", "<C-u>zz")
 vim.keymap.set("n", "<n>", "nzzzv")
 vim.keymap.set("n", "<N>", "Nzzzv")
 
+--MCPHub
+vim.keymap.set("n", "<leader>am", ":MCPHub<CR>")
+
+
 -- Use control-c instead of escape
 vim.keymap.set("n", "c-c", "<Esc>")
 
