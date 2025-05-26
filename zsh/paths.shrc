@@ -45,6 +45,8 @@ export VIMRC=$MYVIMRC
 export RC=$MYVIMRC
 #vim in browser
 export XDG_DATA_HOME=$HOME/.local/share/
+# setting default config path from MacOS (`~/Library/Application Support/`) to Linux (`~/.config/`)
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # PROTOC_HOME=/Users/zekexu/Documents/protoc
 # export PATH=$PATH:$PROTOC_HOME/bin
