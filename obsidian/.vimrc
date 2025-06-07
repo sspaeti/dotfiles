@@ -56,6 +56,12 @@ exmap theme_light obcommand theme:use-light
 nmap <Space>td :theme_dark<CR>
 nmap <Space>tl :theme_light<CR>
 
+
+" Zen mode (hide tab bar) and right side
+exmap toggle_tab obcommand obsidian-hider:toggle-tab-containers
+exmap toggle_right obcommand app:toggle-right-sidebar
+nmap <Space>z :toggle_tab<CR>:toggle_right<CR>
+
 " Copy file path (similar to your leader-y)
 exmap copy_path obcommand workspace:copy-path
 nmap <Space>y :copy_path<CR>
