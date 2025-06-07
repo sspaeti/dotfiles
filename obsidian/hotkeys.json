@@ -445,15 +445,6 @@
       "key": "H"
     }
   ],
-  "calendar:open-weekly-note": [
-    {
-      "modifiers": [
-        "Alt",
-        "Mod"
-      ],
-      "key": "W"
-    }
-  ],
   "editor:unfold-all": [
     {
       "modifiers": [
@@ -477,6 +468,16 @@
         "Mod"
       ],
       "key": "C"
+    }
+  ],
+  "workspace:close-window": [],
+  "calendar:open-weekly-note": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "W"
     }
   ]
 }
