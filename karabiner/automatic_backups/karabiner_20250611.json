@@ -4,45 +4,65 @@
         {
             "complex_modifications": {
                 "rules": [
-                    {
-                        "description": "Simultaneous keys - jk and kj as ESC",
-                        "manipulators": [
+                  {
+                    "description": "Simultaneous keys",
+                    "manipulators": [
+                      {
+                        "from": {
+                          "modifiers": {
+                            "optional": ["any"]
+                          },
+                          "simultaneous": [
                             {
-                                "from": {
-                                    "modifiers": { "optional": ["any"] },
-                                    "simultaneous": [
-                                        { "key_code": "j" },
-                                        { "key_code": "k" }
-                                    ],
-                                    "simultaneous_options": {
-                                        "detect_key_down_uninterruptedly": false,
-                                        "key_down_order": "insensitive",
-                                        "key_up_order": "insensitive",
-                                        "key_up_when": "any"
-                                    }
-                                },
-                                "to": [{ "key_code": "escape" }],
-                                "type": "basic"
+                              "key_code": "j"
                             },
                             {
-                                "from": {
-                                    "modifiers": { "optional": ["any"] },
-                                    "simultaneous": [
-                                        { "key_code": "k" },
-                                        { "key_code": "j" }
-                                    ],
-                                    "simultaneous_options": {
-                                        "detect_key_down_uninterruptedly": false,
-                                        "key_down_order": "insensitive",
-                                        "key_up_order": "insensitive",
-                                        "key_up_when": "any"
-                                    }
-                                },
-                                "to": [{ "key_code": "escape" }],
-                                "type": "basic"
+                              "key_code": "k"
                             }
-                        ]
-                    },
+                          ],
+                          "simultaneous_options": {
+                            "detect_key_down_uninterruptedly": false,
+                            "key_down_order": "insensitive",
+                            "key_up_order": "insensitive",
+                            "key_up_when": "any"
+                          }
+                        },
+                        "to": [
+                          {
+                            "key_code": "escape"
+                          }
+                        ],
+                        "type": "basic"
+                      },
+                                           {
+                        "from": {
+                          "modifiers": {
+                            "optional": ["any"]
+                          },
+                          "simultaneous": [
+                            {
+                              "key_code": "k"
+                            },
+                            {
+                              "key_code": "j"
+                            }
+                          ],
+                          "simultaneous_options": {
+                            "detect_key_down_uninterruptedly": false,
+                            "key_down_order": "insensitive",
+                            "key_up_order": "insensitive",
+                            "key_up_when": "any"
+                          }
+                        },
+                        "to": [
+                          {
+                            "key_code": "escape"
+                          }
+                        ],
+                        "type": "basic"
+                      }
+                    ]
+                  },
                     {
                         "description": "Convert Caps Lock (in combination with Shift) with [aou] to [ÄÖÜ]",
                         "manipulators": [
