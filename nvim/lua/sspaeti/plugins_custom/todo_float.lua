@@ -3,8 +3,11 @@ local utils = require("sspaeti.plugins_custom.utils")
 
 local M = {}
 
+-- Track the current todo window
+local todo_win = nil
+
 local function float_win_config()
-	local width = math.min(math.floor(vim.o.columns * 0.8), 64)
+	local width = math.min(math.floor(vim.o.columns * 0.9), 128)
 	local height = math.floor(vim.o.lines * 0.8)
 
 	return {
@@ -17,7 +20,14 @@ local function float_win_config()
 	}
 end
 
-local function open_floating_file(filepath)
+local function toggle_floating_file(filepath)
+	-- If window exists and is valid, close it
+	if todo_win and vim.api.nvim_win_is_valid(todo_win) then
+		vim.api.nvim_win_close(todo_win, true)
+		todo_win = nil
+		return
+	end
+
 	local path = utils.expand_path(filepath)
 
 	-- Check if the file exists
@@ -38,7 +48,7 @@ local function open_floating_file(filepath)
 		end)
 	end
 
-	local win = vim.api.nvim_open_win(buf, true, float_win_config())
+	todo_win = vim.api.nvim_open_win(buf, true, float_win_config())
 	vim.cmd("setlocal nospell")
 
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", "", {
@@ -50,15 +60,27 @@ local function open_floating_file(filepath)
 				vim.notify("Please save changes first", vim.log.levels.WARN)
 			else
 				vim.api.nvim_win_close(0, true)
+				todo_win = nil
 			end
 		end,
 	})
 
 	vim.api.nvim_create_autocmd("VimResized", {
 		callback = function()
-			vim.api.nvim_win_set_config(win, float_win_config())
+			if todo_win and vim.api.nvim_win_is_valid(todo_win) then
+				vim.api.nvim_win_set_config(todo_win, float_win_config())
+			end
 		end,
 		once = false,
+	})
+
+	-- Clear todo_win when window is closed
+	vim.api.nvim_create_autocmd("WinClosed", {
+		pattern = tostring(todo_win),
+		callback = function()
+			todo_win = nil
+		end,
+		once = true,
 	})
 end
 
@@ -72,13 +94,13 @@ local function setup_user_commands(opts)
 		opts.target_file = opts.global_file
 	end
 	vim.api.nvim_create_user_command("Td", function()
-		open_floating_file(opts.target_file)
+		toggle_floating_file(opts.target_file)
 	end, {})
 end
 
 local function setup_keymaps()
-	vim.keymap.set("n", "<leader>mt", ":Td<CR>", { desc = "open my todo file", silent = true })
 	vim.keymap.set("n", "<leader>tt", ":Td<CR>", { desc = "open my todo file", silent = true })
+	vim.keymap.set("n", "<leader><leader>", ":Td<CR>", { desc = "open my todo file", silent = true })
 end
 
 M.setup = function(opts)
