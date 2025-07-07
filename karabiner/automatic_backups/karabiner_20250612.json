@@ -5,17 +5,9 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Simultaneous keys - jk and kj as ESC (excluding Obsidian)",
+                        "description": "Simultaneous keys - jk and kj as ESC",
                         "manipulators": [
                             {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "md.obsidian"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
                                 "from": {
                                     "modifiers": { "optional": ["any"] },
                                     "simultaneous": [
@@ -33,14 +25,6 @@
                                 "type": "basic"
                             },
                             {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "md.obsidian"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
                                 "from": {
                                     "modifiers": { "optional": ["any"] },
                                     "simultaneous": [

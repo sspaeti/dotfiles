@@ -23,7 +23,7 @@ yabai -m config mouse_action2 resize
 
 
 # when window is dropped in center of another window, swap them (on edges it will split it)
-yabai -m mouse_drop_action swap
+#yabai -m mouse_drop_action swap
 
 
 # default apps on screen number
@@ -61,7 +61,6 @@ yabai -m rule --add app="^Microsoft Outlook$" manage=off
 #does not work..
 yabai -m rule --add app="^dbeaver$" manage=off
 yabai -m rule --add app="^DBeaver$" manage=off
-yabai -m rule --add app="(?i)^DBeaver$" manage=off
 yabai -m rule --add app="/Applications/DBeaver\.app/Contents/MacOS/dbeaver$" manage=off
 yabai -m rule --add app="org.jkiss.dbeaver.core.product" manage=off #osascript -e 'id of app "DBeaver"'
 yabai -m rule --add app="com.dbeaver.DBeaverCommunity" manage=off

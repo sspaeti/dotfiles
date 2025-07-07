@@ -50,6 +50,7 @@ cp ~/.config/helix/config.toml $git/general/dotfiles/helix/config.toml
 
 #obsidian
 cp ~/Simon/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
+cp ~/Simon/SecondBrain/.obsidian/plugins $git/general/dotfiles/obsidian/plugins
 cp ~/Simon/SecondBrain/.obsidian/workspace.json $git/general/dotfiles/obsidian/workspace.json
 cp ~/Simon/SecondBrain/.obsidian/hotkeys.json $git/general/dotfiles/obsidian/hotkeys.json
 cp ~/Simon/SecondBrain/.obsidian/core-plugins.json $git/general/dotfiles/obsidian/core-plugins.json

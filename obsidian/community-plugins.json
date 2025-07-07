@@ -3,7 +3,6 @@
   "omnisearch",
   "remember-cursor-position",
   "obsidian-scroll-offset",
-  "obsidian-list-callouts",
   "obsidian-hider",
   "templater-obsidian",
   "obsidian-admonition",
@@ -33,5 +32,10 @@
   "obsidian-book-search-plugin",
   "copy-document-as-html",
   "obsidian-linter",
-  "calendar"
+  "calendar",
+  "obsidian-excalidraw-plugin",
+  "excalibrain",
+  "nlp",
+  "graph-analysis",
+  "obsidian-list-callouts"
 ]

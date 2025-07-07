@@ -273,7 +273,7 @@ vim.keymap.set("n", "<Leader>cn", ":cnext<CR>")
 vim.keymap.set("n", "<Leader>cp", ":cprevious<CR>")
 vim.keymap.set("n", "]q", ":cnext<CR>")
 vim.keymap.set("n", "[q", ":cprevious<CR>")
-vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
+-- vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
 
 --<TAB>: completion -> still needed?
 --inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -340,7 +340,10 @@ vim.keymap.set('i', '[', '[<c-g>u')
 vim.keymap.set('i', '(', '(<c-g>u')
 
 -- word count
-vim.keymap.set('n', '<leader>cw', 'g<c-g><CR>', {desc="count words"})
+vim.keymap.set('n', '<leader>wg', 'g<c-g><CR>', {desc="count words"})
+vim.keymap.set('n', '<leader>wc', ':!wc -w<CR>', {desc="count words"})
+vim.keymap.set('v', '<leader>wc', ':!wc -w<CR>', {desc="count words"})
+
 
 -- jumplist mutations
 -- These mappings are not directly convertible to Lua since they involve an expression.
