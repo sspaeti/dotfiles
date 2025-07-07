@@ -1,0 +1,12 @@
+[Unit]
+Description=Kanata Service
+Requires=local-fs.target
+After=local-fs.target
+
+[Service]
+ExecStartPre=/usr/bin/modprobe uinput
+ExecStart=/usr/bin/kanata -c /etc/kanata/kanata.kbd
+Restart=no
+
+[Install]
+WantedBy=sysinit.target
