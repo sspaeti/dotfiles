@@ -2,6 +2,7 @@
 
 cp -r ~/.config/hypr/ _arch-linux/
 cp -r ~/.local/share/omarchy/default/hypr/* _arch-linux/hypr/omarchy/default
+cp -r ~/.local/share/omarchy/bin/*  _arch-linux/hypr/omarchy/bin
 
 #keyboard shortcuts
 cp /etc/kanata/kanata.kbd _arch-linux/kanata/
