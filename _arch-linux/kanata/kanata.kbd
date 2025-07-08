@@ -1,3 +1,6 @@
+(defcfg
+  process-unmapped-keys yes
+)
 
 (defsrc
   esc 1 2 3 4 5 6 7 8 9 0 - = bspc
@@ -7,11 +10,12 @@
   lctl lmet lalt spc ralt rmet menu rctl
 )
 
+;; Define Caps Lock as a tap-hold: tap for Escape, hold for layer
 (defalias
-  ;; Define Caps Lock as a tap-hold: tap for Escape, hold for layer
   caps-key (tap-hold 200 200 esc (layer-while-held caps-layer))
 )
 
+;; Default base layer (German layout)
 (deflayer base
   esc 1 2 3 4 5 6 7 8 9 0 - = bspc
   tab q w e r t z u i o p [ ] \
@@ -20,6 +24,14 @@
   lctl lmet lalt spc ralt rmet menu rctl
 )
 
+;; Override layer for Kinesis keyboard (US layout)
+;; This will only affect the Kinesis keyboard
+(deflayermap (kinesis-advantage2-keyboard)
+  y z
+  z y
+)
+
+;; Caps layer works on both
 (deflayer caps-layer
   _ _ _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ _ _ _ _ _ _ _
@@ -27,3 +39,5 @@
   _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ _
 )
+
+
