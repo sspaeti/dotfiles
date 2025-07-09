@@ -3,10 +3,11 @@ set -euo pipefail
 
 # source: https://github.com/end-4/fuzzel-emoji
 
-MODE="${1:-type}"
+
+MODE="${1:-both}"
+
 # Use wofi instead of fuzzel
 emoji="$(sed '1,/^### DATA ###$/d' "$0" | wofi --dmenu --prompt "Emoji: " | cut -d ' ' -f 1 | tr -d '\n')"
-# emoji="$(sed '1,/^### DATA ###$/d' "$0" | fuzzel --match-mode fzf --dmenu | cut -d ' ' -f 1 | tr -d '\n')"
 
 case "$MODE" in
     type)
@@ -16,8 +17,8 @@ case "$MODE" in
         wl-copy "${emoji}"
         ;;
     both)
-        wtype "${emoji}" || true
         wl-copy "${emoji}"
+        wtype "${emoji}" || true
         ;;
     *)
         echo "Usage: $0 [type|copy|both]"
