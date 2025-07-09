@@ -12,7 +12,7 @@ cp ~/.local/bin/switch-keyboard _arch-linux/bin/helper/
 # will be set automatically with above switch-keyboard bash script
 # cp /etc/kanata/kanata.kbd _arch-linux/kanata/
 
-cp -r ~/.config/waybar/ _arch-linux/waybar/
+cp -r ~/.config/waybar/ _arch-linux/
 cp -r ~/.config/wofi/ _arch-linux/wofi
 
 

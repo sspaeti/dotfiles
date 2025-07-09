@@ -16,30 +16,24 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  margin-left: 8px;
-  background: transparent;
-  padding: 2px 4px;
+  margin: 0;
 }
 
 #workspaces button {
   all: initial;
-  padding: 4px 8px;
-  margin: 0 1px;
-  background: transparent;
+  padding: 2px 6px;
+  margin-right: 3px;
   color: #727169;
-  transition: all 0.3s ease;
-  font-weight: 500;
+  background: transparent;
+  transition: background-color 0.2s ease;
 }
 
 #workspaces button:hover {
   background: #2a2a37;
-  color: #dcd7ba;
 }
 
 #workspaces button.active {
   background: #54546d;
-  color: #dcd7ba;
-  font-weight: 600;
 }
 
 /* Clock */
@@ -48,6 +42,7 @@ window#waybar {
   color: #dcd7ba;
   padding: 4px 12px;
   font-weight: 500;
+  margin-left: 8px;
 }
 
 /* Module styling */

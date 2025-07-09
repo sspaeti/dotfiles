@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(waybar:*)"
+      "Bash(waybar:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

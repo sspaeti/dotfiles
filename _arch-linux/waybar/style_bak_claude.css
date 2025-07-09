@@ -1,0 +1,180 @@
+/* Kanagawa-inspired Waybar Theme */
+
+* {
+  border: none;
+  border-radius: 8px;
+  min-height: 0;
+  font-family: "CaskaydiaMono Nerd Font", monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+window#waybar {
+  background: linear-gradient(135deg, #1f1f28 0%, #16161d 100%);
+  color: #dcd7ba;
+  border-bottom: 2px solid #54546d;
+}
+
+/* Workspaces */
+#workspaces {
+  margin-left: 10px;
+  background: #2a2a37;
+  border-radius: 12px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#workspaces button {
+  all: initial;
+  padding: 6px 10px;
+  margin: 0 2px;
+  background: transparent;
+  color: #727169;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+#workspaces button:hover {
+  background: #54546d;
+  color: #dcd7ba;
+}
+
+#workspaces button.active {
+  background: linear-gradient(135deg, #7e9cd8 0%, #957fb8 100%);
+  color: #1f1f28;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(126, 156, 216, 0.4);
+}
+
+/* Clock */
+#clock {
+  background: linear-gradient(135deg, #2a2a37 0%, #363644 100%);
+  color: #dcd7ba;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid #54546d;
+}
+
+/* Module styling */
+#custom-dropbox,
+#custom-filen,
+#cpu,
+#power-profiles-daemon,
+#battery,
+#network,
+#custom-network-speed,
+#bluetooth,
+#pulseaudio,
+#custom-power-menu {
+  background: #2a2a37;
+  color: #dcd7ba;
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid #54546d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#custom-dropbox:hover,
+#custom-filen:hover,
+#cpu:hover,
+#power-profiles-daemon:hover,
+#battery:hover,
+#network:hover,
+#custom-network-speed:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#custom-power-menu:hover {
+  background: #363644;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Specific module colors */
+#network {
+  color: #7e9cd8;
+}
+
+#custom-network-speed {
+  color: #98bb6c;
+  font-family: "CaskaydiaMono Nerd Font", monospace;
+  font-size: 11px;
+}
+
+#custom-filen {
+  color: #7fb4ca;
+}
+
+#bluetooth {
+  color: #957fb8;
+}
+
+#pulseaudio {
+  color: #ff9e3b;
+}
+
+#cpu {
+  color: #e46876;
+}
+
+#power-profiles-daemon {
+  color: #ffa066;
+}
+
+#battery {
+  color: #98bb6c;
+}
+
+#battery.warning {
+  color: #ff9e3b;
+}
+
+#battery.critical {
+  color: #e46876;
+}
+
+#custom-power-menu {
+  color: #e46876;
+  font-weight: 700;
+}
+
+#custom-power-menu:hover {
+  background: #e46876;
+  color: #1f1f28;
+}
+
+/* Tooltips */
+tooltip {
+  background: #2a2a37;
+  color: #dcd7ba;
+  border: 1px solid #54546d;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+tooltip label {
+  color: #dcd7ba;
+  font-weight: 500;
+}
+
+
+/* Smooth transitions for supported elements */
+#workspaces button,
+#custom-dropbox,
+#custom-filen,
+#cpu,
+#power-profiles-daemon,
+#battery,
+#network,
+#custom-network-speed,
+#bluetooth,
+#pulseaudio,
+#custom-power-menu {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@import "../omarchy/current/theme/waybar.css";
