@@ -2,7 +2,7 @@
   "layer": "top",
     "position": "top",
     "spacing": 0,
-    "height": 23,
+    "height": 26,
     "modules-left": [
       "hyprland/workspaces"
     ],
@@ -11,10 +11,8 @@
     ],
     "modules-right": [
       "custom/dropbox",
-      "custom/filen",
       "bluetooth",
       "network",
-      "custom/network-speed",
       "pulseaudio",
       "cpu",
       "power-profiles-daemon",
@@ -73,18 +71,6 @@
       "interval": 3,
       "nospacing": 1,
       "on-click": "alacritty -e iwctl"
-    },
-    "custom/network-speed": {
-      "format": "⇣{} ⇡{}",
-      "exec": "~/.config/waybar/scripts/network-speed.sh",
-      "return-type": "json",
-      "interval": 2,
-      "tooltip": false
-    },
-    "custom/filen": {
-      "format": "󰀂",
-      "on-click": "filen-desktop",
-      "tooltip-format": "Launch Filen.io"
     },
     "battery": {
       "format": "{capacity}% {icon}",

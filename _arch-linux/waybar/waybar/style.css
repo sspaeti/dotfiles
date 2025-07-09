@@ -1,40 +1,132 @@
+/* Kanagawa-inspired Waybar Theme */
+
 * {
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: CaskaydiaMono Nerd Font;
+  font-family: "CaskaydiaMono Nerd Font", monospace;
   font-size: 12px;
+  font-weight: 400;
 }
 
+window#waybar {
+  background: #1f1f28;
+  color: #dcd7ba;
+}
+
+/* Workspaces */
 #workspaces {
-  margin-left: 7px;
+  margin-left: 8px;
+  background: transparent;
+  padding: 2px 4px;
 }
 
 #workspaces button {
   all: initial;
-  padding: 2px 6px;
-  margin-right: 3px;
+  padding: 4px 8px;
+  margin: 0 1px;
+  background: transparent;
+  color: #727169;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
+#workspaces button:hover {
+  background: #2a2a37;
+  color: #dcd7ba;
+}
+
+#workspaces button.active {
+  background: #54546d;
+  color: #dcd7ba;
+  font-weight: 600;
+}
+
+/* Clock */
+#clock {
+  background: transparent;
+  color: #dcd7ba;
+  padding: 4px 12px;
+  font-weight: 500;
+}
+
+/* Module styling */
 #custom-dropbox,
+#custom-filen,
 #cpu,
 #power-profiles-daemon,
 #battery,
 #network,
+#custom-network-speed,
 #bluetooth,
 #pulseaudio,
-#clock,
 #custom-power-menu {
-  min-width: 12px;
-  margin-right: 13px;
+  background: transparent;
+  color: #dcd7ba;
+  padding: 4px 8px;
+  margin: 0 2px;
+  transition: all 0.3s ease;
 }
 
+#custom-dropbox:hover,
+#custom-filen:hover,
+#cpu:hover,
+#power-profiles-daemon:hover,
+#battery:hover,
+#network:hover,
+#custom-network-speed:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#custom-power-menu:hover {
+  background: #2a2a37;
+  color: #dcd7ba;
+}
+
+/* Specific module colors - subtle */
+#custom-network-speed {
+  font-family: "CaskaydiaMono Nerd Font", monospace;
+  font-size: 11px;
+}
+
+#battery.warning {
+  color: #ff9e3b;
+}
+
+#battery.critical {
+  color: #e46876;
+}
+
+#custom-power-menu:hover {
+  background: #54546d;
+  color: #dcd7ba;
+}
+
+/* Tooltips */
 tooltip {
-  padding: 2px;
+  background: #2a2a37;
+  color: #dcd7ba;
+  padding: 4px 8px;
 }
 
 tooltip label {
-  padding: 2px;
+  color: #dcd7ba;
+  font-weight: 400;
+}
+
+
+/* Smooth transitions for supported elements */
+#workspaces button,
+#custom-dropbox,
+#custom-filen,
+#cpu,
+#power-profiles-daemon,
+#battery,
+#network,
+#custom-network-speed,
+#bluetooth,
+#pulseaudio,
+#custom-power-menu {
+  transition: background-color 0.2s ease;
 }
 
 @import "../omarchy/current/theme/waybar.css";
