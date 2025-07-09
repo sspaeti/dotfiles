@@ -5,12 +5,11 @@ cp -r ~/.local/share/omarchy/default/hypr/* _arch-linux/hypr/omarchy/default
 cp -r ~/.local/share/omarchy/bin/*  _arch-linux/hypr/omarchy/bin
 
 #keyboard shortcuts
-cp /etc/kanata/kanata.kbd _arch-linux/kanata/
+cp /etc/kanata/* _arch-linux/kanata/
 cp /etc/systemd/system/kanata.service _arch-linux/kanata/
 
 cp -r ~/.config/waybar/ _arch-linux/waybar/
 cp -r ~/.config/wofi/ _arch-linux/wofi
-
 
 
 #! I also have the mac ghostty settings in the dots files one level above
