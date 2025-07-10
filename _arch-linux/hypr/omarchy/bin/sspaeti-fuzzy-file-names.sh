@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Define available search directories
 AVAILABLE_DIRS=(
-    "$HOME/Documents"
+    "$HOME/Pictures/"
 )
 
 # Add all subdirectories in Simon/Sync to the list
