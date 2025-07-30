@@ -19,7 +19,7 @@ for dir in "${AVAILABLE_DIRS[@]}"; do
     DIR_MENU="$DIR_MENU$(basename "$dir") ($dir)\n"
 done
 
-SELECTED_DIR=$(echo -e "$DIR_MENU" | wofi --dmenu --prompt "Select search directory: " --width 100% --height 80%)
+SELECTED_DIR=$(echo -e "$DIR_MENU" | walker --dmenu --placeholder "Select search directory: " --forceprint)
 
 # Exit if no directory selected
 if [ -z "$SELECTED_DIR" ]; then
@@ -31,7 +31,7 @@ SEARCH_DIR=$(echo "$SELECTED_DIR" | sed 's/.*(\(.*\))/\1/')
 SEARCH_DIRS=("$SEARCH_DIR")
 
 # Get search term from user
-SEARCH_TERM=$(wofi --dmenu --prompt "Search for: ")
+SEARCH_TERM=$(walker --dmenu --placeholder "Search for: " --forceprint)
 
 # Exit if no search term
 if [ -z "$SEARCH_TERM" ]; then
@@ -59,7 +59,7 @@ SELECTED=$(rg --line-number \
    "$FUZZY_REGEX" "${SEARCH_DIRS[@]}" 2>/dev/null | \
    awk -F: '{print $1}' | sort -u | \
    head -n 200 | \
-   wofi --dmenu --prompt "Results: " --width 100% --height 80% --lines 20)
+   walker --dmenu --placeholder "Results: " --forceprint)
 
 # Exit if nothing selected
 if [ -z "$SELECTED" ]; then
@@ -70,7 +70,7 @@ fi
 FILE_PATH="$SELECTED"
 
 # Show options for what to do with the file
-ACTION=$(echo -e "Open file\nCopy path to clipboard\nOpen folder in Nautilus\nOpen folder in terminal" | wofi --dmenu --prompt "Action: " --width 100% --height 80%)
+ACTION=$(echo -e "Open file\nCopy path to clipboard\nOpen folder in Nautilus\nOpen folder in terminal" | walker --dmenu --placeholder "Action: " --forceprint)
 
 if [ "$ACTION" = "Copy path to clipboard" ]; then
     echo "$FILE_PATH" | wl-copy

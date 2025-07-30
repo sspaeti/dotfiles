@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Copy and sync icon files
+mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
+cp ~/.local/share/omarchy/applications/icons/*.png ~/.local/share/icons/hicolor/48x48/apps/
+gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null
+
+# Copy .desktop declarations
+mkdir -p ~/.local/share/applications
+cp ~/.local/share/omarchy/applications/*.desktop ~/.local/share/applications/
+cp ~/.local/share/omarchy/applications/hidden/*.desktop ~/.local/share/applications/
+
+# Only copy xtras if user is not in bare mode
+if [[ ! -f ~/.local/state/omarchy/bare.mode ]] && [ -z "$OMARCHY_BARE" ]; then
+  cp ~/.local/share/omarchy/applications/xtras/*.desktop ~/.local/share/applications/
+fi
+
+update-desktop-database ~/.local/share/applications
