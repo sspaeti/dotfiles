@@ -4,18 +4,21 @@
   "position": "top",
   "spacing": 0,
   "height": 26,
-  "modules-left": [
+  "modules-center": [
     "hyprland/workspaces"
   ],
-  "modules-center": [
+  "modules-left": [
     "clock"
   ],
   "modules-right": [
     "group/tray-expander",
+    "custom/network-speed",
+    "cpu",
     "bluetooth",
     "network",
     "pulseaudio",
-    "cpu",
+    "network",
+    // "custom/filen",
     "battery"
   ],
   "hyprland/workspaces": {
@@ -35,11 +38,16 @@
       "active": "󱓻"
     },
     "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": []
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": [],
+        "6": [],
+        "7": [],
+        "8": [],
+        "9": [],
+        "10": []
     }
   },
   "cpu": {
@@ -47,12 +55,12 @@
     "format": "󰍛",
     "on-click": "alacritty -e btop"
   },
-  "clock": {
-    "format": "{:%A %H:%M}",
-    "format-alt": "{:%d %B W%V %Y}",
-    "tooltip": false,
+   "clock": {
+      "format": "{:%a %d %B W%V - %H:%M}",
+      "format-alt": "{:%d %B W%V %Y}",
+      "tooltip": false,
     "on-click-right": "~/.local/share/omarchy/bin/omarchy-cmd-tzupdate"
-  },
+    },
   "network": {
     "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
     "format" : "{icon}",
@@ -65,6 +73,18 @@
     "interval": 3,
     "nospacing": 1,
     "on-click": "alacritty --class=Impala -e impala"
+  },
+  "custom/network-speed": {
+    "format": "⇣{} ⇡{}",
+    "exec": "~/.config/waybar/scripts/network-speed.sh",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": false
+  },
+  "custom/filen": {
+    "format": "🗁",
+    "on-click": "filen-desktop",
+    "tooltip-format": "Launch Filen.io"
   },
   "battery": {
     "format": "{capacity}% {icon}",
