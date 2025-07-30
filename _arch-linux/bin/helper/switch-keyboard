@@ -39,7 +39,7 @@ case "$CONFIG" in
 esac
 
 echo "Reloading systemd and restarting kanata..."
-systemctl daemon-reload
+#systemctl daemon-reload
 systemctl restart kanata
 
 echo "Done\!"
