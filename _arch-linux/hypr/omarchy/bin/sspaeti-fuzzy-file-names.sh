@@ -13,6 +13,12 @@ if [ -d "$HOME/Simon/Sync" ]; then
     done < <(find "$HOME/Simon/Sync" -mindepth 1 -maxdepth 1 -type d -print0)
 fi
 
+if [ -d "$HOME/git" ]; then
+    while IFS= read -r -d '' dir; do
+        AVAILABLE_DIRS+=("$dir")
+    done < <(find "$HOME/git" -mindepth 1 -maxdepth 1 -type d -print0)
+fi
+
 # Let user select which directories to search
 DIR_MENU=""
 for dir in "${AVAILABLE_DIRS[@]}"; do
