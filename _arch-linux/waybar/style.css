@@ -1,127 +1,47 @@
-/* Kanagawa-inspired Waybar Theme */
+@import "../omarchy/current/theme/waybar.css";
 
 * {
+  background-color: @background;
+  color: @foreground;
+
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: "CaskaydiaMono Nerd Font", monospace;
+  font-family: CaskaydiaMono Nerd Font Propo;
   font-size: 12px;
-  font-weight: 400;
 }
 
-window#waybar {
-  background: #1f1f28;
-  color: #dcd7ba;
+.modules-left {
+  margin-left: 8px;
 }
 
-/* Workspaces */
-#workspaces {
-  margin: 0;
+.modules-right {
+  margin-right: 8px;
 }
 
 #workspaces button {
   all: initial;
-  padding: 2px 6px;
-  margin-right: 3px;
-  color: #727169;
-  background: transparent;
-  transition: background-color 0.2s ease;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
 }
 
-#workspaces button:hover {
-  background: #2a2a37;
-}
-
-#workspaces button.active {
-  background: #54546d;
-}
-
-/* Clock */
-#clock {
-  background: transparent;
-  color: #dcd7ba;
-  padding: 4px 12px;
-  font-weight: 500;
-  margin-left: 8px;
-}
-
-/* Module styling */
-#custom-dropbox,
-#custom-filen,
+#tray,
 #cpu,
-#power-profiles-daemon,
 #battery,
 #network,
-#custom-network-speed,
 #bluetooth,
 #pulseaudio,
+#clock,
 #custom-power-menu {
-  background: transparent;
-  color: #dcd7ba;
-  padding: 4px 8px;
-  margin: 0 2px;
-  transition: all 0.3s ease;
+  min-width: 12px;
+  margin: 0 7.5px;
 }
 
-#custom-dropbox:hover,
-#custom-filen:hover,
-#cpu:hover,
-#power-profiles-daemon:hover,
-#battery:hover,
-#network:hover,
-#custom-network-speed:hover,
-#bluetooth:hover,
-#pulseaudio:hover,
-#custom-power-menu:hover {
-  background: #2a2a37;
-  color: #dcd7ba;
+#custom-expand-icon {
+  margin-right: 12px;
 }
 
-/* Specific module colors - subtle */
-#custom-network-speed {
-  font-family: "CaskaydiaMono Nerd Font", monospace;
-  font-size: 11px;
-}
-
-#battery.warning {
-  color: #ff9e3b;
-}
-
-#battery.critical {
-  color: #e46876;
-}
-
-#custom-power-menu:hover {
-  background: #54546d;
-  color: #dcd7ba;
-}
-
-/* Tooltips */
 tooltip {
-  background: #2a2a37;
-  color: #dcd7ba;
-  padding: 4px 8px;
+  padding: 2px;
 }
-
-tooltip label {
-  color: #dcd7ba;
-  font-weight: 400;
-}
-
-
-/* Smooth transitions for supported elements */
-#workspaces button,
-#custom-dropbox,
-#custom-filen,
-#cpu,
-#power-profiles-daemon,
-#battery,
-#network,
-#custom-network-speed,
-#bluetooth,
-#pulseaudio,
-#custom-power-menu {
-  transition: background-color 0.2s ease;
-}
-
-@import "../omarchy/current/theme/waybar.css";
