@@ -20,3 +20,5 @@ cp -r ~/.config/wofi/ _arch-linux/wofi
 cp -r ~/.config/ghostty/ _arch-linux/ghostty
 
 
+# Installed SW arch (Pacman Yay)
+pacman -Qe > _arch-linux/pacman.txt
