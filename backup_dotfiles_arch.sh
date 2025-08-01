@@ -2,7 +2,6 @@
 
 cp -r ~/.config/hypr/ _arch-linux/
 cp -r ~/.local/share/omarchy/default/hypr/* _arch-linux/hypr/omarchy/default
-cp -r ~/.local/share/omarchy/sspaeti/hypr/* _arch-linux/hypr/omarchy/sspaeti
 cp -r ~/.local/share/omarchy/bin/*  _arch-linux/hypr/omarchy/bin
 
 #keyboard shortcuts
@@ -14,7 +13,7 @@ cp ~/.local/bin/switch-keyboard _arch-linux/bin/helper/
 # cp /etc/kanata/kanata.kbd _arch-linux/kanata/
 
 cp -r ~/.config/waybar/ _arch-linux/
-cp -r ~/.config/wofi/ _arch-linux/wofi
+cp -r ~/.config/walker/ _arch-linux/walker
 
 
 #! I also have the mac ghostty settings in the dots files one level above
