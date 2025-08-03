@@ -6,7 +6,7 @@ theme = "omarchy-default"
 theme_base = []
 theme_location = ["~/.local/share/omarchy/default/walker/themes/"]
 monitor = ""
-hotreload_theme = true
+hotreload_theme = false
 as_window = false
 timeout = 0
 disable_click_to_close = false
@@ -199,7 +199,7 @@ typeahead = true
 hidden = true
 
 [builtins.finder]
-use_fd = true
+use_fd = false
 fd_flags = "--ignore-vcs --type file --type directory"
 cmd_alt = "xdg-open $(dirname ~/%RESULT%)"
 weight = 5
@@ -212,7 +212,7 @@ refresh = true
 concurrency = 8
 show_icon_when_single = true
 preview_images = true
-hidden = false
+hidden = true
 prefix = "."
 
 [builtins.runner]
