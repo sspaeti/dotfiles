@@ -5,8 +5,8 @@ hyprctl dispatch workspace 1
 hyprctl dispatch workspace 2
 hyprctl dispatch workspace 3
 
-# Launch Alacritty → workspace 1
-alacritty &
+# Launch Alacritty with tmux → workspace 1
+alacritty -e tmux &
 while [ -z "$alacritty_addr" ]; do
     sleep 0.2
     alacritty_addr=$(hyprctl clients -j | jq -r '.[] | select(.class == "Alacritty") | .address')
