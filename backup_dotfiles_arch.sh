@@ -11,6 +11,10 @@ cp /etc/systemd/system/kanata.service _arch-linux/kanata/
 cp ~/.local/bin/switch-keyboard _arch-linux/bin/helper/
 cp ~/.XCompose _arch-linux/XCompose
 
+# notifications
+cp -r ~/.config/mako/ _arch-linux/mako/
+
+
 # will be set automatically with above switch-keyboard bash script
 # cp /etc/kanata/kanata.kbd _arch-linux/kanata/
 
