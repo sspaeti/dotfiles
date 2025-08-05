@@ -9,6 +9,8 @@ cp /etc/kanata/lenovo.kbd _arch-linux/kanata/
 cp /etc/kanata/kinesis.kbd _arch-linux/kanata/
 cp /etc/systemd/system/kanata.service _arch-linux/kanata/
 cp ~/.local/bin/switch-keyboard _arch-linux/bin/helper/
+cp ~/.XCompose _arch-linux/XCompose
+
 # will be set automatically with above switch-keyboard bash script
 # cp /etc/kanata/kanata.kbd _arch-linux/kanata/
 

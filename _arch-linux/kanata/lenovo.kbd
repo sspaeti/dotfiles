@@ -10,9 +10,9 @@
   lctl lmet lalt spc ralt rmet menu rctl
 )
 
-;; Define Caps Lock as a tap-hold: tap for Escape, hold for layer
+;; Define Caps Lock as a tap-hold: tap for Caps Lock, hold for layer
 (defalias
-  caps-key (tap-hold 200 200 esc (layer-while-held caps-layer))
+  caps-key (tap-hold 200 200 caps (layer-while-held caps-layer))
 )
 
 ;; Default base layer (German layout)
@@ -39,5 +39,3 @@
   _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ _
 )
-
-

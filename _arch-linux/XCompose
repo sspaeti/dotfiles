@@ -1,0 +1,21 @@
+include "%H/.local/share/omarchy/default/xcompose"
+
+# Identification
+<Multi_key> <space> <n> : "Simon Späti"
+<Multi_key> <space> <e> : "simon@ssp.sh"
+
+# Typography
+<Multi_key> <minus> : "—"
+<Multi_key> <less> : "«"
+<Multi_key> <greater> : "»"
+
+<Multi_key> <a> : "ä"
+<Multi_key> <o> : "ö"
+<Multi_key> <u> : "ü"
+
+<Multi_key> <A> : "Ä"
+<Multi_key> <O> : "Ö"
+<Multi_key> <U> : "Ü"
+
+# Refresh with running `refresh-xcompose` in the terminal to get the changes picked up.
+
