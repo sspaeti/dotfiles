@@ -43,7 +43,7 @@ exit
 😊 smiling face with smiling eyes face smile happy flushed crush embarrassed shy joy
 😇 smiling face with halo face angel heaven halo
 🥰 smiling face with hearts face love like affection valentines infatuation crush hearts adore
-😍 smiling face with heart eyes face love like affection valentines infatuation crush heart
+😍 love heart eyes face like affection valentines infatuation crush heart
 🤩 star struck face smile starry eyes grinning
 😘 face blowing a kiss face love like affection valentines infatuation kiss
 😗 kissing face love like face 3 valentines infatuation kiss
@@ -144,7 +144,7 @@ exit
 🙉 hear no evil monkey animal monkey nature
 🙊 speak no evil monkey monkey animal nature omg
 💋 kiss mark face lips love like affection valentines
-💌 love letter email like affection envelope valentines
+💌 letter love email like affection envelope valentines
 💘 heart with arrow love like heart affection valentines
 💝 heart with ribbon love valentines
 💖 sparkling heart love like affection valentines
@@ -793,7 +793,7 @@ exit
 🏥 hospital building health surgery doctor
 🏦 bank building money sales cash business enterprise
 🏨 hotel building accomodation checkin
-🏩 love hotel like affection dating
+🏩 hotel like affection love dating
 🏪 convenience store building shopping groceries
 🏫 school building student education learn teach
 🏬 department store building shopping mall
