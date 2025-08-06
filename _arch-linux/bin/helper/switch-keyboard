@@ -6,10 +6,10 @@
 SCRIPT_DIR="/etc/kanata"
 TARGET_FILE="$SCRIPT_DIR/kanata.kbd"
 
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root"
-    exit 1
-fi
+# if [[ $EUID -ne 0 ]]; then
+#     echo "This script must be run as root"
+#     exit 1
+# fi
 
 # If no argument provided, detect current config and switch
 if [ $# -eq 0 ]; then
@@ -24,11 +24,11 @@ fi
 
 case "$CONFIG" in
     kinesis)
-        cp "$SCRIPT_DIR/kinesis.kbd" "$TARGET_FILE"
+        sudo cp "$SCRIPT_DIR/kinesis.kbd" "$TARGET_FILE"
         echo "Switched to kinesis configuration"
         ;;
     lenovo)
-        cp "$SCRIPT_DIR/lenovo.kbd" "$TARGET_FILE"
+        sudo cp "$SCRIPT_DIR/lenovo.kbd" "$TARGET_FILE"
         echo "Switched to lenovo configuration"
         ;;
     *)
@@ -40,6 +40,6 @@ esac
 
 echo "Reloading systemd and restarting kanata..."
 #systemctl daemon-reload
-systemctl restart kanata
+sudo systemctl restart kanata
 
 echo "Done\!"
