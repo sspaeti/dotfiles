@@ -108,6 +108,7 @@ npm 11.5.2-1
 nss-mdns 0.15.1-2
 obs-studio 31.1.1-1
 obsidian 1.8.10-1
+ocrmypdf 16.10.4-1
 pamixer 1.6-3
 pinta 3.0.3-1
 pipewire 1:1.4.7-1
@@ -137,6 +138,7 @@ sushi 46.0-2
 swaybg 1.2.1-1
 swayosd 0.2.1-1
 system-config-printer 1.5.18-5
+tesseract-data-deu 2:4.1.0-4
 tig 2.5.12-1
 timeshift 25.07.4-1
 tldr 3.4.1-1

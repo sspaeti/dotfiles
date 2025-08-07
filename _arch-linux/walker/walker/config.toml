@@ -200,7 +200,7 @@ hidden = true
 
 [builtins.finder]
 use_fd = true
-fd_flags = "--ignore-vcs --type file --type directory --exclude 'Simon/SecondBrain'"
+fd_flags = "--ignore-vcs --type file --type directory --exclude 'Simon/SecondBrain' --exclude 'sspaeti/Simon/SecondBrain' --exclude '/home/sspaeti/Simon/SecondBrain'"
 cmd_alt = "xdg-open \"$(dirname \"$HOME/%RESULT%\")\""
 weight = 5
 icon = "file"
