@@ -28,3 +28,9 @@ cp -r ~/.config/ghostty/ _arch-linux/ghostty
 
 # Installed SW arch (Pacman Yay)
 pacman -Qe > _arch-linux/pacman.txt
+
+
+#others
+
+
+cp ~/.config/btop/btop.conf btop/btop.conf
