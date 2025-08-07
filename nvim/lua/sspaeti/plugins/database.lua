@@ -27,6 +27,13 @@ return {
     },
     event = "VeryLazy",
     config = function()
+      -- Database connections
+      vim.g.dbs = {
+        local_postgres_sspaeti = 'postgres://postgres@localhost:5432/sspaeti',
+        duckdb_memory = 'duckdb:',
+        duckdb_file = 'duckdb:///tmp/analytics.duckdb',
+      }
+
       vim.g.db_ui_execute_on_save = 0 --do not execute on save
       vim.g.db_ui_win_position = "right"
 
@@ -38,7 +45,6 @@ return {
       vim.api.nvim_set_keymap('x', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
       vim.api.nvim_set_keymap('x', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
-
       -- Does not work: Define the custom key mapping for executing the query under the cursor
       -- vim.api.nvim_set_keymap('n', '<leader><CR>', 'vip<leader>S', { noremap = true, silent = true })
 
@@ -47,5 +53,4 @@ return {
       -- vim.api.nvim_set_keymap('n', '<CR>', '<Plug>(DBUI_SelectLineVsplit)', {noremap = true})
     end,
   },
-
 }
