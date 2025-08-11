@@ -167,7 +167,6 @@ wireplumber 0.5.10-1
 wl-clip-persist 0.4.3-2
 wl-clipboard 1:2.2.1-3
 wl-screenrec 0.1.7-1
-wlsunset 0.4.0-1
 woff2-font-awesome 7.0.0-4
 wtype 0.4-2
 xdg-desktop-portal-gtk 1.15.3-1
