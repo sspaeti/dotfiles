@@ -134,6 +134,7 @@ slack-desktop 4.45.64-1
 sof-firmware 2025.05-1
 spotify 1:1.2.63.394-1
 sshfs 3.7.3-3
+stress-ng 0.19.03-1
 sushi 46.0-2
 swaybg 1.2.1-1
 swayosd 0.2.1-1
