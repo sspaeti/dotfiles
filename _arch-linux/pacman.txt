@@ -11,6 +11,7 @@ brave-bin 1:1.80.125-1
 brightnessctl 0.5.1-3
 btop 1.4.4-1
 btrfs-progs 6.15-1
+calcure-git r304.26c38af-1
 chaotic-keyring 20250614-1
 chaotic-mirrorlist 20240724-3
 chromium 139.0.7258.66-1
