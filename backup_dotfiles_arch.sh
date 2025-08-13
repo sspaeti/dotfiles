@@ -14,6 +14,7 @@ cp ~/.XCompose _arch-linux/XCompose
 # notifications
 cp -r ~/.config/mako/ _arch-linux/mako/
 
+cp -r ~/.config/mise/ _arch-linux/mise/
 
 # will be set automatically with above switch-keyboard bash script
 # cp /etc/kanata/kanata.kbd _arch-linux/kanata/

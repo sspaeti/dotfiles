@@ -1,0 +1,10 @@
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+[settings.ruby]
+ruby_build_opts = "CC=gcc-14 CXX=g++-14"
+
+[tools]
+node = "24"
+python = "latest"
+ruby = "latest"
