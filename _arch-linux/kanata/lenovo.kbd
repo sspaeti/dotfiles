@@ -21,7 +21,7 @@
   tab q w e r t z u i o p [ ] \
   @caps-key a s d f g h j k l ; ' ret
   lsft y x c v b n m , . / rsft
-  lctl lmet lalt spc ralt rmet menu rctl
+  lctl lalt lmet spc ralt rmet menu rctl
 )
 
 ;; Override layer for Kinesis keyboard (US layout)
