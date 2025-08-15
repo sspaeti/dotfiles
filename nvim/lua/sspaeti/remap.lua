@@ -32,7 +32,9 @@ vim.keymap.set('n', 'sz', ':Helptags<CR>')
 vim.keymap.set('n', 'sZ', ':Tags<CR>')
 vim.keymap.set('n', 'su', ':UndotreeToggle<CR>')
 vim.keymap.set('n', 'sF', ':Rg<CR>')
-vim.keymap.set('n', 'sp', function() Snacks.picker.smart() end, { desc = "Smart Find Files" }) --search for typing string
+-- disable Snack for now and use Telescope, it always quits nvim on linux??
+vim.keymap.set('n', 'sp', function() local is_git = os.execute('git') == 0 if is_git then require("telescope.builtin").git_files() else require("telescope.builtin").find_files() end end, {desc = "Find Open Files", })
+-- vim.keymap.set('n', 'sp', function() Snacks.picker.smart() end, { desc = "Grep" })
 vim.keymap.set('n', 'sf', function() Snacks.picker.grep() end, { desc = "Grep" })
 vim.keymap.set('n', '<leader>ft', function() Snacks.picker.resume() end, { desc = "Resume Find" })
 -- vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
@@ -273,7 +275,7 @@ vim.keymap.set("n", "<Leader>cn", ":cnext<CR>")
 vim.keymap.set("n", "<Leader>cp", ":cprevious<CR>")
 vim.keymap.set("n", "]q", ":cnext<CR>")
 vim.keymap.set("n", "[q", ":cprevious<CR>")
--- vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
+vim.keymap.set("n", "<Leader>wc", ":%s///gn<CR>") --first search a term with /
 
 --<TAB>: completion -> still needed?
 --inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -340,10 +342,7 @@ vim.keymap.set('i', '[', '[<c-g>u')
 vim.keymap.set('i', '(', '(<c-g>u')
 
 -- word count
-vim.keymap.set('n', '<leader>wg', 'g<c-g><CR>', {desc="count words"})
-vim.keymap.set('n', '<leader>wc', ':!wc -w<CR>', {desc="count words"})
-vim.keymap.set('v', '<leader>wc', ':!wc -w<CR>', {desc="count words"})
-
+vim.keymap.set('n', '<leader>cw', 'g<c-g><CR>', {desc="count words"})
 
 -- jumplist mutations
 -- These mappings are not directly convertible to Lua since they involve an expression.

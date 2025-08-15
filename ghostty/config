@@ -19,17 +19,15 @@ keybind = ctrl+shift+t=ignore
 keybind = alt+shift+p=ignore
 
 #fix nvim c-o
-keybind = ctrl+o=text:\x0f
+# keybind = ctrl+o=text:\x0f
 
 # turn full screen off
 keybind = cmd+enter=ignore
 
-font-size =16.0
+font-size =12.0
 
 background-opacity = 0.98
 copy-on-select = clipboard
-
-
 
 #old kitty configs:
 ## shell zsh
@@ -40,3 +38,4 @@ copy-on-select = clipboard
 #term xterm-256color
 
 
+confirm-close-surface=false

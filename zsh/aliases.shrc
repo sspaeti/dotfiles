@@ -1,8 +1,6 @@
-#python 3
-alias python=python3
-alias pip=pip3
 #make neovim default vim
 export EDITOR="nvim"
+export SUDO_EDITOR="$EDITOR"
 alias vim=nvim
 alias v=nvim
 
@@ -17,7 +15,7 @@ alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance
 alias c=clear
 
 # show hidden files by default
-alias ll='ls -la'
+alias ll='ls -lah'
 function chpwd() {
     emulate -L zsh
     ll
@@ -96,8 +94,8 @@ alias docker-compose="docker compose"
 alias lg=lazygit
 alias ldd=lazydocker
 alias lk=k9s
-alias cat=bat
-alias cato=/bin/cat
+alias cat=cat
+alias cato=bat
 
 #docker
 alias dkps="docker ps"
@@ -120,5 +118,7 @@ alias m="neomutt"
 alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"
 alias msync="offlineimap -a sspaeti.com"
 
-alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
+
+# use open as on macOs to open pdf, videos, images, and directories (send output to dev and start in background for file manager (nautilus))
+open() { xdg-open "$@" &>/dev/null & }
 

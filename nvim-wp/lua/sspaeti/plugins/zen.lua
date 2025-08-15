@@ -17,7 +17,7 @@ return {
       window = {
         -- backdrop = 1,
         -- width = 0.66, 
-        width = 97, --98,
+        width = 120, --98,
         options = {
           relativenumber = false,
           signcolumn = "no",

@@ -26,38 +26,14 @@ bindkey -M viins 'kj' vi-cmd-mode
 # fzf search
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#on slow internet connection brew update takes ages. Disabling it per default here
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
-
-# . /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-#add homebrew
-export PATH=/opt/homebrew/bin:$PATH
-#add rust to path
-export PATH=/Users/sspaeti/.cargo/bin:$PATH
-
-# following https://earthly.dev/blog/homebrew-on-m1/
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
-# m1 issue building python with asdf/pyenv
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
-# add this after homebrew to use m1 /opt/homebrew before old homebrew that was in /usr/local/bin 
-export PATH="$PATH:/usr/local/bin/"
-
-# add path from uv
-export PATH="/Users/sspaeti/.local/share/../bin:$PATH"
-
-#adoptopenjdk to change java versions with e.g. "jdk 11"
-jdk() {
-        version=$1
-        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-        # java -version
- }
-# Set a default Java version for every new terminal session
-jdk 17
+##adoptopenjdk to change java versions with e.g. "jdk 11"
+#jdk() {
+#        version=$1
+#        export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+#        # java -version
+# }
+## Set a default Java version for every new terminal session
+#jdk 17
 
 
 #gradle: from: https://docs.airbyte.com/contributing-to-airbyte/developing-locally#build-with-gradle
@@ -80,5 +56,5 @@ fzfvim() {
   vim "$(rg . | fzf)"
 }
 
-#asdf: Source asdf in my path to use before brew for Python
-. "$(brew --prefix asdf)"/libexec/asdf.sh
+#mise replaces asdf
+eval "$(mise activate)"

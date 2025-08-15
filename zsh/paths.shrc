@@ -1,7 +1,18 @@
 # export SHELL=zsh
 
 # Add Visual Studio Code (code)
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+# export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+
+# Omarchy (Arch Linux) paths - Set complete path
+export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omarchy/bin:$PATH"
+set +h
+
+#add rust to path
+export PATH="/home/sspaeti/.cargo/bin:$PATH"
+
+# add path from uv
+export PATH="/Users/sspaeti/.local/share/../bin:$PATH"
 
 #go path
 export GOPATH=$HOME/.go
@@ -11,28 +22,28 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH="~/.asdf/installs/poetry/1.2.2/bin:$PATH"
 
 # my shortcuts
-export git=~/Documents/git
+export git=~/git
 export de=$git/de
-export general=$git/general
-export sspaeticom=$git/sspaeti.com
+export general=~/git/general
+export sspaeticom=~/git/sspaeti.com
 export venvs=~/.venvs/
 export sync=~/Simon/Sync
-export secondbrain=/Users/sspaeti/Simon/SecondBrain/
-export public_secondbrain=$git/sspaeti.com/second-brain-public/content
+export secondbrain=~/Simon/SecondBrain/
+export public_secondbrain=~/git/sspaeti.com/second-brain-public/content
 
 
-export areas=/Users/sspaeti/Simon/SecondBrain/⚛️\ Areas
-export blog=/Users/sspaeti/Documents/git/sspaeti.com/sspaeti-hugo-blog
+export areas=~/Simon/SecondBrain/⚛️\ Areas
+export blog=~/git/sspaeti.com/sspaeti-hugo-blog
 export hugo=$blog
 export docs=~/Documents
-export VS_Projects=/Users/sspaeti/Documents/VS_Projects/
+export VS_Projects=/Documents/VS_Projects/
 # export SPARK_HOME=~/Documents/spark/spark-3.0.1-bin-hadoop3.2
 # export SPARK_HOME=~/Documents/spark/spark-3.4.2-bin-hadoop3.3
 export SPARK_HOME=~/Documents/spark/spark-3.5.1-bin-hadoop3.3
 # export SPARK_HOME="/opt/homebrew/opt/apache-spark/libexec/"
 export PATH="$SPARK_HOME/bin/:$PATH"
 export PYSPARK_PYTHON=python3
-#export DATASETS=/Users/sspaeti/Simon/Sync/Business/13_sspaeti/Real-estate/_DATASETS
+#export DATASETS=/Simon/Sync/Business/13_sspaeti/Real-estate/_DATASETS
 
 export DAGSTER_HOME=~/.dagster
 #set default deployment to local (staging or prod are usually others, check dagster code)
@@ -43,6 +54,10 @@ export AIRFLOW_HOME=~/.airflow
 export MYVIMRC=~/.config/nvim/init.lua
 export VIMRC=$MYVIMRC
 export RC=$MYVIMRC
+export HYPRRC=~/.config/hypr/hyprland.conf
+
+export OMARCHY_SCREENSHOT_DIR=~/Pictures/Satty
+
 #vim in browser
 export XDG_DATA_HOME=$HOME/.local/share/
 # setting default config path from MacOS (`~/Library/Application Support/`) to Linux (`~/.config/`)
@@ -83,3 +98,5 @@ export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@3
 # }
 # display_greeting
 
+# filen-cli
+PATH=$PATH:~/.filen-cli/bin
