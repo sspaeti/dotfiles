@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(hyprctl:*)",
-      "Bash(dmesg:*)"
-    ],
-    "deny": []
-  }
-}
