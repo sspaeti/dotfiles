@@ -17,6 +17,8 @@
     "bluetooth",
     "network",
     "pulseaudio",
+    "temperature",
+    "custom/cpu-governor",
     "cpu",
     "battery"
   ],
@@ -52,7 +54,7 @@
   "custom/omarchy": {
     "format": "",
     "on-click": "~/.local/share/omarchy/bin/omarchy-menu",
-    "tooltip-format": "SUPER + ALT + SPACE"
+    "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
   },
   "custom/update": {
     "format": "",
@@ -160,5 +162,23 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12
+  },
+  "temperature": {
+    "thermal-zone": 0,
+    "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "critical-threshold": 80,
+    "format-critical": "🔥 {temperatureC}°C",
+    "format": "{temperatureC}°C",
+    "tooltip-format": "CPU Temperature: {temperatureC}°C",
+    "interval": 2
+  },
+  "custom/cpu-governor": {
+    "format": " {}", 
+    "exec": "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor | case $(cat) in 'performance') echo '⚡';; 'powersave') echo '▒';; 'balanced'|'ondemand'|'conservative') echo '⚖️';; *) echo '❓';; esac",
+    "exec-if": "test -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
+    "interval": 5,
+    "tooltip": true,
+    "tooltip-format": "Powerprofile: {}",
+    "on-click": "alacritty -e sudo cpupower frequency-set -g $([ $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor) = 'performance' ] && echo 'powersave' || echo 'performance')"
   }
 }
