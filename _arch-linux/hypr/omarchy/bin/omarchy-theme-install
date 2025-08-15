@@ -4,7 +4,6 @@
 # Usage: omarchy-theme-install <git-repo-url>
 
 if [ -z "$1" ]; then
-  ~/.local/share/omarchy/bin/omarchy-show-logo
   echo -e "\e[32mSee https://manuals.omamix.org/2/the-omarchy-manual/90/extra-themes\n\e[0m"
   REPO_URL=$(gum input --placeholder="Git repo URL for theme" --header="")
 else
@@ -31,4 +30,4 @@ if ! git clone "$REPO_URL" "$THEME_PATH"; then
 fi
 
 # Apply the new theme with omarchy-theme-set
-~/.local/share/omarchy/bin/omarchy-theme-set $THEME_NAME
+omarchy-theme-set $THEME_NAME

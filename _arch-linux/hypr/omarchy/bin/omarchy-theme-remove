@@ -4,10 +4,10 @@
 # Usage: omarchy-theme-remove <theme-name>
 
 if [ -z "$1" ]; then
-  extra_themes=$(find ~/.config/omarchy/themes -mindepth 1 -maxdepth 1 -type d ! -xtype l -printf '%f\n')
+  mapfile -t extra_themes < <(find ~/.config/omarchy/themes -mindepth 1 -maxdepth 1 -type d ! -xtype l -printf '%f\n')
 
-  if [[ -n "$extra_themes" ]]; then
-    THEME_NAME=$(gum choose --header="Remove extra theme" "$extra_themes")
+  if [[ ${#extra_themes[@]} -gt 0 ]]; then
+    THEME_NAME=$(gum choose --header="Remove extra theme" "${extra_themes[@]}")
   else
     echo "No extra themes installed."
     exit 1
@@ -33,7 +33,7 @@ fi
 
 # Move to the next theme if the current theme is the one being removed
 if [ "$(readlink -f "$CURRENT_DIR/theme")" = "$(readlink -f "$THEME_PATH")" ]; then
-  ~/.local/share/omarchy/bin/omarchy-theme-next
+  omarchy-theme-next
 fi
 
 # Now remove the theme directory for THEME_NAME
