@@ -174,11 +174,11 @@
   },
   "custom/cpu-governor": {
     "format": " {}", 
-    "exec": "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor | case $(cat) in 'performance') echo '⚡';; 'powersave') echo '▒';; 'balanced'|'ondemand'|'conservative') echo '⚖️';; *) echo '❓';; esac",
-    "exec-if": "test -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
+    "exec": "powerprofilesctl get | case $(cat) in 'performance') echo '⚡';; 'power-saver') echo '▒';; 'balanced') echo '⚖️';; *) echo '❓';; esac",
+    "exec-if": "command -v powerprofilesctl",
     "interval": 5,
     "tooltip": true,
     "tooltip-format": "Powerprofile: {}",
-    "on-click": "alacritty -e sudo cpupower frequency-set -g $([ $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor) = 'performance' ] && echo 'powersave' || echo 'performance')"
+    "on-click": "current=$(powerprofilesctl get); case $current in 'balanced') powerprofilesctl set power-saver;; 'power-saver') powerprofilesctl set performance;; 'performance') powerprofilesctl set balanced;; esac"
   }
 }
