@@ -1,9 +1,22 @@
 
-obsidian/workspace
-obsidian/workspace.json
-obsidian/plugins
-obsidian/app.json
 zsh/.secrets
 .ssh
-_arch-linux/hypr/sspaeti/.bg_mode_state
-_arch-linux/hypr/sspaeti/.current_personal_image
+hypr/.config/hypr/sspaeti/.bg_mode_state
+hypr/.config/hypr/sspaeti/.current_personal_image
+
+
+# Secrets and sensitive files
+zsh/.secrets
+**/secrets
+**/*.secret
+**/*.key
+.env.local
+
+
+#obsidian
+obsidian/Simon/SecondBrain/.obsidian/workspace
+obsidian/Simon/SecondBrain/.obsidian/workspace.json
+obsidian/Simon/SecondBrain/.obsidian/workspaces.json
+obsidian/Simon/SecondBrain/.obsidian/app.json
+obsidian/Simon/SecondBrain/.obsidian/plugins
+obsidian/Simon/SecondBrain/.obsidian/themes
