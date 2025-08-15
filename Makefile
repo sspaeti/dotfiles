@@ -1,18 +1,50 @@
-.DEFAULT_GOAL := backup-dotfiles
+# Linking dotfiles with Stow
+#
 
-backup-dotfiles: 
-	./backup_dotfiles.sh
-	echo "backup done.."
-	python _utils/remove_data.py
+# Shared packages (work on both platforms)
+SHARED = nvim zsh tmux kitty git scripts
+
+# Platform-specific packages
+MACOS = karabiner-elements yabai skhd
+LINUX = kanata
+
+.PHONY: mac linux shared clean
 
 
-mj-backup: 
-	./backup_dotfiles_mj.sh
-	echo "backup done.."
 
-arch: 
-	./backup_dotfiles_arch.sh
-	echo "backup done.."
+# obsidian:
+# 	cp ~/Simon/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
+# 	cp ~/Simon/SecondBrain/.obsidian/plugins $git/general/dotfiles/obsidian/plugins
+# 	cp ~/Simon/SecondBrain/.obsidian/workspace.json $git/general/dotfiles/obsidian/workspace.json
+# 	cp ~/Simon/SecondBrain/.obsidian/hotkeys.json $git/general/dotfiles/obsidian/hotkeys.json
+# 	cp ~/Simon/SecondBrain/.obsidian/core-plugins.json $git/general/dotfiles/obsidian/core-plugins.json
+# 	cp ~/Simon/SecondBrain/.obsidian/community-plugins.json $git/general/dotfiles/obsidian/community-plugins.json
+# 	cp ~/Simon/SecondBrain/.obsidian/appearance.json $git/general/dotfiles/obsidian/appearance.json
+# 	cp ~/Simon/SecondBrain/.obsidian/app.json $git/general/dotfiles/obsidian/app.json
+# 	cp ~/Simon/SecondBrain/.obsidian/.vimrc $git/general/dotfiles/obsidian/.vimrc
+# 	cp -r ~/Simon/SecondBrain/.obsidian/snippets/* $git/general/dotfiles/obsidian/snippets/
+# 	cp -r ~/Simon/SecondBrain/.obsidian/exports/* $git/general/dotfiles/obsidian/exports/
 
-help: ## Show all Makefile targets
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+# Install shared dotfiles
+shared:
+	stow $(SHARED)
+
+# Install macOS-specific setup
+mac: shared
+	stow $(MACOS)
+
+# Install Linux-specific setup  
+linux: shared
+	stow $(LINUX)
+
+# Remove all symlinks
+clean:
+	stow -D $(SHARED) $(MACOS) $(LINUX)
+
+# Remove only macOS symlinks
+clean-mac:
+	stow -D $(MACOS)
+
+# Remove only Linux symlinks
+clean-linux:
+	stow -D $(LINUX)
