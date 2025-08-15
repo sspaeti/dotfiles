@@ -17,55 +17,6 @@
       "key": "M"
     }
   ],
-  "app:toggle-left-sidebar": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "L"
-    }
-  ],
-  "app:toggle-right-sidebar": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "R"
-    }
-  ],
-  "file-explorer:reveal-active-file": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "R"
-    }
-  ],
-  "editor:focus-left": [
-    {
-      "modifiers": [
-        "Ctrl",
-        "Shift"
-      ],
-      "key": "H"
-    }
-  ],
-  "editor:focus-right": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "Tab"
-    },
-    {
-      "modifiers": [
-        "Ctrl",
-        "Shift"
-      ],
-      "key": "L"
-    }
-  ],
   "templater-obsidian:insert-templater": [
     {
       "modifiers": [
@@ -77,12 +28,6 @@
   "workspace:close": [
     {
       "modifiers": [
-        "Ctrl"
-      ],
-      "key": "W"
-    },
-    {
-      "modifiers": [
         "Mod"
       ],
       "key": "W"
@@ -91,15 +36,8 @@
   "switcher:open": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "7"
-    },
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
+        "Alt",
+        "Mod"
       ],
       "key": "O"
     }
@@ -142,7 +80,8 @@
   "obsidian-admonition:insert-callout": [
     {
       "modifiers": [
-        "Ctrl"
+        "Mod",
+        "Shift"
       ],
       "key": "C"
     }
@@ -161,7 +100,14 @@
   "omnisearch:show-modal": [
     {
       "modifiers": [
-        "Mod"
+        "Alt"
+      ],
+      "key": "O"
+    },
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
       ],
       "key": "O"
     }
@@ -178,26 +124,9 @@
   "workspace:next-tab": [
     {
       "modifiers": [
-        "Ctrl"
+        "Mod"
       ],
       "key": "L"
-    }
-  ],
-  "workspaces:save-and-load": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "E"
-    }
-  ],
-  "readwise-official:readwise-official-sync": [
-    {
-      "modifiers": [
-        "Ctrl",
-        "Shift"
-      ],
-      "key": "R"
     }
   ],
   "obsidian-excalidraw-plugin:insert-link-to-element": [],
@@ -215,7 +144,7 @@
   "workspace:previous-tab": [
     {
       "modifiers": [
-        "Ctrl"
+        "Mod"
       ],
       "key": "H"
     }
@@ -223,7 +152,7 @@
   "editor:toggle-checklist-status": [
     {
       "modifiers": [
-        "Mod",
+        "Alt",
         "Shift"
       ],
       "key": "X"
@@ -232,7 +161,8 @@
   "editor:fold-more": [
     {
       "modifiers": [
-        "Ctrl"
+        "Mod",
+        "Shift"
       ],
       "key": "-"
     }
@@ -280,15 +210,6 @@
       "key": "E"
     }
   ],
-  "window:zoom-in": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "="
-    }
-  ],
   "ava:ava-generative-search": [],
   "editor:insert-wikilink": [
     {
@@ -312,7 +233,8 @@
   "obsidian-projects:show-projects": [
     {
       "modifiers": [
-        "Ctrl"
+        "Alt",
+        "Mod"
       ],
       "key": "P"
     }
@@ -320,7 +242,8 @@
   "editor:fold-less": [
     {
       "modifiers": [
-        "Ctrl"
+        "Mod",
+        "Shift"
       ],
       "key": "="
     }
@@ -370,7 +293,8 @@
   "theme:switch": [
     {
       "modifiers": [
-        "Ctrl"
+        "Alt",
+        "Mod"
       ],
       "key": "T"
     }
@@ -378,7 +302,8 @@
   "obsidian-projects:show:7244edf8-282c-4645-ae1c-91948acf9b81": [
     {
       "modifiers": [
-        "Ctrl"
+        "Alt",
+        "Mod"
       ],
       "key": "B"
     }
@@ -404,8 +329,8 @@
   "theme:use-light": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Alt",
+        "Mod"
       ],
       "key": ";"
     }
@@ -413,33 +338,16 @@
   "theme:use-dark": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Alt",
+        "Mod"
       ],
       "key": "'"
-    }
-  ],
-  "obsidian-heading-shifter:increase-heading": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "L"
     }
   ],
   "obsidian-heading-shifter:decrease-heading": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "H"
-    }
-  ],
-  "editor:toggle-highlight": [
-    {
-      "modifiers": [
+        "Alt",
         "Mod"
       ],
       "key": "H"
@@ -456,18 +364,10 @@
   "editor:fold-all": [
     {
       "modifiers": [
-        "Ctrl"
-      ],
-      "key": "1"
-    }
-  ],
-  "copy-document-as-html:copy-selection-as-html": [
-    {
-      "modifiers": [
-        "Ctrl",
+        "Alt",
         "Mod"
       ],
-      "key": "C"
+      "key": "1"
     }
   ],
   "workspace:close-window": [],
@@ -478,6 +378,53 @@
         "Shift"
       ],
       "key": "W"
+    }
+  ],
+  "file-explorer:reveal-active-file": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "R"
+    }
+  ],
+  "markdown:add-metadata-property": [],
+  "obsidian-heading-shifter:increase-heading": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "L"
+    }
+  ],
+  "app:toggle-left-sidebar": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "L"
+    }
+  ],
+  "editor:open-search-replace": [],
+  "app:toggle-right-sidebar": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "R"
+    }
+  ],
+  "editor:toggle-italics": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "I"
     }
   ]
 }
