@@ -8,6 +8,8 @@ hypr/.config/hypr/sspaeti/.current_personal_image
 # Secrets and sensitive files
 zsh/.secrets
 **/secrets
+**/.secrets
+**/.secret.*
 **/*.secret
 **/*.key
 .env.local

@@ -17,7 +17,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/sspaeti/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -82,8 +82,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-
 
 # Performance Improvements
 # Add to your .zshrc to disable oh-my-zsh updates
@@ -144,21 +142,11 @@ source ~/.dotfiles/zsh/paths.shrc
 source ~/.dotfiles/zsh/aliases.shrc
 source ~/.dotfiles/zsh/.secrets
 
+source ~/.dotfiles/zsh/omarchy.shrc
+
 source ~/.dotfiles/zsh/configs.shrc
+source ~/.dotfiles/helpers/scripts/ffmpeg.sh
 source ~/.dotfiles/zsh/end.shrc
 
 
-# OCTAVIA CLI 0.40.22
-OCTAVIA_ENV_FILE=/Users/sspaeti/.octavia
-export OCTAVIA_ENABLE_TELEMETRY=False
-alias octavia="docker run -i --rm -v \$(pwd):/home/octavia-project --network host --env-file \${OCTAVIA_ENV_FILE} --user \$(id -u):\$(id -g) airbyte/octavia-cli:0.40.22"
-
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+. "$HOME/.local/share/../bin/env"
