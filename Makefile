@@ -10,8 +10,6 @@ LINUX = kanata hypr walker waybar obsidian mako
 
 .PHONY: mac linux shared clean
 
-
-
 # obsidian:
 # 	cp ~/Simon/SecondBrain/.obsidian/workspace $git/general/dotfiles/obsidian/workspace
 # 	cp ~/Simon/SecondBrain/.obsidian/plugins $git/general/dotfiles/obsidian/plugins
@@ -58,3 +56,7 @@ uninstall-kanata:
 	sudo systemctl stop kanata.service
 	sudo systemctl disable kanata.service
 	sudo rm /etc/systemd/system/kanata.service
+
+arch:
+	pacman -Qe > pacman.txt
+
