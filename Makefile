@@ -48,3 +48,13 @@ clean-mac:
 # Remove only Linux symlinks
 clean-linux:
 	stow -D $(LINUX)
+
+install-kanata:
+	sudo cp systemd/.config/systemd/system/kanata.service /etc/systemd/system/
+	sudo systemctl daemon-reload
+	sudo systemctl enable kanata.service
+
+uninstall-kanata:
+	sudo systemctl stop kanata.service
+	sudo systemctl disable kanata.service
+	sudo rm /etc/systemd/system/kanata.service
