@@ -65,3 +65,15 @@ Above you'll find all my dotfiles repository. Each file and directory is it's ow
 
 Enjoy navigating my digital workspace, tailored for efficiency, learning, and a bit of fun.
 
+## Installation
+
+I use [Stow](https://www.gnu.org/software/stow/) to manage my dotfiles. I created a [Makefile](Makefile) to stow them for Mac and Linux respectively. But I'd suggest to not blindly run them, but rather choose and pick what you like from my dotfiles.
+
+But you can run `make linux` and it will stow all shared + linux dotfiles I set. But you can also just install one specific dotfile with `stow nvim` for my Neovim installation. Please check the docs for further information how it works.
+
+My setup is I clone this dotfiles repo in `~/git/general/dotfiles` and in `~/.stowrc` I set the target stow directory to `--target=/home/sspaeti` as the default stow target is the partent directory which in my case would be wrong (general-dir).
+
+### Operation System
+I used MacOS 15+ years, Windows at work and now [Arch Linux with Omarchy](https://www.ssp.sh/blog/macbook-to-arch-linux-omarchy/). 
+
+I have all settings in one folder with stow, except Windows. It's in it's own folder under [Windows directory](windows) .
