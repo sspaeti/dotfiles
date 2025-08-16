@@ -2,11 +2,11 @@
 #
 
 # Shared packages (work on both platforms)
-SHARED = nvim zsh tmux kitty git scripts
+SHARED = nvim nvim-wp zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm ruff sesh
 
 # Platform-specific packages
-MACOS = karabiner-elements yabai skhd
-LINUX = kanata
+MACOS = karabiner yabai skhd alfred
+LINUX = kanata hypr walker waybar obsidian mako
 
 .PHONY: mac linux shared clean
 
