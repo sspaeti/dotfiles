@@ -37,3 +37,7 @@ mutt/.config/mutt/screened_in.txt
 mutt/.config/mutt/screened_out.txt
 #msmtp
 msmtp/.msmtprc
+
+#tmux
+tmux/.tmux/plugins
+tmux/.tmux/tmux-client-*.log
