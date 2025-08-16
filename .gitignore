@@ -26,3 +26,14 @@ obsidian/Simon/SecondBrain/.obsidian/themes
 # kanata
 kanata/.config/kanata/kanata.kbd
 
+
+# mutt and email
+mutt/.config/mutt/get_hey_emails/approved_emails.txt
+mutt/.config/mutt/get_hey_emails/denied_emails.txt
+mutt/.config/mutt/logs
+mutt/.config/mutt/feed.txt
+mutt/.config/mutt/papertrail.txt
+mutt/.config/mutt/screened_in.txt
+mutt/.config/mutt/screened_out.txt
+#msmtp
+msmtp/.msmtprc
