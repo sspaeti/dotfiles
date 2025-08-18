@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=SSP
+Comment=SSP
+Exec=chromium --new-window --ozone-platform=wayland --app="https://www.ssp.sh" --name="SSP" --class="SSP"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/SSP.png
+StartupNotify=true

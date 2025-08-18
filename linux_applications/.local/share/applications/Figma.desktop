@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Figma
+Comment=Figma
+Exec=chromium --new-window --ozone-platform=wayland --app="https://figma.com/" --name="Figma" --class="Figma"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Figma.png
+StartupNotify=true

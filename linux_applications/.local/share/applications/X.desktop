@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=X
+Comment=X
+Exec=chromium --new-window --ozone-platform=wayland --app="https://x.com/" --name="X" --class="X"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/X.png
+StartupNotify=true

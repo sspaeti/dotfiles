@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Grammarly
+Comment=Grammarly
+Exec=chromium --new-window --ozone-platform=wayland --app="https://app.grammarly.com/ddocs/2881779475" --name="Grammarly" --class="Grammarly"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Grammarly.png
+StartupNotify=true

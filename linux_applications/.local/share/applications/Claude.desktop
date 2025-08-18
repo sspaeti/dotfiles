@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Claude
+Comment=Claude AI
+Exec=brave --force-device-scale-factor=0.8 --new-window --ozone-platform=wayland --app="https://claude.ai/" --name="Claude" --class="Claude"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Claude AI.png
+StartupNotify=true

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Brave
+Comment=Access the Internet
+Exec=brave --force-device-scale-factor=1.0 %U
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/brave.png
+Categories=Network;WebBrowser;
+StartupNotify=false
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;

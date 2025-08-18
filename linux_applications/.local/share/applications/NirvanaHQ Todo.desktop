@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=NirvanaHQ Todo
+Comment=NirvanaHQ Todo
+Exec=chromium --new-window --ozone-platform=wayland --app="https://focus.nirvanahq.com/" --name="NirvanaHQ Todo" --class="NirvanaHQ Todo"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/NirvanaHQ Todo.png
+StartupNotify=true

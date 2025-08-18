@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Timeshift
+Comment=System restore utility
+# Exec=env WAYLAND_DISPLAY=$WAYLAND_DISPLAY pkexec timeshift-gtk
+Exec=pkexec env DISPLAY=$DISPLAY WAYLAND_DISPLAY=$WAYLAND_DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR timeshift-gtk
+Icon=timeshift
+Type=Application
+Categories=System;
+StartupNotify=true

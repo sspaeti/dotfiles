@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=GitHub
+Comment=GitHub
+Exec=chromium --new-window --ozone-platform=wayland --app="https://github.com/" --name="GitHub" --class="GitHub"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/GitHub.png
+StartupNotify=true

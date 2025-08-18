@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=SRF Play
+Comment=SRF TV
+Exec=brave --force-device-scale-factor=0.8 --new-window --ozone-platform=wayland --app="https://www.srf.ch/play/tv" --name="SRF" --class="SRF"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/SRF.png
+StartupNotify=true
