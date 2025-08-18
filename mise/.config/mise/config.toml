@@ -6,5 +6,5 @@ ruby_build_opts = "CC=gcc-14 CXX=g++-14"
 
 [tools]
 node = "24"
-python = "latest"
+python = "3.13.5"
 ruby = "latest"
