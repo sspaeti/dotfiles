@@ -71,6 +71,7 @@ imv 4.5.0-5
 inetutils 2.6-1
 iwd 3.9-1
 jdk 24.0.2-1
+k9s 0.50.9-1
 kanata-bin 1.9.0-1
 kdenlive 25.04.3-1
 kitty 0.42.2-1

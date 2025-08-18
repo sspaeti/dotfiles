@@ -1,5 +1,6 @@
 # Linking dotfiles with Stow
 #
+.DEFAULT_GOAL := arch
 
 # Shared packages (work on both platforms)
 SHARED = nvim nvim-wp zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm ruff sesh mutt msmtp lazydocker yazi
@@ -46,4 +47,3 @@ uninstall-kanata:
 
 arch:
 	pacman -Qe > pacman.txt
-
