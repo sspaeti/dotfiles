@@ -179,6 +179,6 @@
     "interval": 5,
     "tooltip": true,
     "tooltip-format": "Powerprofile: {}",
-    "on-click": "current=$(powerprofilesctl get); case $current in 'balanced') powerprofilesctl set power-saver;; 'power-saver') powerprofilesctl set performance;; 'performance') powerprofilesctl set balanced;; esac"
+    "on-click": "current=$(powerprofilesctl get); case $current in 'balanced') powerprofilesctl set performance;; 'performance') powerprofilesctl set power-saver;; 'power-saver') powerprofilesctl set balanced;; esac"
   }
 }
