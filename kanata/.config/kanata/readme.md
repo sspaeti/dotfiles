@@ -4,5 +4,6 @@ Install systemd service to run it automatically. It must be as /etc/systemd/syst
 I also added below line to `/etc/sudoers` to allow hypr shortcut without asking for sudo password each time i hit the shortcut:
 
 ```
-sspaeti ALL=(ALL) NOPASSWD: /bin/cp /etc/kanata/*.kbd /home/sspaeti/.config/kanata/kanata.kbd, /bin/systemctl restart kanata
+sspaeti ALL=(ALL) NOPASSWD: /bin/cp /home/sspaeti/.config/kanata/*.kbd /home/sspaeti/.config/kanata/kanata.kbd, /bin/systemctl restart kanata
+
 ```
