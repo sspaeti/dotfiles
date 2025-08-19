@@ -83,9 +83,6 @@ return {
       })
     end,
   },
-  { "mhinz/vim-signify",     event = "VeryLazy" }, --highlighing changes not commited to last commmit
-
-  { "APZelos/blamer.nvim",   event = "VeryLazy" }, --gitlens blame style',
   -- 'nvim-lua/popup.nvim',
   { "nvim-lua/plenary.nvim", event = "VeryLazy" },
   -- search
