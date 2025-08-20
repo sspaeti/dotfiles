@@ -15,7 +15,7 @@ LINUX = kanata hypr walker waybar obsidian mako mise XCompose
 shared:
 	stow $(SHARED)
 
-# Install macOS-specific setup
+# TODO: Does not yet work on Mac, just the preparation
 mac: shared
 	stow $(MACOS)
 
