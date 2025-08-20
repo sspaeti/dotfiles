@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Background management script
-# Usage: bg-mode-toggle.sh [switch|next]
+# Usage: bg-mode-toggle.sh [switch|next|restore]
 #   switch: Toggle between Omarchy and personal images (default)
 #   next: Cycle to next personal image (only works in personal mode)
+#   restore: Restore personal background on startup (if in personal mode)
 
 STATE_FILE="$HOME/.config/hypr/sspaeti/.bg_mode_state"
 CURRENT_IMAGE_FILE="$HOME/.config/hypr/sspaeti/.current_personal_image"
@@ -89,6 +90,21 @@ case "$action" in
             get_next_personal_image
         else
             notify-send "Background Mode" "Switch to personal mode first (use 'switch')"
+        fi
+        ;;
+    "restore")
+        # Restore personal background on startup if in personal mode
+        if [ "$current_mode" = "personal" ] && [ -f "$CURRENT_IMAGE_FILE" ]; then
+            image_path=$(cat "$CURRENT_IMAGE_FILE")
+            if [ -f "$image_path" ]; then
+                # Wait for Omarchy's swaybg to start first
+                sleep 1
+                # Start new swaybg with personal image
+                swaybg -i "$image_path" &
+                sleep 0.5
+                # Kill the old swaybg (Omarchy's)
+                pkill -o swaybg
+            fi
         fi
         ;;
     "switch"|*)
