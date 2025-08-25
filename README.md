@@ -1,22 +1,22 @@
 
 # Dotfiles
 
-Welcome to my dotfiles, the backbone of my development and [PKM](https://www.ssp.sh/blog/pkm-workflow-for-a-deeper-life/) and [Obsidian Note-Taking](https://www.ssp.sh/blog/obsidian-note-taking-workflow/) workflow. Each dotfile here are fine-tuned to create an environment that's efficient for me, and, most importantly, give me joy workin in.
+Welcome to my dotfiles, the backbone of my development, backed by my [vim workflow](https://www.ssp.sh/blog/my-vimverse/), [PKM workflow](https://www.ssp.sh/blog/pkm-workflow-for-a-deeper-life/) or [Obsidian workflow](https://www.ssp.sh/blog/obsidian-note-taking-workflow/).
 
-Most imprantant for my workflow I leverage a combination of `nvim`, `tmux`, and a tiling window manager orchestrated with `skhd` and `yabai`.
+The dotfile here are fine-tuned to create an environment that's efficient for me, and, most importantly, give me joy workin in. Check out the details below.
 
 ![Neovim, Tmux, and Kitty](_images/nvim_tmux_220701.png)
 
 
 ## Key Components
-- **Editor** ([PDE](https://youtu.be/QMVIJhC9Veg)): [NeoVim](https://neovim.io/)
-- Indent-color with [indent-blankline](https://github.com/lukas-reineke/indent-blankline.nvim)
-- Tabs for buffers with [bufferline](https://github.com/akinsho/bufferline.nvim)
+- **OS** Linux with [Omarchy](https://omarchy.org) (since July 2025, before macOS)
+- **Window Manager** [Hyprland](https://hypr.land/) (before `skhd` and `yabai`)
+- **Editor / [PDE](https://youtu.be/QMVIJhC9Veg)**: [NeoVim](https://neovim.io/)
 - **Color Theme**: [Kanagawa](https://github.com/rebelot/kanagawa.nvim) (mix between [gruvbox](https://github.com/morhetz/gruvbox) and [tokyonight](https://github.com/folke/tokyonight.nvim)!). Announced [here](https://www.reddit.com/r/neovim/comments/rm92q6/kanagawanvim_if_gruvbox_and_tokyonight_had_a_baby/) on reddit
 - **Multiplexer**: [Tmux](https://github.com/tmux/tmux/wiki)
 - **Window Management**: Yabai, Skhd and Mission Control shortcuts for seamless navigation (more below)
-- **Terminal**: [Kitty](https://github.com/kovidgoyal/kitty)
-- **Note-Taking**: Obsidian, where my Second Brain thrives
+- **Terminal**: [Kitty](https://github.com/kovidgoyal/kitty), Ghostty
+- **Note-Taking**: [Obsidian](https://ssp.sh/brain/obsidian), where my Second Brain thrives
 
 #### Terminal Powered Workflow [[More Images](https://www.ssp.sh/brain/neovim/#my-setup-images)]
 ![power of terminal bases workflow](_images/neovim-and-terminal-power.png)
@@ -33,14 +33,6 @@ In one screen:
 
 
 
-
-## [Obsidian](https://www.ssp.sh/brain/obsidian) 
-
-![](_images/obsidian.jpeg)
-
-I made two of my own Themes, they are called [Kanagawa](https://github.com/sspaeti/obsidian_kanagawa) and [Rosé Pine](https://github.com/sspaeti/obsidian_rose_pine).
-Also check my YT video [How I use Obsidian](https://youtu.be/myHKHM2mIis), in case that's interest you.
-
 ## Screen alignment
 
 I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-office/), a single-screen (or one extra for meetings) has worked best with these shorcuts to switch betweent them instantly:
@@ -53,17 +45,19 @@ I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-o
 - `Alt+6`: Extra (when laptop screen is open): Additional screens for meetings with Zoom, etc.
 - `Alt+7`: Extra (when laptop screen is open)
 
+## [Obsidian](https://www.ssp.sh/brain/obsidian) 
 
-## Neovim as a Word Processor
+![](_images/obsidian.jpeg)
+
+I made two of my own Themes, they are called [Kanagawa](https://github.com/sspaeti/obsidian_kanagawa) and [Rosé Pine](https://github.com/sspaeti/obsidian_rose_pine).
+Also check my YT video [How I use Obsidian](https://youtu.be/myHKHM2mIis), in case that's interest you.
+
+
+
+### Neovim as a Word Processor
 
 For my Micro Journal I converted my Neovim config to a minimal config soley for writing. My goal was to reproduce my Obsidian environment within Neovim, running on a small, distraction-free typewriter.
 See all details in [Neovim as a WordProcessor](./nvim-wp/)
-
-## Dive into My Dotfiles
-Above you'll find all my dotfiles repository. Each file and directory is it's own software.
-
-
-Enjoy navigating my digital workspace, tailored for efficiency, learning, and a bit of fun.
 
 ## Installation
 
