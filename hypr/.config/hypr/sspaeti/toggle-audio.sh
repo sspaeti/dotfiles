@@ -54,6 +54,11 @@ else
 fi
 
 # Get a clean name for notification
-clean_name=$(echo "$next_sink_name" | sed -E 's/.*\.([^.]+)$/\1/' | sed 's/-/ /g' | sed 's/\b\w/\U&/g')
+case "$next_sink_name" in
+    *usb-R__DE_Microphones*) clean_name="RØDE Headphones" ;;
+    *pci-*analog-stereo*) clean_name="Speakers/Headphones" ;;
+    *hdmi*) clean_name="HDMI Audio" ;;
+    *) clean_name=$(echo "$next_sink_name" | sed -E 's/.*\.([^.]+)$/\1/' | sed 's/-/ /g' | sed 's/\b\w/\U&/g') ;;
+esac
 
 notify-send "Audio Output" "Switched to: $clean_name" -i audio-card
