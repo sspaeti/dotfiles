@@ -426,5 +426,15 @@
       ],
       "key": "I"
     }
+  ],
+  "obsidian-excalidraw-plugin:insert-link": [],
+  "editor:insert-link": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "K"
+    }
   ]
 }
