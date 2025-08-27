@@ -2,113 +2,122 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Overview
+## Architecture Overview
 
-This is a screenshot management and OCR indexing system for Linux. It provides automated organization of screenshots by date and powerful text-based search functionality using OCR (Optical Character Recognition).
+This is an **Image Library Browser System** built with Bash scripts for Linux/Hyprland environments. It provides a comprehensive solution for organizing, indexing, and searching screenshots and design images using OCR technology.
 
-## Core Scripts
+### Core Components
 
-### Screenshot Organization
-- `screenshot-organizer.sh` - Bulk organizes existing screenshots into monthly folders
-- `auto-organize-screenshot.sh` - Auto-organizes new screenshots (hooks into screenshot tools)
+**Central Configuration (`image-library-config.sh`)**
+- Exports shared environment variables and directory paths
+- Defines `IMAGE_DIRS` array with all monitored image directories
+- Provides utility functions `find_all_images()` and `count_all_images()`
 
-### OCR Indexing and Search
-- `screenshot-indexer-parallel.sh` - Fast parallel OCR indexing with smart incremental updates
-- `screenshot-browser.sh` - Interactive TUI for browsing and searching screenshots
+**Main Browser Interface (`screenshot-browser-gum.sh`)**  
+- TUI application using `gum` for beautiful terminal interface
+- Provides OCR-based text search, monthly browsing, statistics, and index management
+- Integrates with `yazi` file manager for image previews
+- Main entry point for end users
 
-### Configuration
-- `image-library-config.sh` - Central configuration file defining directories and paths
+**OCR Indexer (`screenshot-indexer-parallel.sh`)**
+- Parallel OCR processing using Tesseract with German+English language support
+- Three indexing modes: `--rebuild` (full), `--smart` (incremental), `--recent` (post-screenshot)
+- Lock file mechanism prevents concurrent indexing
+- Uses 4 workers for optimal performance
 
-## Key Commands
+**Auto Organization (`auto-organize-screenshot.sh`)**
+- Post-screenshot hook that moves new screenshots to monthly folders (`YYYY-MM`)
+- Automatically triggers background smart indexing
+- Handles recent screenshots (within 1 minute)
 
-### Build/Index Screenshots
-```bash
-# Full rebuild of OCR index (slow)
-./screenshot-indexer-parallel.sh --rebuild
-
-# Smart incremental update (fast, default)
-./screenshot-indexer-parallel.sh --smart
-
-# Index only recent screenshots (post-screenshot hook)
-./screenshot-indexer-parallel.sh --recent
-```
-
-### Organize Screenshots
-```bash
-# Organize all screenshots in Pictures directory into monthly folders
-./screenshot-organizer.sh
-
-# Auto-organize recent screenshots (for automation)
-./auto-organize-screenshot.sh
-```
-
-### Browse and Search
-```bash
-# Interactive TUI browser with search
-./screenshot-browser.sh
-
-# Direct search mode
-./screenshot-browser.sh search
-
-# Browse by month
-./screenshot-browser.sh month 2025-08
-
-# Show statistics
-./screenshot-browser.sh stats
-```
-
-## Architecture
+**Manual Organization (`screenshot-organizer.sh`)**
+- Batch organizes screenshots by parsing dates from filenames
+- Supports multiple filename formats: hyprshot, screenshot, flame screen
+- Creates monthly directory structure in `~/Pictures/Printscreen/`
 
 ### Directory Structure
 ```
-/home/sspaeti/Pictures/
-├── Printscreen/           # Main screenshot directory
-│   ├── 2025-07/          # Monthly organization
-│   ├── 2025-08/
-│   └── .screenshot_index.txt  # OCR search index
-├── Fireshot/             # Browser extension screenshots
-├── Ksnip/               # Screenshot tool captures
-└── [organization scripts]
+~/Pictures/
+├── Printscreen/           # Main screenshot storage
+│   ├── 2025-01/          # Monthly organization
+│   └── 2025-02/
+├── Fireshot/             # Browser screenshots
+├── Ksnip/               # Ksnip screenshots  
+└── Design Blogs/        # Various design image directories
 ```
 
-### OCR Index System
-- **Index File**: `.image_ocr_index.txt` contains `filepath|ocr_text|file_size|mod_time`
-- **Languages**: Supports German (`deu`) and English (`eng`) OCR
-- **Smart Updates**: Only processes new/modified files for speed
-- **Parallel Processing**: Uses 4 workers for fast bulk processing
+### Data Flow
+1. Screenshot taken → auto-organize-screenshot.sh moves to monthly folder
+2. Background smart indexing extracts OCR text using Tesseract
+3. Index stored in `.image_ocr_index.txt` with format: `filepath|ocr_text|file_size|mod_time`
+4. Browser interface searches index and opens results in yazi
 
-### Dependencies
-- `tesseract` - OCR text extraction (with German and English language packs)
-- `yazi` - File manager for browsing
-- `fzf` - Fuzzy finder for search interface
-- `parallel` or manual batch processing for parallel OCR
+## Common Development Commands
+
+**Run the main browser:**
+```bash
+./screenshot-browser-gum.sh
+```
+
+**Direct commands:**
+```bash
+./screenshot-browser-gum.sh search    # Direct to OCR search
+./screenshot-browser-gum.sh browse    # Direct to file browser  
+./screenshot-browser-gum.sh stats     # Show statistics
+```
+
+**Index management:**
+```bash
+./screenshot-indexer-parallel.sh --smart     # Incremental update (default)
+./screenshot-indexer-parallel.sh --rebuild   # Full rebuild
+./screenshot-indexer-parallel.sh --recent    # Recent screenshots only
+```
+
+**Manual organization:**
+```bash
+./screenshot-organizer.sh              # Organize loose screenshots
+./auto-organize-screenshot.sh [path]   # Organize specific screenshot
+```
+
+## Dependencies
+
+Required packages (install via package manager):
+- `yazi` or `yazi-git` - File manager with image previews
+- `fzf` - Fuzzy finder for fallback search interface
+- `tesseract` - OCR engine for text extraction
+- `gum` - Terminal UI components for beautiful interface
+
+**Arch Linux:**
+```bash
+sudo pacman -S yazi-git fzf tesseract gum
+```
 
 ## Configuration
 
-The `image-library-config.sh` file defines:
-- Base directories (`PICTURES_DIR`, `PRINTSCREEN_DIR`)
-- Image directories to index (`IMAGE_DIRS` array)
-- Supported file extensions (`IMAGE_EXTENSIONS`)
-- Central index file location (`INDEX_FILE`)
+**Key Environment Variables (set in image-library-config.sh):**
+- `PICTURES_DIR`: Base pictures directory (`/home/sspaeti/Pictures`)
+- `PRINTSCREEN_DIR`: Screenshot storage (`$PICTURES_DIR/Printscreen`)  
+- `INDEX_FILE`: OCR index location (`$SHELL_DIR/.image_ocr_index.txt`)
+- `IMAGE_DIRS`: Array of all indexed image directories
 
-To add new directories for indexing, modify the `IMAGE_DIRS` array in `image-library-config.sh`.
+**OCR Languages:** 
+- Configured for German + English (`deu+eng`)
+- Modify `tesseract` language parameter in indexer if needed
 
-## Integration Patterns
+## Integration Points
 
-### Post-Screenshot Automation
-The system supports integration with screenshot tools through:
-- `auto-organize-screenshot.sh` - Moves new screenshots to monthly folders
-- `screenshot-indexer-parallel.sh --recent` - Fast OCR indexing of recent captures
-- Lock file system prevents concurrent indexing conflicts
+**Hyprland Integration:**
+- Auto-organize script intended as post-screenshot hook
+- Works with hyprshot, screenshot tools, and manual file placement
 
-### Screenshot Naming Patterns
-Supports multiple screenshot naming conventions:
-- `screenshot-YYYY-MM-DD_HH-MM-SS.png` (default format)
-- `YYYY-MM-DD-HHMMSS_hyprshot.png` (Hyprshot format)
-- `flame screen-YYYY-MM-DD_HH-MM.png` (Flame screenshot format)
+**File Manager Integration:**
+- Optimized for `yazi` with image preview capabilities
+- Creates temporary symlink directories for search results
+- Sorts by modification time (newest first)
 
-### Search and Browse Workflow
-1. Screenshots are automatically organized into monthly directories
-2. OCR indexing extracts searchable text from images
-3. Interactive TUI allows fuzzy searching through OCR content
-4. Results open in yazi file manager for viewing/actions
+## Performance Notes
+
+- **Smart indexing** only processes files newer than last index (60s safety margin)
+- **Parallel processing** uses 4 workers to avoid resource contention  
+- **Lock file mechanism** prevents concurrent indexing operations
+- **Recent mode** for fast post-screenshot indexing (2-minute window)
