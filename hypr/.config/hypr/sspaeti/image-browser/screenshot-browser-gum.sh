@@ -174,15 +174,29 @@ search_screenshots() {
             local temp_results_dir="/tmp/screenshot_search_results_$$"
             mkdir -p "$temp_results_dir"
             
+            # Sort files by modification time (newest first) and create numbered symlinks
             local counter=1
+            # Create a temporary file with modification times for sorting
+            local temp_with_times="/tmp/search_with_times_$$"
             while IFS= read -r filepath; do
+                if [[ -f "$filepath" ]]; then
+                    local mtime=$(stat -c %Y "$filepath" 2>/dev/null || echo "0")
+                    echo "$mtime|$filepath"
+                fi
+            done < "$temp_file_list" | sort -t'|' -k1,1nr > "$temp_with_times"
+            
+            # Create symlinks in order of modification time (newest first)
+            while IFS='|' read -r mtime filepath; do
                 local basename=$(basename "$filepath")
                 local extension="${basename##*.}"
                 local name="${basename%.*}"
-                # Create numbered symlinks to preserve search order
+                # Create numbered symlinks sorted by modification time
                 ln -sf "$filepath" "$temp_results_dir/$(printf "%03d" $counter)-$name.$extension"
                 ((counter++))
-            done < "$temp_file_list"
+            done < "$temp_with_times"
+            
+            # Cleanup temp file
+            rm -f "$temp_with_times"
             
             # Open yazi in the temporary directory
             yazi "$temp_results_dir"
@@ -334,8 +348,13 @@ show_main_menu() {
         esac
         
         echo
-        gum style --foreground 8 "Press Enter to continue..."
-        read -r
+        gum style --foreground 8 "Press q to continue..."
+        while true; do
+            read -n 1 -s key
+            if [[ "$key" == "q" ]]; then
+                break
+            fi
+        done
     done
 }
 
