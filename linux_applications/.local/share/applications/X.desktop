@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=1.0
-Name=X
-Comment=X
-Exec=chromium --new-window --ozone-platform=wayland --app="https://x.com/" --name="X" --class="X"
+Name=Twitter/X
+Comment=Twitter
+Exec=brave --new-window --ozone-platform=wayland --app="https://x.com/" --name="Twitter" --class="X"
 Terminal=false
 Type=Application
-Icon=/home/sspaeti/.local/share/applications/icons/X.png
+Icon=/home/sspaeti/.local/share/applications/icons/twitter.png
 StartupNotify=true
