@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=AbaNinja Accounting SSP Data
+Comment=AbaNinja Accounting SSP Data
+Exec=omarchy-launch-webapp https://app.abaninja.ch/finances/payments/open
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/AbaNinja Accounting SSP Data.png
+StartupNotify=true
