@@ -1,9 +1,13 @@
 
 zsh/.secrets
 .ssh
+
+
+#hypr
 hypr/.config/hypr/sspaeti/.bg_mode_state
 hypr/.config/hypr/sspaeti/.current_personal_image
-
+# file image search
+hypr/.config/hypr/sspaeti/image-browser/.image_ocr_index.txt
 
 # Secrets and sensitive files
 zsh/.secrets
@@ -41,3 +45,4 @@ msmtp/.msmtprc
 #tmux
 tmux/.tmux/plugins
 tmux/.tmux/tmux-client-*.log
+
