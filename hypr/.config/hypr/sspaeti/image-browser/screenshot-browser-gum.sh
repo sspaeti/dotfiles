@@ -223,53 +223,7 @@ browse_screenshots() {
     yazi "$PRINTSCREEN_DIR"
 }
 
-# Function to show recent screenshots
-show_recent() {
-    show_header
-    gum style --foreground 51 --bold "⏰ RECENT SCREENSHOTS"
-    echo
-    
-    # Find and show recent screenshots
-    local recent_files=$(find "$PRINTSCREEN_DIR" -name "*.png" -printf "%T@ %p\n" | \
-        sort -nr | head -20 | cut -d' ' -f2-)
-    
-    if [[ -z "$recent_files" ]]; then
-        gum style --foreground 214 "No screenshots found"
-        return
-    fi
-    
-    local selected_recent=$(echo "$recent_files" | \
-        fzf --preview='
-            echo "📁 File: {}"
-            echo
-            stat -c "📊 Size: %s bytes" "{}"
-            stat -c "🕐 Modified: %y" "{}"
-            echo
-            echo "🖼️  Image Preview:"
-            echo "=================="
-            if command -v chafa >/dev/null 2>&1; then
-                chafa --size=40x15 --format=symbols "{}" 2>/dev/null || echo "Could not preview image"
-            elif command -v viu >/dev/null 2>&1; then
-                viu -w 40 -h 15 "{}" 2>/dev/null || echo "Could not preview image"
-            elif command -v img2sixel >/dev/null 2>&1; then
-                img2sixel -w 300 -h 200 "{}" 2>/dev/null || echo "Could not preview image"
-            elif command -v timg >/dev/null 2>&1; then
-                timg -g 40x15 "{}" 2>/dev/null || echo "Could not preview image"
-            else
-                file "{}"
-                echo "Install chafa, viu, img2sixel, or timg for image previews"
-            fi
-        ' \
-            --preview-window=right:60% \
-            --header="📸 Recent Screenshots with preview (Last 20)" \
-            --prompt="📅 ")
-    
-    if [[ -n "$selected_recent" ]]; then
-        local selected_dir=$(dirname "$selected_recent")
-        gum style --foreground 119 "Opening: $(basename "$selected_recent")"
-        cd "$selected_dir" && yazi "$(basename "$selected_recent")"
-    fi
-}
+
 
 # Function to browse by month
 browse_by_month() {
@@ -356,7 +310,6 @@ show_main_menu() {
             --cursor.foreground="119" \
             "🔍 Search by text content (OCR)" \
             "📁 Browse all screenshots" \
-            "⏰ Show recent screenshots" \
             "📅 Browse by month" \
             "🔧 Rebuild search index" \
             "📊 Show statistics" \
@@ -371,7 +324,6 @@ show_main_menu() {
         case "$choice" in
             *"Search by text"*) search_screenshots ;;
             *"Browse all"*) browse_screenshots ;;
-            *"recent"*) show_recent ;;
             *"by month"*) browse_by_month ;;
             *"Rebuild"*) rebuild_index ;;
             *"statistics"*) show_stats ;;
@@ -398,7 +350,6 @@ main() {
     case "${1:-menu}" in
         "search") search_screenshots ;;
         "browse") browse_screenshots ;;
-        "recent") show_recent ;;
         "month") browse_by_month ;;
         "rebuild") rebuild_index ;;
         "stats") show_stats ;;

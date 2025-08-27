@@ -4,8 +4,9 @@
 
 # Base directories
 export PICTURES_DIR="/home/sspaeti/Pictures"
+export SHELL_DIR="/home/sspaeti/.config/hypr/sspaeti/image-browser"
 export PRINTSCREEN_DIR="$PICTURES_DIR/Printscreen"
-export INDEX_FILE="$PICTURES_DIR/.image_ocr_index.txt"
+export INDEX_FILE="$SHELL_DIR/.image_ocr_index.txt"
 
 # Define all image directories to index
 export IMAGE_DIRS=(

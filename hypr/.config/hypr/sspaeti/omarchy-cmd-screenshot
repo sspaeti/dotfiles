@@ -25,13 +25,13 @@ pkill slurp || hyprshot -m ${1:-region} --raw |
     sleep 0.5
     
     # Auto-organize new screenshots
-    if [[ -f "$OUTPUT_DIR/auto-organize-screenshot.sh" ]]; then
-        "$OUTPUT_DIR/auto-organize-screenshot.sh" >/dev/null 2>&1
+    if [[ -f "/home/sspaeti/.config/hypr/sspaeti/image-browser/auto-organize-screenshot.sh" ]]; then
+        "/home/sspaeti/.config/hypr/sspaeti/image-browser/auto-organize-screenshot.sh" >/dev/null 2>&1
     fi
     
     # Fast OCR indexing - only recent screenshots
-    if [[ -f "$OUTPUT_DIR/screenshot-indexer-parallel.sh" ]]; then
-        "$OUTPUT_DIR/screenshot-indexer-parallel.sh" --recent >/dev/null 2>&1
+    if [[ -f "/home/sspaeti/.config/hypr/sspaeti/image-browser/screenshot-indexer-parallel.sh" ]]; then
+        "/home/sspaeti/.config/hypr/sspaeti/image-browser/screenshot-indexer-parallel.sh" --recent >/dev/null 2>&1
     fi
     
     # Optional: Show notification when processing is complete
