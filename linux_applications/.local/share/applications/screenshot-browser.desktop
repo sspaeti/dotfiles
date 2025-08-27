@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
-Name=Screenshot Browser
+Name=Image/Screenshot Browser
 Comment=Snagit-like screenshot library with OCR search
-Exec=ghostty --class=ScreenshotBrowser --title="Screenshot Browser" -e /home/sspaeti/Pictures/screenshot-browser-gum.sh
+Exec=ghostty --class=ScreenshotBrowser --title="Image/Screenshot Browser" -e /home/sspaeti/.config/hypr/sspaeti/image-browser/screenshot-browser-gum.sh
 Terminal=false
 Type=Application
 Icon=image-x-generic
