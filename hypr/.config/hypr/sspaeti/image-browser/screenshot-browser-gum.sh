@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Screenshot Browser with Gum TUI - A beautiful Snagit-like interface for Linux
+# Image Browser with Gum TUI - A beautiful Snagit-like interface for Linux (Screenshots & Design Images)
 
-PICTURES_DIR="/home/sspaeti/Pictures"
-PRINTSCREEN_DIR="$PICTURES_DIR/Printscreen"
-INDEX_FILE="$PRINTSCREEN_DIR/.screenshot_index.txt"
+# Source the central configuration
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/image-library-config.sh"
 
 # Function to check dependencies
 check_dependencies() {
@@ -31,9 +30,9 @@ show_header() {
     gum style \
         --foreground 212 --border-foreground 212 --border double \
         --align center --width 60 --margin "1 2" --padding "2 4" \
-        '📸 SCREENSHOT BROWSER' \
+        '🖼️ IMAGE LIBRARY BROWSER' \
         '' \
-        'A beautiful Snagit-like library for Linux'
+        'Screenshots • Design Images • OCR Search'
         
     gum style --foreground 8 --italic "Organized • Searchable • Fast"
     echo
@@ -43,38 +42,46 @@ show_header() {
 show_stats() {
     show_header
     
-    if [[ -d "$PRINTSCREEN_DIR" ]]; then
-        # Calculate stats
-        local total_screenshots=$(find "$PRINTSCREEN_DIR" -name "*.png" | wc -l)
-        local total_size=$(find "$PRINTSCREEN_DIR" -name "*.png" -exec stat -c%s {} \; 2>/dev/null | awk '{sum+=$1} END {print sum}')
-        local total_size_mb=$((total_size / 1024 / 1024))
+    # Calculate stats from all image directories
+    echo "Calculating statistics..." >&2
+    local total_images=$(count_all_images)
+    local total_size=$(find_all_images | xargs stat -c%s 2>/dev/null | awk '{sum+=$1} END {print sum}')
+    
+    local total_size_mb=$((total_size / 1024 / 1024))
+    
+    if [[ $total_images -gt 0 ]]; then
         
         # Show main stats
         gum join --vertical \
-            "$(gum style --foreground 51 --bold 'LIBRARY STATISTICS')" \
+            "$(gum style --foreground 51 --bold 'IMAGE LIBRARY STATISTICS')" \
             "" \
             "$(gum join --horizontal \
-                "$(gum style --foreground 119 '📷 Total Screenshots: ')" \
-                "$(gum style --foreground 15 --bold "$total_screenshots")")" \
+                "$(gum style --foreground 119 '🖼️  Total Images: ')" \
+                "$(gum style --foreground 15 --bold "$total_images")")" \
             "$(gum join --horizontal \
                 "$(gum style --foreground 119 '💾 Total Size: ')" \
                 "$(gum style --foreground 15 --bold "${total_size_mb} MB")")"
         
         echo
         
-        # Show monthly breakdown
-        gum style --foreground 51 --bold "📅 BY MONTH"
+        # Show directory breakdown
+        gum style --foreground 51 --bold "📁 BY DIRECTORY"
         echo
         
-        for month_dir in $(ls -1 "$PRINTSCREEN_DIR" | grep -E '^[0-9]{4}-[0-9]{2}$' | sort -r | head -6); do
-            local month_count=$(find "$PRINTSCREEN_DIR/$month_dir" -name "*.png" | wc -l)
-            local month_size=$(find "$PRINTSCREEN_DIR/$month_dir" -name "*.png" -exec stat -c%s {} \; 2>/dev/null | awk '{sum+=$1} END {print sum}')
-            local month_size_mb=$((month_size / 1024 / 1024))
-            
-            gum join --horizontal \
-                "$(gum style --foreground 81 "  $month_dir:")" \
-                "$(gum style --foreground 15 --bold "$month_count files")" \
-                "$(gum style --foreground 8 "($month_size_mb MB)")"
+        for dir in "${IMAGE_DIRS[@]}"; do
+            if [[ -d "$dir" ]]; then
+                local dir_name=$(basename "$dir")
+                local dir_count=$(find "$dir" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | wc -l)
+                local dir_size=$(find "$dir" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) -exec stat -c%s {} \; 2>/dev/null | awk '{sum+=$1} END {print sum}')
+                local dir_size_mb=$((dir_size / 1024 / 1024))
+                
+                if [[ $dir_count -gt 0 ]]; then
+                    gum join --horizontal \
+                        "$(gum style --foreground 81 "  $dir_name:")" \
+                        "$(gum style --foreground 15 --bold "$dir_count files")" \
+                        "$(gum style --foreground 8 "($dir_size_mb MB)")"
+                fi
+            fi
         done
         
         echo
@@ -82,18 +89,21 @@ show_stats() {
         # OCR index status
         if [[ -f "$INDEX_FILE" ]]; then
             local indexed_count=$(grep -v '^#' "$INDEX_FILE" | wc -l)
-            gum style --foreground 119 "🔍 OCR Indexed: $(gum style --foreground 15 --bold "$indexed_count screenshots")"
+            gum style --foreground 119 "🔍 OCR Indexed: $(gum style --foreground 15 --bold "$indexed_count images")"
         else
             gum style --foreground 214 "⚠️  OCR Index not built yet"
         fi
     else
-        gum style --foreground 196 --bold "❌ Printscreen directory not found"
+        gum style --foreground 196 --bold "❌ No image directories found"
     fi
 }
 
-# Function to search screenshots with OCR
+# Function to search screenshots with OCR  
 search_screenshots() {
     show_header
+    
+    # Create temp directory for this session
+    local TEMP_DIR="/tmp/screenshot_search_$$"
     
     # Check if index exists
     if [[ ! -f "$INDEX_FILE" ]]; then
@@ -138,24 +148,72 @@ search_screenshots() {
     gum style --foreground 119 "✅ Found $result_count screenshot(s)"
     echo
     
-    # Use fzf for selection with better preview
-    local selected_line=$(echo "$search_results" | \
-        fzf --preview='echo "📁 File: {1}"; echo; echo "📝 OCR Text:"; echo {2} | fold -w 50' \
-            --preview-window=right:50% \
-            --header="📸 Select screenshot to view (Enter to open in yazi)" \
-            --prompt="🔍 " \
-            --delimiter="|" \
-            --with-nth=1)
+    # Create a temporary file list for yazi
+    local temp_file_list="$TEMP_DIR/search_results_$$"
+    mkdir -p "$(dirname "$temp_file_list")"
     
-    if [[ -n "$selected_line" ]]; then
-        local selected_file=$(echo "$selected_line" | cut -d'|' -f1)
-        local selected_dir=$(dirname "$selected_file")
-        
-        gum style --foreground 119 "Opening: $(basename "$selected_file")"
-        
-        # Open yazi in the directory with the file selected
-        cd "$selected_dir" && yazi "$(basename "$selected_file")"
-    fi
+    # Extract just the file paths
+    echo "$search_results" | cut -d'|' -f1 > "$temp_file_list"
+    
+    local choice=$(gum choose \
+        --height 6 \
+        --header="How would you like to view the results?" \
+        --header.foreground="8" \
+        --selected.foreground="15" \
+        --selected.background="57" \
+        --cursor="→ " \
+        --cursor.foreground="119" \
+        "📁 Open all results in yazi (recommended - browse with image previews)" \
+        "🔍 Use fzf to select one (text preview only)" \
+        "❌ Cancel")
+    
+    case "$choice" in
+        *"Open all results"*)
+            gum style --foreground 119 "🚀 Opening $result_count screenshots in yazi..."
+            # Create a temporary directory with symlinks to found files
+            local temp_results_dir="/tmp/screenshot_search_results_$$"
+            mkdir -p "$temp_results_dir"
+            
+            local counter=1
+            while IFS= read -r filepath; do
+                local basename=$(basename "$filepath")
+                local extension="${basename##*.}"
+                local name="${basename%.*}"
+                # Create numbered symlinks to preserve search order
+                ln -sf "$filepath" "$temp_results_dir/$(printf "%03d" $counter)-$name.$extension"
+                ((counter++))
+            done < "$temp_file_list"
+            
+            # Open yazi in the temporary directory
+            yazi "$temp_results_dir"
+            
+            # Cleanup
+            rm -rf "$temp_results_dir"
+            ;;
+        *"Use fzf"*)
+            # Fallback to fzf selection with text preview
+            local selected_line=$(echo "$search_results" | \
+                fzf --preview='echo "📁 File: {1}"; echo; echo "📝 OCR Text:"; echo {2} | fold -w 50' \
+                    --preview-window=right:50% \
+                    --header="📸 Select screenshot to view" \
+                    --prompt="🔍 " \
+                    --delimiter="|" \
+                    --with-nth=1)
+            
+            if [[ -n "$selected_line" ]]; then
+                local selected_file=$(echo "$selected_line" | cut -d'|' -f1)
+                local selected_dir=$(dirname "$selected_file")
+                gum style --foreground 119 "Opening: $(basename "$selected_file")"
+                cd "$selected_dir" && yazi "$(basename "$selected_file")"
+            fi
+            ;;
+        *)
+            gum style --foreground 8 "Search cancelled"
+            ;;
+    esac
+    
+    # Cleanup
+    rm -f "$temp_file_list"
 }
 
 # Function to browse screenshots
@@ -181,9 +239,29 @@ show_recent() {
     fi
     
     local selected_recent=$(echo "$recent_files" | \
-        fzf --preview='echo "📁 File: {}"; echo; stat -c "📊 Size: %s bytes" "{}"; echo "🕐 Modified: %y" "{}"' \
-            --preview-window=right:50% \
-            --header="📸 Recent Screenshots (Last 20)" \
+        fzf --preview='
+            echo "📁 File: {}"
+            echo
+            stat -c "📊 Size: %s bytes" "{}"
+            stat -c "🕐 Modified: %y" "{}"
+            echo
+            echo "🖼️  Image Preview:"
+            echo "=================="
+            if command -v chafa >/dev/null 2>&1; then
+                chafa --size=40x15 --format=symbols "{}" 2>/dev/null || echo "Could not preview image"
+            elif command -v viu >/dev/null 2>&1; then
+                viu -w 40 -h 15 "{}" 2>/dev/null || echo "Could not preview image"
+            elif command -v img2sixel >/dev/null 2>&1; then
+                img2sixel -w 300 -h 200 "{}" 2>/dev/null || echo "Could not preview image"
+            elif command -v timg >/dev/null 2>&1; then
+                timg -g 40x15 "{}" 2>/dev/null || echo "Could not preview image"
+            else
+                file "{}"
+                echo "Install chafa, viu, img2sixel, or timg for image previews"
+            fi
+        ' \
+            --preview-window=right:60% \
+            --header="📸 Recent Screenshots with preview (Last 20)" \
             --prompt="📅 ")
     
     if [[ -n "$selected_recent" ]]; then
