@@ -2,7 +2,7 @@
 Version=1.0
 Name=Grammarly
 Comment=Grammarly
-Exec=chromium --new-window --ozone-platform=wayland --app="https://app.grammarly.com/ddocs/2881779475" --name="Grammarly" --class="Grammarly"
+Exec=omarchy-launch-webapp "https://app.grammarly.com/ddocs/2881779475"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Grammarly.png

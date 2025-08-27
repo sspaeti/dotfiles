@@ -2,7 +2,7 @@
 Version=1.0
 Name=ChatGPT
 Comment=ChatGPT
-Exec=chromium --new-window --ozone-platform=wayland --app="https://chatgpt.com/" --name="ChatGPT" --class="ChatGPT"
+Exec=omarchy-launch-webapp "https://chatgpt.com/"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/ChatGPT.png

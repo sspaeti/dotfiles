@@ -2,7 +2,7 @@
 Version=1.0
 Name=Basecamp
 Comment=Basecamp Project Management
-Exec=chromium --new-window --ozone-platform=wayland --app="https://launchpad.37signals.com" --name=Basecamp --class=Basecamp
+Exec=omarchy-launch-webapp "https://launchpad.37signals.com"
 Terminal=false
 Type=Application
 Icon=Basecamp

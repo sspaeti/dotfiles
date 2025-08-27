@@ -2,7 +2,7 @@
 Version=1.0
 Name=Focus@Will
 Comment=Focus@Will
-Exec=chromium --new-window --ozone-platform=wayland --app="https://www.focusatwill.com/music/#player" --name="Focus@Will" --class="Focus@Will"
+Exec=omarchy-launch-webapp "https://www.focusatwill.com/music/#player"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Focus@Will.png

@@ -2,7 +2,7 @@
 Version=1.0
 Name=YouTube
 Comment=YouTube
-Exec=chromium --new-window --ozone-platform=wayland --app="https://youtube.com/" --name="YouTube" --class="YouTube"
+Exec=omarchy-launch-webapp "https://youtube.com/"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/YouTube.png
