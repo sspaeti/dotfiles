@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Dict.cc
+Comment=Dict.cc
+Exec=omarchy-launch-webapp https://www.dict.cc/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Dict.cc.png
+StartupNotify=true
