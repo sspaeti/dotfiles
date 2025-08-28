@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Flattened version of omarchy-menu that shows all direct actions in a single searchable list without hierarchical categories.
+# Based on ~/.local/share/omarchy/bin/omarchy-menu but removes top-level menus (Learn, Style, Setup, etc.) for faster daily workflow access.
+
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
 menu() {
