@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Hacker News
+Comment=Hacker News
+Exec=omarchy-launch-webapp https://news.ycombinator.com/news
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Hacker News.png
+StartupNotify=true
