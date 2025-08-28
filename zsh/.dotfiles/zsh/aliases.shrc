@@ -49,6 +49,7 @@ alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir
 
 alias r=ranger
 alias zed="open -a /Applications/Zed.app -n"
+alias hn=clx
 
 # same as ranger above, leaves you at currrent directory when quitting
 function y() {
