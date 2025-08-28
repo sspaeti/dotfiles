@@ -30,8 +30,12 @@ organize_screenshot() {
 if [[ -n "$1" && -f "$1" ]]; then
     organize_screenshot "$1"
 else
-    # Look for recent screenshots in Pictures directory
+    # Look for recent screenshots in Pictures directory AND Printscreen root
     find "$PICTURES_DIR" -maxdepth 1 -name "*.png" -mmin -1 | while read -r screenshot; do
+        organize_screenshot "$screenshot"
+    done
+    # Also check for screenshots directly in Printscreen root (from grim commands)
+    find "$PRINTSCREEN_DIR" -maxdepth 1 -name "*.png" -mmin -1 | while read -r screenshot; do
         organize_screenshot "$screenshot"
     done
 fi
