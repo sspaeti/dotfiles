@@ -29,11 +29,16 @@ trap cleanup SIGTERM SIGINT
 docker-compose up &
 COMPOSE_PID=$!
 
-# Wait for RDP port to be available and RDP service to be ready
-echo "Waiting for RDP port to open..."
-while ! nc -z 127.0.0.1 3389; do
-    echo "  Port 3389 not ready yet..."
-    sleep 10
+# Wait for container to be running
+echo "Waiting for Windows container to start..."
+while true; do
+    CONTAINER_STATUS=$(docker inspect --format='{{.State.Status}}' windows 2>/dev/null)
+    if [ "$CONTAINER_STATUS" = "running" ]; then
+        echo "Container is running!"
+        break
+    fi
+    echo "  Container status: $CONTAINER_STATUS"
+    sleep 2
     
     # Check if docker-compose process is still running
     if ! kill -0 $COMPOSE_PID 2>/dev/null; then
@@ -42,18 +47,30 @@ while ! nc -z 127.0.0.1 3389; do
     fi
 done
 
-echo "Port 3389 is open, waiting for Windows VM to fully initialize..."
-echo "This can take 2-3 minutes for Windows to boot completely..."
+# Check if web interface is responding (faster than waiting for RDP)
+echo "Checking if Windows VM web interface is responding..."
+while true; do
+    if curl -s --connect-timeout 5 http://127.0.0.1:8006 > /dev/null 2>&1; then
+        echo "Web interface is responding at http://127.0.0.1:8006"
+        break
+    fi
+    echo "  Web interface not ready yet..."
+    sleep 3
+done
 
-# Additional wait for Windows to fully boot and RDP service to be ready
-sleep 60
+# Now wait for RDP port specifically
+echo "Waiting for RDP service to be ready..."
+while ! nc -z 127.0.0.1 3389; do
+    echo "  RDP port not ready yet..."
+    sleep 5
+done
 
-# Test RDP connection availability
-echo "Testing RDP connection..."
-timeout 10 rdesktop -g 640x480 -u docker 127.0.0.1:3389 -p admin 2>/dev/null
+echo "RDP port is open, testing connection..."
+# Quick RDP test with shorter timeout
+timeout 5 rdesktop -g 1920x1200 -u docker 127.0.0.1:3389 -p admin 2>/dev/null
 if [ $? -ne 0 ]; then
-    echo "RDP not fully ready yet, waiting another 30 seconds..."
-    sleep 30
+    echo "RDP not fully ready yet, waiting 20 more seconds..."
+    sleep 20
 fi
 
 echo "Starting RDP connection..."
