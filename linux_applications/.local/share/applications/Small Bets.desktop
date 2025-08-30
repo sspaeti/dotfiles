@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Small Bets
+Comment=Small Bets
+Exec=omarchy-launch-webapp https://smallbets.com/rooms/708
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Small Bets.png
+StartupNotify=true

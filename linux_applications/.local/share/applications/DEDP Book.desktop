@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=DEDP Book
+Comment=DEDP Book
+Exec=omarchy-launch-webapp https://www.dedp.online
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/DEDP Book.png
+StartupNotify=true
