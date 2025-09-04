@@ -29,7 +29,7 @@ return {
     config = function()
       -- Database connections
       vim.g.dbs = {
-        local_postgres_sspaeti = 'postgres://postgres@localhost:5432/sspaeti',
+        local_postgres_postgres = 'postgres://postgres@localhost:5432/postgres',
         duckdb_memory = 'duckdb:',
         duckdb_file = 'duckdb:///tmp/analytics.duckdb',
       }

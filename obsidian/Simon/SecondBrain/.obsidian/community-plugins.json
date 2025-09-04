@@ -32,8 +32,8 @@
   "obsidian-plantuml",
   "obsidian-book-search-plugin",
   "copy-document-as-html",
-  "obsidian-linter",
   "calendar",
   "excalibrain",
-  "obsidian-excalidraw-plugin"
+  "obsidian-excalidraw-plugin",
+  "obsidian-linter"
 ]
