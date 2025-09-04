@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(hyprctl:*)",
-      "Bash(dmesg:*)"
+      "Bash(dmesg:*)",
+      "Read(/home/sspaeti/.local/share/omarchy/**)",
     ],
     "deny": []
   }
