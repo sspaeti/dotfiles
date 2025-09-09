@@ -21,6 +21,10 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 #poetry version: installed with `brew install asdf \n asdf plugin add poetry && asdf install poetry 1.2.2`
 export PATH="~/.asdf/installs/poetry/1.2.2/bin:$PATH"
 
+
+# filen-cli
+PATH=$PATH:~/.filen-cli/bin
+
 # my shortcuts
 export git=~/git
 export de=$git/de

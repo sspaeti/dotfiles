@@ -71,3 +71,45 @@ My setup is I clone this dotfiles repo in `~/git/general/dotfiles` and in `~/.st
 I used MacOS 15+ years, Windows at work and now [Arch Linux with Omarchy](https://www.ssp.sh/blog/macbook-to-arch-linux-omarchy/). 
 
 I have all settings in one folder with stow, except Windows. It's in it's own folder under [Windows directory](windows) .
+
+## Others
+
+### Oh-my-zsh
+
+Check [latest](https://ohmyz.sh/#install):
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+
+## Copy files over
+
+### Allow ssh on old Linux computer
+
+```
+sudo systemctl enable --now sshd
+```
+
+### Copy files over
+
+```
+rsync -avy --progress USER@IP:~/.ssh ~/
+rsync -avy --progress USER@IP:~/.local/share/zoxide ~/.local/share/
+rsync -avy --progress USER@IP:~/.local/share/kdenlive ~/.local/share/
+rsync -avy --progress USER@IP:~/.local/bin ~/.local/
+rsync -avy --progress USER@IP:~/Simon ~/
+rsync -avy --progress USER@IP:~/git ~/
+rsync -avy --progress USER@IP:~/Documents/ ~/Documents/
+rsync -avy --progress USER@IP:~/Downloads/ ~/Downloads/
+rsync -avy --progress USER@IP:~/Videos/ ~/Videos/
+rsync -avy --progress USER@IP:~/Pictures/ ~/Pictures/
+```
+
+
+### Finalize
+
+Turn off ssh again:
+
+```
+sudo systemctl stop sshd
+```
