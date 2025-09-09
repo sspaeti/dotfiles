@@ -18,6 +18,9 @@ set -o vi
 # ignore commands you don't want stored in the history with a space
 setopt HIST_IGNORE_SPACE
 
+# allow zsh to offer corrections
+setopt CORRECT
+
 
 # bindkey '^r' history-incremental-search-backward
 bindkey -M viins 'jk' vi-cmd-mode
