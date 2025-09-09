@@ -94,3 +94,5 @@
 [gitflow "hotfix.finish"]
 	push = yes
 
+[credential]
+	helper = store
