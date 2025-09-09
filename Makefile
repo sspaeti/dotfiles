@@ -53,4 +53,4 @@ arch:
 
 arch-install:
 	sudo pacman -S --needed - < pacman.txt
-	yay -S --needed - < aur.txt
+	yay -S --needed - < yay_aur.txt
