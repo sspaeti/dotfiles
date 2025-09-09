@@ -51,6 +51,21 @@ arch:
 	{ pacman -Qqm; pacman -Qqen | grep -f <(pacman -Sl chaotic-aur | awk '{print $$2}'); } | sort -u > yay_aur.txt
 
 
+#TODO
+post-omarchy-install:
+	arch-install
+	cp ~/stow/.stowrc ~/.stowrc
+	linux
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	sudo systemctl enable --now sshd
+	rsync TODO _post-scripts/rsync.sh (take from readme)
+	sudo systemctl enable --now sshd
+	install-kanata
+
+
+
+
+
 arch-install:
 	sudo pacman -S --needed - < pacman.txt
 	yay -S --needed --noconfirm - < yay_aur.txt

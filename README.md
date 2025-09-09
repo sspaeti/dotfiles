@@ -94,6 +94,7 @@ sudo systemctl enable --now sshd
 
 ```
 rsync -avy --progress USER@IP:~/.ssh ~/
+rsync -avy --progress USER@IP:~/.dotfiles/zsh/secrets ~/.dotfiles/zsh/secrets
 rsync -avy --progress USER@IP:~/.local/share/zoxide ~/.local/share/
 rsync -avy --progress USER@IP:~/.local/share/kdenlive ~/.local/share/
 rsync -avy --progress USER@IP:~/.local/bin ~/.local/
@@ -105,6 +106,17 @@ rsync -avy --progress USER@IP:~/Videos/ ~/Videos/
 rsync -avy --progress USER@IP:~/Pictures/ ~/Pictures/
 ```
 
+### Keyboard Kanata
+
+```
+make install-kanata
+```
+and 
+
+Add `/etc/sudoers.d/00_sspaeti` see [readme kanata](kanta/.config/kanata/readme.md)
+
+### sudo time out password
+TODO update X-times wrong password and how long until I can re-enter
 
 ### Finalize
 
