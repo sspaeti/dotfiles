@@ -1,9 +1,0 @@
-brother-dcpl2550dn
-calcure-git
-circumflex
-duckdb-bin
-filen-desktop-bin
-hyprmon-bin
-kanata-bin
-morgen-bin
-sesh-bin
