@@ -93,17 +93,17 @@ sudo systemctl enable --now sshd
 ### Copy files over
 
 ```
-rsync -avy --progress USER@IP:~/.ssh ~/
-rsync -avy --progress USER@IP:~/.dotfiles/zsh/secrets ~/.dotfiles/zsh/secrets
-rsync -avy --progress USER@IP:~/.local/share/zoxide ~/.local/share/
-rsync -avy --progress USER@IP:~/.local/share/kdenlive ~/.local/share/
-rsync -avy --progress USER@IP:~/.local/bin ~/.local/
-rsync -avy --progress USER@IP:~/Simon ~/
-rsync -avy --progress USER@IP:~/git ~/
-rsync -avy --progress USER@IP:~/Documents/ ~/Documents/
-rsync -avy --progress USER@IP:~/Downloads/ ~/Downloads/
-rsync -avy --progress USER@IP:~/Videos/ ~/Videos/
-rsync -avy --progress USER@IP:~/Pictures/ ~/Pictures/
+rsync -avy --progress sspaeti@192.168.1.18:~/.ssh ~/
+rsync -avy --progress sspaeti@192.168.1.18:~/.dotfiles/zsh/secrets ~/.dotfiles/zsh/secrets
+rsync -avy --progress sspaeti@192.168.1.18:~/.local/share/zoxide ~/.local/share/
+rsync -avy --progress sspaeti@192.168.1.18:~/.local/share/kdenlive ~/.local/share/
+rsync -avy --progress sspaeti@192.168.1.18:~/.local/bin ~/.local/
+rsync -avy --progress sspaeti@192.168.1.18:~/Simon ~/
+rsync -avy --progress sspaeti@192.168.1.18:~/git ~/
+rsync -avy --progress sspaeti@192.168.1.18:~/Documents/ ~/Documents/
+rsync -avy --progress sspaeti@192.168.1.18:~/Downloads/ ~/Downloads/
+rsync -avy --progress sspaeti@192.168.1.18:~/Videos/ ~/Videos/
+rsync -avy --progress sspaeti@192.168.1.18:~/Pictures/ ~/Pictures/
 ```
 
 ### Keyboard Kanata
@@ -118,6 +118,13 @@ Add `/etc/sudoers.d/00_sspaeti` see [readme kanata](kanta/.config/kanata/readme.
 ### sudo time out password
 TODO update X-times wrong password and how long until I can re-enter
 
+### Tmux
+
+After stow tmux, i cant install the plugins. It needs the plugin manager:
+```
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+then `ctrl + t` and `ctrl + I` should work.
 ### Finalize
 
 Turn off ssh again:
