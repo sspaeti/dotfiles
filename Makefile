@@ -51,6 +51,6 @@ arch:
 	{ pacman -Qqm; pacman -Qqen | grep -f <(pacman -Sl chaotic-aur | awk '{print $$2}'); } | sort -u > yay_aur.txt
 
 
-install-arch:
+arch-install:
 	sudo pacman -S --needed - < pacman.txt
 	yay -S --needed - < aur.txt
