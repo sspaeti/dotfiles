@@ -46,4 +46,11 @@ uninstall-kanata:
 	sudo rm /etc/systemd/system/kanata.service
 
 arch:
-	pacman -Qe > pacman.txt
+	pacman -Qneq > pacman.txt #native/official repo packages only (no versions)
+	pacman -Qne > pacman-versions.txt 
+	pacman -Qmeq > aur.txt #foreign/AUR packages only (no versions)
+
+
+install-arch:
+	sudo pacman -S --needed - < pacman.txt
+	yay -S --needed - < aur.txt
