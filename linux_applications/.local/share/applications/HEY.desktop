@@ -1,11 +1,9 @@
 [Desktop Entry]
 Version=1.0
 Name=HEY
-Comment=HEY Email + Calendar
-Exec=brave --new-window --ozone-platform=wayland --app="https://app.hey.com" --name=HEY --class=HEY
+Comment=HEY
+Exec=omarchy-launch-webapp https://app.hey.com
 Terminal=false
 Type=Application
-Icon=HEY
-Categories=GTK;
-MimeType=text/html;text/xml;application/xhtml_xml;
+Icon=/home/sspaeti/.local/share/applications/icons/HEY.png
 StartupNotify=true

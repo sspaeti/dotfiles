@@ -2,7 +2,7 @@
 Version=1.0
 Name=Zoom
 Comment=Zoom
-Exec=brave --new-window --ozone-platform=wayland --app="https://app.zoom.us/wc/home" --name="Zoom" --class="Zoom"
+Exec=omarchy-launch-webapp https://app.zoom.us/wc/home
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Zoom.png
