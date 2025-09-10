@@ -47,3 +47,7 @@ msmtp/.msmtprc
 tmux/.tmux/tmux-client-*.log
 tmux/.tmux/plugins/
 
+#clipse
+clipse/.config/clipse/tmp_files/
+clipse/.config/clipse/clipboard_history.json
+clipse/.config/clipse/clipse.log

@@ -7,7 +7,7 @@ SHARED = nvim git zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm r
 
 # Platform-specific packages
 MACOS = karabiner yabai skhd alfred
-LINUX = kanata hypr walker waybar obsidian mako mise XCompose
+LINUX = kanata hypr walker waybar obsidian mako mise XCompose clipse
 
 .PHONY: mac linux shared clean
 
