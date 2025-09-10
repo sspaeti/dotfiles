@@ -1,0 +1,8 @@
+# GIMP gimp-foreground-select-tool options
+
+(foreground
+    (color "R'G'B'A float" 16 "\0\0\200\77\0\0\200\77\0\0\200\77\0\0\200\77" 0))
+(background
+    (color "R'G'B'A float" 16 "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\200\77" 0))
+
+# end of gimp-foreground-select-tool options

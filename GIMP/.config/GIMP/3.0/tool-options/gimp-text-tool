@@ -1,0 +1,8 @@
+# GIMP gimp-text-tool options
+
+(foreground
+    (color "R'G'B'A float" 16 "\0\0\200\77\0\0\200\77\0\0\200\77\0\0\200\77" 0))
+(palette "Color History")
+(font "Sans-serif")
+
+# end of gimp-text-tool options

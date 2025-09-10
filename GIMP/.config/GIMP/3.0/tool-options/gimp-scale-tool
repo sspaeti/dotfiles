@@ -1,0 +1,6 @@
+# GIMP gimp-scale-tool options
+
+(background
+    (color "R'G'B'A float" 16 "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\200\77" 0))
+
+# end of gimp-scale-tool options

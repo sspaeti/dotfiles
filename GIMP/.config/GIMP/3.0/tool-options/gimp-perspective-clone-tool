@@ -1,0 +1,15 @@
+# GIMP gimp-perspective-clone-tool options
+
+(foreground
+    (color "R'G'B'A float" 16 "\0\0\200\77\0\0\200\77\0\0\200\77\0\0\200\77" 0))
+(background
+    (color "R'G'B'A float" 16 "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\200\77" 0))
+(brush "1. Pixel")
+(dynamics "Pressure Size")
+(pattern "Pine")
+(palette "Color History")
+(brush-size 3)
+(brush-spacing 0.20000000000000001)
+(dynamics-enabled no)
+
+# end of gimp-perspective-clone-tool options
