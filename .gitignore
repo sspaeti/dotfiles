@@ -51,3 +51,7 @@ tmux/.tmux/plugins/
 clipse/.config/clipse/tmp_files/
 clipse/.config/clipse/clipboard_history.json
 clipse/.config/clipse/clipse.log
+
+#OBS
+OBS/.config/obs-studio/logs/
+OBS/.config/obs-studio/profiler_data/
