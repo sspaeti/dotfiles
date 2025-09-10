@@ -3,7 +3,7 @@
 .DEFAULT_GOAL := arch
 
 # Shared packages (work on both platforms)
-SHARED = nvim git zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm ruff sesh mutt msmtp lazydocker yazi
+SHARED = nvim git zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm ruff sesh mutt msmtp lazydocker yazi oh-my-zsh
 
 # Platform-specific packages
 MACOS = karabiner yabai skhd alfred
