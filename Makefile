@@ -3,7 +3,7 @@
 .DEFAULT_GOAL := arch
 
 # Shared packages (work on both platforms)
-SHARED = nvim git zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm ruff sesh mutt msmtp lazydocker yazi oh-my-zsh
+SHARED = nvim git zsh tmux kitty ghostty lazygit k9s btop fzf helix presenterm ruff sesh mutt msmtp lazydocker yazi
 
 # Platform-specific packages
 MACOS = karabiner yabai skhd alfred
@@ -50,19 +50,20 @@ arch:
 	pacman -Qen | grep -v -f <(pacman -Sl chaotic-aur | awk '{print $$2}') > pacman-versions.txt
 	{ pacman -Qqm; pacman -Qqen | grep -f <(pacman -Sl chaotic-aur | awk '{print $$2}'); } | sort -u > yay_aur.txt
 
+oh-my-zsh:
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" #install oh-my-zsh
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 
 #TODO
 post-omarchy-install:
 	arch-install
 	cp ~/stow/.stowrc ~/.stowrc
 	linux
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	oh-my-zsh
 	sudo systemctl enable --now sshd
 	rsync TODO _post-scripts/rsync.sh (take from readme)
 	sudo systemctl enable --now sshd
 	install-kanata
-
-
 
 
 
