@@ -103,7 +103,7 @@ rsync -avy --progress sspaeti@192.168.1.18:~/.local/share/zoxide ~/.local/share/
 rsync -avy --progress sspaeti@192.168.1.18:~/.local/share/kdenlive ~/.local/share/
 rsync -avy --progress sspaeti@192.168.1.18:~/.local/bin ~/.local/
 rsync -avy --progress sspaeti@192.168.1.18:~/Simon ~/
-rsync -avy --progress sspaeti@192.168.1.18:~/git ~/
+rsync -avy --progress sspaeti@192.168.1.18:~/git ~/git/
 rsync -avy --progress sspaeti@192.168.1.18:~/Documents/ ~/Documents/
 rsync -avy --progress sspaeti@192.168.1.18:~/Downloads/ ~/Downloads/
 rsync -avy --progress sspaeti@192.168.1.18:~/Videos/ ~/Videos/
@@ -129,6 +129,11 @@ After stow tmux, i cant install the plugins. It needs the plugin manager:
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 then `ctrl + t` and `ctrl + I` should work.
+### Manual
+- GIMP: ctrl + del shortcut
+- ..
+- document all special setups here. Can this be automated/copies with ~/.loca/state/? or .local/share?
+
 ### Finalize
 
 Turn off ssh again:
