@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Discord
+Comment=Discord
+Exec=omarchy-launch-webapp https://discord.com/channels/@me
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Discord.png
+StartupNotify=true

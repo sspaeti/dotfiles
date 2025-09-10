@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Google Photos
+Comment=Google Photos
+Exec=omarchy-launch-webapp https://photos.google.com/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Google Photos.png
+StartupNotify=true

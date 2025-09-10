@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Basecamp
+Comment=Basecamp
+Exec=omarchy-launch-webapp https://launchpad.37signals.com
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Basecamp.png
+StartupNotify=true

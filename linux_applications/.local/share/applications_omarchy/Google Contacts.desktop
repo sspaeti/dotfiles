@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Google Contacts
+Comment=Google Contacts
+Exec=omarchy-launch-webapp https://contacts.google.com/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Google Contacts.png
+StartupNotify=true

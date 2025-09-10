@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Figma
+Comment=Figma
+Exec=omarchy-launch-webapp https://figma.com/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Figma.png
+StartupNotify=true
