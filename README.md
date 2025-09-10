@@ -81,7 +81,6 @@ Check [latest](https://ohmyz.sh/#install):
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-
 ## Copy files over
 
 ### Allow ssh on old Linux computer
@@ -89,6 +88,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 sudo systemctl enable --now sshd
 ```
+
+### Obsidian
+activate sync, and create symlinks blog, writing, etc.
+check settings and appearance, eventough .obsidian is moved, they don't take the settings
+-> I didn't stow all the themes etc. I think? -> use obsidian sync for that
 
 ### Copy files over
 
