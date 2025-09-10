@@ -124,11 +124,13 @@ TODO update X-times wrong password and how long until I can re-enter
 
 ### Tmux
 
-After stow tmux, i cant install the plugins. It needs the plugin manager:
+After stowing tmux, run this command to ensure clean plugin installation:
 ```
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+rm -rf ~/.tmux/plugins && tmux new-session -d && tmux kill-session
 ```
-then `ctrl + t` and `ctrl + I` should work.
+Then open tmux and press `Ctrl+t` + `I` to install all plugins.
+
+If you see "tmux resurrect file not found" errors, press `Ctrl+t` + `Ctrl+s` to save a session first.
 ### Manual
 - GIMP: ctrl + del shortcut
 - ..
