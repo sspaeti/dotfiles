@@ -1,7 +1,7 @@
 {
   "offloadAdmControls": false,
   "chromiumSwitches": {},
-  "IS_MAXIMIZED": true,
+  "IS_MAXIMIZED": false,
   "IS_MINIMIZED": false,
   "BACKGROUND_COLOR": "#121214",
   "OPEN_ON_STARTUP": false,
@@ -11,7 +11,7 @@
   "WINDOW_BOUNDS": {
     "x": 0,
     "y": 0,
-    "width": 1536,
-    "height": 960
+    "width": 1440,
+    "height": 900
   }
 }
