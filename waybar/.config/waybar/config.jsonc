@@ -121,7 +121,7 @@
   "group/tray-expander": {
     "orientation": "inherit",
     "drawer": {
-      "transition-duration": 600,
+      "transition-duration": 100,
       "children-class": "tray-group-item"
     },
     "modules": ["custom/expand-icon", "tray"]
