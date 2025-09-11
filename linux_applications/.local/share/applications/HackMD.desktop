@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=HackMD
+Comment=HackMD
+Exec=omarchy-launch-webapp https://hackmd.io/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/HackMD.png
+StartupNotify=true
