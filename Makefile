@@ -70,3 +70,10 @@ post-omarchy-install:
 arch-install:
 	sudo pacman -S --needed - < pacman.txt
 	yay -S --needed --noconfirm - < yay_aur.txt
+
+tmux-init-install:
+	rm -rf ~/.tmux/plugins
+	tmux new-session -d && tmux kill-session
+	mkdir -p ~/.tmux/plugins
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true
+	~/.tmux/plugins/tpm/bin/install_plugins

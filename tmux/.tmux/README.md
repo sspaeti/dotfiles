@@ -10,7 +10,17 @@ When you stow tmux configuration, the `~/.tmux/plugins` directory may be empty b
 rm -rf ~/.tmux/plugins && tmux new-session -d && tmux kill-session
 ```
 
-Then open tmux and press `Ctrl+t` followed by `I` to install all plugins.
+**Then install TPM (Tmux Plugin Manager) first:**
+
+Run this command to install TPM and all plugins:
+
+```bash
+mkdir -p ~/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true 
+~/.tmux/plugins/tpm/bin/install_plugins
+```
+
+After TPM is installed, you can use `Ctrl+t` followed by `I` for future plugin installations.
 
 This removes the empty plugins directory and allows the plugin manager to properly install plugins from scratch.
 
