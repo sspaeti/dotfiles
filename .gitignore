@@ -45,7 +45,7 @@ msmtp/.msmtprc
 
 #tmux
 tmux/.tmux/tmux-client-*.log
-tmux/.tmux/plugins/
+# tmux/.tmux/plugins/
 
 #clipse
 clipse/.config/clipse/tmp_files/
