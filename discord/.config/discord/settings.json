@@ -1,7 +1,7 @@
 {
   "offloadAdmControls": false,
   "chromiumSwitches": {},
-  "IS_MAXIMIZED": false,
+  "IS_MAXIMIZED": true,
   "IS_MINIMIZED": false,
   "BACKGROUND_COLOR": "#121214",
   "OPEN_ON_STARTUP": false,
