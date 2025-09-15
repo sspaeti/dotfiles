@@ -1203,7 +1203,7 @@ exit
 🖊️ pen stationery writing write
 🖌️ paintbrush drawing creativity art
 🖍️ crayon drawing creativity
-📝 memo write documents stationery pencil paper writing legal exam quiz test study compose
+📝 note notebook writing pencil write documents stationery paper
 💼 briefcase business documents work law legal job career
 📁 file folder documents business office
 📂 open file folder documents load
