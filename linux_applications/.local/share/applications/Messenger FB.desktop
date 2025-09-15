@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Messenger FB
+Comment=Messenger FB
+Exec=omarchy-launch-webapp https://www.facebook.com/messages
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Messenger FB.png
+StartupNotify=true
