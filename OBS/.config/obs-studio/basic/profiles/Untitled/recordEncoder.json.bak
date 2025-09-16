@@ -1,1 +1,1 @@
-{"vaapi_device":"/dev/dri/by-path/pci-0000:75:00.0-render","bitrate":2600,"rate_control":"CQP","qp":18,"keyint_sec":0,"bf":0,"ffmpeg_opts":""}
+{"vaapi_device":"/dev/dri/by-path/pci-0000:65:00.0-render","bitrate":2600,"rate_control":"CQP","qp":18,"keyint_sec":2,"bf":2,"ffmpeg_opts":" preset=medium tune=film"}

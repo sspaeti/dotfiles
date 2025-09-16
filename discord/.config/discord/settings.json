@@ -1,5 +1,5 @@
 {
-  "offloadAdmControls": false,
+  "offloadAdmControls": true,
   "chromiumSwitches": {},
   "IS_MAXIMIZED": true,
   "IS_MINIMIZED": false,

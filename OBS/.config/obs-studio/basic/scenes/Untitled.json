@@ -15,21 +15,21 @@
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 11,
+                "id_counter": 12,
                 "custom_size": false,
                 "items": [
                     {
                         "name": "Ext Screen HOME",
                         "source_uuid": "d2db5b9c-2196-4bb9-8643-446aec925f7a",
                         "visible": true,
-                        "locked": true,
+                        "locked": false,
                         "rot": 0.0,
                         "scale_ref": {
                             "x": 3072.0,
                             "y": 1920.0
                         },
                         "align": 5,
-                        "bounds_type": 2,
+                        "bounds_type": 1,
                         "bounds_align": 0,
                         "bounds_crop": false,
                         "crop_left": 0,
@@ -43,23 +43,23 @@
                             "y": 0.0
                         },
                         "pos_rel": {
-                            "x": -1.7777777910232544,
+                            "x": -1.600000023841858,
                             "y": -1.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 0.9999999403953552,
+                            "y": 0.9999999403953552
                         },
                         "scale_rel": {
-                            "x": 1.3333333730697632,
-                            "y": 1.3333333730697632
+                            "x": 0.9599999785423279,
+                            "y": 0.9599999785423279
                         },
                         "bounds": {
-                            "x": 2560.0,
-                            "y": 1440.0
+                            "x": 3200.0,
+                            "y": 2000.0
                         },
                         "bounds_rel": {
-                            "x": 3.555555582046509,
+                            "x": 3.200000047683716,
                             "y": 2.0
                         },
                         "scale_filter": "disable",
@@ -94,7 +94,7 @@
                         "id": 2,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 0.0,
+                            "x": -178.0,
                             "y": 0.0
                         },
                         "pos_rel": {
@@ -102,8 +102,8 @@
                             "y": -1.0
                         },
                         "scale": {
-                            "x": 1.3333333730697632,
-                            "y": 1.3333333730697632
+                            "x": 1.8518518209457397,
+                            "y": 1.8518518209457397
                         },
                         "scale_rel": {
                             "x": 1.0,
@@ -149,24 +149,24 @@
                         "id": 8,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 2050.0,
-                            "y": 1220.0
+                            "x": 2669.5,
+                            "y": 1694.5
                         },
                         "pos_rel": {
                             "x": 1.0694444179534912,
                             "y": 0.6944444179534912
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.3888888359069824,
+                            "y": 1.3888888359069824
                         },
                         "scale_rel": {
                             "x": 1.0,
                             "y": 1.0
                         },
                         "bounds": {
-                            "x": 480.0,
-                            "y": 720.0
+                            "x": 666.5,
+                            "y": 1000.0
                         },
                         "bounds_rel": {
                             "x": 0.6666666865348816,
@@ -186,7 +186,7 @@
                     {
                         "name": "Rhode Mic",
                         "source_uuid": "b4436481-fb6f-4c84-a1e6-eeef2fda8550",
-                        "visible": true,
+                        "visible": false,
                         "locked": true,
                         "rot": 0.0,
                         "scale_ref": {
@@ -204,7 +204,7 @@
                         "id": 6,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 0.0,
+                            "x": -178.0,
                             "y": 0.0
                         },
                         "pos_rel": {
@@ -212,8 +212,8 @@
                             "y": -1.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.3888888359069824,
+                            "y": 1.3888888359069824
                         },
                         "scale_rel": {
                             "x": 1.0,
@@ -259,7 +259,7 @@
                         "id": 9,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 0.0,
+                            "x": -178.0,
                             "y": 0.0
                         },
                         "pos_rel": {
@@ -267,8 +267,8 @@
                             "y": -1.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.3888888359069824,
+                            "y": 1.3888888359069824
                         },
                         "scale_rel": {
                             "x": 1.0,
@@ -314,7 +314,7 @@
                         "id": 10,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 0.0,
+                            "x": -178.0,
                             "y": 0.0
                         },
                         "pos_rel": {
@@ -322,16 +322,16 @@
                             "y": -1.0
                         },
                         "scale": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.3888888359069824,
+                            "y": 1.3888888359069824
                         },
                         "scale_rel": {
                             "x": 1.0,
                             "y": 1.0
                         },
                         "bounds": {
-                            "x": 2560.0,
-                            "y": 1440.0
+                            "x": 3555.5,
+                            "y": 2000.0
                         },
                         "bounds_rel": {
                             "x": 3.555555582046509,
@@ -369,28 +369,83 @@
                         "id": 11,
                         "group_item_backup": false,
                         "pos": {
-                            "x": 2230.0,
-                            "y": 1080.0
+                            "x": 2919.5,
+                            "y": 1500.0
                         },
                         "pos_rel": {
                             "x": 1.3194444179534912,
                             "y": 0.5
                         },
                         "scale": {
-                            "x": 0.6000000238418579,
-                            "y": 0.6000000238418579
+                            "x": 0.8333333134651184,
+                            "y": 0.8333333134651184
                         },
                         "scale_rel": {
                             "x": 0.6000000238418579,
                             "y": 0.6000000238418579
                         },
                         "bounds": {
-                            "x": 1.0,
-                            "y": 1.0
+                            "x": 1.5,
+                            "y": 1.5
                         },
                         "bounds_rel": {
                             "x": 0.0013888889225199819,
                             "y": 0.0013888889225199819
+                        },
+                        "scale_filter": "disable",
+                        "blend_method": "default",
+                        "blend_type": "normal",
+                        "show_transition": {
+                            "duration": 0
+                        },
+                        "hide_transition": {
+                            "duration": 0
+                        },
+                        "private_settings": {}
+                    },
+                    {
+                        "name": "Shure MV6",
+                        "source_uuid": "2206f39e-026e-4555-9ca9-6788d20f7269",
+                        "visible": true,
+                        "locked": false,
+                        "rot": 0.0,
+                        "scale_ref": {
+                            "x": 2560.0,
+                            "y": 1440.0
+                        },
+                        "align": 5,
+                        "bounds_type": 0,
+                        "bounds_align": 0,
+                        "bounds_crop": false,
+                        "crop_left": 0,
+                        "crop_top": 0,
+                        "crop_right": 0,
+                        "crop_bottom": 0,
+                        "id": 12,
+                        "group_item_backup": false,
+                        "pos": {
+                            "x": -178.0,
+                            "y": 0.0
+                        },
+                        "pos_rel": {
+                            "x": -1.7777777910232544,
+                            "y": -1.0
+                        },
+                        "scale": {
+                            "x": 1.3888888359069824,
+                            "y": 1.3888888359069824
+                        },
+                        "scale_rel": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_rel": {
+                            "x": 0.0,
+                            "y": 0.0
                         },
                         "scale_filter": "disable",
                         "blend_method": "default",
@@ -431,7 +486,9 @@
                 "libobs.show_scene_item.10": [],
                 "libobs.hide_scene_item.10": [],
                 "libobs.show_scene_item.11": [],
-                "libobs.hide_scene_item.11": []
+                "libobs.hide_scene_item.11": [],
+                "libobs.show_scene_item.12": [],
+                "libobs.hide_scene_item.12": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,
@@ -763,6 +820,37 @@
             "deinterlace_field_order": 0,
             "monitoring_type": 0,
             "private_settings": {}
+        },
+        {
+            "prev_ver": 520159234,
+            "name": "Shure MV6",
+            "uuid": "2206f39e-026e-4555-9ca9-6788d20f7269",
+            "id": "pulse_input_capture",
+            "versioned_id": "pulse_input_capture",
+            "settings": {
+                "device_id": "alsa_input.usb-Shure_Inc_Shure_MV6_MV6_2-51354e2fbb59545fac295c67905f5290-01.mono-fallback"
+            },
+            "mixers": 255,
+            "sync": 0,
+            "flags": 0,
+            "volume": 0.2971588969230652,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {
+                "libobs.mute": [],
+                "libobs.unmute": [],
+                "libobs.push-to-mute": [],
+                "libobs.push-to-talk": []
+            },
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
         }
     ],
     "groups": [],
@@ -814,8 +902,8 @@
         }
     },
     "resolution": {
-        "x": 2560,
-        "y": 1440
+        "x": 3200,
+        "y": 2000
     },
     "version": 2
 }
