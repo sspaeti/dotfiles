@@ -156,6 +156,13 @@
         "Shift"
       ],
       "key": "X"
+    },
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "X"
     }
   ],
   "editor:fold-more": [
