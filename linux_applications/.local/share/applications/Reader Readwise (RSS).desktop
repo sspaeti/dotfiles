@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Reader Readwise (RSS)
+Comment=Reader Readwise (RSS)
+Exec=omarchy-launch-webapp https://read.readwise.io/home
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Reader Readwise (RSS).png
+StartupNotify=true
