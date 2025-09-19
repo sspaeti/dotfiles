@@ -2,7 +2,7 @@
 Version=1.0
 Name=S3
 Comment=System activity from btop
-Exec=alacritty --class=s3 --title=s3 -e zsh -c "source ~/.zshrc && /home/sspaeti/.cargo/bin/stu"
+Exec=alacritty --class=s3 --title=s3 -e zsh -c "source ~/.zshrc && yazi ~/mnt/s3/"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/S3.png
