@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=MS Excel
+Comment=MS Excel
+Exec=omarchy-launch-webapp https://excel.cloud.microsoft/en-us
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/MS Excel.png
+StartupNotify=true
