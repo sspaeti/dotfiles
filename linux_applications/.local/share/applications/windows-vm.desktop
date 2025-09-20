@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Windows VM
+Comment=Start Windows VM via Docker and connect with RDP
+Exec=uwsm app -- /home/sspaeti/.config/hypr/sspaeti/windows-ms/start-windows.sh
+Icon=/home/sspaeti/.local/share/applications/icons/windows.png
+Terminal=false
+Type=Application
+Categories=System;Virtualization;
