@@ -46,9 +46,9 @@ uninstall-kanata:
 	sudo rm /etc/systemd/system/kanata.service
 
 arch:
-	pacman -Qqen | grep -v -f <(pacman -Sl chaotic-aur | awk '{print $$2}') > pacman.txt
-	pacman -Qen | grep -v -f <(pacman -Sl chaotic-aur | awk '{print $$2}') > pacman-versions.txt
-	{ pacman -Qqm; pacman -Qqen | grep -f <(pacman -Sl chaotic-aur | awk '{print $$2}'); } | sort -u > yay_aur.txt
+	pacman -Qqm > yay_aur.txt
+	pacman -Qqen | grep -v -f <(pacman -Qqm) > pacman.txt
+	pacman -Qen | grep -v -f <(pacman -Qqm) > pacman-versions.txt
 
 oh-my-zsh:
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" #install oh-my-zsh
