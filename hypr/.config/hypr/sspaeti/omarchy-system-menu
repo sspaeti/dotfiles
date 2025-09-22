@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Custom system menu with tmux-aware shutdown/restart
+# Replaces omarchy-menu system functionality with proper tmux handling
+# FIXED 1-2 minutes shutdown as an tangling Neovim session is not closing as file is unsaved
+
+export PATH="$HOME/.local/share/omarchy/bin:$PATH"
+
+menu() {
+  local prompt="$1"
+  local options="$2"
+  local extra="$3"
+
+  read -r -a args <<<"$extra"
+  echo -e "$options" | walker --dmenu --theme dmenu_250 -p "$prompt…" "${args[@]}"
+}
+
+handle_tmux_and_poweroff() {
+  # Save tmux sessions and close gracefully before shutdown
+  if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+    # Save all tmux sessions using resurrect
+    tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+    # Kill all tmux sessions gracefully
+    tmux kill-server
+  fi
+  systemctl poweroff
+}
+
+handle_tmux_and_reboot() {
+  # Save tmux sessions and close gracefully before restart
+  if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+    # Save all tmux sessions using resurrect
+    tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+    # Kill all tmux sessions gracefully
+    tmux kill-server
+  fi
+  systemctl reboot
+}
+
+case $(menu "System" "  Lock\n󱄄  Screensaver\n󰤄  Suspend\n  Relaunch\n󰜉  Restart\n󰐥  Shutdown") in
+  *Lock*) omarchy-lock-screen ;;
+  *Screensaver*) omarchy-launch-screensaver force ;;
+  *Suspend*) systemctl suspend ;;
+  *Relaunch*) uwsm stop ;;
+  *Restart*) handle_tmux_and_reboot ;;
+  *Shutdown*) handle_tmux_and_poweroff ;;
+esac
