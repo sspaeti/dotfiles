@@ -4,9 +4,6 @@
 # export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 
-# Omarchy (Arch Linux) paths - Set complete path
-export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omarchy/bin:$PATH"
-set +h
 
 #add rust to path
 export PATH="/home/sspaeti/.cargo/bin:$PATH"
@@ -60,6 +57,10 @@ export VIMRC=$MYVIMRC
 export RC=$MYVIMRC
 export HYPRRC=~/.config/hypr/hyprland.conf
 
+# OMARCHY STUFF HEREJ
+# Omarchy (Arch Linux) paths - Set complete path
+export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omarchy/bin:$PATH"
+set +h
 export OMARCHY_SCREENSHOT_DIR=~/Pictures/Satty
 
 #vim in browser
