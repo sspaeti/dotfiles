@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Custom omarchy-menu wrapper that uses our tmux-aware system menu
+# This preserves the original omarchy-menu while adding custom system handling
+
+# If called with "system" argument, use our custom system menu
+if [[ "$1" == "system" ]]; then
+    exec ~/.config/hypr/sspaeti/omarchy-system-menu
+fi
+
+# For all other cases, call the original omarchy-menu
+exec ~/.local/share/omarchy/bin/omarchy-menu "$@"

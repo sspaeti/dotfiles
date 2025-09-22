@@ -358,8 +358,8 @@ show_system_menu() {
   *Screensaver*) omarchy-launch-screensaver force ;;
   *Suspend*) systemctl suspend ;;
   *Relaunch*) uwsm stop ;;
-  *Restart*) systemctl reboot ;;
-  *Shutdown*) systemctl poweroff ;;
+  *Restart*) ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot ;;
+  *Shutdown*) ~/.config/hypr/sspaeti/omarchy-system-menu-intercept poweroff ;;
   *) show_main_menu ;;
   esac
 }
@@ -431,8 +431,8 @@ go_to_menu() {
   *lock*) omarchy-lock-screen ;;
   *suspend*) systemctl suspend ;;
   *relaunch*) uwsm stop ;;
-  *restart*) systemctl reboot ;;
-  *shutdown*) systemctl poweroff ;;
+  *restart*) ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot ;;
+  *shutdown*) ~/.config/hypr/sspaeti/omarchy-system-menu-intercept poweroff ;;
   esac
 }
 

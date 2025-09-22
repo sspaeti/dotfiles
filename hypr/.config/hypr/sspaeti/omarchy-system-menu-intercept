@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Intercept script for omarchy-menu to add tmux-aware shutdown/restart
+# This script wraps systemctl calls to use our custom system menu
+
+if [[ "$1" == "poweroff" ]]; then
+    # Save tmux sessions and close gracefully before shutdown
+    if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+        # Save all tmux sessions using resurrect
+        tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+        # Kill all tmux sessions gracefully
+        tmux kill-server
+    fi
+    exec /usr/bin/systemctl poweroff
+elif [[ "$1" == "reboot" ]]; then
+    # Save tmux sessions and close gracefully before restart
+    if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+        # Save all tmux sessions using resurrect
+        tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+        # Kill all tmux sessions gracefully
+        tmux kill-server
+    fi
+    exec /usr/bin/systemctl reboot
+else
+    # For all other systemctl commands, pass through normally
+    exec /usr/bin/systemctl "$@"
+fi
