@@ -6,7 +6,7 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 # RDP_COMMAND="rdesktop -g 1600x1000@144 -P -z -x l -r sound:off -u docker 127.0.0.1:3389 -p admin"
-RDP_COMMAND="xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:1600x1000 +f /cert:tofu -grab-keyboard"
+RDP_COMMAND="xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:1600x1000 +f /cert:tofu -grab-keyboard /scale:140"
 
 echo "Starting Windows VM..."
 
@@ -69,10 +69,10 @@ done
 echo "RDP port is open, testing connection..."
 # Quick RDP test with shorter timeout
 # timeout 5 rdesktop -g 320x240 -u docker 127.0.0.1:3389 -p admin 2>/dev/null
-timeout 15 xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /cert:tofu  2>/dev/null
+timeout 5 rdesktop -g 320x240 -u docker 127.0.0.1:3389 -p admin 2>/dev/null
 if [ $? -ne 0 ]; then
     echo "RDP not fully ready yet, waiting 5 more seconds..."
-    sleep 15 
+    sleep 5 
 fi
 
 echo "Starting RDP connection..."
