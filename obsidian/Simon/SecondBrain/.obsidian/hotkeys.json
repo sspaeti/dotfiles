@@ -198,6 +198,13 @@
         "Mod"
       ],
       "key": "ArrowRight"
+    },
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "L"
     }
   ],
   "app:go-back": [
@@ -206,6 +213,13 @@
         "Mod"
       ],
       "key": "ArrowLeft"
+    },
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "H"
     }
   ],
   "obsidian-excalidraw-plugin:toggle-lock": [],
@@ -355,7 +369,8 @@
     {
       "modifiers": [
         "Alt",
-        "Mod"
+        "Mod",
+        "Shift"
       ],
       "key": "H"
     }
@@ -401,7 +416,8 @@
     {
       "modifiers": [
         "Alt",
-        "Mod"
+        "Mod",
+        "Shift"
       ],
       "key": "L"
     }
