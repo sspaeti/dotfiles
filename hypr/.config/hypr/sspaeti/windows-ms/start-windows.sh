@@ -39,7 +39,7 @@ while true; do
         break
     fi
     echo "  Container status: $CONTAINER_STATUS"
-    sleep 2
+    sleep 5
     
     # Check if docker-compose process is still running
     if ! kill -0 $COMPOSE_PID 2>/dev/null; then
@@ -56,7 +56,7 @@ while true; do
         break
     fi
     echo "  Web interface not ready yet..."
-    sleep 3
+    sleep 5
 done
 
 # Now wait for RDP port specifically
