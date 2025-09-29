@@ -4,21 +4,29 @@
 # This script wraps systemctl calls to use our custom system menu
 
 if [[ "$1" == "poweroff" ]]; then
+    echo "$(date): Shutdown script called - poweroff" >> /tmp/shutdown.log
     # Save tmux sessions and close gracefully before shutdown
     if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+        echo "$(date): Found tmux sessions, saving and killing" >> /tmp/shutdown.log
         # Save all tmux sessions using resurrect
         tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+        sleep 2
         # Kill all tmux sessions gracefully
         tmux kill-server
+        echo "$(date): tmux kill-server completed" >> /tmp/shutdown.log
     fi
     exec /usr/bin/systemctl poweroff
 elif [[ "$1" == "reboot" ]]; then
+    echo "$(date): Shutdown script called - reboot" >> /tmp/shutdown.log
     # Save tmux sessions and close gracefully before restart
     if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+        echo "$(date): Found tmux sessions, saving and killing" >> /tmp/shutdown.log
         # Save all tmux sessions using resurrect
         tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+        sleep 2
         # Kill all tmux sessions gracefully
         tmux kill-server
+        echo "$(date): tmux kill-server completed" >> /tmp/shutdown.log
     fi
     exec /usr/bin/systemctl reboot
 else
