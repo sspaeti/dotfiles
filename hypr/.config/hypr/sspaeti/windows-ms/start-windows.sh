@@ -6,6 +6,7 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 # RDP_COMMAND="rdesktop -g 1600x1000@144 -P -z -x l -r sound:off -u docker 127.0.0.1:3389 -p admin"
+# Note: added `-grab-keyboard` for avoiding terminal interuptions. e.g. ctrl+c is terminating RDC, but can be used for copying
 RDP_COMMAND="xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:1600x1000 +f /cert:tofu -grab-keyboard /scale:140"
 
 echo "Starting Windows VM..."
