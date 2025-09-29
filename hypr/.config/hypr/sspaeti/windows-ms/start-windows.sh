@@ -20,7 +20,7 @@ cd "$SCRIPT_DIR" || {
 # Function to handle cleanup
 cleanup() {
     echo "Shutting down Windows VM..."
-    docker-compose down
+    docker-compose down --volumes --remove-orphans
     exit 0
 }
 
