@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=MS Teams
+Comment=MS Teams
+Exec=omarchy-launch-webapp https://teams.live.com/v2/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/MS Teams.png
+StartupNotify=true
