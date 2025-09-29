@@ -867,7 +867,7 @@ exit
 🛤️ railway track train transportation
 🛢️ oil drum barrell
 ⛽ fuel pump gas station petroleum
-🚨 police car light police ambulance 911 emergency alert error pinged law legal
+🚨 fire alarm sirene car ambulance 911 emergency
 🚥 horizontal traffic light transportation signal
 🚦 vertical traffic light transportation driving
 🛑 stop sign stop
