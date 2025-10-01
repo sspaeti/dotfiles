@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Synonyms (Thesaurus)
+Comment=Synonyms (Thesaurus)
+Exec=omarchy-launch-webapp https://www.thesaurus.com/browse
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Synonyms (Thesaurus).png
+StartupNotify=true
