@@ -16,28 +16,16 @@ menu() {
 }
 
 handle_tmux_and_poweroff() {
-  # Save tmux sessions and close gracefully before shutdown
-  if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
-    # Save all tmux sessions using resurrect
-    tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
-    # Kill all tmux sessions gracefully
-    tmux kill-server
-  fi
-  systemctl poweroff
+  # Use the intercept script for tmux-aware shutdown
+  ~/.config/hypr/sspaeti/omarchy-system-menu-intercept poweroff
 }
 
 handle_tmux_and_reboot() {
-  # Save tmux sessions and close gracefully before restart
-  if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
-    # Save all tmux sessions using resurrect
-    tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
-    # Kill all tmux sessions gracefully
-    tmux kill-server
-  fi
-  systemctl reboot
+  # Use the intercept script for tmux-aware reboot
+  ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot
 }
 
-case $(menu "System" "  Lock\n󱄄  Screensaver\n󰤄  Suspend\n  Relaunch\n󰜉  Restart\n󰐥  Shutdown") in
+case $(menu "System" "  Lock\n󱄄  Screensaver\n󰤄  Suspend\n  Relaunch\n󰜉  Restart\n󰐥  Shutdown") in
   *Lock*) omarchy-lock-screen ;;
   *Screensaver*) omarchy-launch-screensaver force ;;
   *Suspend*) systemctl suspend ;;

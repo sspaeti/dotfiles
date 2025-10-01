@@ -4,29 +4,37 @@
 # This script wraps systemctl calls to use our custom system menu
 
 if [[ "$1" == "poweroff" ]]; then
-    echo "$(date): Shutdown script called - poweroff" >> /tmp/shutdown.log
+    # Log to both journal and persistent file
+    logger -t "omarchy-shutdown" "Shutdown script called - poweroff"
+    echo "$(date): Shutdown script called - poweroff" >> /var/log/omarchy-shutdown.log
     # Save tmux sessions and close gracefully before shutdown
     if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
-        echo "$(date): Found tmux sessions, saving and killing" >> /tmp/shutdown.log
+        logger -t "omarchy-shutdown" "Found tmux sessions, saving and killing"
+        echo "$(date): Found tmux sessions, saving and killing" >> /var/log/omarchy-shutdown.log
         # Save all tmux sessions using resurrect
         tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
         sleep 2
-        # Kill all tmux sessions gracefully
-        tmux kill-server
-        echo "$(date): tmux kill-server completed" >> /tmp/shutdown.log
+        # Kill all tmux sessions gracefully with more aggressive timeout
+        timeout 2s tmux kill-server || logger -t "omarchy-shutdown" "tmux kill-server timed out, forcing kill"
+        logger -t "omarchy-shutdown" "tmux kill-server completed"
+        echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
     fi
     exec /usr/bin/systemctl poweroff
 elif [[ "$1" == "reboot" ]]; then
-    echo "$(date): Shutdown script called - reboot" >> /tmp/shutdown.log
+    # Log to both journal and persistent file
+    logger -t "omarchy-shutdown" "Shutdown script called - reboot"
+    echo "$(date): Shutdown script called - reboot" >> /var/log/omarchy-shutdown.log
     # Save tmux sessions and close gracefully before restart
     if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
-        echo "$(date): Found tmux sessions, saving and killing" >> /tmp/shutdown.log
+        logger -t "omarchy-shutdown" "Found tmux sessions, saving and killing"
+        echo "$(date): Found tmux sessions, saving and killing" >> /var/log/omarchy-shutdown.log
         # Save all tmux sessions using resurrect
         tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
         sleep 2
-        # Kill all tmux sessions gracefully
-        tmux kill-server
-        echo "$(date): tmux kill-server completed" >> /tmp/shutdown.log
+        # Kill all tmux sessions gracefully with more aggressive timeout
+        timeout 2s tmux kill-server || logger -t "omarchy-shutdown" "tmux kill-server timed out, forcing kill"
+        logger -t "omarchy-shutdown" "tmux kill-server completed"
+        echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
     fi
     exec /usr/bin/systemctl reboot
 else
