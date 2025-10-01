@@ -7,7 +7,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 # RDP_COMMAND="rdesktop -g 1600x1000@144 -P -z -x l -r sound:off -u docker 127.0.0.1:3389 -p admin"
 # Note: added `-grab-keyboard` for avoiding terminal interruptions. e.g. ctrl+c is terminating RDC, but can be used for copying
-RDP_COMMAND="xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:1600x1000 +f -grab-keyboard /scale:140"
+RDP_COMMAND="xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:1600x1000 +f -grab-keyboard /cert:ignore /scale:140"
 
 echo "Starting Windows VM..."
 
@@ -69,7 +69,7 @@ done
 
 echo "RDP port is open, testing connection..."
 # Quick RDP test with shorter timeout - xfreerdp3 with certificate ignore
-timeout 5 xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:320x240 /cert:ignore 2>/dev/null
+timeout 5 xfreerdp3 /u:docker /p:admin /v:127.0.0.1:3389 /size:320x240 /cert:tofu 2>/dev/null
 if [ $? -ne 0 ]; then
     echo "RDP not fully ready yet, waiting 5 more seconds..."
     sleep 5
