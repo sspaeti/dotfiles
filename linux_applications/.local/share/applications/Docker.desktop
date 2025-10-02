@@ -2,7 +2,7 @@
 Version=1.0
 Name=Docker
 Comment=Docker
-Exec=alacritty --class TUI.tile -e lazydocker
+Exec=$TERMINAL --class=TUI.tile -e lazydocker
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Docker.png
