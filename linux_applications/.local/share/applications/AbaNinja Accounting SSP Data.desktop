@@ -5,5 +5,5 @@ Comment=AbaNinja Accounting SSP Data
 Exec=omarchy-launch-webapp https://app.abaninja.ch/finances/payments/open
 Terminal=false
 Type=Application
-Icon=/home/sspaeti/.local/share/applications/icons/AbaNinja Accounting SSP Data.png
+Icon=/home/sspaeti/.local/share/applications/icons/abaninja.png
 StartupNotify=true
