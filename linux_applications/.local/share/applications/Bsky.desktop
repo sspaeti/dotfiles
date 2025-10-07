@@ -2,7 +2,7 @@
 Version=1.0
 Name=Bsky
 Comment=Bsky
-Exec=brave --new-window --ozone-platform=wayland --app="https://blue.ssp.sh/" --name="Bsky" --class="Bsky"
+Exec=omarchy-launch-webapp "https://blue.ssp.sh/"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Bsky.png

@@ -2,7 +2,7 @@
 Version=1.0
 Name=Twitter/X
 Comment=Twitter
-Exec=brave --new-window --ozone-platform=wayland --app="https://x.com/" --name="Twitter" --class="X"
+Exec=omarchy-launch-webapp "https://x.com/"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/twitter.png
