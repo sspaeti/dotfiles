@@ -36,7 +36,7 @@ return {
     config = function()
       require("avante").setup({
         ---Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-        provider = "claude",
+        provider = "gemini",
         hints = { enabled = false },
         -- for MCPhub
         -- system_prompt as function ensures LLM always has latest MCP server state
