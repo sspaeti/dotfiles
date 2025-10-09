@@ -11,8 +11,7 @@ return {
   --   end,
   --   dependencies = {
   --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim",
   --   },
   -- },
   --
@@ -20,7 +19,6 @@ return {
     "yetone/avante.nvim",
     lazy = false,
     priority = 1005,
-    opts = {},
     build = "make",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -37,7 +35,9 @@ return {
       require("avante").setup({
         ---Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
         provider = "gemini",
-        hints = { enabled = false },
+        selection = {
+          enabled = false, -- This disables the visual mode inline hints!
+        },
         -- for MCPhub
         -- system_prompt as function ensures LLM always has latest MCP server state
         -- This is evaluated for every message, even in existing chats
