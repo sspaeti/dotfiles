@@ -5,7 +5,7 @@ services:
     environment:
       VERSION: "11"
       RAM_SIZE: "24G"
-      CPU_CORES: "8"
+      CPU_CORES: "4"
     devices:
       - /dev/kvm
       - /dev/net/tun
@@ -17,6 +17,6 @@ services:
       - 3389:3389/udp
     volumes:
       - ~/Documents/VMs/windows:/storage
-      - /home/sspaeti/Simon:/data
+      - /home/sspaeti/Simon/Sync:/data
     restart: always
     stop_grace_period: 2m
