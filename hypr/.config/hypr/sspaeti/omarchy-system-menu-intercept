@@ -2,6 +2,9 @@
 
 # Intercept script for omarchy-menu to add tmux-aware shutdown/restart
 # This script wraps systemctl calls to use our custom system menu
+# Updated to use omarchy-state like the official omarchy-menu
+
+export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
 if [[ "$1" == "poweroff" ]]; then
     # Log to both journal and persistent file
@@ -19,7 +22,9 @@ if [[ "$1" == "poweroff" ]]; then
         logger -t "omarchy-shutdown" "tmux kill-server completed"
         echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
     fi
-    exec /usr/bin/systemctl poweroff
+    # Use omarchy-state to clear restart-required notifications before shutdown
+    omarchy-state clear re*-required
+    exec /usr/bin/systemctl poweroff --no-wall
 elif [[ "$1" == "reboot" ]]; then
     # Log to both journal and persistent file
     logger -t "omarchy-shutdown" "Shutdown script called - reboot"
@@ -36,7 +41,9 @@ elif [[ "$1" == "reboot" ]]; then
         logger -t "omarchy-shutdown" "tmux kill-server completed"
         echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
     fi
-    exec /usr/bin/systemctl reboot
+    # Use omarchy-state to clear restart-required notifications before reboot
+    omarchy-state clear re*-required
+    exec /usr/bin/systemctl reboot --no-wall
 else
     # For all other systemctl commands, pass through normally
     exec /usr/bin/systemctl "$@"

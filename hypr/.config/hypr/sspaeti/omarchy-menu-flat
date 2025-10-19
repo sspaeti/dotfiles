@@ -21,7 +21,10 @@ menu() {
     fi
   fi
 
-  echo -e "$options" | walker --dmenu --theme dmenu_250 -p "$prompt…" "${args[@]}"
+  # Removed --theme dmenu_250 as it doesn't exist in walker 2.x
+  # Walker will use the default theme from config.toml
+  # Use --exit to avoid using background service that might merge results
+  echo -e "$options" | walker --dmenu --exit -p "$prompt…" "${args[@]}"
 }
 
 terminal() {
@@ -32,9 +35,9 @@ present_terminal() {
   omarchy-launch-floating-terminal-with-presentation $1
 }
 
-edit_in_nvim() {
+open_in_editor() {
   notify-send "Editing config file" "$1"
-  alacritty -e nvim "$1"
+  omarchy-launch-editor "$1"
 }
 
 install() {
@@ -74,7 +77,7 @@ show_style_menu() {
   *Theme*) show_theme_menu ;;
   *Font*) show_font_menu ;;
   *Background*) omarchy-theme-bg-next ;;
-  *Screensaver*) edit_in_nvim ~/.config/omarchy/branding/screensaver.txt ;;
+  *Screensaver*) open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
   *) show_main_menu ;;
   esac
 }
@@ -150,9 +153,9 @@ show_setup_menu() {
     blueberry
     ;;
   *Power*) show_setup_power_menu ;;
-  *Monitors*) edit_in_nvim ~/.config/hypr/monitors.conf ;;
-  *Keybindings*) edit_in_nvim ~/.config/hypr/bindings.conf ;;
-  *Input*) edit_in_nvim ~/.config/hypr/input.conf ;;
+  *Monitors*) open_in_editor ~/.config/hypr/monitors.conf ;;
+  *Keybindings*) open_in_editor ~/.config/hypr/bindings.conf ;;
+  *Input*) open_in_editor ~/.config/hypr/input.conf ;;
   *DNS*) present_terminal omarchy-setup-dns ;;
   *Config*) show_setup_config_menu ;;
   *Fingerprint*) present_terminal omarchy-setup-fingerprint ;;
@@ -173,14 +176,14 @@ show_setup_power_menu() {
 
 show_setup_config_menu() {
   case $(menu "Setup" "  Hyprland\n  Hypridle\n  Hyprlock\n  Hyprsunset\n  Swayosd\n󰌧  Walker\n󰍜  Waybar\n󰞅  XCompose") in
-  *Hyprland*) edit_in_nvim ~/.config/hypr/hyprland.conf ;;
-  *Hypridle*) edit_in_nvim ~/.config/hypr/hypridle.conf && omarchy-restart-hypridle ;;
-  *Hyprlock*) edit_in_nvim ~/.config/hypr/hyprlock.conf ;;
-  *Hyprsunset*) edit_in_nvim ~/.config/hypr/hyprsunset.conf && omarchy-restart-hyprsunset ;;
-  *Swayosd*) edit_in_nvim ~/.config/swayosd/config.toml && omarchy-restart-swayosd ;;
-  *Walker*) edit_in_nvim ~/.config/walker/config.toml && omarchy-restart-walker ;;
-  *Waybar*) edit_in_nvim ~/.config/waybar/config.jsonc && omarchy-restart-waybar ;;
-  *XCompose*) edit_in_nvim ~/.XCompose && omarchy-restart-xcompose ;;
+  *Hyprland*) open_in_editor ~/.config/hypr/hyprland.conf ;;
+  *Hypridle*) open_in_editor ~/.config/hypr/hypridle.conf && omarchy-restart-hypridle ;;
+  *Hyprlock*) open_in_editor ~/.config/hypr/hyprlock.conf ;;
+  *Hyprsunset*) open_in_editor ~/.config/hypr/hyprsunset.conf && omarchy-restart-hyprsunset ;;
+  *Swayosd*) open_in_editor ~/.config/swayosd/config.toml && omarchy-restart-swayosd ;;
+  *Walker*) open_in_editor ~/.config/walker/config.toml && omarchy-restart-walker ;;
+  *Waybar*) open_in_editor ~/.config/waybar/config.jsonc && omarchy-restart-waybar ;;
+  *XCompose*) open_in_editor ~/.XCompose && omarchy-restart-xcompose ;;
   *) show_main_menu ;;
   esac
 }
@@ -393,8 +396,11 @@ show_main_menu() {
   flat_options="$flat_options\nRelaunch"
   flat_options="$flat_options\nRestart"
   flat_options="$flat_options\nShutdown"
-  
-  go_to_menu "$(menu "Go" "$flat_options")"
+
+  selection="$(menu "Go" "$flat_options")"
+  # Exit if cancelled (empty selection)
+  [[ -z "$selection" ]] && exit 0
+  go_to_menu "$selection"
 }
 
 go_to_menu() {
@@ -405,17 +411,17 @@ go_to_menu() {
   *font*) show_font_menu ;;
   *background*) omarchy-theme-bg-next ;;
   *screensaver*) omarchy-toggle-screensaver ;;
-  *audio*) alacritty --class=Wiremix -e wiremix ;;
-  *wifi*) 
+  *audio*) setsid uwsm-app -- $TERMINAL --class=Wiremix -e wiremix & ;;
+  *wifi*|*wlan*)
     rfkill unblock wifi
-    alacritty --class=Impala -e impala
+    omarchy-launch-wifi
     ;;
-  *bluetooth*) 
+  *bluetooth*)
     rfkill unblock bluetooth
     blueberry
     ;;
   *power*profile*) show_setup_power_menu ;;
-  *monitors*) edit_in_nvim ~/.config/hypr/monitors.conf ;;
+  *monitors*) open_in_editor ~/.config/hypr/monitors.conf ;;
   *dns*) present_terminal omarchy-setup-dns ;;
   *docker*db*) present_terminal omarchy-install-docker-dbs ;;
   *config*) show_setup_config_menu ;;
