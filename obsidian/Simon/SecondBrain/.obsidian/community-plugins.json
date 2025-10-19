@@ -1,6 +1,5 @@
 [
   "obsidian-vimrc-support",
-  "omnisearch",
   "remember-cursor-position",
   "obsidian-scroll-offset",
   "obsidian-hider",
@@ -33,7 +32,6 @@
   "copy-document-as-html",
   "obsidian-linter",
   "calendar",
-  "obsidian-excalidraw-plugin",
-  "excalibrain",
-  "obsidian-list-callouts"
+  "obsidian-list-callouts",
+  "omnisearch"
 ]

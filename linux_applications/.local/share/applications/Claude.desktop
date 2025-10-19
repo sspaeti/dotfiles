@@ -7,3 +7,4 @@ Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Claude AI.png
 StartupNotify=true
+MimeType=x-scheme-handler/claude;

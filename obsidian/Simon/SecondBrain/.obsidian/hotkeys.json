@@ -235,8 +235,8 @@
   "editor:insert-wikilink": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Alt",
+        "Mod"
       ],
       "key": "I"
     }
@@ -444,8 +444,8 @@
   "editor:toggle-italics": [
     {
       "modifiers": [
-        "Alt",
-        "Mod"
+        "Mod",
+        "Shift"
       ],
       "key": "I"
     }
