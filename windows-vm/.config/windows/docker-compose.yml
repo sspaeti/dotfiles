@@ -20,6 +20,6 @@ services:
       - 3389:3389/udp
     volumes:
       - /home/sspaeti/.windows:/storage
-      - /home/sspaeti/Windows:/shared
+      - /home/sspaeti/Simon/Sync:/data
     restart: always
     stop_grace_period: 2m
