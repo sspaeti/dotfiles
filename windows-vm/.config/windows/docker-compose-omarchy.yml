@@ -1,0 +1,25 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: omarchy-windows
+    environment:
+      VERSION: "11"
+      RAM_SIZE: "32G"
+      CPU_CORES: "4"
+      DISK_SIZE: "32G"
+      USERNAME: "sspaeti"
+      PASSWORD: "admin"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - /home/sspaeti/.windows:/storage
+      - /home/sspaeti/Simon/Sync:/data
+    restart: always
+    stop_grace_period: 2m
