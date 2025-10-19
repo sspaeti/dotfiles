@@ -23,8 +23,8 @@ menu() {
 
   # Removed --theme dmenu_250 as it doesn't exist in walker 2.x
   # Walker will use the default theme from config.toml
-  # Use --exit to avoid using background service that might merge results
-  echo -e "$options" | walker --dmenu --exit -p "$prompt…" "${args[@]}"
+  # Use omarchy-launch-walker like the official menu does
+  echo -e "$options" | omarchy-launch-walker --dmenu --width 295 --minheight 1 --maxheight 600 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
 terminal() {
@@ -368,6 +368,7 @@ show_system_menu() {
 }
 
 show_main_menu() {
+  logger -t "omarchy-menu-flat" "show_main_menu called"
   # Only show the direct action options, no icons for clean text-only search
   local flat_options="Apps"
   flat_options="$flat_options\nKeybindings"
@@ -400,19 +401,29 @@ show_main_menu() {
   selection="$(menu "Go" "$flat_options")"
   # Exit if cancelled (empty selection)
   [[ -z "$selection" ]] && exit 0
+  # Debug logging
+  logger -t "omarchy-menu-flat" "Selected: '$selection'"
   go_to_menu "$selection"
 }
 
 go_to_menu() {
-  case "${1,,}" in
-  *apps*) walker -p "Launch…" ;;
+  local selection_lower="${1,,}"
+  logger -t "omarchy-menu-flat" "go_to_menu called with: '$1' (lowercase: '$selection_lower')"
+
+  case "$selection_lower" in
+  *apps*)
+    logger -t "omarchy-menu-flat" "Matched: apps"
+    walker -p "Launch…" ;;
   *keybindings*) omarchy-menu-keybindings ;;
   *theme*) show_theme_menu ;;
   *font*) show_font_menu ;;
   *background*) omarchy-theme-bg-next ;;
   *screensaver*) omarchy-toggle-screensaver ;;
-  *audio*) setsid uwsm-app -- $TERMINAL --class=Wiremix -e wiremix & ;;
+  *audio*)
+    logger -t "omarchy-menu-flat" "Matched: audio - launching wiremix"
+    setsid uwsm-app -- $TERMINAL --class=Wiremix -e wiremix & ;;
   *wifi*|*wlan*)
+    logger -t "omarchy-menu-flat" "Matched: wifi/wlan"
     rfkill unblock wifi
     omarchy-launch-wifi
     ;;
@@ -439,6 +450,9 @@ go_to_menu() {
   *relaunch*) uwsm stop ;;
   *restart*) ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot ;;
   *shutdown*) ~/.config/hypr/sspaeti/omarchy-system-menu-intercept poweroff ;;
+  *)
+    logger -t "omarchy-menu-flat" "No match found for: '$1'"
+    ;;
   esac
 }
 

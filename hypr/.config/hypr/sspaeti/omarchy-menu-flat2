@@ -1,0 +1,228 @@
+#!/bin/bash
+
+# Flattened omarchy menu - all actions in a single searchable list
+# Based on /home/sspaeti/.local/share/omarchy/bin/omarchy-menu
+
+export PATH="$HOME/.local/share/omarchy/bin:$PATH"
+
+# Set TERMINAL if not already set (needed when running from keybinds)
+export TERMINAL="${TERMINAL:-alacritty}"
+
+# Main flat menu with all actions
+selection=$(echo -e "\
+Apps
+Keybindings
+Omarchy Manual
+Hyprland Wiki
+Arch Wiki
+Neovim Keymaps
+Bash Cheatsheet
+Theme
+Font
+Background
+Screensaver Config
+Screenshot
+Screenrecord
+Color Picker
+Toggle Screensaver
+Toggle Nightlight
+Toggle Idle Lock
+Toggle Waybar
+Audio
+Wifi
+Bluetooth
+Power Profile
+Monitors
+Keybindings Config
+Input Config
+Defaults Config
+DNS Setup
+Fingerprint Setup
+Fido2 Setup
+Hyprland Config
+Hypridle Config
+Hyprlock Config
+Hyprsunset Config
+Swayosd Config
+Walker Config
+Waybar Config
+XCompose Config
+Install Package
+Install AUR
+Install Web App
+Install TUI
+Install Dropbox
+Install Tailscale
+Install Bitwarden
+Install Chromium Account
+Install VSCode
+Install Cursor
+Install Zed
+Install Sublime Text
+Install Helix
+Install Emacs
+Install Alacritty
+Install Ghostty
+Install Kitty
+Install Claude Code
+Install Gemini
+Install LM Studio
+Install Ollama
+Install Crush
+Install opencode
+Install Steam
+Install RetroArch
+Install Minecraft
+Install Theme
+Install Font
+Install Development
+Remove Package
+Remove Web App
+Remove TUI
+Remove Theme
+Remove Windows VM
+Remove Fingerprint
+Remove Fido2
+Update Omarchy
+Update Branch
+Update Config
+Update Extra Themes
+Update Firmware
+Update Timezone
+Update Password
+Restart Hypridle
+Restart Hyprsunset
+Restart Swayosd
+Restart Walker
+Restart Waybar
+Restart Audio
+Restart Wifi
+Restart Bluetooth
+Lock Screen
+Launch Screensaver
+Suspend
+Relaunch Hyprland
+Restart System
+Shutdown System" | omarchy-launch-walker --dmenu --width 295 --minheight 1 --maxheight 600 -p "Action…" 2>/dev/null)
+
+# Exit if cancelled
+[[ -z "$selection" ]] && exit 0
+
+# Log the selection for debugging
+logger -t "omarchy-menu-flat2" "Selected: '$selection', TERMINAL='$TERMINAL'"
+
+# Execute based on selection
+case "$selection" in
+  "Apps") walker -p "Launch…" ;;
+  "Keybindings") omarchy-menu-keybindings ;;
+  "Omarchy Manual") omarchy-launch-webapp "https://learn.omacom.io/2/the-omarchy-manual" ;;
+  "Hyprland Wiki") omarchy-launch-webapp "https://wiki.hypr.land/" ;;
+  "Arch Wiki") omarchy-launch-webapp "https://wiki.archlinux.org/title/Main_page" ;;
+  "Neovim Keymaps") omarchy-launch-webapp "https://www.lazyvim.org/keymaps" ;;
+  "Bash Cheatsheet") omarchy-launch-webapp "https://devhints.io/bash" ;;
+
+  "Theme") omarchy-menu theme ;;
+  "Font") omarchy-menu font ;;
+  "Background") omarchy-theme-bg-next ;;
+  "Screensaver Config") open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
+
+  "Screenshot") omarchy-menu screenshot ;;
+  "Screenrecord") omarchy-menu screenrecord ;;
+  "Color Picker") pkill hyprpicker || hyprpicker -a ;;
+
+  "Toggle Screensaver") omarchy-toggle-screensaver ;;
+  "Toggle Nightlight") omarchy-toggle-nightlight ;;
+  "Toggle Idle Lock") omarchy-toggle-idle ;;
+  "Toggle Waybar") omarchy-toggle-waybar ;;
+
+  "Audio")
+    logger -t "omarchy-menu-flat2" "Launching: $TERMINAL --class=Wiremix -e wiremix"
+    $TERMINAL --class=Wiremix -e wiremix ;;
+
+  "Wifi") rfkill unblock wifi && omarchy-launch-wifi ;;
+  "Bluetooth") rfkill unblock bluetooth && blueberry ;;
+  "Power Profile") omarchy-menu power ;;
+  "Monitors") open_in_editor ~/.config/hypr/monitors.conf ;;
+  "Keybindings Config") open_in_editor ~/.config/hypr/bindings.conf ;;
+  "Input Config") open_in_editor ~/.config/hypr/input.conf ;;
+  "Defaults Config") open_in_editor ~/.config/uwsm/default ;;
+  "DNS Setup") omarchy-launch-floating-terminal-with-presentation omarchy-setup-dns ;;
+  "Fingerprint Setup") omarchy-launch-floating-terminal-with-presentation omarchy-setup-fingerprint ;;
+  "Fido2 Setup") omarchy-launch-floating-terminal-with-presentation omarchy-setup-fido2 ;;
+
+  "Hyprland Config") open_in_editor ~/.config/hypr/hyprland.conf ;;
+  "Hypridle Config") open_in_editor ~/.config/hypr/hypridle.conf && omarchy-restart-hypridle ;;
+  "Hyprlock Config") open_in_editor ~/.config/hypr/hyprlock.conf ;;
+  "Hyprsunset Config") open_in_editor ~/.config/hypr/hyprsunset.conf && omarchy-restart-hyprsunset ;;
+  "Swayosd Config") open_in_editor ~/.config/swayosd/config.toml && omarchy-restart-swayosd ;;
+  "Walker Config") open_in_editor ~/.config/walker/config.toml && omarchy-restart-walker ;;
+  "Waybar Config") open_in_editor ~/.config/waybar/config.jsonc && omarchy-restart-waybar ;;
+  "XCompose Config") open_in_editor ~/.XCompose && omarchy-restart-xcompose ;;
+
+  "Install Package") $TERMINAL -e omarchy-pkg-install ;;
+  "Install AUR") $TERMINAL -e omarchy-pkg-aur-install ;;
+  "Install Web App") omarchy-launch-floating-terminal-with-presentation omarchy-webapp-install ;;
+  "Install TUI") omarchy-launch-floating-terminal-with-presentation omarchy-tui-install ;;
+  "Install Dropbox") omarchy-launch-floating-terminal-with-presentation omarchy-install-dropbox ;;
+  "Install Tailscale") omarchy-launch-floating-terminal-with-presentation omarchy-install-tailscale ;;
+  "Install Bitwarden") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Bitwarden...'; sudo pacman -S --noconfirm bitwarden bitwarden-cli && setsid gtk-launch bitwarden" ;;
+  "Install Chromium Account") omarchy-launch-floating-terminal-with-presentation omarchy-install-chromium-google-account ;;
+
+  "Install VSCode") omarchy-launch-floating-terminal-with-presentation omarchy-install-vscode ;;
+  "Install Cursor") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Cursor from AUR...'; yay -S --noconfirm cursor-bin && setsid gtk-launch cursor" ;;
+  "Install Zed") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Zed...'; sudo pacman -S --noconfirm zed && setsid gtk-launch dev.zed.Zed" ;;
+  "Install Sublime Text") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Sublime Text from AUR...'; yay -S --noconfirm sublime-text-4 && setsid gtk-launch sublime_text" ;;
+  "Install Helix") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Helix...'; sudo pacman -S --noconfirm helix" ;;
+  "Install Emacs") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Emacs...'; sudo pacman -S --noconfirm emacs-wayland && systemctl --user enable --now emacs.service" ;;
+
+  "Install Alacritty") omarchy-launch-floating-terminal-with-presentation "omarchy-install-terminal alacritty" ;;
+  "Install Ghostty") omarchy-launch-floating-terminal-with-presentation "omarchy-install-terminal ghostty" ;;
+  "Install Kitty") omarchy-launch-floating-terminal-with-presentation "omarchy-install-terminal kitty" ;;
+
+  "Install Claude Code") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Claude Code...'; sudo pacman -S --noconfirm claude-code" ;;
+  "Install Gemini") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Gemini...'; sudo pacman -S --noconfirm gemini-cli" ;;
+  "Install LM Studio") omarchy-launch-floating-terminal-with-presentation "echo 'Installing LM Studio from AUR...'; yay -S --noconfirm lmstudio" ;;
+  "Install Ollama") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Ollama...'; sudo pacman -S --noconfirm ollama" ;;
+  "Install Crush") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Crush from AUR...'; yay -S --noconfirm crush-bin" ;;
+  "Install opencode") omarchy-launch-floating-terminal-with-presentation "echo 'Installing opencode from AUR...'; yay -S --noconfirm opencode-bin" ;;
+
+  "Install Steam") omarchy-launch-floating-terminal-with-presentation omarchy-install-steam ;;
+  "Install RetroArch") omarchy-launch-floating-terminal-with-presentation "echo 'Installing RetroArch from AUR...'; yay -S --noconfirm retroarch retroarch-assets libretro libretro-fbneo && setsid gtk-launch com.libretro.RetroArch.desktop" ;;
+  "Install Minecraft") omarchy-launch-floating-terminal-with-presentation "echo 'Installing Minecraft...'; sudo pacman -S --noconfirm minecraft-launcher && setsid gtk-launch minecraft-launcher" ;;
+
+  "Install Theme") omarchy-launch-floating-terminal-with-presentation omarchy-theme-install ;;
+  "Install Font") omarchy-menu "Install Font" ;;
+  "Install Development") omarchy-menu "Install Development" ;;
+
+  "Remove Package") $TERMINAL -e omarchy-pkg-remove ;;
+  "Remove Web App") omarchy-launch-floating-terminal-with-presentation omarchy-webapp-remove ;;
+  "Remove TUI") omarchy-launch-floating-terminal-with-presentation omarchy-tui-remove ;;
+  "Remove Theme") omarchy-launch-floating-terminal-with-presentation omarchy-theme-remove ;;
+  "Remove Windows VM") omarchy-launch-floating-terminal-with-presentation "omarchy-windows-vm remove" ;;
+  "Remove Fingerprint") omarchy-launch-floating-terminal-with-presentation "omarchy-setup-fingerprint --remove" ;;
+  "Remove Fido2") omarchy-launch-floating-terminal-with-presentation "omarchy-setup-fido2 --remove" ;;
+
+  "Update Omarchy") omarchy-launch-floating-terminal-with-presentation omarchy-update ;;
+  "Update Branch") omarchy-menu "Update Branch" ;;
+  "Update Config") omarchy-menu "Update Config" ;;
+  "Update Extra Themes") omarchy-launch-floating-terminal-with-presentation omarchy-theme-update ;;
+  "Update Firmware") omarchy-launch-floating-terminal-with-presentation omarchy-update-firmware ;;
+  "Update Timezone") omarchy-launch-floating-terminal-with-presentation omarchy-tz-select ;;
+  "Update Password") omarchy-menu "Update Password" ;;
+
+  "Restart Hypridle") omarchy-restart-hypridle ;;
+  "Restart Hyprsunset") omarchy-restart-hyprsunset ;;
+  "Restart Swayosd") omarchy-restart-swayosd ;;
+  "Restart Walker") omarchy-restart-walker ;;
+  "Restart Waybar") omarchy-restart-waybar ;;
+  "Restart Audio") omarchy-launch-floating-terminal-with-presentation omarchy-restart-pipewire ;;
+  "Restart Wifi") omarchy-launch-floating-terminal-with-presentation omarchy-restart-wifi ;;
+  "Restart Bluetooth") omarchy-launch-floating-terminal-with-presentation omarchy-restart-bluetooth ;;
+
+  "Lock Screen") omarchy-lock-screen ;;
+  "Launch Screensaver") omarchy-launch-screensaver force ;;
+  "Suspend") systemctl suspend ;;
+  "Relaunch Hyprland") uwsm stop ;;
+  "Restart System") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot ;;
+  "Shutdown System") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept poweroff ;;
+esac
