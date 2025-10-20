@@ -7,7 +7,7 @@ set -euo pipefail
 MODE="${1:-both}"
 
 # Use walker instead of fuzzel
-emoji="$(sed '1,/^### DATA ###$/d' "$0" | walker --dmenu --placeholder "Emoji: " --forceprint | cut -d ' ' -f 1 | tr -d '\n')"
+emoji="$(sed '1,/^### DATA ###$/d' "$0" | walker --dmenu -p "Emoji: " 2>/dev/null | cut -d ' ' -f 1 | tr -d '\n')"
 
 case "$MODE" in
     type)
