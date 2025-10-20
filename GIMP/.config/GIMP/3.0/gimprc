@@ -7,10 +7,10 @@
 # Preferences dialog.
 
 (prev-language "American English")
-(config-version "3.0.4")
-(import-raw-plug-in "${gimp_plug_in_dir}/plug-ins/file-raw-placeholder/file-raw-placeholder")
-(monitor-xresolution 146)
-(monitor-yresolution 144)
+(config-version "3.0.6")
+(import-raw-plug-in "${gimp_plug_in_dir}/plug-ins/file-darktable/file-darktable")
+(monitor-xresolution 108)
+(monitor-yresolution 108)
 (theme-color-scheme light)
 (fill-options
     (style fg-color)
