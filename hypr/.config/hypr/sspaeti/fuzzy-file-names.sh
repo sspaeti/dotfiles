@@ -25,7 +25,7 @@ for dir in "${AVAILABLE_DIRS[@]}"; do
     DIR_MENU="$DIR_MENU$(basename "$dir") ($dir)\n"
 done
 
-SELECTED_DIR=$(echo -e "$DIR_MENU" | walker --dmenu --placeholder "Select search directory: " --forceprint)
+SELECTED_DIR=$(echo -e "$DIR_MENU" | walker --dmenu -p "Select search directory: " 2>/dev/null)
 
 # Exit if no directory selected
 if [ -z "$SELECTED_DIR" ]; then
@@ -36,7 +36,7 @@ fi
 SEARCH_DIR=$(echo "$SELECTED_DIR" | sed 's/.*(\(.*\))/\1/')
 
 # Get search term from user
-SEARCH_TERM=$(walker --dmenu --placeholder "Search file names for: " --forceprint)
+SEARCH_TERM=$(walker --dmenu -p "Search file names for: " 2>/dev/null)
 
 # Exit if no search term
 if [ -z "$SEARCH_TERM" ]; then
@@ -66,7 +66,7 @@ SELECTED=$(fd -t f --hidden --exclude .git --exclude node_modules --exclude .cac
         } <<< "$(cat)"
     } | \
     head -n 200 | \
-    walker --dmenu --placeholder "Results: " --forceprint)
+    walker --dmenu -p "Results: " 2>/dev/null)
 
 # Exit if nothing selected
 if [ -z "$SELECTED" ]; then
@@ -77,7 +77,7 @@ fi
 FILE_PATH="$SELECTED"
 
 # Show options for what to do with the file
-ACTION=$(echo -e "Open file\nCopy path to clipboard\nOpen folder in Nautilus\nOpen folder in terminal" | walker --dmenu --placeholder "Action: " --forceprint)
+ACTION=$(echo -e "Open file\nCopy path to clipboard\nOpen folder in Nautilus\nOpen folder in terminal" | walker --dmenu -p "Action: " 2>/dev/null)
 
 if [ "$ACTION" = "Copy path to clipboard" ]; then
     echo "$FILE_PATH" | wl-copy
