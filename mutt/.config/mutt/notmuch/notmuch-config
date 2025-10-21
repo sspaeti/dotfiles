@@ -1,0 +1,28 @@
+# Notmuch configuration for email screening system
+# This replaces folder-based organization with tag-based organization
+
+[database]
+path=/home/sspaeti/Documents/mutt/sspaeti.com
+
+[user]
+name=Simon Späti
+primary_email=simon@ssp.sh
+other_email=simon@sspaeti.com;simu@sspaeti.com
+
+[new]
+tags=unread;inbox;new
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true
+
+# Initial tagging rules
+[new]
+# Tag all new mail with 'new' and 'inbox'
+tags=new;inbox;
+
+# Auto-tagging based on folders (if needed for backward compatibility)
+# These will apply when notmuch indexes new mail

@@ -1,0 +1,134 @@
+# mbsync configuration for sspaeti.com
+# This is a template - customize and rename to ~/.mbsyncrc or ~/.config/mbsync/mbsyncrc
+
+# IMAP Account Configuration
+IMAPAccount sspaeti.com
+Host imap.mail.hostpoint.ch
+Port 993
+User simu@sspaeti.com
+# You can use PassCmd to get password from a command instead of storing it
+# PassCmd "pass show email/sspaeti.com"
+# Or use a password file:
+# PassCmd "cat ~/.dotfiles/zsh/.secret-mbsync"
+# Or set it directly (less secure):
+# Pass yourpasswordhere
+PassCmd "grep imap_pass ~/.dotfiles/zsh/.secret.muttrc | cut -d'\"' -f2"
+TLSType IMAPS
+# For Arch Linux:
+CertificateFile /etc/ssl/cert.pem
+
+# Remote IMAP Storage
+IMAPStore sspaeti.com-remote
+Account sspaeti.com
+
+# Local Maildir Storage
+MaildirStore sspaeti.com-local
+Path ~/Documents/mutt/sspaeti.com/
+Inbox ~/Documents/mutt/sspaeti.com/INBOX
+SubFolders Verbatim
+
+# Channel Configuration - Sync everything
+Channel sspaeti.com-inbox
+Far :sspaeti.com-remote:INBOX
+Near :sspaeti.com-local:INBOX
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-sent
+Far :sspaeti.com-remote:Sent
+Near :sspaeti.com-local:Sent
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-drafts
+Far :sspaeti.com-remote:Drafts
+Near :sspaeti.com-local:Drafts
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-trash
+Far :sspaeti.com-remote:Trash
+Near :sspaeti.com-local:Trash
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-junk
+Far :sspaeti.com-remote:Junk
+Near :sspaeti.com-local:Junk
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-archive
+Far :sspaeti.com-remote:Archive
+Near :sspaeti.com-local:Archive
+Create Both
+Expunge Both
+SyncState *
+
+# Add any other folders you have
+Channel sspaeti.com-toscreen
+Far :sspaeti.com-remote:ToScreen
+Near :sspaeti.com-local:ToScreen
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-screenedout
+Far :sspaeti.com-remote:ScreenedOut
+Near :sspaeti.com-local:ScreenedOut
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-waiting
+Far :sspaeti.com-remote:Waiting
+Near :sspaeti.com-local:Waiting
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-someday
+Far :sspaeti.com-remote:Someday
+Near :sspaeti.com-local:Someday
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-feed
+Far :sspaeti.com-remote:Feed
+Near :sspaeti.com-local:Feed
+Create Both
+Expunge Both
+SyncState *
+
+Channel sspaeti.com-papertrail
+Far :sspaeti.com-remote:PaperTrail
+Near :sspaeti.com-local:PaperTrail
+Create Both
+Expunge Both
+SyncState *
+
+# Group all channels together
+Group sspaeti.com
+Channel sspaeti.com-inbox
+Channel sspaeti.com-sent
+Channel sspaeti.com-drafts
+Channel sspaeti.com-trash
+Channel sspaeti.com-junk
+Channel sspaeti.com-archive
+Channel sspaeti.com-toscreen
+Channel sspaeti.com-screenedout
+Channel sspaeti.com-waiting
+Channel sspaeti.com-someday
+Channel sspaeti.com-feed
+Channel sspaeti.com-papertrail
+
+# Usage:
+# mbsync sspaeti.com          # Sync all channels
+# mbsync sspaeti.com-inbox    # Sync just inbox
+# mbsync -a                   # Sync all accounts

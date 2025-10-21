@@ -1,0 +1,317 @@
+
+
+### offline email -------------------------
+set folder = "~/Documents/mutt/sspaeti.com/"
+alias me "Simon Späti" "simon@ssp.sh"
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+# set bcc="sspaeti@hey.com"
+
+# Neomutt will actively add CR or LF after the exact characters. As I'm doing them myself, I set it to 0.
+# set wrap=0
+set text_flowed
+
+### Direct -------------------------------
+# set folder = "imaps://simu@sspaeti.com@imap.mail.hostpoint.ch:993"
+# set smtp_url = "smtp://simu@sspaeti.com@asmtp.mail.hostpoint.ch:587"
+
+# set smpt password with ENV variable
+# set smtp_pass = "$HOSTSPINT_SMTP_PASSWORD_SIMU"
+# set imap_pass = "password"
+source ~/.dotfiles/zsh/.secret.muttrc
+
+set realname = "Simon Späti"
+set from = "simon@ssp.sh"
+# accounts in `~/msmtprc`
+set sendmail = "msmtp -a simon@sspaeti.com"
+# send each mail bcc to hey email in order to have the full picture there too
+send-hook . "my_hdr Bcc: sspaeti@hey.com"
+
+#Create Macros for Switching Accounts:
+macro compose <F1> "<enter-command>set sendmail='msmtp -a simon@ssp.sh'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+macro compose <F2> "<enter-command>set sendmail='msmtp -a simon@sspaeti.com'<enter><enter-command>set from='simu@sspaeti.com'<enter>"
+macro compose <F3> "<enter-command>set sendmail='msmtp -a simu@sspaeti.com'<enter><enter-command>set from='simon@ssp.sh'<enter>"
+
+macro index <F1> ":set from='simon@ssp.sh'\n:set sendmail='mssmtp -a simon@ssp.sh'\n"
+macro index <F2> ":set from='simon@sspaeti.com'\n:set sendmail='msmtp -a simon@sspaeti.com'\n"
+macro index <F3> ":set from='simu@sspaeti.com'\n:set sendmail='msmtp -a simu@sspaeti.com'\n"
+
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+
+# Ensure TLS is enforced
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+mailboxes =INBOX =ToScreen =ScreenedOut =Waiting =Scheduled =Someday =Sent =Trash =Drafts =Junk =Archive =Others =Feed =PaperTrail =Spam"
+
+
+
+# macro compose <F4> "<enter-command>set sendmail='/usr/bin/msmtp -a gmail.com'<enter><enter-command>set from='simon.spaeti@gmail.com'<enter>"
+
+# SCREENER
+#
+## Step 3: Decision Making Macros
+
+# Screen In and move to Inbox
+# 1. Takes the current message and sends it through a pipeline for processing.
+# 2. Uses awk to extract the last field (email address) from the line that starts with From: . The $NF is a special awk variable that represents the last field in a record.
+# 3. Removes angle brackets from around the email address, which are commonly used in email headers.
+# 4. Appends the email address to the screened_in.txt file.
+# 5. Saves the message to the Inbox after the macro executes.
+#works better with MIME types. done with formail
+macro index,pager I "<pipe-message>formail -zx From: | awk '/@/ {print \$NF}' | tr -d '<>' | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
+
+# this does:
+# 1. Appends the email address to the screened_out.txt file.
+# 2. Saves the message to a folder named ScreenedOut after execution.
+# macro index,pager O "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+macro index,pager O "<pipe-message>formail -zx From: | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+
+# add to Feed list
+# macro index,pager F "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+macro index,pager F "<pipe-message>formail -zx From: | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+
+
+# add to papertrail list
+# macro index,pager P "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
+macro index,pager P "<pipe-message>formail -zx From: | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
+
+
+# ## old / archive
+# macro index,pager I "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_in.txt<enter><save-message>~/Documents/mutt/sspaeti.com/INBOX<enter>y" "Screen in this sender"
+# macro index,pager O "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/screened_out.txt<enter><save-message>~/Documents/mutt/sspaeti.com/ScreenedOut<enter>y" "Screen out this sender"
+# macro index,pager F "<pipe-message>awk '/^From: / {print \$NF}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager F "<pipe-message>awk '/^From: / { match(\$0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}/, arr); if(arr[0] != \"\") print arr[0] }' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager F "<pipe-message>echo %{from}<enter> | ./extract_email.sh | xargs -I {} echo {} >> ~/.config/mutt/feed.txt<enter><save-message>~/Documents/mutt/sspaeti.com/Feed<enter>y" "Add sender to Feed"
+# macro index,pager P "<pipe-message>awk -F'[<>]' '/^From: / {print \$2}' | tr -d '<>' | xargs -I {} echo {} >> ~/.config/mutt/papertrail.txt<enter><save-message>~/Documents/mutt/sspaeti.com/PaperTrail<enter>y" "Add sender to PaperTrail"
+
+## Step 6: Updating Lists and Filters
+set my_screen_update_macro="<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
+# macro index F5 "<shell-escape>~/.config/mutt/update_screen_lists.sh<enter>"
+
+
+# Where to put the stuff
+set header_cache = "~/.cache/mutt/headers"
+set message_cachedir = "~/.cache/mutt/bodies"
+set certificate_file = "~/.cache/mutt/certificates"
+#unset record
+
+set signature = "~/.config/mutt/signature"
+
+# link to mailcap file
+set mailcap_path = "~/.config/mutt/mailcap"
+# open attachments with mailcap with <return>
+bind attach <return> view-mailcap             
+# save attachments to a folder
+macro attach s '<save-entry> <bol>~/Documents/attachments/<eol>' 'save attachment'
+auto_view text/html		# automatically show html (mailcap uses lynx)
+
+#urlscan: open urls
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+# macro pager \cb "|urlview\n"
+
+# query
+set query_command="/opt/homebrew/bin/lbdbq '%s'"
+bind editor <Tab> complete-query
+
+source ~/.config/mutt/color.muttrc
+
+bind index,pager i noop
+bind index,pager g noop
+bind index \Cf noop
+bind index,pager M noop
+bind index,pager C noop
+
+# General rebindings
+# set editor = "nvim"
+set editor="nvim -c 'setlocal filetype=markdown'"
+# for proper quoting
+set indent_string="> "
+
+
+bind index gg first-entry
+bind index j next-entry
+bind index k previous-entry
+bind attach <return> view-mailcap
+bind attach l view-mailcap
+bind editor <space> noop
+bind index G last-entry
+bind pager,attach h exit
+bind pager j next-line
+bind pager k previous-line
+bind pager l view-attachments
+
+
+#Vim navigation
+# Changed bindings for scrolling and deleting
+bind index,pager d noop
+bind index,pager,browser \Cd half-down
+bind index,pager,browser \Cu half-up
+bind index,pager d half-down
+bind index,pager u half-up
+bind index D delete-message
+
+# Global search macro (excluding ScreenedOut folder)
+macro index \Cf "<limit>~B " "search in all folders"
+# appendix to add: <search term> & !~f ScreenedOut
+
+# Unbind ESC+q from sort
+unbind index,pager \eq
+
+# bind index U undelete-message
+# bind index L limit
+bind index h noop
+bind index l display-message
+bind index,query <space> tag-entry
+#bind browser h goto-parent
+macro browser h '<change-dir><kill-line>..<enter>' "Go to parent folder"
+bind index,pager H view-raw-message
+bind browser l select-entry
+bind browser gg top-page
+bind browser G bottom-page
+bind pager gg top
+bind pager G bottom
+#sync & screener
+# macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox><shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
+# both are seperate:
+macro index,pager S "<shell-escape>offlineimap -a sspaeti.com<enter><sync-mailbox>"
+# bind index,pager S sync-mailbox
+macro index,pager A "<shell-escape>~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1<enter><sync-mailbox>"
+
+
+# reomve selection
+# macro index U "T.t<enter>"
+# macro index U "<tag-pattern>.<enter>;<tag-toggle><enter>" 
+macro index U "<tag-pattern>.<enter>;t<enter>"
+
+
+
+
+
+bind index,pager R group-reply
+bind index \031 previous-undeleted	# Mouse wheel
+bind index \005 next-undeleted		# Mouse wheel
+bind pager \031 previous-line		# Mouse wheel
+bind pager \005 next-line		# Mouse wheel
+bind editor <Tab> complete-query
+
+
+## Move, copy and go to folders mappings
+macro index,pager gi "<change-folder>=INBOX<enter>" "go to INBOX"
+macro index,pager Mi ";<save-message>=INBOX<enter>y" "move mail to INBOX"
+
+macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+macro index,pager Md ";<save-message>=Drafts<enter>y" "move mail to drafts"
+
+macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
+macro index,pager Mj ";<save-message>=Junk<enter>y" "move mail to junk"
+
+macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+macro index,pager Mt ";<save-message>=Trash<enter>y" "move mail to trash"
+
+macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+
+macro index,pager gm "<change-folder>=Someday<enter>" "go to Someday"
+macro index,pager Mm ";<save-message>=Someday<enter>" "move mail to Someday"
+
+macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
+macro index,pager Ma ";<save-message>=Archive<enter>y" "move mail to archive"
+
+macro index,pager gw "<change-folder>=Waiting<enter>" "go to waiting"
+macro index,pager Mw ";<save-message>=Waiting<enter>y" "move mail to waiting"
+
+macro index,pager gk "<change-folder>=ToScreen<enter>" "go to screener"
+
+macro index,pager gf "<change-folder>=Feed<enter>" "go to Feed"
+macro index,pager Mf ";<save-message>=Feed<enter>y" "move mail to Feed"
+
+macro index,pager gp "<change-folder>=PaperTrail<enter>" "go to PaperTrail"
+macro index,pager Mp ";<save-message>=PaperTrail<enter>y" "move mail to PaperTrail"
+
+macro index,pager go "<change-folder>=ScreenedOut<enter>" "go to screened out"
+macro index,pager Mo ";<save-message>=ScreenedOut<enter>y" "move mail to screened out"
+
+macro index,pager gl "<show-log-messages><enter>" "go to log messages"
+
+# Sidebar mappings
+set sidebar_visible = yes
+set sidebar_on_right = yes
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set mail_check_stats
+# set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
+bind index,pager \Cp sidebar-prev-new
+bind index,pager \Cn sidebar-next-new
+bind index,pager B sidebar-toggle-visible
+
+
+# general settings from seniormars
+set pager_index_lines = 10          
+set pager_context = 3                # show 3 lines of context
+set pager_stop                       # stop at end of message
+set menu_scroll                      # scroll menu
+set tilde                            # use ~ to pad mutt
+set move=no                          # don't move messages when marking as read
+set mail_check = 30                  # check for new mail every 30 seconds
+set imap_keepalive = 900             # 15 minutes
+set sleep_time = 0                   # don't sleep when idle
+set wait_key = no		     # mutt won't ask "press key to continue"
+set envelope_from                    # which from?
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set forward_quote                    # include message in forwards
+set mime_forward                     # forward attachments as part of body
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set text_flowed=yes                  # correct indentation for plain text
+unset sig_dashes                     # no dashes before sig
+unset markers
+
+# Sort by newest conversation first.
+set charset = "utf-8"
+set uncollapse_jump
+set sort_re
+set sort = reverse-threads
+set sort_aux = last-date-received
+# How we reply and quote emails.
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set send_charset = "utf-8:iso-8859-1:us-ascii" # send in utf-8
+
+#Convert to HTML when hitting `m` for composing email
+# from: https://tom.wemyss.net/posts/neomutt-markdown-email/#2-set-up-a-pandoc-template-for-html-emails
+#
+# how it works:
+# Before pressing ‘y’ to send the message:
+# 1. Press ‘m’ to run the macro. All being well, this will automatically create another inline attachment containing both the HTML and the plain text.
+# 2. If you’re happy with the new attachment that got generated, then delete your markdown file by using the arrow keys to navigate the list of attachments and detaching the original text (pressing Shift and D with the default key bindings).
+# 3. Press send!
+macro compose m \
+"<enter-command>set pipe_decode<enter>\
+<pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter>\
+<pipe-message>pandoc -s -f gfm --self-contained -o /tmp/msg.html --resource-path ~/.config/mutt/templates/ --template email.html<enter>\
+<enter-command>unset pipe_decode<enter>\
+<attach-file>/tmp/msg.txt<enter>\
+<attach-file>/tmp/msg.html<enter>\
+<tag-entry><previous-entry><tag-entry><group-alternatives>" \
+"Convert markdown to HTML5 and plaintext alternative content types"
+
+# more configs at https://raw.githubusercontent.com/LukeSmithxyz/mutt-wizard/1c5085d3f203fbd4eef8813e0915fd6e3c899570/share/mutt-wizard.muttrc
+# and: https://seniormars.github.io/posts/neomutt/#motivation
+#

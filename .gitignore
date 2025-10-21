@@ -18,7 +18,7 @@ zsh/.secrets
 **/*.secret
 **/*.key
 .env.local
-
+zsh/.dotfiles/mutt/.lists
 
 #obsidian
 obsidian/Simon/SecondBrain/.obsidian/workspace
