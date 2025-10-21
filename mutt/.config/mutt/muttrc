@@ -160,6 +160,11 @@ bind pager G bottom
 # Remove selection
 macro index U "<tag-pattern>.<enter>;t<enter>"
 
+# Batch operations shortcuts
+# '@' - Limit by sender pattern (type partial email/domain, 'l'+'all' to reset)
+macro index,pager @ "<limit>~f " "limit to sender pattern"
+# 'T' - Tag by pattern (then use ;D to delete, ;Ma to archive, etc.)
+
 bind index,pager R group-reply
 bind index \031 previous-undeleted	# Mouse wheel
 bind index \005 next-undeleted		# Mouse wheel
