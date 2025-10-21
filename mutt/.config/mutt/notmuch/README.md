@@ -1,332 +1,134 @@
 # Notmuch Email Screening Setup
 
-This directory contains the configuration and scripts for using **notmuch** with Neomutt for tag-based email management instead of folder-based organization.
+Tag-based email management with **notmuch** + **mbsync** for Neomutt.
 
 ## Overview
 
-Instead of moving emails between folders (INBOX, ScreenedOut, Feed, etc.), notmuch uses **tags** to organize emails:
+Instead of moving emails between folders, notmuch uses **tags**:
 
-- `screened-in` - Approved senders (stay in inbox)
+- `screened-in` - Approved senders (inbox)
 - `screened-out` - Blocked senders (spam)
 - `feed` - Newsletters/feeds
-- `papertrail` - Receipts and papertrail items
-- `to-screen` - New emails needing manual review
-- Plus standard tags: `inbox`, `archive`, `spam`, `waiting`, `someday`, etc.
+- `papertrail` - Receipts
+- `to-screen` - Needs manual review
+- Plus: `inbox`, `archive`, `spam`, `waiting`, `someday`, etc.
 
-## Directory Structure
-
-```
-~/.config/mutt/
-├── muttrc-notmuch          # Main Neomutt config (use instead of muttrc)
-└── notmuch/
-    ├── README.md           # This file
-    ├── notmuch-config      # Notmuch database configuration
-    ├── notmuch_screening.sh # Tag-based screening script
-    ├── mbsyncrc.example    # Example mbsync config (recommended)
-    └── sync/
-        ├── notmuch_sync.sh         # Sync script for offlineimap + notmuch
-        └── mbsync_notmuch_sync.sh  # Sync script for mbsync + notmuch (recommended)
-```
-
-## Required Files (Already in Top-Level Directory)
-
-These files from your existing setup are still needed:
-
-- `~/.config/mutt/screened_in.txt` - List of approved email addresses
-- `~/.config/mutt/screened_out.txt` - List of blocked email addresses
-- `~/.config/mutt/feed.txt` - List of newsletter/feed email addresses
-- `~/.config/mutt/papertrail.txt` - List of papertrail email addresses
-- `~/.config/mutt/color.muttrc` - Your color scheme
-- `~/.config/mutt/signature` - Email signature
-- `~/.config/mutt/mailcap` - MIME type handlers
-- `~/.dotfiles/zsh/.secret.muttrc` - Password/secrets file
-
-## Installation & Setup
-
-### Prerequisites
-
-Install required packages on Arch Linux:
+## Quick Start
 
 ```bash
-# For notmuch
-sudo pacman -S notmuch
+# 1. Install packages
+sudo pacman -S notmuch isync
 
-# For mbsync (recommended over offlineimap)
-sudo pacman -S isync
+# 2. Configure mbsync
+cp ~/.config/mutt/notmuch/mbsyncrc.example ~/.mbsyncrc
+# Edit ~/.mbsyncrc - update PassCmd for password
 
-# If keeping offlineimap
-sudo pacman -S offlineimap
+# 3. Initial sync
+cd ~/.config/mutt
+make notmuch-sync    # Downloads all emails (takes time)
 
-# Required utilities (likely already installed)
-sudo pacman -S formail grep sed coreutils
+# 4. Initialize notmuch
+make notmuch-init    # Indexes emails
+
+# 5. Run screening
+make notmuch-screen  # Tags emails based on lists
+
+# 6. Launch neomutt
+neomutt
 ```
 
-### Option 1: Keep offlineimap (Easier Migration)
-
-1. **Initialize notmuch database:**
-   ```bash
-   notmuch setup
-   ```
-   - Database path: `/home/sspaeti/Documents/mutt/sspaeti.com`
-   - Your name: `Simon Späti`
-   - Primary email: `simon@ssp.sh`
-   - Other emails: `simon@sspaeti.com;simu@sspaeti.com`
-
-2. **Or use the pre-configured notmuch-config:**
-   ```bash
-   export NOTMUCH_CONFIG=~/.config/mutt/notmuch/notmuch-config
-   notmuch new
-   ```
-
-3. **Test the setup:**
-   ```bash
-   # Run initial screening
-   ~/.config/mutt/notmuch/notmuch_screening.sh
-
-   # Launch Neomutt with notmuch config
-   neomutt -F ~/.config/mutt/muttrc-notmuch
-   ```
-
-4. **Update your sync workflow:**
-   - Use `~/.config/mutt/notmuch/sync/notmuch_sync.sh` instead of your old sync script
-   - Or set up a cron job/systemd timer for automatic syncing
-
-### Option 2: Upgrade to mbsync (Recommended)
-
-**Why mbsync?**
-- 3-5x faster than offlineimap
-- Actively maintained (offlineimap is dormant)
-- Better IMAP compliance
-- Lower resource usage
-
-**Setup Steps:**
-
-1. **Configure mbsync:**
-   ```bash
-   cp ~/.config/mutt/notmuch/mbsyncrc.example ~/.mbsyncrc
-   ```
-
-2. **Edit `~/.mbsyncrc`:**
-   - Update the `PassCmd` line to match your password method
-   - Verify folder names match your IMAP server
-
-3. **Initial sync (takes a while):**
-   ```bash
-   mbsync -V sspaeti.com
-   ```
-
-4. **Initialize notmuch:**
-   ```bash
-   export NOTMUCH_CONFIG=~/.config/mutt/notmuch/notmuch-config
-   notmuch new
-   ```
-
-5. **Run initial screening:**
-   ```bash
-   ~/.config/mutt/notmuch/notmuch_screening.sh
-   ```
-
-6. **Launch Neomutt:**
-   ```bash
-   neomutt -F ~/.config/mutt/muttrc-notmuch
-   ```
-
-7. **Update your workflow:**
-   - Use `~/.config/mutt/notmuch/sync/mbsync_notmuch_sync.sh` for syncing
-
-## Usage
-
-### Starting Neomutt with Notmuch
+## Daily Usage
 
 ```bash
-neomutt -F ~/.config/mutt/muttrc-notmuch
+cd ~/.config/mutt
+
+make sync        # Sync once (fetch → screen → sync back)
+make             # Start continuous loop (syncs every 10 min)
+make help        # Show all commands
 ```
 
-Or create an alias in your shell config:
-```bash
-alias mutt="neomutt -F ~/.config/mutt/muttrc-notmuch"
-```
+## Key Bindings in Neomutt
 
-### Key Bindings (Same as Before!)
+**Screening (in email view):**
+- `I` - Approve sender → inbox
+- `O` - Block sender → spam
+- `F` - Add to Feed
+- `P` - Add to PaperTrail
 
-**Screening macros:**
-- `I` - Screen in sender (add to approved list, tag as `screened-in`)
-- `O` - Screen out sender (add to blocked list, tag as `screened-out`)
-- `F` - Add sender to Feed list (tag as `feed`)
-- `P` - Add sender to PaperTrail list (tag as `papertrail`)
+**Navigation:**
+- `gi` - INBOX, `gk` - ToScreen, `go` - ScreenedOut
+- `gf` - Feed, `gp` - PaperTrail, `gw` - Waiting
+- `gm` - Someday, `ga` - Archive, `gt` - Trash
 
-**Navigation (using virtual mailboxes):**
-- `gi` - Go to INBOX
-- `gk` - Go to ToScreen (emails needing review)
-- `go` - Go to ScreenedOut
-- `gf` - Go to Feed
-- `gp` - Go to PaperTrail
-- `gw` - Go to Waiting
-- `gm` - Go to Someday
-- `ga` - Go to Archive
-- `gt` - Go to Trash
-- `gs` - Go to Sent
-
-**Tagging macros:**
-- `Mi` - Tag as inbox
-- `Mo` - Tag as screened-out
-- `Mf` - Tag as feed
-- `Mp` - Tag as papertrail
-- `Mw` - Tag as waiting
-- `Mm` - Tag as someday
-- `Ma` - Tag as archive
-- `Mt` - Tag as trash
+**Tagging:**
+- `Mi` - inbox, `Mo` - screened-out, `Mf` - feed
+- `Mw` - waiting, `Mm` - someday, `Ma` - archive
 
 **Sync:**
-- `S` - Sync emails and run screening
-- `A` - Run screening only
+- `S` - Sync all, `A` - Screen only
 
-### How Screening Works
+## How It Works
 
-1. **Automatic screening on sync:**
-   - New emails are indexed by notmuch
-   - Screening script checks sender against your lists
-   - Tags are applied automatically
-
-2. **Manual screening:**
-   - Review emails in "ToScreen" mailbox (`gk`)
-   - Press `I` to approve sender → moves to INBOX
-   - Press `O` to block sender → tags as spam
-   - Press `F` for feeds, `P` for papertrail
-
-3. **List updates:**
-   - When you approve/block a sender, their email is added to the respective .txt file
-   - Previously received emails from that sender are retagged automatically
-
-## Files Explained
-
-### notmuch-config
-Notmuch database configuration. Defines:
-- Database path
-- Your email addresses
-- Default tags for new emails
-- Synchronization settings
-
-### notmuch_screening.sh
-Core screening logic. This script:
-1. Runs `notmuch new` to index new emails
-2. Reads your screened lists (screened_in.txt, screened_out.txt, etc.)
-3. Applies appropriate tags to emails based on sender
-4. Retags emails in ToScreen if sender status changed
-
-**You should run this after each sync.**
-
-### sync/notmuch_sync.sh
-Complete sync workflow for **offlineimap**:
-1. Checks Wi-Fi connection
-2. Runs offlineimap to fetch new emails
-3. Runs notmuch screening
-4. Syncs again to push any local changes
-
-### sync/mbsync_notmuch_sync.sh
-Complete sync workflow for **mbsync**:
-1. Checks Wi-Fi connection
-2. Runs mbsync to fetch new emails
-3. Runs notmuch screening
-4. Syncs again to push any local changes
-
-### mbsyncrc.example
-Template configuration for mbsync. Copy to `~/.mbsyncrc` and customize.
-
-## Automation
-
-### Systemd Timer (Recommended)
-
-Create `~/.config/systemd/user/mutt-sync.service`:
-```ini
-[Unit]
-Description=Mutt Email Sync with Notmuch
-
-[Service]
-Type=oneshot
-ExecStart=/home/sspaeti/.config/mutt/notmuch/sync/mbsync_notmuch_sync.sh
-```
-
-Create `~/.config/systemd/user/mutt-sync.timer`:
-```ini
-[Unit]
-Description=Sync emails every 10 minutes
-
-[Timer]
-OnBootSec=2min
-OnUnitActiveSec=10min
-
-[Install]
-WantedBy=timers.target
-```
-
-Enable and start:
-```bash
-systemctl --user enable --now mutt-sync.timer
-```
-
-### Cron Job Alternative
-
-Add to crontab (`crontab -e`):
-```bash
-*/10 * * * * /home/sspaeti/.config/mutt/notmuch/sync/mbsync_notmuch_sync.sh
-```
+1. **mbsync** downloads emails from IMAP to local Maildir
+2. **notmuch** indexes emails and applies tags based on:
+   - `~/.dotfiles/mutt/.lists/screened_in.txt`
+   - `~/.dotfiles/mutt/.lists/screened_out.txt`
+   - `~/.dotfiles/mutt/.lists/feed.txt`
+   - `~/.dotfiles/mutt/.lists/papertrail.txt`
+3. Emails from unknown senders get tagged `to-screen`
+4. Review `ToScreen` mailbox and press `I`/`O`/`F`/`P` to categorize
 
 ## Troubleshooting
 
-### Notmuch can't find database
+**Notmuch can't find database:**
 ```bash
 export NOTMUCH_CONFIG=~/.config/mutt/notmuch/notmuch-config
 notmuch new
 ```
 
-### Tags not applying
-Check that your .txt files have proper formatting:
+**Virtual mailboxes empty:**
 ```bash
-# Remove trailing whitespace
-sed -i 's/[[:space:]]*$//' ~/.config/mutt/screened_in.txt
+# Check tags
+NOTMUCH_CONFIG=~/.config/mutt/notmuch/notmuch-config notmuch search tag:inbox
 ```
 
-### Virtual mailboxes empty
-Run notmuch manually to check:
+**mbsync authentication fails:**
 ```bash
-notmuch search tag:to-screen
-notmuch search tag:inbox
+# Test password extraction
+grep imap_pass ~/.dotfiles/zsh/.secret.muttrc | cut -d'"' -f2
 ```
 
-### mbsync authentication fails
-Check password command in `~/.mbsyncrc`:
-```bash
-# Test password retrieval
-grep HOSTPOINT_SMTP_PASSWORD_SIMU ~/.dotfiles/zsh/.secret.muttrc | cut -d'"' -f2
+## Files
+
+```
+~/.config/mutt/
+├── muttrc                  # Main config
+├── Makefile                # make sync, make help
+└── notmuch/
+    ├── notmuch-config      # DB config
+    ├── notmuch_screening.sh # Tagging script
+    ├── mbsyncrc.example    # mbsync template
+    └── sync/mbsync_notmuch_sync.sh
+
+~/.dotfiles/mutt/.lists/    # Email lists (git ignored)
+├── screened_in.txt         # 1,723 approved senders
+├── screened_out.txt        # 1,287 blocked senders
+├── feed.txt                # 107 newsletters
+└── papertrail.txt          # 12 receipts
+
+~/.mbsyncrc                 # mbsync config
 ```
 
-## Migration from Folder-Based System
+## Why Notmuch?
 
-Your existing folder-based setup will continue to work. To migrate:
+- **Faster search** - Full-text search across all email
+- **Multiple tags** - Email can be "waiting" AND "important"
+- **No file moving** - Tags are metadata, files stay in place
+- **Better threading** - Excellent conversation threading
+- **Scriptable** - Easy custom tag rules
 
-1. **Keep both configs** - Use `muttrc` for old system, `muttrc-notmuch` for new
-2. **Test thoroughly** with notmuch before fully switching
-3. **Your .txt files work with both** - They're shared between systems
-4. **No data loss** - Notmuch doesn't modify your maildir, just indexes it
+## Resources
 
-## Advantages of Notmuch
-
-1. **Multiple tags per email** - An email can be both "waiting" and "important"
-2. **Faster search** - Full-text search across all email
-3. **No file moving** - Tags are just metadata, files stay in place
-4. **Better threading** - Notmuch excels at conversation threading
-5. **Scriptable** - Easy to write custom tag rules
-
-## Additional Resources
-
-- [Notmuch Documentation](https://notmuchmail.org/documentation/)
-- [Neomutt Notmuch Integration](https://neomutt.org/feature/notmuch)
-- [mbsync Documentation](https://isync.sourceforge.io/mbsync.html)
-
-## Support
-
-If you encounter issues:
-1. Check logs in `~/.config/mutt/logs/`
-2. Run screening script manually to see errors
-3. Test notmuch commands directly: `notmuch search`, `notmuch tag`, etc.
+- [Notmuch Docs](https://notmuchmail.org/doc/latest/man1/notmuch.html)
+- [Neomutt Notmuch](https://neomutt.org/feature/notmuch)
+- [mbsync Docs](https://isync.sourceforge.io/mbsync.html)
