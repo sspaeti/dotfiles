@@ -68,27 +68,48 @@ done < "$screened_in"
 printf "Tagging remaining new emails as to-screen...\n"
 notmuch tag +to-screen -new -- tag:new and not tag:screened-in and not tag:screened-out and not tag:feed and not tag:papertrail
 
-# Move previously screened emails if sender status changed
-printf "Updating tags for emails in to-screen based on current lists...\n"
+# Efficiently process to-screen emails against current lists
+printf "Processing to-screen emails against screening lists...\n"
 
-# Check to-screen emails and retag if sender is now in a list
-for msg_id in $(notmuch search --output=messages tag:to-screen); do
-    sender=$(notmuch show --format=json "$msg_id" | grep -o '"From":.*"' | head -1 | grep -Eo '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
-
-    if grep -Fxq "$sender" "$screened_in"; then
-        notmuch tag +screened-in +inbox -to-screen -- id:"$msg_id"
-        printf "Moved %s back to inbox (screened-in)\n" "$msg_id"
-    elif grep -Fxq "$sender" "$screened_out"; then
-        notmuch tag +screened-out +spam -to-screen -inbox -- id:"$msg_id"
-        printf "Tagged %s as screened-out\n" "$msg_id"
-    elif grep -Fxq "$sender" "$feed_list"; then
-        notmuch tag +feed -to-screen -inbox -- id:"$msg_id"
-        printf "Tagged %s as feed\n" "$msg_id"
-    elif grep -Fxq "$sender" "$papertrail_list"; then
-        notmuch tag +papertrail -to-screen -inbox -- id:"$msg_id"
-        printf "Tagged %s as papertrail\n" "$msg_id"
+# Process screened_in list against to-screen emails (most efficient: bulk operations)
+while IFS= read -r email; do
+    [ -z "$email" ] && continue
+    count=$(notmuch count from:"$email" tag:to-screen)
+    if [ "$count" -gt 0 ]; then
+        printf "  Screening in %d emails from %s\n" "$count" "$email"
+        notmuch tag +screened-in +inbox -to-screen -- from:"$email" tag:to-screen
     fi
-done
+done < "$screened_in"
+
+# Process screened_out list against to-screen emails
+while IFS= read -r email; do
+    [ -z "$email" ] && continue
+    count=$(notmuch count from:"$email" tag:to-screen)
+    if [ "$count" -gt 0 ]; then
+        printf "  Screening out %d emails from %s\n" "$count" "$email"
+        notmuch tag +screened-out +spam -to-screen -inbox -- from:"$email" tag:to-screen
+    fi
+done < "$screened_out"
+
+# Process feed list against to-screen emails
+while IFS= read -r email; do
+    [ -z "$email" ] && continue
+    count=$(notmuch count from:"$email" tag:to-screen)
+    if [ "$count" -gt 0 ]; then
+        printf "  Tagging %d emails from %s as feed\n" "$count" "$email"
+        notmuch tag +feed -to-screen -inbox -- from:"$email" tag:to-screen
+    fi
+done < "$feed_list"
+
+# Process papertrail list against to-screen emails
+while IFS= read -r email; do
+    [ -z "$email" ] && continue
+    count=$(notmuch count from:"$email" tag:to-screen)
+    if [ "$count" -gt 0 ]; then
+        printf "  Tagging %d emails from %s as papertrail\n" "$count" "$email"
+        notmuch tag +papertrail -to-screen -inbox -- from:"$email" tag:to-screen
+    fi
+done < "$papertrail_list"
 
 printf "Notmuch screening completed at $(date '+%Y-%m-%d %H:%M:%S')\n"
 printf -- "####################################\n"
