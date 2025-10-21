@@ -13,11 +13,27 @@ Instead of moving emails between folders, notmuch uses **tags**:
 - `to-screen` - Needs manual review
 - Plus: `inbox`, `archive`, `spam`, `waiting`, `someday`, etc.
 
+## Requirements
+
+### Essential
+- **notmuch** - Email indexing and tagging
+- **isync (mbsync)** - IMAP sync
+- **neomutt** - Email client with notmuch support
+
+### HTML Email Rendering
+- **w3m** - Primary HTML-to-text renderer (recommended)
+- **lynx** - Fallback HTML-to-text renderer
+
+Install all on Arch Linux:
+```bash
+sudo pacman -S notmuch isync neomutt w3m lynx
+```
+
 ## Quick Start
 
 ```bash
-# 1. Install packages
-sudo pacman -S notmuch isync
+# 1. Install packages (if not done above)
+sudo pacman -S notmuch isync neomutt w3m lynx
 
 # 2. Configure mbsync
 cp ~/.config/mutt/notmuch/mbsyncrc.example ~/.mbsyncrc
