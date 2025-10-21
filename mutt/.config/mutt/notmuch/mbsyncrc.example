@@ -12,7 +12,7 @@ User simu@sspaeti.com
 # PassCmd "cat ~/.dotfiles/zsh/.secret-mbsync"
 # Or set it directly (less secure):
 # Pass yourpasswordhere
-PassCmd "grep HOSTPOINT_SMTP_PASSWORD_SIMU ~/.dotfiles/zsh/.secret.muttrc | cut -d'\"' -f2"
+PassCmd "grep imap_pass ~/.dotfiles/zsh/.secret.muttrc | cut -d'\"' -f2"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 # For Arch Linux specifically:
