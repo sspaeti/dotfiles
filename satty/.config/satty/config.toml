@@ -1,0 +1,30 @@
+[general]
+initial-tool = "rectangle"
+
+# Custom colours for the colour palette
+[color-palette]
+# These will be shown in the toolbar for quick selection
+palette = [
+    "#FF5D62",  # Brand Red - your primary color
+    "#3150AA",  # Link (Light) - bright blue for highlights
+    "#98BB6C",  # Success - green for positive actions
+    "#FFA066",  # Warning - orange for attention
+    "#D27E99",  # Link Hover (Dark) - pink for secondary actions
+    "#DCD7BA"   # White/Text (Light) - beige for text/outlines
+]
+
+# These will be available in the color picker as presets
+custom = [
+    "#FF5D62",  # Brand Red
+    "#1F1F28",  # Dark 2 (Inner BG)
+    "#181820",  # Dark 1 (Outer BG)
+    "#3150AA",  # Link (Light)
+    "#658594",  # Link (Dark)
+    "#D27E99",  # Link Hover (Dark)
+    "#938AA9",  # Visited Link (Dark)
+    "#98BB6C",  # Success
+    "#FFA066",  # Warning
+    "#DCD7BA",  # White/Text (Light)
+    "#717C7C",  # Breadcrumb
+    "#363646"   # Accent BG
+]
