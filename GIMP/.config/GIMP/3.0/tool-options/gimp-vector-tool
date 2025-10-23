@@ -1,9 +1,0 @@
-# GIMP gimp-vector-tool options
-
-(brush "1. Pixel")
-(dynamics "Pressure Size")
-(pattern "Pine")
-(gradient "FG to BG (RGB)")
-(palette "Color History")
-
-# end of gimp-vector-tool options

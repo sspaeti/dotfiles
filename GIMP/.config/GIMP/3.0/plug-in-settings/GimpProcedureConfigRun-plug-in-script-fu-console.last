@@ -1,6 +1,0 @@
-# settings
-
-(run-mode interactive)
-(history 3 "(apropos \"crop\")" "print" "(apropos \"crop\")")
-
-# end of settings

@@ -1,8 +1,0 @@
-# GIMP gimp-ink-tool options
-
-(pattern "Pine")
-(brush-size 51)
-(brush-hardness 0.5)
-(size 2.2999999999999998)
-
-# end of gimp-ink-tool options
