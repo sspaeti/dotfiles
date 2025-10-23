@@ -1,28 +1,35 @@
 #!/bin/bash
 
 # Screenshot workflow: hyprshot -> Satty -> Editt
-# Simple and focused - no extra processing
+# Satty saves directly to Printscreen directory, Editt opens and edits that file
 
-# Generate timestamped filename
+# Set up directory structure with year-month
+YEAR_MONTH=$(date +'%Y-%m')
+OUTPUT_DIR="$HOME/Pictures/Printscreen/$YEAR_MONTH"
+
+# Create directory if it doesn't exist
+mkdir -p "$OUTPUT_DIR"
+
+# Generate timestamped filename - save directly to final location
 TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-TEMP_FILE="/tmp/satty-$TIMESTAMP.png"
+SCREENSHOT_FILE="$OUTPUT_DIR/screenshot-$TIMESTAMP.png"
 
-# Take screenshot with Satty for quick annotations
+# Take screenshot with Satty - save directly to Printscreen directory
 pkill slurp || hyprshot -m region --raw | \
   satty --filename - \
-    --output-filename "$TEMP_FILE" \
+    --output-filename "$SCREENSHOT_FILE" \
     --early-exit
 
 # Check if user saved the screenshot (file exists)
-if [[ -f "$TEMP_FILE" ]]; then
+if [[ -f "$SCREENSHOT_FILE" ]]; then
     # Copy to clipboard
-    wl-copy < "$TEMP_FILE"
+    wl-copy < "$SCREENSHOT_FILE"
 
-    # Always open in Editt for advanced editing
-    editt "$TEMP_FILE"
+    # Open in Editt for advanced editing
+    # Editt will open the file from Printscreen directory and save edits there
+    editt "$SCREENSHOT_FILE"
 
-    # Clean up temp file after Editt closes
-    rm -f "$TEMP_FILE"
+    notify-send "Screenshot saved" "$SCREENSHOT_FILE" -t 2000
 else
     notify-send "Screenshot cancelled" -t 1000
 fi
