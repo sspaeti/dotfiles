@@ -21,6 +21,7 @@ Theme
 Font
 Background
 Screensaver Config
+About
 Screenshot
 Screenrecord
 Color Picker
@@ -125,6 +126,7 @@ case "$selection" in
   "Font") omarchy-menu font ;;
   "Background") omarchy-theme-bg-next ;;
   "Screensaver Config") open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
+  "About") omarchy-launch-about ;;
 
   "Screenshot") omarchy-menu screenshot ;;
   "Screenrecord") omarchy-menu screenrecord ;;
