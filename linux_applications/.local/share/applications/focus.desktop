@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Focus @ Will
-Comment=Listeing focus music
-Exec=omarchy-launch-webapp "https://www.focusatwill.com/app/music"
-Terminal=false
-Type=Application
-Icon=/home/sspaeti/.local/share/applications/icons/salt.png
-StartupNotify=true

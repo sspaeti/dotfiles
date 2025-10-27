@@ -204,11 +204,11 @@ exit
 🤛 left facing fist hand fistbump
 🤜 right facing fist hand fistbump
 👏 clapping hands hands praise applause congrats yay
-🙌 raising hands gesture hooray yea celebration hands
+🙌 raised raising hands gesture hooray yea celebration hands
 👐 open hands fingers butterfly hands open
 🤲 palms up together hands gesture cupped prayer
 🤝 handshake agreement shake
-🙏 folded hands please hope wish namaste highfive pray
+🙏 thank you pray folded hands please hope wish namaste highfive
 ✍️ writing hand lower left ballpoint pen stationery write compose
 💅 nail polish beauty manicure finger fashion nail
 🤳 selfie camera phone
