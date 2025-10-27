@@ -1,0 +1,1 @@
+max_items = 300 #will define how many clipboard-items are stored. How many displayed is in Walker `max_results`

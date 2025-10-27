@@ -60,6 +60,7 @@ provider = "websearch"
 [[providers.prefixes]]
 prefix = "$"
 provider = "clipboard"
+max_results = 300 #how many are stored see in elephant `max_items`
 
 [providers.actions] # This will be MERGED/OVEWRITTEN with what the user specifies
 dmenu = [{ action = "select", default = true, bind = "Return" }]
