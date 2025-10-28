@@ -12,15 +12,11 @@ export PATH="/home/sspaeti/.cargo/bin:$PATH"
 export PATH="/Users/sspaeti/.local/share/../bin:$PATH"
 
 #go path
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# export GOPATH=$HOME/.go
+# export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-#poetry version: installed with `brew install asdf \n asdf plugin add poetry && asdf install poetry 1.2.2`
-export PATH="~/.asdf/installs/poetry/1.2.2/bin:$PATH"
-
-
-# filen-cli
-PATH=$PATH:~/.filen-cli/bin
+# # filen-cli
+# PATH=$PATH:~/.filen-cli/bin
 
 # my shortcuts
 export git=~/git
@@ -38,10 +34,7 @@ export blog=~/git/sspaeti.com/sspaeti-hugo-blog
 export hugo=$blog
 export docs=~/Documents
 export VS_Projects=/Documents/VS_Projects/
-# export SPARK_HOME=~/Documents/spark/spark-3.0.1-bin-hadoop3.2
-# export SPARK_HOME=~/Documents/spark/spark-3.4.2-bin-hadoop3.3
-export SPARK_HOME=~/Documents/spark/spark-3.5.1-bin-hadoop3.3
-# export SPARK_HOME="/opt/homebrew/opt/apache-spark/libexec/"
+# export SPARK_HOME=~/Documents/spark/spark-3.5.1-bin-hadoop3.3
 export PATH="$SPARK_HOME/bin/:$PATH"
 export PYSPARK_PYTHON=python3
 #export DATASETS=/Simon/Sync/Business/13_sspaeti/Real-estate/_DATASETS
@@ -103,5 +96,3 @@ export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@3
 # }
 # display_greeting
 
-# filen-cli
-PATH=$PATH:~/.filen-cli/bin
