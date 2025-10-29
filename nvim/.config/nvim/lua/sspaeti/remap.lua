@@ -107,6 +107,14 @@ vim.keymap.set("n", "<leader>x", "<C-w>c")
 
 --color themes
 vim.keymap.set("n", "<leader>ts", ":Telescope colorscheme<CR>")
+--switch to dark and light mode directly
+vim.keymap.set("n", "<leader>td", function()
+  vim.o.background = "dark"
+end, { desc = "Set dark mode" })
+vim.keymap.set("n", "<leader>tl", function()
+  vim.o.background = "light"
+end, { desc = "Set light mode" })
+
 
 --GIT: Start
 --

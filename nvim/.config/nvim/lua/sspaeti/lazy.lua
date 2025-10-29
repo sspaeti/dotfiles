@@ -19,7 +19,8 @@ local sessionThemes = {
     ["work"]        = "gruvbox-material",
     ["dotfiles"]    = "vague", 
     ["de-projects"] = "kanagawa-paper",
-    ["DEDP"]        = "rose-pine",
+    ["dedp"]        = "rose-pine",
+    ["hugo-blog-brain-dedp"]        = "rose-pine",
     ["default"]     = "kanagawa",  --required: default theme
 }
 

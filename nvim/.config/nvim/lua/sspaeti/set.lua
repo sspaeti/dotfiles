@@ -65,6 +65,7 @@ vim.opt.splitbelow = true -- Horizontal splits will automatically be below
 vim.opt.splitright = true -- Vertical splits will automatically be to the right
 -- vim.opt.t_Co=256                            -- Support 256 colors
 vim.opt.termguicolors = true -- True color support
+vim.opt.background = "dark"  -- Light or darkmode, set default here
 vim.opt.cmdheight = 2 -- More space for displaying messages
 vim.opt.pumheight = 10 -- Makes popup menu smaller
 vim.opt.hidden = true -- Required to keep multiple buffers open multiple buffers
