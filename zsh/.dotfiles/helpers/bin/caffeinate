@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# caffeinate status   # show current state
+# caffeinate          # Keep awake indefinitely
+# caffeinate 30       # Keep awake for 30 minutes
+# caffeinate 120      # Keep awake for 120 minutes
+# caffeinate off      # Turn off caffeinate
+
+caffeinate() {
+    if [ "$1" = "off" ]; then
+        pkill -f "systemd-inhibit.*sleep"
+        echo "Caffeinate disabled"
+    elif [ "$1" = "status" ]; then
+        if pgrep -f "systemd-inhibit.*sleep" > /dev/null; then
+            echo "Caffeinate is currently active:"
+            # Show the process with remaining time if possible
+            ps aux | grep "systemd-inhibit.*sleep" | grep -v grep
+        else
+            echo "Caffeinate is not active"
+        fi
+    elif [ -z "$1" ]; then
+        systemd-inhibit --what=sleep:idle:handle-lid-switch sleep infinity &
+        echo "Caffeinate enabled indefinitely (use 'caffeinate off' to disable)"
+    else
+        local minutes=$1
+        local seconds=$((minutes * 60))
+        systemd-inhibit --what=sleep:idle:handle-lid-switch sleep ${seconds} &
+        echo "Caffeinate enabled for ${minutes} minutes"
+    fi
+}
+
+# Call the function with all arguments
+caffeinate "$@"
