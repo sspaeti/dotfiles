@@ -1144,7 +1144,7 @@ exit
 🎞️ film frames movie
 📽️ film projector video tape record movie
 🎬 clapper board movie film record
-📺 television technology program oldschool show television
+📺 tv television technology program oldschool show television
 📷 camera gadgets photography
 📸 camera with flash photography gadgets
 📹 video camera film record

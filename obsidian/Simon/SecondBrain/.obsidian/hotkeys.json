@@ -375,21 +375,13 @@
       "key": "H"
     }
   ],
-  "editor:unfold-all": [
-    {
-      "modifiers": [
-        "Ctrl"
-      ],
-      "key": "0"
-    }
-  ],
   "editor:fold-all": [
     {
       "modifiers": [
         "Alt",
         "Mod"
       ],
-      "key": "1"
+      "key": "0"
     }
   ],
   "workspace:close-window": [],
@@ -458,6 +450,15 @@
         "Shift"
       ],
       "key": "K"
+    }
+  ],
+  "editor:unfold-all": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "1"
     }
   ]
 }
