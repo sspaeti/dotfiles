@@ -67,9 +67,6 @@ return {
       require("mcphub").setup()
     end
   },
-
-
-  --
   {
     "github/copilot.vim",
     event = "VeryLazy",
