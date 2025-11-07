@@ -1,0 +1,8 @@
+# w3m keymap configuration
+# Custom keybindings
+
+# Ctrl+D for page down
+keymap C-d NEXT_PAGE
+
+# Ctrl+U for page up
+keymap C-u PREV_PAGE
