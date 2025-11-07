@@ -4,7 +4,7 @@
 "query:-Curiosity Feeds:tags # \"curiosity\"" curiosity
 "query:-Life Feeds:tags # \"life\"" life
 "query:-Indie Hacking Feeds:tags # \"indie\"" indie
-"query:-ngineering Hacking Feeds:tags # \"engineering\"" engineering
+"query:-Engineering Hacking Feeds:tags # \"engineering\"" engineering
 "query:-Misc Feeds:tags # \"misc\"" misc
 "query:-MSQL Feeds:tags # \"mssql\"" mssql
 "query:-AI Feeds:tags # \"ai\"" ai

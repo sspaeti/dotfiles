@@ -1,8 +1,9 @@
 # general settings
 auto-reload yes
 max-items 50
+article-sort-order date-desc
 
-# externel browser
+# external browser
 browser "/bin/w3m %u"
 macro m set browser "/usr/local/bin/mpv %u"; open-in-browser ; set browser "/usr/local/bin/w3m %u"
 macro l set browser "/usr/local/bin/firefox %u"; open-in-browser ; set browser "/usr/local/bin/w3m %u"
@@ -13,12 +14,22 @@ unbind-key j
 unbind-key k
 unbind-key J
 unbind-key K
+unbind-key g
+unbind-key G
 
 # bind keys - vim style
 bind-key j down
 bind-key k up
 bind-key l open
 bind-key h quit
+
+# Move g/G functionality to s/S
+bind-key s sort
+bind-key S rev-sort
+
+# Vim-style gg and G for top/bottom
+bind gg everywhere home -- "Go to top of list"
+bind G everywhere end -- "Go to bottom of list"
 
 # solarized
 color background         default   default
