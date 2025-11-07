@@ -1,23 +1,29 @@
-https://ssp.sh/index.xml me
-https://www.ssp.sh/brain/index.xml me
-https://www.youtube.com/feeds/videos.xml?channel_id=UCvhMptiA4Q5PiXNR2GsclKw me
-https://sspaeti.substack.com/feed me
-https://dedp.online/feed.xml me
+"query:-Me Feeds:tags # \"me\"" me
+"query:-Data Feeds:tags # \"data\"" data
+"query:-Data Warehousing Feeds:tags # \"warehousing\"" warehousing
+"query:-Curiosity Feeds:tags # \"curiosity\"" curiosity
+"query:-Life Feeds:tags # \"life\"" life
+"query:-Indie Hacking Feeds:tags # \"indie\"" indie
+"query:-ngineering Hacking Feeds:tags # \"engineering\"" engineering
+"query:-Misc Feeds:tags # \"misc\"" misc
+"query:-MSQL Feeds:tags # \"mssql\"" mssql
+"query:-AI Feeds:tags # \"ai\"" ai
+https://ssp.sh/index.xml ! me
+https://www.ssp.sh/brain/index.xml ! me
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvhMptiA4Q5PiXNR2GsclKw ! me
+https://sspaeti.substack.com/feed ! me
+https://dedp.online/feed.xml ! me
 https://www.blef.fr/blog/rss/ data
 https://world.hey.com/jason/feed.atom curiosity
 https://world.hey.com/dhh/feed.atom curiosity
 https://www.theseattledataguy.com/feed/ data
-https://roundup.getdbt.com/feed data
-https://pedram.substack.com/feed data
-http://www.gregreda.com/feeds/all.atom.xml
-https://jpmonteiro.substack.com/feed
 https://sive.rs/en.atom curiosity
 https://www.confessionsofadataguy.com/feed/ data
 https://petrjanda.substack.com/feed data
 https://newsletter.pragmaticengineer.com/feed engineering
 https://stkbailey.substack.com/feed data
 https://benn.substack.com/feed data
-https://technically.substack.com/feed engineering
+https://technically.substack.com/feed 
 https://karlastarr.substack.com/feed
 https://seattledataguy.substack.com/feed data
 https://www.jamesserra.com/feed data
@@ -28,6 +34,10 @@ https://serve.podhome.fm/rss/1c0357c0-6aba-5766-a2d5-2090d8dab6bc
 https://fromanengineersight.substack.com/feed data
 https://groupby1.substack.com/feed data
 http://www.cathrinewilhelmsen.net/feed/ mssql
+https://roundup.getdbt.com/feed data
+https://pedram.substack.com/feed data
+http://www.gregreda.com/feeds/all.atom.xml ! curiosity
+https://jpmonteiro.substack.com/feed
 https://www.eckerson.com/feed/ warehousing
 https://joereis.substack.com/feed data
 https://chollinger.com/blog/index.xml misc
@@ -52,7 +62,6 @@ https://win.hyperquery.ai/feed data life
 https://eczachly.substack.com/feed data
 https://dataengineeringcentral.substack.com/feed data
 https://moderndataengineering.substack.com/feed data
-https://www.waitingforcode.com/rss data
 https://news.tonydinh.com/feed indie
 https://tfthacker.substack.com/feed note-taking
 https://ergestx.substack.com/feed data
@@ -67,3 +76,29 @@ https://erikbern.com/index.xml startup
 https://registerspill.thorstenball.com/feed terminal
 https://luminousmen.com/feeds/ misc
 https://rmoff.net/index.xml data
+https://www.waitingforcode.com/rss ! archive-data
+https://ownyourdata.ai/wp/feed/ ! archive
+https://www.startdataengineering.com/index.xml ! archive
+https://dagster.io/rss.xml ! archive
+https://www.advancinganalytics.co.uk/blog?format=rss ! archive
+http://www.tableausoftware.com/taxonomy/term/1920/feed ! archive
+https://www.dataschool.io/rss/ ! archive
+https://sarahsnewsletter.substack.com/feed ! archive
+https://blog.sqlauthority.com/feed/ ! archive
+https://dataproducts.substack.com/feed ! archive
+https://feeds.feedburner.com/sqlbi_blog ! archive
+https://www.data-is-plural.com/feed.xml ! archive
+https://kentgraziano.com/feed/ ! archive
+https://dwbi1.wordpress.com/feed/ ! archive
+http://cwebbbi.spaces.live.com/feed.rss ! archive
+https://softwareengineeringdaily.com/category/podcast/feed/ ! archive
+https://agiledataguides.com/feed/ ! archive
+https://dataespresso.substack.com/feed ! archive
+https://fortelabs.com/feed/ ! archive
+https://datacreation.substack.com/feed ! archive
+https://thdpth.substack.com/feed ! archive
+https://thedataplatform.substack.com/feed ! archive
+https://www.newsletter.swirlai.com/feed ! archive
+https://hubertdulay.substack.com/feed ! archive
+"query:z-Archive Data Feeds:tags # \"archive-data\"" archive-data
+"query:z-Archive Feeds:tags # \"archive\"" archive
