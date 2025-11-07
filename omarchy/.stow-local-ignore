@@ -1,0 +1,3 @@
+# Ignore Omarchy-managed symlinks
+.config/omarchy/current
+.config/omarchy/themes
