@@ -2,6 +2,8 @@
 auto-reload yes
 max-items 50
 article-sort-order date-desc
+# Wider Title: The %-17T means the feed title is left-aligned with 17 characters. You can increase this number.
+articlelist-format "%4i %f %D %?T?|%-33T| ?%t"
 
 # external browser
 browser "/bin/w3m %u"
@@ -30,6 +32,10 @@ bind-key S rev-sort
 # Vim-style gg and G for top/bottom
 bind gg everywhere home -- "Go to top of list"
 bind G everywhere end -- "Go to bottom of list"
+
+# Page navigation
+bind-key ^D pagedown
+bind-key ^U pageup
 
 # solarized
 color background         default   default
