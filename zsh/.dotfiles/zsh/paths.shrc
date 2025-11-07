@@ -44,6 +44,7 @@ export DAGSTER_HOME=~/.dagster
 export DAGSTER_DEPLOYMENT=local
 export AIRFLOW_HOME=~/.airflow
 
+export W3M_DIR=~/.config/w3m/
 #vim stuff
 export MYVIMRC=~/.config/nvim/init.lua
 export VIMRC=$MYVIMRC

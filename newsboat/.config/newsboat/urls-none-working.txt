@@ -1,0 +1,16 @@
+https://ownyourdata.ai/wp/feed/
+https://www.startdataengineering.com/index.xml
+https://dagster.io/rss.xml
+https://twitter.com/i/lists/1142380353040146433
+https://twitter.com/i/lists/1388497186460037122
+https://www.advancinganalytics.co.uk/blog?format=rss
+http://feeds.feedburner.com/TdwiChannel-DataWarehouseTechnologyAndPlatforms
+http://feeds.feedburner.com/TdwiChannel-BusinessAnalysisAndDesign
+http://feeds.feedburner.com/TdwiChannel-DataIntegrationAndQuality
+http://feeds.feedburner.com/TdwiChannel-AgileBusinessIntelligence
+http://feeds.feedburner.com/TdwiChannel-BigDataAnalytics
+http://feeds.feedburner.com/TdwiChannel-BusinessIntelligence
+http://feeds.feedburner.com/TdwiChannel-MasterDataManagement
+http://www.tableausoftware.com/taxonomy/term/1920/feed
+http://www.hansmichiels.com/feed/
+http://blog.ted.com/category/science/feed/
