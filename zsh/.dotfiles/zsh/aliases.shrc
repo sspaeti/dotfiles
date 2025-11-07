@@ -115,6 +115,9 @@ alias intel="env /usr/bin/arch -x86_64 /bin/zsh --login"
 # Neomutt
 alias mutt="neomutt"
 alias m="neomutt"
+
+alias rss="newsboat"
+
 # alias mscreener="~/.config/mutt/initial_screening.sh"
 alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"
 alias msync="offlineimap -a sspaeti.com"
