@@ -6,3 +6,6 @@ keymap C-d NEXT_PAGE
 
 # Ctrl+U for page up
 keymap C-u PREV_PAGE
+
+# q to quit without confirmation
+keymap q EXIT
