@@ -5,10 +5,16 @@ article-sort-order date-desc
 # Wider Title: The %-17T means the feed title is left-aligned with 17 characters. You can increase this number.
 articlelist-format "%4i %f %D %?T?|%-33T| ?%t"
 
+
+# Shortcuts
+# l -> open in default newsboat reader
+# o -> open inline with w3m
+# O -> open default Browser (Brave)
 # external browser
 browser "/bin/w3m %u"
-macro m set browser "/usr/local/bin/mpv %u"; open-in-browser ; set browser "/usr/local/bin/w3m %u"
-macro l set browser "/usr/local/bin/firefox %u"; open-in-browser ; set browser "/usr/local/bin/w3m %u"
+# Open in external browser with single O keypress
+unbind-key O
+bind O article set browser "xdg-open %u"; open-in-browser ; set browser "/bin/w3m %u" -- "Open in default browser"
 
 # unbind keys
 unbind-key ENTER
@@ -50,3 +56,4 @@ color article            default   default
 highlight article "^(Title):.*$" blue default
 highlight article "https?://[^ ]+" red default
 highlight article "\\[image\\ [0-9]+\\]" green default
+
