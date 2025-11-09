@@ -1,4 +1,3 @@
-"query:-Me Feeds:tags # \"me\"" me
 "query:-Data Feeds:tags # \"data\"" data
 "query:-Data Warehousing Feeds:tags # \"warehousing\"" warehousing
 "query:-Curiosity Feeds:tags # \"curiosity\"" curiosity
@@ -8,8 +7,9 @@
 "query:-Misc Feeds:tags # \"misc\"" misc
 "query:-MSQL Feeds:tags # \"mssql\"" mssql
 "query:-AI Feeds:tags # \"ai\"" ai
+"query:-Newsletter/Substacks Feeds:tags # \"substack\"" substack
 https://ssp.sh/index.xml ! me
-https://www.ssp.sh/brain/index.xml ! me
+#https://www.ssp.sh/brain/index.xml ! me
 https://www.youtube.com/feeds/videos.xml?channel_id=UCvhMptiA4Q5PiXNR2GsclKw ! me
 https://sspaeti.substack.com/feed ! me
 https://dedp.online/feed.xml ! me
@@ -26,7 +26,7 @@ https://benn.substack.com/feed data
 https://technically.substack.com/feed 
 https://karlastarr.substack.com/feed
 https://seattledataguy.substack.com/feed data
-https://www.jamesserra.com/feed data
+https://www.jamesserra.com/feed mssql
 https://www.dataengineeringweekly.com/feed data
 https://medium.com/feed/@maximebeauchemin data
 https://davidsj.substack.com/feed data
@@ -76,29 +76,100 @@ https://erikbern.com/index.xml startup
 https://registerspill.thorstenball.com/feed terminal
 https://luminousmen.com/feeds/ misc
 https://rmoff.net/index.xml data
-https://www.waitingforcode.com/rss ! archive-data
-https://ownyourdata.ai/wp/feed/ ! archive
-https://www.startdataengineering.com/index.xml ! archive
-https://dagster.io/rss.xml ! archive
-https://www.advancinganalytics.co.uk/blog?format=rss ! archive
-http://www.tableausoftware.com/taxonomy/term/1920/feed ! archive
-https://www.dataschool.io/rss/ ! archive
-https://sarahsnewsletter.substack.com/feed ! archive
-https://blog.sqlauthority.com/feed/ ! archive
-https://dataproducts.substack.com/feed ! archive
-https://feeds.feedburner.com/sqlbi_blog ! archive
-https://www.data-is-plural.com/feed.xml ! archive
-https://kentgraziano.com/feed/ ! archive
-https://dwbi1.wordpress.com/feed/ ! archive
-http://cwebbbi.spaces.live.com/feed.rss ! archive
-https://softwareengineeringdaily.com/category/podcast/feed/ ! archive
-https://agiledataguides.com/feed/ ! archive
-https://dataespresso.substack.com/feed ! archive
-https://fortelabs.com/feed/ ! archive
-https://datacreation.substack.com/feed ! archive
-https://thdpth.substack.com/feed ! archive
-https://thedataplatform.substack.com/feed ! archive
-https://www.newsletter.swirlai.com/feed ! archive
-https://hubertdulay.substack.com/feed ! archive
-"query:z-Archive Data Feeds:tags # \"archive-data\"" archive-data
-"query:z-Archive Feeds:tags # \"archive\"" archive
+https://blog.christoolivier.com/feed data
+
+# substacks I follow - hidden in feed:
+https://andrewchen.substack.com/feed ! substack
+https://agenticdata.substack.com/feed ! substack
+https://alirezasadeghi1.substack.com/feed ! substack
+https://roundup.getdbt.com/feed ! substack
+https://askvinnie.substack.com/feed ! substack
+https://austinkleon.substack.com/feed ! substack
+https://www.james-lucas.com/feed ! substack
+https://benn.substack.com/feed ! substack
+https://becomingcaryn.substack.com/feed ! substack
+https://substack.com/@chriskornaro/feed ! substack
+https://blog.christoolivier.com/feed ! substack
+https://compassionatefaith.substack.com/feed ! substack
+https://boundlessnotions.substack.com/feed ! substack
+https://jonathanneo.substack.com/feed ! substack
+https://dataengineerthings.substack.com/feed ! substack
+https://dataengineeringcentral.substack.com/feed ! substack
+https://dataengineeringcommunity.substack.com/feed ! substack
+https://www.dataengineeringweekly.com/feed ! substack
+https://dataespresso.substack.com/feed ! substack
+https://datajargon.substack.com/feed ! substack
+https://sqlpatterns.com/feed ! substack
+https://stkbailey.substack.com/feed ! substack
+https://dataproducts.substack.com/feed ! substack
+https://datascienceweekly.substack.com/feed ! substack
+https://thedatatoolbox.substack.com/feed ! substack
+https://blog.dataexpert.io/feed ! substack
+https://digitalorganizationdad.substack.com/feed ! substack
+https://archiew.substack.com/feed ! substack
+https://tfthacker.substack.com/feed ! substack
+https://fromanengineersight.substack.com/feed ! substack
+https://groupby1.mattarderne.com/feed ! substack
+https://karunpal.substack.com/feed ! substack
+https://juhache.substack.com/feed ! substack
+https://www.lyle.blog/feed ! substack
+https://learnanalyticsengineering.substack.com/feed ! substack
+https://nickmilo.substack.com/feed ! substack
+https://ungated.life/feed ! substack
+https://manifestomusings.com/feed ! substack
+https://materializedview.io/feed ! substack
+https://blog.mehdio.com/feed ! substack
+https://jpmonteiro.substack.com/feed ! substack
+https://on.substack.com/feed ! substack
+https://dataopsleadership.substack.com/feed ! substack
+https://databased.pedramnavid.com/feed ! substack
+https://petrjanda.substack.com/feed ! substack
+https://www.pracdata.io/feed ! substack
+https://practicaldatamodeling.substack.com/feed ! substack
+https://newsletter.pragmaticengineer.com/feed ! substack
+https://registerspill.thorstenball.com/feed ! substack
+https://sarahsnewsletter.substack.com/feed ! substack
+https://blog.sdf.com/feed ! substack
+https://seattledataguy.substack.com/feed ! substack
+https://semitechnicals.com/feed ! substack
+https://karlastarr.substack.com/feed ! substack
+https://hubertdulay.substack.com/feed ! substack
+https://dcubed.substack.com/feed ! substack
+https://read.technically.dev/feed ! substack
+https://thesequence.substack.com/feed ! substack
+https://think.ryi.me/feed ! substack
+https://threetimeswiser.substack.com/feed ! substack
+https://news.tonydinh.com/feed ! substack
+https://thaomaoh.substack.com/feed ! substack
+https://www.whitenoise.email/feed ! substack
+https://win.hyperquery.ai/feed ! substack
+
+#
+#https://www.waitingforcode.com/rss ! archive-data
+#https://ownyourdata.ai/wp/feed/ ! archive
+#https://www.startdataengineering.com/index.xml ! archive
+#https://dagster.io/rss.xml ! archive
+#https://www.advancinganalytics.co.uk/blog?format=rss ! archive
+#http://www.tableausoftware.com/taxonomy/term/1920/feed ! archive
+#https://www.dataschool.io/rss/ ! archive
+#https://sarahsnewsletter.substack.com/feed ! archive
+#https://blog.sqlauthority.com/feed/ ! archive
+#https://dataproducts.substack.com/feed ! archive
+#https://feeds.feedburner.com/sqlbi_blog ! archive
+#https://www.data-is-plural.com/feed.xml ! archive
+#https://kentgraziano.com/feed/ ! archive
+#https://dwbi1.wordpress.com/feed/ ! archive
+#http://cwebbbi.spaces.live.com/feed.rss ! archive
+#https://softwareengineeringdaily.com/category/podcast/feed/ ! archive
+#https://agiledataguides.com/feed/ ! archive
+#https://dataespresso.substack.com/feed ! archive
+#https://fortelabs.com/feed/ ! archive
+#https://datacreation.substack.com/feed ! archive
+#https://thdpth.substack.com/feed ! archive
+#https://thedataplatform.substack.com/feed ! archive
+#https://www.newsletter.swirlai.com/feed ! archive
+#https://hubertdulay.substack.com/feed ! archive
+#https://www.devas.life curiosity
+"query:-Me Feeds:tags # \"me\"" me
+#"query:z-Archive Data Feeds:tags # \"archive-data\"" archive-data
+#"query:z-Archive Feeds:tags # \"archive\"" archive
