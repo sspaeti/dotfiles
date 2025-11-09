@@ -6,7 +6,7 @@ article-sort-order date-desc
 articlelist-format "%4i %f %D %?T?|%-33T| ?%t"
 
 # add comments and books mark and store directly in my second brain
-bookmark-cmd "sh -c 'echo \"| $1 | $2 | $3 | $4 |\" >> \"/home/sspaeti/Simon/SecondBrain/💡 Resources/RSS Bookmarks/My RSS Bookmarks.md\"' --"
+bookmark-cmd "sh -c 'echo \"| [$2]($1) | $3 | $4 |\" >> \"/home/sspaeti/Simon/SecondBrain/💡 Resources/RSS Bookmarks/My RSS Bookmarks.md\"' --"
 
 # Shortcuts
 # l -> open in default newsboat reader
