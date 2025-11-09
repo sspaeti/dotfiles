@@ -5,6 +5,8 @@ article-sort-order date-desc
 # Wider Title: The %-17T means the feed title is left-aligned with 17 characters. You can increase this number.
 articlelist-format "%4i %f %D %?T?|%-33T| ?%t"
 
+# add comments and books mark and store directly in my second brain
+bookmark-cmd "sh -c 'echo \"| $1 | $2 | $3 | $4 |\" >> \"/home/sspaeti/Simon/SecondBrain/💡 Resources/RSS Bookmarks/My RSS Bookmarks.md\"' --"
 
 # Shortcuts
 # l -> open in default newsboat reader
