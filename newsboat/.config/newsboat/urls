@@ -1,16 +1,20 @@
-"query:-Data Feeds:tags # \"data\"" data
-"query:-Data Warehousing Feeds:tags # \"warehousing\"" warehousing
 "query:-Curiosity Feeds:tags # \"curiosity\"" curiosity
 "query:-Life Feeds:tags # \"life\"" life
-"query:-Indie Hacking Feeds:tags # \"indie\"" indie
-"query:-Engineering Hacking Feeds:tags # \"engineering\"" engineering
+---
 "query:-Data Newsletter/Substacks Feeds:tags # \"data-substack\"" data-substack
 "query:-MSQL Feeds:tags # \"mssql\"" mssql
+"query:-Data Warehousing Feeds:tags # \"warehousing\"" warehousing
+"query:-Data Feeds:tags # \"data\"" data
+---
+"query:-Indie Hacking Feeds:tags # \"indie\"" indie
+"query:-Engineering Hacking Feeds:tags # \"engineering\"" engineering
 "query:-AI Feeds:tags # \"ai\"" ai
-"query:-Misc Feeds:tags # \"misc\"" misc
+---
 "query:-Newsletter/Substacks Feeds:tags # \"producitvity\"" producitvity
-"query:-Consulting Feeds:tags # \"consulting\"" consulting
 "query:-Note-Taking Feeds:tags # \"note-taking\"" note-taking
+"query:-Consulting Feeds:tags # \"consulting\"" consulting
+"query:-Misc Feeds:tags # \"misc\"" misc
+---
 https://ssp.sh/index.xml ! me
 #https://www.ssp.sh/brain/index.xml ! me
 https://www.youtube.com/feeds/videos.xml?channel_id=UCvhMptiA4Q5PiXNR2GsclKw ! me
