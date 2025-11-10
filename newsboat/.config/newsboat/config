@@ -1,6 +1,7 @@
 # general settings
 auto-reload yes
 max-items 50
+reload-threads 20
 article-sort-order date-desc
 # Wider Title: The %-17T means the feed title is left-aligned with 17 characters. You can increase this number.
 articlelist-format "%4i %f %D %?T?|%-33T| ?%t"
