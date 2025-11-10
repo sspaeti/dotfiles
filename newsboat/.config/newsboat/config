@@ -46,11 +46,23 @@ bind G everywhere end -- "Go to bottom of list"
 bind-key ^D pagedown
 bind-key ^U pageup
 
+# Remap read/unread from n/N to m/M
+unbind-key n
+unbind-key N
+# Use n/p for navigating through list (especially useful in search results)
+bind-key n next #same as j
+bind-key p prev #same as k
+# use m for read/unread
+bind-key M toggle-article-read
+bind-key m toggle-article-read
+
+
 # solarized
 color background         default   default
 color listnormal         default   default
-color listnormal_unread  default   default
 color listfocus          black     cyan
+# color listnormal_unread  default   default
+color listnormal_unread  black     yellow
 color listfocus_unread   black     cyan
 color info               default   black
 color article            default   default
