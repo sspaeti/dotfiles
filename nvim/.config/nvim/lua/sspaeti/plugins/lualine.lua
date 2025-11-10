@@ -77,6 +77,18 @@ return {
     --word per minute
     local wpm = require("wpm")
 
+    -- macro recording indicator
+    local recording = {
+      function()
+        local reg = vim.fn.reg_recording()
+        if reg == "" then
+          return ""
+        end
+        return "recording @" .. reg
+      end,
+      color = { fg = "#ff9e64", gui = "bold" },
+    }
+
     --old config
     require("lualine").setup({
       options = {
@@ -88,7 +100,7 @@ return {
         always_divide_middle = true,
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = { "mode", recording },
         lualine_b = {},
         lualine_c = { branch, active_lsp, filename },
         lualine_x = { wpm.historic_graph, diff, diagnostics, { get_venv, color = { gui = "bold" } }, filetype },
