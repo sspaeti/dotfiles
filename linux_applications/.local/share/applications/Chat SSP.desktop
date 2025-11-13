@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Chat SSP
+Comment=Chat SSP
+Exec=omarchy-launch-webapp https://chat.ssp.sh
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Chat SSP.png
+StartupNotify=true

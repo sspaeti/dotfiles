@@ -45,7 +45,6 @@ https://roundup.getdbt.com/feed data
 https://pedram.substack.com/feed data substack
 http://www.gregreda.com/feeds/all.atom.xml ! curiosity
 https://jpmonteiro.substack.com/feed substack
-https://www.eckerson.com/feed/ warehousing
 https://joereis.substack.com/feed data substack
 https://chollinger.com/blog/index.xml misc
 https://mehdio.substack.com/feed data substack
@@ -84,6 +83,9 @@ https://registerspill.thorstenball.com/feed terminal
 https://luminousmen.com/feeds/ misc
 https://rmoff.net/index.xml data
 https://blog.christoolivier.com/feed data
+https://www.counting-stuff.com/rss/ curiosity
+
+https://nicolevanderhoeven.github.io/blog/index.xml note-taking
 
 # substacks I follow - hidden in feed:
 https://dataengineeringcommunity.substack.com/feed ! substack data
@@ -97,7 +99,6 @@ https://manifestomusings.com/feed ! substack life
 https://becomingcaryn.substack.com/feed ! substack life
 https://compassionatefaith.substack.com/feed ! substack life
 https://karunpal.substack.com/feed ! substack life
-https://threetimeswiser.substack.com/feed ! substack life
 https://on.substack.com/feed ! substack life
 
 https://think.ryi.me/feed ! substack curiosity
@@ -151,10 +152,16 @@ https://themetagridnotes.substack.com/feed ! substack data-substack
 #https://thedataplatform.substack.com/feed ! archive
 #https://www.newsletter.swirlai.com/feed ! archive
 #https://hubertdulay.substack.com/feed ! archive
+#https://www.eckerson.com/feed/ warehousing
+
+#no RSS:
 #https://www.devas.life curiosity
+
+https://tim.blog/feed/ curiosity
 
 # other Feeds (less important)
 "query:-Me Feeds:tags # \"me\"" me
 "query:-Newsletter/Substacks Feeds:tags # \"substack\"" substack
 #"query:z-Archive Data Feeds:tags # \"archive-data\"" archive-data
 #"query:z-Archive Feeds:tags # \"archive\"" archive
+
