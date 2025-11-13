@@ -1,0 +1,1 @@
+/usr/share/aether/shaders/power-crunch.glsl

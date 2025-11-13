@@ -1,0 +1,1 @@
+/usr/share/aether/shaders/monochrome-pink.glsl

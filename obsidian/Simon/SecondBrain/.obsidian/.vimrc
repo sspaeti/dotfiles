@@ -51,10 +51,10 @@ exmap lint_current_file obcommand obsidian-linter:lint-file
 nmap <Space>lf :lint_current_file<CR>
 
 
-exmap theme_dark obcommand theme:use-dark
-exmap theme_light obcommand theme:use-light
-nmap <Space>td :theme_dark<CR>
-nmap <Space>tl :theme_light<CR>
+exmap theme_toggle_light_dark obcommand theme:toggle-light-dark
+nmap <Space>td :theme_toggle_light_dark<CR>
+nmap <Space>tl :theme_toggle_light_dark<CR>
+nmap <Space>tt :theme_toggle_light_dark<CR>
 
 
 " Zen mode (hide tab bar) and right side
