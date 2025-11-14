@@ -97,3 +97,5 @@ export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@3
 # }
 # display_greeting
 
+# opencode
+export PATH=/home/sspaeti/.opencode/bin:$PATH
