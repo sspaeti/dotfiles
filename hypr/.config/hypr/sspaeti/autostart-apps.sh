@@ -5,13 +5,13 @@ hyprctl dispatch workspace 1
 hyprctl dispatch workspace 2
 hyprctl dispatch workspace 3
 
-# Launch Alacritty with tmux → workspace 1
-alacritty -e tmux &
-while [ -z "$alacritty_addr" ]; do
+# Launch Kitty with tmux → workspace 1
+uwsm app -- kitty -e tmux &
+while [ -z "$kitty_addr" ]; do
     sleep 0.2
-    alacritty_addr=$(hyprctl clients -j | jq -r '.[] | select(.class == "Alacritty") | .address')
+    kitty_addr=$(hyprctl clients -j | jq -r '.[] | select(.class == "kitty") | .address')
 done
-hyprctl dispatch movetoworkspace "1,address:$alacritty_addr"
+hyprctl dispatch movetoworkspace "1,address:$kitty_addr"
 
 # Launch Brave → workspace 2
 brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
