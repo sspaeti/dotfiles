@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Wrapper for omarchy-menu that preserves personal backgrounds when switching themes
+# This script calls the original omarchy-menu and then restores personal background if needed
+
+STATE_FILE="$HOME/.config/hypr/sspaeti/.bg_mode_state"
+CURRENT_IMAGE_FILE="$HOME/.config/hypr/sspaeti/.current_personal_image"
+
+# Check if we need to restore personal background after theme change
+should_restore=false
+if [ -f "$STATE_FILE" ]; then
+    current_mode=$(cat "$STATE_FILE")
+    if [ "$current_mode" = "personal" ] && [ -f "$CURRENT_IMAGE_FILE" ]; then
+        should_restore=true
+        image_path=$(cat "$CURRENT_IMAGE_FILE")
+    fi
+fi
+
+# Call the original omarchy-menu with all arguments passed through
+~/.local/share/omarchy/bin/omarchy-menu "$@"
+
+# Post-processing: Restore personal background if needed
+if [ "$should_restore" = true ] && [ -f "$image_path" ]; then
+    # Background restore happens asynchronously to avoid blocking
+    {
+        # Wait briefly for swaybg to be killed and restarted by theme change
+        sleep 0.15
+
+        # Start new swaybg with personal image
+        swaybg -i "$image_path" &
+        sleep 0.05
+
+        # Kill the old swaybg (from theme change)
+        pkill -o swaybg
+    } &
+fi
