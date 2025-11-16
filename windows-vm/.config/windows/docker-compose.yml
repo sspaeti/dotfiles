@@ -21,9 +21,9 @@ services:
     volumes:
       - /home/sspaeti/.windows:/storage
       # Mount specific Sync subdirectories to avoid heavy I/O from git repos
-      - /home/sspaeti/Simon/Sync/1 Areas:/data/1 Areas:ro
-      - /home/sspaeti/Simon/Sync/2 Project:/data/2 Project:ro
-      - /home/sspaeti/Simon/Sync/3 Resources:/data/3 Resources:ro
+      - /home/sspaeti/Simon/Sync/1 Areas:/data/1 Areas
+      - /home/sspaeti/Simon/Sync/2 Project:/data/2 Project
+      - /home/sspaeti/Simon/Sync/3 Resources:/data/3 Resources
       # - /home/sspaeti/Simon/Sync/Pics:/data/Pics
       # - /home/sspaeti/Simon/Sync/PicsUpload:/data/PicsUpload
       # 4 Archive excluded 
