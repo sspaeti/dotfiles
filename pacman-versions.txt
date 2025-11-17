@@ -6,7 +6,7 @@ alacritty 0.16.1-1
 amd-ucode 20251021-1
 asciinema 3.0.1-1
 asdcontrol 0.23.0ee8bd5-1
-aws-cli 1.42.64-1
+aws-cli 1.42.69-1
 base 3-2
 base-devel 1-2
 bash-completion 2.17.0-1
@@ -15,9 +15,9 @@ blueberry 1.4.8-2
 brightnessctl 0.5.1-3
 btop 1.4.5-1
 btrfs-progs 6.17-1
-clang 21.1.4-2
+clang 21.1.5-1
 claude-code 2.0.32-1
-corectrl 1.5.2-3
+corectrl 1.5.2-4
 cpupower 6.17-2
 cups 2:2.4.14-1
 cups-browsed 2.1.1-1
@@ -26,7 +26,7 @@ cups-pdf 3.0.2-1
 darktable 2:5.2.1-3
 discord 1:0.0.113-1
 dmenu 5.4-1
-docker 1:28.5.1-1
+docker 1:28.5.2-1
 docker-buildx 0.29.1-1
 docker-compose 2.40.3-1
 dua-cli 2.32.2-1
@@ -60,7 +60,7 @@ fprintd 1.94.5-1
 freerdp 2:3.17.2-4
 fzf 0.66.1-1
 gcc14 14.3.1+r25+g42e99e057bd7-1
-gemini-cli 1:0.11.3-1
+gemini-cli 1:0.13.0-1
 geoclue 2.8.0-1
 ghostty 1.2.3-2
 gimp 3.0.6-2
@@ -79,9 +79,9 @@ gvfs-nfs 1.58.0-2
 gvfs-smb 1.58.0-2
 hugo 0.152.2-1
 hypridle 0.1.7-4
-hyprland 0.51.1-6
-hyprland-qtutils 0.1.5-4
-hyprlock 0.9.2-3
+hyprland 0.52.0-1
+hyprland-guiutils 0.1.0-2
+hyprlock 0.9.2-4
 hyprpicker 0.4.5-7
 hyprshot 1.3.0-4
 hyprsunset 0.3.3-3
@@ -97,7 +97,7 @@ iw 6.17-1
 iwd 3.10-1
 jq 1.8.1-1
 k9s 0.50.16-1
-kdenlive 25.08.2-2
+kdenlive 25.08.3-2
 kitty 0.44.0-1
 kubectl 1.34.1-1
 kvantum-qt5 1.1.5-1
@@ -111,13 +111,13 @@ libgphoto2 2.5.33-1
 libpulse 17.0+r88+geee0e8f22-1
 libqalculate 5.8.1-1
 libreoffice-fresh 25.8.2-4
-limine 10.2.1-1
+limine 10.3.0-1
 limine-mkinitcpio-hook 1.25.3-1
 limine-snapper-sync 1.17.1-1
 linux 6.17.7.arch1-1
 linux-firmware 20251021-1
 linux-headers 6.17.7.arch1-1
-llvm 21.1.4-1
+llvm 21.1.5-1
 localsend 1.17.0-2
 luarocks 3.12.2-1
 lynx 2.9.2-2
@@ -132,6 +132,7 @@ msmtp 1.8.32-1
 nautilus 49.1-2
 neomutt 20250905-1
 neovim 0.11.5-1
+newsboat 2.41-1
 noto-fonts 1:2025.11.01-1
 noto-fonts-cjk 20240730-1
 noto-fonts-emoji 1:2.051-1
@@ -156,7 +157,7 @@ pipewire-jack 1:1.4.9-1
 pipewire-pulse 1:1.4.9-1
 playerctl 2.4.1-4
 plocate 1.1.23-1
-plymouth 24.004.60-12
+plymouth 24.004.60-14
 polkit-gnome 0.105-11
 postgresql-libs 18.0-1
 power-profiles-daemon 0.30-1
@@ -172,10 +173,10 @@ rdesktop 1.9.0-2
 ripgrep 15.1.0-1
 rsync 3.4.1-2
 rust 1:1.91.0-1
-s3fs-fuse 1.93-2
+s3fs-fuse 1.95-1
 satty 0.20.0-1
 sddm 0.21.0-6
-signal-desktop 7.77.1-1
+signal-desktop 7.78.0-1
 slurp 1.5.0-1
 snapper 0.13.0-2
 sof-firmware 2025.05.1-1
@@ -184,7 +185,7 @@ sshfs 3.7.3-3
 starship 1.24.0-1
 stow 2.4.1-1
 stress 1.0.7-3
-stress-ng 0.19.05-1
+stress-ng 0.19.06-1
 sushi 46.0-2
 swaybg 1.2.1-1
 swayosd 0.2.1-2
@@ -197,7 +198,7 @@ tmux 3.5_a-1
 trash-cli 0.24.5.26-2
 tree 2.2.1-1
 tree-sitter-cli 0.25.10-1
-ttc-iosevka 33.3.3-1
+ttc-iosevka 33.3.4-1
 ttf-atkinson-hyperlegible 1.006-1
 ttf-cascadia-mono-nerd 3.4.0-1
 ttf-ia-writer 20181225-1
@@ -216,7 +217,7 @@ w3m 0.5.3.git20230713_1-1
 walker 2.8.2-2
 waybar 0.14.0-4
 wayfreeze 0.1.0-1
-wget 1.25.0-2
+wget 1.25.0-3
 whois 5.6.5-1
 wireless_tools 30.pre9-4
 wiremix 0.7.0-1
@@ -235,7 +236,7 @@ yarn 1.22.22-2
 yaru-icon-theme 25.10.2-1
 yay 12.5.2-2
 yazi 25.5.31-2
-zed 0.210.4-1
+zed 0.211.6-1
 zoxide 0.9.8-2
 zram-generator 1.2.1-1
 zsh 5.9-5
