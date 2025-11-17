@@ -16,9 +16,9 @@
 "query:-Misc Feeds:tags # \"misc\"" misc
 ---
 https://ssp.sh/index.xml ! me
-#https://www.ssp.sh/brain/index.xml ! me
-https://www.youtube.com/feeds/videos.xml?channel_id=UCvhMptiA4Q5PiXNR2GsclKw ! me
-https://sspaeti.substack.com/feed ! me substack
+#https://www.ssp.sh/brain/index.xml ! me "~My Second Brain"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvhMptiA4Q5PiXNR2GsclKw ! me "~My YouTube"
+https://sspaeti.substack.com/feed ! me "~My Substack"
 https://dedp.online/feed.xml ! me
 https://www.blef.fr/blog/rss/ data
 https://world.hey.com/jason/feed.atom curiosity
@@ -26,29 +26,29 @@ https://world.hey.com/dhh/feed.atom curiosity
 https://www.theseattledataguy.com/feed/ data
 https://sive.rs/en.atom curiosity
 https://www.confessionsofadataguy.com/feed/ data
-https://petrjanda.substack.com/feed data substack
-https://newsletter.pragmaticengineer.com/feed engineering
-https://stkbailey.substack.com/feed data substack
-https://benn.substack.com/feed data substack
-https://technically.substack.com/feed  substack
-https://karlastarr.substack.com/feed substack
-https://seattledataguy.substack.com/feed data substack
+https://petrjanda.substack.com/feed data
+https://newsletter.pragmaticengineer.com/feed ! engineering
+https://stkbailey.substack.com/feed data
+https://benn.substack.com/feed data
+https://technically.substack.com/feed 
+https://karlastarr.substack.com/feed 
+https://seattledataguy.substack.com/feed data
 https://www.jamesserra.com/feed mssql
 https://www.dataengineeringweekly.com/feed data
 https://medium.com/feed/@maximebeauchemin data "~Maxime Beauchemin (Medium)"
-https://davidsj.substack.com/feed data substack
+https://davidsj.substack.com/feed data
 https://serve.podhome.fm/rss/1c0357c0-6aba-5766-a2d5-2090d8dab6bc
-https://fromanengineersight.substack.com/feed data substack "~Benoit Pimpaud (From an Engineer Sight)"
-https://groupby1.substack.com/feed data substack
+https://fromanengineersight.substack.com/feed data "~Benoit Pimpaud (From an Engineer Sight)"
+https://groupby1.substack.com/feed data
 http://www.cathrinewilhelmsen.net/feed/ ! mssql
 https://roundup.getdbt.com/feed ! data
-https://pedram.substack.com/feed data substack
+https://pedram.substack.com/feed data
 http://www.gregreda.com/feeds/all.atom.xml ! curiosity
-https://jpmonteiro.substack.com/feed substack
-https://joereis.substack.com/feed data substack
+https://jpmonteiro.substack.com/feed
+https://joereis.substack.com/feed data 
 https://chollinger.com/blog/index.xml misc
-https://mehdio.substack.com/feed data substack
-https://moderndata101.substack.com/feed data substack
+https://mehdio.substack.com/feed data
+https://moderndata101.substack.com/feed data
 https://karimjedda.com/rss/ curiosity
 https://www.kahandatasolutions.com/blog.rss data
 https://semanticinsight.wordpress.com/feed/ data
@@ -61,21 +61,21 @@ https://www.lyle.blog/feed life "Lyle McKeany"
 https://www.likethefish.blog/feed life
 https://ungated.life/feed life
 https://lspace.swyx.io/feed ai
-https://continuedjourney.substack.com/feed substack
-https://tayloramurphy.substack.com/feed ! data substack "~Taylora Murphy"
-https://sashachapin.substack.com/feed substack
+https://continuedjourney.substack.com/feedJ
+https://tayloramurphy.substack.com/feed ! data "~Taylora Murphy"
+https://sashachapin.substack.com/feed
 https://win.hyperquery.ai/feed data life
-https://eczachly.substack.com/feed data substack
-https://dataengineeringcentral.substack.com/feed data substack
-https://moderndataengineering.substack.com/feed data substack
+https://eczachly.substack.com/feed data
+https://dataengineeringcentral.substack.com/feed data
+https://moderndataengineering.substack.com/feed data 
 https://news.tonydinh.com/feed indie
 https://tfthacker.substack.com/feed note-taking "~Tools for Thought (Obsidian, PKM)"
-https://sqlpatterns.com/feed substack data-substack "~Data Patterns by Ergest Xheblati"
-https://uncledata.substack.com/feed data substack
-https://practicaldatamodeling.substack.com/feed data substack
-https://juhache.substack.com/feed data substack
+https://sqlpatterns.com/feed data-substack "~Data Patterns by Ergest Xheblati"
+https://uncledata.substack.com/feed data
+https://practicaldatamodeling.substack.com/feed data
+https://juhache.substack.com/feed data
 https://sympathetic.ink/feed.xml data
-https://askvinnie.substack.com/feed data substack
+https://askvinnie.substack.com/feed data
 https://materializedview.io/feed data
 https://www.pracdata.io/feed data
 https://erikbern.com/index.xml startup "~Erik Bernhardsson"
@@ -88,44 +88,44 @@ https://www.counting-stuff.com/rss/ curiosity
 https://nicolevanderhoeven.github.io/blog/index.xml note-taking
 
 # substacks I follow - hidden in feed:
-https://dataengineeringcommunity.substack.com/feed ! substack data
-https://dataespresso.substack.com/feed ! substack data
-https://datajargon.substack.com/feed ! substack data
-https://thedatatoolbox.substack.com/feed ! substack data
-https://groupby1.mattarderne.com/feed ! substack data
-https://blog.mehdio.com/feed ! substack data
+https://dataengineeringcommunity.substack.com/feed ! data
+https://dataespresso.substack.com/feed ! data
+https://datajargon.substack.com/feed ! data
+https://thedatatoolbox.substack.com/feed ! data
+https://groupby1.mattarderne.com/feed ! data
+https://blog.mehdio.com/feed ! data
 
-https://manifestomusings.com/feed ! substack life
-https://becomingcaryn.substack.com/feed ! substack life
-https://compassionatefaith.substack.com/feed ! substack life
-https://karunpal.substack.com/feed ! substack life
-https://on.substack.com/feed ! substack life
+https://manifestomusings.com/feed ! life
+https://becomingcaryn.substack.com/feed ! life
+https://compassionatefaith.substack.com/feed ! life
+https://karunpal.substack.com/feed ! life
+https://on.substack.com/feed ! life
 
-https://think.ryi.me/feed ! substack curiosity
-https://thaomaoh.substack.com/feed ! substack curiosity
+https://think.ryi.me/feed ! curiosity
+https://thaomaoh.substack.com/feed ! curiosity
 
-https://nickmilo.substack.com/feed ! substack note-taking
-https://digitalorganizationdad.substack.com/feed ! substack producitvity
+https://nickmilo.substack.com/feed ! note-taking
+https://digitalorganizationdad.substack.com/feed ! producitvity
 
-https://andrewchen.substack.com/feed ! substack indie
+https://andrewchen.substack.com/feed ! indie
 https://alirezasadeghi1.substack.com/feed ! data-substack
-https://austinkleon.substack.com/feed ! substack curiosity
+https://austinkleon.substack.com/feed ! curiosity
 https://austinkleon.com/feed curiosity
-https://boundlessnotions.substack.com/feed ! substack data-substack
-https://dataproducts.substack.com/feed ! substack data-substack
-https://datascienceweekly.substack.com/feed ! substack ai
-https://blog.dataexpert.io/feed ! substack data-substack
-https://archiew.substack.com/feed ! substack data-substack
-https://learnanalyticsengineering.substack.com/feed ! substack data-substack dbt
-https://dataopsleadership.substack.com/feed ! substack data-substack
-https://databased.pedramnavid.com/feed ! substack data-substack
-https://sarahsnewsletter.substack.com/feed ! substack data-substack
-https://semitechnicals.com/feed ! substack engineering
-https://hubertdulay.substack.com/feed ! substack data-substack
-https://dcubed.substack.com/feed ! substack consulting
-https://read.technically.dev/feed ! substack engineering
-https://thesequence.substack.com/feed ! substack ai
-https://themetagridnotes.substack.com/feed ! substack data-substack
+https://boundlessnotions.substack.com/feed ! data-substack
+https://dataproducts.substack.com/feed ! data-substack
+https://datascienceweekly.substack.com/feed ! ai
+https://blog.dataexpert.io/feed ! data-substack
+https://archiew.substack.com/feed ! data-substack
+https://learnanalyticsengineering.substack.com/feed ! data-substack dbt
+https://dataopsleadership.substack.com/feed ! data-substack
+https://databased.pedramnavid.com/feed ! data-substack
+https://sarahsnewsletter.substack.com/feed ! data-substack
+https://semitechnicals.com/feed ! engineering
+https://hubertdulay.substack.com/feed ! data-substack
+https://dcubed.substack.com/feed ! consulting
+https://read.technically.dev/feed ! engineering
+https://thesequence.substack.com/feed ! ai
+https://themetagridnotes.substack.com/feed ! data-substack
 
 #off for now to not overwelm
 #https://www.waitingforcode.com/rss ! archive-data
@@ -156,12 +156,13 @@ https://themetagridnotes.substack.com/feed ! substack data-substack
 
 #no RSS:
 #https://www.devas.life curiosity
+https://claytonwramsey.com/blog/rss.xml curiosity "~Clayton Ramsey Blog"
 
 https://tim.blog/feed/ curiosity
 
 # other Feeds (less important)
 "query:-Me Feeds:tags # \"me\"" me
-"query:-Newsletter/Substacks Feeds:tags # \"substack\"" substack
+"query:-Substacks Left-Overs Feeds:tags # \"substack\"" substack
 #"query:z-Archive Data Feeds:tags # \"archive-data\"" archive-data
 #"query:z-Archive Feeds:tags # \"archive\"" archive
 
