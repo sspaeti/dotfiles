@@ -33,6 +33,9 @@ bind-key j down
 bind-key k up
 bind-key l open
 bind-key h quit
+#vim like forth an back
+bind-key ^I open
+bind-key ^O quit
 
 # Move g/G functionality to s/S
 bind-key s sort
@@ -45,6 +48,9 @@ bind G everywhere end -- "Go to bottom of list"
 # Page navigation
 bind-key ^D pagedown
 bind-key ^U pageup
+bind-key d pagedown
+bind-key u pageup
+
 
 # Remap read/unread from n/N to m/M
 unbind-key n
