@@ -57,3 +57,7 @@ OBS/.config/obs-studio/logs/
 OBS/.config/obs-studio/profiler_data/
 
 w3m/.config/w3m/cookie
+
+#arch
+arch-orphans.txt
+arch-package-analysis.txt

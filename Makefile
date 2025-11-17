@@ -50,6 +50,28 @@ arch:
 	pacman -Qqen | grep -v -f <(pacman -Qqm) > pacman.txt
 	pacman -Qen | grep -v -f <(pacman -Qqm) > pacman-versions.txt
 
+
+## how it works:
+# make arch-orphans        # List orphaned packages → arch-orphans.txt
+# make arch-cleanup        # Remove orphaned packages (after review)
+# make arch-package-check  # Analyze all packages → arch-package-analysis.txt
+# make arch-check-deps     # Check what depends on a package
+# make arch-clean-cache    # Clean package cache (keeps 3 versions)
+arch-orphans:
+	./_utils/arch-maintenance.sh orphans
+
+arch-cleanup:
+	./_utils/arch-maintenance.sh cleanup
+
+arch-package-check:
+	./_utils/arch-maintenance.sh package-check
+
+arch-check-deps:
+	./_utils/arch-maintenance.sh check-deps
+
+arch-clean-cache:
+	./_utils/arch-maintenance.sh clean-cache
+
 oh-my-zsh:
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" #install oh-my-zsh
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
