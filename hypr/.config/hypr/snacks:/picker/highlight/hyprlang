@@ -1,0 +1,1 @@
+bind = SUPER ALT, F, exec, uwsm app -- kitty --title="Screenshot Browser" -e /home/sspaeti/.config/hypr/sspaeti/image-browser/screenshot-browser-gum.sh
