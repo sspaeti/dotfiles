@@ -35,13 +35,13 @@ https://karlastarr.substack.com/feed substack
 https://seattledataguy.substack.com/feed data substack
 https://www.jamesserra.com/feed mssql
 https://www.dataengineeringweekly.com/feed data
-https://medium.com/feed/@maximebeauchemin data
+https://medium.com/feed/@maximebeauchemin data "~Maxime Beauchemin (Medium)"
 https://davidsj.substack.com/feed data substack
 https://serve.podhome.fm/rss/1c0357c0-6aba-5766-a2d5-2090d8dab6bc
-https://fromanengineersight.substack.com/feed data substack
+https://fromanengineersight.substack.com/feed data substack "~Benoit Pimpaud (From an Engineer Sight)"
 https://groupby1.substack.com/feed data substack
-http://www.cathrinewilhelmsen.net/feed/ mssql
-https://roundup.getdbt.com/feed data
+http://www.cathrinewilhelmsen.net/feed/ ! mssql
+https://roundup.getdbt.com/feed ! data
 https://pedram.substack.com/feed data substack
 http://www.gregreda.com/feeds/all.atom.xml ! curiosity
 https://jpmonteiro.substack.com/feed substack
@@ -55,14 +55,14 @@ https://semanticinsight.wordpress.com/feed/ data
 https://planyournext.com/feed
 https://think-boundless.com/feed/
 https://jonathanneo.substack.com/feed substack
-https://vickiboykis.com/index.xml misc
+https://vickiboykis.com/index.xml ! misc 
 https://www.whitenoise.email/feed/ life
-https://www.lyle.blog/feed life
+https://www.lyle.blog/feed life "Lyle McKeany"
 https://www.likethefish.blog/feed life
 https://ungated.life/feed life
 https://lspace.swyx.io/feed ai
 https://continuedjourney.substack.com/feed substack
-https://tayloramurphy.substack.com/feed data substack
+https://tayloramurphy.substack.com/feed ! data substack "~Taylora Murphy"
 https://sashachapin.substack.com/feed substack
 https://win.hyperquery.ai/feed data life
 https://eczachly.substack.com/feed data substack
@@ -70,7 +70,7 @@ https://dataengineeringcentral.substack.com/feed data substack
 https://moderndataengineering.substack.com/feed data substack
 https://news.tonydinh.com/feed indie
 https://tfthacker.substack.com/feed note-taking substack
-https://ergestx.substack.com/feed data substack
+https://sqlpatterns.com/feed substack data-substack "~Data Patterns by Ergest Xheblati"
 https://uncledata.substack.com/feed data substack
 https://practicaldatamodeling.substack.com/feed data substack
 https://juhache.substack.com/feed data substack
@@ -112,7 +112,6 @@ https://alirezasadeghi1.substack.com/feed ! data-substack
 https://austinkleon.substack.com/feed ! substack curiosity
 https://austinkleon.com/feed curiosity
 https://boundlessnotions.substack.com/feed ! substack data-substack
-https://sqlpatterns.com/feed ! substack data-substack
 https://dataproducts.substack.com/feed ! substack data-substack
 https://datascienceweekly.substack.com/feed ! substack ai
 https://blog.dataexpert.io/feed ! substack data-substack
