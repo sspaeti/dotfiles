@@ -460,5 +460,14 @@
       ],
       "key": "1"
     }
+  ],
+  "obsidian-hider:toggle-tab-containers": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": ";"
+    }
   ]
 }

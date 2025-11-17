@@ -12,3 +12,6 @@ keymap u PREV_PAGE
 # q to quit without confirmation
 keymap q EXIT
 keymap h EXIT
+
+# Open current URL in Brave browser
+keymap O EXTERN 'brave %s &'

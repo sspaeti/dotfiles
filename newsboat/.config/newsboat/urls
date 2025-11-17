@@ -23,7 +23,8 @@ https://dedp.online/feed.xml ! me
 https://www.blef.fr/blog/rss/ data
 https://world.hey.com/jason/feed.atom curiosity
 https://world.hey.com/dhh/feed.atom curiosity
-https://www.theseattledataguy.com/feed/ data
+https://seattledataguy.substack.com/feed data "~Seattle Data Guy Substack"
+https://www.theseattledataguy.com/feed/ data "~Seattle Data Guy Blog"
 https://sive.rs/en.atom curiosity
 https://www.confessionsofadataguy.com/feed/ data
 https://petrjanda.substack.com/feed data
@@ -32,7 +33,6 @@ https://stkbailey.substack.com/feed data
 https://benn.substack.com/feed data
 https://technically.substack.com/feed 
 https://karlastarr.substack.com/feed 
-https://seattledataguy.substack.com/feed data
 https://www.jamesserra.com/feed mssql
 https://www.dataengineeringweekly.com/feed data
 https://medium.com/feed/@maximebeauchemin data "~Maxime Beauchemin (Medium)"
@@ -45,7 +45,6 @@ https://roundup.getdbt.com/feed ! data
 https://pedram.substack.com/feed data
 http://www.gregreda.com/feeds/all.atom.xml ! curiosity
 https://jpmonteiro.substack.com/feed
-https://joereis.substack.com/feed data 
 https://chollinger.com/blog/index.xml misc
 https://mehdio.substack.com/feed data
 https://moderndata101.substack.com/feed data
@@ -72,7 +71,9 @@ https://news.tonydinh.com/feed indie
 https://tfthacker.substack.com/feed note-taking "~Tools for Thought (Obsidian, PKM)"
 https://sqlpatterns.com/feed data-substack "~Data Patterns by Ergest Xheblati"
 https://uncledata.substack.com/feed data
-https://practicaldatamodeling.substack.com/feed data
+https://joereis.substack.com/feed data "~Joe Reis Substack"
+https://practicaldatamodeling.substack.com/feed data "~Practical Data Modeling - Joe Reis"
+https://dataarchitecture.substack.com/feed data "~Data Architecture - Joe Reis"
 https://juhache.substack.com/feed data
 https://sympathetic.ink/feed.xml data
 https://askvinnie.substack.com/feed data
@@ -124,7 +125,7 @@ https://semitechnicals.com/feed ! engineering
 https://hubertdulay.substack.com/feed ! data-substack
 https://dcubed.substack.com/feed ! consulting
 https://read.technically.dev/feed ! engineering
-https://thesequence.substack.com/feed ! ai
+#https://thesequence.substack.com/feed ! ai
 https://themetagridnotes.substack.com/feed ! data-substack
 
 #off for now to not overwelm
