@@ -3,9 +3,12 @@
 
 # Ctrl+D for page down
 keymap C-d NEXT_PAGE
+keymap d NEXT_PAGE
 
 # Ctrl+U for page up
 keymap C-u PREV_PAGE
+keymap u PREV_PAGE
 
 # q to quit without confirmation
 keymap q EXIT
+keymap h EXIT
