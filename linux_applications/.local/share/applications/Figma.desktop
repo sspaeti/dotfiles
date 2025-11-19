@@ -2,7 +2,7 @@
 Version=1.0
 Name=Figma
 Comment=Figma
-Exec=omarchy-launch-webapp "https://figma.com/"
+Exec=omarchy-launch-webapp "https://www.figma.com/design/COlQFhfTKGvIbEWVUcW9bd/SSP-Data-Design-Canva--Hero--Design-?node-id=1-2"
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Figma.png
