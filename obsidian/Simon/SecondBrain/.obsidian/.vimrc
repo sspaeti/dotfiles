@@ -37,6 +37,8 @@ vmap <Space>/ :local_search<CR>
 "fuzzy serach with omnisearch
 exmap omnisearch_search obcommand omnisearch:show-modal
 nmap <Space>f :omnisearch_search<CR>
+nmap <Space><Space> :omnisearch_search<CR>
+
 " Leader key search/replace (<leader>s)
 exmap search_replace obcommand editor:open-search-replace
 nmap <Space>s :search_replace<CR>
