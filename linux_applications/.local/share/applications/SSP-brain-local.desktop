@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=SSP Brain (Localhost)
+Comment=SSP
+Exec=omarchy-launch-webapp "http://localhost:1313/brain/"
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/SSP.png
+StartupNotify=true

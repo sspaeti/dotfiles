@@ -2,7 +2,7 @@
 Version=1.0
 Name=Stats Goatcounter
 Comment=Stats Goatcounter
-Exec=omarchy-launch-webapp https://stats.ssp.sh/
+Exec=omarchy-launch-webapp https://goatcounter.ssp.sh/
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Stats Goatcounter.png
