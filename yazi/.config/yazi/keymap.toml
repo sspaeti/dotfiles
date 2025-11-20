@@ -3,64 +3,15 @@ prepend_keymap = [
 	{ on = "?", run = 'help', desc = "Help" },
 	{ on = "H", run = 'plugin duckdb -1', desc = "Scroll one column to the left" },
 	{ on = "L", run = 'plugin duckdb +1', desc = "Scroll one column to the right" },
-	# { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
+	# Sort by modified time (descending = newest first)
+	{ on = [ ",", "m" ], run = "sort mtime --reverse=yes", desc = "Sort by modified time (newest first)" },
+	# Sort by modified time (ascending = oldest first)
+	{ on = [ ",", "M" ], run = "sort mtime --reverse=no", desc = "Sort by modified time (oldest first)" },
+  # { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
 ]
-
-
 
 [help]
 prepend_keymap = [
 	{ on = "/", run = 'filter', desc = "Filter" },
 ]
-
-# [[manager.prepend_keymap]]
-# on = "H"
-# run = "plugin duckdb -1"
-# desc = "Scroll one column to the left"
-
-# [[manager.prepend_keymap]]
-# on = "L"
-# run = "plugin duckdb +1"
-# desc = "Scroll one column to the right"
-
-# [[manager.prepend_keymap]]
-# on = ["g", "o"]
-# run = "plugin duckdb -open"
-# desc = "open with duckdb"
-
-# [[manager.prepend_keymap]]
-# on = ["g", "u"]
-# run = "plugin duckdb -ui"
-# desc = "open with duckdb ui"
-
-# keymap = [
-
-# 	# Help
-# 	{ on = [ "?" ], exec = "help", desc = "Open help" },
-# ]
-
-# [tasks]
-
-# keymap = [
-# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
-# ]
-
-# [select]
-
-# keymap = [
-# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
-# ]
-
-# [input]
-
-# keymap = [
-# 	# Help
-# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
-# ]
-
-# [completion]
-
-# keymap = [
-# 	{ on = [ "?" ], exec = "help", desc = "Open help" }
-# ]
 
