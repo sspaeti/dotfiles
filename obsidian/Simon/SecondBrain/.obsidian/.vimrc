@@ -37,7 +37,12 @@ vmap <Space>/ :local_search<CR>
 "fuzzy serach with omnisearch
 exmap omnisearch_search obcommand omnisearch:show-modal
 nmap <Space>f :omnisearch_search<CR>
-nmap <Space><Space> :omnisearch_search<CR>
+
+" Open My Todos with <Space><Space>
+exmap open_todos obcommand obsidian-open-specific-notes:open-todos
+nmap <Space><Space> :open_todos<CR>
+exmap open_daily obcommand obsidian-open-specific-notes:daily-journal
+nmap <Space>d :open_daily<CR>
 
 " Leader key search/replace (<leader>s)
 exmap search_replace obcommand editor:open-search-replace
