@@ -153,14 +153,14 @@
     {
       "modifiers": [
         "Alt",
-        "Shift"
+        "Mod"
       ],
       "key": "X"
     },
     {
       "modifiers": [
-        "Alt",
-        "Mod"
+        "Mod",
+        "Shift"
       ],
       "key": "X"
     }
