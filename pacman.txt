@@ -166,6 +166,7 @@ pv
 python-gobject
 python-poetry-core
 python-terminaltexteffects
+python-weasyprint
 qalculate-gtk
 qt5-wayland
 qutebrowser

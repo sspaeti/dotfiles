@@ -166,6 +166,7 @@ pv 1.9.44-1
 python-gobject 3.54.5-1
 python-poetry-core 2.2.1-1
 python-terminaltexteffects 0.12.2-1
+python-weasyprint 66.0-1
 qalculate-gtk 5.8.1-1
 qt5-wayland 5.15.18+kde+r55-1
 qutebrowser 3.6.1-1
