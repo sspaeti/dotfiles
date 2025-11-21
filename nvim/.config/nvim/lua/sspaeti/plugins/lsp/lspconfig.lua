@@ -57,9 +57,6 @@ return {
       -- { "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end,                        desc = "LSP Workspace Symbol (Leader)" },
     },
     config = function()
-      -- import lspconfig plugin
-      local lspconfig = require("lspconfig")
-
       -- import cmp-nvim-lsp plugin
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -133,163 +130,109 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      -- configure html server
-      lspconfig["html"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- configure typescript server with plugin
-      lspconfig["ts_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-      --
-      -- -- not suggested with ts_ls together
-      -- lspconfig["denols"].setup({
-      --   capabilities = capabilities,
-      --   on_attach = on_attach,
-      -- })
-
-      -- configure css server
-      lspconfig["cssls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- configure tailwindcss server
-      lspconfig["tailwindcss"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      lspconfig["helm_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "helm", "yaml" },
-      })
-
-      -- -- configure svelte server
-      -- lspconfig["svelte"].setup({
-      --   capabilities = capabilities,
-      --   on_attach = function(client, bufnr)
-      --     on_attach(client, bufnr)
-
-      --     vim.api.nvim_create_autocmd("BufWritePost", {
-      --       pattern = { "*.js", "*.ts" },
-      --       callback = function(ctx)
-      --         if client.name == "svelte" then
-      --           client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-      --         end
-      --       end,
-      --     })
-      --   end,
-      -- })
-
-      -- configure graphql language server
-      lspconfig["graphql"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-      })
-
-      -- configure emmet language server
-      lspconfig["emmet_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-      })
-
-      -- configure python server
-      lspconfig["pyright"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- Configure `ruff-lsp`.
-      -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-      -- For the default config, along with instructions on how to customize the settings
-      lspconfig["ruff"].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        init_options = {
-          settings = {
-            -- Any extra CLI arguments for `ruff` go here.
-            args = {},
+      -- Define LSP servers with their configurations
+      local servers = {
+        { "html", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }},
+        { "ts_ls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }},
+        { "cssls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }},
+        { "tailwindcss", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }},
+        { "helm_ls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          filetypes = { "helm", "yaml" },
+        }},
+        { "graphql", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+        }},
+        { "emmet_ls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+        }},
+        { "pyright", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }},
+        { "ruff", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          init_options = {
+            settings = {
+              args = {},
+            }
           }
-        }
-      }
-      -- configure lua server (with special settings)
-      lspconfig["lua_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = { -- custom settings for lua
-          Lua = {
-            format = {
-              enable = true,
-              defaultConfig = {
-                indent_style = "space",
-                indent_size = "2",
-                align_continuous_assign_statement = false,
-                align_continuous_rect_table_field = false,
-                align_array_table = false
+        }},
+        { "lua_ls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          settings = {
+            Lua = {
+              format = {
+                enable = true,
+                defaultConfig = {
+                  indent_style = "space",
+                  indent_size = "2",
+                  align_continuous_assign_statement = false,
+                  align_continuous_rect_table_field = false,
+                  align_array_table = false
+                },
               },
-            },
-            -- make the language server recognize "vim" global
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              -- make language server aware of runtime files
-              library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
+              diagnostics = {
+                globals = { "vim" },
+              },
+              workspace = {
+                library = {
+                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                  [vim.fn.stdpath("config") .. "/lua"] = true,
+                },
               },
             },
           },
-        },
-      })
-
-      lspconfig["lemminx"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          xml = {
-            server = {
-              workDir = "~/.cache/lemminx",
+        }},
+        { "lemminx", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          settings = {
+            xml = {
+              server = {
+                workDir = "~/.cache/lemminx",
+              }
             }
           }
-        }
-      })
+        }},
+        { "bashls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }},
+        { "jdtls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          root_dir = vim.fs.root(0, {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}),
+        }},
+      }
 
-      lspconfig["bashls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- lspconfig["ruby_lsp"].setup({
-      --   capabilities = capabilities,
-      --   on_attach = on_attach,
-      -- })
-
-      --java setup
-      local project_files = {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}
-      local root_dir = require('lspconfig/util').root_pattern(unpack(project_files))
-
-      lspconfig['jdtls'].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        root_dir = root_dir,
-        --on_attach = function(client, bufnr)
-        --  on_attach(client, bufnr)
-
-        --  --TODO: not yet correct? root_dir need to be set?
-        --  --also file types need to be added (?):
-        --  --util.root_pattern("build.sbt", "build.sc", "build.gradle", "pom.xml")
-
-        --  root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1])
-        --end
-      })
+      -- Configure all servers using the new vim.lsp.config API
+      -- They will be automatically enabled when you open a matching filetype
+      for _, server in ipairs(servers) do
+        local name, config = server[1], server[2]
+        vim.lsp.config(name, config)
+        -- Note: vim.lsp.enable() is NOT called here
+        -- Servers will auto-start when opening matching filetypes
+      end
 
     end,
 

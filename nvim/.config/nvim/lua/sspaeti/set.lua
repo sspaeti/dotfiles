@@ -100,6 +100,9 @@ augroup END
 -- Automatically set activated virtual environment for Python
 vim.g.python3_host_prog = vim.fn.expand("$HOME/.venvs/nvim/bin/python3")
 
+-- Disable Perl provider (not used)
+vim.g.loaded_perl_provider = 0
+
 -- Register a command in Neovim to format JSON using jq
 vim.api.nvim_create_user_command('Formatj', function()
   vim.cmd('%!jq .')

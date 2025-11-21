@@ -30,12 +30,7 @@ return {
       ensure_installed = {
         "html",
         "cssls",
-        "tailwindcss",
-        -- "svelte",
         "lua_ls",
-        "graphql",
-        "emmet_ls", -- { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" } --> See lspconfig.lua
-        -- "prismals",
         "pyright",
       },
       -- auto-install configured servers (with lspconfig)

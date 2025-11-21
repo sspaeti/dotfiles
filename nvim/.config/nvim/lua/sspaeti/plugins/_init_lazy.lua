@@ -1,35 +1,36 @@
 return {
   --rust
   {
-    "simrat39/rust-tools.nvim",
-    event = "VeryLazy",
+    "neovim/nvim-lspconfig",
+    ft = { "rust" },
     config = function()
-      local opts = {
-        tools = {
-          -- rust-tools options
+      -- Configure rust_analyzer using the new vim.lsp.config API
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+            },
+            checkOnSave = {
+              command = "clippy",
+            },
+          },
         },
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set(
-              "n",
-              "<C-space>",
-              require("rust-tools").hover_actions.hover_actions,
-              { buffer = bufnr }
-            )
-            -- Code action groups
-            vim.keymap.set(
-              "n",
-              "<Leader>a",
-              require("rust-tools").code_action_group.code_action_group,
-              { buffer = bufnr }
-            )
-          end,
-        }, -- rust-analyser options
-      }
-      require("rust-tools").setup(opts)
+      })
+
+      -- Enable rust_analyzer for rust files
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "rust",
+        callback = function()
+          vim.lsp.enable("rust_analyzer")
+
+          -- Set up keymaps for rust files
+          local bufnr = vim.api.nvim_get_current_buf()
+          vim.keymap.set("n", "<C-space>", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover actions" })
+          vim.keymap.set("n", "<Leader>a", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code actions" })
+        end,
+      })
     end,
-    ft = { "rust", "rs" },
   },
   --'puremourning/vimspector', --debugging in vim
   { "christoomey/vim-system-copy", event = "VeryLazy" },
