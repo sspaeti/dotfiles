@@ -8,7 +8,6 @@
   "nldates-obsidian",
   "obsidian-pandoc",
   "obsidian-projects",
-  "obsidian-reading-time",
   "settings-search",
   "obsidian-style-settings",
   "tag-wrangler",
@@ -37,5 +36,7 @@
   "obsidian-excalidraw-plugin",
   "excalibrain",
   "obsidian-open-specific-notes",
-  "obsidian-theme-design-utilities"
+  "obsidian-theme-design-utilities",
+  "obsidian-reading-time",
+  "statusbar-organizer"
 ]
