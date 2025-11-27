@@ -117,7 +117,7 @@ alias mutt="neomutt"
 alias m="neomutt"
 
 # alias rss="newsboat"
-alias rss='cd ~/.config/newsboat && make run'
+alias rss='cd ~/.config/newsboat && NEWSBOAT_PASS="$NEWSBOAT_PASS" make run'
 
 # alias mscreener="~/.config/mutt/initial_screening.sh"
 alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"

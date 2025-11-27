@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := save
-.PHONY: decrypt run save clean help
+.PHONY: decrypt run urls save clean help
 
 # Default target - decrypt and run newsboat
 run: decrypt
@@ -23,6 +23,8 @@ decrypt:
 		echo "Error: urls.gpg not found"; \
 		exit 1; \
 	fi
+
+urls: decrypt
 
 # Save (encrypt) urls to urls.gpg using environment variable
 save:
@@ -54,9 +56,16 @@ help:
 	@echo "Newsboat Encrypted URLs Management"
 	@echo ""
 	@echo "Usage:"
-	@echo "  make run      - Decrypt and run newsboat (default)"
-	@echo "  make save     - Encrypt urls to urls.gpg"
+	@echo "  make decrypt  - Decrypt urls.gpg to urls (for editing)"
+	@echo "  make urls  - Decrypt urls.gpg to urls (for editing)"
+	@echo "  make run      - Decrypt and run newsboat"
+	@echo "  make save     - Encrypt urls to urls.gpg (default)"
 	@echo "  make clean    - Remove decrypted urls file"
+	@echo ""
+	@echo "Workflow:"
+	@echo "  1. make decrypt   # Edit urls file"
+	@echo "  2. make save      # Encrypt changes"
+	@echo "  3. git add & commit"
 	@echo ""
 	@echo "Environment variable required:"
 	@echo "  NEWSBOAT_PASS - Passphrase for encryption/decryption"
