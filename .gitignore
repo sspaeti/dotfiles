@@ -58,6 +58,9 @@ OBS/.config/obs-studio/profiler_data/
 
 w3m/.config/w3m/cookie
 
+#newsboat
+newsboat/.config/newsboat/urls
+
 #arch
 arch-orphans.txt
 arch-package-analysis.txt
