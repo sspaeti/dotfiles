@@ -120,6 +120,7 @@ alias m="neomutt"
 alias rss='cd ~/.config/newsboat && NEWSBOAT_PASS="$NEWSBOAT_PASS" make run'
 alias rss-save='cd ~/.config/newsboat && NEWSBOAT_PASS="$NEWSBOAT_PASS" make save'
 alias rss-urls='cd ~/.config/newsboat && NEWSBOAT_PASS="$NEWSBOAT_PASS" make urls'
+alias rss-vacuum='newsboat --vacuum'
 
 # alias mscreener="~/.config/mutt/initial_screening.sh"
 alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"
