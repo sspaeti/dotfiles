@@ -351,7 +351,7 @@
                     {
                         "name": "Video Capture Device (V4L2)",
                         "source_uuid": "9ef703f7-e476-4cca-9e2e-2d9e793517af",
-                        "visible": true,
+                        "visible": false,
                         "locked": false,
                         "rot": 0.0,
                         "scale_ref": {
