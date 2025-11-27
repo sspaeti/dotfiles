@@ -6,17 +6,39 @@
   "hideUnresolved": true,
   "showOrphans": false,
   "collapse-color-groups": true,
-  "colorGroups": [],
+  "colorGroups": [
+    {
+      "query": "Data Engineering",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "Personal",
+      "color": {
+        "a": 1,
+        "rgb": 14725458
+      }
+    },
+    {
+      "query": "Writing",
+      "color": {
+        "a": 1,
+        "rgb": 5984992
+      }
+    }
+  ],
   "collapse-display": false,
   "showArrow": false,
-  "textFadeMultiplier": -1.2,
+  "textFadeMultiplier": -1,
   "nodeSizeMultiplier": 0.63274704070652,
   "lineSizeMultiplier": 0.202219263204616,
-  "collapse-forces": false,
-  "centerStrength": 0.426509332442762,
+  "collapse-forces": true,
+  "centerStrength": 0.133254426197169,
   "repelStrength": 10.4107759100523,
   "linkStrength": 0.967679691268693,
   "linkDistance": 217,
-  "scale": 0.05207164717831125,
-  "close": false
+  "scale": 0.4743893260655897,
+  "close": true
 }

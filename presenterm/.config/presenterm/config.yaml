@@ -2,4 +2,4 @@ export:
   dimensions:
     columns: 90
     rows: 35
-  pauses: new_slide
+  # pauses: new_slide

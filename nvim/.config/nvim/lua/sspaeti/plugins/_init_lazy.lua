@@ -60,7 +60,7 @@ return {
   { "tpope/vim-rhubarb",           event = "VeryLazy" },
 
   { "kdheepak/lazygit.nvim",       event = "VeryLazy" },
-  {
+  { --potentially replace with esmuellert/vscode-diff.nvim as below does not get updates?
     "sindrets/diffview.nvim",
     config = function()
       require("diffview").setup({
