@@ -11,6 +11,7 @@ base
 base-devel
 bash-completion
 bat
+bind
 blueberry
 brightnessctl
 btop
@@ -111,6 +112,7 @@ libgphoto2
 libpulse
 libqalculate
 libreoffice-fresh
+libwebp-utils
 limine
 limine-mkinitcpio-hook
 limine-snapper-sync
