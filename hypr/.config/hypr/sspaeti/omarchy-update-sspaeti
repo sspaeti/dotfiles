@@ -1,0 +1,4 @@
+# because python dependecies on Arch update is failing as mise is active
+mise deactivate
+omarchy-update
+mise activate
