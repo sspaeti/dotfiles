@@ -39,3 +39,6 @@ copy-on-select = clipboard
 
 
 confirm-close-surface=false
+
+# Slowdown mouse scrolling
+mouse-scroll-multiplier = 0.95
