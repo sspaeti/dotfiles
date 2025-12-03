@@ -12,7 +12,7 @@ base-devel
 bash-completion
 bat
 bind
-blueberry
+bluetui
 brightnessctl
 btop
 btrfs-progs
@@ -47,6 +47,7 @@ elephant-todo
 elephant-unicode
 elephant-websearch
 evince
+exfatprogs
 expac
 eza
 fastfetch
@@ -175,6 +176,7 @@ qutebrowser
 rdesktop
 ripgrep
 rsync
+ruby
 rust
 s3fs-fuse
 satty
@@ -198,6 +200,7 @@ tig
 timeshift
 tldr
 tmux
+tobi-try
 trash-cli
 tree
 tree-sitter-cli
@@ -211,6 +214,7 @@ tzupdate
 ufw
 ufw-docker
 unzip
+usage
 usbutils
 uwsm
 vim

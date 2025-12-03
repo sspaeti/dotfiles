@@ -6,9 +6,7 @@ claude-desktop-native
 clipse
 duckdb-bin
 editt-bin
-editt-bin-debug
 ente-auth-bin
-ente-auth-bin-debug
 filen-desktop-bin
 himalaya-git
 hyprmon-bin
