@@ -887,7 +887,7 @@
     "transition_duration": 300,
     "preview_locked": true,
     "scaling_enabled": false,
-    "scaling_level": 0,
+    "scaling_level": -5,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "modules": {
