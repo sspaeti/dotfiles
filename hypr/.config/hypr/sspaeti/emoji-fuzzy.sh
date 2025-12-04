@@ -1478,7 +1478,7 @@ exit
 🔵 blue circle shape icon button
 🟣 purple circle round
 🟤 brown circle round
-⚫ black circle shape button round
+⚫ black circle shape button round dot
 ⚪ white circle shape round
 🟥 red square
 🟧 orange square
@@ -1489,11 +1489,11 @@ exit
 🟫 brown square
 ⬛ black large square shape icon button
 ⬜ white large square shape icon stone button
-◼️ black medium square shape button icon
+◼️ black medium square shape button icon dot
 ◻️ white medium square shape stone icon
-◾ black medium small square icon shape button
+◾ black medium small square icon shape button dot
 ◽ white medium small square shape stone icon button
-▪️ black small square shape icon
+▪️ black small square shape icon dot
 ▫️ white small square shape icon
 🔶 large orange diamond shape jewel gem
 🔷 large blue diamond shape jewel gem
@@ -1899,3 +1899,5 @@ AH↗️HA↘️HA↗️HA↘️HA↗️HA↘️HA↗️HA↘️ pekora arrows h
 𝕏  twitter x logo
 👉👈 etou ughhhhhhh shy
 👉👌 put it in imagination perv
+# hashtag
+＃ hashtag2

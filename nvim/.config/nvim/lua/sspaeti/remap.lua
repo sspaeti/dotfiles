@@ -24,7 +24,8 @@ vim.keymap.set('n', 's/', ':History/<CR>')
 vim.keymap.set('n', 'sL', ':Lines<CR>')
 vim.keymap.set('n', 'sn', ':enew<CR>')
 vim.keymap.set('n', 'sM', ':Maps<CR>')
-vim.keymap.set('n', 'st', ':Neotree position=float toggle=true reveal<CR>')
+-- vim.keymap.set('n', 'st', ':Neotree position=float toggle=true reveal<CR>')
+vim.keymap.set('n', 'st', '<cmd>Yazi<cr>', {desc = "Open yazi at the current file"} )
 vim.keymap.set('n', 'se', ':Neotree position=right toggle=true reveal<CR>')
 -- this will include hidden files and work on none git directories. Also fuzzy search works better than telecope
 vim.keymap.set('n', '<c-p>', ':Files<CR>') --> s is in telecope.lua
