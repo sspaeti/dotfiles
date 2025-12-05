@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Fizzy
+Comment=Fizzy
+Exec=omarchy-launch-webapp https://app.fizzy.do/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Fizzy.png
+StartupNotify=true
