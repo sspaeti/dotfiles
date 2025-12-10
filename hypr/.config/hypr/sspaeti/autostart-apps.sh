@@ -14,6 +14,12 @@ done
 hyprctl dispatch movetoworkspace "1,address:$kitty_addr"
 
 # Launch Brave → workspace 2
+# Wait for gnome-keyring-daemon to be ready (fixes keyring race condition and multiple keyring files at ~/.local/share/keyrings)
+while ! systemctl --user is-active --quiet gnome-keyring-daemon.service; do
+    sleep 0.2
+done
+# Give PAM an extra moment to unlock the keyring
+sleep 1
 brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
 while [ -z "$brave_addr" ]; do
     sleep 0.5
