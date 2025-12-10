@@ -1,0 +1,8 @@
+--ignore-errors
+# --no-playlist
+
+# Save in ~/Videos
+-o ~/Videos/YouTube/%(title)s.%(ext)s
+
+# Prefer 1080p or lower resolutions
+-f bestvideo[height<=?1080]+bestaudio/best
