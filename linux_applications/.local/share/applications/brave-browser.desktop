@@ -2,7 +2,7 @@
 Version=1.0
 Name=Brave
 Comment=Access the Internet
-Exec=brave --force-device-scale-factor=1.0 %U
+Exec=brave --password-store=basic --force-device-scale-factor=1.0 %U
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/brave.png

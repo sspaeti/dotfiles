@@ -18,9 +18,7 @@ hyprctl dispatch movetoworkspace "1,address:$kitty_addr"
 while ! systemctl --user is-active --quiet gnome-keyring-daemon.service; do
     sleep 0.2
 done
-# Give PAM an extra moment to unlock the keyring
-sleep 1
-brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
+brave --password-store=basic --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
 while [ -z "$brave_addr" ]; do
     sleep 0.5
     brave_addr=$(hyprctl clients -j | jq -r '.[] | select(.class == "brave-browser") | .address')
