@@ -18,6 +18,10 @@ hyprctl dispatch movetoworkspace "1,address:$kitty_addr"
 while ! systemctl --user is-active --quiet gnome-keyring-daemon.service; do
     sleep 0.2
 done
+
+# Fix Ente Auth keyring integration (prevents duplicate keyring creation)
+# ~/.config/hypr/sspaeti/fix-ente-keyring.sh > /tmp/keyring-fix-startup.log 2>&1
+
 brave --password-store=basic --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
 while [ -z "$brave_addr" ]; do
     sleep 0.5
