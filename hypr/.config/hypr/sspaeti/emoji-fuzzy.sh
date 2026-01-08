@@ -1177,6 +1177,7 @@ exit
 💴 yen banknote money sales japanese dollar currency
 💵 dollar banknote money sales bill currency
 💶 euro banknote money sales dollar currency
+€ euro money dollar
 💷 pound banknote british sterling money sales bills uk england currency
 💸 money with wings dollar bills payment sale
 💳 credit card money sales dollar bill payment shopping
@@ -1314,6 +1315,10 @@ exit
 🔞 no one under eighteen 18 drink pub night minor circle
 ☢️ radioactive nuclear danger
 ☣️ biohazard danger
+→ right arrow bullet pointer
+← left arrow bullet pointer
+↑ up arrow
+↓ down arrow
 ⬆️ up arrow blue-square continue top direction
 ↗️ up right arrow blue-square point direction diagonal northeast
 ➡️ right arrow blue-square next
@@ -1487,20 +1492,20 @@ exit
 🟦 blue square
 🟪 purple square
 🟫 brown square
-⬛ black large square shape icon button
-⬜ white large square shape icon stone button
-◼️ black medium square shape button icon dot
-◻️ white medium square shape stone icon
-◾ black medium small square icon shape button dot
+⬛ bullet listing black large square shape icon button
+⬜ bullet listing white large square shape icon stone button
+◼️ bullet listing black medium square shape button icon dot
+◻️ bullet listing white medium square shape stone icon
+◾ bullet listing bullet listing black medium small square icon shape button dot
 ◽ white medium small square shape stone icon button
-▪️ black small square shape icon dot
-▫️ white small square shape icon
+▪️ bullet listing black small square shape icon dot
+▫️ bullet listing white small square shape icon
 🔶 large orange diamond shape jewel gem
 🔷 large blue diamond shape jewel gem
-🔸 small orange diamond shape jewel gem
-🔹 small blue diamond shape jewel gem
-🔺 red triangle pointed up shape direction up top
-🔻 red triangle pointed down shape direction bottom
+🔸 bullet listing small orange diamond shape jewel gem
+🔹 bullet listing small blue diamond shape jewel gem
+🔺 bullet listing red triangle pointed up shape direction up top
+🔻 bullet listing red triangle pointed down shape direction bottom
 💠 diamond with a dot jewel blue gem crystal fancy
 🔘 radio button input old music circle
 🔳 white square button shape input
@@ -1886,10 +1891,6 @@ exit
 🪪 identification card document
 🟰 heavy equals sign math
 ¿? question upside down reversed spanish
-← left arrow
-↑ up arrow
-→ right arrow
-↓ down arrow
 ←↑→↓ all directions up down left right arrows
 AH↗️HA↘️HA↗️HA↘️HA↗️HA↘️HA↗️HA↘️ pekora arrows hahaha rabbit
 • dot circle separator
