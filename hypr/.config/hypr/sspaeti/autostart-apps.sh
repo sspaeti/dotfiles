@@ -22,7 +22,8 @@ done
 # Fix Ente Auth keyring integration (prevents duplicate keyring creation)
 # ~/.config/hypr/sspaeti/fix-ente-keyring.sh > /tmp/keyring-fix-startup.log 2>&1
 
-brave --password-store=basic --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
+# brave --password-store=basic --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
+brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
 while [ -z "$brave_addr" ]; do
     sleep 0.5
     brave_addr=$(hyprctl clients -j | jq -r '.[] | select(.class == "brave-browser") | .address')
