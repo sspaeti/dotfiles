@@ -2,7 +2,8 @@
 Version=1.0
 Name=Meet Video Google
 Comment=Meet Video Google
-Exec=omarchy-launch-webapp https://meet.google.com/
+# use chromium as I manually disabled "use graphic accelariotn when available" as this can crashes computer when having meetings | disable-sync is needed to not crash chromium on opening *.google.com
+Exec=chromium --disable-sync https://meet.google.com/
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Meet Video Google.png
