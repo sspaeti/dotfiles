@@ -8,6 +8,8 @@ duckdb-bin
 editt-bin
 ente-auth-bin
 filen-desktop-bin
+gcc14
+gcc14-libs
 himalaya-git
 hyprmon-bin
 jdk
