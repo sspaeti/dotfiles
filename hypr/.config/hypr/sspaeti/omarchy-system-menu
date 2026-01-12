@@ -3,6 +3,7 @@
 # Custom system menu with tmux-aware shutdown/restart
 # Replaces omarchy-menu system functionality with proper tmux handling
 # FIXED 1-2 minutes shutdown as an tangling Neovim session is not closing as file is unsaved
+# Updated to support dynamic suspend and hibernate options based on system capabilities
 
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
@@ -25,11 +26,17 @@ handle_tmux_and_reboot() {
   ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot
 }
 
-case $(menu "System" "  Lock\n󱄄  Screensaver\n󰤄  Suspend\n  Relaunch\n󰜉  Restart\n󰐥  Shutdown") in
+# Build menu options dynamically based on system capabilities
+options="  Lock\n󱄄  Screensaver"
+[ -f ~/.local/state/omarchy/toggles/suspend-on ] && options="$options\n󰒲  Suspend"
+omarchy-hibernation-available && options="$options\n󰤁  Hibernate"
+options="$options\n󰜉  Restart\n󰐥  Shutdown"
+
+case $(menu "System" "$options") in
   *Lock*) omarchy-lock-screen ;;
   *Screensaver*) omarchy-launch-screensaver force ;;
   *Suspend*) systemctl suspend ;;
-  *Relaunch*) uwsm stop ;;
+  *Hibernate*) systemctl hibernate ;;
   *Restart*) handle_tmux_and_reboot ;;
   *Shutdown*) handle_tmux_and_poweroff ;;
 esac
