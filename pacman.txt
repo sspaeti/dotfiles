@@ -13,6 +13,7 @@ bash-completion
 bat
 bind
 bluetui
+bolt
 brightnessctl
 btop
 btrfs-progs
@@ -30,6 +31,7 @@ dmenu
 docker
 docker-buildx
 docker-compose
+dotnet-runtime-9.0
 dua-cli
 dust
 efibootmgr
@@ -83,6 +85,7 @@ hugo
 hypridle
 hyprland
 hyprland-guiutils
+hyprland-preview-share-picker
 hyprlock
 hyprpicker
 hyprshot
@@ -101,6 +104,7 @@ jq
 k9s
 kdenlive
 kitty
+ksnip
 kubectl
 kvantum-qt5
 languagetool
@@ -220,6 +224,7 @@ usbutils
 uwsm
 vim
 visual-studio-code-bin
+voxtype-bin
 vulkan-radeon
 w3m
 walker
@@ -233,7 +238,6 @@ wireplumber
 wl-clipboard
 woff2-font-awesome
 wtype
-xapp
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xdg-terminal-exec
@@ -245,6 +249,7 @@ yarn
 yaru-icon-theme
 yay
 yazi
+yq
 yt-dlp
 zed
 zoxide

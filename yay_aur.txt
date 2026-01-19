@@ -8,8 +8,6 @@ duckdb-bin
 editt-bin
 ente-auth-bin
 filen-desktop-bin
-gcc14
-gcc14-libs
 himalaya-git
 hyprmon-bin
 jdk
@@ -22,7 +20,6 @@ python-jalali-core
 python-jdatetime
 python-kitchen
 python-taskw
-rustdesk-bin
 sesh-bin
 slack-desktop
 tuxedo-control-center-bin
