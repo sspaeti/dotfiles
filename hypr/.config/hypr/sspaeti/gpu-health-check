@@ -1,0 +1,44 @@
+#!/bin/bash
+# Quick GPU health check - run before meetings to verify GPU state
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+echo "GPU Health Check"
+echo "================"
+
+# Check for critical GPU errors in current boot
+errors=$(journalctl -b -k 2>/dev/null | grep -E "(VPE.*(fail|reset)|IB.*(fail|test failed)|MES.*fail|amdgpu.*(reset|hang|error))" | grep -v "collaborate mode")
+
+if [ -z "$errors" ]; then
+    echo -e "${GREEN}[OK]${NC} No GPU errors in current boot"
+else
+    echo -e "${RED}[WARN]${NC} GPU errors detected:"
+    echo "$errors" | head -5
+    echo -e "${YELLOW}Recommendation: Reboot before your meeting${NC}"
+fi
+
+# Check GPU is responding
+if busy=$(cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1); then
+    echo -e "${GREEN}[OK]${NC} GPU responding (${busy}% busy)"
+else
+    echo -e "${RED}[FAIL]${NC} Cannot read GPU status"
+fi
+
+# Check VRAM
+if vram=$(cat /sys/class/drm/card*/device/mem_info_vram_used 2>/dev/null | head -1); then
+    vram_mb=$((vram / 1024 / 1024))
+    echo -e "${GREEN}[OK]${NC} VRAM in use: ${vram_mb}MB"
+else
+    echo -e "${YELLOW}[SKIP]${NC} VRAM info not available"
+fi
+
+# Summary
+echo ""
+if [ -z "$errors" ]; then
+    echo -e "${GREEN}GPU is healthy - safe to start meeting${NC}"
+else
+    echo -e "${RED}GPU may be unstable - consider rebooting${NC}"
+fi
