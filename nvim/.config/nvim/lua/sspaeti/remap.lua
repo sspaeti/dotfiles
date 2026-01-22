@@ -47,7 +47,30 @@ vim.keymap.set('n', 'sy', ':Filetypes<CR>')
 vim.keymap.set('n', 'sz', ':FZF<CR>')
 	-- si and sm are mapped to harpoon
 	-- vim.keymap.set(' sm :Marms<CR>
--- vim.keymap.set(' ss :Snippets<CR>
+-- vim.keymap.set('<leader>st :Snippets<CR>
+-- Template picker: browse and insert templates with <leader>ss
+local function insert_template()
+  local templates_dir = vim.fn.stdpath("config") .. "/templates"
+  require("telescope.builtin").find_files({
+    prompt_title = "Templates",
+    cwd = templates_dir,
+    attach_mappings = function(prompt_bufnr, map)
+      local actions = require("telescope.actions")
+      local action_state = require("telescope.actions.state")
+      actions.select_default:replace(function()
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+        if selection then
+          local file_path = templates_dir .. "/" .. selection[1]
+          local lines = vim.fn.readfile(file_path)
+          vim.api.nvim_put(lines, "l", true, true)
+        end
+      end)
+      return true
+    end,
+  })
+end
+vim.keymap.set("n", "<leader>ss", insert_template, { desc = "Insert template" })
 
 -- zoom vim split views
 vim.api.nvim_set_keymap('n', 'Zz', '<C-w>_| <C-w>|', {noremap = true})
