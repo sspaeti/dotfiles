@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Publer
+Comment=Publer
+Exec=omarchy-launch-webapp https://app.publer.com/#/calendar/week
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Publer.png
+StartupNotify=true
