@@ -154,6 +154,9 @@ return {
       local cwd = vim.uv.cwd()
       local basename = vim.fs.basename(cwd)
       _99.setup({
+        -- Set a valid model (default "opencode/claude-sonnet-4-5" doesn't exist)
+        model = "anthropic/claude-sonnet-4-20250514",
+
         logger = {
           level = _99.DEBUG,
           path = "/tmp/" .. basename .. ".99.debug",
