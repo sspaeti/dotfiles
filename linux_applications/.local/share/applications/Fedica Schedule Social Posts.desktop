@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Fedica Schedule Social Posts
+Comment=Fedica Schedule Social Posts
+Exec=omarchy-launch-webapp https://fedica.com/schedule/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/Fedica Schedule Social Posts.png
+StartupNotify=true
