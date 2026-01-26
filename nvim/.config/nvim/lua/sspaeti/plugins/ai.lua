@@ -142,6 +142,12 @@ return {
     config = function()
       local _99 = require("99")
 
+      -- SSP: Workaround: Ensure tmp directory exists (plugin bug - should create automatically)
+      local tmp_dir = vim.uv.cwd() .. "/tmp"
+      if vim.fn.isdirectory(tmp_dir) == 0 then
+        vim.fn.mkdir(tmp_dir, "p")
+      end
+
       -- For logging that is to a file if you wish to trace through requests
       -- for reporting bugs, i would not rely on this, but instead the provided
       -- logging mechanisms within 99.  This is for more debugging purposes
@@ -157,7 +163,7 @@ return {
         --- A new feature that is centered around tags
         completion = {
           --- Defaults to .cursor/rules
-          cursor_rules = "<custom path to cursor rules>"
+          cursor_rules = "<custom path to cursor rules>",
 
           --- A list of folders where you have your own agents
           custom_rules = {
@@ -168,7 +174,7 @@ return {
           --- support cmp right now
           source = "cmp",
 
-        }
+        },
 
         --- WARNING: if you change cwd then this is likely broken
         --- ill likely fix this in a later change
@@ -208,6 +214,7 @@ return {
       --- Create a rule file like ~/.rules/debug.md that defines custom behavior.
       --- For instance, a "debug" rule could automatically add printf statements
       --- throughout a function to help debug its execution flow.
+
       vim.keymap.set("n", "<leader>9fd", function()
         _99.fill_in_function()
       end)
