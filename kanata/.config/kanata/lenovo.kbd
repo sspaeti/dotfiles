@@ -1,7 +1,13 @@
 ;; Lenovo, default
 (defcfg
   process-unmapped-keys yes
+  ;; sequence-input-mode hidden-suppressed  ;; enable for jj→esc
 )
+
+;; jj→esc: uncomment below + defcfg line above, replace spc with @spc-ldr in base layer
+;; (defseq jj-esc (j j))
+;; (deffakekeys jj-esc esc)
+;; (defalias spc-ldr (tap-hold-release 200 200 spc sldr))
 
 (defsrc
   esc 1 2 3 4 5 6 7 8 9 0 - = bspc
