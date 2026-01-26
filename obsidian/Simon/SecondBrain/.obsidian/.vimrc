@@ -70,7 +70,7 @@ exmap toggle_right obcommand app:toggle-right-sidebar
 nmap <Space>z :toggle_tab<CR>:toggle_right<CR>
 
 " Copy file path (similar to your leader-y)
-exmap copy_path obcommand workspace:copy-path
+exmap copy_path obcommand workspace:copy-full-path
 nmap <Space>y :copy_path<CR>
 
 " Outline (similar to your aerial plugin)
