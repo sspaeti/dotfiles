@@ -81,6 +81,9 @@ Check [latest](https://ohmyz.sh/#install):
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
+## Root files
+There are some root files not handled with Stow. These are just keep in my dots as reference and are manually kept up to date. see [linux_root](linux_root/README.md).
+
 ## Copy files over
 
 ### Allow ssh on old Linux computer
