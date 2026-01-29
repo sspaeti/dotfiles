@@ -142,11 +142,11 @@ return {
     config = function()
       local _99 = require("99")
 
-      -- SSP: Workaround: Ensure tmp directory exists (plugin bug - should create automatically)
-      local tmp_dir = vim.uv.cwd() .. "/tmp"
-      if vim.fn.isdirectory(tmp_dir) == 0 then
-        vim.fn.mkdir(tmp_dir, "p")
-      end
+      -- -- SSP: Workaround: Ensure tmp directory exists (plugin bug - should create automatically)
+      -- local tmp_dir = vim.uv.cwd() .. "/tmp"
+      -- if vim.fn.isdirectory(tmp_dir) == 0 then
+      --   vim.fn.mkdir(tmp_dir, "p")
+      -- end
 
       -- For logging that is to a file if you wish to trace through requests
       -- for reporting bugs, i would not rely on this, but instead the provided
