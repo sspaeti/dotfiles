@@ -37,6 +37,17 @@ vim.keymap.set('n', 'sF', ':Rg<CR>')
 vim.keymap.set('n', 'sp', function() local is_git = os.execute('git') == 0 if is_git then require("telescope.builtin").git_files() else require("telescope.builtin").find_files() end end, {desc = "Find Open Files", })
 -- vim.keymap.set('n', 'sp', function() Snacks.picker.smart() end, { desc = "Grep" })
 vim.keymap.set('n', 'sf', function() Snacks.picker.grep() end, { desc = "Grep" })
+-- Two-step grep: specify file/dir filter, then live search within matches
+vim.keymap.set('n', 'sG', function()
+  vim.ui.input({ prompt = "File filter (e.g. *.md, hypr/): " }, function(input)
+    if not input or input == "" then return end
+    local pattern = input
+    if input:match("/$") then
+      pattern = input .. "**"
+    end
+    require("telescope.builtin").live_grep({ glob_pattern = pattern })
+  end)
+end, { desc = "Filtered grep (file pattern first, then search)" })
 vim.keymap.set('n', '<leader>ft', function() Snacks.picker.resume() end, { desc = "Resume Find" })
 -- vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
 vim.keymap.set('n', 'sw', ':Telescope grep_string<CR>') --search for word/string under cursor
