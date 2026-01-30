@@ -15,7 +15,16 @@ vim.keymap.set('n', 'sC', ':BCommits<CR>')
 vim.keymap.set('n', 'sS', ':Telescope lsp_document_symbols<CR>')
 vim.keymap.set('n', 'so', ':Telescope lsp_document_symbols<CR>')
 vim.keymap.set('n', 'go', ':Telescope lsp_document_symbols<CR>')
-vim.keymap.set('n', 'sg', ':GFiles<CR>')
+vim.keymap.set('n', 'sg', function()
+  vim.ui.input({ prompt = "File filter (e.g. *.md, hypr/): " }, function(input)
+    if not input or input == "" then return end
+    local pattern = input
+    if input:match("/$") then
+      pattern = input .. "**"
+    end
+    require("telescope.builtin").live_grep({ glob_pattern = pattern })
+  end)
+end, { desc = "Filtered grep (file pattern first, then search)" })
 vim.keymap.set('n', 'sG', ':GFiles?<CR>')
 vim.keymap.set('n', 'sr', ':History<CR>')
 vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
@@ -38,16 +47,6 @@ vim.keymap.set('n', 'sp', function() local is_git = os.execute('git') == 0 if is
 -- vim.keymap.set('n', 'sp', function() Snacks.picker.smart() end, { desc = "Grep" })
 vim.keymap.set('n', 'sf', function() Snacks.picker.grep() end, { desc = "Grep" })
 -- Two-step grep: specify file/dir filter, then live search within matches
-vim.keymap.set('n', 'sG', function()
-  vim.ui.input({ prompt = "File filter (e.g. *.md, hypr/): " }, function(input)
-    if not input or input == "" then return end
-    local pattern = input
-    if input:match("/$") then
-      pattern = input .. "**"
-    end
-    require("telescope.builtin").live_grep({ glob_pattern = pattern })
-  end)
-end, { desc = "Filtered grep (file pattern first, then search)" })
 vim.keymap.set('n', '<leader>ft', function() Snacks.picker.resume() end, { desc = "Resume Find" })
 -- vim.keymap.set('n', 'sf', ':Telescope live_grep<CR>') --search for typing string
 vim.keymap.set('n', 'sw', ':Telescope grep_string<CR>') --search for word/string under cursor

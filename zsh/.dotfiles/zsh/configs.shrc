@@ -63,7 +63,7 @@ fzfvim() {
 eval "$(mise activate)"
 
 # Custom FZF keybindings - must be AFTER fzf is sourced to override defaults
-# Ctrl+f to fuzzy find files by name and open in nvim
+# C-F: Ctrl+f to fuzzy find files by name and open in nvim
 fzf-file-widget() {
   local file
   file=$(find . -type f 2>/dev/null | fzf) && nvim "$file"
@@ -71,7 +71,7 @@ fzf-file-widget() {
 zle -N fzf-file-widget
 bindkey '^F' fzf-file-widget
 
-# Ctrl+g to search file contents with fzf and open in nvim at the line
+# C-G: Ctrl+g to search file contents with fzf and open in nvim at the line
 fzfvim-widget() {
   local result file line
   result=$(rg --line-number --color=always . | fzf --ansi)
