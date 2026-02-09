@@ -148,6 +148,7 @@ npm 11.7.0-1
 nss-mdns 0.15.1-2
 obs-studio 32.0.2-2
 obsidian 1.10.6-1
+offlineimap 8.0.0-6
 omarchy-chromium 143.0.7499.192-18
 omarchy-keyring 20251027-1
 omarchy-nvim 2025.11.20-1

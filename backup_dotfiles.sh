@@ -43,6 +43,7 @@ cp -r ~/.dotfiles/helpers/* $git/general/dotfiles/zsh/helpers/
 
 # only locally
 cp -r ~/.ssh/* $git/general/dotfiles/.ssh/
+cp -r ~/.offlineimaprc $git/general/dotfiles/mutt/.offlineimaprc
 
 
 #helix

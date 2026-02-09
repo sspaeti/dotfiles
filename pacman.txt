@@ -148,6 +148,7 @@ npm
 nss-mdns
 obs-studio
 obsidian
+offlineimap
 omarchy-chromium
 omarchy-keyring
 omarchy-nvim
