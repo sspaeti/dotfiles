@@ -39,9 +39,9 @@ exmap omnisearch_search obcommand omnisearch:show-modal
 nmap <Space>f :omnisearch_search<CR>
 
 " Open My Todos with <Space><Space>
-exmap open_todos obcommand obsidian-open-specific-notes:open-todos
+exmap open_todos obcommand open-specific-notes:open-todos
 nmap <Space><Space> :open_todos<CR>
-exmap open_daily obcommand obsidian-open-specific-notes:daily-journal
+exmap open_daily obcommand open-specific-notes:daily-journal
 nmap <Space>d :open_daily<CR>
 
 " Leader key search/replace (<leader>s)

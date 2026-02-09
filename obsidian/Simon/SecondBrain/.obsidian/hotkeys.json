@@ -86,16 +86,6 @@
       "key": "C"
     }
   ],
-  "app:open-vault": [
-    {
-      "modifiers": [
-        "Alt",
-        "Mod",
-        "Shift"
-      ],
-      "key": "O"
-    }
-  ],
   "editor:delete-paragraph": [],
   "omnisearch:show-modal": [
     {
@@ -448,6 +438,13 @@
       "modifiers": [
         "Mod",
         "Shift"
+      ],
+      "key": "K"
+    },
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
       ],
       "key": "K"
     }
