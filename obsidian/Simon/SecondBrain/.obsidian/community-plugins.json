@@ -17,7 +17,6 @@
   "obsidian-advanced-uri",
   "obsidian-kindle-plugin",
   "numerals",
-  "readwise-official",
   "note-folder-autorename",
   "obsidian-charts",
   "obsidian-heading-shifter",
@@ -30,7 +29,6 @@
   "obsidian-book-search-plugin",
   "copy-document-as-html",
   "obsidian-linter",
-  "calendar",
   "obsidian-list-callouts",
   "omnisearch",
   "obsidian-excalidraw-plugin",
@@ -38,5 +36,9 @@
   "obsidian-open-specific-notes",
   "obsidian-theme-design-utilities",
   "obsidian-reading-time",
-  "statusbar-organizer"
+  "statusbar-organizer",
+  "obsidian-trouble-tags",
+  "smart-connections",
+  "trouble-tags",
+  "open-specific-notes"
 ]

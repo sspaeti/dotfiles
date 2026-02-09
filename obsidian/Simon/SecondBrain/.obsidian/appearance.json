@@ -1,11 +1,12 @@
 {
   "baseFontSize": 16,
   "cssTheme": "Kanagawa",
-  "theme": "obsidian",
+  "theme": "moonstone",
   "enabledCssSnippets": [
     "hide_file_in_filetree",
     "better_pdf",
-    "mermaid"
+    "mermaid",
+    "general"
   ],
   "translucency": false,
   "accentColor": "#658594",
