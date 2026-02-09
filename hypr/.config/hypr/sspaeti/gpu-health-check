@@ -6,6 +6,8 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
+warn=0
+
 echo "GPU Health Check"
 echo "================"
 
@@ -18,13 +20,24 @@ else
     echo -e "${RED}[WARN]${NC} GPU errors detected:"
     echo "$errors" | head -5
     echo -e "${YELLOW}Recommendation: Reboot before your meeting${NC}"
+    warn=1
 fi
 
-# Check GPU is responding
-if busy=$(cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1); then
+# Check MES errors specifically (early warning before full crash)
+mes_count=$(journalctl -b -k --no-pager 2>/dev/null | grep -c "MES")
+if [ "$mes_count" -gt 0 ]; then
+    echo -e "${RED}[WARN]${NC} MES errors this boot: ${mes_count} (crash imminent, reboot NOW)"
+    warn=1
+else
+    echo -e "${GREEN}[OK]${NC} MES scheduler healthy"
+fi
+
+# Check GPU is responding (timeout = early freeze detection)
+if busy=$(timeout 2 cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1); then
     echo -e "${GREEN}[OK]${NC} GPU responding (${busy}% busy)"
 else
-    echo -e "${RED}[FAIL]${NC} Cannot read GPU status"
+    echo -e "${RED}[FAIL]${NC} Cannot read GPU status (GPU may be hung)"
+    warn=1
 fi
 
 # Check VRAM
@@ -35,10 +48,40 @@ else
     echo -e "${YELLOW}[SKIP]${NC} VRAM info not available"
 fi
 
+# Check CWSR status (known MES crash trigger on gfx1150)
+cwsr=$(cat /sys/module/amdgpu/parameters/cwsr_enable 2>/dev/null)
+if [ "$cwsr" = "1" ]; then
+    echo -e "${YELLOW}[INFO]${NC} CWSR enabled (known MES crash risk on gfx1150)"
+    echo -e "       To disable: add amdgpu.cwsr_enable=0 to kernel params"
+elif [ "$cwsr" = "0" ]; then
+    echo -e "${GREEN}[OK]${NC} CWSR disabled (MES crash mitigation active)"
+fi
+
+# Check if last suspend/resume left GPU degraded
+resume_errors=$(journalctl -b -k --no-pager 2>/dev/null | grep -E "(SMU is resumed|ring .* uses VM)" | tail -1)
+if [ -n "$resume_errors" ]; then
+    post_resume_errors=$(journalctl -b -k --no-pager 2>/dev/null | sed -n "/SMU is resumed/,\$p" | grep -cE "(fail|error|timeout)" 2>/dev/null)
+    if [ "$post_resume_errors" -gt 0 ]; then
+        echo -e "${RED}[WARN]${NC} GPU errors after last resume: ${post_resume_errors} (reboot recommended)"
+        warn=1
+    else
+        echo -e "${GREEN}[OK]${NC} Last suspend/resume was clean"
+    fi
+fi
+
+# Check kernel params are set
+cmdline=$(cat /proc/cmdline 2>/dev/null)
+missing=""
+echo "$cmdline" | grep -q "gpu_recovery=1" || missing="${missing} gpu_recovery"
+echo "$cmdline" | grep -q "ip_block_mask" || missing="${missing} ip_block_mask(VPE)"
+if [ -n "$missing" ]; then
+    echo -e "${YELLOW}[INFO]${NC} Missing kernel params:${missing}"
+fi
+
 # Summary
 echo ""
-if [ -z "$errors" ]; then
-    echo -e "${GREEN}GPU is healthy - safe to start meeting${NC}"
+if [ "$warn" -eq 0 ]; then
+    echo -e "${GREEN}GPU is healthy - safe to proceed${NC}"
 else
     echo -e "${RED}GPU may be unstable - consider rebooting${NC}"
 fi
