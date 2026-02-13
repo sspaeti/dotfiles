@@ -1,0 +1,1 @@
+/usr/share/aether/shaders/apple2-color-fringe.glsl

@@ -157,6 +157,7 @@ video/x-ogm+ogg=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
 x-scheme-handler/about=brave-browser.desktop;
+x-scheme-handler/aether=aether-protocol-handler.desktop;
 x-scheme-handler/claude=Claude.desktop;
 x-scheme-handler/discord=Vencord.desktop;
 x-scheme-handler/http=brave-browser.desktop;chromium.desktop;

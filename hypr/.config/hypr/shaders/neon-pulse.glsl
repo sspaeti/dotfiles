@@ -1,0 +1,1 @@
+/usr/share/aether/shaders/neon-pulse.glsl

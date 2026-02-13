@@ -1,0 +1,1 @@
+/usr/share/aether/shaders/focus-mode.glsl

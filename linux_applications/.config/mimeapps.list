@@ -52,3 +52,4 @@ application/x-shellscript=nvim.desktop
 text/x-c=nvim.desktop
 text/x-c++=nvim.desktop
 text/markdown=nvim.desktop
+x-scheme-handler/aether=aether-protocol-handler.desktop

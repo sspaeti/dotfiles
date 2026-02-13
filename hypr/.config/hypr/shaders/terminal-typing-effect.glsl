@@ -1,0 +1,1 @@
+/usr/share/aether/shaders/terminal-typing-effect.glsl
