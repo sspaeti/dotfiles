@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Aether Protocol Handler
+Comment=Import Aether blueprint themes from web links
+Exec=aether --import-blueprint %u --auto-apply
+Type=Application
+NoDisplay=true
+MimeType=x-scheme-handler/aether;
+Icon=preferences-desktop-theme
+Categories=System;Utility;
+Keywords=theme;blueprint;import;
+StartupNotify=false
+Terminal=false
