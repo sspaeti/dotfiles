@@ -60,7 +60,7 @@ fzfvim() {
 }
 
 #mise replaces asdf
-eval "$(mise activate)"
+eval "$(mise activate zsh)"
 
 # Custom FZF keybindings - must be AFTER fzf is sourced to override defaults
 # C-F: Ctrl+f to fuzzy find files by name and open in nvim
