@@ -1,3 +1,9 @@
+# Miniflux sync (uncomment when Miniflux is set up)
+# urls-source "miniflux"
+# miniflux-url "https://rss.ssp.sh/"
+# miniflux-login "simon"
+# miniflux-passwordeval "pass show miniflux/rss.ssp.sh"
+
 # general settings
 auto-reload yes
 max-items 50
