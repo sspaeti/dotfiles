@@ -1,8 +1,12 @@
 .DEFAULT_GOAL := save
-.PHONY: decrypt run urls save clean help
+.PHONY: decrypt run freshrss urls save clean help
 
 # Default target - decrypt and run newsboat
 run: decrypt
+	@newsboat
+
+# Run with FreshRSS (no decryption needed)
+freshrss:
 	@newsboat
 
 # Decrypt urls.gpg to urls using environment variable

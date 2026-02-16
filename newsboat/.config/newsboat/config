@@ -1,8 +1,10 @@
-# Miniflux sync (uncomment when Miniflux is set up)
-# urls-source "miniflux"
-# miniflux-url "https://rss.ssp.sh/"
-# miniflux-login "simon"
-# miniflux-passwordeval "pass show miniflux/rss.ssp.sh"
+# FreshRSS sync
+urls-source "freshrss"
+freshrss-url "https://rss.sspaeti.duckdns.org/api/greader.php"
+freshrss-login "sspaeti"
+freshrss-passwordeval "printenv FRESHRSS_PASSWORD"
+freshrss-min-items 50
+freshrss-flag-star "s"
 
 # general settings
 auto-reload yes
