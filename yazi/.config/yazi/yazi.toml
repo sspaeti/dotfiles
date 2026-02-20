@@ -2,21 +2,21 @@
 show_hidden = true
 [plugin]  
 prepend_previewers = [  
-  { name = "*.csv", run = "duckdb" },  
-  { name = "*.tsv", run = "duckdb" },  
-  { name = "*.json", run = "duckdb" },  
-  { name = "*.parquet", run = "duckdb" },  
-  { name = "*.txt", run = "duckdb" },  
-  { name = "*.xlsx", run = "duckdb" },  
-  { name = "*.db", run = "duckdb" },
-  { name = "*.duckdb", run = "duckdb" }
+  { url = "*.csv", run = "duckdb" },  
+  { url = "*.tsv", run = "duckdb" },  
+  { url = "*.json", run = "duckdb" },  
+  { url = "*.parquet", run = "duckdb" },  
+  { url = "*.txt", run = "duckdb" },  
+  { url = "*.xlsx", run = "duckdb" },  
+  { url = "*.db", run = "duckdb" },
+  { url = "*.duckdb", run = "duckdb" }
 ]
 
 prepend_preloaders = [  
-  { name = "*.csv", run = "duckdb", multi = false },  
-  { name = "*.tsv", run = "duckdb", multi = false },  
-  { name = "*.json", run = "duckdb", multi = false },  
-  { name = "*.parquet", run = "duckdb", multi = false },
-  { name = "*.txt", run = "duckdb", multi = false },  
-  { name = "*.xlsx", run = "duckdb", multi = false }
+  { url = "*.csv", run = "duckdb", multi = false },  
+  { url = "*.tsv", run = "duckdb", multi = false },  
+  { url = "*.json", run = "duckdb", multi = false },  
+  { url = "*.parquet", run = "duckdb", multi = false },
+  { url = "*.txt", run = "duckdb", multi = false },  
+  { url = "*.xlsx", run = "duckdb", multi = false }
 ]
