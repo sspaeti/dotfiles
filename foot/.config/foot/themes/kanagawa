@@ -1,0 +1,32 @@
+# -*- conf -*-
+# Kanagawa
+# Ported from https://github.com/rebelot/kanagawa.nvim/
+
+[colors]
+background=1F1F28
+foreground=DCD7BA
+cursor=1F1F28 C8C093
+selection-foreground=C8C093
+selection-background=2D4F67
+urls=72A7BC
+
+regular0=090618
+regular1=C34043
+regular2=76946A
+regular3=C0A36E
+regular4=7E9CD8
+regular5=957FB8
+regular6=6A9589
+regular7=C8C093
+
+bright0=727169
+bright1=E82424
+bright2=98BB6C
+bright3=E6C384
+bright4=7FB4CA
+bright5=938AA9
+bright6=7AA89F
+bright7=DCD7BA
+
+16=FFA066
+17=FF5D62
