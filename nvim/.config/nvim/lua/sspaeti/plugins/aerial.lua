@@ -7,6 +7,22 @@ return {
 		},
     config = function()
       require('aerial').setup({
+        layout = {
+          max_width = 30,
+          width = 25,
+          min_width = 20,
+          default_direction = "right",
+        },
+        float = {
+          border = "rounded",
+          relative = "win",
+          override = function(conf, source_winid)
+            conf.anchor = "NE"
+            conf.col = vim.fn.winwidth(source_winid)
+            conf.row = 0
+            return conf
+          end,
+        },
         -- Skip treesitter for SQL to avoid create_policy query error
         -- See: https://github.com/stevearc/aerial.nvim/issues/506
         backends = {
@@ -16,8 +32,7 @@ return {
           plsql = { "lsp" },
         },
         on_attach = function(bufnr)
-          -- Toggle the aerial window with <leader>a
-          vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>o', '<cmd>AerialToggle!<CR>', {})
+          -- <leader>o is mapped in remap.lua (zen-mode aware)
           -- -- Jump forwards/backwards with '{' and '}'
           -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '{', '<cmd>AerialPrev<CR>', {})
           -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '}', '<cmd>AerialNext<CR>', {})

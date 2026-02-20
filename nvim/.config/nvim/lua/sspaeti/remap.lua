@@ -243,7 +243,13 @@ vim.keymap.set("n", "<leader>sc", "<c-o>:set nospell<cr>")
 vim.keymap.set("n", "<leader>sc", ":set nospell<cr>")
 
 --Aerial
-vim.keymap.set("n", "<leader>o", ":AerialToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>o", function()
+  if vim.g.zen_mode_active then
+    vim.cmd("AerialToggle float")
+  else
+    vim.cmd("AerialToggle")
+  end
+end, { noremap = true, silent = true })
 --preview
 
 

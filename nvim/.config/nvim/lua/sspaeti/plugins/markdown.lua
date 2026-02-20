@@ -64,8 +64,8 @@ return {
       let g:vimwiki_global_ext = 0 " o
       ]])
 
-      -- Outline Shortcut
-      vim.cmd("autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>")
+      -- Outline Shortcut (uses AerialToggle, configured in aerial.lua)
+      -- vim.cmd("autocmd FileType markdown,vimwiki nmap <leader>o :SymbolsOutline<CR>")
 
       -- create WikiLink and paste clipboard as link when in visual mode
       vim.cmd('autocmd FileType markdown vnoremap <leader>K <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>')
