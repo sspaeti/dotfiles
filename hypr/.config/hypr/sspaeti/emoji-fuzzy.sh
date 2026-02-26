@@ -4,27 +4,25 @@ set -euo pipefail
 # source: https://github.com/end-4/fuzzel-emoji
 
 
-MODE="${1:-both}"
-
 # Use walker instead of fuzzel
 emoji="$(sed '1,/^### DATA ###$/d' "$0" | walker --dmenu -p "Emoji: " 2>/dev/null | cut -d ' ' -f 1 | tr -d '\n')"
 
-case "$MODE" in
-    type)
-        wtype "${emoji}" || wl-copy "${emoji}"
-        ;;
-    copy)
-        wl-copy "${emoji}"
-        ;;
-    both)
-        wl-copy "${emoji}"
-        wtype "${emoji}" || true
-        ;;
-    *)
-        echo "Usage: $0 [type|copy|both]"
-        exit 1
-        ;;
-esac
+[ -z "$emoji" ] && exit 0
+
+# Old approach - copies into clipboard, and need to be pasted again
+# MODE="${1:-both}"
+# case "$MODE" in
+#     type)  wtype "${emoji}" || wl-copy "${emoji}" ;;
+#     copy)  wl-copy "${emoji}" ;;
+#     both)  wl-copy "${emoji}"; wtype "${emoji}" || true ;;
+# esac
+
+# AUTO-PASTE
+# Copy to both clipboard and primary selection, then auto-paste via Shift+Insert
+# (foot terminal uses primary selection for Shift+Insert, browsers use clipboard)
+wl-copy "$emoji"
+wl-copy --primary "$emoji"
+hyprctl dispatch sendshortcut "SHIFT, Insert,"
 
 exit
 ### DATA ###
