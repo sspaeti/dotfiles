@@ -130,6 +130,8 @@ alias msync="offlineimap -a sspaeti.com"
 # Omarchy / hyprland
 alias gpu-check="~/.config/hypr/sspaeti/gpu-health-check"
 
+alias cx=claude
+
 # use open as on macOs to open pdf, videos, images, and directories (send output to dev and start in background for file manager (nautilus))
 open() { xdg-open "$@" &>/dev/null & }
 
