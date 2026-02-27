@@ -2,3 +2,13 @@
 # select = ["E", "F", "B", "W", "Q"]
 # fix = true
 line-length = 88
+
+[tool.ruff.lint]
+# Migrated from pylint/flake8 config:
+# PLR = refactoring checks (snake_case etc.)
+# PLW0511 = TODO warnings
+# PLW1201, PLW1202 = log format warnings (false positives)
+# PLW0231 = super-init-not-called
+# PLW0707 = raise-missing-from
+# E501 = line too long (ruff formatter handles this)
+ignore = ["PLR", "PLW0511", "PLW1201", "PLW1202", "PLW0231", "PLW0707", "E501"]

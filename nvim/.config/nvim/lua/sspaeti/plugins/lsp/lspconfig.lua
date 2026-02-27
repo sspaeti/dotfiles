@@ -41,8 +41,8 @@ return {
       { "<Leader>la", vim.lsp.buf.code_action,                              desc = "LSP Code Action" },
       { "<Leader>lf", vim.lsp.buf.format,                                   desc = "LSP Format" },
       { "<Leader>lr", vim.lsp.buf.rename,                                   desc = "LSP Rename" },
-      { "<Leader>lc", vim.diagnostic.enable(false),                         desc = "Diagnostic Disable" },
-      { "<Leader>le", vim.diagnostic.enable,                                desc = "Diagnostic Enable" },
+      { "<Leader>lc", function() vim.diagnostic.enable(false) end,            desc = "Diagnostic Disable" },
+      { "<Leader>le", function() vim.diagnostic.enable() end,               desc = "Diagnostic Enable" },
       { "<leader>lo", vim.diagnostic.open_float,                            desc = "Diagnostic Open (Float)" },
       { "<Leader>ln", vim.diagnostic.goto_next,                             desc = "Diagnostic Go To Next" },
       { "]d",         vim.diagnostic.goto_next,                             desc = "Diagnostic Go To Next" },
@@ -113,22 +113,22 @@ return {
         --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         --vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
 
-        -- turn on grammarly language server only for filetype=markdown
-        if client.name == "grammarly" then
-          vim.api.nvim_buf_set_option(bufnr, "filetype", "markdown")
-        end
       end
 
       -- used to enable autocompletion (assign to every lsp server config)
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
       -- Change the Diagnostic symbols in the sign column (gutter)
-      -- (not in youtube nvim video)
-      local signs = { Error = "", Warn = "", Hint = "", Info = "", }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "ï",
+            [vim.diagnostic.severity.WARN] = "ï©",
+            [vim.diagnostic.severity.HINT] = "ï µ",
+            [vim.diagnostic.severity.INFO] = "ï",
+          },
+        },
+      })
 
       -- Define LSP servers with their configurations
       local servers = {
@@ -230,8 +230,7 @@ return {
       for _, server in ipairs(servers) do
         local name, config = server[1], server[2]
         vim.lsp.config(name, config)
-        -- Note: vim.lsp.enable() is NOT called here
-        -- Servers will auto-start when opening matching filetypes
+        vim.lsp.enable(name)
       end
 
     end,

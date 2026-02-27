@@ -32,6 +32,15 @@ return {
         "cssls",
         "lua_ls",
         "pyright",
+        "ts_ls",
+        "tailwindcss",
+        "helm_ls",
+        "graphql",
+        "emmet_ls",
+        "ruff",
+        "lemminx",
+        "bashls",
+        "jdtls",
       },
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed

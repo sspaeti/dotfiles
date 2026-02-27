@@ -1,7 +1,6 @@
 return {
   "nvimtools/none-ls.nvim", --before: jose-elias-alvarez/null-ls.nvim"
-  lazy = true,
-  -- event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "jay-babu/mason-null-ls.nvim",
   },
@@ -15,11 +14,9 @@ return {
     mason_null_ls.setup({
       ensure_installed = {
         "prettier", -- prettier formatter
-        "stylua", -- lua formatter
-        "black", -- python formatter
-        "pylint", -- python linter
-        "eslint_d", -- js linter
-        "jq",   --json format
+        "jq",   -- json format
+        "mypy", -- python type checker
+        -- "eslint_d", -- removed from none-ls builtins; use eslint LSP instead
       },
     })
 
@@ -42,39 +39,34 @@ return {
       root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
       -- setup formatters & linters
       sources = {
-        --  to disable file types use
-        --  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
         formatting.prettier.with({ extra_filetypes = { "svelte" } }), -- js/ts formatter
-        formatting.stylua.with({ extra_args = { "indent_type=space" } }), -- lua formatter
-        formatting.isort,
-        formatting.black,
-        -- formatting.black.with({ extra_args = { "--fast" } }),
-        diagnostics.pylint,
-        diagnostics.eslint_d.with({                                   -- js/ts linter
-          condition = function(utils)
-            return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs
-          end,
-        }),
-        --see also ~/.pylintrc or .my_example.toml
-        -- R - refactoring related checks => snake_case
-        -- C - convention related checks
-        -- W0511 disable TODO warning
-        -- W1201, W1202 disable log format warning. False positives (I think)
-        -- W0231 disable super-init-not-called - pylint doesn't understand six.with_metaclass(ABCMeta)
-        -- W0707 disable raise-missing-from which we cant use because py2 back compat
-        -- C0301 Line too long => disabled as black-formatter handles long lines automatically
-        diagnostics.flake8.with({
-          extra_args = {
-            "--max-line-length=88",
-            "--disable=R,duplicate-code,W0231,W0511,W1201,W1202,W0707,C0301,no-init",
-          },
-        }),
+        -- diagnostics.eslint_d removed from none-ls builtins; use eslint LSP instead
+        -- diagnostics.eslint_d.with({
+        --   condition = function(utils)
+        --     return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" })
+        --   end,
+        -- }),
         diagnostics.mypy.with({ extra_args = { "--ignore-missing-imports" } }),
-        diagnostics.write_good,
+        -- Replaced by ruff LSP (configure rules in ruff.toml / pyproject.toml):
+        -- formatting.stylua.with({ extra_args = { "indent_type=space" } }), -- lua_ls handles lua formatting
+        -- formatting.isort,        -- ruff handles import sorting
+        -- formatting.black,        -- ruff handles python formatting
+        -- diagnostics.pylint,      -- ruff covers pylint rules (PLW, PLC, PLR prefixes)
+        -- diagnostics.flake8.with({
+        --   extra_args = {
+        --     "--max-line-length=88",
+        --     "--disable=R,duplicate-code,W0231,W0511,W1201,W1202,W0707,C0301,no-init",
+        --   },
+        -- }),
+        -- diagnostics.write_good,
+        --
+        -- Ruff equivalents for your pylint/flake8 disables (put in ruff.toml or pyproject.toml):
+        --   [tool.ruff.lint]
+        --   ignore = ["PLR", "PLW0511", "PLW1201", "PLW1202", "PLW0231", "PLW0707", "E501"]
       },
       -- configure format on save TODO: this seem not to work yet, at least for python
       on_attach = function(current_client, bufnr)
-        local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+        local filetype = vim.bo[bufnr].filetype
         if current_client.supports_method("textDocument/formatting")
           -- and filetype == 'python' --only python formatin on save
           then
@@ -83,10 +75,10 @@ return {
             group = augroup,
             buffer = bufnr,
             callback = function()
+              if not vim.g.format_on_save then return end
               vim.lsp.buf.format({
                 filter = function(client)
                   --  only use null-ls for formatting instead of lsp server
-                  print("on_attach called for buffer", bufnr)
                   return client.name == "null-ls"
                 end,
                 bufnr = bufnr,

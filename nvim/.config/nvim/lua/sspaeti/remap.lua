@@ -131,6 +131,17 @@ vim.api.nvim_set_keymap('n', '<leader>rl', ':%s/^$\\n*//<CR>', { noremap = true,
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 
+-- Toggle format on save (controls the LspFormatting augroup from none-ls)
+vim.g.format_on_save = false -- disabled by default
+vim.keymap.set("n", "<Leader>lF", function()
+  vim.g.format_on_save = not vim.g.format_on_save
+  if vim.g.format_on_save then
+    vim.notify("Format on save: ON")
+  else
+    vim.notify("Format on save: OFF")
+  end
+end, { desc = "Toggle format on save" })
+
 -- closing buffers "https://stackoverflow.com/a/8585343/5246670
 vim.keymap.set("n", "<C-w>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 --vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")

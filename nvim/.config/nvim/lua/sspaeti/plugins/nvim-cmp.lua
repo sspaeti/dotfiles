@@ -73,13 +73,11 @@ return {
       -- sources for autocompletion
       sources = cmp.config.sources({
         { name = "nvim_lsp", priority = 1 },
-        { name = "vsnip" },
+        { name = "luasnip" },
         { name = "path" },
         { name = "luasnip" },
         { name = "obsidian" },
         { name = "obsidian_new" },
-        { name = "nvim_lsp:lua_ls" },
-        { name = "nvim_lsp:null-ls" },
         { name = "dictionary", keyword_length = 3, priority = 5, keyword_pattern = [[\w\+]] }, -- from uga-rosa/cmp-dictionary plug
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
