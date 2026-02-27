@@ -67,7 +67,7 @@ return {
       -- configure format on save TODO: this seem not to work yet, at least for python
       on_attach = function(current_client, bufnr)
         local filetype = vim.bo[bufnr].filetype
-        if current_client.supports_method("textDocument/formatting")
+        if current_client:supports_method("textDocument/formatting")
           -- and filetype == 'python' --only python formatin on save
           then
           vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })

@@ -168,7 +168,9 @@ return {
           on_attach = on_attach,
         }},
         { "ruff", {
-          capabilities = capabilities,
+          capabilities = vim.tbl_deep_extend("force", capabilities, {
+            general = { positionEncodings = { "utf-16" } },
+          }),
           on_attach = on_attach,
           init_options = {
             settings = {
