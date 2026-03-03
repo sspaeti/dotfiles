@@ -65,13 +65,7 @@ return {
     config = function()
       require("diffview").setup({
         hooks = {
-          hooks = {
-            diff_buf_win_enter = function(bufnr)
-              vim.cmd("norm! gg]c")
-            end,
-          },
           diff_buf_read = function(bufnr)
-            -- print("Opening diff buffer...")
             vim.cmd("norm! gg]c")
             if vim.fn.search("]c") ~= 0 then
               vim.cmd("norm! zz")
@@ -79,6 +73,9 @@ return {
           end,
           diff_buf_win_enter = function(bufnr)
             vim.opt_local.foldlevel = 99
+            -- Restore default ]c / [c diff navigation (overridden by signify/markdown plugins)
+            vim.keymap.set("n", "]c", "]c", { buffer = bufnr, desc = "Next diff change" })
+            vim.keymap.set("n", "[c", "[c", { buffer = bufnr, desc = "Previous diff change" })
           end,
         },
       })
