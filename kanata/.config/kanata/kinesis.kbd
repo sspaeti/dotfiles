@@ -20,6 +20,10 @@
 ;; Define Caps Lock as a tap-hold: tap for Caps Lock, hold for layer
 (defalias
   caps-key (tap-hold 200 200 caps (layer-while-held caps-layer))
+  nav-h (tap-hold 500 500 left home)
+  nav-l (tap-hold 500 500 rght end)
+  nav-j (tap-hold 500 500 down C-end)
+  nav-k (tap-hold 500 500 up C-home)
 )
 
 ;; Default base layer (German layout)
@@ -35,7 +39,7 @@
 (deflayer caps-layer
   _ f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 _
   _ _ _ _ _ _ _ _ _ _ _ _ _ _
-  _ _ _ _ _ _ left down up rght _ _ _
+  _ _ _ _ _ _ @nav-h @nav-j @nav-k @nav-l _ _ _
   _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ _
 )
