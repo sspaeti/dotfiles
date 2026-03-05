@@ -427,6 +427,8 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', {noremap = true, silent = true})
 
 --copy path of current file into clipboard
 vim.keymap.set('n', '<leader>y', ':let @+=expand("%:p")<CR>')
+--copy file name of current file into clipboard
+vim.keymap.set('n', '<leader>Y', ':let @+=expand("%:t")<CR>')
 
 --! jumping forth and back: Needed, if I remove, c-o and c-i are not working anylonger
 -- vim.keymap.set("n", "<leader>O", "<C-o>", { noremap = true })
