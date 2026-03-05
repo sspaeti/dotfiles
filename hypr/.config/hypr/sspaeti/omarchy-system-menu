@@ -28,7 +28,7 @@ handle_tmux_and_reboot() {
 
 # Build menu options dynamically based on system capabilities
 options="  Lock\n󱄄  Screensaver"
-[ -f ~/.local/state/omarchy/toggles/suspend-on ] && options="$options\n󰒲  Suspend"
+[ ! -f ~/.local/state/omarchy/toggles/suspend-off ] && options="$options\n󰒲  Suspend"
 omarchy-hibernation-available && options="$options\n󰤁  Hibernate"
 options="$options\n󰜉  Restart\n󰐥  Shutdown"
 
