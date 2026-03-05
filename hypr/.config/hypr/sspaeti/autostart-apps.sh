@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Check WiFi health and notify if issues detected
+~/.config/hypr/sspaeti/wifi/check-wifi-startup.sh &
+
 # Touch workspaces to force monitor assignment
 hyprctl dispatch workspace 1
 hyprctl dispatch workspace 2
