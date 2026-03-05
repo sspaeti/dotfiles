@@ -2,12 +2,12 @@
 
 ## Plugin Installation After Stow
 
-When you stow tmux configuration, the `~/.tmux/plugins` directory may be empty but still exist, which prevents proper plugin installation.
+When you stow tmux configuration, the `~/.config/tmux/plugins` directory may be empty but still exist, which prevents proper plugin installation.
 
 **Run this command after stowing tmux:**
 
 ```bash
-rm -rf ~/.tmux/plugins && tmux new-session -d && tmux kill-session
+rm -rf ~/.config/tmux/plugins && tmux new-session -d && tmux kill-session
 ```
 
 **Then install TPM (Tmux Plugin Manager) first:**
@@ -15,9 +15,9 @@ rm -rf ~/.tmux/plugins && tmux new-session -d && tmux kill-session
 Run this command to install TPM and all plugins:
 
 ```bash
-mkdir -p ~/.tmux/plugins
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 2>/dev/null || true 
-~/.tmux/plugins/tpm/bin/install_plugins
+mkdir -p ~/.config/tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm 2>/dev/null || true 
+~/.config/tmux/plugins/tpm/bin/install_plugins
 ```
 
 After TPM is installed, you can use `Ctrl+t` followed by `I` for future plugin installations.
