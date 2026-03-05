@@ -45,8 +45,8 @@ mutt/.config/mutt/screened_out.txt
 msmtp/.msmtprc
 
 #tmux
-tmux/.tmux/tmux-client-*.log
-# tmux/.tmux/plugins/
+tmux/.config/tmux/tmux-client-*.log
+tmux/.config/tmux/plugins/
 
 #clipse
 clipse/.config/clipse/tmp_files/
