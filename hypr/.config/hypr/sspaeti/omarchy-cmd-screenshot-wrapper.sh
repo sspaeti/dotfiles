@@ -1,19 +1,29 @@
 #!/bin/bash
 
 # Wrapper for omarchy-cmd-screenshot with post-processing
-# Calls the original omarchy script, then organizes screenshots into monthly folders
+# Calls the original omarchy script, then always opens Satty for editing
+# and organizes screenshots into monthly folders
 
-# Call the original omarchy-cmd-screenshot with all arguments passed through
-~/.local/share/omarchy/bin/omarchy-cmd-screenshot "$@"
+[[ -f ~/.config/user-dirs.dirs ]] && source ~/.config/user-dirs.dirs
+OUTPUT_DIR="${OMARCHY_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}}"
 
-# Post-processing: Auto-organize screenshots into year-month folders
-# Run in background to avoid blocking the screenshot workflow
-{
-    sleep 0.5  # Wait for file to be fully written
-    ~/.config/hypr/sspaeti/image-browser/auto-organize-screenshot.sh >/dev/null 2>&1
+# Record newest screenshot before taking a new one
+BEFORE=$(ls -t "$OUTPUT_DIR"/screenshot-*.png 2>/dev/null | head -1)
 
-    # # Fast OCR indexing - only recent screenshots
-    # if [[ -f "/home/sspaeti/.config/hypr/sspaeti/image-browser/screenshot-indexer-parallel.sh" ]]; then
-    #     "/home/sspaeti/.config/hypr/sspaeti/image-browser/screenshot-indexer-parallel.sh" --recent >/dev/null 2>&1
-    # fi
-} &
+# Call the original omarchy-cmd-screenshot, suppressing its notification
+OMARCHY_SCREENSHOT_EDITOR=true ~/.local/share/omarchy/bin/omarchy-cmd-screenshot "$@"
+
+# Find the newly created screenshot
+AFTER=$(ls -t "$OUTPUT_DIR"/screenshot-*.png 2>/dev/null | head -1)
+
+# If a new screenshot was taken, open Satty
+if [[ -n "$AFTER" && "$AFTER" != "$BEFORE" ]]; then
+    satty --filename "$AFTER" \
+        --output-filename "$AFTER" \
+        --actions-on-enter save-to-clipboard \
+        --save-after-copy \
+        --copy-command 'wl-copy'
+
+    # Post-processing: Auto-organize screenshots into year-month folders
+    ~/.config/hypr/sspaeti/image-browser/auto-organize-screenshot.sh >/dev/null 2>&1 &
+fi
