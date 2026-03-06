@@ -1,7 +1,7 @@
 @import "../omarchy/current/theme/waybar.css";
 
 * {
-  background-color: @background;
+  background-color: transparent;
   color: @foreground;
 
   border: none;
@@ -9,69 +9,160 @@
   min-height: 0;
   font-family: 'CaskaydiaMono Nerd Font';
   font-size: 12px;
+  transition: all 200ms ease;
 }
 
-.modules-left {
-  margin-left: 8px;
-}
-
-.modules-right {
-  margin-right: 8px;
-}
-
-#workspaces button {
-  all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
-}
-
-#workspaces button.empty {
-  opacity: 0.5;
-}
-
-#cpu,
-#battery,
-#pulseaudio,
-#custom-omarchy,
-
-#custom-update {
-  min-width: 12px;
-  margin: 0 7.5px;
-}
-
-#tray {
-  margin-right: 16px;
-}
-
-#bluetooth {
-  margin-right: 17px;
-}
-
-#network {
-  margin-right: 13px;
-}
-
-#custom-expand-icon {
-  margin-right: 18px;
+window#waybar {
+  background-color: alpha(@background, 0.35);
+  border-bottom: 1px solid alpha(@foreground, 0.06);
 }
 
 tooltip {
-  padding: 2px;
+  background-color: alpha(@background, 0.85);
+  border: 1px solid alpha(@foreground, 0.12);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: @foreground;
 }
+
+tooltip label {
+  color: @foreground;
+}
+
+/* ── Module groups ─────────────────────────────────────── */
+
+.modules-left {
+  margin-left: 6px;
+}
+
+.modules-right {
+  margin-right: 6px;
+}
+
+/* ── Omarchy logo ──────────────────────────────────────── */
+
+#custom-omarchy {
+  padding: 0 10px 0 4px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+#custom-omarchy:hover {
+  opacity: 1;
+}
+
+/* ── Workspaces ────────────────────────────────────────── */
+
+#workspaces button {
+  all: initial;
+  padding: 0 5px;
+  margin: 4px 1px;
+  min-width: 8px;
+  border-radius: 4px;
+  color: alpha(@foreground, 0.35);
+  font-family: 'CaskaydiaMono Nerd Font';
+  font-size: 11px;
+  transition: all 200ms ease;
+}
+
+#workspaces button.empty {
+  color: alpha(@foreground, 0.15);
+}
+
+#workspaces button.active {
+  color: @foreground;
+  background-color: alpha(@foreground, 0.12);
+}
+
+#workspaces button:hover {
+  color: alpha(@foreground, 0.8);
+  background-color: alpha(@foreground, 0.06);
+}
+
+/* ── Clock ─────────────────────────────────────────────── */
+
+#clock {
+  font-weight: 500;
+  opacity: 0.85;
+  padding: 0 8px;
+}
+
+#clock:hover {
+  opacity: 1;
+}
+
+/* ── Right-side modules: shared pill style ─────────────── */
+
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#cpu,
+#temperature,
+#custom-cpu-governor {
+  padding: 0 6px;
+  margin: 4px 1px;
+  border-radius: 6px;
+  opacity: 0.6;
+}
+
+#battery:hover,
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#cpu:hover,
+#temperature:hover,
+#custom-cpu-governor:hover {
+  opacity: 1;
+  background-color: alpha(@foreground, 0.08);
+}
+
+/* ── Battery states ────────────────────────────────────── */
+
+#battery.warning {
+  color: #E9BB4F;
+  opacity: 0.9;
+}
+
+#battery.critical {
+  color: #ED5B5A;
+  opacity: 1;
+}
+
+/* ── Tray ──────────────────────────────────────────────── */
+
+#tray {
+  margin-right: 8px;
+  opacity: 0.5;
+}
+
+#tray:hover {
+  opacity: 0.8;
+}
+
+#custom-expand-icon {
+  margin-right: 10px;
+  opacity: 0.3;
+}
+
+/* ── Center indicators ─────────────────────────────────── */
 
 #custom-update {
   font-size: 10px;
+  margin: 0 6px;
+  opacity: 0.7;
 }
 
-#clock {
-  margin-left: 5px;
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 6px;
+  opacity: 0.6;
 }
 
-.hidden {
-  opacity: 0;
+#custom-voxtype.recording {
+  color: #ED5B5A;
+  opacity: 1;
 }
-
 
 #custom-screenrecording-indicator,
 #custom-idle-indicator,
@@ -81,22 +172,22 @@ tooltip {
   margin-right: 0;
   font-size: 10px;
   padding-bottom: 1px;
+  opacity: 0.5;
 }
 
 #custom-screenrecording-indicator.active {
-  color: #a55555;
-}
-
-#custom-voxtype {
-  min-width: 12px;
-  margin: 0 0 0 7.5px;
-}
-
-#custom-voxtype.recording {
-  color: #a55555;
+  color: #ED5B5A;
+  opacity: 1;
 }
 
 #custom-idle-indicator.active,
 #custom-notification-silencing-indicator.active {
-  color: #a55555;
+  color: #ED5B5A;
+  opacity: 1;
+}
+
+/* ── Hidden utility class ──────────────────────────────── */
+
+.hidden {
+  opacity: 0;
 }
