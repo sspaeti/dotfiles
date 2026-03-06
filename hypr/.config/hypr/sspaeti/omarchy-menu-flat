@@ -29,6 +29,10 @@ Toggle Screensaver
 Toggle Nightlight
 Toggle Idle Lock
 Toggle Waybar
+Toggle Workspace Layout
+Toggle Window Gaps
+Toggle 1-Window Ratio
+Toggle Display Scaling
 Audio
 Wifi
 Bluetooth
@@ -102,6 +106,7 @@ Restart Bluetooth
 Lock Screen
 Launch Screensaver
 Suspend
+Logout
 Relaunch Hyprland
 Restart System
 Shutdown System" | omarchy-launch-walker --dmenu --width 295 --minheight 1 --maxheight 600 -p "Action…" 2>/dev/null)
@@ -136,6 +141,10 @@ case "$selection" in
   "Toggle Nightlight") omarchy-toggle-nightlight ;;
   "Toggle Idle Lock") omarchy-toggle-idle ;;
   "Toggle Waybar") omarchy-toggle-waybar ;;
+  "Toggle Workspace Layout") omarchy-hyprland-workspace-layout-toggle ;;
+  "Toggle Window Gaps") omarchy-hyprland-window-gaps-toggle ;;
+  "Toggle 1-Window Ratio") omarchy-hyprland-window-single-square-aspect-toggle ;;
+  "Toggle Display Scaling") omarchy-hyprland-monitor-scaling-cycle ;;
 
   "Audio")
     logger -t "omarchy-menu-flat2" "Launching: $TERMINAL --class=Wiremix -e wiremix"
@@ -224,6 +233,7 @@ case "$selection" in
   "Lock Screen") omarchy-lock-screen ;;
   "Launch Screensaver") omarchy-launch-screensaver force ;;
   "Suspend") systemctl suspend ;;
+  "Logout") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept logout ;;
   "Relaunch Hyprland") uwsm stop ;;
   "Restart System") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot ;;
   "Shutdown System") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept poweroff ;;

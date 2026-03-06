@@ -13,7 +13,7 @@ menu() {
   local extra="$3"
 
   read -r -a args <<<"$extra"
-  echo -e "$options" | walker --dmenu --theme dmenu_250 -p "$prompt…" "${args[@]}"
+  echo -e "$options" | omarchy-launch-walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
 handle_tmux_and_poweroff() {
@@ -26,17 +26,22 @@ handle_tmux_and_reboot() {
   ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot
 }
 
+handle_tmux_and_logout() {
+  # Use the intercept script for tmux-aware logout
+  ~/.config/hypr/sspaeti/omarchy-system-menu-intercept logout
+}
+
 # Build menu options dynamically based on system capabilities
-options="  Lock\n󱄄  Screensaver"
-[ ! -f ~/.local/state/omarchy/toggles/suspend-off ] && options="$options\n󰒲  Suspend"
+options=" Lock"
+[[ ! -f ~/.local/state/omarchy/toggles/suspend-off ]] && options="$options\n󰒲  Suspend"
 omarchy-hibernation-available && options="$options\n󰤁  Hibernate"
-options="$options\n󰜉  Restart\n󰐥  Shutdown"
+options="$options\n󰍃  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
 case $(menu "System" "$options") in
   *Lock*) omarchy-lock-screen ;;
-  *Screensaver*) omarchy-launch-screensaver force ;;
   *Suspend*) systemctl suspend ;;
   *Hibernate*) systemctl hibernate ;;
+  *Logout*) handle_tmux_and_logout ;;
   *Restart*) handle_tmux_and_reboot ;;
   *Shutdown*) handle_tmux_and_poweroff ;;
 esac

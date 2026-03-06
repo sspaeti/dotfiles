@@ -6,45 +6,44 @@
 
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
+save_and_kill_tmux() {
+    if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+        logger -t "omarchy-shutdown" "Found tmux sessions, saving and killing"
+        echo "$(date): Found tmux sessions, saving and killing" >> /var/log/omarchy-shutdown.log
+        tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+        sleep 2
+        timeout 2s tmux kill-server || logger -t "omarchy-shutdown" "tmux kill-server timed out, forcing kill"
+        logger -t "omarchy-shutdown" "tmux kill-server completed"
+        echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
+    fi
+}
+
 if [[ "$1" == "poweroff" ]]; then
-    # Log to both journal and persistent file
     logger -t "omarchy-shutdown" "Shutdown script called - poweroff"
     echo "$(date): Shutdown script called - poweroff" >> /var/log/omarchy-shutdown.log
-    # Save tmux sessions and close gracefully before shutdown
-    if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
-        logger -t "omarchy-shutdown" "Found tmux sessions, saving and killing"
-        echo "$(date): Found tmux sessions, saving and killing" >> /var/log/omarchy-shutdown.log
-        # Save all tmux sessions using resurrect
-        tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
-        sleep 2
-        # Kill all tmux sessions gracefully with more aggressive timeout
-        timeout 2s tmux kill-server || logger -t "omarchy-shutdown" "tmux kill-server timed out, forcing kill"
-        logger -t "omarchy-shutdown" "tmux kill-server completed"
-        echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
-    fi
-    # Use omarchy-state to clear restart-required notifications before shutdown
+    save_and_kill_tmux
     omarchy-state clear re*-required
-    exec /usr/bin/systemctl poweroff --no-wall
+    # Schedule shutdown, then close all windows gracefully (matching upstream pattern)
+    nohup bash -c "sleep 2 && systemctl poweroff --no-wall" >/dev/null 2>&1 &
+    omarchy-hyprland-window-close-all
+    sleep 1
 elif [[ "$1" == "reboot" ]]; then
-    # Log to both journal and persistent file
     logger -t "omarchy-shutdown" "Shutdown script called - reboot"
     echo "$(date): Shutdown script called - reboot" >> /var/log/omarchy-shutdown.log
-    # Save tmux sessions and close gracefully before restart
-    if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
-        logger -t "omarchy-shutdown" "Found tmux sessions, saving and killing"
-        echo "$(date): Found tmux sessions, saving and killing" >> /var/log/omarchy-shutdown.log
-        # Save all tmux sessions using resurrect
-        tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
-        sleep 2
-        # Kill all tmux sessions gracefully with more aggressive timeout
-        timeout 2s tmux kill-server || logger -t "omarchy-shutdown" "tmux kill-server timed out, forcing kill"
-        logger -t "omarchy-shutdown" "tmux kill-server completed"
-        echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
-    fi
-    # Use omarchy-state to clear restart-required notifications before reboot
+    save_and_kill_tmux
     omarchy-state clear re*-required
-    exec /usr/bin/systemctl reboot --no-wall
+    # Schedule reboot, then close all windows gracefully (matching upstream pattern)
+    nohup bash -c "sleep 2 && systemctl reboot --no-wall" >/dev/null 2>&1 &
+    omarchy-hyprland-window-close-all
+    sleep 1
+elif [[ "$1" == "logout" ]]; then
+    logger -t "omarchy-shutdown" "Shutdown script called - logout"
+    echo "$(date): Shutdown script called - logout" >> /var/log/omarchy-shutdown.log
+    save_and_kill_tmux
+    # Schedule session stop, then close all windows gracefully (matching upstream pattern)
+    nohup bash -c "sleep 2 && uwsm stop" >/dev/null 2>&1 &
+    omarchy-hyprland-window-close-all
+    sleep 1
 else
-    # For all other systemctl commands, pass through normally
     exec /usr/bin/systemctl "$@"
 fi
