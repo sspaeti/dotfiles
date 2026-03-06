@@ -5,7 +5,7 @@
   "spacing": 0,
   "height": 15,
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
-  "modules-center": ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
+  "modules-center": ["clock", "custom/spacer", "custom/weather", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
   "modules-right": [
     "group/tray-expander",
     "bluetooth",
@@ -13,6 +13,8 @@
     "pulseaudio",
     "temperature",
     "custom/cpu-governor",
+    "disk",
+    "memory",
     "cpu",
     "battery"
   ],
@@ -65,6 +67,17 @@
     "interval": 5,
     "format": "󰍛",
     "on-click": "omarchy-launch-or-focus-tui btop"
+  },
+  "memory": {
+    "interval": 30,
+    "format": "󰘚",
+    "tooltip-format": "Memory: {used:0.1f}G / {total:0.1f}G ({percentage}%)\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G"
+  },
+  "disk": {
+    "interval": 120,
+    "format": "󰋊",
+    "path": "/",
+    "tooltip-format": "Disk: {used} / {total} ({percentage_used}%)\nFree: {free}"
   },
   "clock": {
     "format": "{:L%A %H:%M}",
@@ -172,6 +185,17 @@
   "tray": {
     "icon-size": 12,
     "spacing": 12
+  },
+  "custom/spacer": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/weather": {
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "return-type": "json",
+    "interval": 1800,
+    "tooltip": true,
+    "on-click": "xdg-open https://meteonews.ch/de/Wetter/G2661513/Biel"
   },
   // sspaeti customizations
    "clock-sspaeti": {

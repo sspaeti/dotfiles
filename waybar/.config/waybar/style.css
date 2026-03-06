@@ -91,6 +91,18 @@ tooltip label {
   opacity: 1;
 }
 
+/* ── Weather ───────────────────────────────────────────── */
+
+#custom-weather {
+  padding: 0 6px;
+  opacity: 0.7;
+  font-size: 11px;
+}
+
+#custom-weather:hover {
+  opacity: 1;
+}
+
 /* ── Right-side modules: shared pill style ─────────────── */
 
 #battery,
@@ -98,6 +110,8 @@ tooltip label {
 #network,
 #bluetooth,
 #cpu,
+#memory,
+#disk,
 #temperature,
 #custom-cpu-governor {
   padding: 0 6px;
@@ -110,6 +124,8 @@ tooltip label {
 #pulseaudio:hover,
 #network:hover,
 #bluetooth:hover,
+#disk:hover,
+#memory:hover,
 #cpu:hover,
 #temperature:hover,
 #custom-cpu-governor:hover {
