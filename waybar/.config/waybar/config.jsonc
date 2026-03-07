@@ -13,9 +13,9 @@
     "pulseaudio",
     "temperature",
     "custom/cpu-governor",
-    "disk",
-    "memory",
-    "cpu",
+    //"disk",
+    //"memory",
+    //"cpu",
     "battery"
   ],
   "hyprland/workspaces": {
@@ -80,8 +80,8 @@
     "tooltip-format": "Disk: {used} / {total} ({percentage_used}%)\nFree: {free}"
   },
   "clock": {
-    "format": "{:L%A %H:%M}",
-    "format-alt": "{:L%d %B W%V %Y}",
+    "format": "{:L%d %B-%H:%M}",
+    "format-alt": "{:L%A %H:%M W%V}",
     "tooltip": false,
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
@@ -226,7 +226,7 @@
     "interval": 2
   },
   "custom/cpu-governor": {
-    "format": " {}", 
+    "format": "{}", 
     "exec": "current=$(powerprofilesctl get); case $current in 'performance') icon='⚡'; tooltip='Performance';; 'power-saver') icon='▒'; tooltip='Power Saver';; 'balanced') icon='⚖️'; tooltip='Balanced';; *) icon='❓'; tooltip='Unknown';; esac; echo \"{\\\"text\\\":\\\"$icon\\\",\\\"tooltip\\\":\\\"Power Profile: $tooltip\\\"}\"",
     "exec-if": "command -v powerprofilesctl",
     "return-type": "json",
