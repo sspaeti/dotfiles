@@ -16,9 +16,9 @@ if ! grep -q "IgnorePkg.*linux-firmware-intel" /etc/pacman.conf; then
         "linux-firmware-intel can be upgraded by omarchy. Run: sudo ~/.config/hypr/sspaeti/wifi/fix-wifi-speed.sh"
 fi
 
-# Check if firmware version is not the known-good one
-fw_version=$(pacman -Q linux-firmware-intel 2>/dev/null | awk '{print $2}')
-if [ "$fw_version" != "20251021-1" ]; then
-    notify-send -u critical "WiFi: Bad firmware ($fw_version)" \
-        "Expected 20251021-1. Run: sudo ~/.config/hypr/sspaeti/wifi/fix-wifi-speed.sh"
-fi
+# # Check if firmware version is not the known-good one
+# fw_version=$(pacman -Q linux-firmware-intel 2>/dev/null | awk '{print $2}')
+# if [ "$fw_version" != "20251021-1" ]; then
+#     notify-send -u critical "WiFi: Bad firmware ($fw_version)" \
+#         "Expected 20251021-1. Run: sudo ~/.config/hypr/sspaeti/wifi/fix-wifi-speed.sh"
+# fi
