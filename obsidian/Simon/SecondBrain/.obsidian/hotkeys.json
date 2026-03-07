@@ -40,6 +40,12 @@
         "Mod"
       ],
       "key": "O"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "N"
     }
   ],
   "graph:open-local": [
@@ -475,5 +481,6 @@
       ],
       "key": "H"
     }
-  ]
+  ],
+  "file-explorer:new-file": []
 }
