@@ -1,0 +1,18 @@
+#!/bin/bash
+# Shows exiftool output for selected file(s) in a zenity dialog
+
+IFS=$'\n'
+output=""
+
+for file in $NAUTILUS_SCRIPT_SELECTED_FILE_PATHS; do
+    if [ -f "$file" ]; then
+        output+="=== $(basename "$file") ===\n"
+        output+="$(exiftool "$file")\n\n"
+    fi
+done
+
+echo -e "$output" | zenity --text-info \
+    --title="ExifTool Info" \
+    --width=600 \
+    --height=500 \
+    --font="monospace" 2>/dev/null
