@@ -159,6 +159,13 @@ end, { desc = "Set dark mode" })
 vim.keymap.set("n", "<leader>tl", function()
   vim.o.background = "light"
 end, { desc = "Set light mode" })
+vim.keymap.set("n", "<leader>tt", function()
+  if vim.o.background == "dark" then
+    vim.o.background = "light"
+  else
+    vim.o.background = "dark"
+  end
+end, { desc = "Toggle light/dark mode" })
 
 
 --GIT: Start
