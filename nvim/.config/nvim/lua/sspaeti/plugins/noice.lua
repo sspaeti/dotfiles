@@ -11,7 +11,14 @@ return {
       -- This is a current Neovim limitation.
       view = "mini", --show default operation in lover right corner. Warn/Errors are still as popu (notify). options: notify, split, vsplit, popup, mini, cmdline, cmdline_popup, cmdline_output, messages, confirm, hover, popupmenu
     },
+    presets = {
+      long_message_to_split = true, -- shell command output and other long messages open in a split
+    },
     routes = {
+      { -- show shell command output in a split instead of mini
+        view = "split",
+        filter = { event = "msg_show", kind = "shell_out" },
+      },
       { --this turns off notification in neo-tree that are distracting
         view = 'mini',
         filter = {
