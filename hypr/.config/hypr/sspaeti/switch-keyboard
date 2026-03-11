@@ -25,11 +25,11 @@ fi
 case "$CONFIG" in
     kinesis)
         sudo cp "$SCRIPT_DIR/kinesis.kbd" "$TARGET_FILE"
-        echo "Switched to kinesis configuration"
+        LABEL="Kinesis"
         ;;
     lenovo)
         sudo cp "$SCRIPT_DIR/lenovo.kbd" "$TARGET_FILE"
-        echo "Switched to lenovo configuration"
+        LABEL="Laptop"
         ;;
     *)
         echo "Usage: $0 [kinesis|lenovo]"
@@ -38,8 +38,5 @@ case "$CONFIG" in
         ;;
 esac
 
-echo "Reloading systemd and restarting kanata..."
-#systemctl daemon-reload
 sudo systemctl restart kanata
-
-echo "Done\!"
+echo "Switched to $LABEL keyboard"
