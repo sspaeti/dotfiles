@@ -40,12 +40,6 @@
         "Mod"
       ],
       "key": "O"
-    },
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "N"
     }
   ],
   "graph:open-local": [
@@ -106,6 +100,12 @@
         "Shift"
       ],
       "key": "O"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "N"
     }
   ],
   "workspace:new-tab": [],
