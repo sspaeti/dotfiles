@@ -58,6 +58,8 @@ default_max_prompt_size = 0
 hide_addressed_by_default = false
 auto_filter_repo = false
 tab_width = 0
+[advanced]
+tasks_enabled = true
 
 [sync]
   enabled = false
