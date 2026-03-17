@@ -3,7 +3,7 @@
 
 data=$(curl -sf "wttr.in/Biel~Switzerland?format=%C|%t" 2>/dev/null)
 
-if [ -z "$data" ]; then
+if [ -z "$data" ] || echo "$data" | grep -qi "already being processed\|Unknown location\|API key"; then
   echo '{"text": "", "tooltip": "Weather unavailable"}'
   exit 0
 fi

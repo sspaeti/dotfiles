@@ -11,7 +11,6 @@
   "settings-search",
   "obsidian-style-settings",
   "tag-wrangler",
-  "obsidian-auto-link-title",
   "better-export-pdf",
   "dataview",
   "obsidian-advanced-uri",
@@ -40,5 +39,6 @@
   "obsidian-trouble-tags",
   "smart-connections",
   "trouble-tags",
-  "open-specific-notes"
+  "open-specific-notes",
+  "obsidian-auto-link-title-fixed"
 ]
