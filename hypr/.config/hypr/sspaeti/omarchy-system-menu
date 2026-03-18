@@ -38,7 +38,7 @@ omarchy-hibernation-available && options="$options\n󰤁  Hibernate"
 options="$options\n󰍃  Logout\n󰜉  Restart\n󰐥  Shutdown"
 
 case $(menu "System" "$options") in
-  *Lock*) omarchy-lock-screen ;;
+  *Lock*) ~/.config/hypr/sspaeti/omarchy-lock-screen-wrapper.sh ;;
   *Suspend*) systemctl suspend ;;
   *Hibernate*) systemctl hibernate ;;
   *Logout*) handle_tmux_and_logout ;;

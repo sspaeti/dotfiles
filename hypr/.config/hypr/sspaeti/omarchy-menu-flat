@@ -230,7 +230,7 @@ case "$selection" in
   "Restart Wifi") omarchy-launch-floating-terminal-with-presentation omarchy-restart-wifi ;;
   "Restart Bluetooth") omarchy-launch-floating-terminal-with-presentation omarchy-restart-bluetooth ;;
 
-  "Lock Screen") omarchy-lock-screen ;;
+  "Lock Screen") ~/.config/hypr/sspaeti/omarchy-lock-screen-wrapper.sh ;;
   "Launch Screensaver") omarchy-launch-screensaver force ;;
   "Suspend") systemctl suspend ;;
   "Logout") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept logout ;;
