@@ -225,6 +225,20 @@ return {
           on_attach = on_attach,
           root_dir = vim.fs.root(0, {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}),
         }},
+        { "gopls", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true,
+                shadow = true,
+              },
+              staticcheck = true,
+              gofumpt = true, -- stricter formatting
+            },
+          },
+        }},
       }
 
       -- Configure all servers using the new vim.lsp.config API
