@@ -19,7 +19,6 @@ zsh/.secrets
 **/*.secret
 **/*.key
 .env.local
-zsh/.dotfiles/mutt/.lists
 
 #obsidian
 obsidian/Simon/SecondBrain/.obsidian/workspace
@@ -33,14 +32,10 @@ obsidian/Simon/SecondBrain/.obsidian/themes
 kanata/.config/kanata/kanata.kbd
 
 
+zsh/.dotfiles/mutt/.lists
 # mutt and email
-mutt/.config/mutt/get_hey_emails/approved_emails.txt
-mutt/.config/mutt/get_hey_emails/denied_emails.txt
 mutt/.config/mutt/logs
-mutt/.config/mutt/feed.txt
-mutt/.config/mutt/papertrail.txt
-mutt/.config/mutt/screened_in.txt
-mutt/.config/mutt/screened_out.txt
+mutt/.config/mutt/**/*.txt
 #msmtp
 msmtp/.msmtprc
 
