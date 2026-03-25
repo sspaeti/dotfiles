@@ -1,0 +1,41 @@
+[[accounts]]
+  name = "Personal"
+  imap = "imap.mail.hostpoint.ch:993"
+  smtp = "asmtp.mail.hostpoint.ch:587"
+  user = "simu@sspaeti.com"
+  password = "$IMAP_PASS_SIMU"
+  from = "Simon Späti <simu@sspaeti.com>"
+  starttls = false
+
+[[accounts]]
+  name = "Work"
+  imap = "imap.mail.hostpoint.ch:993"
+  smtp = "asmtp.mail.hostpoint.ch:587"
+  user = "simon@sspaeti.com"
+  password = "$IMAP_PASS_SIMON"
+  from = "Simon Späti <simon@ssp.sh>"
+  starttls = false
+
+[screener]
+  screened_in = "/home/sspaeti/.dotfiles/mutt/.lists/screened_in.txt"
+  screened_out = "/home/sspaeti/.dotfiles/mutt/.lists/screened_out.txt"
+  feed = "/home/sspaeti/.dotfiles/mutt/.lists/feed.txt"
+  papertrail = "/home/sspaeti/.dotfiles/mutt/.lists/papertrail.txt"
+
+[folders]
+  inbox = "INBOX"
+  sent = "Sent"
+  trash = "Trash"
+  drafts = "Drafts"
+  to_screen = "ToScreen"
+  feed = "Feed"
+  papertrail = "PaperTrail"
+  screened_out = "ScreenedOut"
+  archive = "Archive"
+  waiting = "Waiting"
+  scheduled = "Scheduled"
+  someday = "Someday"
+
+[ui]
+  theme = "dark"
+  inbox_count = 200
