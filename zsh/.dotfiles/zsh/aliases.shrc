@@ -114,7 +114,7 @@ alias intel="env /usr/bin/arch -x86_64 /bin/zsh --login"
 
 # Neomutt
 alias mutt="neomutt"
-alias m="neomutt"
+alias m="neomd"
 
 # alias rss="newsboat"
 # alias rss='cd ~/.config/newsboat && NEWSBOAT_PASS="$NEWSBOAT_PASS" make run'

@@ -21,6 +21,7 @@
   screened_out = "/home/sspaeti/.dotfiles/mutt/.lists/screened_out.txt"
   feed = "/home/sspaeti/.dotfiles/mutt/.lists/feed.txt"
   papertrail = "/home/sspaeti/.dotfiles/mutt/.lists/papertrail.txt"
+  spam = "/home/sspaeti/.dotfiles/mutt/.lists/spam.txt"
 
 [folders]
   inbox = "INBOX"
@@ -35,7 +36,14 @@
   waiting = "Waiting"
   scheduled = "Scheduled"
   someday = "Someday"
+  spam = "spam"
+  tab_order = ["inbox", "to_screen", "feed", "papertrail", "waiting", "someday", "scheduled", "sent", "archive", "screened_out", "trash"]
 
 [ui]
   theme = "dark"
   inbox_count = 200
+  signature   = """**Simon Späti**
+  Data Engineer & Technical Author, SSP Data GmbH
+
+  Connect: [LinkedIn](https://li.ssp.sh/) | [Bluesky](https://bs.ssp.sh/) | [GitHub](https://gh.ssp.sh/)
+  Explore: [Website](https://ssp.sh/) | [Vault](https://vault.ssp.sh/) | [Book](https://dedp.online/) | [Services](https://ssp.sh/services)"""
