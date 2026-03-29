@@ -53,3 +53,4 @@ text/x-c=nvim.desktop
 text/x-c++=nvim.desktop
 text/markdown=nvim.desktop
 x-scheme-handler/aether=aether-protocol-handler.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
