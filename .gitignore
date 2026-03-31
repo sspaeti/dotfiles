@@ -60,3 +60,6 @@ newsboat/.config/newsboat/urls
 #arch
 arch-orphans.txt
 arch-package-analysis.txt
+
+#git
+git/.gitconfig
