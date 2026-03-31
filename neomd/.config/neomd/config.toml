@@ -16,6 +16,20 @@
   from = "Simon Späti <simon@ssp.sh>"
   starttls = false
 
+[[accounts]]
+  name = "Work Info"
+  imap = "imap.mail.hostpoint.ch:993"
+  smtp = "asmtp.mail.hostpoint.ch:587"
+  user = "info@ssp.sh"
+  password = "$IMAP_PASS_SSP_INFO"
+  from = "SSP Data GmbH <info@ssp.sh>"
+  starttls = false
+
+[[senders]]
+  name = "Simon Späti" #alias for s with simu
+  from = "Simon Späti <s@ssp.sh>"
+  account = "Personal"
+
 [screener]
   screened_in = "/home/sspaeti/.dotfiles/mutt/.lists/screened_in.txt"
   screened_out = "/home/sspaeti/.dotfiles/mutt/.lists/screened_out.txt"
