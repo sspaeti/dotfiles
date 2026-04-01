@@ -88,6 +88,29 @@ vim.cmd("autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup='Inc
 --set filetype bash when file ending wih .shrc
 vim.cmd('autocmd BufNewFile,BufRead *.shrc,.secrets,.secrets_airbyte set filetype=bash')
 
+-- neomd email compose: keep markdown filetype (for plugins), just add spell + soft wrap
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = "*/neomd/neomd-*.md",
+  callback = function()
+    vim.wo.spell = true
+    vim.opt_local.spelllang = { "en_us", "de" }
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+
+    -- Spell keymaps with which-key labels (buffer-local)
+    local opts = function(desc) return { buffer = true, desc = desc } end
+    vim.keymap.set("n", "]s",         "]s",  opts("Next spell error"))
+    vim.keymap.set("n", "[s",         "[s",  opts("Prev spell error"))
+    vim.keymap.set("n", "z=",         "z=",  opts("Spell suggestions"))
+    vim.keymap.set("n", "zg",         "zg",  opts("Add word to dictionary"))
+    vim.keymap.set("n", "<leader>sf", "1z=", opts("Spell: auto-fix (first suggestion)"))
+    vim.keymap.set("n", "<leader>sn", "]s",  opts("Spell: next error"))
+    vim.keymap.set("n", "<leader>sp", "[s",  opts("Spell: prev error"))
+    vim.keymap.set("n", "<leader>s=", "z=",  opts("Spell: show suggestions"))
+    vim.keymap.set("n", "<leader>sa", "zg",  opts("Spell: add to dictionary"))
+  end,
+})
+
 -- auto create a folder if we save a file in a non existing folder
 vim.cmd([[
 augroup Mkdir
