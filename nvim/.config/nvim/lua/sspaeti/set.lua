@@ -97,6 +97,11 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
 
+    -- Make spell errors visible: red underline + colored text (works in all terminals)
+    vim.api.nvim_set_hl(0, "SpellBad",  { underline = true, fg = "#e82424" })
+    vim.api.nvim_set_hl(0, "SpellCap",  { underline = true, fg = "#e6c384" })
+    vim.api.nvim_set_hl(0, "SpellRare", { underline = true, fg = "#957FB8" })
+
     -- Spell keymaps with which-key labels (buffer-local)
     local opts = function(desc) return { buffer = true, desc = desc } end
     vim.keymap.set("n", "]s",         "]s",  opts("Next spell error"))
