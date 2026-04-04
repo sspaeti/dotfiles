@@ -33,6 +33,7 @@ kanata/.config/kanata/kanata.kbd
 
 
 zsh/.dotfiles/mutt/.lists
+zsh/.dotfiles/mutt/.lists.bak
 # mutt and email
 mutt/.config/mutt/logs
 mutt/.config/mutt/**/*.txt
@@ -51,6 +52,9 @@ clipse/.config/clipse/clipse.log
 #OBS
 OBS/.config/obs-studio/logs/
 OBS/.config/obs-studio/profiler_data/
+OBS/.config/obs-studio/plugin_config/
+OBS/.config/obs-studio/global.ini
+OBS/.config/obs-studio/user.ini
 
 w3m/.config/w3m/cookie
 
