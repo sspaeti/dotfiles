@@ -1,3 +1,5 @@
+auto_bcc = "sspaeti@hey.com"
+
 [[accounts]]
   name = "Personal"
   imap = "imap.mail.hostpoint.ch:993"
@@ -47,11 +49,12 @@
   papertrail = "PaperTrail"
   screened_out = "ScreenedOut"
   archive = "Archive"
+  work = "Work"
   waiting = "Waiting"
   scheduled = "Scheduled"
   someday = "Someday"
   spam = "spam"
-  tab_order = ["inbox", "to_screen", "feed", "papertrail", "waiting", "someday", "scheduled", "sent", "archive", "screened_out", "trash"]
+  tab_order = ["inbox", "to_screen", "feed", "papertrail", "waiting", "someday", "scheduled", "sent", "work", "archive", "screened_out", "trash"]
 
 [ui]
   theme = "dark"
@@ -60,4 +63,6 @@
   Data Engineer & Technical Author, SSP Data GmbH
 
   Connect: [LinkedIn](https://li.ssp.sh/) | [Bluesky](https://bs.ssp.sh/) | [GitHub](https://gh.ssp.sh/)
-  Explore: [Website](https://ssp.sh/) | [Vault](https://vault.ssp.sh/) | [Book](https://dedp.online/) | [Services](https://ssp.sh/services)"""
+  Explore: [Website](https://ssp.sh/) | [Vault](https://vault.ssp.sh/) | [Book](https://dedp.online/) | [Services](https://ssp.sh/services)
+
+  *sent from [neomd](https://neomd.ssp.sh)*"""
