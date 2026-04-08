@@ -60,9 +60,9 @@ auto_bcc = "sspaeti@hey.com"
   theme = "dark"
   inbox_count = 200
   signature   = """**Simon Späti**
-  Data Engineer & Technical Author, SSP Data GmbH
+Data Engineer & Technical Author, SSP Data GmbH
 
-  Connect: [LinkedIn](https://li.ssp.sh/) | [Bluesky](https://bs.ssp.sh/) | [GitHub](https://gh.ssp.sh/)
-  Explore: [Website](https://ssp.sh/) | [Vault](https://vault.ssp.sh/) | [Book](https://dedp.online/) | [Services](https://ssp.sh/services)
+Connect: [LinkedIn](https://li.ssp.sh/) | [Bluesky](https://bs.ssp.sh/) | [GitHub](https://gh.ssp.sh/)
+Explore: [Website](https://ssp.sh/) | [Vault](https://vault.ssp.sh/) | [Book](https://dedp.online/) | [Services](https://ssp.sh/services)
 
-  *sent from [neomd](https://neomd.ssp.sh)*"""
+*sent from [neomd](https://neomd.ssp.sh)*"""
