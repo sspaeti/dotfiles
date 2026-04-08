@@ -54,14 +54,27 @@ local function neomd_attach()
   vim.cmd("startinsert")
 end
 
--- Only map <leader>a when editing a neomd compose buffer (neomd-*.md)
+-- Only activate neomd writing mode when editing a neomd compose buffer (neomd-*.md)
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "neomd-*.md",
   callback = function()
+    -- Attach file via yazi
     vim.keymap.set("n", "<leader>a", neomd_attach, {
       buffer = true,
       desc   = "neomd: attach file via yazi",
     })
+
+    -- Writing-optimized settings (from nvim-wp/set_wp.lua)
+    vim.wo.spell = true
+    vim.bo.spelllang = "en_us,de"
+    vim.wo.wrap = true
+    vim.wo.linebreak = true
+    vim.wo.breakindent = true
+    vim.wo.breakindentopt = "shift:1"
+    vim.wo.showbreak = "↪ "
+    vim.wo.conceallevel = 2
+    vim.wo.relativenumber = false
+    -- Word count + reading time is handled by lualine (see plugins/lualine.lua)
   end,
 })
 -- ── end neomd ──────────────────────────────────────────────────────────────

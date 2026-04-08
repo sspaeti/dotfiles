@@ -77,6 +77,27 @@ return {
     --word per minute
     local wpm = require("wpm")
 
+    -- neomd compose: word count + reading time (only for neomd-*.md buffers)
+    local function is_neomd()
+      return vim.fn.expand("%:t"):match("^neomd%-.*%.md$") ~= nil
+    end
+    local neomd_words = {
+      function()
+        return vim.fn.wordcount().words .. " words"
+      end,
+      cond = is_neomd,
+      color = { fg = "#7aa2f7" },
+    }
+    local neomd_reading = {
+      function()
+        local words = vim.fn.wordcount().words
+        local mins = math.max(math.floor(words / 200), 1)
+        return "~" .. mins .. " min read"
+      end,
+      cond = is_neomd,
+      color = { fg = "#9ece6a" },
+    }
+
     -- macro recording indicator
     local recording = {
       function()
@@ -103,7 +124,7 @@ return {
         lualine_a = { "mode", recording },
         lualine_b = {},
         lualine_c = { branch, active_lsp, filename },
-        lualine_x = { wpm.historic_graph, diff, diagnostics, { get_venv, color = { gui = "bold" } }, filetype },
+        lualine_x = { neomd_words, neomd_reading, wpm.historic_graph, diff, diagnostics, { get_venv, color = { gui = "bold" } }, filetype },
         lualine_y = {},
         lualine_z = { progress, location },
       },
