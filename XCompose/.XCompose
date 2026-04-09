@@ -3,7 +3,7 @@ include "%H/.local/share/omarchy/default/xcompose"
 # Identification
 <Multi_key> <space> <n> : "Simon Späti"
 <Multi_key> <space> <e> : "simon@ssp.sh"
-<Multi_key> <space> <f> : "*sent from [neomd](https://neomd.ssp.sh)*"
+<Multi_key> <space> <m> : "*sent from [neomd](https://neomd.ssp.sh)*"
 
 # Typography
 <Multi_key> <minus> : "—"
