@@ -2,7 +2,7 @@
 # Kanagawa
 # Ported from https://github.com/rebelot/kanagawa.nvim/
 
-[colors]
+[colors-dark]
 background=1F1F28
 foreground=DCD7BA
 cursor=1F1F28 C8C093

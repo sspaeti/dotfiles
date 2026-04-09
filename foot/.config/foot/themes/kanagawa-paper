@@ -2,7 +2,7 @@
 # Kanagawa Paper
 # Ported from https://github.com/sho-87/kanagawa-paper.nvim
 
-[colors]
+[colors-dark]
 background=1F1F28
 foreground=DCD7BA
 cursor=1F1F28 c8c093

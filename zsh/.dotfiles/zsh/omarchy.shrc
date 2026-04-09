@@ -1,3 +1,6 @@
 
-source ~/.local/share/omarchy/default/bash/functions
+# Source omarchy bash functions except worktrees (conflicts with git aliases)
+for f in ~/.local/share/omarchy/default/bash/fns/*; do
+  [[ "$(basename "$f")" != "worktrees" ]] && source "$f"
+done
 # source ~/.local/share/omarchy/default/bash/init
