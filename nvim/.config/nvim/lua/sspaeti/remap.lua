@@ -124,7 +124,9 @@ vim.opt.wildmenu = true
 --
 --remove empty line
 -- vim.keymap.set("n", "<leader>rl", ":%s/^$\n*//g")
-vim.api.nvim_set_keymap('n', '<leader>rl', ':%s/^$\\n*//<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>rl', ':%s/^$\\n*//<CR>', { noremap = true, silent = true, desc = "Remove emtpy lines" })
+--remove trailing whitespace
+vim.keymap.set("n", "<leader>rw", ":%s/\\s\\+$//ge<CR>", { noremap = true, silent = true, desc = "Remove trailing whitespace" })
 
 
 --vim.keymap.set("n", "<Leader>lf", "vim.lsp.buf.format()<CR>")
