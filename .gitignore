@@ -32,7 +32,9 @@ obsidian/Simon/SecondBrain/.obsidian/themes
 kanata/.config/kanata/kanata.kbd
 
 
-zsh/.dotfiles/mutt/.lists
+neomd/.config/neomd/lists
+.stfolder
+zsh/.dotfiles/mutt/.lists-moved
 zsh/.dotfiles/mutt/.lists.bak
 # mutt and email
 mutt/.config/mutt/logs
@@ -52,6 +54,7 @@ clipse/.config/clipse/clipse.log
 #OBS
 OBS/.config/obs-studio/logs/
 OBS/.config/obs-studio/
+OBS/.config/obs-studio.bak
 
 w3m/.config/w3m/cookie
 

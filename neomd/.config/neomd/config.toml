@@ -33,11 +33,11 @@ auto_bcc = "sspaeti@hey.com"
   account = "Personal"
 
 [screener]
-  screened_in = "/home/sspaeti/.dotfiles/mutt/.lists/screened_in.txt"
-  screened_out = "/home/sspaeti/.dotfiles/mutt/.lists/screened_out.txt"
-  feed = "/home/sspaeti/.dotfiles/mutt/.lists/feed.txt"
-  papertrail = "/home/sspaeti/.dotfiles/mutt/.lists/papertrail.txt"
-  spam = "/home/sspaeti/.dotfiles/mutt/.lists/spam.txt"
+  screened_in = "/home/sspaeti/.config/neomd/lists/screened_in.txt"
+  screened_out = "/home/sspaeti/.config/neomd/lists/screened_out.txt"
+  feed = "/home/sspaeti/.config/neomd/lists/feed.txt"
+  papertrail = "/home/sspaeti/.config/neomd/lists/papertrail.txt"
+  spam = "/home/sspaeti/.config/neomd/lists/spam.txt"
 
 [folders]
   inbox = "INBOX"
@@ -59,6 +59,7 @@ auto_bcc = "sspaeti@hey.com"
 [ui]
   theme = "dark"
   inbox_count = 200
+  mark_as_read_after_secs = 7  # wait 10 seconds (default)
 
 # [ui.signature_block]
 #   text = """**Simon Späti**
