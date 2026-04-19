@@ -34,6 +34,7 @@ kanata/.config/kanata/kanata.kbd
 
 neomd/.config/neomd/lists
 .stfolder
+*.swp
 zsh/.dotfiles/mutt/.lists-moved
 zsh/.dotfiles/mutt/.lists.bak
 # mutt and email

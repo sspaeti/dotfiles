@@ -60,6 +60,7 @@ auto_bcc = "sspaeti@hey.com"
   theme = "dark"
   inbox_count = 200
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
+  bg_sync_interval     = 5  #disable as run on ti server
 
 # [ui.signature_block]
 #   text = """**Simon Späti**
