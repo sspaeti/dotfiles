@@ -1,4 +1,4 @@
-auto_bcc = "sspaeti@hey.com"
+# auto_bcc = "sspaeti@hey.com"
 
 [[accounts]]
   name = "Personal"
@@ -54,7 +54,7 @@ auto_bcc = "sspaeti@hey.com"
   scheduled = "Scheduled"
   someday = "Someday"
   spam = "spam"
-  tab_order = ["inbox", "to_screen", "feed", "papertrail", "waiting", "someday", "scheduled", "sent", "work", "archive", "screened_out", "trash"]
+  tab_order = ["inbox", "to_screen", "waiting", "someday", "scheduled", "feed", "papertrail", "work", "archive", "sent","screened_out", "trash"]
 
 [ui]
   theme = "dark"
