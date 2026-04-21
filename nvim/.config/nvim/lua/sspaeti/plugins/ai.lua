@@ -11,10 +11,14 @@ return {
   --   end,
   --   dependencies = {
   --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "folke/trouble.nvim",
+  --     "nvim-telescope/telescope.nvim"
   --   },
+  --   keys = {
+  --     { "<leader>ai", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
+  --   }
   -- },
-  --
   {
     "yetone/avante.nvim",
     lazy = false,
@@ -81,22 +85,6 @@ return {
     --     vim.keymap.set("n", "<leader>cd", "<Plug>(copilot-dismiss)", { noremap = true, silent = true })
     --   }
     -- end
-  },
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup()
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim"
-    },
-    keys = {
-      { "<leader>ai", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
-    }
   },
   -- local defaults = {
   --   api_key_cmd = nil,
