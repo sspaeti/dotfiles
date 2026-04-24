@@ -105,3 +105,25 @@
     </td>
   </tr>
 </table>"""
+
+[listmonk]
+url = "https://list.ssp.sh"
+api_user = "sspaeti-neomd"
+api_token = "${LISTMONK_API_NEOMD_TOKEN}"
+delay_minutes = 30
+
+[[listmonk.triggers]]
+address = "listmonk@ssp.sh"
+list_ids = [2]  # send to default
+
+[[listmonk.triggers]]
+address = "listmonk-book@ssp.sh"
+list_ids = [4]
+
+[[listmonk.triggers]]
+address = "listmonk-all@ssp.sh"
+list_ids = [2, 4]
+
+[[listmonk.triggers]]
+address = "listmonk-test@ssp.sh"
+list_ids = [6]  # just for testing
