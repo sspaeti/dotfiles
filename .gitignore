@@ -68,3 +68,6 @@ arch-package-analysis.txt
 
 #git
 git/.gitconfig
+
+#ignore dictionary
+nvim/.config/nvim/spell
