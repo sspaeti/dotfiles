@@ -83,3 +83,10 @@ fzfvim-widget() {
 }
 zle -N fzfvim-widget
 bindkey '^G' fzfvim-widget
+
+purge-cdn() {
+  if [ -z "$BUNNY_API_KEY" ]; then echo "BUNNY_API_KEY not set"; return 1; fi
+  local url="https://www.${1}"
+  curl -s -X POST "https://api.bunny.net/purge?url=${url}&async=true" \
+    -H "AccessKey: $BUNNY_API_KEY" && echo "Purged: $url"
+}
