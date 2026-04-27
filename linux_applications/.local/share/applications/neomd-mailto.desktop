@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=neomd (mailto)
+Comment=Compose email in neomd terminal email client
+Exec=foot -e /home/sspaeti/.local/bin/neomd-mailto.sh %u
+Icon=mail-send
+Terminal=false
+NoDisplay=true
+MimeType=x-scheme-handler/mailto;
+Categories=Network;Email;
