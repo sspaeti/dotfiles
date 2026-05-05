@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Aether Protocol Handler
+Name=Z-Aether Protocol Handler
 Comment=Import Aether blueprint themes from web links
 Exec=aether --import-blueprint %u --auto-apply
 Type=Application
