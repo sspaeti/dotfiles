@@ -27,6 +27,17 @@ auto_bcc = "simon.spaeti@gmail.com"
   from = "SSP Data GmbH <info@ssp.sh>"
   starttls = false
 
+[[accounts]]
+  name     = "Gmail"
+  imap     = "imap.gmail.com:993"
+  imap_disabled = true #only used for sending
+  smtp     = "smtp.gmail.com:587"
+  user     = "simon.spaeti@gmail.com"
+  password = "$IMAP_APPPASS_GMAIL_NEOMD"    # 16-char app password from Google
+  from     = "Simon Späti <simon.spaeti@gmail.com>"
+  starttls = false
+
+
 [[senders]]
   name = "Simon Späti" #alias for s with simu
   from = "Simon Späti <s@ssp.sh>"
@@ -60,7 +71,7 @@ auto_bcc = "simon.spaeti@gmail.com"
   theme = "dark"
   inbox_count = 200
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
-  bg_sync_interval     = 5  #disable as run on ti server
+  bg_sync_interval     = 2
 
 # [ui.signature_block]
 #   text = """**Simon Späti**
@@ -72,6 +83,13 @@ auto_bcc = "simon.spaeti@gmail.com"
 # *sent from [neomd](https://neomd.ssp.sh)*
 
 # [html-signature]"""
+
+[notifications]
+enabled  = true                     # opt-in; default off
+command  = "notify-send"            # binary path; user may swap for "hyprctl"
+icon     = "mail-message-new"       # passed as --icon
+expire_ms = 15000                    # passed as -t
+folders  = ["Inbox", "PaperTrail"]                # only fire when message lands in one of these (default: Inbox only)
 
 [ui.signature_block]
   text = """[html-signature]"""
