@@ -5,7 +5,8 @@ auto_bcc = "simon.spaeti@gmail.com"
   imap = "imap.mail.hostpoint.ch:993"
   smtp = "asmtp.mail.hostpoint.ch:587"
   user = "simu@sspaeti.com"
-  password = "$IMAP_PASS_SIMU"
+  # password = "$IMAP_PASS_SIMU"
+  password = "keyring"
   from = "Simon Späti <simu@sspaeti.com>"
   starttls = false
 
@@ -14,16 +15,18 @@ auto_bcc = "simon.spaeti@gmail.com"
   imap = "imap.mail.hostpoint.ch:993"
   smtp = "asmtp.mail.hostpoint.ch:587"
   user = "simon@sspaeti.com"
-  password = "$IMAP_PASS_SIMON"
+  # password = "$IMAP_PASS_SIMON"
+  password = "keyring"
   from = "Simon Späti <simon@ssp.sh>"
   starttls = false
 
 [[accounts]]
-  name = "Work Info"
+  name = "WorkInfo"
   imap = "imap.mail.hostpoint.ch:993"
   smtp = "asmtp.mail.hostpoint.ch:587"
   user = "info@ssp.sh"
-  password = "$IMAP_PASS_SSP_INFO"
+  # password = "$IMAP_PASS_SSP_INFO"
+  password = "keyring"
   from = "SSP Data GmbH <info@ssp.sh>"
   starttls = false
 
@@ -68,7 +71,8 @@ auto_bcc = "simon.spaeti@gmail.com"
   tab_order = ["inbox", "to_screen", "waiting", "someday", "scheduled", "feed", "papertrail", "work", "archive", "sent","screened_out", "trash"]
 
 [ui]
-  theme = "dark"
+  # theme = "dark"
+  theme = "kanagawa" # kanagawa default, kanagawa-paper, rose-pine, gruvbox, osaka-jade
   inbox_count = 200
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
   bg_sync_interval     = 2
