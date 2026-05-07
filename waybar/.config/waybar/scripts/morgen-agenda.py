@@ -79,9 +79,7 @@ def format_time(start: str, all_day: bool) -> tuple[date, int, str] | None:
     if all_day or not m.group(2):
         return d, -1, "All day"
     h, mi = int(m.group(2)), int(m.group(3))
-    ampm = "AM" if h < 12 else "PM"
-    h12 = h % 12 or 12
-    return d, h * 60 + mi, f"{h12:02d}:{mi:02d} {ampm}"
+    return d, h * 60 + mi, f"{h:02d}:{mi:02d}"
 
 
 def day_header(d: date, today: date) -> str:
@@ -135,7 +133,7 @@ def main() -> None:
                 lines.append("")
             lines.append(day_header(d, today))
             last_day = d
-        lines.append(f"{t:<8}  -  {title}")
+        lines.append(f"{t:<7}  -  {title}")
     emit("\n".join(lines))
 
 
