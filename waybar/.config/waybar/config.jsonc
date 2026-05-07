@@ -55,10 +55,13 @@
     "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
   },
   "custom/waycal": {
-    "format": "󰃭",
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/morgen-agenda.py",
+    "return-type": "json",
+    "interval": 1800,
+    "signal": 11,
     "on-click": "pkill -x waycal || waycal",
-    "on-click-right": "morgen",
-    "tooltip-format": "Calendar\n\nLeft-click: waycal popup\nRight-click: Open Morgen"
+    "on-click-right": "morgen"
   },
   "custom/update": {
     "format": "",

@@ -58,6 +58,7 @@ OBS/.config/obs-studio/
 OBS/.config/obs-studio.bak
 
 w3m/.config/w3m/cookie
+w3m/.config/w3m/history
 
 #newsboat
 newsboat/.config/newsboat/urls
