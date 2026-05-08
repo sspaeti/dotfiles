@@ -153,7 +153,7 @@ exit
 💟 heart decoration purple-square love like
 ❣️ heart exclamation decoration love
 💔 broken heart sad sorry break heart heartbreak
-❤️ red heart love like valentines
+❤️ love heart red like valentines
 🧡 orange heart love like affection valentines
 💛 yellow heart love like affection valentines
 💚 green heart love like affection valentines
