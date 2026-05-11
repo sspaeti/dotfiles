@@ -72,7 +72,7 @@ auto_bcc = "simon.spaeti@gmail.com"
 
 [ui]
   # theme = "dark"
-  theme = "kanagawa" # kanagawa default, kanagawa-paper, rose-pine, gruvbox, osaka-jade
+  theme = "gruvbox" # kanagawa default, kanagawa-paper, rose-pine, gruvbox, osaka-jade
   inbox_count = 200
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
   bg_sync_interval     = 2
