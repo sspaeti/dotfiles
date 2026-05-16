@@ -101,8 +101,8 @@ vim.keymap.set("n", "sl", "<C-w>l")
 
 --search and replace
 vim.keymap.set("n", "S", ":%s//g<Left><Left>") --used for lazy.
-vim.keymap.set("n", "<leader>s", ":%s//g<Left><Left>")
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- vim.keymap.set("n", "<leader>s", ":%s//g<Left><Left>")
+-- vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 --ciq (change in quotes) 
 vim.keymap.set("n", "ciq", "ci\"")

@@ -29,16 +29,13 @@
   "copy-document-as-html",
   "obsidian-linter",
   "obsidian-list-callouts",
-  "omnisearch",
-  "obsidian-excalidraw-plugin",
-  "excalibrain",
   "obsidian-open-specific-notes",
   "obsidian-theme-design-utilities",
   "obsidian-reading-time",
   "statusbar-organizer",
   "obsidian-trouble-tags",
-  "smart-connections",
-  "trouble-tags",
   "open-specific-notes",
-  "obsidian-auto-link-title-fixed"
+  "obsidian-auto-link-title-fixed",
+  "trouble-tags",
+  "omnisearch"
 ]

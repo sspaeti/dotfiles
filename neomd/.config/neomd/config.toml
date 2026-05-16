@@ -141,6 +141,7 @@ list_ids = [2]  # send to default
 [[listmonk.triggers]]
 address = "listmonk-book@ssp.sh"
 list_ids = [4]
+template_id = 5  # "Book Update Template"
 
 [[listmonk.triggers]]
 address = "listmonk-all@ssp.sh"
