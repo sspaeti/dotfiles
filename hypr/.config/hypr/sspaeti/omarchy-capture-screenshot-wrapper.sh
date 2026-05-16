@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Wrapper for omarchy-cmd-screenshot with post-processing
+# Wrapper for omarchy-capture-screenshot with post-processing
 # Calls the original omarchy script, then always opens Satty for editing
 # and organizes screenshots into monthly folders
 
@@ -10,8 +10,8 @@ OUTPUT_DIR="${OMARCHY_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}}"
 # Record newest screenshot before taking a new one
 BEFORE=$(ls -t "$OUTPUT_DIR"/screenshot-*.png 2>/dev/null | head -1)
 
-# Call the original omarchy-cmd-screenshot, suppressing its notification
-OMARCHY_SCREENSHOT_EDITOR=true ~/.local/share/omarchy/bin/omarchy-cmd-screenshot "$@"
+# Call the original omarchy-capture-screenshot, suppressing its notification
+OMARCHY_SCREENSHOT_EDITOR=true ~/.local/share/omarchy/bin/omarchy-capture-screenshot "$@"
 
 # Find the newly created screenshot
 AFTER=$(ls -t "$OUTPUT_DIR"/screenshot-*.png 2>/dev/null | head -1)

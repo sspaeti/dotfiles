@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Wrapper around omarchy-cmd-screenrecord that produces Kdenlive-friendly recordings.
+# Wrapper around omarchy-capture-screenrecording that produces Kdenlive-friendly recordings.
 # Uses CFR (constant frame rate) to avoid the "variable frame rate" transcode prompt.
 # Also forces CPU encoding to avoid VAAPI GPU crashes on AMD Radeon 890M (gfx1150).
 

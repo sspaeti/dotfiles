@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Wrapper for omarchy-lock-screen that skips locking 1Password.
+# Wrapper for omarchy-system-lock that skips locking 1Password.
 # Calls the original behavior except the "1password --lock" step.
 
 # Lock the screen
