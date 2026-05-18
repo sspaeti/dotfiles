@@ -25,10 +25,13 @@ vim.opt.showcmd = true -- display incomplete commands
 vim.opt.laststatus = 3 -- 3: Only show global status line in acitve window 2: Always display the status line
 
 --foldlevel settings
+-- Use Neovim's native Lua treesitter foldexpr (much faster than the legacy
+-- Vimscript `nvim_treesitter#foldexpr()`, which was the dominant cost on
+-- :bnext in large SCSS files — ~6995 calls / 8.25s in a single profile run).
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 5
 vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- search related
 vim.opt.hlsearch = true
