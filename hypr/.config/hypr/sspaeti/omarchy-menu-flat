@@ -18,13 +18,23 @@ Arch Wiki
 Neovim Keymaps
 Bash Cheatsheet
 Theme
+Unlock Screens
 Font
 Background
+Looknfeel
 Screensaver Config
 About
 Screenshot
 Screenrecord
+Text Extraction OCR
 Color Picker
+Transcode
+Reminder Set
+Reminder Show All
+Reminder Clear All
+Share Clipboard
+Share File
+Share Folder
 Toggle Screensaver
 Toggle Nightlight
 Toggle Idle Lock
@@ -33,6 +43,9 @@ Toggle Workspace Layout
 Toggle Window Gaps
 Toggle 1-Window Ratio
 Toggle Display Scaling
+Toggle Notifications
+Toggle Direct Boot
+Toggle Passwordless Sudo
 Audio
 Wifi
 Bluetooth
@@ -89,23 +102,27 @@ Remove Windows VM
 Remove Fingerprint
 Remove Fido2
 Update Omarchy
-Update Branch
+Update Channel
 Update Config
 Update Extra Themes
 Update Firmware
 Update Timezone
+Update Time
 Update Password
 Restart Hypridle
 Restart Hyprsunset
+Restart Mako
 Restart Swayosd
 Restart Walker
 Restart Waybar
 Restart Audio
 Restart Wifi
 Restart Bluetooth
+Restart Trackpad
 Lock Screen
 Launch Screensaver
 Suspend
+Hibernate
 Logout
 Relaunch Hyprland
 Restart System
@@ -128,14 +145,26 @@ case "$selection" in
   "Bash Cheatsheet") omarchy-launch-webapp "https://devhints.io/bash" ;;
 
   "Theme") omarchy-menu theme ;;
+  "Unlock Screens") omarchy-launch-walker -m menus:omarchyunlocks --width 800 --minheight 400 ;;
   "Font") omarchy-menu font ;;
   "Background") omarchy-theme-bg-next ;;
+  "Looknfeel") open_in_editor ~/.config/hypr/looknfeel.conf ;;
   "Screensaver Config") open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
   "About") omarchy-launch-about ;;
 
   "Screenshot") omarchy-menu screenshot ;;
   "Screenrecord") omarchy-menu screenrecord ;;
+  "Text Extraction OCR") omarchy-capture-text-extraction ;;
   "Color Picker") pkill hyprpicker || hyprpicker -a ;;
+  "Transcode") omarchy-transcode ;;
+
+  "Reminder Set") omarchy-menu reminder-set ;;
+  "Reminder Show All") omarchy-reminder show ;;
+  "Reminder Clear All") omarchy-reminder clear ;;
+
+  "Share Clipboard") omarchy-menu-share clipboard ;;
+  "Share File") $TERMINAL -e bash -c "omarchy-menu-share file" ;;
+  "Share Folder") $TERMINAL -e bash -c "omarchy-menu-share folder" ;;
 
   "Toggle Screensaver") omarchy-toggle-screensaver ;;
   "Toggle Nightlight") omarchy-toggle-nightlight ;;
@@ -145,6 +174,9 @@ case "$selection" in
   "Toggle Window Gaps") omarchy-hyprland-window-gaps-toggle ;;
   "Toggle 1-Window Ratio") omarchy-hyprland-window-single-square-aspect-toggle ;;
   "Toggle Display Scaling") omarchy-hyprland-monitor-scaling-cycle ;;
+  "Toggle Notifications") omarchy-toggle-notification-silencing ;;
+  "Toggle Direct Boot") omarchy-launch-floating-terminal-with-presentation omarchy-config-direct-boot ;;
+  "Toggle Passwordless Sudo") omarchy-launch-floating-terminal-with-presentation omarchy-sudo-passwordless ;;
 
   "Audio")
     logger -t "omarchy-menu-flat2" "Launching: $TERMINAL --class=Wiremix -e wiremix"
@@ -214,25 +246,29 @@ case "$selection" in
   "Remove Fido2") omarchy-launch-floating-terminal-with-presentation "omarchy-setup-fido2 --remove" ;;
 
   "Update Omarchy") omarchy-launch-floating-terminal-with-presentation omarchy-update ;;
-  "Update Branch") omarchy-menu "Update Branch" ;;
+  "Update Channel") omarchy-menu "Update Channel" ;;
   "Update Config") omarchy-menu "Update Config" ;;
   "Update Extra Themes") omarchy-launch-floating-terminal-with-presentation omarchy-theme-update ;;
   "Update Firmware") omarchy-launch-floating-terminal-with-presentation omarchy-update-firmware ;;
   "Update Timezone") omarchy-launch-floating-terminal-with-presentation omarchy-tz-select ;;
+  "Update Time") omarchy-launch-floating-terminal-with-presentation omarchy-update-time ;;
   "Update Password") omarchy-menu "Update Password" ;;
 
   "Restart Hypridle") omarchy-restart-hypridle ;;
   "Restart Hyprsunset") omarchy-restart-hyprsunset ;;
+  "Restart Mako") omarchy-restart-mako ;;
   "Restart Swayosd") omarchy-restart-swayosd ;;
   "Restart Walker") omarchy-restart-walker ;;
   "Restart Waybar") omarchy-restart-waybar ;;
   "Restart Audio") omarchy-launch-floating-terminal-with-presentation omarchy-restart-pipewire ;;
   "Restart Wifi") omarchy-launch-floating-terminal-with-presentation omarchy-restart-wifi ;;
   "Restart Bluetooth") omarchy-launch-floating-terminal-with-presentation omarchy-restart-bluetooth ;;
+  "Restart Trackpad") omarchy-launch-floating-terminal-with-presentation omarchy-restart-trackpad ;;
 
   "Lock Screen") ~/.config/hypr/sspaeti/omarchy-system-lock-wrapper.sh ;;
   "Launch Screensaver") omarchy-launch-screensaver force ;;
   "Suspend") systemctl suspend ;;
+  "Hibernate") systemctl hibernate ;;
   "Logout") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept logout ;;
   "Relaunch Hyprland") uwsm stop ;;
   "Restart System") ~/.config/hypr/sspaeti/omarchy-system-menu-intercept reboot ;;
