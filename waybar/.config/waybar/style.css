@@ -103,6 +103,17 @@ tooltip label {
   opacity: 1;
 }
 
+/* ── Waycal (Morgen agenda) ────────────────────────────── */
+
+#custom-waycal {
+  padding: 0 8px;
+  opacity: 0.85;
+}
+
+#custom-waycal:hover {
+  opacity: 1;
+}
+
 /* ── Right-side modules: shared pill style ─────────────── */
 
 #battery,

@@ -201,6 +201,14 @@
     "tooltip": false
   },
   "custom/weather": {
+    "exec": "$OMARCHY_PATH/default/waybar/weather.sh",
+    "return-type": "json",
+    "interval": 60,
+    "tooltip": false,
+    "on-click": "notify-send -u low \"$(omarchy-weather-status)\"",
+    "on-click-right": "xdg-open https://meteonews.ch/de/Wetter/G2661513/Biel"
+  },
+  "custom/weather-sspaeti": {
     "exec": "~/.config/waybar/scripts/weather.sh",
     "return-type": "json",
     "interval": 1800,
