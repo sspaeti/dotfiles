@@ -171,8 +171,8 @@ vim.g.tmux_navigator_preserve_zoom = 1
 -- Replace `$EDITOR` candidate with this command to open the selected file
 vim.g.rnvimr_edit_cmd = 'drop'
 
--- let blame default be on
-vim.g.blamer_enabled = 1
+-- Inline git blame is now handled by gitsigns' current_line_blame option
+-- (see lua/sspaeti/plugins/git.lua). Toggle with <leader>gb.
 
 --TODO: not sure if that works yet
 --disable match parentes as it's super slow on larger files (e.g. log files)

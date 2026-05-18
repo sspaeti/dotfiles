@@ -174,8 +174,8 @@ end, { desc = "Toggle light/dark mode" })
 --
 -- LazyGit
 vim.api.nvim_set_keymap('n', '<leader>lG', ':LazyGit<CR>', {noremap = true, silent = true}) --> replaces with snack.nvim
---Blamer
-vim.api.nvim_set_keymap('n', '<leader>gb', ':BlamerToggle<CR>', {noremap = true, silent = true})
+-- <leader>gb (toggle inline git blame) is now defined inside gitsigns'
+-- on_attach in lua/sspaeti/plugins/git.lua — it maps to gs.toggle_current_line_blame.
 --Diffview.nvim
 vim.api.nvim_set_keymap('n', '<leader>go', ':DiffviewOpen<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>gc', ':DiffviewClose<CR>', {noremap = true, silent = true})

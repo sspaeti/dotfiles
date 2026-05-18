@@ -10,11 +10,10 @@ return {
         end
         map("n", "]h", gs.next_hunk, "Next git hunk")
         map("n", "[h", gs.prev_hunk, "Previous git hunk")
-        map("n", "<leader>gd", function() gs.blame_line({ full = true }) end, "Git blame line")
+        map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Git blame line (popup)")
       end,
     },
   },
-  { "APZelos/blamer.nvim", event = "VeryLazy" },   --gitlens blame style',
   {
     "FabijanZulj/blame.nvim",
     lazy = false,
