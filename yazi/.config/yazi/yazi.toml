@@ -1,5 +1,5 @@
 [mgr]
-show_hidden = true
+# show_hidden = true
 [plugin]  
 prepend_previewers = [  
   { url = "*.csv", run = "duckdb" },  
