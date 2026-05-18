@@ -136,10 +136,6 @@ return {
           capabilities = capabilities,
           on_attach = on_attach,
         }},
-        { "ts_ls", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-        }},
         { "cssls", {
           capabilities = capabilities,
           on_attach = on_attach,
@@ -147,21 +143,25 @@ return {
         { "tailwindcss", {
           capabilities = capabilities,
           on_attach = on_attach,
+          -- Only attach when the project actually has a Tailwind/PostCSS config.
+          -- Otherwise it's overhead on every CSS/SCSS/HTML buffer and shows up as
+          -- a document_color provider that re-runs on BufEnter (slow :bnext).
+          root_dir = function(bufnr, on_dir)
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            local root = vim.fs.root(fname, {
+              "tailwind.config.js",
+              "tailwind.config.cjs",
+              "tailwind.config.mjs",
+              "tailwind.config.ts",
+              "postcss.config.js",
+            })
+            if root then on_dir(root) end
+          end,
         }},
         { "helm_ls", {
           capabilities = capabilities,
           on_attach = on_attach,
           filetypes = { "helm", "yaml" },
-        }},
-        { "graphql", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        }},
-        { "emmet_ls", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
         }},
         { "pyright", {
           capabilities = capabilities,
@@ -220,11 +220,6 @@ return {
           capabilities = capabilities,
           on_attach = on_attach,
         }},
-        { "jdtls", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          root_dir = vim.fs.root(0, {'gradlew', '.git', 'mvnw', 'pom.xml', 'build.gradle', 'build.sbt', 'build.sc'}),
-        }},
         { "gopls", {
           capabilities = capabilities,
           on_attach = on_attach,
@@ -248,6 +243,22 @@ return {
         vim.lsp.config(name, config)
         vim.lsp.enable(name)
       end
+
+      -- Disable LSP document_color on CSS-family buffers.
+      -- nvim-highlight-colors already renders inline color swatches client-side,
+      -- and the LSP feature re-runs on every BufEnter with each attached client
+      -- (cssls + tailwindcss = noticeable :bnext lag in stylesheet-heavy projects).
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("sspaeti_disable_lsp_doc_color", { clear = true }),
+        callback = function(args)
+          local ft = vim.bo[args.buf].filetype
+          if ft == "css" or ft == "scss" or ft == "sass" or ft == "less" then
+            if vim.lsp.document_color and vim.lsp.document_color.enable then
+              pcall(vim.lsp.document_color.enable, false, args.buf)
+            end
+          end
+        end,
+      })
 
     end,
 
