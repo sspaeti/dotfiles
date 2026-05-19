@@ -4,7 +4,7 @@ return
   -- event = "VeryLazy",
   lazy = false,
   priority = 1000,
-  tag = "0.1.5",
+  branch = "master",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     -- { "<leader>fT", "<cmd>Telescope resume<cr>", desc = "Resume Telescope" },
