@@ -103,3 +103,7 @@ export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@3
 
 # opencode
 export PATH=/home/sspaeti/.opencode/bin:$PATH
+
+export _ZO_MAXAGE=1000000  # 10x default, room for many dirs
+export _ZO_EXCLUDE_DIRS="$HOME/.cache/*:*/.git/*:*/node_modules/*:*/.venv/*:*/__pycache__/*:*/target/*:*/dist/*:*/build/*"
+
