@@ -3,11 +3,38 @@
 # Wrapper for omarchy-system-lock that skips locking 1Password.
 # Calls the original behavior except the "1password --lock" step.
 
-# Lock the screen
-pidof hyprlock || hyprlock &
+
+#!/bin/bash
+
+# omarchy:summary=Lock the computer and turn off the display
+# omarchy:group=system
+# omarchy:name=lock
+# omarchy:examples=omarchy system lock
+
+if ! pidof hyprlock >/dev/null; then
+  (
+    hyprlock
+    omarchy-system-wake
+  ) &
+fi
 
 # Set keyboard layout to default (first layout)
 hyprctl switchxkblayout all 0 > /dev/null 2>&1
 
+
+# # Ensure 1password is locked
+# if pgrep -x "1password" >/dev/null; then
+#   1password --lock &
+# fi
+
 # Avoid running screensaver when locked
 pkill -f org.omarchy.screensaver
+
+if [[ ${OMARCHY_LOCK_ONLY:-false} != "true" ]]; then
+  (
+    sleep 3
+    pidof hyprlock >/dev/null || exit 0
+    omarchy-brightness-keyboard off
+    omarchy-brightness-display off
+  ) &
+fi
