@@ -34,12 +34,30 @@ local function neomd_attach()
         vim.fn.delete(chooser)
         if not ok or not lines or #lines == 0 then return end
 
-        local inserts = {}
+        local inserts, skipped = {}, {}
         for _, path in ipairs(lines) do
           path = vim.trim(path)
           if path ~= "" then
-            table.insert(inserts, "[attach] " .. path)
+            -- Reject directories / missing paths. yazi's `open` writes the
+            -- *selected* file when --chooser-file is set, so a stray <Space>
+            -- (which is <leader> here, easy to mis-press in the terminal
+            -- window) can leave a directory in the chooser output. We filter
+            -- here so the user gets an immediate, visible warning instead of
+            -- silently planting `[attach] /some/dir` in the email buffer.
+            local stat = (vim.uv or vim.loop).fs_stat(path)
+            if stat and stat.type == "file" then
+              table.insert(inserts, "[attach] " .. path)
+            else
+              table.insert(skipped, path)
+            end
           end
+        end
+        if #skipped > 0 then
+          vim.notify(
+            "neomd: skipped " .. #skipped .. " invalid attachment path(s) (not a regular file):\n  " ..
+              table.concat(skipped, "\n  "),
+            vim.log.levels.WARN
+          )
         end
         if #inserts == 0 then return end
 
