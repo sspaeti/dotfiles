@@ -9,6 +9,7 @@ return {
         "vimdoc", "python", "markdown", "markdown_inline", "css", "html",
         "javascript", "yaml", "bash", "json", "lua", "regex", "sql",
         "toml", "vim", "rust", "glimmer",
+        "go", "gomod", "gosum", "gowork",
       })
 
       vim.api.nvim_create_autocmd("FileType", {
