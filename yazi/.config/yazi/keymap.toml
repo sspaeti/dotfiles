@@ -7,6 +7,8 @@ prepend_keymap = [
 	{ on = [ ",", "m" ], run = "sort mtime --reverse=yes", desc = "Sort by modified time (newest first)" },
 	# Sort by modified time (ascending = oldest first)
 	{ on = [ ",", "M" ], run = "sort mtime --reverse=no", desc = "Sort by modified time (oldest first)" },
+	# Copy hovered image to clipboard as PNG (works for webp, jpg, etc.)
+	{ on = [ "c", "i" ], run = '''shell 'magick "$1" png:- | wl-copy --type image/png' --confirm''', desc = "Copy image to clipboard" },
   # { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
 ]
 

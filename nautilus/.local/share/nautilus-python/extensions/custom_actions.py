@@ -1,5 +1,6 @@
 from gi.repository import Nautilus, GObject
 import subprocess
+import shlex
 import os
 
 
@@ -39,6 +40,15 @@ class CustomActions(GObject.GObject, Nautilus.MenuProvider):
         if paths:
             subprocess.Popen(['wl-copy', '\n'.join(paths)])
 
+    # --- Copy Image to Clipboard ---
+    def _copy_image_to_clipboard(self, _menu, files):
+        path = files[0].get_location().get_path()
+        if path:
+            subprocess.Popen(
+                f'magick {shlex.quote(path)} png:- | wl-copy --type image/png',
+                shell=True,
+            )
+
     def get_file_items(self, *args):
         files = args[0] if len(args) == 1 else args[1]
         if not files:
@@ -63,6 +73,11 @@ class CustomActions(GObject.GObject, Nautilus.MenuProvider):
         path_item = Nautilus.MenuItem(name='Custom::copy_path', label='Copy File Path', icon='edit-copy')
         path_item.connect('activate', self._copy_file_path, files)
         items.append(path_item)
+
+        if len(files) == 1 and (files[0].get_mime_type() or '').startswith('image/'):
+            img_item = Nautilus.MenuItem(name='Custom::copy_image', label='Copy Image to Clipboard', icon='edit-copy')
+            img_item.connect('activate', self._copy_image_to_clipboard, files)
+            items.append(img_item)
 
         return items
 
