@@ -7,6 +7,14 @@ return {
 		},
     config = function()
       require('aerial').setup({
+        -- Skip treesitter for SQL to avoid create_policy query error
+        -- See: https://github.com/stevearc/aerial.nvim/issues/506
+        backends = {
+          ["_"] = { "treesitter", "lsp", "markdown", "asciidoc", "man" },
+          sql = { "lsp" },
+          mysql = { "lsp" },
+          plsql = { "lsp" },
+        },
         on_attach = function(bufnr)
           -- Toggle the aerial window with <leader>a
           vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>o', '<cmd>AerialToggle!<CR>', {})
