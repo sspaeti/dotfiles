@@ -49,6 +49,23 @@ class CustomActions(GObject.GObject, Nautilus.MenuProvider):
                 shell=True,
             )
 
+    # --- Copy Image as WebP to Clipboard ---
+    def _copy_image_as_webp_to_clipboard(self, _menu, files):
+        path = files[0].get_location().get_path()
+        if not path:
+            return
+        tmp = '/tmp/nautilus-copy.webp'
+        # Convert synchronously (avoids pipe race when called from Nautilus context).
+        subprocess.run(
+            ['magick', path, '-quality', '80', '-define', 'webp:method=6', tmp],
+            check=False,
+        )
+        # wl-copy reads from a file (no pipe), forks to background to serve clipboard.
+        subprocess.Popen(
+            f'wl-copy --type image/webp < {shlex.quote(tmp)}',
+            shell=True,
+        )
+
     def get_file_items(self, *args):
         files = args[0] if len(args) == 1 else args[1]
         if not files:
@@ -78,6 +95,10 @@ class CustomActions(GObject.GObject, Nautilus.MenuProvider):
             img_item = Nautilus.MenuItem(name='Custom::copy_image', label='Copy Image to Clipboard', icon='edit-copy')
             img_item.connect('activate', self._copy_image_to_clipboard, files)
             items.append(img_item)
+
+            webp_item = Nautilus.MenuItem(name='Custom::copy_image_webp', label='Copy Image as WebP', icon='edit-copy')
+            webp_item.connect('activate', self._copy_image_as_webp_to_clipboard, files)
+            items.append(webp_item)
 
         return items
 

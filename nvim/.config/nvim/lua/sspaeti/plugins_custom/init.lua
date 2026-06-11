@@ -5,3 +5,5 @@ require("sspaeti.plugins_custom.todo_float").setup({
 
 
 require("sspaeti.plugins_custom.sql_runner")
+
+require("sspaeti.plugins_custom.image_paste")
