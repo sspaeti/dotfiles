@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=BEKB Banking
+Comment=BEKB Banking
+Exec=omarchy-launch-webapp https://banking.bekb.ch/
+Terminal=false
+Type=Application
+Icon=/home/sspaeti/.local/share/applications/icons/BEKB Banking.png
+StartupNotify=true
