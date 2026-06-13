@@ -9,6 +9,38 @@ auto_bcc = "simon.spaeti@gmail.com"
   password = "keyring"
   from = "Simon Späti <simu@sspaeti.com>"
   starttls = false
+  [accounts.signature_block]
+  text = """[html-signature]"""
+  html = """<table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; color: #2c3e50; margin-top: 24px; max-width: 600px;">
+    <tr>
+      <td style="padding-right: 18px; vertical-align: middle; width: 70px;">
+        <img src="https://www.ssp.sh/android-chrome-192x192.png" alt="SSP Data GmbH" width="70" height="70" style="display: block; border: 0; border-radius: 4px;">
+      </td>
+      <td style="border-left: 1px solid #d0d7de; padding-left: 18px; vertical-align: middle;">
+        <div style="margin-bottom: 6px;">
+          <strong style="font-size: 16px; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em;">Simon Späti</strong><br>
+          <span style="color: #57606a; font-size: 13px;">Data Engineer & Technical Author</span>
+        </div>
+        <div style="margin-bottom: 2px; font-size: 12.5px; line-height: 1.4;">
+          <span style="color: #656d76; font-weight: 500;">Connect:</span>
+          <a href="https://li.ssp.sh/" style="text-decoration: none; margin: 0 3px;">LinkedIn</a> ·
+          <a href="https://bs.ssp.sh/" style="text-decoration: none; margin: 0 3px;">Bluesky</a> ·
+          <a href="https://gh.ssp.sh/" style="text-decoration: none; margin: 0 3px;">GitHub</a>
+        </div>
+        <div style="margin-bottom: 6px; font-size: 12.5px; line-height: 1.4;">
+          <span style="color: #656d76; font-weight: 500;">Explore:</span>
+          <a href="https://ssp.sh/" style="text-decoration: none; margin: 0 3px;">Website</a> ·
+          <a href="https://vault.ssp.sh/" style="text-decoration: none; margin: 0 3px;">Vault</a> ·
+          <a href="https://dedp.online/" style="text-decoration: none; margin: 0 3px;">Book</a> ·
+          <a href="https://ssp.sh/services" style="text-decoration: none; margin: 0 3px;">Services</a>
+        </div>
+        <div style="font-size: 11px; color: #8c959f; font-style: italic; margin-top: 6px; padding-top: 6px; border-top: 1px solid #f0f3f6;">
+          sent from <a href="https://neomd.ssp.sh" style="color: #8c959f; text-decoration: none;">neomd</a>
+        </div>
+      </td>
+    </tr>
+  </table>"""
+
 
 [[accounts]]
   name = "Work"
@@ -19,6 +51,37 @@ auto_bcc = "simon.spaeti@gmail.com"
   password = "keyring"
   from = "Simon Späti <simon@ssp.sh>"
   starttls = false
+  [accounts.signature_block]
+  text = """[html-signature]"""
+  html = """<table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; color: #2c3e50; margin-top: 24px; max-width: 600px;">
+    <tr>
+      <td style="padding-right: 18px; vertical-align: middle; width: 70px;">
+        <img src="https://www.ssp.sh/android-chrome-192x192.png" alt="SSP Data GmbH" width="70" height="70" style="display: block; border: 0; border-radius: 4px;">
+      </td>
+      <td style="border-left: 1px solid #d0d7de; padding-left: 18px; vertical-align: middle;">
+        <div style="margin-bottom: 6px;">
+          <strong style="font-size: 16px; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em;">Simon Späti</strong><br>
+          <span style="color: #57606a; font-size: 13px;">Data Engineer & Technical Author, SSP Data GmbH</span>
+        </div>
+        <div style="margin-bottom: 2px; font-size: 12.5px; line-height: 1.4;">
+          <span style="color: #656d76; font-weight: 500;">Connect:</span>
+          <a href="https://li.ssp.sh/" style="text-decoration: none; margin: 0 3px;">LinkedIn</a> ·
+          <a href="https://bs.ssp.sh/" style="text-decoration: none; margin: 0 3px;">Bluesky</a> ·
+          <a href="https://gh.ssp.sh/" style="text-decoration: none; margin: 0 3px;">GitHub</a>
+        </div>
+        <div style="margin-bottom: 6px; font-size: 12.5px; line-height: 1.4;">
+          <span style="color: #656d76; font-weight: 500;">Explore:</span>
+          <a href="https://ssp.sh/" style="text-decoration: none; margin: 0 3px;">Website</a> ·
+          <a href="https://vault.ssp.sh/" style="text-decoration: none; margin: 0 3px;">Vault</a> ·
+          <a href="https://dedp.online/" style="text-decoration: none; margin: 0 3px;">Book</a> ·
+          <a href="https://ssp.sh/services" style="text-decoration: none; margin: 0 3px;">Services</a>
+        </div>
+        <div style="font-size: 11px; color: #8c959f; font-style: italic; margin-top: 6px; padding-top: 6px; border-top: 1px solid #f0f3f6;">
+          sent from <a href="https://neomd.ssp.sh" style="color: #8c959f; text-decoration: none;">neomd</a>
+        </div>
+      </td>
+    </tr>
+  </table>"""
 
 [[accounts]]
   name = "WorkInfo"
@@ -77,16 +140,8 @@ auto_bcc = "simon.spaeti@gmail.com"
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
   bg_sync_interval     = 2
 
-# [ui.signature_block]
-#   text = """**Simon Späti**
-# Data Engineer & Technical Author, SSP Data GmbH
 
-# Connect: [LinkedIn](https://li.ssp.sh/) | [Bluesky](https://bs.ssp.sh/) | [GitHub](https://gh.ssp.sh/)
-# Explore: [Website](https://ssp.sh/) | [Vault](https://vault.ssp.sh/) | [Book](https://dedp.online/) | [Services](https://ssp.sh/services)
 
-# *sent from [neomd](https://neomd.ssp.sh)*
-
-# [html-signature]"""
 
 [notifications]
 enabled  = true                     # opt-in; default off
@@ -94,39 +149,6 @@ command  = "notify-send"            # binary path; user may swap for "hyprctl"
 icon     = "mail-message-new"       # passed as --icon
 expire_ms = 15000                    # passed as -t
 folders  = ["Inbox", "PaperTrail"]                # only fire when message lands in one of these (default: Inbox only)
-
-[ui.signature_block]
-  text = """[html-signature]"""
-
-  html = """<table cellpadding="0" cellspacing="0" border="0" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 1.5; color: #2c3e50; margin-top: 24px; max-width: 600px;">
-  <tr>
-    <td style="padding-right: 18px; vertical-align: middle; width: 70px;">
-      <img src="https://www.ssp.sh/android-chrome-192x192.png" alt="SSP Data GmbH" width="70" height="70" style="display: block; border: 0; border-radius: 4px;">
-    </td>
-    <td style="border-left: 1px solid #d0d7de; padding-left: 18px; vertical-align: middle;">
-      <div style="margin-bottom: 6px;">
-        <strong style="font-size: 16px; font-weight: 600; color: #1a1a1a; letter-spacing: -0.01em;">Simon Späti</strong><br>
-        <span style="color: #57606a; font-size: 13px;">Data Engineer & Technical Author, SSP Data GmbH</span>
-      </div>
-      <div style="margin-bottom: 2px; font-size: 12.5px; line-height: 1.4;">
-        <span style="color: #656d76; font-weight: 500;">Connect:</span>
-        <a href="https://li.ssp.sh/" style="text-decoration: none; margin: 0 3px;">LinkedIn</a> ·
-        <a href="https://bs.ssp.sh/" style="text-decoration: none; margin: 0 3px;">Bluesky</a> ·
-        <a href="https://gh.ssp.sh/" style="text-decoration: none; margin: 0 3px;">GitHub</a>
-      </div>
-      <div style="margin-bottom: 6px; font-size: 12.5px; line-height: 1.4;">
-        <span style="color: #656d76; font-weight: 500;">Explore:</span>
-        <a href="https://ssp.sh/" style="text-decoration: none; margin: 0 3px;">Website</a> ·
-        <a href="https://vault.ssp.sh/" style="text-decoration: none; margin: 0 3px;">Vault</a> ·
-        <a href="https://dedp.online/" style="text-decoration: none; margin: 0 3px;">Book</a> ·
-        <a href="https://ssp.sh/services" style="text-decoration: none; margin: 0 3px;">Services</a>
-      </div>
-      <div style="font-size: 11px; color: #8c959f; font-style: italic; margin-top: 6px; padding-top: 6px; border-top: 1px solid #f0f3f6;">
-        sent from <a href="https://neomd.ssp.sh" style="color: #8c959f; text-decoration: none;">neomd</a>
-      </div>
-    </td>
-  </tr>
-</table>"""
 
 [listmonk]
 url = "https://list.ssp.sh"
