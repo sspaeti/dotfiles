@@ -1,7 +1,7 @@
 {
   "baseFontSize": 16,
-  "cssTheme": "Osaka Jade",
-  "theme": "moonstone",
+  "cssTheme": "Kanagawa",
+  "theme": "obsidian",
   "enabledCssSnippets": [
     "hide_file_in_filetree",
     "better_pdf",
