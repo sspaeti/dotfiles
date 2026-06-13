@@ -133,8 +133,8 @@ vim.keymap.set("n", "<leader>rw", ":%s/\\s\\+$//ge<CR>", { noremap = true, silen
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 
--- Toggle format on save (controls the LspFormatting augroup from none-ls)
-vim.g.format_on_save = false -- disabled by default
+-- Toggle format on save (read by conform.nvim and none-ls autocmds)
+vim.g.format_on_save = true -- enabled by default
 vim.keymap.set("n", "<Leader>lF", function()
   vim.g.format_on_save = not vim.g.format_on_save
   if vim.g.format_on_save then

@@ -17,41 +17,53 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      { "williamboman/mason.nvim", config = true },
+      "williamboman/mason-lspconfig.nvim",
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      "folke/neodev.nvim",
     },
     keys = {
-      { "K",          vim.lsp.buf.hover,                                    desc = "LSP Documentation Hover" },
-      { "gd",         vim.lsp.buf.definition,                               desc = "LSP Definition" },
-      { "gD",         vim.lsp.buf.declaration,                              desc = "LSP Declaration" },
-      { "gR",         vim.lsp.buf.references,                               desc = "LSP References" },
+      { "K", vim.lsp.buf.hover, desc = "LSP Documentation Hover" },
+      { "gd", vim.lsp.buf.definition, desc = "LSP Definition" },
+      { "gD", vim.lsp.buf.declaration, desc = "LSP Declaration" },
+      { "gR", vim.lsp.buf.references, desc = "LSP References" },
       -- defined in rempa.lua
       -- { "gr",         require("telescope.builtin").lsp_references,          desc = "Telescope LSP References" },
       -- { "so",         require("telescope.builtin").lsp_document_symbols,    desc = "Telescope LSP Document Symbols" },
-      { "gI",         vim.lsp.buf.implementation,                           desc = "LSP Implementation" },
-      { "gs",         vim.lsp.buf.signature_help,                           desc = "LSP Signature Help" },
+      { "gI", vim.lsp.buf.implementation, desc = "LSP Implementation" },
+      { "gs", vim.lsp.buf.signature_help, desc = "LSP Signature Help" },
       --{ "ga",         vim.lsp.buf.code_action,                              desc = "LSP Code Action" }, -- easy alignment
-      { "<Leader>la", vim.lsp.buf.code_action,                              desc = "LSP Code Action" },
-      { "<Leader>lf", vim.lsp.buf.format,                                   desc = "LSP Format" },
-      { "<Leader>lr", vim.lsp.buf.rename,                                   desc = "LSP Rename" },
-      { "<Leader>lc", function() vim.diagnostic.enable(false) end,            desc = "Diagnostic Disable" },
-      { "<Leader>le", function() vim.diagnostic.enable() end,               desc = "Diagnostic Enable" },
-      { "<leader>lo", vim.diagnostic.open_float,                            desc = "Diagnostic Open (Float)" },
-      { "<Leader>ln", vim.diagnostic.goto_next,                             desc = "Diagnostic Go To Next" },
-      { "]d",         vim.diagnostic.goto_next,                             desc = "Diagnostic Go To Next" },
-      { "]]",         vim.diagnostic.goto_next,                             desc = "Diagnostic Go To Next" },
-      { "<Leader>lp", vim.diagnostic.goto_prev,                             desc = "Diagnostic Go To Previous" },
-      { "[d",         vim.diagnostic.goto_prev,                             desc = "Diagnostic Go To Previous" },
-      { "[[",         vim.diagnostic.goto_prev,                             desc = "Diagnostic Go To Previous" },
-      { "<leader>lh", vim.lsp.buf.signature_help,                           desc = "LSP Signature Help" },
-      { "<leader>ls", ":LspRestart<CR>",                                                    desc = "LSP Restart" },
+      { "<Leader>la", vim.lsp.buf.code_action, desc = "LSP Code Action" },
+      { "<Leader>lf", vim.lsp.buf.format, desc = "LSP Format" },
+      { "<Leader>lr", vim.lsp.buf.rename, desc = "LSP Rename" },
+      {
+        "<Leader>lc",
+        function()
+          vim.diagnostic.enable(false)
+        end,
+        desc = "Diagnostic Disable",
+      },
+      {
+        "<Leader>le",
+        function()
+          vim.diagnostic.enable()
+        end,
+        desc = "Diagnostic Enable",
+      },
+      { "<leader>lo", vim.diagnostic.open_float, desc = "Diagnostic Open (Float)" },
+      { "<Leader>ln", vim.diagnostic.goto_next, desc = "Diagnostic Go To Next" },
+      { "]d", vim.diagnostic.goto_next, desc = "Diagnostic Go To Next" },
+      { "]]", vim.diagnostic.goto_next, desc = "Diagnostic Go To Next" },
+      { "<Leader>lp", vim.diagnostic.goto_prev, desc = "Diagnostic Go To Previous" },
+      { "[d", vim.diagnostic.goto_prev, desc = "Diagnostic Go To Previous" },
+      { "[[", vim.diagnostic.goto_prev, desc = "Diagnostic Go To Previous" },
+      { "<leader>lh", vim.lsp.buf.signature_help, desc = "LSP Signature Help" },
+      { "<leader>ls", ":LspRestart<CR>", desc = "LSP Restart" },
       --prime
       -- { "sC",         function() vim.lsp.buf.workspace_symbol() end,                        desc = "LSP Workspace Symbol" },
       -- { "<Leader>lw", function() vim.lsp.buf.workspace_symbol() end,                        desc = "LSP Workspace Symbol (Leader)" },
@@ -112,7 +124,6 @@ return {
 
         --vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         --vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
-
       end
 
       -- used to enable autocompletion (assign to every lsp server config)
@@ -135,105 +146,125 @@ return {
         { "html", {
           capabilities = capabilities,
           on_attach = on_attach,
-        }},
+        } },
         { "cssls", {
           capabilities = capabilities,
           on_attach = on_attach,
-        }},
-        { "tailwindcss", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          -- Only attach when the project actually has a Tailwind/PostCSS config.
-          -- Otherwise it's overhead on every CSS/SCSS/HTML buffer and shows up as
-          -- a document_color provider that re-runs on BufEnter (slow :bnext).
-          root_dir = function(bufnr, on_dir)
-            local fname = vim.api.nvim_buf_get_name(bufnr)
-            local root = vim.fs.root(fname, {
-              "tailwind.config.js",
-              "tailwind.config.cjs",
-              "tailwind.config.mjs",
-              "tailwind.config.ts",
-              "postcss.config.js",
-            })
-            if root then on_dir(root) end
-          end,
-        }},
-        { "helm_ls", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          filetypes = { "helm", "yaml" },
-        }},
+        } },
+        {
+          "tailwindcss",
+          {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            -- Only attach when the project actually has a Tailwind/PostCSS config.
+            -- Otherwise it's overhead on every CSS/SCSS/HTML buffer and shows up as
+            -- a document_color provider that re-runs on BufEnter (slow :bnext).
+            root_dir = function(bufnr, on_dir)
+              local fname = vim.api.nvim_buf_get_name(bufnr)
+              local root = vim.fs.root(fname, {
+                "tailwind.config.js",
+                "tailwind.config.cjs",
+                "tailwind.config.mjs",
+                "tailwind.config.ts",
+                "postcss.config.js",
+              })
+              if root then
+                on_dir(root)
+              end
+            end,
+          },
+        },
+        {
+          "helm_ls",
+          {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = { "helm", "yaml" },
+          },
+        },
         { "pyright", {
           capabilities = capabilities,
           on_attach = on_attach,
-        }},
-        { "ruff", {
-          capabilities = vim.tbl_deep_extend("force", capabilities, {
-            general = { positionEncodings = { "utf-16" } },
-          }),
-          on_attach = on_attach,
-          init_options = {
+        } },
+        {
+          "ruff",
+          {
+            capabilities = vim.tbl_deep_extend("force", capabilities, {
+              general = { positionEncodings = { "utf-16" } },
+            }),
+            on_attach = on_attach,
+            init_options = {
+              settings = {
+                args = {},
+              },
+            },
+          },
+        },
+        {
+          "lua_ls",
+          {
+            capabilities = capabilities,
+            on_attach = on_attach,
             settings = {
-              args = {},
-            }
-          }
-        }},
-        { "lua_ls", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          settings = {
-            Lua = {
-              format = {
-                enable = true,
-                defaultConfig = {
-                  indent_style = "space",
-                  indent_size = "2",
-                  align_continuous_assign_statement = false,
-                  align_continuous_rect_table_field = false,
-                  align_array_table = false
+              Lua = {
+                format = {
+                  enable = true,
+                  defaultConfig = {
+                    indent_style = "space",
+                    indent_size = "2",
+                    align_continuous_assign_statement = false,
+                    align_continuous_rect_table_field = false,
+                    align_array_table = false,
+                  },
                 },
-              },
-              diagnostics = {
-                globals = { "vim" },
-              },
-              workspace = {
-                library = {
-                  [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                  [vim.fn.stdpath("config") .. "/lua"] = true,
+                diagnostics = {
+                  globals = { "vim" },
+                },
+                workspace = {
+                  library = {
+                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.stdpath("config") .. "/lua"] = true,
+                  },
                 },
               },
             },
           },
-        }},
-        { "lemminx", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          settings = {
-            xml = {
-              server = {
-                workDir = "~/.cache/lemminx",
-              }
-            }
-          }
-        }},
+        },
+        {
+          "lemminx",
+          {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              xml = {
+                server = {
+                  workDir = "~/.cache/lemminx",
+                },
+              },
+            },
+          },
+        },
         { "bashls", {
           capabilities = capabilities,
           on_attach = on_attach,
-        }},
-        { "gopls", {
-          capabilities = capabilities,
-          on_attach = on_attach,
-          settings = {
-            gopls = {
-              analyses = {
-                unusedparams = true,
-                shadow = true,
+        } },
+        {
+          "gopls",
+          {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              gopls = {
+                analyses = {
+                  unusedparams = true,
+                  shadow = true,
+                },
+                staticcheck = true,
+                gofumpt = true, -- stricter formatting
               },
-              staticcheck = true,
-              gofumpt = true, -- stricter formatting
             },
           },
-        }},
+        },
       }
 
       -- Configure all servers using the new vim.lsp.config API
@@ -260,7 +291,8 @@ return {
         end,
       })
 
+      -- Format-on-save is handled by conform.nvim (see plugins/lsp/conform.lua).
+      -- It respects vim.g.format_on_save (toggle with <Leader>lF, see remap.lua).
     end,
-
-  }
+  },
 }
