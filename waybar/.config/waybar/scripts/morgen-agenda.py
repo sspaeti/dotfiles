@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import subprocess
+import time
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -13,10 +14,58 @@ ICON = "󰃭"
 ALLOWED = {"Personal", "Family", "Work"}
 DAYS_AHEAD = 7
 ANSI = re.compile(r"\x1b\[[0-9;]*m")
+MORGEN_WARMUP_SECS = 8
+CLI_RETRY_DELAY = 5
+CLI_MAX_ATTEMPTS = 2
 
 
 def emit(tooltip: str) -> None:
     print(json.dumps({"text": ICON, "tooltip": tooltip}))
+
+
+def is_morgen_running() -> bool:
+    try:
+        return subprocess.run(
+            ["pgrep", "-x", "morgen"],
+            capture_output=True, timeout=2,
+        ).returncode == 0
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return False
+
+
+def start_morgen() -> bool:
+    morgen = shutil.which("morgen")
+    if not morgen:
+        return False
+    try:
+        subprocess.Popen(
+            [morgen],
+            start_new_session=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL,
+        )
+        return True
+    except OSError:
+        return False
+
+
+def fetch_zsh_env_var(name: str) -> str | None:
+    # Waybar autostart from Hyprland doesn't source ~/.zshrc, so secrets
+    # exported there are missing. Pull the value via an interactive zsh.
+    if not shutil.which("zsh"):
+        return None
+    sentinel = "__MORGEN_VAR__"
+    cmd = f"printf '{sentinel}%s{sentinel}' \"${name}\""
+    try:
+        r = subprocess.run(
+            ["zsh", "-i", "-c", cmd],
+            capture_output=True, text=True, timeout=8,
+        )
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        return None
+    m = re.search(re.escape(sentinel) + r"(.*?)" + re.escape(sentinel), r.stdout, re.DOTALL)
+    return m.group(1) if m and m.group(1) else None
 
 
 def find_cli() -> str | None:
@@ -45,6 +94,10 @@ def run_cli() -> tuple[str, str, int] | None:
         str(Path.home() / ".local" / "bin"),
     ]
     env["PATH"] = ":".join(extra + [env.get("PATH", "")])
+    if not env.get("MORGEN_API_KEY"):
+        key = fetch_zsh_env_var("MORGEN_API_KEY")
+        if key:
+            env["MORGEN_API_KEY"] = key
     proc = subprocess.run(
         [cli, "le", "--all", "--start", start_iso, "--end", end_iso],
         capture_output=True, text=True, timeout=25, env=env,
@@ -112,10 +165,26 @@ def day_header(d: date, today: date) -> str:
 
 
 def main() -> None:
-    try:
-        result = run_cli()
-    except subprocess.TimeoutExpired:
-        emit("morgen-calendar timeout")
+    if not is_morgen_running():
+        if not start_morgen():
+            emit("Morgen app not found in PATH")
+            return
+        time.sleep(MORGEN_WARMUP_SECS)
+
+    result = None
+    timed_out = False
+    for attempt in range(CLI_MAX_ATTEMPTS):
+        if attempt > 0:
+            time.sleep(CLI_RETRY_DELAY)
+        try:
+            result = run_cli()
+            timed_out = False
+            break
+        except subprocess.TimeoutExpired:
+            timed_out = True
+
+    if timed_out:
+        emit("morgen-calendar timeout (Morgen still starting?)")
         return
     if result is None:
         emit("morgen-calendar not found in PATH or ~/.local/bin")
