@@ -134,7 +134,7 @@ vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 
 -- Toggle format on save (read by conform.nvim and none-ls autocmds)
-vim.g.format_on_save = true -- enabled by default
+vim.g.format_on_save = false -- enabled/disable with `<Leader>lF`
 vim.keymap.set("n", "<Leader>lF", function()
   vim.g.format_on_save = not vim.g.format_on_save
   if vim.g.format_on_save then

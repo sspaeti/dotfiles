@@ -32,6 +32,7 @@ return {
     -- Override built-in formatter args.
     -- stylua defaults to tabs; match the rest of the config (2-space indent — see set.lua).
     -- Per-project stylua.toml still takes precedence if present.
+    -- Change in `format_on_save` in remap.lua
     formatters = {
       stylua = {
         prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
