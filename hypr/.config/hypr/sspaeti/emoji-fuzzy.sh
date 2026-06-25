@@ -443,6 +443,7 @@ exit
 🏋️ person lifting weights sports training exercise
 🏋️‍♂️ man lifting weights sport
 🏋️‍♀️ woman lifting weights sports training exercise woman female
+🚲 bike red bicycle sports bicycle exercise hipster
 🚴 person biking sport move
 🚴‍♂️ man biking sports bike exercise hipster
 🚴‍♀️ woman biking sports bike exercise hipster woman female
@@ -857,7 +858,6 @@ exit
 🦽 manual wheelchair accessibility
 🦼 motorized wheelchair accessibility
 🛺 auto rickshaw move transportation
-🚲 bicycle sports bicycle exercise hipster
 🛴 kick scooter vehicle kick razor
 🛹 skateboard board
 🚏 bus stop transportation wait

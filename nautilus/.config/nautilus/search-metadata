@@ -1,3 +1,5 @@
 [directory]
-nautilus-icon-view-sort-by=date_modified
+nautilus-icon-view-sort-by=type
 nautilus-icon-view-sort-reversed=true
+nautilus-list-view-visible-columns=name;size;type;date_modified;
+nautilus-list-view-column-order=name;size;type;owner;group;permissions;date_modified;date_accessed;date_created;recency;detailed_type;
