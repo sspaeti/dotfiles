@@ -166,6 +166,22 @@ vim.api.nvim_set_keymap('v', '<leader>i', 'c*<C-r>"*<Esc>', {desc = "Italic Sele
 -- Links
 vim.api.nvim_set_keymap('n', '<leader>l', 'ciw[<C-r>"]()<Esc>T)i', {desc = "Link Word", noremap = true})
 vim.api.nvim_set_keymap('v', '<leader>l', 'c[<C-r>"]()<Esc>T)i', {desc = "Link Selection", noremap = true})
+
+-- gi: italic (mirrors Obsidian gl/gb/gh/gw shortcuts)
+vim.api.nvim_set_keymap('n', 'gi', 'ciw*<C-r>"*<Esc>', {desc = "Italic Word", noremap = true})
+vim.api.nvim_set_keymap('v', 'gi', 'c*<C-r>"*<Esc>', {desc = "Italic Selection", noremap = true})
+
+-- gb: bold
+vim.api.nvim_set_keymap('n', 'gb', 'ciw**<C-r>"**<Esc>', {desc = "Bold Word", noremap = true})
+vim.api.nvim_set_keymap('v', 'gb', 'c**<C-r>"**<Esc>', {desc = "Bold Selection", noremap = true})
+
+-- gh: highlight (==word==)
+vim.api.nvim_set_keymap('n', 'gh', 'ciw==<C-r>"==<Esc>', {desc = "Highlight Word", noremap = true})
+vim.api.nvim_set_keymap('v', 'gh', 'c==<C-r>"==<Esc>', {desc = "Highlight Selection", noremap = true})
+
+-- gw: wikilink ([[word]])
+vim.api.nvim_set_keymap('n', 'gw', 'ciw[[<C-r>"]]<Esc>', {desc = "Wikilink Word", noremap = true})
+vim.api.nvim_set_keymap('v', 'gw', 'c[[<C-r>"]]<Esc>', {desc = "Wikilink Selection", noremap = true})
 --End: Markdown
 
 -- Spell checker
