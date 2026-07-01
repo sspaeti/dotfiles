@@ -10,13 +10,13 @@ return {
           .. ".toggle_emphasis_visual'" .. key .. "'<CR>"
         end
 
-        --activate common macOS keybindings for Markdown
-        -- vim.keymap.set("x", "<M-b>", toggle("b"), { buffer = bufnr })
-        vim.keymap.set("x", "<M-i>", toggle("i"), { buffer = bufnr })
-        vim.keymap.set("x", "<M-u>", toggle("u"), { buffer = bufnr })
-        vim.keymap.set("x", "<M-b>", toggle("l"), { buffer = bufnr })
-        -- vim.keymap.set("x", "<0xa>", toggle("l"), { buffer = bufnr }) --link
-        vim.keymap.set("x", "<M-k>", toggle("l"), { buffer = bufnr }) --link TODO: Does not work
+        ----activate common macOS keybindings for Markdown
+        ---- vim.keymap.set("x", "<M-b>", toggle("b"), { buffer = bufnr })
+        --vim.keymap.set("x", "<M-i>", toggle("i"), { buffer = bufnr })
+        --vim.keymap.set("x", "<M-u>", toggle("u"), { buffer = bufnr })
+        --vim.keymap.set("x", "<M-b>", toggle("l"), { buffer = bufnr })
+        ---- vim.keymap.set("x", "<0xa>", toggle("l"), { buffer = bufnr }) --link
+        --vim.keymap.set("x", "<M-k>", toggle("l"), { buffer = bufnr }) --link TODO: Does not work
       end,
       -- Any other options you want to set can go here
     },
