@@ -91,6 +91,23 @@ nmap za :toggle_fold<CR>
 exmap close_others obcommand workspace:close-others
 nmap <Space>q :close_others<CR>
 
+
+" insert vim-like markup around word
+vmap gl "zs[<C-r>z]()<Esc>i
+nmap gl viw"zs[<C-r>z]()<Esc>i
+
+vmap gi "zs*<C-r>z*<Esc>
+nmap gi viw"zs*<C-r>z*<Esc>
+
+vmap gb "zs**<C-r>z**<Esc>
+nmap gb viw"zs**<C-r>z**<Esc>
+
+vmap gh "zs==<C-r>z==<Esc>
+nmap gh viw"zs==<C-r>z==<Esc>
+
+vmap gw "zs[[<C-r>z]]<Esc>
+nmap gw viw"zs[[<C-r>z]]<Esc>
+
 " Explorer/file tree (<leader>e)
 " exmap toggle_sidebar obcommand app:toggle-left-sidebar
 " nmap <Space>e :toggle_sidebar<CR>
