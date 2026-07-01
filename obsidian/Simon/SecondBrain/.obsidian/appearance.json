@@ -1,12 +1,13 @@
 {
   "baseFontSize": 16,
-  "cssTheme": "Kanagawa",
+  "cssTheme": "Obsidian gruvbox",
   "theme": "obsidian",
   "enabledCssSnippets": [
     "hide_file_in_filetree",
     "better_pdf",
     "mermaid",
-    "general"
+    "general",
+    "kill-animations"
   ],
   "translucency": false,
   "accentColor": "#658594",

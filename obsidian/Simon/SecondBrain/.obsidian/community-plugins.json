@@ -11,7 +11,6 @@
   "settings-search",
   "obsidian-style-settings",
   "tag-wrangler",
-  "dataview",
   "obsidian-advanced-uri",
   "numerals",
   "note-folder-autorename",
@@ -36,5 +35,7 @@
   "smart-connections",
   "better-export-pdf",
   "copy-url-in-preview",
-  "image-converter"
+  "image-converter",
+  "dataview",
+  "obsidian-excalidraw-plugin"
 ]
