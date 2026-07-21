@@ -2,4 +2,11 @@ git:
   pagers:
     - colorArg: always
       pager: delta --dark --paging=never
+      # pager: hunk pager
   overrideGpg: true
+customCommands:
+  - key: "H"
+    context: "files"
+    command: 'hunk diff -- "{{.SelectedFile.Name}}"'
+    description: "Open file in hunk diff viewer"
+    output: terminal

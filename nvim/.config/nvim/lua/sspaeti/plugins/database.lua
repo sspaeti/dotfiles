@@ -31,7 +31,7 @@ return {
       vim.g.dbs = {
         local_postgres_postgres = 'postgres://postgres@localhost:5432/postgres',
         duckdb_memory = 'duckdb:',
-        duckdb_file = 'duckdb:///tmp/analytics.duckdb',
+        duckdb_file = 'duckdb:///home/sspaeti/Documents/sandbox/duckdbs/default-nvim.duckdb',
       }
 
       vim.g.db_ui_execute_on_save = 0 --do not execute on save

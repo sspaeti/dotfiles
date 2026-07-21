@@ -4,6 +4,7 @@ local PRESETS = {
 	blog = { ext = "webp", args = "-resize '1600x1600>' -quality 75 -define webp:method=6" },
 	webp = { ext = "webp", args = "-quality 80 -define webp:method=6" },
 	jpeg = { ext = "jpg", args = "-strip -interlace Plane -sampling-factor 4:2:0 -quality 82" },
+	lossless = { ext = "webp", args = "-quality 100 -define webp:lossless=true -define webp:method=6" },
 }
 
 -- Returns { kind = "path", path = "/abs/path" } or { kind = "bytes", mime = "image/png" } or nil.
@@ -85,5 +86,8 @@ end, { desc = "Paste image: WebP same size (q80)" })
 vim.keymap.set("n", "<leader>iaj", function()
 	paste("jpeg")
 end, { desc = "Paste image: JPEG compressed (q82 progressive)" })
+vim.keymap.set("n", "<leader>ial", function()
+	paste("lossless")
+end, { desc = "Paste image: WebP lossless 100% (no compression, no resize)" })
 
 return M
