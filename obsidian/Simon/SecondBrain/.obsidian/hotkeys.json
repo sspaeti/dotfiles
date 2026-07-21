@@ -461,15 +461,6 @@
       "key": ";"
     }
   ],
-  "editor:toggle-highlight": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "H"
-    }
-  ],
   "file-explorer:new-file": [],
   "obsidian-auto-link-title-fixed:enhance-url-with-title": []
 }
