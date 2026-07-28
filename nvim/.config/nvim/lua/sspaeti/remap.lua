@@ -133,6 +133,9 @@ vim.keymap.set("n", "<leader>rw", ":%s/\\s\\+$//ge<CR>", { noremap = true, silen
 vim.keymap.set("n", "<Leader>li", ":Mason<CR>")
 vim.keymap.set("n", "<Leader>ll", ":Lazy<CR>")
 
+-- Format JSON with jq (see :Formatj in set.lua)
+vim.keymap.set("n", "<Leader>ljq", "<cmd>Formatj<cr>", { desc = "Format JSON (jq)" })
+
 -- Toggle format on save (read by conform.nvim and none-ls autocmds)
 vim.g.format_on_save = false -- enabled/disable with `<Leader>lF`
 vim.keymap.set("n", "<Leader>lF", function()
