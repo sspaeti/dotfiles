@@ -72,3 +72,10 @@ Iosevka Etoile offers:
 - Elegant aesthetic while maintaining technical requirements
 
 Alternative would be **Iosekvka Aile**.
+
+## Using it on my Micro Journal
+
+![image](images/my-micro-jounral.webp)
+
+More images, galleries and posts at [My Distraction-Free Typewriter (Micro Journal)](https://www.ssp.sh/brain/my-distraction-free-typewriter-micro-journal).
+
