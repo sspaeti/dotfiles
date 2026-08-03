@@ -1,11 +1,14 @@
+apfs-fuse-git-debug
 brave-bin
 brother-dcpl2550dn
 brother-mfc-l3760cdw
 circumflex
 claude-desktop-native
 clipse
-duckdb-bin
+defuddle
+diff2html-cli
 editt-bin
+electron34
 ente-auth-bin
 filen-desktop-bin
 himalaya-git
@@ -15,6 +18,8 @@ kanata-bin
 morgen-bin
 ocrmypdf
 otf-metropolis
+pi-coding-agent
+python-fpdf2
 python-hijridate
 python-jalali-core
 python-jdatetime
@@ -27,6 +32,7 @@ tuxedo-drivers-dkms
 tuxedo-yt6801-dkms-git
 vencord
 vesktop
+waycal
 zen-browser-bin
 zotero-bin
 zsh-theme-powerlevel10k-git
