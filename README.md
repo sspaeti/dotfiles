@@ -39,7 +39,7 @@ I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-o
 
 - `SUPER+1`: Terminal for coding
 - `SUPER+2`: Browser for research and browsing needs
-- `Alt+3`: Obsidian for notes, thinking, writing, and my [Second Brain](https://www.ssp.sh/brain/) ([GitHub](https://github.com/sspaeti/second-brain-public))
+- `SUPER+3`: Obsidian for notes, thinking, writing, and my [Second Brain](https://www.ssp.sh/brain/) ([GitHub](https://github.com/sspaeti/second-brain-public))
 - `SUPER+4`: Music, featuring Spotify and Focus@Will for all things auditory
 - `SUPER+5`: Collaboration tools like Slack, Asana, Nirvana, and my to-do lists
 - `SUPER+6`: Extra (when laptop screen is open): Additional screens for meetings with Zoom, etc.
