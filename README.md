@@ -7,7 +7,6 @@ The dotfile here are fine-tuned to create an environment that's efficient for me
 
 ![Neovim, Tmux, and Kitty](_images/nvim_tmux_220701.png)
 
-
 ## Key Components
 - **OS** Linux with [Omarchy](https://omarchy.org) (since July 2025, before macOS)
 - **Window Manager** [Hyprland](https://hypr.land/) (before `skhd` and `yabai`)
@@ -44,6 +43,9 @@ I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-o
 - `SUPER+5`: Collaboration tools like Slack, Asana, Nirvana, and my to-do lists
 - `SUPER+6`: Extra (when laptop screen is open): Additional screens for meetings with Zoom, etc.
 - `SUPER+7`: Extra (when laptop screen is open)
+
+> [!NOTE]
+> Find the latest, more updated shortcuts and more information at [Computer Desk Setup, Monitor & Developer Workflow: Shortcuts for Virtual Desktops](https://www.ssp.sh/brain/computer-desk-setup-monitor-workflow#shortcuts-for-virtual-desktops)
 
 ## [Obsidian](https://www.ssp.sh/brain/obsidian) 
 
