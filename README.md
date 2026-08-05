@@ -37,13 +37,13 @@ In one screen:
 
 I have tried [many setups](https://www.ssp.sh/brain/computer-desk-setup-todays-office/), a single-screen (or one extra for meetings) has worked best with these shorcuts to switch betweent them instantly:
 
-- `Alt+1`: Terminal for coding
-- `Alt+2`: Browser for research and browsing needs
+- `SUPER+1`: Terminal for coding
+- `SUPER+2`: Browser for research and browsing needs
 - `Alt+3`: Obsidian for notes, thinking, writing, and my [Second Brain](https://www.ssp.sh/brain/) ([GitHub](https://github.com/sspaeti/second-brain-public))
-- `Alt+4`: Music, featuring Spotify and Focus@Will for all things auditory
-- `Alt+5`: Collaboration tools like Slack, Asana, Nirvana, and my to-do lists
-- `Alt+6`: Extra (when laptop screen is open): Additional screens for meetings with Zoom, etc.
-- `Alt+7`: Extra (when laptop screen is open)
+- `SUPER+4`: Music, featuring Spotify and Focus@Will for all things auditory
+- `SUPER+5`: Collaboration tools like Slack, Asana, Nirvana, and my to-do lists
+- `SUPER+6`: Extra (when laptop screen is open): Additional screens for meetings with Zoom, etc.
+- `SUPER+7`: Extra (when laptop screen is open)
 
 ## [Obsidian](https://www.ssp.sh/brain/obsidian) 
 
