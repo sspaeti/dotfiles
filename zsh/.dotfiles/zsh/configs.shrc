@@ -43,6 +43,10 @@ bindkey -M viins 'kj' vi-cmd-mode
 export GRADLE_OPTS="-Dorg.gradle.workers.max=6"
 
 # zoxide is a smarter cd command, inspired by z and autojump.
+# Exclude /mnt/* (UGREEN NAS autofs, s3fs, T7): zoxide stat-checks every entry
+# for existence (e.g. yazi's `Z` interactive picker), and an unreachable autofs
+# mount blocks in autofs_wait for ~80s. Excluding filters them before the stat.
+export _ZO_EXCLUDE_DIRS="/mnt/*"
 source ~/.dotfiles/zsh/zoxide.sh
 eval "$(zoxide init zsh)"
 export PATH=~/.dotfiles/helpers/bin:$PATH
