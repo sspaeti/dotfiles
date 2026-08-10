@@ -1,5 +1,5 @@
 [directory]
-nautilus-icon-view-sort-by=type
-nautilus-icon-view-sort-reversed=true
+nautilus-icon-view-sort-by=name
+nautilus-icon-view-sort-reversed=false
 nautilus-list-view-visible-columns=name;size;type;date_modified;
 nautilus-list-view-column-order=name;size;type;owner;group;permissions;date_modified;date_accessed;date_created;recency;detailed_type;
