@@ -166,8 +166,11 @@ alias rss-vacuum='newsboat --vacuum'
 alias mscreener="~/.config/mutt/initial_screening.sh >> ~/.config/mutt/logs/screening.log 2>&1"
 alias msync="offlineimap -a sspaeti.com"
 
-# Omarchy / hyprland
-alias gpu-check="~/.config/hypr/sspaeti/gpu-health-check"
+# Omarchy / hyprland - GPU crash toolkit (see troubleshoot.md)
+alias gpu-check="~/.config/hypr/sspaeti/gpu-checks/gpu-health-check"
+alias gpu-stress="~/.config/hypr/sspaeti/gpu-checks/gpu-stress"
+alias gpu-stack-changed="~/.config/hypr/sspaeti/gpu-checks/gpu-stack-changed"
+alias kernel-rollback="~/.config/hypr/sspaeti/gpu-checks/kernel-rollback"
 
 alias cx=claude
 alias cl=claude

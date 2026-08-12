@@ -1,0 +1,28 @@
+#!/bin/bash
+# gpu-session-check - one-shot GPU sanity check at session start.
+#
+# Runs once, exits. No background process, no journal following.
+#
+# Silent when everything is fine. Notifies only when there is something to act
+# on: GPU already degraded this boot, or the GPU stack was updated and is
+# unproven. Called from ~/.config/hypr/autostart.conf.
+
+set -uo pipefail
+
+DIR="$(dirname "$(readlink -f "$0")")"
+
+# Let the session settle so mako is up to receive notifications.
+sleep 20
+
+# 1. Is the GPU already degraded this boot? (catches the Jan-21 pattern:
+#    VPE/IB test failures at init, fatal crash ~1h later)
+if ! out=$("$DIR/gpu-health-check" 2>&1); then
+  notify-send -u critical -t 0 -a gpu-guard \
+    "GPU already degraded this boot" \
+    "$(printf '%s' "$out" | sed 's/\x1b\[[0-9;]*m//g' | grep -E '^\[(WARN|FAIL)\]' | head -4)
+
+Reboot before heavy GPU work." 2>/dev/null
+fi
+
+# 2. Did the GPU stack change since the last proven run?
+"$DIR/gpu-stack-changed" --notify >/dev/null 2>&1 || true

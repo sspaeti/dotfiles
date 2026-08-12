@@ -24,7 +24,10 @@ else
 fi
 
 # Check MES errors specifically (early warning before full crash)
-mes_count=$(journalctl -b -k --no-pager 2>/dev/null | grep -c "MES")
+# Match MES *failures* only. Plain "MES" also hits two benign init lines
+# ("MES: vmid_mask_mmhub ...", "MES: gfx_hqd_mask ...") present on every boot,
+# which made this warn 100% of the time.
+mes_count=$(journalctl -b -k --no-pager 2>/dev/null | grep -cE "MES failed|MES ring buffer|reset via MES failed|failed to (unmap|reset) legacy queue")
 if [ "$mes_count" -gt 0 ]; then
     echo -e "${RED}[WARN]${NC} MES errors this boot: ${mes_count} (crash imminent, reboot NOW)"
     warn=1
@@ -85,3 +88,6 @@ if [ "$warn" -eq 0 ]; then
 else
     echo -e "${RED}GPU may be unstable - consider rebooting${NC}"
 fi
+
+# Exit code so callers (gpu-session-check, scripts) can act on the result
+exit "$warn"

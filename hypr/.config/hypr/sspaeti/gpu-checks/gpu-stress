@@ -1,0 +1,103 @@
+#!/bin/bash
+# gpu-stress - deliberately provoke the gfx1150 MES failure, on your terms.
+#
+# Your crashes are queue-lifecycle failures (MES RESET / REMOVE_QUEUE) triggered
+# by Chromium-family apps creating and tearing down GPU contexts. So this churns
+# short-lived Vulkan contexts rather than running one long cube, then diffs the
+# kernel log for amdgpu errors.
+#
+# WARNING: if the GPU is unstable this can hang the session. That is the point --
+# it fails now, while you are watching, instead of mid-meeting. Save work first.
+#
+#   gpu-stress            -> 120s churn
+#   gpu-stress 300        -> 300s churn
+#   gpu-stress 120 8      -> 120s, 8 concurrent contexts
+
+set -uo pipefail
+
+DURATION=${1:-120}
+CONCURRENCY=${2:-6}
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+PATTERN='ring gfx_0\.0\.0 timeout|MES failed to respond|device wedged|Ring .* reset failed|failed to reset legacy queue|pipe reset|IB test failed|VPE queue reset failed|amdgpu.*page fault|GPU reset'
+
+command -v vkcube >/dev/null || {
+  echo "vkcube missing. Install: sudo pacman -S vulkan-tools"
+  exit 1
+}
+
+echo "GPU Stress Test"
+echo "==============="
+echo "Duration:    ${DURATION}s"
+echo "Concurrency: ${CONCURRENCY} churning Vulkan contexts"
+echo "GPU stack:"
+pacman -Q linux mesa vulkan-radeon linux-firmware-amdgpu 2>/dev/null | sed 's/^/  /'
+echo
+echo -e "${YELLOW}Save your work. Ctrl-C to abort.${NC}"
+echo
+
+START=$(date '+%Y-%m-%d %H:%M:%S')
+sleep 3
+
+pids=()
+cleanup() {
+  for p in "${pids[@]}"; do kill "$p" 2>/dev/null; done
+  pkill -x vkcube 2>/dev/null
+  wait 2>/dev/null
+}
+trap cleanup EXIT INT TERM
+
+# Each worker repeatedly spawns a short-lived context, so MES sees a constant
+# stream of queue create/destroy -- the path that fails in every crash log.
+churn() {
+  local deadline=$((SECONDS + DURATION))
+  while ((SECONDS < deadline)); do
+    vkcube --c 90 --suppress_popups >/dev/null 2>&1
+  done
+}
+
+for ((i = 0; i < CONCURRENCY; i++)); do
+  churn &
+  pids+=($!)
+done
+
+# Progress + live abort if the kernel starts complaining.
+elapsed=0
+tripped=0
+while ((elapsed < DURATION)); do
+  sleep 5
+  elapsed=$((elapsed + 5))
+  if journalctl -k --since "$START" --no-pager 2>/dev/null | grep -qE "$PATTERN"; then
+    tripped=1
+    echo -e "\n${RED}GPU error detected at ${elapsed}s - stopping early${NC}"
+    break
+  fi
+  printf '\r  running... %ss/%ss' "$elapsed" "$DURATION"
+done
+echo
+
+cleanup
+trap - EXIT INT TERM
+sleep 3
+
+ERRORS=$(journalctl -k --since "$START" --no-pager 2>/dev/null | grep -E "$PATTERN")
+
+echo
+if [[ -z $ERRORS && $tripped -eq 0 ]]; then
+  echo -e "${GREEN}PASS${NC} - no amdgpu errors during ${DURATION}s of context churn."
+  echo
+  echo "Not a clean bill of health: 5 of your 6 logged crashes also passed a"
+  echo "clean boot and died later under real browser load. Treat as 'no obvious"
+  echo "regression', then mark it: gpu-stack-changed --ack"
+  exit 0
+fi
+
+echo -e "${RED}FAIL${NC} - amdgpu errors during stress:"
+printf '%s\n' "$ERRORS" | sed 's/^/  /'
+echo
+echo -e "${YELLOW}This kernel/mesa combination is unstable. Reboot and roll back.${NC}"
+exit 1

@@ -1,0 +1,204 @@
+#!/bin/bash
+# kernel-rollback - drop back to a known-good cached kernel and rebuild the UKI.
+#
+# For when a kernel update brings the amdgpu MES crashes back (see troubleshoot.md).
+# Downgrades linux AND linux-headers together from /var/cache/pacman/pkg, then
+# regenerates the limine UKI. Nothing is downloaded; cache only.
+#
+#   kernel-rollback              -> roll back to the default known-good version
+#   kernel-rollback --list       -> show cached kernels that have matching headers
+#   kernel-rollback --to 7.0.3.arch1-2
+#   kernel-rollback --pin        -> also add IgnorePkg so -Syu won't undo it
+#   kernel-rollback --unpin      -> remove the IgnorePkg entry
+#   kernel-rollback --yes        -> skip the confirmation prompt
+#
+# Reboot afterwards. Until you do, the running kernel's modules may be gone, so
+# loading a module that is not already loaded will fail.
+
+set -uo pipefail
+
+# Last version with no MES failures across 3 weeks of uptime (boots -9..-2,
+# Jul 22 - Aug 12 2026). 7.1.4 crashed 22 minutes into its first boot.
+DEFAULT_TARGET="7.0.10.arch1-1"
+
+CACHE=/var/cache/pacman/pkg
+PACMAN_CONF=/etc/pacman.conf
+UKI=/boot/EFI/Linux/omarchy_linux.efi
+PIN_PKGS="linux linux-headers"
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+TARGET=$DEFAULT_TARGET
+ASSUME_YES=0
+DO_PIN=0
+
+die() {
+  echo -e "${RED}error:${NC} $*" >&2
+  exit 1
+}
+
+list_cached() {
+  local running installed v mark
+  running=$(uname -r)
+  installed=$(pacman -Q linux 2>/dev/null | awk '{print $2}')
+  echo "Cached kernels with matching headers:"
+  for f in "$CACHE"/linux-[0-9]*.pkg.tar.zst; do
+    [[ -e $f ]] || continue
+    v=$(basename "$f")
+    v=${v#linux-}
+    v=${v%-x86_64.pkg.tar.zst}
+    [[ -e "$CACHE/linux-headers-$v-x86_64.pkg.tar.zst" ]] || continue
+    mark=""
+    [[ $v == "$installed" ]] && mark="$mark ${GREEN}(installed)${NC}"
+    [[ ${v%.arch*} == "${running%-arch*}" ]] && mark="$mark ${BLUE}(running)${NC}"
+    [[ $v == "$DEFAULT_TARGET" ]] && mark="$mark ${YELLOW}(default target)${NC}"
+    echo -e "  $v$mark"
+  done
+}
+
+pin() {
+  if grep -qE "^[[:space:]]*IgnorePkg[[:space:]]*=.*(^|[[:space:]])linux([[:space:]]|$)" "$PACMAN_CONF"; then
+    echo -e "${GREEN}[OK]${NC} linux already pinned in $PACMAN_CONF"
+    return
+  fi
+  echo -e "${BLUE}==>${NC} Pinning $PIN_PKGS in $PACMAN_CONF"
+  if grep -qE "^[[:space:]]*IgnorePkg[[:space:]]*=" "$PACMAN_CONF"; then
+    # Append to the first active IgnorePkg line.
+    sudo sed -i -E "0,/^[[:space:]]*IgnorePkg[[:space:]]*=.*/s//& $PIN_PKGS/" "$PACMAN_CONF" ||
+      die "failed to update IgnorePkg"
+  else
+    # No active line: insert one above the commented template.
+    sudo sed -i -E "0,/^#IgnorePkg/s//IgnorePkg = $PIN_PKGS\n&/" "$PACMAN_CONF" ||
+      die "failed to add IgnorePkg"
+  fi
+  grep -nE "^[[:space:]]*IgnorePkg" "$PACMAN_CONF" | sed 's/^/  /'
+  echo -e "${YELLOW}note:${NC} pacman -Syu now skips kernel updates until you run --unpin"
+}
+
+unpin() {
+  if ! grep -qE "^[[:space:]]*IgnorePkg[[:space:]]*=.*linux" "$PACMAN_CONF"; then
+    echo "linux is not pinned."
+    return
+  fi
+  sudo sed -i -E \
+    -e "/^[[:space:]]*IgnorePkg[[:space:]]*=/ s/[[:space:]]+linux-headers([[:space:]]|$)/\1/g" \
+    -e "/^[[:space:]]*IgnorePkg[[:space:]]*=/ s/[[:space:]]+linux([[:space:]]|$)/\1/g" \
+    -e "/^[[:space:]]*IgnorePkg[[:space:]]*=/ s/[[:space:]]+$//" \
+    "$PACMAN_CONF" || die "failed to edit $PACMAN_CONF"
+  # Drop the line entirely if nothing is left on it.
+  sudo sed -i -E "/^[[:space:]]*IgnorePkg[[:space:]]*=[[:space:]]*$/d" "$PACMAN_CONF"
+  echo -e "${GREEN}[OK]${NC} unpinned. Remaining IgnorePkg lines:"
+  grep -nE "^[[:space:]]*IgnorePkg" "$PACMAN_CONF" | sed 's/^/  /' || echo "  (none)"
+}
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+  --list)
+    list_cached
+    exit 0
+    ;;
+  --to)
+    TARGET=${2:-}
+    [[ -n $TARGET ]] || die "--to needs a version, e.g. --to 7.0.10.arch1-1"
+    shift 2
+    ;;
+  --pin)
+    DO_PIN=1
+    shift
+    ;;
+  --unpin)
+    unpin
+    exit 0
+    ;;
+  --yes | -y)
+    ASSUME_YES=1
+    shift
+    ;;
+  -h | --help)
+    # Print the leading comment block (everything after the shebang until the
+    # first non-comment line), stripped of the leading '#'.
+    awk 'NR==1 {next} /^#/ {sub(/^# ?/, ""); print; next} {exit}' "$0"
+    exit 0
+    ;;
+  *) die "unknown argument: $1 (try --help)" ;;
+  esac
+done
+
+KPKG="$CACHE/linux-$TARGET-x86_64.pkg.tar.zst"
+HPKG="$CACHE/linux-headers-$TARGET-x86_64.pkg.tar.zst"
+
+if [[ ! -f $KPKG ]]; then
+  echo -e "${RED}error:${NC} not in cache: $KPKG" >&2
+  echo >&2
+  list_cached >&2
+  exit 1
+fi
+[[ -f $HPKG ]] || die "headers not in cache: $HPKG (would leave a version mismatch)"
+
+CUR_K=$(pacman -Q linux 2>/dev/null | awk '{print $2}')
+CUR_H=$(pacman -Q linux-headers 2>/dev/null | awk '{print $2}')
+
+echo "Kernel rollback"
+echo "==============="
+echo "  running:       $(uname -r)"
+echo "  linux:         $CUR_K  ->  $TARGET"
+echo "  linux-headers: $CUR_H  ->  $TARGET"
+echo
+
+if [[ $CUR_K == "$TARGET" && $CUR_H == "$TARGET" ]]; then
+  echo -e "${GREEN}Already on $TARGET.${NC} Rebuilding UKI only."
+else
+  if [[ $ASSUME_YES -eq 0 ]]; then
+    read -rp "Proceed? [y/N] " ans
+    [[ ${ans,,} == y* ]] || {
+      echo "Aborted."
+      exit 1
+    }
+  fi
+  echo -e "${BLUE}==>${NC} Installing cached packages"
+  # Both in one transaction so linux/linux-headers never drift apart.
+  sudo pacman -U --noconfirm "$KPKG" "$HPKG" || die "pacman -U failed"
+fi
+
+# The pacman hook normally rebuilds the UKI already; run it explicitly so this
+# also fixes the case where only the UKI is stale.
+echo -e "${BLUE}==>${NC} Regenerating UKI (limine-mkinitcpio)"
+BEFORE=$(stat -c %Y "$UKI" 2>/dev/null || echo 0)
+sudo limine-mkinitcpio || die "limine-mkinitcpio failed - DO NOT REBOOT, fix this first"
+AFTER=$(stat -c %Y "$UKI" 2>/dev/null || echo 0)
+
+echo
+if [[ $AFTER -gt $BEFORE ]]; then
+  echo -e "${GREEN}[OK]${NC} UKI rebuilt: $(date -d "@$AFTER" '+%Y-%m-%d %H:%M:%S')"
+else
+  echo -e "${YELLOW}[WARN]${NC} UKI timestamp unchanged - verify before rebooting:"
+  echo "       ls -la $UKI"
+fi
+
+echo -e "${GREEN}[OK]${NC} linux $(pacman -Q linux | awk '{print $2}') / linux-headers $(pacman -Q linux-headers | awk '{print $2}')"
+
+# Out-of-tree modules must be rebuilt against the target kernel or they vanish
+# silently after reboot.
+if command -v dkms >/dev/null && [[ -n $(dkms status 2>/dev/null) ]]; then
+  echo
+  echo "DKMS status:"
+  dkms status 2>/dev/null | sed 's/^/  /'
+  if ! dkms status 2>/dev/null | grep -q "${TARGET%.arch*}"; then
+    echo -e "${YELLOW}[WARN]${NC} no DKMS modules built for $TARGET. Rebuild with:"
+    echo "       sudo dkms autoinstall -k ${TARGET%-*}"
+  fi
+fi
+
+if [[ $DO_PIN -eq 1 ]]; then
+  echo
+  pin
+fi
+
+echo
+echo -e "${YELLOW}Reboot now.${NC} After reboot:"
+echo "  uname -r      # expect ${TARGET%.arch*}"
+echo "  gpu-check     # confirm clean GPU init"

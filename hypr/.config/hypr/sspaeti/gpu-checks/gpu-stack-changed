@@ -1,0 +1,61 @@
+#!/bin/bash
+# gpu-stack-changed - has the GPU-relevant package set changed since last ack?
+#
+# Every one of the recorded crashes followed a kernel/mesa/firmware bump. This
+# does not test the GPU; it tells you *when* the GPU stack is unproven, so you
+# can run gpu-stress at a moment you can afford to lose the session.
+#
+#   gpu-stack-changed          -> print status, exit 1 if changed
+#   gpu-stack-changed --notify -> also send a desktop notification if changed
+#   gpu-stack-changed --ack    -> mark current stack as proven
+
+set -uo pipefail
+
+PKGS=(linux linux-lts mesa vulkan-radeon linux-firmware-amdgpu hyprland)
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/gpu-guard"
+PROVEN="$STATE_DIR/proven-stack"
+
+mkdir -p "$STATE_DIR"
+
+current_stack() {
+  # Missing packages are skipped rather than erroring, so linux-lts is optional.
+  pacman -Q "${PKGS[@]}" 2>/dev/null | sort
+}
+
+CURRENT=$(current_stack)
+
+case "${1:-}" in
+--ack)
+  printf '%s\n' "$CURRENT" >"$PROVEN"
+  echo "Marked current GPU stack as proven:"
+  printf '%s\n' "$CURRENT" | sed 's/^/  /'
+  exit 0
+  ;;
+esac
+
+if [[ ! -f $PROVEN ]]; then
+  echo "No proven stack recorded yet. Run: gpu-stress, then gpu-stack-changed --ack"
+  exit 1
+fi
+
+DIFF=$(diff <(cat "$PROVEN") <(printf '%s\n' "$CURRENT") | grep -E '^>' | sed 's/^> /  /')
+
+if [[ -z $DIFF ]]; then
+  echo "GPU stack unchanged since last proven run."
+  exit 0
+fi
+
+echo "GPU stack CHANGED since last proven run:"
+printf '%s\n' "$DIFF"
+echo
+echo "Run 'gpu-stress' when you can afford a hang, then 'gpu-stack-changed --ack'."
+
+if [[ ${1:-} == --notify ]]; then
+  notify-send -u normal -t 15000 -a gpu-guard \
+    "GPU stack updated" \
+    "$(printf '%s' "$DIFF" | sed 's/^ *//')
+
+Untested. Run gpu-stress before heavy GPU work." 2>/dev/null
+fi
+
+exit 1
