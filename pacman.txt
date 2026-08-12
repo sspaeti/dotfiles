@@ -248,6 +248,7 @@ w3m
 walker
 waybar
 wget
+whisper-cpp
 whois
 wireless_tools
 wiremix

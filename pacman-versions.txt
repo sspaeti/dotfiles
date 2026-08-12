@@ -248,6 +248,7 @@ w3m 0.5.6-1
 walker 2.16.2-1
 waybar 0.15.0-2
 wget 1.25.0-5
+whisper-cpp 1.9.1-1
 whois 5.6.6-1
 wireless_tools 30.pre9-5
 wiremix 0.10.0-1

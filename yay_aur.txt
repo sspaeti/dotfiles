@@ -17,6 +17,8 @@ jdk
 kanata-bin
 morgen-bin
 ocrmypdf
+omapic
+omapic-debug
 otf-metropolis
 pi-coding-agent
 python-fpdf2
