@@ -55,7 +55,10 @@ export HYPRRC=~/.config/hypr/hyprland.conf
 # Omarchy (Arch Linux) paths - Set complete path
 export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omarchy/bin:$PATH"
 set +h
-export OMARCHY_SCREENSHOT_DIR=~/Pictures/Satty
+# Screenshots land here, then image-browser/auto-organize-screenshot.sh moves
+# them into Printscreen/YYYY-MM/. Was ~/Pictures/Satty; Quattro's editor is
+# Tensaku now, and the grim-based PRINT bindings already write straight here.
+export OMARCHY_SCREENSHOT_DIR=~/Pictures/Printscreen
 
 #vim in browser
 export XDG_DATA_HOME=$HOME/.local/share/

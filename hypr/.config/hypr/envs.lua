@@ -12,3 +12,10 @@ hl.env("BRAVE_FLAGS", "--enable-features=UseOzonePlatform --ozone-platform=wayla
 -- Cursor size (Omarchy's default is 24)
 hl.env("XCURSOR_SIZE", "48")
 hl.env("HYPRCURSOR_SIZE", "48")
+
+-- Where omarchy-capture-screenshot writes before
+-- sspaeti/image-browser/auto-organize-screenshot.sh files it under
+-- Printscreen/YYYY-MM/. Also exported from zsh/.dotfiles/zsh/paths.shrc for
+-- terminal use; set here too so keybind-spawned processes see it regardless of
+-- whether the login shell's env made it into the graphical session.
+hl.env("OMARCHY_SCREENSHOT_DIR", os.getenv("HOME") .. "/Pictures/Printscreen")

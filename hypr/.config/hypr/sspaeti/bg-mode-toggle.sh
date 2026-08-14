@@ -16,15 +16,23 @@ if [ ! -f "$STATE_FILE" ]; then
 fi
 
 # Function to set a personal background image
+#
+# Omarchy Quattro no longer uses swaybg -- the Omarchy shell (Quickshell) draws
+# the background itself from the ~/.local/state/omarchy/current/background
+# symlink. omarchy-theme-bg-set repoints that symlink and pushes the change to
+# the running shell over IPC, so the old "start swaybg, sleep, kill the previous
+# one" dance is gone.
 set_personal_image() {
     local image_path="$1"
     local message="$2"
-    
-    swaybg -i "$image_path" &
-    sleep 0.5
-    pkill -o swaybg
+
+    if ! omarchy-theme-bg-set "$image_path"; then
+        notify-send "Background Error" "Could not set $(basename "$image_path")"
+        return 1
+    fi
+
     echo "$image_path" > "$CURRENT_IMAGE_FILE"
-    notify-send "Background" "Next personal image"
+    notify-send "Background" "${message:-Personal image}"
 }
 
 # Function to get next personal image in sequence
@@ -97,13 +105,11 @@ case "$action" in
         if [ "$current_mode" = "personal" ] && [ -f "$CURRENT_IMAGE_FILE" ]; then
             image_path=$(cat "$CURRENT_IMAGE_FILE")
             if [ -f "$image_path" ]; then
-                # Wait for Omarchy's swaybg to start first
+                # Give the Omarchy shell a moment to come up so the IPC push
+                # lands. Even if it isn't up yet the symlink is still written and
+                # the background plugin picks it up when it starts.
                 sleep 1
-                # Start new swaybg with personal image
-                swaybg -i "$image_path" &
-                sleep 0.5
-                # Kill the old swaybg (Omarchy's)
-                pkill -o swaybg
+                omarchy-theme-bg-set "$image_path"
             fi
         fi
         ;;
@@ -115,7 +121,7 @@ case "$action" in
         else
             # Switch to Omarchy backgrounds
             echo "omarchy" > "$STATE_FILE"
-            ~/.local/share/omarchy/bin/omarchy-theme-bg-next
+            omarchy-theme-bg-next
             notify-send "Background Mode" "Switched to Omarchy backgrounds"
         fi
         ;;

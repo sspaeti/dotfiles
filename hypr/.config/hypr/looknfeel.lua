@@ -48,8 +48,9 @@ o.window("(clipse)", { name = "windowrule-ssp-4", size = { 622, 652 } }) -- set 
 o.window({ title = "(Screenshot Browser)" }, { name = "windowrule-ssp-5", float = true }) -- ensure you have a floating window class set if you want this behavior
 o.window({ title = "(Screenshot Browser)" }, { name = "windowrule-ssp-6", size = { 1200, 800 } }) -- set the size of the window as necessary
 
--- floating Screenshot: larger than default - override omarchy default
-o.window("^(com.gabm.satty)$", { name = "windowrule-ssp-7", size = { 1200, 800 } })
+-- Tensaku is Quattro's replacement for satty. Omarchy already floats and
+-- centers it; this just gives it the same 1200x800 box as satty had.
+o.window("dev.tensaku.Tensaku", { size = { 1200, 800 } })
 
 o.window("^(io.ente.auth)$", { name = "windowrule-ssp-8", no_screen_share = true })
 o.window("^(io.ente.auth)$", { tag = "+floating-window" })

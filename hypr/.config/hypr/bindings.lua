@@ -13,11 +13,8 @@ local ssp = home .. "/.config/hypr/sspaeti"
 -- CUSTOM Application bindings
 -- $terminal = uwsm app -- $TERMINAL  (use { omarchy = "terminal" } instead)
 -- $browser = omarchy-launch-browser
-local browser = "uwsm app -- brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0"
+-- The browser flags now live inline on the SUPER+B binding below.
 
--- custom sspaeti:
-local toggle = ssp .. "/app-toggle.sh"
--- local webapptoggle = ssp .. "/webapp-toggle.sh"  -- unused in the old config
 
 -- use zsh shell by default -> check if omarchy is not touched by this change
 hl.unbind("SUPER + RETURN") -- default: Terminal
@@ -30,9 +27,16 @@ o.bind("SUPER + SHIFT + N", "Neovim", { tui = "nvim" })
 hl.unbind("SUPER + O") -- default: Pop window out (float & pin)
 o.bind("SUPER + O", "Files (Sync)", { launch = "nautilus --new-window " .. home .. "/Simon/Sync/" })
 hl.unbind("SUPER + SHIFT + O") -- default: Obsidian
-o.bind("SUPER + SHIFT + O", "Yazi (Sync)", { tui = "zsh -c 'yazi " .. home .. "/Simon/Sync'" })
-o.bind("SUPER + B", "Brave", toggle .. " brave-browser " .. o.shell_quote(browser))
-o.bind("SUPER + Z", "Zen browser", toggle .. " zen zen-browser")
+-- NOTE: do NOT use { tui = ... } here. That helper shell-quotes its value into a
+-- SINGLE argument, but omarchy-launch-tui expects `<command> [args...]` as
+-- separate ones -- it runs `-e "$1" "${@:2}"` and derives the app-id from
+-- `basename $1`. A multi-word value lands entirely in $1 and fails to exec.
+-- Passing the raw string lets the shell split it, giving app-id org.omarchy.yazi.
+-- The old `zsh -c "yazi ~/..."` wrapper existed only to expand ~; yazi takes the
+-- path directly.
+o.bind("SUPER + SHIFT + O", "Yazi (Sync)", "omarchy-launch-tui yazi " .. home .. "/Simon/Sync")
+o.bind("SUPER + B", "Brave", { launch = "brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0", focus = "brave-browser" })
+o.bind("SUPER + Z", "Zen browser", { launch = "zen-browser", focus = "zen" })
 
 hl.unbind("SUPER + SLASH") -- default: Monitor scaling up
 o.bind("SUPER + SLASH", "1Password", { launch = "1password" })
@@ -106,11 +110,8 @@ o.bind("SUPER + CTRL + L", "Locking computer", ssp .. "/omarchy-system-lock-wrap
 hl.unbind("SUPER + SHIFT + ALT + B") -- default: Browser (private)
 o.bind("SUPER + SHIFT + ALT + B", "Toggle window transparency", "omarchy-hyprland-window-transparency-toggle")
 
--- o.bind("SUPER + N", "Obsidian", toggle .. " obsidian 'obsidian --disable-gpu'")
--- trying with GPU:
--- o.bind("SUPER + N", "Obsidian", toggle .. " obsidian obsidian")
-o.bind("SUPER + N", "Obsidian", { launch = "obsidian", focus = "^obsidian$" })
--- o.bind("SUPER + N", "Obsidian", { launch = "obsidian --disable-gpu", focus = "^obsidian$" })
+o.bind("SUPER + N", "Obsidian", { launch = "obsidian", focus = "obsidian" })
+-- o.bind("SUPER + N", "Obsidian", { launch = "obsidian --disable-gpu", focus = "obsidian" })
 
 hl.unbind("SUPER + SHIFT + S") -- default: Google Maps
 o.bind("SUPER + SHIFT + S", "Signal", { launch = "signal-desktop" })
@@ -118,7 +119,7 @@ o.bind("SUPER + SHIFT + S", "Signal", { launch = "signal-desktop" })
 -- o.bind("SUPER + CTRL + S", "Google Messages", { webapp = "https://messages.google.com/web/conversations" })
 
 hl.unbind("SUPER + CTRL + C") -- default: Capture menu
-o.bind("SUPER + CTRL + C", "Morgen", toggle .. " Morgen morgen")
+o.bind("SUPER + CTRL + C", "Morgen", { launch = "morgen", focus = "Morgen" })
 
 hl.unbind("SUPER + CTRL + SPACE") -- default: Background switcher
 o.bind("SUPER + CTRL + SPACE", "Emoji picker", ssp .. "/emoji-fuzzy.sh")
