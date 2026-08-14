@@ -46,7 +46,7 @@ local dell_work_scale = 1.5
 -- --- TUXEDO laptop internal ---
 local laptop = "eDP-1"
 local laptop_res = "2880x1800@120"
-local laptop_scale = 1.8
+local laptop_scale = 1.6
 
 -- --- HDMI (check with `hyprctl monitors` whether it is HDMI-A-1 or HDMI-1) ---
 local hdmi = "HDMI-A-1"
