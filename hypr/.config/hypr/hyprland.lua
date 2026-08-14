@@ -19,6 +19,9 @@ require("default.hypr.omarchy")
 require("hypr.monitors")
 require("hypr.input")
 require("hypr.bindings")
+-- tiling.lua must come after bindings.lua so it wins on any shared key.
+require("hypr.tiling")
+require("hypr.envs")
 require("hypr.looknfeel")
 require("hypr.autostart")
 

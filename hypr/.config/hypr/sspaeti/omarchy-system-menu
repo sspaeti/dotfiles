@@ -13,7 +13,7 @@ menu() {
   local extra="$3"
 
   read -r -a args <<<"$extra"
-  echo -e "$options" | omarchy-launch-walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
+  echo -e "$options" | walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
 handle_tmux_and_poweroff() {
