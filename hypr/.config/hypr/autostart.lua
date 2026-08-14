@@ -27,8 +27,14 @@ o.exec_on_start(ssp .. "/autostart-apps.sh")
 -- Restore personal background if in personal mode (overrides Omarchy's swaybg)
 o.exec_on_start(ssp .. "/bg-mode-toggle.sh restore")
 
--- Morgen calendar (autostart from settings doesn't reliably launch under Hyprland)
-o.launch_on_start("morgen")
+-- Morgen calendar: do NOT launch it here.
+-- QUATTRO/uwsm now runs XDG autostart entries, so ~/.config/autostart/morgen.desktop
+-- ("Exec=/opt/Morgen/morgen --hidden") already starts it in the background as
+-- app-morgen@autostart.service. Morgen is single-instance, so a second
+-- `uwsm app -- morgen` here did not start a second process -- it just told the
+-- running one to un-hide, which is why a Morgen window popped up at login.
+-- Verify with: systemctl --user status app-morgen@autostart.service
+-- o.launch_on_start("morgen")
 
 -- GPU guard: one-shot check ~20s after login. Warns if the GPU is already
 -- degraded this boot, or if kernel/mesa/firmware changed and is untested.
