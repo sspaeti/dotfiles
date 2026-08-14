@@ -13,7 +13,13 @@ menu() {
   local extra="$3"
 
   read -r -a args <<<"$extra"
-  echo -e "$options" | walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
+  # --hideqa drops the F1/F2/F3/F4 quick-activation badges (walker's
+  # quick_activate keybinds, on by default via hide_quick_activation = false).
+  # --theme sspaeti-menu is a copy of walker's default theme in
+  # ~/.config/walker/themes/ with centred, larger entry text. Both are scoped to
+  # this menu only, so other walker callers keep the stock look.
+  echo -e "$options" | walker --dmenu --hideqa --theme sspaeti-menu \
+    --width 380 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
 handle_tmux_and_poweroff() {

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "sspaeti.emojis",
+  "name": "My Emojis",
+  "version": "1.0.0",
+  "author": "Omarchy",
+  "description": "Search, copy, and type emojis",
+  "kinds": [
+    "overlay"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "overlay": "Emojis.qml"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.emojis"
+  }
+}
