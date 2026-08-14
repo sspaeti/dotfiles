@@ -1,22 +1,22 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
+    "centerAnchor": "sspaeti.clock",
     "layout": {
       "center": [
         {
           "id": "omarchy.indicators"
         },
         {
-          "id": "omarchy.clock",
-          "format": "ddd d MMM HH:mm",
-          "formatAlt": "d MMMM 'W'ww yyyy",
+          "id": "sspaeti.clock",
+          "format": "d MMMM 'W'ww yyyy",
+          "formatAlt": "dddd HH:mm 'W'ww",
           "verticalFormat": "HH\n—\nmm"
         },
         {
           "id": "omarchy.keyboard-layout"
         },
         {
-          "id": "omarchy.weather"
+          "id": "sspaeti.weather"
         },
         {
           "id": "omarchy.system-update"
@@ -27,7 +27,7 @@
           "id": "omarchy.menu"
         },
         {
-          "id": "omarchy.workspaces"
+          "id": "sspaeti.workspaces"
         }
       ],
       "right": [
@@ -50,12 +50,20 @@
           "id": "omarchy.monitor"
         },
         {
+          "id": "cpu-temp",
+          "type": "command",
+          "exec": "~/.config/omarchy/bar/scripts/cpu-temp.sh",
+          "interval": 5,
+          "onClick": "omarchy-launch-or-focus-tui btop",
+          "onRightClick": "omarchy-launch-or-focus tuxedo tuxedo-control-center"
+        },
+        {
           "id": "omarchy.power"
         }
       ]
     },
     "position": "top",
-    "transparent": true
+    "transparent": false
   },
   "idle": {
     "lock": 300,
