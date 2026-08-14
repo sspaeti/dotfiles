@@ -63,3 +63,4 @@ audio/ogg=org.strawberrymusicplayer.strawberry.desktop
 audio/x-vorbis+ogg=org.strawberrymusicplayer.strawberry.desktop
 audio/aac=org.strawberrymusicplayer.strawberry.desktop
 audio/x-m4a=org.strawberrymusicplayer.strawberry.desktop
+x-scheme-handler/codex=chatgpt.desktop
