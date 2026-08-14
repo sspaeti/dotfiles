@@ -3,46 +3,46 @@
 
 -- Keyboard layout and options.
 -- See https://wiki.hypr.land/Configuring/Basics/Variables/#input
--- hl.config({
---   input = {
---     -- Use multiple keyboard layouts and switch between them with Left Alt + Right Alt.
---     kb_layout = "us,dk,eu",
---     kb_options = "compose:caps,shift:both_capslock_cancel,grp:alts_toggle",
---
---     -- Use a specific keyboard variant if needed (e.g. intl for international keyboards).
---     kb_variant = "intl",
---
---     -- Change speed of keyboard repeat.
---     repeat_rate = 40,
---     repeat_delay = 250,
---
---     -- Start with numlock on by default.
---     numlock_by_default = true,
---
---     -- Increase sensitivity for mouse/trackpad (default: 0).
---     sensitivity = 0.35,
---
---     -- Turn off mouse acceleration (default: adaptive).
---     accel_profile = "flat",
---
---     touchpad = {
---       -- Use natural (inverse) scrolling.
---       natural_scroll = true,
---
---       -- Use two-finger clicks for right-click instead of lower-right corner.
---       clickfinger_behavior = true,
---
---       -- Control the speed of your scrolling.
---       scroll_factor = 0.4,
---
---       -- Enable the touchpad while typing.
---       disable_while_typing = false,
---
---       -- Left-click-and-drag with three fingers.
---       drag_3fg = 1,
---     },
---   },
--- })
+hl.config({
+	input = {
+		--     -- Use multiple keyboard layouts and switch between them with Left Alt + Right Alt.
+		kb_layout = "us", --,dk,eu",
+		kb_options = "compose:caps,grp:alt_space_toggle",
+		--
+		--     -- Use a specific keyboard variant if needed (e.g. intl for international keyboards).
+		--     kb_variant = "intl",
+		--
+		--     -- Change speed of keyboard repeat.
+		repeat_rate = 40,
+		repeat_delay = 200,
+		--
+		--     -- Start with numlock on by default.
+		--     numlock_by_default = true,
+		--
+		--     -- Increase sensitivity for mouse/trackpad (default: 0).
+		sensitivity = 0.6,
+		--
+		--     -- Turn off mouse acceleration (default: adaptive).
+		--     accel_profile = "flat",
+		--
+		touchpad = {
+			-- Use natural (inverse) scrolling.
+			natural_scroll = true,
+			--
+			-- Use two-finger clicks for right-click instead of lower-right corner.
+			clickfinger_behavior = true,
+			--
+			--       -- Control the speed of your scrolling.
+			scroll_factor = 0.8,
+			--
+			--       -- Enable the touchpad while typing.
+			--       disable_while_typing = false,
+			--
+			--       -- Left-click-and-drag with three fingers.
+			--       drag_3fg = 1,
+		},
+	},
+})
 
 -- App-specific touchpad scroll speeds.
 -- o.window("(Alacritty|kitty|foot)", { scroll_touchpad = 1.5 })

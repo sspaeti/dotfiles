@@ -4,6 +4,7 @@ idiomatic_version_file_enable_tools = ["ruby"]
 [settings.ruby]
 
 [tools]
+claude = "latest"
 codex = "latest"
 gh = "latest"
 node = "24"
