@@ -16,10 +16,12 @@ alias c=clear
 
 # show hidden files by default
 alias ll='ls -lah'
-function chpwd() {
-    emulate -L zsh
-    ll
-}
+# auto-ls on every directory change — disabled: chpwd fires for *any* cd,
+# including inside scripts/programs, which pollutes their output.
+# function chpwd() {
+#     emulate -L zsh
+#     ll
+# }
 
 
 # Pomodoro timer
