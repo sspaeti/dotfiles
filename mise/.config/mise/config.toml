@@ -1,12 +1,3 @@
-[settings]
-idiomatic_version_file_enable_tools = ["ruby"]
-
-[settings.ruby]
-
 [tools]
 claude = "latest"
-codex = "latest"
 gh = "latest"
-node = "24"
-python = "3.13.5"
-ruby = "latest"
