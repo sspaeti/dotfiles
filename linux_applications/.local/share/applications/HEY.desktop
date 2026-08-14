@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=1.0
 Name=HEY
-Comment=HEY
-Exec=omarchy-launch-webapp https://app.hey.com
+Exec=omarchy-webapp-handler-hey %u
 Terminal=false
 Type=Application
-Icon=/home/sspaeti/.local/share/applications/icons/HEY.png
+Icon=hey
 StartupNotify=true
+MimeType=x-scheme-handler/mailto

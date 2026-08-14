@@ -1,9 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Name=Disk Usage
-Comment=Disk Usage
-Exec=$TERMINAL --class=TUI.float -e bash -c 'dust -r; read -n 1 -s'
+Exec=xdg-terminal-exec --app-id=TUI.float -e bash -c "dua i /"
 Terminal=false
 Type=Application
-Icon=/home/sspaeti/.local/share/applications/icons/Disk Usage.png
+Icon=disk-usage
 StartupNotify=true

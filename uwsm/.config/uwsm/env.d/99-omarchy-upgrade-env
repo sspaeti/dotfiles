@@ -1,0 +1,13 @@
+# Preserved custom ~/.config/uwsm/env content during Omarchy quattro upgrade.
+# Exact legacy Omarchy-managed setup lines were replaced with no-op markers where safe.
+# Changes require a relaunch of Hyprland to take effect.
+
+# Ensure Omarchy bins are in the path
+: # omarchy-upgrade omitted legacy Omarchy OMARCHY_PATH
+export PATH=$OMARCHY_PATH/bin/:$PATH
+
+# Set default terminal and editor
+: # omarchy-upgrade omitted legacy Omarchy uwsm/default source
+
+# Activate mise if present on the system
+: # omarchy-upgrade omitted legacy Omarchy mise activation

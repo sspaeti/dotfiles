@@ -1,10 +1,9 @@
 [Desktop Entry]
 Version=1.0
 Name=Zoom
-Comment=Zoom
 Exec=omarchy-webapp-handler-zoom %u
 Terminal=false
 Type=Application
-Icon=/home/sspaeti/.local/share/applications/icons/Zoom.png
+Icon=zoom
 StartupNotify=true
 MimeType=x-scheme-handler/zoommtg;x-scheme-handler/zoomus
