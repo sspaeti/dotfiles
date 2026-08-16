@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/monochrome-green.glsl

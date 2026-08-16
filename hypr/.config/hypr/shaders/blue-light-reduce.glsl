@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/blue-light-reduce.glsl

@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/vibe-60s.glsl

@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/hue-shift-180.glsl

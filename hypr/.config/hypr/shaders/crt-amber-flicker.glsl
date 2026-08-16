@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/crt-amber-flicker.glsl

@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/c64-raster-bars.glsl

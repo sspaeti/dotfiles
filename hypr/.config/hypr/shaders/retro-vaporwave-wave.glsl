@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/retro-vaporwave-wave.glsl

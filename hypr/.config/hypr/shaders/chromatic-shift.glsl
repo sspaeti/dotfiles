@@ -1,1 +1,0 @@
-/usr/share/aether/shaders/chromatic-shift.glsl
