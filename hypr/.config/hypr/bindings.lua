@@ -150,8 +150,10 @@ hl.unbind("SUPER + CTRL + F") -- default: Tiled full screen
 -- NOTE: no omarchy-launch-tui wrapper here -- the script opens its own terminal.
 -- Floating size for org.omarchy.finder is set in looknfeel.lua.
 o.bind("SUPER + CTRL + F", "Search Files (Finder)", ssp .. "/fuzzy-file-names.sh")
--- The older fzf take (fuzzy-as-you-type, text-only previews) is still around:
--- o.bind("SUPER + CTRL + SHIFT + F", "Search Files (fzf)", "omarchy-launch-tui --app-id=org.omarchy.finder " .. ssp .. "/fuzzy-file-names-fzf.sh")
+-- Same finder, but when you don't know the name: drops straight into yazi's
+-- built-in fzf plugin (its own `z` key) for live fuzzy-as-you-type, then yazi
+-- reveals the pick with a full preview. fd feeds fzf via FZF_DEFAULT_COMMAND.
+o.bind("SUPER + CTRL + SHIFT + F", "Browse Files (fuzzy)", ssp .. "/fuzzy-file-names.sh browse")
 
 -- notifications restore
 -- QUATTRO: mako is gone; notifications live in the Omarchy shell.
