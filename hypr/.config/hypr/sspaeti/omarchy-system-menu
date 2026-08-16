@@ -10,16 +10,13 @@ export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 menu() {
   local prompt="$1"
   local options="$2"
-  local extra="$3"
 
-  read -r -a args <<<"$extra"
-  # --hideqa drops the F1/F2/F3/F4 quick-activation badges (walker's
-  # quick_activate keybinds, on by default via hide_quick_activation = false).
-  # --theme sspaeti-menu is a copy of walker's default theme in
-  # ~/.config/walker/themes/ with centred, larger entry text. Both are scoped to
-  # this menu only, so other walker callers keep the stock look.
-  echo -e "$options" | walker --dmenu --hideqa --theme sspaeti-menu \
-    --width 380 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
+  # QUATTRO: walker/elephant are gone, so the old `walker --dmenu --theme
+  # sspaeti-menu` call is now the Omarchy shell menu, which already picks up the
+  # active theme. Option lines are "<glyph>\t<label>"; the glyph is rendered but
+  # never comes back with the selection, so the case arms below match on the
+  # label alone.
+  echo -e "$options" | omarchy-menu-select "$prompt" -- --width 380 --maxheight 630
 }
 
 handle_tmux_and_poweroff() {
@@ -38,10 +35,10 @@ handle_tmux_and_logout() {
 }
 
 # Build menu options dynamically based on system capabilities
-options=" Lock"
-[[ ! -f ~/.local/state/omarchy/toggles/suspend-off ]] && options="$options\n󰒲  Suspend"
-omarchy-hibernation-available && options="$options\n󰤁  Hibernate"
-options="$options\n󰍃  Logout\n󰜉  Restart\n󰐥  Shutdown"
+options="󰌾\tLock"
+omarchy-toggle-enabled suspend-off || options="$options\n󰒲\tSuspend"
+omarchy-hibernation-available && options="$options\n󰤁\tHibernate"
+options="$options\n󰍃\tLogout\n󰜉\tRestart\n󰐥\tShutdown"
 
 case $(menu "System" "$options") in
   *Lock*) ~/.config/hypr/sspaeti/omarchy-system-lock-wrapper.sh ;;
