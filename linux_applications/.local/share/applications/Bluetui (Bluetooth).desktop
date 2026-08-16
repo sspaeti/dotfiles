@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Bluetui (Bluetooth)
+Comment=Bluetui (Bluetooth)
+Exec=xdg-terminal-exec --app-id=TUI.float -e bluetui
+Terminal=false
+Type=Application
+Icon=bluetui-bluetooth
+StartupNotify=true

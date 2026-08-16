@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Wifi (Impala TUI)
+Comment=Wifi (Impala TUI)
+Exec=xdg-terminal-exec --app-id=TUI.float -e impala
+Terminal=false
+Type=Application
+Icon=wifi-impala-tui
+StartupNotify=true
