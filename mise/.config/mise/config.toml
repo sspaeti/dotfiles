@@ -1,3 +1,4 @@
 [tools]
 claude = "latest"
+codex = "latest"
 gh = "latest"
