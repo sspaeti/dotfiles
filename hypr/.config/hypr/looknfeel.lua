@@ -65,5 +65,12 @@ o.window("^(org\\.gnome\\.Evince)$", { size = { 1300, 900 } })
 -- Default rule lives in $OMARCHY_PATH/default/hypr/apps/system.lua (size 875 600 was too cramped).
 o.window("^(org\\.omarchy\\.btop)$", { tag = "-floating-window" })
 
+-- Fuzzy file finder (SUPER+CTRL+F) -- the walker `-m files` replacement.
+-- Needs to be wide: yazi splits it into a result list and a preview pane, and
+-- search results are shown as full paths.
+o.window("^(org\\.omarchy\\.finder)$", { name = "windowrule-ssp-finder", float = true })
+o.window("^(org\\.omarchy\\.finder)$", { center = true })
+o.window("^(org\\.omarchy\\.finder)$", { size = { 1600, 1000 } })
+
 -- Make the default floating-window box bigger than omarchy's 875x600 (used by image viewer, About, generic floats).
 o.window({ tag = "floating-window" }, { size = { 1300, 900 } })

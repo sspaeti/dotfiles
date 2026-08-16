@@ -1,121 +1,52 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 
-# Define available search directories
-AVAILABLE_DIRS=(
-    "$HOME/Pictures/"
-)
+# Live file/folder finder with real previews -- the replacement for the old
+# `omarchy-launch-walker -m files`.
+#
+# QUATTRO: walker and elephant are gone from Omarchy 4. walker 2.x was only a
+# frontend; elephant was the backend daemon that served every provider, so every
+# `walker --dmenu` call now returns nothing.
+#
+# The UI here is yazi, because it brings everything the alternatives lack:
+#   - real previews: images (ffmpegthumbnailer/magick), PDFs (pdftoppm), and the
+#     duckdb previewer already wired up in ~/.config/yazi/yazi.toml for
+#     csv/tsv/json/parquet/xlsx/db
+#   - native open semantics: Enter enters a directory or opens a file with its
+#     default app, `O` opens the interactive "choose an opener" menu
+#   - `f` filters the result list live, with the preview following along
+#
+# The Omarchy shell menu can't do any of that (it substring-filters a fixed list
+# and has no preview pane), and fzf previews are text-only without chafa. The
+# fzf variant is kept alongside as fuzzy-file-names-fzf.sh.
+#
+# Priming the search without yazi prompting for it:
+#   yazi's `search` actor opens an input pre-filled with opt.subject, but
+#   `search_do` runs the search straight away (yazi-actor/src/mgr/search.rs).
+#   SearchOpt takes the subject as its FIRST POSITIONAL argument
+#   (yazi-core/src/mgr/search.rs: `subject: a.take_first()`), so
+#       ya emit-to <id> search_do "<term>" --via=fd
+#   searches the instance's cwd with fd and no prompt.
 
-# Add all subdirectories in Simon/Sync to the list
-if [ -d "$HOME/Simon/Sync" ]; then
-    while IFS= read -r -d '' dir; do
-        AVAILABLE_DIRS+=("$dir")
-    done < <(find "$HOME/Simon/Sync" -mindepth 1 -maxdepth 1 -type d -print0)
-fi
+SEARCH_ROOT="$HOME"
 
-if [ -d "$HOME/git" ]; then
-    while IFS= read -r -d '' dir; do
-        AVAILABLE_DIRS+=("$dir")
-    done < <(find "$HOME/git" -mindepth 1 -maxdepth 1 -type d -print0)
-fi
+QUERY=$(omarchy-menu-input "Search files & folders") || exit 0
+[ -n "$QUERY" ] || exit 0
 
-# Let user select which directories to search
-DIR_MENU=""
-for dir in "${AVAILABLE_DIRS[@]}"; do
-    DIR_MENU="$DIR_MENU$(basename "$dir") ($dir)\n"
+# `ya emit-to` addresses a yazi instance by its client id, so pick one up front.
+CLIENT_ID=$((RANDOM + 20000))
+
+# The app-id is what looknfeel.lua floats and sizes.
+setsid omarchy-launch-tui --app-id=org.omarchy.finder \
+    yazi --client-id "$CLIENT_ID" "$SEARCH_ROOT" >/dev/null 2>&1 &
+
+# `ya emit-to` exits 1 with "Connection refused" until the instance is listening,
+# so poll rather than guess at a fixed sleep.
+for _ in $(seq 1 100); do
+    if ya emit-to "$CLIENT_ID" search_do "$QUERY" --via=fd 2>/dev/null; then
+        exit 0
+    fi
+    sleep 0.1
 done
 
-SELECTED_DIR=$(echo -e "$DIR_MENU" | walker --dmenu -p "Select search directory: " 2>/dev/null)
-
-# Exit if no directory selected
-if [ -z "$SELECTED_DIR" ]; then
-    exit 0
-fi
-
-# Extract the actual path from the selection
-SEARCH_DIR=$(echo "$SELECTED_DIR" | sed 's/.*(\(.*\))/\1/')
-
-# Get search term from user
-SEARCH_TERM=$(walker --dmenu -p "Search file names for: " 2>/dev/null)
-
-# Exit if no search term
-if [ -z "$SEARCH_TERM" ]; then
-    exit 0
-fi
-
-# Notify the user that the search is starting
-notify-send "Omarchy File Name Search" "Searching for '$SEARCH_TERM'..."
-
-# Search file names with fd and grep, prioritizing filename matches over path matches
-SELECTED=$(fd -t f --hidden --exclude .git --exclude node_modules --exclude .cache --exclude .zip . "$SEARCH_DIR" 2>/dev/null | \
-    {
-        # First priority: filename contains the search term (case insensitive)
-        grep -i "$SEARCH_TERM" | {
-            # Show files with search term in basename first
-            while IFS= read -r file; do
-                if basename "$file" | grep -qi "$SEARCH_TERM"; then
-                    echo "$file"
-                fi
-            done
-            # Then show files with search term in path
-            while IFS= read -r file; do
-                if ! basename "$file" | grep -qi "$SEARCH_TERM" && echo "$file" | grep -qi "$SEARCH_TERM"; then
-                    echo "$file"
-                fi
-            done
-        } <<< "$(cat)"
-    } | \
-    head -n 200 | \
-    walker --dmenu -p "Results: " 2>/dev/null)
-
-# Exit if nothing selected
-if [ -z "$SELECTED" ]; then
-    exit 0
-fi
-
-# The selected line is the file path
-FILE_PATH="$SELECTED"
-
-# Show options for what to do with the file
-ACTION=$(echo -e "Open file\nCopy path to clipboard\nOpen folder in Nautilus\nOpen folder in terminal" | walker --dmenu -p "Action: " 2>/dev/null)
-
-if [ "$ACTION" = "Copy path to clipboard" ]; then
-    echo "$FILE_PATH" | wl-copy
-    notify-send "Path Copied" "File path copied to clipboard: $FILE_PATH"
-elif [ "$ACTION" = "Open file" ]; then
-    # Open the file in the preferred editor
-    if [ -n "$FILE_PATH" ] && [ -f "$FILE_PATH" ]; then
-        if command -v code >/dev/null; then
-            code "$FILE_PATH"
-        elif command -v nvim >/dev/null; then
-            nvim "$FILE_PATH"
-        else
-            xdg-open "$FILE_PATH"
-        fi
-    else
-        notify-send "File Not Found" "Could not open the selected file: $FILE_PATH"
-    fi
-elif [ "$ACTION" = "Open folder in Nautilus" ]; then
-    # Get the directory containing the file
-    DIR_PATH=$(dirname "$FILE_PATH")
-    if [ -d "$DIR_PATH" ]; then
-        nautilus "$DIR_PATH"
-    else
-        notify-send "Directory Not Found" "Could not open directory: $DIR_PATH"
-    fi
-elif [ "$ACTION" = "Open folder in terminal" ]; then
-    # Get the directory containing the file
-    DIR_PATH=$(dirname "$FILE_PATH")
-    if [ -d "$DIR_PATH" ]; then
-        # Use the same terminal variable as in your hypr config
-        if command -v ghostty >/dev/null; then
-            ghostty --working-directory="$DIR_PATH"
-        elif command -v alacritty >/dev/null; then
-            alacritty --working-directory "$DIR_PATH"
-        else
-            xdg-open "$DIR_PATH"
-        fi
-    else
-        notify-send "Directory Not Found" "Could not open directory: $DIR_PATH"
-    fi
-fi
+notify-send "File Search" "yazi did not come up in time -- searching for '$QUERY' manually (press s)"

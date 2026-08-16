@@ -143,8 +143,15 @@ o.bind("SUPER + ALT + F", "Tiled full screen", "omarchy-hyprland-window-tiled-fu
 hl.unbind("SUPER + SHIFT + C") -- default: Calendar (web app)
 o.bind("SUPER + SHIFT + C", "Clipboard", "omarchy-menu-clipboard")
 hl.unbind("SUPER + CTRL + F") -- default: Tiled full screen
--- QUATTRO: no walker `-m files` equivalent; using your own fuzzy finder instead.
+-- QUATTRO: no walker `-m files` equivalent. fuzzy-file-names.sh rebuilds it by
+-- prompting for a term, then priming a yazi instance with `ya emit-to <id>
+-- search_do <term> --via=fd` -- so you get real previews (images, PDFs, and the
+-- duckdb previewer from yazi.toml) plus yazi's native open/reveal keys.
+-- NOTE: no omarchy-launch-tui wrapper here -- the script opens its own terminal.
+-- Floating size for org.omarchy.finder is set in looknfeel.lua.
 o.bind("SUPER + CTRL + F", "Search Files (Finder)", ssp .. "/fuzzy-file-names.sh")
+-- The older fzf take (fuzzy-as-you-type, text-only previews) is still around:
+-- o.bind("SUPER + CTRL + SHIFT + F", "Search Files (fzf)", "omarchy-launch-tui --app-id=org.omarchy.finder " .. ssp .. "/fuzzy-file-names-fzf.sh")
 
 -- notifications restore
 -- QUATTRO: mako is gone; notifications live in the Omarchy shell.

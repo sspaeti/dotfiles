@@ -1,6 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
+# Fuzzy file *content* search (ripgrep).
+#
+# QUATTRO: see the header of fuzzy-file-names.sh -- walker/elephant are gone, so
+# every `walker --dmenu` prompt became omarchy-menu-select / omarchy-menu-input.
+
+ICON_FILE="󰈔" # nf-md-file
+ICON_DIR="󰉋"  # nf-md-folder
+
 # Define available search directories
 AVAILABLE_DIRS=(
     "$HOME/Documents"
@@ -14,102 +22,82 @@ if [ -d "$HOME/Simon/Sync" ]; then
 fi
 
 # Let user select which directories to search
-DIR_MENU=""
-for dir in "${AVAILABLE_DIRS[@]}"; do
-    DIR_MENU="$DIR_MENU$(basename "$dir") ($dir)\n"
-done
+SELECTED_DIR=$(
+    for dir in "${AVAILABLE_DIRS[@]}"; do
+        printf '%s\t%s\t%s\n' "$ICON_DIR" "$(basename "$dir")" "$dir"
+    done | omarchy-menu-select "Select search directory"
+) || exit 0
 
-SELECTED_DIR=$(echo -e "$DIR_MENU" | walker --dmenu -p "Select search directory: " 2>/dev/null)
-
-# Exit if no directory selected
-if [ -z "$SELECTED_DIR" ]; then
-    exit 0
-fi
-
-# Extract the actual path from the selection
-SEARCH_DIR=$(echo "$SELECTED_DIR" | sed 's/.*(\(.*\))/\1/')
-SEARCH_DIRS=("$SEARCH_DIR")
+# The selection comes back as "<basename>\t<path>"
+SEARCH_DIR=$(printf '%s' "$SELECTED_DIR" | cut -f2)
+[ -d "$SEARCH_DIR" ] || exit 0
 
 # Get search term from user
-SEARCH_TERM=$(walker --dmenu -p "Search for: " 2>/dev/null)
-
-# Exit if no search term
-if [ -z "$SEARCH_TERM" ]; then
-    exit 0
-fi
+SEARCH_TERM=$(omarchy-menu-input "Search contents in $(basename "$SEARCH_DIR")") || exit 0
+[ -n "$SEARCH_TERM" ] || exit 0
 
 # Convert search term to a fuzzy regex: 'test' -> 't.*e.*s.*t.*'
-FUZZY_REGEX=$(echo "$SEARCH_TERM" | sed 's/./&.*/g')
+FUZZY_REGEX=$(printf '%s' "$SEARCH_TERM" | sed 's/./&.*/g')
 
-# Notify the user that the search is starting
-notify-send "Omarchy Fuzzy Search" "Searching for '$SEARCH_TERM'..."
+notify-send "Fuzzy Content Search" "Searching for '$SEARCH_TERM'..."
 
-# Search with ripgrep, limit results, and display with wofi
-# The output from rg is in the format: /path/to/file:line_number:content
-SELECTED=$(rg --line-number \
-   --no-heading \
-   --color=never \
-   --max-columns=300 \
-   --ignore-case \
-   --hidden \
-   --glob '!.zip/**' \
-   --glob '!.git/**' \
-   --glob '!node_modules/**' \
-   --glob '!.cache/**' \
-   "$FUZZY_REGEX" "${SEARCH_DIRS[@]}" 2>/dev/null | \
-   awk -F: '{print $1}' | sort -u | \
-   head -n 200 | \
-   walker --dmenu -p "Results: " 2>/dev/null)
+mapfile -t MATCHES < <(
+    rg --line-number \
+        --no-heading \
+        --color=never \
+        --max-columns=300 \
+        --ignore-case \
+        --hidden \
+        --glob '!.zip/**' \
+        --glob '!.git/**' \
+        --glob '!node_modules/**' \
+        --glob '!.cache/**' \
+        "$FUZZY_REGEX" "$SEARCH_DIR" 2>/dev/null |
+        awk -F: '{print $1}' | sort -u | head -n 200
+)
 
-# Exit if nothing selected
-if [ -z "$SELECTED" ]; then
+if [ "${#MATCHES[@]}" -eq 0 ]; then
+    notify-send "Fuzzy Content Search" "No matches for '$SEARCH_TERM'"
     exit 0
 fi
 
-# The selected line is now just the file path
-FILE_PATH="$SELECTED"
+SELECTED=$(
+    for path in "${MATCHES[@]}"; do
+        printf '%s\t%s\t%s\n' "$ICON_FILE" "$(basename "$path")" "$path"
+    done | omarchy-menu-select "Results (${#MATCHES[@]})"
+) || exit 0
 
-# Show options for what to do with the file
-ACTION=$(echo -e "Open file\nCopy path to clipboard\nOpen folder in Nautilus\nOpen folder in terminal" | walker --dmenu -p "Action: " 2>/dev/null)
+FILE_PATH=$(printf '%s' "$SELECTED" | cut -f2)
+[ -f "$FILE_PATH" ] || exit 0
+DIR_PATH=$(dirname "$FILE_PATH")
 
-if [ "$ACTION" = "Copy path to clipboard" ]; then
-    echo "$FILE_PATH" | wl-copy
-    notify-send "Path Copied" "File path copied to clipboard: $FILE_PATH"
-elif [ "$ACTION" = "Open file" ]; then
-    # Open the file in the preferred editor
-    if [ -n "$FILE_PATH" ] && [ -f "$FILE_PATH" ]; then
-        if command -v code >/dev/null; then
-            code "$FILE_PATH"
-        elif command -v nvim >/dev/null; then
-            nvim "$FILE_PATH"
-        else
-            xdg-open "$FILE_PATH"
-        fi
-    else
-        notify-send "File Not Found" "Could not open the selected file: $FILE_PATH"
-    fi
-elif [ "$ACTION" = "Open folder in Nautilus" ]; then
-    # Get the directory containing the file
-    DIR_PATH=$(dirname "$FILE_PATH")
-    if [ -d "$DIR_PATH" ]; then
-        nautilus "$DIR_PATH"
-    else
-        notify-send "Directory Not Found" "Could not open directory: $DIR_PATH"
-    fi
-elif [ "$ACTION" = "Open folder in terminal" ]; then
-    # Get the directory containing the file
-    DIR_PATH=$(dirname "$FILE_PATH")
-    if [ -d "$DIR_PATH" ]; then
-        # Use the same terminal variable as in your hypr config
-        if command -v ghostty >/dev/null; then
-            ghostty --working-directory="$DIR_PATH"
-        elif command -v alacritty >/dev/null; then
-            alacritty --working-directory "$DIR_PATH"
-        else
-            xdg-open "$DIR_PATH"
-        fi
-    else
-        notify-send "Directory Not Found" "Could not open directory: $DIR_PATH"
-    fi
-fi
+ACTION=$(omarchy-menu-select "Action" \
+    "Open file" "Copy path to clipboard" "Open folder in Nautilus" "Open folder in terminal") || exit 0
 
+case "$ACTION" in
+"Copy path to clipboard")
+    printf '%s\n' "$FILE_PATH" | wl-copy
+    notify-send "Path Copied" "$FILE_PATH"
+    ;;
+"Open file")
+    if command -v code >/dev/null; then
+        code "$FILE_PATH"
+    elif command -v nvim >/dev/null; then
+        omarchy-launch-tui nvim "$FILE_PATH"
+    else
+        xdg-open "$FILE_PATH"
+    fi
+    ;;
+"Open folder in Nautilus")
+    nautilus "$DIR_PATH"
+    ;;
+"Open folder in terminal")
+    if command -v ghostty >/dev/null; then
+        ghostty --working-directory="$DIR_PATH"
+    elif command -v alacritty >/dev/null; then
+        alacritty --working-directory "$DIR_PATH"
+    else
+        xdg-open "$DIR_PATH"
+    fi
+    ;;
+esac
