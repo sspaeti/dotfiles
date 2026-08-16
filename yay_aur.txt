@@ -1,4 +1,3 @@
-apfs-fuse-git-debug
 brave-bin
 brother-dcpl2550dn
 brother-mfc-l3760cdw
