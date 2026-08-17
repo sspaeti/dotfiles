@@ -8,7 +8,7 @@
         },
         {
           "id": "sspaeti.clock",
-          "format": "ddd d MMM HH:mm",
+          "format": "d MMMM 'W'ww yyyy",
           "formatAlt": "dddd HH:mm 'W'ww",
           "verticalFormat": "HH\n—\nmm"
         },
