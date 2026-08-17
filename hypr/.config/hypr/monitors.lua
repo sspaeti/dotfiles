@@ -34,14 +34,14 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy
 -- --- HOME Dell (Dell S2722QC, 27" 4K UHD) ---
 local dell_home_port = "desc:Dell Inc. DELL S2722QC"
 local dell_home_res = "3840x2160@60"
-local dell_home_scale = 1.5
+local dell_home_scale = 1.6
 
 -- --- WORK Dell (Dell S2725QC, 4K UHD) ---
 -- TODO: verify exact description at office (hyprctl monitors -j)
 -- local dell_work_port = "desc:Dell Inc. DELL S2722QC 89CQLD3"
 local dell_work_port = "desc:Dell Inc. DELL S2725QC DTFF464"
 local dell_work_res = "3840x2160@60"
-local dell_work_scale = 1.5
+local dell_work_scale = 1.6
 
 -- --- TUXEDO laptop internal ---
 local laptop = "eDP-1"
@@ -51,10 +51,23 @@ local laptop_scale = 1.6
 -- --- HDMI (check with `hyprctl monitors` whether it is HDMI-A-1 or HDMI-1) ---
 local hdmi = "HDMI-A-1"
 
+-- --- Logical (scaled) sizes ---
+-- Hyprland `position` is in SCALED coordinates, not native pixels. So every
+-- position below is derived from resolution/scale -- change a scale above and
+-- the layouts stay flush automatically (no more gaps like 1.5 -> 1.6 caused).
+--   Dell   3840x2160 @1.6 -> 2400x1350
+--   Laptop 2880x1800 @1.6 -> 1800x1125
+local dell_w = math.floor(3840 / dell_home_scale)
+local dell_h = math.floor(2160 / dell_home_scale)
+local laptop_w = math.floor(2880 / laptop_scale)
+local laptop_h = math.floor(1800 / laptop_scale)
+
 -- --- Layout positions ---
 local pos_ext_top_left = "0x0" -- external at origin
-local pos_home_laptop = "480x1440" -- laptop BELOW external (home stack)
-local pos_office_laptop = "2560x220" -- laptop RIGHT of external (office)
+-- laptop BELOW external, horizontally centered under it (home stack)
+local pos_home_laptop = string.format("%dx%d", math.floor((dell_w - laptop_w) / 2), dell_h)
+-- laptop RIGHT of external, vertically centered against it (office)
+local pos_office_laptop = string.format("%dx%d", dell_w, math.floor((dell_h - laptop_h) / 2))
 local pos_standalone_laptop = "0x0" -- laptop standalone
 local pos_hdmi_laptop = "1920x0" -- laptop right of HDMI (extended)
 
