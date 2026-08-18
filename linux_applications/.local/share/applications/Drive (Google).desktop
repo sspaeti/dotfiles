@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Drive (Google)
+Comment=Drive (Google)
+Exec=omarchy-launch-webapp https://drive.google.com/
+Terminal=false
+Type=Application
+Icon=drive-google
+StartupNotify=true
