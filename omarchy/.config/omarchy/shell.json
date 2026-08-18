@@ -75,13 +75,21 @@
   "plugins": [
     {
       "id": "sspaeti.emojis"
+    },
+    {
+      "id": "sspaeti.clipboard",
+      "historyLimit": 800,
+      "maxRows": 100,
+      "ocr": true
     }
   ],
   "version": 1,
   "disabledPlugins": [
-    "omarchy.emojis"
+    "omarchy.emojis",
+    "omarchy.clipboard"
   ],
   "cloneSourceRestores": [
-    "sspaeti.emojis"
+    "sspaeti.emojis",
+    "sspaeti.clipboard"
   ]
 }
