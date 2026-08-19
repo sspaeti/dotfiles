@@ -25,6 +25,7 @@ Item {
   // Use this plugin's own capture.sh (with OCR) instead of the stock one the
   // upstream plugin hardcodes under OMARCHY_PATH.
   property string captureScript: Qt.resolvedUrl("capture.sh").toString().replace(/^file:\/\//, "")
+  property string gcScript: Qt.resolvedUrl("gc.sh").toString().replace(/^file:\/\//, "")
   // Shares the [menu] surface tokens — themes that style the menu also
   // style the clipboard. Selected-row colors composed in the
   // singleton so consumers drop them straight into Rectangle bindings.
@@ -56,6 +57,9 @@ Item {
   }
   property int historyLimit: Number(root.pluginSettings.historyLimit) > 0 ? Math.floor(Number(root.pluginSettings.historyLimit)) : 500
   property int maxRows: Number(root.pluginSettings.maxRows) > 0 ? Math.floor(Number(root.pluginSettings.maxRows)) : 50
+  // true = Enter/click auto-pastes like stock omarchy; false (default) =
+  // Enter/click only copies, Shift+Enter does the other action either way.
+  property bool autoPaste: root.pluginSettings.autoPaste === true
 
   function open(payloadJson) {
     root.opened = true
@@ -93,6 +97,9 @@ Item {
 
   function saveHistory() {
     historyFile.setText(JSON.stringify(root.history.slice(0, root.historyLimit), null, 2) + "\n")
+    // Reap image files whose entries were deleted, evicted, or cleared —
+    // delayed so gc.sh reads the freshly written history file.
+    gcTimer.restart()
   }
 
   function addClipboardEntry(entry) {
@@ -239,6 +246,16 @@ Item {
     root.openSelected(row)
   }
 
+  function primaryIndex(index) {
+    if (root.autoPaste) root.activateIndex(index)
+    else root.copyIndex(index)
+  }
+
+  function secondaryIndex(index) {
+    if (root.autoPaste) root.copyIndex(index)
+    else root.activateIndex(index)
+  }
+
   function applySelected(row) {
     if (!row) return
     root.opened = false
@@ -266,6 +283,13 @@ Item {
   }
 
   Component.onCompleted: initProc.running = true
+
+  Timer {
+    id: gcTimer
+    interval: 1000
+    repeat: false
+    onTriggered: Quickshell.execDetached([root.gcScript])
+  }
 
   ListModel { id: displayModel }
 
@@ -419,11 +443,9 @@ Item {
             root.selectAbsolute(displayModel.count - 1)
             event.accepted = true
           } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            // Walker-style: Enter only copies to the clipboard; Shift+Enter
-            // additionally auto-pastes into the focused window.
             if (root.cursorActive && (event.modifiers & Qt.AltModifier)) root.openIndex(root.selectedIndex)
-            else if (root.cursorActive && (event.modifiers & Qt.ShiftModifier)) root.activateIndex(root.selectedIndex)
-            else if (root.cursorActive) root.copyIndex(root.selectedIndex)
+            else if (root.cursorActive && (event.modifiers & Qt.ShiftModifier)) root.secondaryIndex(root.selectedIndex)
+            else if (root.cursorActive) root.primaryIndex(root.selectedIndex)
             else if (displayModel.count > 0) root.cursorActive = true
             event.accepted = true
           } else if (event.text && event.text.length === 1 && event.text.charCodeAt(0) >= 32 && event.text.charCodeAt(0) !== 127) {
@@ -471,6 +493,7 @@ Item {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             text: (root.imagesOnly ? "[images] " : "") + (root.filterText || (root.imagesOnly ? "Search image text…" : "Search clipboard…"))
+            textFormat: Text.PlainText
             color: root.foreground
             opacity: root.filterText ? 1 : 0.58
             font.family: root.fontFamily
@@ -538,6 +561,9 @@ Item {
                       width: parent.width - (parent.parent.previewImage.length > 0 ? parent.height + parent.spacing : 0)
                       height: parent.height
                       text: parent.parent.previewText
+                      // Clipboard content is untrusted: AutoText would parse
+                      // copied HTML markup and load remote images from it.
+                      textFormat: Text.PlainText
                       color: parent.parent.hasCursor ? root.selectedText : root.foreground
                       font.family: root.fontFamily
                       font.pixelSize: Style.font.title
@@ -558,7 +584,7 @@ Item {
                     onClicked: {
                       root.cursorActive = true
                       root.selectedIndex = row.index
-                      root.copyIndex(row.index)
+                      root.primaryIndex(row.index)
                     }
                   }
                 }
@@ -588,6 +614,7 @@ Item {
                 anchors.topMargin: 0
                 anchors.bottomMargin: 0
                 text: parent.activeRow ? parent.activeRow.fullText : ""
+                textFormat: Text.PlainText
                 color: root.foreground
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.title
@@ -631,6 +658,7 @@ Item {
               text: root.history.length === 0 ? "Clipboard is empty"
                 : (root.imagesOnly && !root.filterText ? "No images in history"
                 : "No matches for “" + root.filterText + "”")
+              textFormat: Text.PlainText
               color: root.foreground
               opacity: 0.7
               font.family: root.fontFamily

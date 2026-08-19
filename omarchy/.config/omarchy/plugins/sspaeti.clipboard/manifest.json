@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
   "id": "sspaeti.clipboard",
-  "name": "My Clipboard",
-  "version": "1.0.0",
-  "author": "Omarchy",
-  "description": "A clipboard manager to view and paste history",
+  "name": "Clipboard with OCR",
+  "version": "1.1.0",
+  "author": "Simon Späti",
+  "license": "MIT",
+  "description": "A clipboard manager to view and paste history with OCR, Image only search, and paste to clipboard only (no direct paste)",
   "kinds": [
     "overlay"
   ],

@@ -80,7 +80,9 @@
       "id": "sspaeti.clipboard",
       "historyLimit": 800,
       "maxRows": 100,
-      "ocr": true
+      "autoPaste": false,
+      "ocr": true,
+      "ocrLang": "eng+deu"
     }
   ],
   "version": 1,

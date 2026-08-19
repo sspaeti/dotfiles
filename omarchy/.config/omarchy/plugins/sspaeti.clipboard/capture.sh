@@ -20,19 +20,22 @@ fi
 OCR_MAX_CHARS=4000
 SHELL_JSON="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/shell.json"
 
-# Disable with "ocr": false on this plugin's entry in shell.json plugins[].
-ocr_enabled() {
-  [[ -f $SHELL_JSON ]] || return 0
-  local value
-  value=$(jq -r '(.plugins // []) | map(select(.id == "sspaeti.clipboard")) | first | .ocr // true' "$SHELL_JSON" 2>/dev/null)
-  [[ $value != "false" ]]
+# Settings on this plugin's entry in shell.json plugins[]:
+#   "ocr": false          disables OCR
+#   "ocrLang": "eng+deu"  tesseract language(s), default eng
+plugin_setting() {
+  [[ -f $SHELL_JSON ]] || { printf '%s' "$2"; return; }
+  jq -r --arg key "$1" --arg default "$2" \
+    '(.plugins // []) | map(select(.id == "sspaeti.clipboard")) | first | .[$key] // $default' \
+    "$SHELL_JSON" 2>/dev/null || printf '%s' "$2"
 }
 
 ocr_image() {
-  local file="$1" text=""
-  ocr_enabled || return 0
+  local file="$1" text="" lang
+  [[ $(plugin_setting ocr true) != "false" ]] || return 0
   command -v tesseract >/dev/null 2>&1 || return 0
-  text=$(timeout 15s tesseract "$file" - 2>/dev/null | tr -s '[:space:]' ' ') || true
+  lang=$(plugin_setting ocrLang eng)
+  text=$(timeout 15s tesseract -l "$lang" "$file" - 2>/dev/null | tr -s '[:space:]' ' ') || true
   text="${text# }"
   text="${text% }"
   printf '%s' "${text:0:OCR_MAX_CHARS}"
