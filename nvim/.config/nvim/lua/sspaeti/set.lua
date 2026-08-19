@@ -35,7 +35,9 @@ if os.getenv("TMUX") then
       end, 50)
     end,
   })
-end-- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
+end
+
+-- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
 
 --set `filetype` in lua
 vim.cmd("filetype plugin indent on")
