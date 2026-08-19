@@ -123,7 +123,7 @@ o.bind("SUPER + CTRL + C", "Morgen", { launch = "morgen", focus = "Morgen" })
 
 hl.unbind("SUPER + CTRL + SPACE") -- default: Background switcher
 -- Edit the emoji list here: ~/.config/omarchy/plugins/sspaeti.emojis/emojis.json
--- Pasting is identical to the old script: omarchy-menu-emoji-insert does wl-copy + wtype shift+Insert.
+-- Selecting an emoji only copies it (wl-copy); paste manually with Ctrl+V.
 o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspaeti.emojis")
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
 o.bind("SUPER + SHIFT + ALT + F", "Fuzzy file content", ssp .. "/fuzzy-file-content.sh")

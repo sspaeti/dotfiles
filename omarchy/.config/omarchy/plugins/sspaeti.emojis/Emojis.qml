@@ -148,7 +148,8 @@ Item {
   function applySelected(emoji) {
     if (!emoji) return
     root.dismiss()
-    Quickshell.execDetached([root.omarchyPath + "/bin/omarchy-menu-emoji-insert", emoji])
+    // Copy only — no wtype Shift+Insert, paste manually
+    Quickshell.execDetached(["wl-copy", "--type", "text/plain", emoji])
   }
 
   ListModel { id: displayModel }
