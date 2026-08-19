@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "sspaeti.tuxedo-profile",
+  "name": "TUXEDO Profile",
+  "version": "1.0.0",
+  "author": "sspaeti",
+  "description": "Show and switch the TUXEDO Control Center profile (tccd)",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "TUXEDO Profile",
+    "description": "Left-click cycles TCC profiles, right-click opens TCC, middle-click restarts tccd (unstick 600 MHz lock)",
+    "category": "System",
+    "allowMultiple": false
+  }
+}

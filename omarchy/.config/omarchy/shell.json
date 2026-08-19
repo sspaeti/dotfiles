@@ -61,12 +61,15 @@
           "onRightClick": "omarchy-launch-or-focus tuxedo tuxedo-control-center"
         },
         {
+          "id": "sspaeti.tuxedo-profile"
+        },
+        {
           "id": "omarchy.power"
         }
       ]
     },
     "position": "top",
-    "transparent": false
+    "transparent": true
   },
   "idle": {
     "lock": 600,
