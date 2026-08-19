@@ -1,0 +1,3 @@
+#!/bin/sh
+# no-op shim: silences omarchy-notification-send during screenshot capture
+exit 0

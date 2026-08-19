@@ -35,7 +35,11 @@ fi
 # Suppress Quattro's own "click to edit" action: this wrapper opens the editor
 # itself, and by the time the notification is clicked the file has already been
 # moved into its monthly folder, so the path in that action would be stale.
-FILEPATH=$(OMARCHY_SCREENSHOT_EDITOR=true omarchy-capture-screenshot "$MODE" "$PROCESSING")
+#
+# Also silence the "Screenshot saved to clipboard and file" notification by
+# shimming a no-op omarchy-notification-send onto PATH for the capture call.
+SHIM_DIR="$(cd "$(dirname "$0")" && pwd)/no-notification-shim"
+FILEPATH=$(PATH="$SHIM_DIR:$PATH" OMARCHY_SCREENSHOT_EDITOR=true omarchy-capture-screenshot "$MODE" "$PROCESSING")
 
 # Cancelled selection (Esc) prints nothing.
 [[ -z $FILEPATH || ! -f $FILEPATH ]] && exit 0

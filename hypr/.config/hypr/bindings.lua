@@ -176,7 +176,7 @@ o.bind("SUPER + CTRL + ALT + C", "Cut-out image", ssp .. "/omapic-capture-cut.sh
 -- Screenshot with Satty -> Editt workflow
 o.bind("SUPER + ALT + CTRL + P", "Screenshot -> Satty -> Editt", ssp .. "/screenshot-edit.sh")
 
-local grim_screenshot = "grim " .. home .. [[/Pictures/Printscreen/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png && notify-send "Screenshot saved" && ]] .. ssp .. "/image-browser/auto-organize-screenshot.sh"
+local grim_screenshot = "grim " .. home .. [[/Pictures/Printscreen/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png && ]] .. ssp .. "/image-browser/auto-organize-screenshot.sh"
 
 -- o.bind("PRINT", "Screenshot", ssp .. "/omarchy-capture-screenshot output")
 hl.unbind("PRINT") -- default: Screenshot
