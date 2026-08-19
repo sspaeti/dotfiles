@@ -107,6 +107,11 @@ function SetThemeBasedOnTmuxSession(sessionThemes)
     session_name = session_name:gsub("%s+", "")
 
     local theme = sessionThemes[session_name] or sessionThemes["default"]
+    if theme == "Omarchy" then
+        -- follow the system theme from `omarchy theme set`, with hot reload
+        require("sspaeti.omarchy_theme").enable()
+        return
+    end
     vim.cmd("colorscheme " .. theme)
     
     -- Call the transparency function after setting the colorscheme

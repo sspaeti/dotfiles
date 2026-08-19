@@ -15,20 +15,25 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 
 
 -- define colorscheme based on session name
+-- "Omarchy" is a pseudo-theme: it follows the system theme set via
+-- `omarchy theme set`, incl. hot reload (see sspaeti/omarchy_theme.lua)
 local sessionThemes = {
-    ["work"]        = "gruvbox-material",
-    ["dotfiles"]    = "vague", 
-    ["de-projects"] = "kanagawa-paper",
-    ["dedp"]        = "rose-pine",
-    ["hugo-blog-brain-dedp"]        = "rose-pine",
-    ["default"]     = "kanagawa",  --required: default theme
+    -- temporarily disabled: use the Omarchy system theme everywhere
+    -- ["work"]        = "gruvbox-material",
+    -- ["dotfiles"]    = "vague",
+    -- ["de-projects"] = "kanagawa-paper",
+    -- ["dedp"]        = "rose-pine",
+    -- ["hugo-blog-brain-dedp"]        = "rose-pine",
+    ["default"]     = "Omarchy",  --required: default theme
 }
 
 
 --lazy stuff
 require("lazy").setup({ { import = "sspaeti.plugins" }, { import = "sspaeti.plugins.lsp" } }, {
   install = {
-    colorscheme = { sessionThemes["default"] },
+    -- "Omarchy" is not a real colorscheme, so give lazy real fallbacks
+    -- for the install screen (aether = Omarchy 4 stock theme engine)
+    colorscheme = { "aether", "kanagawa" },
   },
   checker = {
     enabled = false, --shoots 10's of lookups to github for checking if new update...
