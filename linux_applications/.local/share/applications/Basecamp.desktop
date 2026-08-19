@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Basecamp
-Exec=omarchy-launch-webapp https://launchpad.37signals.com
+Exec=omarchy-launch-webapp https://app.basecamp.com/5803421/projects/38153828
 Terminal=false
 Type=Application
 Icon=basecamp
