@@ -164,7 +164,6 @@ omarchy-keyring 20251027-1
 omarchy-nvim 2026.8.13-1
 omarchy-settings 4.0.0-1
 omawrite 0.5.0-1
-openai-codex-desktop 26.803.81509-8.1
 openbsd-netcat 1.238_1-1
 pacman-contrib 1.13.1-1
 pamixer 1.6-4

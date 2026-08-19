@@ -164,7 +164,6 @@ omarchy-keyring
 omarchy-nvim
 omarchy-settings
 omawrite
-openai-codex-desktop
 openbsd-netcat
 pacman-contrib
 pamixer

@@ -28,7 +28,6 @@ python-kitchen
 python-taskw
 sesh-bin
 slack-desktop
-tuxedo-control-center-bin
 tuxedo-drivers-dkms
 tuxedo-yt6801-dkms-git
 vencord
