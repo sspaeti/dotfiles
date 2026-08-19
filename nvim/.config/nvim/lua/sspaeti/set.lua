@@ -15,7 +15,27 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.colorcolumn = "100"
 
--- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
+-- tmux grid corruption workaround (see tmux/.config/tmux/tmux-nvim-repaint.sh
+-- for the zoom/session-switch side): closing telescope also leaves its float
+-- colors in tmux's grid. `redraw!` can't fix it (the TUI skips cells it thinks
+-- are correct); `mode` repaints unconditionally. Trigger it when a telescope
+-- window closes; debounced since telescope closes prompt/results/preview.
+if os.getenv("TMUX") then
+  local pending = false
+  vim.api.nvim_create_autocmd("WinClosed", {
+    group = vim.api.nvim_create_augroup("TmuxRepaintOnTelescopeClose", { clear = true }),
+    callback = function(ev)
+      if not vim.bo[ev.buf].filetype:match("^Telescope") or pending then
+        return
+      end
+      pending = true
+      vim.defer_fn(function()
+        pending = false
+        vim.cmd("mode")
+      end, 50)
+    end,
+  })
+end-- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
 
 --set `filetype` in lua
 vim.cmd("filetype plugin indent on")
