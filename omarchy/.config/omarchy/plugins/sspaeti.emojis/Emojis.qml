@@ -139,17 +139,23 @@ Item {
     root.rebuildDisplay()
   }
 
-  function activateIndex(index) {
+  function activateIndex(index, paste) {
     if (index < 0 || index >= displayModel.count) return
     var row = displayModel.get(index)
-    root.applySelected(row.emoji)
+    root.applySelected(row.emoji, paste)
   }
 
-  function applySelected(emoji) {
+  function applySelected(emoji, paste) {
     if (!emoji) return
     root.dismiss()
-    // Copy only — no wtype Shift+Insert, paste manually
-    Quickshell.execDetached(["wl-copy", "--type", "text/plain", emoji])
+    if (paste)
+      // Type the emoji directly via wtype (after focus returns to the app) —
+      // avoids omarchy-menu-emoji-insert's Shift+Insert race that pastes stale
+      // clipboard content. Also copies it as a fallback.
+      Quickshell.execDetached(["sh", "-c", 'printf %s "$1" | wl-copy --type text/plain; sleep 0.2; wtype "$1"', "emoji-paste", emoji])
+    else
+      // Copy only — no wtype Shift+Insert, paste manually
+      Quickshell.execDetached(["wl-copy", "--type", "text/plain", emoji])
   }
 
   ListModel { id: displayModel }
@@ -223,7 +229,8 @@ Item {
             root.selectPage(1)
             event.accepted = true
           } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            if (root.cursorActive) root.activateIndex(root.selectedIndex)
+            // Enter copies to clipboard; Shift+Enter pastes directly
+            if (root.cursorActive) root.activateIndex(root.selectedIndex, (event.modifiers & Qt.ShiftModifier) !== 0)
             else if (displayModel.count > 0) root.cursorActive = true
             event.accepted = true
           } else if (event.text && event.text.length === 1 && event.text.charCodeAt(0) >= 32 && event.text.charCodeAt(0) !== 127) {
@@ -302,10 +309,11 @@ Item {
                   root.cursorActive = true
                   root.selectedIndex = index
                 }
-                onClicked: {
+                onClicked: function(mouse) {
                   root.cursorActive = true
                   root.selectedIndex = index
-                  root.activateIndex(index)
+                  // Click copies to clipboard; Shift+Click pastes directly
+                  root.activateIndex(index, (mouse.modifiers & Qt.ShiftModifier) !== 0)
                 }
               }
             }
