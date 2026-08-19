@@ -27,6 +27,9 @@ o.exec_on_start(ssp .. "/autostart-apps.sh")
 -- Restore personal background if in personal mode (overrides Omarchy's swaybg)
 o.exec_on_start(ssp .. "/bg-mode-toggle.sh restore")
 
+-- Reset monitor profile to auto-detection on cable plug/unplug (see monitors.lua)
+o.exec_on_start(ssp .. "/monitor-hotplug-watcher.sh")
+
 -- Morgen calendar: do NOT launch it here.
 -- QUATTRO/uwsm now runs XDG autostart entries, so ~/.config/autostart/morgen.desktop
 -- ("Exec=/opt/Morgen/morgen --hidden") already starts it in the background as

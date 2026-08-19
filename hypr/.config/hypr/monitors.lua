@@ -1,25 +1,23 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 -- List current monitors and supported resolutions with: hyprctl monitors all
+--
+-- HOW THIS FILE WORKS
+--   1. Every monitor I own is defined ONCE below (matched by description, not port).
+--   2. A "profile" (home / office / laptop / hdmi...) picks layout + workspaces.
+--   3. The chosen profile is PERSISTED to ~/.local/state/omarchy/monitor-profile,
+--      so Hyprland reloads (e.g. omarchy theme changes) keep the current setup.
+--   4. On every reload the stored profile is validated against the monitors that
+--      are actually connected; if it no longer fits (cable pulled, different
+--      desk), it falls back to auto-detection: home Dell -> HOME, work Dell ->
+--      OFFICE, none -> laptop only.
+--   5. ~/.config/hypr/sspaeti/monitor-hotplug-watcher.sh (autostart) clears the
+--      stored profile and reloads whenever a monitor is plugged/unplugged, so
+--      cable events always re-run auto-detection.
 
 local omarchy_gdk_scale = 2
-local omarchy_monitor_scale = 1.6
 
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy_monitor_scale })
-
--- Configure a specific monitor.
--- hl.monitor({ output = "DP-2", mode = "2560x1440@144", position = "0x0", scale = 1 })
-
--- Portrait/rotated secondary monitor (transform: 1 = 90°, 3 = 270°).
--- hl.monitor({ output = "DP-2", mode = "preferred", position = "auto", scale = 1, transform = 1 })
-
--- ---------------------------------------------------------------------------------------
--- Everything below is converted from the old monitors.conf.
---
--- NOTE: the old config set `env = GDK_SCALE,1.75` (for 4k). The Omarchy default
--- above sets 2. Change `omarchy_gdk_scale` to 1.75 if the old value worked better.
--- You must relaunch Hyprland after changing envs (use Super+Esc, then Relaunch).
--- ---------------------------------------------------------------------------------------
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.6 })
 
 -- ============================================================================
 -- SINGLE SOURCE OF TRUTH
@@ -32,14 +30,14 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = omarchy
 -- monitor is currently plugged into. Confirm description with: hyprctl monitors
 
 -- --- HOME Dell (Dell S2722QC, 27" 4K UHD) ---
-local dell_home_port = "desc:Dell Inc. DELL S2722QC"
+local dell_home_match = "S2722QC" -- unique substring, used for auto-detection
+local dell_home_port = "desc:Dell Inc. DELL " .. dell_home_match
 local dell_home_res = "3840x2160@60"
 local dell_home_scale = 1.6
 
 -- --- WORK Dell (Dell S2725QC, 4K UHD) ---
--- TODO: verify exact description at office (hyprctl monitors -j)
--- local dell_work_port = "desc:Dell Inc. DELL S2722QC 89CQLD3"
-local dell_work_port = "desc:Dell Inc. DELL S2725QC DTFF464"
+local dell_work_match = "S2725QC"
+local dell_work_port = "desc:Dell Inc. DELL " .. dell_work_match .. " DTFF464"
 local dell_work_res = "3840x2160@60"
 local dell_work_scale = 1.6
 
@@ -71,24 +69,14 @@ local pos_office_laptop = string.format("%dx%d", dell_w, math.floor((dell_h - la
 local pos_standalone_laptop = "0x0" -- laptop standalone
 local pos_hdmi_laptop = "1920x0" -- laptop right of HDMI (extended)
 
--- --- Workspace assignment is dynamic ---
--- At boot, workspaces 1-5 default to dell_home_port (see bottom of file).
--- When you press SUPER+ALT+7 (home) or SUPER+ALT+8 (office), the keybind
--- reassigns workspaces 1-5 to whichever Dell port is in use, so you only
--- ever need to update dell_home_port or dell_work_port above.
-
--- --- Composable helpers (replaces the old hyprctl --batch fragments) ---
+-- --- Composable helpers ---
 local function assign_workspaces(first, last, monitor)
   for ws = first, last do
     hl.workspace_rule({ workspace = tostring(ws), monitor = monitor })
   end
 end
 
-local function notify(title, body)
-  hl.exec_cmd("notify-send " .. o.shell_quote(title) .. " " .. o.shell_quote(body))
-end
-
--- Monitor layouts
+-- ===== MONITOR LAYOUTS =====
 local function layout_home()
   hl.monitor({ output = dell_home_port, mode = dell_home_res, position = pos_ext_top_left, scale = dell_home_scale })
   hl.monitor({ output = laptop, mode = laptop_res, position = pos_home_laptop, scale = laptop_scale })
@@ -115,101 +103,204 @@ local function layout_laptop_only()
   hl.monitor({ output = laptop, mode = laptop_res, position = pos_standalone_laptop, scale = laptop_scale })
 end
 
--- Monitor and Screen resolution --TUXEDO
---
--- Desc for 4: For example, if you have a 27" or 32" 4K, you can use fractional
--- scaling (GDK_SCALE 1.75 and monitor scale 1.666667).
--- Fallback: the `output = ""` monitor at the top of this file covers everything else.
+local function layout_hdmi_mirror()
+  hl.monitor({ output = hdmi, mode = "preferred", position = "auto", scale = "auto" })
+  hl.monitor({ output = laptop, mode = laptop_res, position = "0x0", scale = laptop_scale, mirror = hdmi })
+end
 
--- ===== STATIC MONITOR DEFINITIONS =====
--- These apply when Hyprland starts
+local function layout_hdmi_ext()
+  hl.monitor({ output = hdmi, mode = "preferred", position = "0x0", scale = "auto" })
+  hl.monitor({ output = laptop, mode = laptop_res, position = pos_hdmi_laptop, scale = laptop_scale })
+end
 
--- -- External Dell 4K monitor (works for both home and office)
--- hl.monitor({ output = dell_home_port, mode = dell_home_res, position = pos_ext_top_left, scale = dell_home_scale })
+-- ===== PROFILES =====
+-- `needs` names a key from detect_monitors(); if that monitor is not connected
+-- anymore, the stored profile is discarded and auto-detection takes over.
+local profiles = {
+  home = {
+    needs = "home_dell",
+    apply = function()
+      layout_home()
+      assign_workspaces(1, 5, dell_home_port)
+      assign_workspaces(6, 10, laptop)
+    end,
+  },
+  home_ext = {
+    needs = "home_dell",
+    apply = function()
+      layout_home_ext_only()
+      assign_workspaces(1, 10, dell_home_port)
+    end,
+  },
+  office = {
+    needs = "work_dell",
+    apply = function()
+      layout_office()
+      assign_workspaces(1, 5, dell_work_port)
+      assign_workspaces(6, 10, laptop)
+    end,
+  },
+  office_ext = {
+    needs = "work_dell",
+    apply = function()
+      layout_office_ext_only()
+      assign_workspaces(1, 10, dell_work_port)
+    end,
+  },
+  laptop = {
+    apply = function()
+      layout_laptop_only()
+      assign_workspaces(1, 10, laptop)
+    end,
+  },
+  hdmi_mirror = {
+    needs = "hdmi",
+    apply = function()
+      layout_hdmi_mirror()
+      assign_workspaces(1, 10, laptop)
+    end,
+  },
+  hdmi_ext = {
+    needs = "hdmi",
+    apply = function()
+      layout_hdmi_ext()
+      assign_workspaces(1, 10, laptop)
+    end,
+  },
+}
 
--- -- TUXEDO laptop internal screen (default) - append mirror for demo-presentations
--- hl.monitor({ output = laptop, mode = laptop_res, position = pos_home_laptop, scale = laptop_scale })
+-- ===== PERSISTENCE + AUTO-DETECTION =====
+local state_file = (os.getenv("HOME") or "") .. "/.local/state/omarchy/monitor-profile"
 
--- MIRROR for PRESENTATIONs -> Comment out above and use below. Check with `hyprctl monitors`
--- -1 DisplayPort:
--- hl.monitor({ output = laptop, mode = laptop_res, position = "0x0", scale = laptop_scale, mirror = dell_home_port })
--- -2 HDMI:
--- hl.monitor({ output = laptop, mode = laptop_res, position = "0x0", scale = laptop_scale, mirror = hdmi })
+local function read_stored_profile()
+  local f = io.open(state_file, "r")
+  if not f then
+    return nil
+  end
+  local line = f:read("*l")
+  f:close()
+  return line and line:match("%S+")
+end
 
--- SUPER+ALT+0 for autosetup for presentation
--- Manual Setup: Use `hyprmon` to setup screen
+-- Detect connected monitors from sysfs (DRM connector status + EDID model
+-- string). Deliberately NOT `hyprctl monitors`: this code runs while Hyprland
+-- parses the config, and Hyprland cannot answer its own IPC mid-reload
+-- (deadlocks until timeout). sysfs is always readable, even at first boot.
+local function read_file(path)
+  local f = io.open(path, "rb")
+  if not f then
+    return nil
+  end
+  local content = f:read("*a")
+  f:close()
+  return content
+end
 
--- ===== DYNAMIC LAYOUT SWITCHING =====
--- Only the POSITION changes between home and office
+local function detect_monitors()
+  local h = io.popen("ls -d /sys/class/drm/card*-* 2>/dev/null")
+  if not h then
+    return nil
+  end
+  local listing = h:read("*a") or ""
+  h:close()
+  if listing == "" then
+    return nil
+  end
+
+  local present = { home_dell = false, work_dell = false, hdmi = false }
+  for dir in listing:gmatch("[^\n]+") do
+    local status = read_file(dir .. "/status") or ""
+    if status:find("^connected") then
+      local edid = read_file(dir .. "/edid") or ""
+      if edid:find(dell_home_match, 1, true) then
+        present.home_dell = true
+      end
+      if edid:find(dell_work_match, 1, true) then
+        present.work_dell = true
+      end
+      -- connector name, e.g. card1-HDMI-A-1 -> HDMI-A-1
+      if dir:match("card%d+%-HDMI") then
+        present.hdmi = true
+      end
+    end
+  end
+  return present
+end
+
+local function resolve_profile()
+  local present = detect_monitors()
+  if not present then
+    return nil -- sysfs unreadable: leave static defaults in place
+  end
+
+  local stored = read_stored_profile()
+  local profile = stored and profiles[stored]
+  if profile and profile.needs and not present[profile.needs] then
+    profile = nil -- stored profile no longer matches connected hardware
+  end
+
+  if not profile then
+    if present.home_dell then
+      profile = profiles.home
+    elseif present.work_dell then
+      profile = profiles.office
+    else
+      profile = profiles.laptop
+    end
+  end
+
+  return profile
+end
+
+-- ===== KEYBINDS: pick a profile =====
+-- Each bind only persists the profile name and reloads -- the layout itself is
+-- applied by resolve_profile() above, so keypress and reload share ONE code path.
 --
 -- NOTE: SUPER+ALT+1..5 are Omarchy defaults ("Switch to group window N"), so
 -- they are unbound first. SUPER+ALT+7/8/9/0 were free.
+local state_file_q = o.shell_quote(state_file)
 
--- SUPER ALT 7: HOME setup (external above, laptop below) -- Toggle to HOME setup
-o.bind("SUPER + ALT + 7", "Home Setup", function()
-  layout_home()
-  assign_workspaces(1, 5, dell_home_port)
-  assign_workspaces(6, 10, laptop)
-  notify("Monitor Setup", "HOME: External above laptop")
-end)
+local function bind_profile(keys, description, profile_name, message)
+  local cmd = "printf '%s' "
+    .. profile_name
+    .. " > "
+    .. state_file_q
+    .. " && hyprctl reload"
+    .. " && notify-send 'Monitor Setup' "
+    .. o.shell_quote(message)
+  o.bind(keys, description, "sh -c " .. o.shell_quote(cmd))
+end
+
+bind_profile("SUPER + ALT + 7", "Home Setup", "home", "HOME: External above laptop")
 
 hl.unbind("SUPER + ALT + code:10") -- default: Switch to group window 1
-o.bind("SUPER + ALT + 1", "Home Ext Only", function()
-  layout_home_ext_only()
-  assign_workspaces(1, 5, dell_home_port)
-  notify("Monitor Setup", "HOME: External only")
-end)
+bind_profile("SUPER + ALT + 1", "Home Ext Only", "home_ext", "HOME: External only")
 
--- SUPER ALT 8: OFFICE setup (external left, laptop right) -- Toggle to OFFICE setup
-o.bind("SUPER + ALT + 8", "Office Setup", function()
-  layout_office()
-  assign_workspaces(1, 5, dell_work_port)
-  assign_workspaces(6, 10, laptop)
-  notify("Monitor Setup", "OFFICE: Laptop right of external")
-end)
+bind_profile("SUPER + ALT + 8", "Office Setup", "office", "OFFICE: Laptop right of external")
 
 hl.unbind("SUPER + ALT + code:11") -- default: Switch to group window 2
-o.bind("SUPER + ALT + 2", "Office Ext Only", function()
-  layout_office_ext_only()
-  assign_workspaces(1, 5, dell_work_port)
-  notify("Monitor Setup", "OFFICE: External only")
-end)
+bind_profile("SUPER + ALT + 2", "Office Ext Only", "office_ext", "OFFICE: External only")
 
--- SUPER ALT 9: Laptop only (disable both externals)
-o.bind("SUPER + ALT + 9", "Laptop Only", function()
-  layout_laptop_only()
-  assign_workspaces(1, 5, laptop)
-  notify("Monitor Setup", "Laptop only mode")
-end)
+bind_profile("SUPER + ALT + 9", "Laptop Only", "laptop", "Laptop only mode")
 
--- SUPER ALT 0: Auto setup (reset to defaults)
-o.bind("SUPER + ALT + 0", "Auto Setup", function()
-  hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
-  notify("Monitor Setup", "AUTO setup")
-end)
-
--- ===== HDMI SHORTCUTS =====
--- TODO: Check when connected it shows up as HDMI-A-1 or HDMI-1
--- SUPER ALT 4: Mirror internal laptop to HDMI (for presentations)
 hl.unbind("SUPER + ALT + code:13") -- default: Switch to group window 4
-o.bind("SUPER + ALT + 4", "HDMI Mirror", function()
-  hl.monitor({ output = hdmi, mode = "preferred", position = "auto", scale = "auto" })
-  hl.monitor({ output = laptop, mode = laptop_res, position = "0x0", scale = laptop_scale, mirror = hdmi })
-  notify("Monitor Setup", "HDMI: Mirrored display")
-end)
+bind_profile("SUPER + ALT + 4", "HDMI Mirror", "hdmi_mirror", "HDMI: Mirrored display")
 
--- SUPER ALT 5: Extended display with HDMI (laptop + HDMI side by side)
 hl.unbind("SUPER + ALT + code:14") -- default: Switch to group window 5
-o.bind("SUPER + ALT + 5", "HDMI Extended", function()
-  hl.monitor({ output = hdmi, mode = "preferred", position = "0x0", scale = "auto" })
-  hl.monitor({ output = laptop, mode = laptop_res, position = pos_hdmi_laptop, scale = laptop_scale })
-  notify("Monitor Setup", "HDMI: Extended display")
-end)
+bind_profile("SUPER + ALT + 5", "HDMI Extended", "hdmi_ext", "HDMI: Extended display")
+
+-- SUPER ALT 0: back to auto-detection (clears the stored profile)
+o.bind(
+  "SUPER + ALT + 0",
+  "Auto Setup",
+  "sh -c "
+    .. o.shell_quote(
+      "rm -f " .. state_file_q .. " && hyprctl reload && notify-send 'Monitor Setup' 'AUTO: detected from connected monitors'"
+    )
+)
 
 -- Cycle monitor scaling with SUPER + CTRL + / (slash)
--- QUATTRO: omarchy-hyprland-monitor-scaling-cycle is gone; it is now
--- `omarchy-hyprland-monitor-scaling up|down` (also on SUPER+SLASH / SUPER+ALT+SLASH
--- by default, but those are taken by 1Password here).
+-- (omarchy default SUPER+SLASH / SUPER+ALT+SLASH are taken by 1Password here)
 o.bind("SUPER + CTRL + SLASH", "Monitor scaling up", "omarchy-hyprland-monitor-scaling up")
 o.bind("SUPER + CTRL + ALT + SLASH", "Monitor scaling down", "omarchy-hyprland-monitor-scaling down")
 
@@ -218,27 +309,14 @@ o.bind("SUPER + CTRL + ALT + SLASH", "Monitor scaling down", "omarchy-hyprland-m
 -- - **1.5 (seem best)**: 2560x1440 effective - Perfect balance ✅
 -- - **2.0**: 1920x1080 effective - Too large, wastes the 4K resolution
 
--- ===== WORKSPACE ASSIGNMENT =====
--- Boot defaults: workspaces 1-5 on dell_home_port. SUPER+ALT+7/8 reassign at runtime.
+-- ===== STATIC DEFAULTS + PROFILE APPLICATION =====
+-- Base workspace split (overridden by the profile below when IPC is ready).
+-- Hyprland already falls back to an available monitor when the one named in a
+-- workspace rule is not connected, so no extra fallback rules are needed.
 assign_workspaces(1, 5, dell_home_port)
-
--- Workspaces 6-10 on laptop screen (eDP-1)
 assign_workspaces(6, 10, laptop)
 
--- Fallback: when no external monitor, all workspaces on laptop
---
--- The old monitors.conf repeated `workspace = 1..5, monitor:$laptop, default:true`
--- here as a fallback. That does NOT translate: hl.workspace_rule() is keyed by
--- workspace, so a second call for the same workspace REPLACES the first one --
--- re-adding these lines pins workspaces 1-5 to eDP-1 permanently and the Dell
--- never gets them. Hyprland already falls back to an available monitor when the
--- one named in the rule is not connected, so no fallback rule is needed.
-
--- HOME SETUP: External monitor (top) - Dell S2722QC at native 4K resolution
--- Laptop screen on the bottom
---   hl.monitor({ output = "DP-1", mode = "3840x2160@60", position = "0x0", scale = 1.5 })
---   hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x1440", scale = 1.5 })
-
--- OFFICE SETUP: Dell display to the left of laptop
---   hl.monitor({ output = "DP-1", mode = "3840x2160@60", position = "0x0", scale = 1.5 })
---   hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "2560x0", scale = 1.25 })
+local profile = resolve_profile()
+if profile then
+  profile.apply()
+end
