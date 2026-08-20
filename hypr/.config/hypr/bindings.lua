@@ -172,7 +172,8 @@ o.bind("SUPER + ALT + P", "Screenshot", ssp .. "/omasnap-capture.sh")
 o.bind("SUPER + ALT + SHIFT + P", "Screenshot (copy only)", ssp .. "/omasnap-capture.sh --copy")
 -- o.bind("ALT + PRINT", "Screenrecording", "omarchy-menu screenrecord")
 -- o.bind("SUPER + PRINT", "Color picking", "pkill hyprpicker || hyprpicker -a")
-o.bind("SUPER + CTRL + ALT + C", "Cut-out image", ssp .. "/omapic-capture-cut.sh")
+o.bind("SUPER + ALT + CTRL + X", "Cut-out image (omapic)", ssp .. "/omapic-capture-cut.sh")
+o.bind("SUPER + ALT + CTRL + C", "Copy last screenshot path", ssp .. "/copy-last-screenshot-path.sh")
 
 -- Fallback: previous default flow (omarchy capture -> Tensaku -> organize).
 -- The old Satty -> Editt script (screenshot-edit.sh) is dead: satty is gone.
