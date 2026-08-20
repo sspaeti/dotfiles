@@ -161,8 +161,10 @@ Item {
   ListModel { id: displayModel }
 
   FileView {
-    path: root.omarchyPath + "/shell/plugins/emojis/emojis.json"
+    path: Quickshell.env("HOME") + "/.config/omarchy/plugins/sspaeti.emojis/emojis.json"
+    watchChanges: true
     onLoaded: root.loadEmojis(text())
+    onFileChanged: reload()
   }
   PanelWindow {
     id: panel
