@@ -22,8 +22,8 @@ organize_screenshot() {
     mv "$screenshot_path" "$destination"
     echo "Screenshot organized: $destination"
     
-    # Optional: Add to OCR index immediately (background smart update)
-    nohup "$PICTURES_DIR/screenshot-indexer-parallel.sh" --smart >/dev/null 2>&1 &
+    # OCR happens in the sspaeti.clipboard plugin on clipboard images; the
+    # old screenshot-indexer script is retired and must not be triggered.
 }
 
 # If called with a screenshot path argument

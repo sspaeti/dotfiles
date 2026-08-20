@@ -24,16 +24,7 @@ MONTH_DIR="$HOME/Pictures/Printscreen/$(date +%Y-%m)"
 mkdir -p "$MONTH_DIR"
 export OMASNAP_SCREENSHOT_DIR="$MONTH_DIR"
 
-# Anything saved after this marker was produced by this invocation.
-MARKER=$(mktemp -t omasnap-capture.XXXXXX)
-trap 'rm -f "$MARKER"' EXIT
-
 # The no-op omarchy-notification-send shim silences the saved/copied toast.
+# OCR happens in the sspaeti.clipboard plugin when the image hits the
+# clipboard — the old screenshot-indexer script stays retired.
 PATH="$SSP_DIR/no-notification-shim:$PATH" omasnap "$@"
-
-# Same background OCR-index hook auto-organize-screenshot.sh uses.
-INDEXER="$SSP_DIR/image-browser/screenshot-indexer-parallel.sh"
-if [[ -x $INDEXER ]] &&
-  find "$MONTH_DIR" -maxdepth 1 -name '*.png' -newer "$MARKER" | grep -q .; then
-  nohup "$INDEXER" --smart >/dev/null 2>&1 &
-fi
