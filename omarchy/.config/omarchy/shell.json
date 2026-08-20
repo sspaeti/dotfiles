@@ -81,7 +81,7 @@
     },
     {
       "id": "sspaeti.clipboard",
-      "historyLimit": 800,
+      "historyLimit": 2000,
       "maxRows": 100,
       "autoPaste": false,
       "ocr": true,
