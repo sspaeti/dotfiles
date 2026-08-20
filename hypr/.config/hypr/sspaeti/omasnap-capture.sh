@@ -13,6 +13,10 @@
 # is open dismisses that overlay and exits without capturing, so a second
 # hotkey press closes the picker and the index check below finds nothing.
 
+# Hyprland's session PATH puts /usr/bin before ~/.local/bin, which would
+# resolve the pacman omasnap instead of the locally installed fork build.
+export PATH="$HOME/.local/bin:$PATH"
+
 MONTH_DIR="$HOME/Pictures/Printscreen/$(date +%Y-%m)"
 mkdir -p "$MONTH_DIR"
 export OMASNAP_SCREENSHOT_DIR="$MONTH_DIR"
