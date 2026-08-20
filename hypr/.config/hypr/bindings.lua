@@ -235,3 +235,26 @@ o.bind("SUPER + SHIFT + X", "Bluesky", { webapp = "https://blue.ssp.sh" })
 hl.unbind("SUPER + SHIFT + Z")
 o.bind("SUPER + SHIFT + Z", "Edge light", home .. "/.local/bin/wayland-edge-light-videocalls/launch-edgelight.sh")
 -- o.bind("SUPER + SHIFT + ALT + Z", "Position edge light", home .. "/.local/bin/wayland-edge-light-videocalls/position-window-in-border.sh")
+
+-- Screen zoom for video recording (magnifies around cursor on the focused
+-- monitor, layout/scale untouched -- shows up in screen recordings).
+-- Omarchy default SUPER+CTRL+Z jumps in whole steps (1 -> 2 -> 3); these use
+-- smooth x1.25 steps instead, and zoom out snaps back to exactly 1 when close.
+local function zoom_step(factor)
+  return function()
+    local zoom = (hl.get_config("cursor.zoom_factor") or 1) * factor
+    if zoom > 5 then
+      zoom = 5
+    elseif zoom < 1.05 then
+      zoom = 1
+    end
+    hl.config({ cursor = { zoom_factor = zoom } })
+  end
+end
+o.bind("SUPER + CTRL + EQUAL", "Zoom in", zoom_step(1.25))
+o.bind("SUPER + CTRL + MINUS", "Zoom out", zoom_step(1 / 1.25))
+o.bind("SUPER + CTRL + mouse_up", "Zoom in (scroll)", zoom_step(1.25))
+o.bind("SUPER + CTRL + mouse_down", "Zoom out (scroll)", zoom_step(1 / 1.25))
+o.bind("SUPER + CTRL + BACKSPACE", "Zoom reset", function()
+  hl.config({ cursor = { zoom_factor = 1 } })
+end)

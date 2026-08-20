@@ -13,11 +13,16 @@
 --   5. ~/.config/hypr/sspaeti/monitor-hotplug-watcher.sh (autostart) clears the
 --      stored profile and reloads whenever a monitor is plugged/unplugged, so
 --      cable events always re-run auto-detection.
+--   6. MANUAL MODE (SUPER+ALT+3): snapshots the CURRENT live monitor settings
+--      (after tweaking scale/resolution, e.g. for screen recording) into
+--      ~/.local/state/omarchy/.monitor-manual and stores profile "manual", so
+--      reloads keep the tweaked setup instead of snapping back to a profile.
+--      Any profile keybind, SUPER+ALT+0, or a cable change exits manual mode
+--      through the existing state-file paths -- nothing extra to clean up.
 
 local omarchy_gdk_scale = 2
 
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.6 })
 
 -- ============================================================================
 -- SINGLE SOURCE OF TRUTH
@@ -48,6 +53,23 @@ local laptop_scale = 1.6
 
 -- --- HDMI (check with `hyprctl monitors` whether it is HDMI-A-1 or HDMI-1) ---
 local hdmi = "HDMI-A-1"
+
+-- --- Catch-all for unknown monitors ---
+-- The scale is `laptop_scale` (a bare variable, not a literal) for TWO reasons:
+--   1. omarchy-hyprland-monitor-scaling sed-rewrites a literal `scale = <n>`
+--      on this line; that file write makes Hyprland auto-reload and re-apply
+--      the profile, instantly reverting the very scale change just made.
+--      A variable dodges its regex.
+--   2. omarchy-hyprland-monitor-clamshell (run by omarchy-hyprland-monitor-watch
+--      after every monitor event, with 1/3/7s delayed retries) TEXT-PARSES this
+--      file for the internal monitor's "configured" scale. Our eDP-1 rules use
+--      `output = laptop`, which its parser can't match, so it falls back to this
+--      catch-all. It CAN resolve a bare word via `local laptop_scale = 1.6`, so
+--      pointing it here keeps its desired scale == what the profiles apply.
+--      Otherwise it force-evals eDP-1 back to `position = auto` at the stale
+--      scale a few seconds after every profile switch (laptop ends up right of
+--      the Dell instead of below it).
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = laptop_scale })
 
 -- --- Logical (scaled) sizes ---
 -- Hyprland `position` is in SCALED coordinates, not native pixels. So every
@@ -171,6 +193,9 @@ local profiles = {
 
 -- ===== PERSISTENCE + AUTO-DETECTION =====
 local state_file = (os.getenv("HOME") or "") .. "/.local/state/omarchy/monitor-profile"
+-- Snapshot of live monitor settings, written by SUPER+ALT+3 (manual mode).
+-- One monitor per line: "<name> <WxH@Hz> <XxY> <scale>" or "<name> disabled".
+local manual_file = (os.getenv("HOME") or "") .. "/.local/state/omarchy/.monitor-manual"
 
 local function read_stored_profile()
   local f = io.open(state_file, "r")
@@ -227,6 +252,41 @@ local function detect_monitors()
   return present
 end
 
+-- Build a profile from the SUPER+ALT+3 snapshot. Port names (not desc:) are
+-- fine here: the snapshot is only valid for the exact hardware it was taken
+-- on, and any cable change clears it via the hotplug watcher anyway.
+local function manual_profile()
+  local f = io.open(manual_file, "r")
+  if not f then
+    return nil
+  end
+  local monitors = {}
+  for line in f:lines() do
+    local name, rest = line:match("^(%S+)%s+(.+)$")
+    if name and rest == "disabled" then
+      monitors[#monitors + 1] = { output = name, disabled = true }
+    elseif name then
+      local mode, pos, scale = rest:match("^(%S+)%s+(%S+)%s+(%S+)$")
+      if mode then
+        monitors[#monitors + 1] = { output = name, mode = mode, position = pos, scale = tonumber(scale) }
+      end
+    end
+  end
+  f:close()
+  if #monitors == 0 then
+    return nil
+  end
+  return {
+    apply = function()
+      for _, m in ipairs(monitors) do
+        hl.monitor(m)
+      end
+      -- workspaces keep the static default split; Hyprland falls back to an
+      -- available monitor when a rule names a disabled one
+    end,
+  }
+end
+
 local function resolve_profile()
   local present = detect_monitors()
   if not present then
@@ -234,6 +294,13 @@ local function resolve_profile()
   end
 
   local stored = read_stored_profile()
+  if stored == "manual" then
+    local manual = manual_profile()
+    if manual then
+      return manual
+    end
+    -- snapshot missing/empty: fall through to auto-detection
+  end
   local profile = stored and profiles[stored]
   if profile and profile.needs and not present[profile.needs] then
     profile = nil -- stored profile no longer matches connected hardware
@@ -282,6 +349,25 @@ hl.unbind("SUPER + ALT + code:11") -- default: Switch to group window 2
 bind_profile("SUPER + ALT + 2", "Office Ext Only", "office_ext", "OFFICE: External only")
 
 bind_profile("SUPER + ALT + 9", "Laptop Only", "laptop", "Laptop only mode")
+
+-- SUPER ALT 3: MANUAL mode -- pin whatever is on screen RIGHT NOW (after
+-- tweaking scale/resolution) so reloads stop reverting it. No hyprctl reload
+-- needed: the settings are already live; this only makes them survive.
+hl.unbind("SUPER + ALT + code:12") -- default: Switch to group window 3
+o.bind(
+  "SUPER + ALT + 3",
+  "Pin Current Setup",
+  "sh -c "
+    .. o.shell_quote(
+      "hyprctl monitors all -j"
+        .. [[ | jq -r '.[] | if .disabled then "\(.name) disabled" else "\(.name) \(.width)x\(.height)@\(.refreshRate) \(.x)x\(.y) \(.scale)" end']]
+        .. " > "
+        .. o.shell_quote(manual_file)
+        .. " && printf '%s' manual > "
+        .. state_file_q
+        .. " && notify-send 'Monitor Setup' 'MANUAL: current settings pinned'"
+    )
+)
 
 hl.unbind("SUPER + ALT + code:13") -- default: Switch to group window 4
 bind_profile("SUPER + ALT + 4", "HDMI Mirror", "hdmi_mirror", "HDMI: Mirrored display")
