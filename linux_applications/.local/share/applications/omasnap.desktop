@@ -2,9 +2,9 @@
 Type=Application
 Name=Omasnap
 Comment=Capture and annotate a screenshot
-Exec=/home/sspaeti/.local/bin/omasnap
+Exec=omasnap
 Icon=camera-photo
 Terminal=false
-NoDisplay=false
+NoDisplay=true
 Categories=Graphics;
 StartupNotify=false
