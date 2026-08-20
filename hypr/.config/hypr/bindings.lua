@@ -166,15 +166,17 @@ o.bind("SUPER + bracketright", "Dismiss notification", "omarchy-shell notificati
 -- o.bind("SUPER + ALT + SHIFT + P", "Screenshot (window)", ssp .. "/omarchy-capture-screenshot window")
 -- o.bind("SUPER + ALT + CTRL + P", "Screenshot (raw)", "grim ...")
 
--- Captures omarchy original (with post-processing wrapper)
-o.bind("SUPER + ALT + P", "Screenshot", ssp .. "/omarchy-capture-screenshot-wrapper.sh")
-o.bind("SUPER + ALT + SHIFT + P", "Screenshot", ssp .. "/omarchy-capture-screenshot-wrapper.sh smart clipboard")
+-- Captures with Omasnap (own fork: cut-out tool + kanagawa colors; saves into
+-- the monthly Printscreen folder via OMASNAP_SCREENSHOT_DIR in the wrapper)
+o.bind("SUPER + ALT + P", "Screenshot", ssp .. "/omasnap-capture.sh")
+o.bind("SUPER + ALT + SHIFT + P", "Screenshot (copy only)", ssp .. "/omasnap-capture.sh --copy")
 -- o.bind("ALT + PRINT", "Screenrecording", "omarchy-menu screenrecord")
 -- o.bind("SUPER + PRINT", "Color picking", "pkill hyprpicker || hyprpicker -a")
 o.bind("SUPER + CTRL + ALT + C", "Cut-out image", ssp .. "/omapic-capture-cut.sh")
 
--- Screenshot with Satty -> Editt workflow
-o.bind("SUPER + ALT + CTRL + P", "Screenshot -> Satty -> Editt", ssp .. "/screenshot-edit.sh")
+-- Fallback: previous default flow (omarchy capture -> Tensaku -> organize).
+-- The old Satty -> Editt script (screenshot-edit.sh) is dead: satty is gone.
+o.bind("SUPER + ALT + CTRL + P", "Screenshot (Tensaku fallback)", ssp .. "/omarchy-capture-screenshot-wrapper.sh")
 
 local grim_screenshot = "grim " .. home .. [[/Pictures/Printscreen/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png && ]] .. ssp .. "/image-browser/auto-organize-screenshot.sh"
 
