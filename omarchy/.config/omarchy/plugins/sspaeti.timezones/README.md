@@ -3,7 +3,7 @@
 A minimal world clock for the [Omarchy](https://omarchy.org/) bar, inspired by
 [worldtimebuddy.com](https://www.worldtimebuddy.com/).
 
-🎬 **Showcase**: [omarchy-plugin-timezone.mp4](omarchy-plugin-timezone.mp4)
+https://github.com/user-attachments/assets/703ba5b8-68bd-4694-bb8f-91f41424505d
 
 A single globe icon in the bar expands to your zones' current times on hover.
 Clicking it opens an hour-grid popup: one 24-hour strip per timezone, all
@@ -75,6 +75,9 @@ To pick your own zones and labels, configure the widget entry in
   Outside this list (traveling), the home row is relabeled by where the system
   clock actually is. Empty (default): always label by the system timezone.
 - `icon` — bar glyph (default `󰇧`).
+- `hoverExpand` — set `false` to keep the bar pill a static icon instead of
+  expanding to the compact times on hover (the expansion shifts neighboring
+  widgets, which not everyone wants). Default `true`.
 - `worldtimebuddyUrl` — right-click target.
 
 Move it in the bar:

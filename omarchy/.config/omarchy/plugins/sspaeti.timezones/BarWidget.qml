@@ -15,8 +15,13 @@ BarWidget {
   readonly property string icon: Model.plainText(setting("icon", "󰇧"))
   readonly property string wtbUrl: setting("worldtimebuddyUrl", "https://www.worldtimebuddy.com/pdt-to-switzerland-bern")
 
+  // Set "hoverExpand": false on the widget entry to keep the pill a static
+  // icon — the expansion shifts neighboring bar widgets, which not everyone
+  // wants.
+  readonly property bool hoverExpand: setting("hoverExpand", true) === true
+
   readonly property string compact: panelLoader.item ? panelLoader.item.compactLabel : ""
-  readonly property bool expanded: !vertical && button.tooltipHovered && compact !== ""
+  readonly property bool expanded: hoverExpand && !vertical && button.tooltipHovered && compact !== ""
 
   function injectPanel() {
     var target = panelLoader.item

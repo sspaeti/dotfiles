@@ -21,6 +21,7 @@
         },
         {
           "id": "sspaeti.timezones",
+          "hoverExpand": false,
           "homeZones": [
             "Europe/Zurich",
             "Europe/Berlin"
