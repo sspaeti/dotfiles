@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "sspaeti.goatcounter",
+  "name": "GoatCounter",
+  "version": "1.0.0",
+  "author": "Simon Späti",
+  "license": "MIT",
+  "description": "GoatCounter weekly analytics: 7-day pageview bars plus top referrers, locations, systems, and languages. Switches between multiple sites.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "GoatCounter",
+    "description": "Weekly GoatCounter stats popup",
+    "category": "Info",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

@@ -11,7 +11,7 @@
           "announceLeadMinutes": 15,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm"
+          "verticalFormat": "HH\n\u2014\nmm"
         },
         {
           "id": "omarchy.keyboard-layout"
@@ -104,6 +104,21 @@
         },
         {
           "id": "omarchy.audio"
+        },
+        {
+          "id": "sspaeti.goatcounter",
+          "hoverExpand": false,
+          "siteLabels": {
+            "dedp": "DEDP"
+          },
+          "alertHourlyViews": {
+            "ssp.sh": 50,
+            "dedp": 20
+          },
+          "alertDailyViews": {
+            "ssp.sh": 1000,
+            "dedp": 150
+          }
         },
         {
           "id": "omarchy.agents"
