@@ -8,10 +8,10 @@
         },
         {
           "id": "tmn73.calendar",
-          "format": "yyyy-MM-dd HH:mm",
+          "announceLeadMinutes": 15,
+          "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm",
-          "announceLeadMinutes": 15
+          "verticalFormat": "HH\n—\nmm"
         },
         {
           "id": "omarchy.keyboard-layout"
@@ -69,6 +69,10 @@
       "right": [
         {
           "id": "omarchy.tray"
+        },
+        {
+          "id": "io.github.kristoferlund.webcam",
+          "device": "/dev/video4"
         },
         {
           "id": "agx.screen-time",
