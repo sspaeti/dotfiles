@@ -128,6 +128,7 @@ o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspae
 
 --plugins
 o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle sspaeti.goatcounter")
+hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE our bind, or it wipes it
 o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle sspaeti.timezones")
 
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
@@ -204,7 +205,6 @@ o.bind("SUPER + SHIFT + ALT + CTRL + G", "Theme switcher", "omarchy-theme-switch
 
 -- Theme and background
 hl.unbind("SUPER + T") -- default: Toggle window floating/tiling
-hl.unbind("SUPER + CTRL + T") -- default: Activity (btop)
 -- o.bind("SUPER + CTRL + T", "Pick new theme", ssp .. "/omarchy-menu-wrapper theme")
 o.bind("SUPER + ALT + T", "Theme menu", "omarchy-menu toggle theme")
 -- toggle to my personal background images
