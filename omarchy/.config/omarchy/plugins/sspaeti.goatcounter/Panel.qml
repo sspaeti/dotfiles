@@ -26,11 +26,13 @@ Panel {
   function open() {
     openedFromHotkey = false
     setCenterHoverRevealSuppressed(false)
+    captureDeltas()
     root.controller.show()
   }
 
   function openFromHotkey() {
     openedFromHotkey = true
+    captureDeltas()
     root.controller.show()
     // Set after showing: showing hands the popout coordinator over, which
     // closes the previously open panel, and that close clears the flag.
@@ -75,6 +77,8 @@ Panel {
   // {"ssp.sh": 3000}. Checked by fetch.sh on every background refresh.
   readonly property var alertDailyViews: setting("alertDailyViews", 0)
   readonly property var alertHourlyViews: setting("alertHourlyViews", 0)
+  // Background fetch cadence in minutes.
+  readonly property int refreshMinutes: Math.max(2, Number(setting("refreshMinutes", 15)) || 15)
 
   readonly property var sites: data && data.sites ? data.sites : []
   readonly property var site: sites.length
@@ -85,6 +89,83 @@ Panel {
   readonly property real maxDay: Model.maxCount(days)
   readonly property string compactLabel: Model.compactLabel(sites, siteLabels)
   readonly property string activeSiteUrl: site && site.url ? String(site.url) : ""
+
+  // ---- "New since last open": on every open, the difference between the
+  //      current counts and the snapshot taken at the previous open is
+  //      frozen for display (a brighter cap stacked on each bar), then the
+  //      snapshot advances and persists. No close hook needed.
+  property var seen: ({})
+  property var frozenDeltas: ({})
+
+  function frozenDelta(dayKey) {
+    if (!site) return 0
+    var perSite = frozenDeltas[site.label]
+    if (!perSite) return 0
+    var perRange = perSite[rangeKey]
+    if (!perRange) return 0
+    return Number(perRange[dayKey]) || 0
+  }
+
+  readonly property real newViews: {
+    var t = 0
+    for (var i = 0; i < days.length; i++) t += frozenDelta(days[i].day)
+    return t
+  }
+
+  function captureDeltas() {
+    if (!data || !data.sites || !data.sites.length) return
+    var fro = {}
+    var snap = {}
+    for (var i = 0; i < data.sites.length; i++) {
+      var s = data.sites[i]
+      if (!s.ranges) continue
+      var fPer = {}
+      var sPer = {}
+      var keys = Object.keys(s.ranges)
+      for (var k = 0; k < keys.length; k++) {
+        var rg = s.ranges[keys[k]]
+        if (!rg || !rg.days) continue
+        var prevRange = (seen[s.label] || {})[keys[k]]
+        var fm = {}
+        var sm = {}
+        for (var j = 0; j < rg.days.length; j++) {
+          var key = rg.days[j].day
+          var c = Number(rg.days[j].count) || 0
+          sm[key] = c
+          if (!prevRange) fm[key] = 0            // first ever open: no delta
+          else if (prevRange[key] === undefined) fm[key] = c  // new day/hour
+          else fm[key] = Math.max(0, c - (Number(prevRange[key]) || 0))
+        }
+        fPer[keys[k]] = fm
+        sPer[keys[k]] = sm
+      }
+      fro[s.label] = fPer
+      snap[s.label] = sPer
+    }
+    root.frozenDeltas = fro
+    root.seen = snap
+    seenSaveProc.command = ["bash", "-c",
+      'dir="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/goatcounter"; mkdir -p "$dir"; printf %s "$1" > "$dir/seen.json"',
+      "_", JSON.stringify(snap)]
+    seenSaveProc.running = true
+  }
+
+  Process { id: seenSaveProc }
+
+  Process {
+    id: seenLoadProc
+    command: ["bash", "-c",
+      'cat "${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/goatcounter/seen.json" 2>/dev/null']
+    stdout: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        try {
+          var v = JSON.parse(String(text || ""))
+          if (v && typeof v === "object") root.seen = v
+        } catch (e) {}
+      }
+    }
+  }
 
   readonly property var topPages: ready ? (range.toppages || []) : []
   readonly property var listSpecs: ready ? [
@@ -142,13 +223,16 @@ Panel {
 
   // Background refresh keeps the cache warm so a click on the bar is instant.
   Timer {
-    interval: 15 * 60 * 1000
+    interval: root.refreshMinutes * 60 * 1000
     running: true
     repeat: true
     onTriggered: root.runFetch(false)
   }
 
-  Component.onCompleted: root.runFetch(true)
+  Component.onCompleted: {
+    seenLoadProc.running = true
+    root.runFetch(true)
+  }
 
   KeyboardPanel {
     id: panel
@@ -168,6 +252,18 @@ Panel {
       anchors.fill: parent
       onCloseRequested: root.close()
       onTabRequested: function(direction) { root.switchPanel(direction) }
+      // p: next site tab · 1/2/3: range 1d/7d/30d · o: open the dashboard.
+      onTextKey: function(t) {
+        if (t === "p" && root.sites.length > 0) {
+          root.siteIndex = (root.siteIndex + 1) % root.sites.length
+        } else if (t === "1" || t === "2" || t === "3") {
+          root.hoverDay = -1
+          root.rangeKey = t === "1" ? "1" : (t === "2" ? "7" : "30")
+        } else if (t === "o" && root.activeSiteUrl !== "" && root.bar) {
+          root.bar.run("omarchy-launch-browser " + Util.shellQuote(root.activeSiteUrl))
+          root.close()
+        }
+      }
 
       Column {
         id: mainCol
@@ -227,7 +323,7 @@ Panel {
             }
 
             Repeater {
-              model: [{ key: "7", label: "7d" }, { key: "30", label: "30d" }]
+              model: [{ key: "1", label: "1d" }, { key: "7", label: "7d" }, { key: "30", label: "30d" }]
 
               Rectangle {
                 required property var modelData
@@ -262,27 +358,72 @@ Panel {
             }
           }
 
-          Column {
+          Row {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            spacing: Style.space(1)
+            spacing: Style.space(8)
 
-            Text {
-              anchors.right: parent.right
-              text: root.ready
-                ? Model.fmtCount(root.range.total) + " views · " + root.rangeKey + " days" : ""
-              color: root.fg
-              font.family: root.fontFam
-              font.pixelSize: Style.font.body
-              font.bold: true
+            Column {
+              anchors.verticalCenter: parent.verticalCenter
+              spacing: Style.space(1)
+
+              Text {
+                anchors.right: parent.right
+                text: root.ready
+                  ? Model.fmtCount(root.range.total) + " views · "
+                    + (root.rangeKey === "1" ? "today" : root.rangeKey + " days")
+                  : ""
+                color: root.fg
+                font.family: root.fontFam
+                font.pixelSize: Style.font.body
+                font.bold: true
+              }
+              Text {
+                anchors.right: parent.right
+                visible: root.newViews > 0
+                text: "+" + Model.fmtCount(root.newViews) + " since last open"
+                color: Color.accent
+                font.family: root.fontFam
+                font.pixelSize: Style.font.caption
+                font.bold: true
+              }
+              Text {
+                anchors.right: parent.right
+                text: root.data && root.data.fetched
+                  ? "updated " + Model.updatedLabel(root.data.fetched) : ""
+                color: Qt.darker(root.fg, 1.5)
+                font.family: root.fontFam
+                font.pixelSize: Style.font.caption
+              }
             }
-            Text {
-              anchors.right: parent.right
-              text: root.data && root.data.fetched
-                ? "updated " + Model.updatedLabel(root.data.fetched) : ""
-              color: Qt.darker(root.fg, 1.5)
-              font.family: root.fontFam
-              font.pixelSize: Style.font.caption
+
+            // Opens the active site's GoatCounter dashboard in the browser.
+            Rectangle {
+              visible: root.activeSiteUrl !== ""
+              anchors.verticalCenter: parent.verticalCenter
+              width: Style.space(26)
+              height: Style.space(26)
+              radius: Style.space(6)
+              color: linkMouse.containsMouse ? Qt.alpha(Color.accent, 0.25)
+                   : Qt.alpha(root.fg, 0.06)
+
+              Text {
+                anchors.centerIn: parent
+                text: "󰏌"
+                color: linkMouse.containsMouse ? root.fg : Qt.darker(root.fg, 1.3)
+                font.family: root.fontFam
+                font.pixelSize: Style.font.bodySmall
+              }
+
+              MouseArea {
+                id: linkMouse
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                  if (root.bar && root.activeSiteUrl !== "")
+                    root.bar.run("omarchy-launch-browser " + Util.shellQuote(root.activeSiteUrl))
+                }
+              }
             }
           }
         }
@@ -319,10 +460,19 @@ Panel {
               required property int index
               readonly property real count: Number(modelData.count) || 0
               readonly property bool hot: index === root.hoverDay
-              // In the 30-day view labels only fit on hover (counts) and on
-              // weekly ticks aligned to today (dates).
+              readonly property real delta: root.frozenDelta(modelData.day)
+              readonly property real barH: root.maxDay > 0
+                ? Math.max(Style.space(2), root.chartH * count / root.maxDay)
+                : Style.space(2)
+              readonly property real deltaH: count > 0 && delta > 0
+                ? Math.max(Style.space(2), barH * Math.min(1, delta / count))
+                : 0
+              // In the dense views labels only fit on hover (counts) and on
+              // ticks aligned to the last bar: every 3 hours today, weekly
+              // over 30 days.
               readonly property bool compact: root.days.length > 7
-              readonly property bool axisTick: !compact || (root.days.length - 1 - index) % 7 === 0
+              readonly property int tickStep: root.rangeKey === "1" ? 3 : 7
+              readonly property bool axisTick: !compact || (root.days.length - 1 - index) % tickStep === 0
               width: root.chartBarW
               spacing: Style.space(4)
 
@@ -344,11 +494,22 @@ Panel {
                   anchors.bottom: parent.bottom
                   anchors.horizontalCenter: parent.horizontalCenter
                   width: parent.width
-                  height: root.maxDay > 0
-                    ? Math.max(Style.space(2), root.chartH * dayCol.count / root.maxDay)
-                    : Style.space(2)
+                  height: dayCol.barH
                   radius: Style.space(3)
-                  color: Qt.alpha(Color.accent, dayCol.hot ? 0.95 : 0.65)
+                  color: Qt.alpha(Color.accent, dayCol.hot ? 0.8 : 0.45)
+                }
+
+                // Views that arrived since the panel was last open, stacked
+                // as a brighter cap on top of the bar.
+                Rectangle {
+                  visible: dayCol.deltaH > 0
+                  anchors.bottom: parent.bottom
+                  anchors.bottomMargin: dayCol.barH - dayCol.deltaH
+                  anchors.horizontalCenter: parent.horizontalCenter
+                  width: parent.width
+                  height: dayCol.deltaH
+                  radius: Style.space(3)
+                  color: Color.accent
                 }
 
                 MouseArea {

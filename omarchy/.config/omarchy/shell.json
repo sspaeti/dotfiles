@@ -118,7 +118,8 @@
           "alertDailyViews": {
             "ssp.sh": 1000,
             "dedp": 150
-          }
+          },
+          "refreshMinutes": 5
         },
         {
           "id": "omarchy.agents"

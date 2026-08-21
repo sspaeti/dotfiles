@@ -45,11 +45,15 @@ if [[ -r "$SECRETS" ]]; then
 fi
 
 # Date-only start/end is unreliable (start==end returns partial data), so
-# always send full RFC3339 timestamps: local day boundaries converted to UTC.
-day_start_utc() { date -u -d "$1 00:00:00" +%FT%TZ; }
-day_end_utc()   { date -u -d "$1 23:59:59" +%FT%TZ; }
+# always send full RFC3339 timestamps. GoatCounter IGNORES the timezone
+# suffix and interprets the clock time in the SITE's timezone (verified:
+# ...T10:00:00Z and ...T10:00:00+02:00 return identical data), so send LOCAL
+# wall-clock times with a nominal Z — correct as long as the site timezone
+# matches this machine's.
+day_start_utc() { date -d "$1 00:00:00" +%FT%TZ; }
+day_end_utc()   { date -d "$1 23:59:59" +%FT%TZ; }
 
-now=$(date -u +%FT%TZ)
+now=$(date +%FT%TZ)
 today=$(date +%F)
 
 # goatcounter.ssp.sh -> ssp.sh, dedp.goatcounter.com -> dedp
@@ -62,11 +66,14 @@ site_label() {
 }
 
 # Rate limit is ~4 req/s (429 with Retry-After, which --retry honors), so
-# space the calls out and let curl retry transient failures.
+# space the calls out and let curl retry transient failures. --retry-max-time
+# caps the whole retry loop: hosted goatcounter.com sends long Retry-After
+# values that would otherwise stall a call for many minutes. The token goes
+# in via a stdin config file, never argv, so it is invisible in `ps`.
 api() { # url token path
-  sleep 0.3
-  curl -fsS -m 20 --retry 3 --retry-delay 2 \
-    -H "Authorization: Bearer $2" "$1/api/v0/$3"
+  sleep 0.15
+  curl -fsS -m 20 --retry 3 --retry-delay 2 --retry-max-time 45 \
+    -K - "$1/api/v0/$3" <<<"header = \"Authorization: Bearer $2\""
 }
 
 # Threshold may be a plain number or a per-site map keyed by label.
@@ -75,14 +82,36 @@ threshold_for() { # spec label
     '$t | if type == "number" then . else (.[$l] // 0) end' 2>/dev/null || echo 0
 }
 
-notify_once() { # marker-key summary body
+notify_once() { # marker-key summary body [click-url]
   local marker="$STATE_DIR/alert-$1"
   [[ -f "$marker" ]] && return 0
   : >"$marker"
-  command -v notify-send >/dev/null && notify-send -a GoatCounter "$2" "$3"
+  command -v notify-send >/dev/null || return 0
+  if [[ -n "${4:-}" ]]; then
+    # -A blocks until the notification is clicked or dismissed, so wait in a
+    # detached subshell and open the stats page on click.
+    (
+      resp=$(notify-send -a GoatCounter -A default=Open "$2" "$3")
+      [[ "$resp" == "default" ]] && omarchy-launch-browser "$4"
+    ) >/dev/null 2>&1 &
+  else
+    notify-send -a GoatCounter "$2" "$3"
+  fi
 }
 
 site_error() { # label url
+  # On a transient API failure keep the site's last good data (marked stale,
+  # original fetch time preserved) rather than wiping the panel for the site.
+  local cached=""
+  [[ -f "$CACHE" ]] && cached=$(jq -c --arg l "$1" \
+    '(.fetched // "") as $gf
+     | [.sites[]? | select(.label == $l and .ranges != null)][0] // empty
+     | . + {stale: true} | .fetched = (.fetched // $gf)' \
+    "$CACHE" 2>/dev/null)
+  if [[ -n "$cached" && "$cached" != "null" ]]; then
+    printf '%s' "$cached"
+    return
+  fi
   jq -n --arg label "$1" --arg url "$2" \
     '{label: $label, url: $url, error: "API request failed (check token, permissions, network)"}'
 }
@@ -113,47 +142,114 @@ fetch_lists() { # url token start end -> json {toppages, toprefs, locations, sys
 fetch_site() { # label url token
   local label=$1 url=${2%/} token=$3
 
+  # Incremental refresh: past days and past hours never change, so reuse them
+  # from the previous cache. A cached period is final only when the cache was
+  # written AFTER it ended, so gate on the cache's fetched timestamp.
+  local cache_date="" cache_hour=-1 cached_days30="[]" cached_hours="[]"
+  if [[ -f "$CACHE" ]]; then
+    # Gate on the SITE's own fetch time (a stale-preserved site carries older
+    # data than the file's timestamp), minus a 2.5-hour finality buffer:
+    # GoatCounter's stats aggregates trail live traffic by up to ~2 hours
+    # (verified: an hour read 25 shortly after it ended, 47 half an hour
+    # later), so a period is trusted only once it was cached comfortably
+    # after it ended — until then it keeps being refetched.
+    local site_fetched fe
+    site_fetched=$(jq -r --arg l "$label" \
+      '([.sites[]? | select(.label == $l)][0].fetched) // .fetched // ""' "$CACHE" 2>/dev/null)
+    fe=$(date -d "$site_fetched" +%s 2>/dev/null || echo 0)
+    if (( fe > 9000 )); then
+      fe=$((fe - 9000))
+      cache_date=$(date -d "@$fe" +%F)
+      cache_hour=$((10#$(date -d "@$fe" +%H)))
+    fi
+    cached_days30=$(jq -c --arg l "$label" \
+      '[.sites[]? | select(.label == $l)][0].ranges["30"].days // []' "$CACHE" 2>/dev/null) \
+      || cached_days30="[]"
+    cached_hours=$(jq -c --arg l "$label" \
+      '[.sites[]? | select(.label == $l)][0].ranges["1"].days // []' "$CACHE" 2>/dev/null) \
+      || cached_hours="[]"
+  fi
+
   # /stats/total has no per-day breakdown, so query each of the last 30 days;
   # the 7-day view is the tail of the same series.
-  local days30="[]" i d t
+  local days30="[]" i d t c
   for i in $(seq 29 -1 0); do
     d=$(date -d "$i days ago" +%F)
+    if [[ -n "$cache_date" && "$d" < "$cache_date" ]]; then
+      c=$(jq -r --arg d "$d" 'map(select(.day == $d)) | .[0].count // "MISS"' <<<"$cached_days30")
+      if [[ "$c" =~ ^[0-9]+$ ]]; then
+        days30=$(jq -n --argjson a "$days30" --arg day "$d" --argjson c "$c" \
+          '$a + [{day: $day, count: $c}]')
+        continue
+      fi
+    fi
     t=$(api "$url" "$token" "stats/total?start=$(day_start_utc "$d")&end=$(day_end_utc "$d")") \
       || { site_error "$label" "$url"; return; }
     days30=$(jq -n --argjson a "$days30" --arg day "$d" --argjson t "$t" \
       '$a + [{day: $day, count: ($t.total // 0)}]')
   done
 
-  local lists7 lists30
+  # Today as hourly bars: one total call per elapsed hour, cached hours reused.
+  local hours="[]" h H hs he hl
+  H=$(date +%-H)
+  for ((h = 0; h <= H; h++)); do
+    hl=$(printf '%02d:00' "$h")
+    if [[ "$cache_date" == "$today" ]] && (( h < cache_hour )); then
+      c=$(jq -r --arg d "$hl" 'map(select(.day == $d)) | .[0].count // "MISS"' <<<"$cached_hours")
+      if [[ "$c" =~ ^[0-9]+$ ]]; then
+        hours=$(jq -n --argjson a "$hours" --arg day "$hl" --argjson c "$c" \
+          '$a + [{day: $day, count: $c}]')
+        continue
+      fi
+    fi
+    hs=$(date -d "$today $h:00:00" +%FT%TZ)
+    he=$(date -d "$today $h:59:59" +%FT%TZ)
+    t=$(api "$url" "$token" "stats/total?start=$hs&end=$he") \
+      || { site_error "$label" "$url"; return; }
+    hours=$(jq -n --argjson a "$hours" --arg day "$hl" --argjson t "$t" \
+      '$a + [{day: $day, count: ($t.total // 0)}]')
+  done
+
+  local lists1 lists7 lists30
+  lists1=$(fetch_lists "$url" "$token" "$(day_start_utc "$today")" "$now") &&
   lists7=$(fetch_lists "$url" "$token" "$(day_start_utc "$(date -d '6 days ago' +%F)")" "$now") &&
   lists30=$(fetch_lists "$url" "$token" "$(day_start_utc "$(date -d '29 days ago' +%F)")" "$now") \
     || { site_error "$label" "$url"; return; }
 
-  # ---- Viral alerts (dedup once per day / per hour via marker files).
-  local thr views
+  # ---- Viral alerts: fire when a SINGLE PAGE passes the threshold in the
+  #      window, not the site total (dedup per day / per hour via markers).
+  check_page_alert() { # window-start marker-key window-label emoji-title thr
+    local ws=$1 marker=$2 wlabel=$3 title=$4 thr=$5 viral n body vpath
+    t=$(api "$url" "$token" "stats/hits?start=$ws&end=$now&limit=10") || return 0
+    viral=$(jq -c --argjson thr "$thr" \
+      '[.hits // [] | .[] | select(.count >= $thr)] | sort_by(-.count)' <<<"$t")
+    n=$(jq 'length' <<<"$viral")
+    (( n == 0 )) && return 0
+    body=$(jq -r --arg w "$wlabel" '.[0] | "\(.path) — \(.count) views \($w)"' <<<"$viral")
+    (( n > 1 )) && body="$body (+$((n - 1)) more pages)"
+    vpath=$(jq -r '.[0].path' <<<"$viral")
+    notify_once "$marker" "$title" "$body (threshold $thr)" "$url/?filter=$vpath"
+  }
+
+  local thr
   thr=$(threshold_for "$alert_daily" "$label")
   if (( thr > 0 )); then
-    views=$(jq -r '.[-1].count' <<<"$days30")
-    if (( views >= thr )); then
-      notify_once "$label-day-$today" \
-        "$label is going viral 🎉" "$views views today (threshold $thr)"
-    fi
+    check_page_alert "$(day_start_utc "$today")" "$label-day-$today" \
+      "today" "$label page is going viral 🎉" "$thr"
   fi
   thr=$(threshold_for "$alert_hourly" "$label")
   if (( thr > 0 )); then
-    t=$(api "$url" "$token" "stats/total?start=$(date -u -d '60 minutes ago' +%FT%TZ)&end=$now") \
-      && views=$(jq -r '.total // 0' <<<"$t") || views=0
-    if (( views >= thr )); then
-      notify_once "$label-hour-$(date +%FT%H)" \
-        "$label is spiking 🚀" "$views views in the last hour (threshold $thr)"
-    fi
+    check_page_alert "$(date -d '60 minutes ago' +%FT%TZ)" "$label-hour-$(date +%FT%H)" \
+      "in the last hour" "$label page is spiking 🚀" "$thr"
   fi
 
-  jq -n --arg label "$label" --arg url "$url" \
-    --argjson days30 "$days30" --argjson lists7 "$lists7" --argjson lists30 "$lists30" '
+  jq -n --arg label "$label" --arg url "$url" --arg fetched "$(date -Is)" \
+    --argjson hours "$hours" --argjson days30 "$days30" \
+    --argjson lists1 "$lists1" --argjson lists7 "$lists7" --argjson lists30 "$lists30" '
     ($days30[-7:]) as $days7 |
-    {label: $label, url: $url,
+    {label: $label, url: $url, fetched: $fetched,
      ranges: {
+       "1":  ({total: ($hours  | map(.count) | add // 0), days: $hours}  + $lists1),
        "7":  ({total: ($days7  | map(.count) | add // 0), days: $days7}  + $lists7),
        "30": ({total: ($days30 | map(.count) | add // 0), days: $days30} + $lists30)
      }}'
