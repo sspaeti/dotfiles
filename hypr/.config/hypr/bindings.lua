@@ -126,7 +126,10 @@ hl.unbind("SUPER + CTRL + SPACE") -- default: Background switcher
 -- Enter/click copies the emoji (wl-copy, paste manually with Ctrl+V); Shift+Enter/Shift+Click types it directly via wtype.
 o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspaeti.emojis")
 
+--plugins
 o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle sspaeti.goatcounter")
+o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle sspaeti.timezones")
+
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
 o.bind("SUPER + SHIFT + ALT + F", "Fuzzy file content", ssp .. "/fuzzy-file-content.sh")
 -- o.bind("SUPER + SHIFT + F", "Fuzzy file names", ssp .. "/fuzzy-file-names.sh")
@@ -205,8 +208,10 @@ hl.unbind("SUPER + CTRL + T") -- default: Activity (btop)
 -- o.bind("SUPER + CTRL + T", "Pick new theme", ssp .. "/omarchy-menu-wrapper theme")
 o.bind("SUPER + ALT + T", "Theme menu", "omarchy-menu toggle theme")
 -- toggle to my personal background images
-o.bind("SUPER + CTRL + T", "Background mode switch", ssp .. "/bg-mode-toggle.sh switch")
-o.bind("SUPER + CTRL + SHIFT + T", "Next background", ssp .. "/bg-mode-toggle.sh next")
+--
+-- o.bind("SUPER + ALT + CTRL + B", "Background mode switch", ssp .. "/bg-mode-toggle.sh switch")
+hl.unbind("SUPER + CTRL + ALT + T") -- default: Show Tim  
+o.bind("SUPER + ALT + CTRL + T", "Next background", ssp .. "/bg-mode-toggle.sh next")
 
 -- Extra bindings
 hl.unbind("SUPER + W") -- default: Close window

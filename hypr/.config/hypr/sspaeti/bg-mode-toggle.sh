@@ -3,7 +3,7 @@
 # Background management script
 # Usage: bg-mode-toggle.sh [switch|next|restore]
 #   switch: Toggle between Omarchy and personal images (default)
-#   next: Cycle to next personal image (only works in personal mode)
+#   next: Cycle to next personal image (auto-switches to personal mode if needed)
 #   restore: Restore personal background on startup (if in personal mode)
 
 STATE_FILE="$HOME/.config/hypr/sspaeti/.bg_mode_state"
@@ -32,7 +32,7 @@ set_personal_image() {
     fi
 
     echo "$image_path" > "$CURRENT_IMAGE_FILE"
-    notify-send "Background" "${message:-Personal image}"
+    # Success is visible on screen; only errors notify.
 }
 
 # Function to get next personal image in sequence
@@ -94,11 +94,11 @@ action="${1:-switch}"
 
 case "$action" in
     "next")
-        if [ "$current_mode" = "personal" ]; then
-            get_next_personal_image
-        else
-            notify-send "Background Mode" "Switch to personal mode first (use 'switch')"
+        # Auto-switch to personal mode first if still in omarchy mode
+        if [ "$current_mode" != "personal" ]; then
+            echo "personal" > "$STATE_FILE"
         fi
+        get_next_personal_image
         ;;
     "restore")
         # Restore personal background on startup if in personal mode
