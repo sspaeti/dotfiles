@@ -11,7 +11,7 @@
           "announceLeadMinutes": 15,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n\u2014\nmm"
+          "verticalFormat": "HH\n—\nmm"
         },
         {
           "id": "omarchy.keyboard-layout"
@@ -65,6 +65,9 @@
         },
         {
           "id": "sspaeti.workspaces"
+        },
+        {
+          "id": "pnkm0nk.omodoro"
         }
       ],
       "right": [
