@@ -63,6 +63,14 @@ function tintFor(hour) {
   return "night"
 }
 
+// Configurable strings (icon, labels, abbreviations) are rendered by Text
+// elements whose default AutoText format detects rich text — strip the
+// characters that could smuggle markup (e.g. <img src=...>) into the
+// long-lived shell process.
+function plainText(value) {
+  return String(value === null || value === undefined ? "" : value).replace(/[<>&]/g, "")
+}
+
 function pad2(n) {
   return (n < 10 ? "0" : "") + n
 }
@@ -102,7 +110,7 @@ function compactLabel(zones, nowUtcMs) {
   for (var i = 0; i < zones.length; i++) {
     var z = zones[i]
     if (z.home || z.offsetMin === undefined || z.offsetMin === null) continue
-    parts.push(z.shortLabel + " " + timeLabel(nowUtcMs, z.offsetMin))
+    parts.push(plainText(z.shortLabel) + " " + timeLabel(nowUtcMs, z.offsetMin))
   }
   return parts.join(" · ")
 }
@@ -131,6 +139,7 @@ if (typeof module !== "undefined") {
     diffLabel: diffLabel,
     nowColumn: nowColumn,
     compactLabel: compactLabel,
+    plainText: plainText,
     defaultZones: defaultZones
   }
 }

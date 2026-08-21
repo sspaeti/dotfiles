@@ -88,10 +88,12 @@ Panel {
       // system actually is (e.g. "New York" while traveling).
       if (cfg.home && systemTz !== "" && homeZoneNames.indexOf(systemTz) === -1)
         label = systemTz.split("/").pop().replace(/_/g, " ")
+      // Config strings are sanitized here — the single source every
+      // consumer (panel texts, bar hover label) reads from.
       out.push({
-        label: label,
-        shortLabel: cfg.shortLabel || "",
-        abbr: cfg.abbr || (probed ? probed.abbr : ""),
+        label: Model.plainText(label),
+        shortLabel: Model.plainText(cfg.shortLabel || ""),
+        abbr: Model.plainText(cfg.abbr || (probed ? probed.abbr : "")),
         home: cfg.home === true,
         offsetMin: probed ? probed.offsetMin : null
       })
@@ -147,19 +149,20 @@ Panel {
     }
   }
 
+  // Offsets can only change at wall-clock hour boundaries (DST switches) or
+  // when the clock jumps (suspend/resume, timezone changed while traveling),
+  // so re-probe exactly then rather than on a polling interval.
   SystemClock {
     precision: SystemClock.Minutes
-    onDateChanged: root.nowUtc = date.getTime()
+    onDateChanged: {
+      var previous = root.nowUtc
+      root.nowUtc = date.getTime()
+      if (date.getMinutes() === 0 || Math.abs(root.nowUtc - previous) > 120000)
+        root.refresh()
+    }
   }
 
-  // Offsets only move on DST switches; a slow re-probe keeps them honest.
-  Timer {
-    interval: 15 * 60 * 1000
-    running: true
-    repeat: true
-    triggeredOnStart: true
-    onTriggered: root.refresh()
-  }
+  Component.onCompleted: root.refresh()
 
   KeyboardPanel {
     id: panel
@@ -218,6 +221,7 @@ Panel {
 
                 Text {
                   text: zoneItem.zoneRow.label
+                  textFormat: Text.PlainText
                   color: root.fg
                   font.family: root.fontFam
                   font.pixelSize: Style.font.body
@@ -226,6 +230,7 @@ Panel {
                 Text {
                   visible: zoneItem.zoneRow.abbr !== ""
                   text: "(" + zoneItem.zoneRow.abbr + ")"
+                  textFormat: Text.PlainText
                   color: Qt.darker(root.fg, 1.5)
                   font.family: root.fontFam
                   font.pixelSize: Style.font.caption

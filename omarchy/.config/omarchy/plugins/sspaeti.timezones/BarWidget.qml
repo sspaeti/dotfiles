@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell.Io
 import qs.Commons
 import qs.Ui
+import "Model.js" as Model
 
 // World-clock pill: a globe icon that expands to the client zones' current
 // times on hover; left click opens the worldtimebuddy-style hour grid.
@@ -9,7 +10,9 @@ BarWidget {
   id: root
   moduleName: "sspaeti.timezones"
 
-  readonly property string icon: setting("icon", "󰇧")
+  // Sanitized because WidgetButton's internal Text uses AutoText, which
+  // would rich-text-parse a crafted setting.
+  readonly property string icon: Model.plainText(setting("icon", "󰇧"))
   readonly property string wtbUrl: setting("worldtimebuddyUrl", "https://www.worldtimebuddy.com/pdt-to-switzerland-bern")
 
   readonly property string compact: panelLoader.item ? panelLoader.item.compactLabel : ""
