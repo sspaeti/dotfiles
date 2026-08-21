@@ -66,6 +66,10 @@
           "id": "omarchy.tray"
         },
         {
+          "id": "agx.screen-time",
+          "iconOnly": true
+        },
+        {
           "id": "quickshell.spotify",
           "deviceName": "Omarchy Spotify",
           "idleShutdownMinutes": 15,

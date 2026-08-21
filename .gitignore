@@ -72,3 +72,6 @@ git/.gitconfig
 
 #ignore dictionary
 nvim/.config/nvim/spell
+
+# ignore omarchy screen time
+omarchy/.config/omarchy/screen-time/history.json
