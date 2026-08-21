@@ -172,7 +172,6 @@ o.bind("SUPER + bracketright", "Dismiss notification", "omarchy-shell notificati
 -- the monthly Printscreen folder via OMASNAP_SCREENSHOT_DIR in the wrapper)
 o.bind("SUPER + ALT + P", "Screenshot", ssp .. "/omasnap-capture.sh")
 o.bind("SUPER + ALT + SHIFT + P", "Screenshot (copy only)", ssp .. "/omasnap-capture.sh --copy")
-o.bind("SUPER + BACKSPACE", "Screenrecording", "omarchy-capture-screenrecording --stop-recording || omarchy-menu toggle trigger.capture.screenrecord")
 -- o.bind("SUPER + PRINT", "Color picking", "pkill hyprpicker || hyprpicker -a")
 o.bind("SUPER + ALT + CTRL + X", "Cut-out image (omapic)", ssp .. "/omapic-capture-cut.sh")
 o.bind("SUPER + ALT + CTRL + C", "Copy last screenshot path", ssp .. "/copy-last-screenshot-path.sh")
