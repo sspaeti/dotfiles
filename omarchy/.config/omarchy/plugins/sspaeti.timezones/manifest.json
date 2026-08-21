@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "sspaeti.timezones",
+  "name": "Timezones",
+  "version": "1.0.0",
+  "author": "sspaeti",
+  "description": "World clock pill with a worldtimebuddy-style hour-grid popup",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Timezones",
+    "description": "World clock pill with a worldtimebuddy-style hour-grid popup",
+    "category": "Info",
+    "allowMultiple": false
+  }
+}

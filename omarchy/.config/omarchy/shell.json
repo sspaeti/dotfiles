@@ -16,10 +16,41 @@
           "id": "omarchy.keyboard-layout"
         },
         {
-          "id": "sspaeti.weather"
+          "id": "omarchy.system-update"
         },
         {
-          "id": "omarchy.system-update"
+          "id": "sspaeti.timezones",
+          "homeZones": [
+            "Europe/Zurich",
+            "Europe/Berlin"
+          ],
+          "zones": [
+            {
+              "label": "Switzerland",
+              "shortLabel": "CH",
+              "zone": "",
+              "home": true
+            },
+            {
+              "label": "East Coast",
+              "shortLabel": "NY",
+              "zone": "America/New_York"
+            },
+            {
+              "label": "West Coast",
+              "shortLabel": "SF",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "label": "Cagayan de Oro",
+              "shortLabel": "CDO",
+              "zone": "Asia/Manila",
+              "abbr": "PHT"
+            }
+          ]
+        },
+        {
+          "id": "sspaeti.weather"
         }
       ],
       "left": [
@@ -69,7 +100,7 @@
       ]
     },
     "position": "top",
-    "transparent": true
+    "transparent": false
   },
   "idle": {
     "lock": 600,
