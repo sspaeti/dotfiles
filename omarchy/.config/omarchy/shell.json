@@ -119,7 +119,7 @@
             "ssp.sh": 1000,
             "dedp": 150
           },
-          "refreshMinutes": 5
+          "refreshMinutes": 15
         },
         {
           "id": "omarchy.agents"
