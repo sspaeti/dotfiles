@@ -53,7 +53,9 @@
         },
         {
           "id": "eduardodallecort.weather-radar",
-          "alertsEnabled": true
+          "alertRadiusKm": 50,
+          "alertsEnabled": true,
+          "alertMinIntensity": "Severe"
         },
         {
           "id": "sspaeti.weather"
