@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Omarchy Spotify
+Comment=Toggle the Omarchy Spotify player
+Exec=omarchy shell -q quickshell.spotify.player toggleFullPlayer
+Icon=spotify
+Terminal=false
+Categories=AudioVideo;Audio;Player;
+StartupNotify=false

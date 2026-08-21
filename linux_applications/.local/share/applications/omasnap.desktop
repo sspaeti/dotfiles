@@ -5,6 +5,6 @@ Comment=Capture and annotate a screenshot
 Exec=omasnap
 Icon=camera-photo
 Terminal=false
-NoDisplay=true
+NoDisplay=false
 Categories=Graphics;
 StartupNotify=false
