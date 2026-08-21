@@ -50,6 +50,10 @@
           ]
         },
         {
+          "id": "eduardodallecort.weather-radar",
+          "alertsEnabled": true
+        },
+        {
           "id": "sspaeti.weather"
         }
       ],
@@ -81,7 +85,7 @@
           "scrollSpeed": "1",
           "audioQuality": "320 kbps",
           "searchHistory": "[]",
-          "sessionState": "{\"tab\":\"setup\",\"searchText\":\"\",\"searchType\":\"track\",\"libraryType\":\"tracks\",\"homeType\":\"recent\",\"libraryFilter\":\"\",\"librarySort\":\"default\",\"playlistFilter\":\"\",\"playlistSort\":\"default\",\"detailFilter\":\"\",\"detailSort\":\"default\",\"homeFilter\":\"\",\"discoverFilter\":\"\",\"queueFilter\":\"\",\"artistSearchText\":\"\",\"scrollPositions\":{\"home:recent\":0,\"search:track\":0,\"playlist:280QjJVAG0mg9nTzG1Figi\":0},\"detailItem\":null,\"selectedPlaylistId\":\"280QjJVAG0mg9nTzG1Figi\",\"lastRadioPlaylist\":null}"
+          "sessionState": "{\"tab\":\"playlists\",\"searchText\":\"\",\"searchType\":\"track\",\"libraryType\":\"tracks\",\"homeType\":\"recent\",\"libraryFilter\":\"\",\"librarySort\":\"default\",\"playlistFilter\":\"\",\"playlistSort\":\"default\",\"detailFilter\":\"\",\"detailSort\":\"default\",\"homeFilter\":\"\",\"discoverFilter\":\"\",\"queueFilter\":\"\",\"artistSearchText\":\"\",\"scrollPositions\":{\"home:recent\":0,\"search:track\":0,\"playlist:280QjJVAG0mg9nTzG1Figi\":0},\"detailItem\":null,\"selectedPlaylistId\":\"2JNtvF6C5OxltfYiVjDAeX\",\"lastRadioPlaylist\":null}"
         },
         {
           "id": "io.github.teevans.apple-tv-remote"
@@ -118,7 +122,7 @@
       ]
     },
     "position": "top",
-    "transparent": true
+    "transparent": false
   },
   "idle": {
     "lock": 600,
