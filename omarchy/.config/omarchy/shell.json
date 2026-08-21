@@ -7,10 +7,11 @@
           "id": "omarchy.indicators"
         },
         {
-          "id": "sspaeti.clock",
-          "format": "ddd d MMM HH:mm",
+          "id": "tmn73.calendar",
+          "format": "yyyy-MM-dd HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm"
+          "verticalFormat": "HH\n—\nmm",
+          "announceLeadMinutes": 15
         },
         {
           "id": "omarchy.keyboard-layout"
@@ -91,9 +92,6 @@
           "id": "io.github.teevans.apple-tv-remote"
         },
         {
-          "id": "omarchy.agents"
-        },
-        {
           "id": "omarchy.bluetooth"
         },
         {
@@ -101,6 +99,9 @@
         },
         {
           "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.agents"
         },
         {
           "id": "omarchy.monitor"

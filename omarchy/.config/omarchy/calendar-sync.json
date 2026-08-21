@@ -1,0 +1,5 @@
+{
+  "gwsPath": "/bin/gws",
+  "profile": "/home/sspaeti/.config/gws-omarchy-calendar",
+  "calendars": { "include": ["Personal", "Work", "Family"], "exclude": [] }
+}
