@@ -174,6 +174,8 @@ o.bind("SUPER + BACKSPACE", "Screenrecording", "omarchy-capture-screenrecording 
 -- o.bind("SUPER + PRINT", "Color picking", "pkill hyprpicker || hyprpicker -a")
 o.bind("SUPER + ALT + CTRL + X", "Cut-out image (omapic)", ssp .. "/omapic-capture-cut.sh")
 o.bind("SUPER + ALT + CTRL + C", "Copy last screenshot path", ssp .. "/copy-last-screenshot-path.sh")
+-- Print videos - Screen recordings
+o.bind("SUPER + BACKSPACE", "Screenrecording", "omarchy-capture-screenrecording --stop-recording || omarchy-menu toggle trigger.capture.screenrecord")
 
 -- Fallback: previous default flow (omarchy capture -> Tensaku -> organize).
 -- The old Satty -> Editt script (screenshot-edit.sh) is dead: satty is gone.
@@ -186,11 +188,6 @@ hl.unbind("PRINT") -- default: Screenshot
 o.bind("PRINT", "Screenshot (raw)", grim_screenshot)
 o.bind("SUPER + ALT + CTRL + SHIFT + P", "Screenshot (raw)", grim_screenshot)
 
--- Print videos - Screen recordings
-o.bind("SUPER + ALT + bracketleft", "Screen record a region", "omarchy-capture-screenrecording region")
-o.bind("SUPER + ALT + SHIFT + bracketleft", "Screen record a region with audio", "omarchy-capture-screenrecording region audio")
-o.bind("SUPER + CTRL + bracketleft", "Screen record display", "omarchy-capture-screenrecording output")
-o.bind("SUPER + CTRL + SHIFT + bracketleft", "Screen record display with audio", "omarchy-capture-screenrecording output audio")
 -- kdenlive: no transformation needed when import, but bigger size
 o.bind("SUPER + ALT + CTRL + bracketleft", "Screen record for Kdenlive", ssp .. "/omarchy-capture-screenrecording-kdenlive --with-desktop-audio")
 
