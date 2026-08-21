@@ -168,6 +168,159 @@ Panel {
   }
 
   readonly property var topPages: ready ? (range.toppages || []) : []
+
+  // ---- On-demand page search ("/"): the site's full path list (up to 1000
+  //      pages, ~150 KB, 6h disk cache) is fetched once; typing matches
+  //      locally over ALL pages, and view counts for the visible matches are
+  //      fetched per site+range in a small targeted call as you type.
+  property bool searchOpen: false
+  property var sitePaths: ({})     // label -> [{id, path, title}]
+  property var countCache: ({})    // "label|range|path" -> count
+  property bool searchLoading: false
+  property string searchError: ""
+
+  readonly property var searchMatches: searchOpen && site && sitePaths[site.label]
+    ? Model.fuzzyPaths(sitePaths[site.label], searchField.text) : []
+
+  // Same-rank matches re-sort by view count as counts stream in, so the
+  // highlighted Enter target is the most-viewed match.
+  readonly property var sortedMatches: {
+    void countCache
+    var arr = searchMatches.slice()
+    arr.sort(function(a, b) {
+      var ca = Math.max(0, countFor(a.name))
+      var cb = Math.max(0, countFor(b.name))
+      return a.rank - b.rank || cb - ca || a.name.length - b.name.length
+    })
+    return arr
+  }
+
+  function countFor(path) {
+    if (!site) return -1
+    var v = countCache[site.label + "|" + rangeKey + "|" + path]
+    return v === undefined ? -1 : v
+  }
+
+  function scriptPath() {
+    return Qt.resolvedUrl("fetch.sh").toString().replace(/^file:\/\//, "")
+  }
+
+  function ensurePaths() {
+    if (!site || site.error) return
+    if (sitePaths[site.label] || pathsProc.running) return
+    searchError = ""
+    searchLoading = true
+    pathsProc.labelAtLaunch = site.label
+    pathsProc.command = ["bash", scriptPath(), "--paths", String(site.label)]
+    pathsProc.running = true
+  }
+
+  function fetchCounts() {
+    if (!searchOpen || !site || countsProc.running) return
+    var ids = []
+    var paths = []
+    for (var i = 0; i < searchMatches.length; i++) {
+      if (countFor(searchMatches[i].name) === -1) {
+        ids.push(searchMatches[i].id)
+        paths.push(searchMatches[i].name)
+      }
+    }
+    if (ids.length === 0) return
+    countsProc.keyPrefix = site.label + "|" + rangeKey + "|"
+    countsProc.requestedPaths = paths
+    countsProc.command = ["bash", scriptPath(), "--counts",
+      String(site.label), String(rangeKey), ids.join(",")]
+    countsProc.running = true
+  }
+
+  function openSearch() {
+    searchOpen = true
+    ensurePaths()
+    Qt.callLater(function() { searchField.forceActiveFocus() })
+  }
+
+  function closeSearch() {
+    searchOpen = false
+    searchField.text = ""
+    keyCatcher.forceActiveFocus()
+  }
+
+  // Enter target: best match that is not hidden as zero-count.
+  function searchBestPath() {
+    for (var i = 0; i < sortedMatches.length; i++)
+      if (countFor(sortedMatches[i].name) !== 0) return sortedMatches[i].name
+    return ""
+  }
+
+  function searchOpenPage(path) {
+    if (root.bar && activeSiteUrl !== "" && path)
+      root.bar.run("omarchy-launch-browser " + Util.shellQuote(activeSiteUrl + "/?filter=" + path))
+    closeSearch()
+  }
+
+  onRangeKeyChanged: if (searchOpen) countsDebounce.restart()
+  onSiteIndexChanged: if (searchOpen) { ensurePaths(); countsDebounce.restart() }
+
+  Timer {
+    id: countsDebounce
+    interval: 300
+    onTriggered: root.fetchCounts()
+  }
+
+  Process {
+    id: pathsProc
+    property string labelAtLaunch: ""
+    stdout: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        root.searchLoading = false
+        try {
+          var v = JSON.parse(String(text || ""))
+          if (v.error) {
+            root.searchError = Model.plainText(v.error)
+            return
+          }
+          var m = {}
+          for (var k in root.sitePaths) m[k] = root.sitePaths[k]
+          m[pathsProc.labelAtLaunch] = v.paths || []
+          root.sitePaths = m
+          // The user may have switched site while this was in flight.
+          if (root.searchOpen && root.site && !root.sitePaths[root.site.label])
+            root.ensurePaths()
+          countsDebounce.restart()
+        } catch (e) {
+          root.searchError = "could not load page list"
+        }
+      }
+    }
+  }
+
+  Process {
+    id: countsProc
+    property string keyPrefix: ""
+    property var requestedPaths: []
+    stdout: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        try {
+          var v = JSON.parse(String(text || ""))
+          var got = {}
+          var rows = (v && v.counts) ? v.counts : []
+          for (var i = 0; i < rows.length; i++) got[rows[i].name] = Number(rows[i].count) || 0
+          var m = {}
+          for (var k in root.countCache) m[k] = root.countCache[k]
+          // Requested pages absent from the response had no views in range.
+          for (var j = 0; j < countsProc.requestedPaths.length; j++) {
+            var p = countsProc.requestedPaths[j]
+            m[countsProc.keyPrefix + p] = got[p] === undefined ? 0 : got[p]
+          }
+          root.countCache = m
+        } catch (e) {}
+        // Pick up matches that appeared while this call was in flight.
+        Qt.callLater(root.fetchCounts)
+      }
+    }
+  }
   readonly property var listSpecs: ready ? [
     { title: "Top Referrers", rows: range.toprefs || [] },
     { title: "Locations", rows: range.locations || [] },
@@ -250,11 +403,16 @@ Panel {
     PanelKeyCatcher {
       id: keyCatcher
       anchors.fill: parent
+      // While the search box has focus, hand every key to it.
+      blocked: searchField.activeFocus
       onCloseRequested: root.close()
       onTabRequested: function(direction) { root.switchPanel(direction) }
-      // p: next site tab · 1/2/3: range 1d/7d/30d · o: open the dashboard.
+      // p: next site tab · 1/2/3: range 1d/7d/30d · o: open dashboard ·
+      // /: fuzzy page search.
       onTextKey: function(t) {
-        if (t === "p" && root.sites.length > 0) {
+        if (t === "/") {
+          root.openSearch()
+        } else if (t === "p" && root.sites.length > 0) {
           root.siteIndex = (root.siteIndex + 1) % root.sites.length
         } else if (t === "1" || t === "2" || t === "3") {
           root.hoverDay = -1
@@ -425,6 +583,125 @@ Panel {
                 }
               }
             }
+          }
+        }
+
+        // ---- "/" page search: text box + fuzzy results for current range.
+        Column {
+          visible: root.searchOpen
+          width: parent.width
+          spacing: Style.space(4)
+
+          Rectangle {
+            width: parent.width
+            height: searchField.implicitHeight + Style.space(14)
+            radius: Style.space(6)
+            color: Qt.alpha(root.fg, 0.06)
+            border.width: 1
+            border.color: searchField.activeFocus
+              ? Qt.alpha(Color.accent, 0.6) : Qt.alpha(root.fg, 0.15)
+
+            TextInput {
+              id: searchField
+              anchors.fill: parent
+              anchors.leftMargin: Style.space(10)
+              anchors.rightMargin: Style.space(10)
+              verticalAlignment: TextInput.AlignVCenter
+              color: root.fg
+              selectionColor: Qt.alpha(Color.accent, 0.4)
+              font.family: root.fontFam
+              font.pixelSize: Style.font.bodySmall
+              clip: true
+              onTextChanged: countsDebounce.restart()
+              Keys.onEscapePressed: root.closeSearch()
+              Keys.onReturnPressed: root.searchOpenPage(root.searchBestPath())
+              Keys.onEnterPressed: root.searchOpenPage(root.searchBestPath())
+
+              Text {
+                visible: searchField.text === ""
+                anchors.verticalCenter: parent.verticalCenter
+                text: "search pages…   Enter: open best match in dashboard · Esc: close"
+                color: Qt.darker(root.fg, 1.6)
+                font.family: root.fontFam
+                font.pixelSize: Style.font.bodySmall
+              }
+            }
+          }
+
+          Text {
+            visible: root.searchLoading || root.searchError !== ""
+            text: root.searchError !== "" ? root.searchError : "loading page list…"
+            color: Qt.darker(root.fg, 1.5)
+            font.family: root.fontFam
+            font.pixelSize: Style.font.caption
+            font.italic: true
+          }
+
+          Repeater {
+            model: root.sortedMatches
+
+            Item {
+              id: resRow
+              required property var modelData
+              required property int index
+              width: root.contentW
+              // Pages with no views in the selected range are hidden once
+              // their count comes back as zero.
+              readonly property bool dead: root.countFor(modelData.name) === 0
+              visible: !dead
+              height: dead ? 0 : root.listRowH
+
+              Rectangle {
+                anchors.fill: parent
+                radius: Style.space(3)
+                color: resRow.index === 0
+                  ? Qt.alpha(Color.accent, 0.18) : Qt.alpha(root.fg, 0.04)
+              }
+
+              Text {
+                anchors.left: parent.left
+                anchors.right: resCount.left
+                anchors.leftMargin: Style.space(6)
+                anchors.rightMargin: Style.space(6)
+                anchors.verticalCenter: parent.verticalCenter
+                text: Model.plainText(resRow.modelData.name)
+                textFormat: Text.PlainText
+                elide: Text.ElideRight
+                color: root.fg
+                font.family: root.fontFam
+                font.pixelSize: Style.font.caption
+              }
+
+              Text {
+                id: resCount
+                anchors.right: parent.right
+                anchors.rightMargin: Style.space(4)
+                anchors.verticalCenter: parent.verticalCenter
+                text: {
+                  var c = root.countFor(resRow.modelData.name)
+                  return c < 0 ? "…" : Model.fmtCount(c)
+                }
+                color: Qt.darker(root.fg, 1.3)
+                font.family: root.fontFam
+                font.pixelSize: Style.font.caption
+                font.bold: resRow.index === 0
+              }
+
+              MouseArea {
+                anchors.fill: parent
+                onClicked: root.searchOpenPage(resRow.modelData.name)
+              }
+            }
+          }
+
+          Text {
+            visible: !root.searchLoading && root.searchError === ""
+              && searchField.text !== "" && root.searchMatches.length === 0
+            text: "no matching page (first 1000 pages searched)"
+            color: Qt.darker(root.fg, 1.5)
+            font.family: root.fontFam
+            font.pixelSize: Style.font.caption
+            font.italic: true
           }
         }
 

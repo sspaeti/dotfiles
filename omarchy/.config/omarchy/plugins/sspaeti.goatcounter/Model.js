@@ -41,6 +41,39 @@ function displayLabel(site, labelMap) {
   return plainText(label)
 }
 
+function isSubsequence(q, s) {
+  var j = 0
+  for (var i = 0; i < s.length && j < q.length; i++)
+    if (s[i] === q[j]) j++
+  return j === q.length
+}
+
+// fzf-style page search over the full path list: prefix and substring
+// matches on the path (or a substring match on the page title) rank above
+// scattered subsequence matches; ties prefer shorter paths.
+function fuzzyPaths(paths, query) {
+  query = String(query || "").toLowerCase().trim()
+  if (query === "") return []
+  var out = []
+  for (var i = 0; i < (paths || []).length; i++) {
+    var p = paths[i]
+    var path = String(p.path || "").toLowerCase()
+    var title = String(p.title || "").toLowerCase()
+    var idx = path.indexOf(query)
+    var rank
+    if (idx === 0) rank = 0
+    else if (idx > 0) rank = 1
+    else if (title.indexOf(query) >= 0) rank = 1
+    else if (isSubsequence(query, path)) rank = 2
+    else continue
+    out.push({ id: p.id, name: p.path, rank: rank })
+  }
+  out.sort(function(a, b) {
+    return a.rank - b.rank || a.name.length - b.name.length
+  })
+  return out.slice(0, 10)
+}
+
 // Bar pill hover label, always the weekly totals: "ssp.sh 13.9k · dedp 456"
 function compactLabel(sites, labelMap) {
   var parts = []

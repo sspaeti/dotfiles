@@ -3,15 +3,17 @@
 #
 # Credentials stay out of the dotfiles repo: sites are auto-discovered from
 # GOATCOUNTER_URL / GOATCOUNTER_TOKEN plus any GOATCOUNTER_URL_<NAME> /
-# GOATCOUNTER_TOKEN_<NAME> pairs in the secrets file. Only the GOATCOUNTER_*
-# assignment lines are eval'd, never the whole file, and tokens are never
-# printed.
+# GOATCOUNTER_TOKEN_<NAME> pairs in the secrets file. The GOATCOUNTER_*
+# assignment lines are parsed literally (never eval'd — no shell syntax in
+# values is ever executed), and tokens are never printed.
 #
 # Usage: fetch.sh [--cached] [--alert-daily N|JSON] [--alert-hourly N|JSON]
 #   --cached        print cache when younger than TTL, else refresh
 #   --alert-daily   notify when a site passes N views today (or per-site map
 #                   like '{"ssp.sh": 3000}'); 0 disables
 #   --alert-hourly  same for views in the last 60 minutes
+#   --paths <label>            print the site's page list (≤1000, 6h cache)
+#   --counts <label> <1|7|30> <id,..>  print view counts for those page ids
 set -uo pipefail
 
 SECRETS="${GOATCOUNTER_SECRETS:-$HOME/.dotfiles/zsh/.secrets}"
@@ -20,11 +22,14 @@ CACHE="$STATE_DIR/stats.json"
 TTL=900
 
 cached=0 alert_daily=0 alert_hourly=0
+paths_label="" counts_label="" counts_range="" counts_ids=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --cached) cached=1; shift ;;
     --alert-daily) alert_daily=${2:-0}; shift 2 ;;
     --alert-hourly) alert_hourly=${2:-0}; shift 2 ;;
+    --paths) paths_label=${2:-}; shift 2 ;;
+    --counts) counts_label=${2:-}; counts_range=${3:-30}; counts_ids=${4:-}; shift 4 ;;
     *) shift ;;
   esac
 done
@@ -40,8 +45,26 @@ if (( cached )) && [[ -f "$CACHE" ]]; then
   fi
 fi
 
+# Parse GOATCOUNTER_* assignments WITHOUT eval: eval would execute shell
+# syntax in the value (command substitutions, chained commands) on every
+# background refresh. Values are taken literally — one level of surrounding
+# quotes is stripped, an unquoted value ends at the first whitespace, and no
+# expansion of any kind is performed.
 if [[ -r "$SECRETS" ]]; then
-  eval "$(grep -E '^[[:space:]]*(export[[:space:]]+)?GOATCOUNTER_[A-Z0-9_]+=' "$SECRETS")"
+  while IFS= read -r _line; do
+    [[ "$_line" =~ ^[[:space:]]*(export[[:space:]]+)?(GOATCOUNTER_[A-Z0-9_]+)=(.*)$ ]] || continue
+    _name="${BASH_REMATCH[2]}"
+    _val="${BASH_REMATCH[3]}"
+    if [[ "$_val" =~ ^\"([^\"]*)\" ]]; then
+      _val="${BASH_REMATCH[1]}"
+    elif [[ "$_val" =~ ^\'([^\']*)\' ]]; then
+      _val="${BASH_REMATCH[1]}"
+    else
+      _val="${_val%%[[:space:]]*}"
+    fi
+    printf -v "$_name" '%s' "$_val"
+  done <"$SECRETS"
+  unset _line _name _val
 fi
 
 # Date-only start/end is unreliable (start==end returns partial data), so
@@ -75,6 +98,79 @@ api() { # url token path
   curl -fsS -m 20 --retry 3 --retry-delay 2 --retry-max-time 45 \
     -K - "$1/api/v0/$3" <<<"header = \"Authorization: Bearer $2\""
 }
+
+resolve_site() { # label -> sets s_url/s_token, fails if unknown
+  s_url="" s_token=""
+  if [[ "$(site_label "${GOATCOUNTER_URL:-}")" == "$1" ]]; then
+    s_url="${GOATCOUNTER_URL:-}" s_token="${GOATCOUNTER_TOKEN:-}"
+  else
+    local sfx u_var t_var
+    for sfx in $(compgen -A variable | grep -E '^GOATCOUNTER_URL_[A-Z0-9_]+$' | sed 's/^GOATCOUNTER_URL_//'); do
+      u_var="GOATCOUNTER_URL_$sfx" t_var="GOATCOUNTER_TOKEN_$sfx"
+      if [[ "$(site_label "${!u_var:-}")" == "$1" ]]; then
+        s_url="${!u_var:-}" s_token="${!t_var:-}"
+        break
+      fi
+    done
+  fi
+  [[ -n "$s_url" && -n "$s_token" ]]
+}
+
+range_start() { # 1|7|30 -> range start timestamp
+  case "$1" in
+    1) day_start_utc "$today" ;;
+    7) day_start_utc "$(date -d '6 days ago' +%F)" ;;
+    *) day_start_utc "$(date -d '29 days ago' +%F)" ;;
+  esac
+}
+
+# ---- "--paths <label>": print the site's path list (up to 1000 pages) as
+#      {paths: [{id, path, title}]} and exit. The list is small (~150 bytes
+#      per path) and cached on disk for 6 hours; the panel's "/" search
+#      fuzzy-matches against it locally.
+if [[ -n "$paths_label" ]]; then
+  resolve_site "$paths_label" || { jq -n '{error: "unknown site"}'; exit 0; }
+  PCACHE="$STATE_DIR/paths-$paths_label.json"
+  if [[ -f "$PCACHE" ]] && (( $(date +%s) - $(stat -c %Y "$PCACHE") < 21600 )); then
+    cat "$PCACHE"
+    exit 0
+  fi
+  all="[]" after=0 truncated=false
+  for _page in 1 2 3 4 5; do
+    r=$(api "${s_url%/}" "$s_token" "paths?Limit=200&After=$after") \
+      || { jq -n '{error: "API request failed"}'; exit 0; }
+    n=$(jq '.paths | length' <<<"$r")
+    (( n == 0 )) && break
+    all=$(jq -n --argjson a "$all" --argjson r "$r" \
+      '$a + ($r.paths | map({id, path, title}))')
+    after=$(jq '.paths[-1].id' <<<"$r")
+    if [[ $(jq '.more' <<<"$r") != "true" ]]; then
+      truncated=false
+      break
+    fi
+    truncated=true
+  done
+  out=$(jq -n --argjson p "$all" --argjson t "$truncated" '{paths: $p, truncated: $t}')
+  tmp=$(mktemp "$STATE_DIR/.paths.XXXXXX")
+  printf '%s\n' "$out" >"$tmp"
+  chmod 600 "$tmp"
+  mv "$tmp" "$PCACHE"
+  printf '%s\n' "$out"
+  exit 0
+fi
+
+# ---- "--counts <label> <range> <ids>": print view counts for specific page
+#      ids in one range as {counts: [{name, count}]} and exit. Small (~15 KB)
+#      because include_paths narrows the hits payload to the matched pages.
+if [[ -n "$counts_label" ]]; then
+  resolve_site "$counts_label" || { jq -n '{error: "unknown site"}'; exit 0; }
+  [[ "$counts_ids" =~ ^[0-9]+(,[0-9]+)*$ ]] || { jq -n '{error: "bad ids"}'; exit 0; }
+  h=$(api "${s_url%/}" "$s_token" \
+    "stats/hits?start=$(range_start "$counts_range")&end=$now&limit=100&include_paths=$counts_ids") \
+    || { jq -n '{error: "API request failed"}'; exit 0; }
+  jq '{counts: (.hits // [] | map({name: .path, count: .count}))}' <<<"$h"
+  exit 0
+fi
 
 # Threshold may be a plain number or a per-site map keyed by label.
 threshold_for() { # spec label
