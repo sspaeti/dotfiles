@@ -3,8 +3,9 @@
   "id": "sspaeti.timezones",
   "name": "Timezones",
   "version": "1.0.0",
-  "author": "sspaeti",
-  "description": "World clock pill with a worldtimebuddy-style hour-grid popup",
+  "author": "Simon Späti",
+  "license": "MIT",
+  "description": "World clock bar pill with a worldtimebuddy-style hour-grid popup. Hover a column to convert any moment across all your zones.",
   "kinds": [
     "bar-widget"
   ],
@@ -13,8 +14,9 @@
   },
   "barWidget": {
     "displayName": "Timezones",
-    "description": "World clock pill with a worldtimebuddy-style hour-grid popup",
+    "description": "World clock with hour-grid popup",
     "category": "Info",
-    "allowMultiple": false
+    "allowMultiple": false,
+    "defaultSection": "center"
   }
 }
