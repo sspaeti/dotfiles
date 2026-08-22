@@ -20,6 +20,11 @@ SECRETS="${GOATCOUNTER_SECRETS:-$HOME/.dotfiles/zsh/.secrets}"
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/goatcounter"
 CACHE="$STATE_DIR/stats.json"
 TTL=900
+# Hard cap per API response: everything is buffered into shell variables and
+# fed to jq, so an oversized (or malicious) response must fail instead of
+# exhausting memory. Largest legitimate payload (stats/hits hourly series)
+# stays well under 1 MB.
+MAX_RESP=$((5 * 1024 * 1024))
 
 cached=0 alert_daily=0 alert_hourly=0
 paths_label="" counts_label="" counts_range="" counts_ids=""
@@ -93,10 +98,20 @@ site_label() {
 # caps the whole retry loop: hosted goatcounter.com sends long Retry-After
 # values that would otherwise stall a call for many minutes. The token goes
 # in via a stdin config file, never argv, so it is invisible in `ps`.
+#
+# Responses are size-bounded twice: --max-filesize rejects up front when the
+# server sends a Content-Length, but does nothing for chunked/unknown-length
+# transfers, so head reads at most MAX_RESP+1 bytes (pipefail plus the byte
+# check fail the call once the cap is crossed, whatever the encoding).
 api() { # url token path
   sleep 0.15
-  curl -fsS -m 20 --retry 3 --retry-delay 2 --retry-max-time 45 \
-    -K - "$1/api/v0/$3" <<<"header = \"Authorization: Bearer $2\""
+  local body
+  body=$(curl -fsS -m 20 --retry 3 --retry-delay 2 --retry-max-time 45 \
+    --max-filesize "$MAX_RESP" \
+    -K - "$1/api/v0/$3" <<<"header = \"Authorization: Bearer $2\"" \
+    | head -c $((MAX_RESP + 1))) || return 1
+  (( $(LC_ALL=C printf '%s' "$body" | wc -c) > MAX_RESP )) && return 1
+  printf '%s' "$body"
 }
 
 resolve_site() { # label -> sets s_url/s_token, fails if unknown
