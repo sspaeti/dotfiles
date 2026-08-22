@@ -130,8 +130,6 @@ o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle sspa
 hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE our bind, or it wipes it
 o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle sspaeti.timezones")
 
--- Gaps toggle on a deliberate chord (default SUPER+SHIFT+BACKSPACE is unbound above).
-o.bind("SUPER + CTRL + ALT + G", "Toggle window gaps", "omarchy-hyprland-window-gaps-toggle")
 
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
 o.bind("SUPER + SHIFT + ALT + F", "Fuzzy file content", ssp .. "/fuzzy-file-content.sh")
@@ -182,6 +180,7 @@ o.bind("SUPER + ALT + SHIFT + P", "Screenshot (copy only)", ssp .. "/omasnap-cap
 o.bind("SUPER + ALT + CTRL + X", "Cut-out image (omapic)", ssp .. "/omapic-capture-cut.sh")
 o.bind("SUPER + ALT + CTRL + C", "Copy last screenshot path", ssp .. "/copy-last-screenshot-path.sh")
 -- Print videos - Screen recordings
+hl.unbind("SUPER + BACKSPACE") -- default: Toggle window transparency
 o.bind("SUPER + BACKSPACE", "Screenrecording", "omarchy-capture-screenrecording --stop-recording || omarchy-menu toggle trigger.capture.screenrecord")
 
 -- Fallback: previous default flow (omarchy capture -> Tensaku -> organize).
@@ -205,7 +204,8 @@ hl.unbind("SUPER + SHIFT + SPACE") -- default: Toggle top bar
 o.bind_toggle("SUPER + G", "Toggle top bar", "bar")
 --toggle floating gaps between windows
 hl.unbind("SUPER + SHIFT + BACKSPACE") -- default: Toggle window gaps (easy to fat-finger next to the bindings below; use `omarchy-hyprland-window-gaps-toggle` manually instead)
-hl.unbind("SUPER + BACKSPACE") -- default: Toggle window transparency
+-- Gaps toggle on a deliberate chord (default SUPER+SHIFT+BACKSPACE is unbound above).
+o.bind("SUPER + CTRL + ALT + G", "Toggle window gaps", "omarchy-hyprland-window-gaps-toggle")
 
 -- Theme and background
 hl.unbind("SUPER + T") -- default: Toggle window floating/tiling
