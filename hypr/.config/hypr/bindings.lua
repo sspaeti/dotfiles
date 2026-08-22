@@ -74,8 +74,7 @@ hl.unbind("SUPER + SHIFT + A") -- default: ChatGPT
 o.bind("SUPER + SHIFT + A", "Activity", { tui = "btop" })
 o.bind("SUPER + D", "Docker", { tui = "lazydocker" })
 
--- keyboard switch
-hl.unbind("SUPER + BACKSPACE") -- default: Toggle window transparency
+-- my keyboard switch
 o.bind(
   "SUPER + ALT + BACKSPACE",
   "Toggle Keyboard",
@@ -130,6 +129,9 @@ o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspae
 o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle sspaeti.goatcounter")
 hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE our bind, or it wipes it
 o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle sspaeti.timezones")
+
+-- Gaps toggle on a deliberate chord (default SUPER+SHIFT+BACKSPACE is unbound above).
+o.bind("SUPER + CTRL + ALT + G", "Toggle window gaps", "omarchy-hyprland-window-gaps-toggle")
 
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
 o.bind("SUPER + SHIFT + ALT + F", "Fuzzy file content", ssp .. "/fuzzy-file-content.sh")
@@ -198,10 +200,12 @@ o.bind("SUPER + ALT + CTRL + bracketleft", "Screen record for Kdenlive", ssp .. 
 
 hl.unbind("SUPER + G") -- default: Toggle window grouping
 hl.unbind("SUPER + SHIFT + SPACE") -- default: Toggle top bar
--- QUATTRO: waybar is gone; the Omarchy shell bar has its own toggle.
+--
+-- top bar (prev: waybar)toggle
 o.bind_toggle("SUPER + G", "Toggle top bar", "bar")
--- QUATTRO: omarchy-theme-next is gone; the switcher is the closest thing.
-o.bind("SUPER + SHIFT + ALT + CTRL + G", "Theme switcher", "omarchy-theme-switcher")
+--toggle floating gaps between windows
+hl.unbind("SUPER + SHIFT + BACKSPACE") -- default: Toggle window gaps (easy to fat-finger next to the bindings below; use `omarchy-hyprland-window-gaps-toggle` manually instead)
+hl.unbind("SUPER + BACKSPACE") -- default: Toggle window transparency
 
 -- Theme and background
 hl.unbind("SUPER + T") -- default: Toggle window floating/tiling
