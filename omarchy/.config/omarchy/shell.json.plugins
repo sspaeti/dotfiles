@@ -1,0 +1,16 @@
+-- plugins that also installed
+
+--replcaed original omarchy
+{
+  "id": "sspaeti.clock",
+  "format": "ddd d MMM HH:mm",
+  "formatAlt": "dddd HH:mm 'W'ww",
+  "verticalFormat": "HH\n—\nmm"
+},
+
+potential:
+ [
+        {
+          "id": "jmaeder.swissweather"
+        }
+ ]
