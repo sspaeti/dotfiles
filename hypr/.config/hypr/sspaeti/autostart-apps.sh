@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Launch terminal -> ws1, Brave -> ws2, Obsidian -> ws3.
+# Launch terminal -> ws1, default browser -> ws2, Obsidian -> ws3.
 #
 # QUATTRO NOTE: with the Lua config, `hyprctl dispatch` parses its argument as
 # Lua, not as the old conf syntax. `hyprctl dispatch workspace 1` and
@@ -52,7 +52,7 @@ TERM_CLASS=${TERM_CLASS:-foot}
 uwsm app -- xdg-terminal-exec tmux &
 term_addr=$(wait_for_window "^${TERM_CLASS}$") && move_to_ws 1 "$term_addr"
 
-# Launch Brave → workspace 2
+# Launch default browser → workspace 2
 # Wait for gnome-keyring-daemon to be ready (fixes keyring race condition and multiple keyring files at ~/.local/share/keyrings)
 while ! systemctl --user is-active --quiet gnome-keyring-daemon.service; do
     sleep 0.2
@@ -61,9 +61,19 @@ done
 # Fix Ente Auth keyring integration (prevents duplicate keyring creation)
 # ~/.config/hypr/sspaeti/fix-ente-keyring.sh > /tmp/keyring-fix-startup.log 2>&1
 
-# brave --password-store=basic --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
-brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
-brave_addr=$(wait_for_window "^brave-browser$" 60) && move_to_ws 2 "$brave_addr"
+# Resolve the system default browser (xdg-settings) so this follows
+# `xdg-settings set default-web-browser ...` instead of hardcoding one.
+# Falls back to brave-origin if xdg-settings has nothing configured.
+BROWSER_DESKTOP=$(xdg-settings get default-web-browser 2>/dev/null)
+BROWSER_DESKTOP=${BROWSER_DESKTOP:-brave-origin.desktop}
+BROWSER_BIN=${BROWSER_DESKTOP%.desktop}
+BROWSER_DESKTOP_FILE=$(find /usr/share/applications ~/.local/share/applications -maxdepth 1 -name "$BROWSER_DESKTOP" 2>/dev/null | head -1)
+BROWSER_CLASS=$(grep -m1 '^StartupWMClass=' "$BROWSER_DESKTOP_FILE" 2>/dev/null | cut -d= -f2)
+BROWSER_CLASS=${BROWSER_CLASS:-$BROWSER_BIN}
+
+# brave-origin --password-store=basic --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
+"$BROWSER_BIN" --new-window --ozone-platform=wayland --force-device-scale-factor=1.0 &
+browser_addr=$(wait_for_window "^${BROWSER_CLASS}$" 60) && move_to_ws 2 "$browser_addr"
 
 # Launch Obsidian → workspace 3
 obsidian &

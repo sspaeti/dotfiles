@@ -36,7 +36,7 @@ hl.unbind("SUPER + SHIFT + O") -- default: Obsidian
 -- path directly.
 o.bind("SUPER + SHIFT + O", "Yazi (Sync)", "omarchy-launch-tui yazi " .. home .. "/Simon/Sync")
 -- o.bind("SUPER + B", "Brave", { launch = "brave --new-window --ozone-platform=wayland --force-device-scale-factor=1.0", focus = "brave-browser" })
-o.bind("SUPER + B", "Brave Origin", { launch = "brave-origin --new-window --ozone-platform=wayland --force-device-scale-factor=1.0", focus = "brave-browser" })
+o.bind("SUPER + B", "Brave Origin", { launch = "brave-origin --new-window --ozone-platform=wayland --force-device-scale-factor=1.0", focus = "brave-origin" })
 o.bind("SUPER + Z", "Zen browser", { launch = "zen-browser", focus = "zen" })
 
 hl.unbind("SUPER + SLASH") -- default: Monitor scaling up
