@@ -52,6 +52,9 @@ o.bind(
   [[pamixer --toggle-mute && notify-send "Audio" "$(pamixer --get-mute | grep -q 'true' && echo '🔇 Muted' || echo '🔊 Unmuted')" -t 2000]]
 )
 
+--new plugin Omarchy Spotify
+o.bind("SUPER + ALT + M", "Timezones", "omarchy-shell shell toggle quickshell.spotify")
+
 -- QUATTRO: omarchy-swayosd-client is gone; volume now goes through
 -- omarchy-audio-output-volume (it drives the Omarchy OSD itself).
 hl.unbind("SUPER + comma") -- default: Dismiss last notification
@@ -129,7 +132,7 @@ o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspae
 --plugins
 o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle sspaeti.goatcounter")
 hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE our bind, or it wipes it
-o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle sspaeti.timezones")
+o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle io.github.sspaeti.timezones")
 
 
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
