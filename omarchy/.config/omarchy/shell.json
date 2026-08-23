@@ -20,7 +20,8 @@
           "id": "omarchy.system-update"
         },
         {
-          "id": "sspaeti.timezones",
+          "id": "io.github.sspaeti.timezones",
+          "icon": "󱉊",
           "hoverExpand": false,
           "homeZones": [
             "Europe/Zurich",
