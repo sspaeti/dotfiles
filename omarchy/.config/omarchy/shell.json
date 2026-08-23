@@ -21,7 +21,7 @@
         },
         {
           "id": "io.github.sspaeti.timezones",
-          "icon": "󱉊",
+          "icon": "",
           "hoverExpand": false,
           "homeZones": [
             "Europe/Zurich",
