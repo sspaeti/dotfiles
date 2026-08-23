@@ -53,7 +53,8 @@ To pick your own zones and labels, configure the widget entry in
 
 ```json
 {
-  "id": "sspaeti.timezones",
+  "id": "io.github.sspaeti.timezones",
+  "icon": "󱉊",
   "homeZones": ["Europe/Zurich", "Europe/Berlin"],
   "zones": [
     { "label": "Switzerland", "shortLabel": "CH", "zone": "", "home": true },
@@ -63,6 +64,8 @@ To pick your own zones and labels, configure the widget entry in
   ]
 }
 ```
+
+The bar icon can be changed with `icon` — see below for the default and alternatives.
 
 - `zones` — the rows of the popup, top to bottom.
   - `zone` — IANA timezone name; `""` with `"home": true` tracks the system timezone.
@@ -74,7 +77,17 @@ To pick your own zones and labels, configure the widget entry in
 - `homeZones` — system timezones that keep the home row's configured label.
   Outside this list (traveling), the home row is relabeled by where the system
   clock actually is. Empty (default): always label by the system timezone.
-- `icon` — bar glyph (default `󰇧`).
+- `icon` — bar glyph, default `󱉊` (md-web_clock: globe with a small clock
+  badge, most literally "timezone"). Not plain md-earth/md-globe — those
+  render 1-2px smaller and lower than sibling bar icons in JetBrainsMono
+  Nerd Font at bar size, a per-glyph hinting quirk at small sizes, not a
+  layout bug. Alternatives:
+
+  | Glyph | Codepoint | Name | Notes |
+  |---|---|---|---|
+  | `󱉊` | U+F124A | md-web_clock | globe with a small clock badge (default) |
+  | `󰅐` | U+F0150 | md-clock_outline | plain clock, simplest shape, safest alignment |
+  | `󰖟` | U+F059F | md-web | plain meridian globe, no continents |
 - `hoverExpand` — set `false` to keep the bar pill a static icon instead of
   expanding to the compact times on hover (the expansion shifts neighboring
   widgets, which not everyone wants). Default `true`.
@@ -83,7 +96,7 @@ To pick your own zones and labels, configure the widget entry in
 Move it in the bar:
 
 ```sh
-omarchy bar move sspaeti.timezones --section center
+omarchy bar move io.github.sspaeti.timezones --section center
 ```
 
 ## How summer/winter time stays correct without syncing
@@ -103,5 +116,5 @@ special.
 ## Remove
 
 ```sh
-omarchy plugin remove sspaeti.timezones
+omarchy plugin remove io.github.sspaeti.timezones
 ```

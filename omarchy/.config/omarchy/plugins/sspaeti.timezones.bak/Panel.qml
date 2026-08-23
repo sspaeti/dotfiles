@@ -9,8 +9,8 @@ import "Model.js" as Model
 // the same absolute moment, with a "now" line and hover-a-column conversion.
 Panel {
   id: root
-  moduleName: "sspaeti.timezones"
-  ipcTarget: "sspaeti.timezones"
+  moduleName: "io.github.sspaeti.timezones"
+  ipcTarget: "io.github.sspaeti.timezones"
   manageIpc: false
 
   property var anchorItem: null
