@@ -1,6 +1,6 @@
 {
   "bar": {
-    "centerAnchor": "sspaeti.clock",
+    "centerAnchor": "tmn73.calendar",
     "layout": {
       "center": [
         {
@@ -96,7 +96,7 @@
           "scrollSpeed": "1",
           "audioQuality": "320 kbps",
           "searchHistory": "[]",
-          "sessionState": "{\"tab\":\"playlists\",\"searchText\":\"\",\"searchType\":\"track\",\"libraryType\":\"tracks\",\"homeType\":\"recent\",\"libraryFilter\":\"\",\"librarySort\":\"default\",\"playlistFilter\":\"\",\"playlistSort\":\"default\",\"detailFilter\":\"\",\"detailSort\":\"default\",\"homeFilter\":\"\",\"discoverFilter\":\"\",\"queueFilter\":\"\",\"artistSearchText\":\"\",\"scrollPositions\":{\"home:recent\":0,\"search:track\":0,\"playlist:280QjJVAG0mg9nTzG1Figi\":0},\"detailItem\":null,\"selectedPlaylistId\":\"2JNtvF6C5OxltfYiVjDAeX\",\"lastRadioPlaylist\":null}"
+          "sessionState": "{\"tab\":\"playlists\",\"searchText\":\"\",\"searchType\":\"track\",\"libraryType\":\"tracks\",\"homeType\":\"recent\",\"libraryFilter\":\"\",\"librarySort\":\"default\",\"playlistFilter\":\"\",\"playlistSort\":\"default\",\"detailFilter\":\"\",\"detailSort\":\"default\",\"homeFilter\":\"\",\"discoverFilter\":\"\",\"queueFilter\":\"\",\"artistSearchText\":\"\",\"scrollPositions\":{\"home:recent\":0,\"search:track\":0,\"playlist:280QjJVAG0mg9nTzG1Figi\":0,\"playlist:2JNtvF6C5OxltfYiVjDAeX\":102,\"detail:spotify:album:7jzURx17ZW6Yo5153MrLdh\":0},\"detailItem\":null,\"selectedPlaylistId\":\"2JNtvF6C5OxltfYiVjDAeX\",\"lastRadioPlaylist\":null}"
         },
         {
           "id": "io.github.teevans.apple-tv-remote"
