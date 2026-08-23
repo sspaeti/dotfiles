@@ -60,8 +60,7 @@
         },
         {
           "id": "sspaeti.weather"
-        }
-      ],
+        }],
       "left": [
         {
           "id": "omarchy.menu"
@@ -91,13 +90,15 @@
           "idleShutdownMinutes": 15,
           "showMiniPlayer": "Off",
           "shortcutPlayer": "Omarchy Music app",
+          "shortcutHints": "On",
           "showTrackTitle": "Off",
           "showArtistName": "Off",
           "scrollBarText": "Off",
           "scrollSpeed": "1",
+          "maxBarTextWidth": "240",
           "audioQuality": "320 kbps",
           "searchHistory": "[]",
-          "sessionState": "{\"tab\":\"playlists\",\"searchText\":\"\",\"searchType\":\"track\",\"libraryType\":\"tracks\",\"homeType\":\"recent\",\"libraryFilter\":\"\",\"librarySort\":\"default\",\"playlistFilter\":\"\",\"playlistSort\":\"default\",\"detailFilter\":\"\",\"detailSort\":\"default\",\"homeFilter\":\"\",\"discoverFilter\":\"\",\"queueFilter\":\"\",\"artistSearchText\":\"\",\"scrollPositions\":{\"home:recent\":0,\"search:track\":0,\"playlist:280QjJVAG0mg9nTzG1Figi\":0,\"playlist:2JNtvF6C5OxltfYiVjDAeX\":102,\"detail:spotify:album:7jzURx17ZW6Yo5153MrLdh\":0},\"detailItem\":null,\"selectedPlaylistId\":\"2JNtvF6C5OxltfYiVjDAeX\",\"lastRadioPlaylist\":null}"
+          "sessionState": "{\"tab\":\"setup\",\"searchText\":\"\",\"searchType\":\"track\",\"libraryType\":\"tracks\",\"homeType\":\"recent\",\"libraryFilter\":\"\",\"librarySort\":\"default\",\"playlistFilter\":\"\",\"playlistSort\":\"default\",\"detailFilter\":\"\",\"detailSort\":\"default\",\"homeFilter\":\"\",\"discoverFilter\":\"\",\"queueFilter\":\"\",\"artistSearchText\":\"\",\"scrollPositions\":{\"home:recent\":0,\"search:track\":0,\"playlist:280QjJVAG0mg9nTzG1Figi\":0,\"playlist:2JNtvF6C5OxltfYiVjDAeX\":102,\"detail:spotify:album:7jzURx17ZW6Yo5153MrLdh\":0},\"detailItem\":null,\"selectedPlaylistId\":\"2JNtvF6C5OxltfYiVjDAeX\",\"lastRadioPlaylist\":null}"
         },
         {
           "id": "io.github.teevans.apple-tv-remote"
