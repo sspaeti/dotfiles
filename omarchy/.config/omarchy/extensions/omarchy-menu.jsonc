@@ -27,4 +27,7 @@
   // Example: replace the default About action by reusing the same id. Existing
   // fields are kept unless overridden.
   // "about": {"icon":"","label":"About","action":"omarchy-launch-or-focus-tui \"zsh -c 'fastfetch; read -k 1'\""},
+
+  // Lock via the wrapper that skips `1password --lock` (see ~/.config/hypr/CLAUDE.md).
+  "system.lock": {"action":"$HOME/.config/hypr/sspaeti/omarchy-system-lock-wrapper.sh"}
 }

@@ -19,9 +19,9 @@ These duplicate upstream logic, so upstream fixes do NOT reach us automatically.
 | Local (in `sspaeti/`) | Upstream | Intentional delta |
 |---|---|---|
 | `omarchy-system-lock-wrapper.sh` | `$(which omarchy-system-lock)` | Skips `1password --lock` (no fingerprint reader; master password every unlock unacceptable). Header documents the diff command. |
-| `omarchy-system-menu` | System section of `$(which omarchy-menu)` | tmux-aware shutdown/restart handling. |
-| `omarchy-system-menu-intercept` | System handling of `$(which omarchy-menu)` (uses `omarchy-state` like upstream) | Intercepts to add tmux-aware shutdown/restart. |
-| `omarchy-menu` | Dispatcher over `$(which omarchy-menu)` | Routes "system" to our `omarchy-system-menu`, passes everything else through. |
+| `omarchy-system-menu` | `system.*` entries in `/usr/share/omarchy/default/omarchy/omarchy-menu.jsonc` + the `omarchy-system-*` binaries they call | tmux-aware shutdown/restart; Lock routes to the lock wrapper. Bound to SUPER+ESCAPE / SUPER+grave in `bindings.lua`. |
+| `omarchy-system-menu-intercept` | Same `system.*` entries (uses `omarchy-state` like upstream) | Intercepts to add tmux-aware shutdown/restart. |
+| `omarchy-menu` | Dispatcher over `$(which omarchy-menu)` | Routes "system" to our `omarchy-system-menu`, passes everything else through. Bound to SUPER+CTRL+ALT+SPACE. |
 
 Check: `diff <(cat "$(which <upstream>)") ~/.config/hypr/sspaeti/<local>` — anything beyond the documented delta = upstream drift.
 
@@ -53,8 +53,12 @@ no line-by-line diff needed.
 - `sspaeti/omarchy-capture-screenshot-wrapper.sh` → calls `omarchy-capture-screenshot`, then opens annotation editor
 - `sspaeti/omarchy-capture-screenrecording-kdenlive` → wraps `omarchy-capture-screenrecording` for Kdenlive-friendly output
 - `sspaeti/omarchy-menu-wrapper` → calls `omarchy-menu`, restores personal background after theme switch
-- `sspaeti/omarchy-update-sspaeti` → wraps `omarchy-update` with `mise deactivate`/`activate`
 - `sspaeti/omasnap-capture.sh` → wraps `omasnap` (external fork, see below), sets monthly Printscreen save dir
+- `~/.config/omarchy/extensions/omarchy-menu.jsonc` → overrides menu entry `system.lock` to run our lock wrapper instead of stock `omarchy-system-lock` (else menu > System > Lock would lock 1Password)
+
+(`omarchy-update-sspaeti` deleted 2026-08-24: its `mise deactivate` was a no-op when run as a
+script — the subcommand only prints shell code — and upstream `omarchy-update` now has an
+explicit mise step.)
 
 ## 4. External fork repos (separate git repos, own upstream tracking)
 
