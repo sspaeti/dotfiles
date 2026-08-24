@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "sspaeti.idle",
+  "name": "My Idle",
+  "version": "1.0.0",
+  "author": "Omarchy",
+  "description": "Quickshell-based idle detection for screensaver, lock, and display wake.",
+  "kinds": [
+    "service"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "service": "Service.qml"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.idle"
+  }
+}

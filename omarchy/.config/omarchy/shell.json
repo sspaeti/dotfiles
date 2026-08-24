@@ -60,7 +60,8 @@
         },
         {
           "id": "sspaeti.weather"
-        }],
+        }
+      ],
       "left": [
         {
           "id": "omarchy.menu"
@@ -168,15 +169,20 @@
       "autoPaste": false,
       "ocr": true,
       "ocrLang": "eng+deu"
+    },
+    {
+      "id": "sspaeti.idle"
     }
   ],
   "version": 1,
   "disabledPlugins": [
     "omarchy.emojis",
-    "omarchy.clipboard"
+    "omarchy.clipboard",
+    "omarchy.idle"
   ],
   "cloneSourceRestores": [
     "sspaeti.emojis",
-    "sspaeti.clipboard"
+    "sspaeti.clipboard",
+    "sspaeti.idle"
   ]
 }
