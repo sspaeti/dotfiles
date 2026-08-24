@@ -33,6 +33,7 @@ kanata/.config/kanata/kanata.kbd
 
 
 neomd/.config/neomd/lists
+neomd/.config/neomd/contacts.csv
 .stfolder
 *.swp
 zsh/.dotfiles/mutt/.lists-moved
