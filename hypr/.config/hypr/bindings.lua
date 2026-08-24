@@ -113,8 +113,7 @@ o.bind("SUPER + CTRL + L", "Locking computer", ssp .. "/omarchy-system-lock-wrap
 hl.unbind("SUPER + SHIFT + ALT + B") -- default: Browser (private)
 o.bind("SUPER + SHIFT + ALT + B", "Toggle window transparency", "omarchy-hyprland-window-transparency-toggle")
 
-o.bind("SUPER + N", "Obsidian", { launch = "obsidian", focus = "obsidian" })
--- o.bind("SUPER + N", "Obsidian", { launch = "obsidian --disable-gpu", focus = "obsidian" })
+o.bind("SUPER + N", "Obsidian", { launch = "obsidian", focus = "obsidian" }) --GPU flag is in ~/.config/obsidian/user-flags.conf
 
 hl.unbind("SUPER + SHIFT + S") -- default: Google Maps
 o.bind("SUPER + SHIFT + S", "Signal", { launch = "signal-desktop" })
