@@ -1,0 +1,12 @@
+# TUXEDO InfinityBook Pro 14 Gen10 AMD (Ryzen AI 9 HX 370)
+# Workaround: xHCI controller 0000:67:00.0 (AMD 1022:151f, USB4 complex)
+# refuses runtime suspend and the kernel retries every ~1.2s:
+#   xhci_hcd 0000:67:00.0: Refused to change power state from D0 to D3hot
+# Keeping the controller awake stops the retry loop (log spam, CPU wakeups).
+# No functional downside: all USB ports keep working; USB devices still
+# autosuspend individually. See linux_root/README.md for the "is it fixed
+# yet?" test and removal instructions. First seen 2026-08-22, workaround
+# applied 2026-08-25 (kernel 7.1.8-arch1-3, BIOS N.1.22A23).
+#
+# Install: sudo cp <this file> /etc/udev/rules.d/ && sudo udevadm control --reload
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x151f", ATTR{power/control}="on"

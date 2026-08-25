@@ -1,0 +1,62 @@
+#!/bin/bash
+# Check the AMD 151f xHCI D3hot bug (controller 0000:67:00.0 refuses runtime
+# suspend, kernel retries every ~1.2s). See linux_root/README.md in dotfiles.
+#
+#   xhci-check             status: is the retry loop active, is the workaround on
+#   xhci-check --test-fix  temporarily re-enable runtime PM for 60s to see if the
+#                          bug is fixed upstream (needs sudo); restores the
+#                          workaround if errors return
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+DEV=/sys/bus/pci/devices/0000:67:00.0
+MSG="Refused to change power state"
+
+[ -d "$DEV" ] || { echo "device 0000:67:00.0 not found"; exit 1; }
+
+status() {
+    echo "xHCI D3hot Check (0000:67:00.0)"
+    echo "==============================="
+    echo "power/control:  $(cat $DEV/power/control)"
+    echo "runtime_status: $(cat $DEV/power/runtime_status)"
+    local recent total
+    recent=$(journalctl -k --since "-120s" --no-pager 2>/dev/null | grep -c "$MSG")
+    total=$(journalctl -b -k --no-pager 2>/dev/null | grep -c "$MSG")
+    echo "errors this boot: $total (last 2 min: $recent)"
+    if [ "$recent" -gt 0 ]; then
+        echo -e "${RED}[WARN]${NC} retry loop active — apply workaround:"
+        echo "  echo on | sudo tee $DEV/power/control"
+    elif [ "$(cat $DEV/power/control)" = "on" ]; then
+        echo -e "${GREEN}[OK]${NC} quiet — workaround active (controller held in D0)"
+    else
+        echo -e "${GREEN}[OK]${NC} quiet with runtime PM enabled — bug may be fixed, run --test-fix to confirm"
+    fi
+}
+
+test_fix() {
+    echo "Re-enabling runtime PM for 60s to test if the D3hot bug is fixed..."
+    echo auto | sudo tee $DEV/power/control >/dev/null
+    sleep 60
+    local hits rs
+    hits=$(journalctl -k --since "-60s" --no-pager 2>/dev/null | grep -c "$MSG")
+    rs=$(cat $DEV/power/runtime_status)
+    if [ "$hits" -gt 0 ]; then
+        echo on | sudo tee $DEV/power/control >/dev/null
+        echo -e "${RED}[STILL BROKEN]${NC} $hits refusals in 60s — workaround re-applied, keep the udev rule"
+        exit 1
+    elif [ "$rs" = "suspended" ]; then
+        echo -e "${GREEN}[FIXED]${NC} no refusals and controller reached '$rs' — remove the udev rule (see linux_root/README.md)"
+        echo on | sudo tee $DEV/power/control >/dev/null   # keep current policy until rule removed deliberately
+    else
+        echo -e "${YELLOW}[INCONCLUSIVE]${NC} no refusals but runtime_status='$rs' (never tried to suspend?) — retest with USB idle"
+        echo on | sudo tee $DEV/power/control >/dev/null
+    fi
+}
+
+case "$1" in
+    --test-fix) test_fix ;;
+    *) status ;;
+esac
