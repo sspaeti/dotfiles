@@ -42,8 +42,9 @@ o.bind("SUPER + Z", "Zen browser", { launch = "zen-browser", focus = "zen" })
 hl.unbind("SUPER + SLASH") -- default: Monitor scaling up
 o.bind("SUPER + SLASH", "1Password", { launch = "1password" })
 
--- music and audio
 o.bind("SUPER + M", "Email (tmux)", ssp .. "/jump-to-email-tmux.sh") -- launching neomd
+--
+-- music and audio
 hl.unbind("SUPER + SHIFT + M") -- default: Music (Spotify)
 o.bind("SUPER + SHIFT + M", "Toggle audio output", ssp .. "/toggle-audio.sh")
 o.bind(
@@ -53,7 +54,7 @@ o.bind(
 )
 
 --new plugin Omarchy Spotify
-o.bind("SUPER + ALT + M", "Timezones", "omarchy-shell shell toggle quickshell.spotify")
+o.bind("SUPER + ALT + M", "Spotify Music", "omarchy-shell shell toggle quickshell.spotify")
 
 -- QUATTRO: omarchy-swayosd-client is gone; volume now goes through
 -- omarchy-audio-output-volume (it drives the Omarchy OSD itself).
@@ -61,7 +62,6 @@ hl.unbind("SUPER + comma") -- default: Dismiss last notification
 o.bind("SUPER + comma", "Volume down", "omarchy-audio-output-volume lower", { locked = true, repeating = true })
 o.bind("SUPER + PERIOD", "Volume up", "omarchy-audio-output-volume raise", { locked = true, repeating = true })
 
--- Sound/Music
 -- QUATTRO: swayosd --playerctl -> omarchy-shell media
 hl.unbind("SUPER + CTRL + P") -- default: Power panel
 o.bind("SUPER + CTRL + P", "Play", "omarchy-shell media playPause", { locked = true })
@@ -121,7 +121,8 @@ o.bind("SUPER + SHIFT + S", "Signal", { launch = "signal-desktop" })
 -- o.bind("SUPER + CTRL + S", "Google Messages", { webapp = "https://messages.google.com/web/conversations" })
 
 hl.unbind("SUPER + CTRL + C") -- default: Capture menu
-o.bind("SUPER + CTRL + C", "Morgen", { launch = "morgen", focus = "Morgen" })
+-- o.bind("SUPER + CTRL + C", "Morgen", { launch = "morgen", focus = "Morgen" })
+o.bind("SUPER + CTRL + C", "Google Calendar", { webapp = "https://calendar.google.com/" })
 
 hl.unbind("SUPER + CTRL + SPACE") -- default: Background switcher
 -- Edit the emoji list here: ~/.config/omarchy/plugins/sspaeti.emojis/emojis.json
@@ -129,7 +130,7 @@ hl.unbind("SUPER + CTRL + SPACE") -- default: Background switcher
 o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspaeti.emojis")
 
 --plugins
-o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle sspaeti.goatcounter")
+o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle io.github.sspaeti.goatcounter")
 hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE our bind, or it wipes it
 o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle io.github.sspaeti.timezones")
 
