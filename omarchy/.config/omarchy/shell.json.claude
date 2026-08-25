@@ -11,7 +11,7 @@
           "announceLeadMinutes": 15,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm"
+          "verticalFormat": "HH\n\u2014\nmm"
         },
         {
           "id": "omarchy.keyboard-layout"
@@ -21,7 +21,7 @@
         },
         {
           "id": "io.github.sspaeti.timezones",
-          "icon": "",
+          "icon": "\uee19",
           "hoverExpand": false,
           "homeZones": [
             "Europe/Zurich",
@@ -76,9 +76,6 @@
       "right": [
         {
           "id": "omarchy.tray"
-        },
-        {
-          "id": "io.github.sspaeti.goatcounter"
         },
         {
           "id": "io.github.kristoferlund.webcam",
