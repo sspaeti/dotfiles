@@ -65,21 +65,11 @@ Panel {
 
   // ---- Settings.
   readonly property var tabNames: setting("folders", ["Inbox", "ToScreen", "Feed", "PaperTrail"])
-  readonly property string defaultTab: String(setting("defaultTab", "ToScreen"))
-  readonly property int limit: Math.max(1, Number(setting("limit", 15)) || 15)
+  readonly property string defaultTab: String(setting("defaultTab", "Inbox"))
+  readonly property int limit: Math.max(1, Number(setting("limit", 25)) || 25)
   readonly property int refreshMinutes: Math.max(2, Number(setting("refreshMinutes", 5)) || 5)
   readonly property string jumpCommand: String(setting("jumpCommand",
     Quickshell.env("HOME") + "/.config/hypr/sspaeti/jump-to-email-tmux.sh"))
-  // Alternate neomd config.toml (e.g. a demo account for screen recordings).
-  // Empty = neomd's default config. fetch.sh keeps a separate cache per
-  // config, so switching never mixes demo and real mail.
-  readonly property string configPath: String(setting("configPath", ""))
-
-  function baseCmd() {
-    var cmd = ["bash", scriptPath()]
-    if (configPath !== "") cmd.push("--config", configPath)
-    return cmd
-  }
 
   // ---- Mail state, filled by fetch.sh (cached on disk between runs).
   property var data: null
@@ -107,9 +97,14 @@ Panel {
 
   function refresh() { runFetch(false) }
 
+  // A fetch requested while one is in flight is queued, not dropped: the
+  // settings injection after a reload races the startup fetch, and dropping
+  // that request would pin stale settings until the next background poll.
+  property bool refetchQueued: false
+
   function runFetch(cachedOk) {
-    if (fetchProc.running) return
-    var cmd = baseCmd()
+    if (fetchProc.running) { refetchQueued = true; return }
+    var cmd = ["bash", scriptPath()]
     if (cachedOk) cmd.push("--cached")
     cmd.push("--folders", tabNames.join(","), "--limit", String(limit))
     fetchProc.command = cmd
@@ -140,7 +135,7 @@ Panel {
     var mail = root.selected
     reading = mail
     bodyError = ""
-    var key = root.configPath + "|" + root.tabName + "|" + mail.uid
+    var key = root.tabName + "|" + mail.uid
     if (bodyCache[key] !== undefined) {
       bodyText = bodyCache[key]
       return
@@ -148,9 +143,7 @@ Panel {
     bodyText = ""
     if (readProc.running) return
     readProc.cacheKey = key
-    var cmd = baseCmd()
-    cmd.push("--read", root.tabName, String(mail.uid))
-    readProc.command = cmd
+    readProc.command = ["bash", scriptPath(), "--read", root.tabName, String(mail.uid)]
     readProc.running = true
   }
 
@@ -178,7 +171,7 @@ Panel {
           for (var k in root.bodyCache) m[k] = root.bodyCache[k]
           m[readProc.cacheKey] = body
           root.bodyCache = m
-          if (root.reading && root.configPath + "|" + root.tabName + "|" + root.reading.uid === readProc.cacheKey)
+          if (root.reading && root.tabName + "|" + root.reading.uid === readProc.cacheKey)
             root.bodyText = body
         } catch (e) {
           root.bodyError = "could not parse body JSON"
@@ -203,6 +196,10 @@ Panel {
           root.loadError = v && v.ok === false ? Model.plainText(v.error || "unknown error") : ""
         } catch (e) {
           root.loadError = "Could not parse mail JSON"
+        }
+        if (root.refetchQueued) {
+          root.refetchQueued = false
+          Qt.callLater(function() { root.runFetch(true) })
         }
       }
     }

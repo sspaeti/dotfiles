@@ -8,9 +8,6 @@
 #       print {"ok":true,"account":..,"folders":[..],"fetched":..}
 #   fetch.sh --read <folder> <uid>
 #       print one message body (BODY.PEEK — never marks it read)
-#   fetch.sh --config <path> ...
-#       use another neomd config.toml (e.g. a demo account); the cache is
-#       kept per config so demo data never mixes with the real mailbox
 #
 # Output is always a single JSON object. Failures print {"ok":false,...} and
 # exit 0: a widget that gets no JSON has nothing to show but a crash.
@@ -37,33 +34,19 @@ fail() { # message
 command -v neomd >/dev/null || fail "neomd not found in PATH"
 command -v jq >/dev/null || fail "jq not found in PATH"
 
-cached=0 folders="Inbox,ToScreen,Feed,PaperTrail" limit=15
-read_folder="" read_uid="" config_path=""
+cached=0 folders="Inbox,ToScreen,Feed,PaperTrail" limit=25
+read_folder="" read_uid=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --cached) cached=1; shift ;;
     --folders) folders=${2:-}; shift 2 ;;
-    --limit) limit=${2:-15}; shift 2 ;;
+    --limit) limit=${2:-25}; shift 2 ;;
     --read) read_folder=${2:-}; read_uid=${3:-}; shift 3 ;;
-    --config) config_path=${2:-}; shift 2 ;;
     *) shift ;;
   esac
 done
 
-# Alternate config (demo account): pass it to every neomd call and keep a
-# separate cache directory, named after the config's parent dir (e.g.
-# "neomd-demo-hostpoint"), so demo data never mixes with the real mailbox.
-NEOMD=(neomd)
-cache_name="default"
-if [[ -n "$config_path" ]]; then
-  config_path="${config_path/#\~/$HOME}"
-  [[ -r "$config_path" ]] || fail "config not readable: ${config_path//\"/}"
-  NEOMD=(neomd -config "$config_path")
-  cache_name=$(basename "$(dirname "$config_path")")
-  [[ "$cache_name" =~ ^[A-Za-z0-9._-]+$ ]] || cache_name="alt"
-fi
-
-STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/neomd/$cache_name"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/neomd"
 CACHE="$STATE_DIR/mail.json"
 mkdir -p "$STATE_DIR"
 chmod 700 "$STATE_DIR"
@@ -79,7 +62,7 @@ if [[ -n "$read_folder" ]]; then
     cat "$BCACHE"
     exit 0
   fi
-  out=$(timeout 60 "${NEOMD[@]}" read --folder "$read_folder" --uid "$read_uid" 2>/dev/null) \
+  out=$(timeout 60 neomd read --folder "$read_folder" --uid "$read_uid" 2>/dev/null) \
     || fail "neomd read timed out"
   [[ -n "$out" ]] || fail "neomd read produced no output"
   jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd read produced no JSON"
@@ -102,7 +85,7 @@ if (( cached )) && [[ -f "$CACHE" ]]; then
   fi
 fi
 
-out=$(timeout 90 "${NEOMD[@]}" list --folders "$folders" --limit "$limit" 2>/dev/null) \
+out=$(timeout 90 neomd list --folders "$folders" --limit "$limit" 2>/dev/null) \
   || { [[ -f "$CACHE" ]] && { cat "$CACHE"; exit 0; }; fail "neomd list timed out"; }
 [[ -n "$out" ]] || fail "neomd list produced no output"
 jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd list produced no JSON"

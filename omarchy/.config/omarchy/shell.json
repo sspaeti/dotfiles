@@ -93,10 +93,7 @@
           ]
         },
         {
-          "id": "io.github.sspaeti.neomd",
-          "settings": {
-            "configPath": "~/.config/neomd-demo-hostpoint/config.toml"
-          }
+          "id": "io.github.sspaeti.neomd"
         },
         {
           "id": "omarchy.bluetooth"

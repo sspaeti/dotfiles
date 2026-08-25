@@ -45,20 +45,19 @@ Hyprland, e.g.
 
 ## Settings
 
-Configure on the widget entry in `~/.config/omarchy/shell.json`:
+Configure on the widget entry in `~/.config/omarchy/shell.json`. Settings are
+**inline keys next to `id`** (every key except `id` is a setting — there is no
+nested `"settings"` object):
 
 ```json
 {
   "id": "io.github.sspaeti.neomd",
-  "settings": {
-    "icon": "󰇰",
-    "folders": ["Inbox", "ToScreen", "Feed", "PaperTrail"],
-    "defaultTab": "ToScreen",
-    "limit": 15,
-    "refreshMinutes": 5,
-    "jumpCommand": "~/.config/hypr/sspaeti/jump-to-email-tmux.sh",
-    "configPath": ""
-  }
+  "icon": "󰇰",
+  "folders": ["Inbox", "ToScreen", "Feed", "PaperTrail"],
+  "defaultTab": "Inbox",
+  "limit": 25,
+  "refreshMinutes": 5,
+  "jumpCommand": "~/.config/hypr/sspaeti/jump-to-email-tmux.sh"
 }
 ```
 
@@ -70,10 +69,6 @@ Configure on the widget entry in `~/.config/omarchy/shell.json`:
 - `refreshMinutes` — background poll cadence (the disk cache means an open
   is always instant)
 - `jumpCommand` — what `o` / right-click runs to open the full client
-- `configPath` — alternate neomd `config.toml`, e.g.
-  `"~/.config/neomd-demo-hostpoint/config.toml"` for a demo account during
-  screen recordings; empty uses neomd's default config. Each config gets its
-  own on-disk cache, so demo and real mail never mix.
 
 ## Mouse
 
