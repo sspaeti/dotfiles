@@ -26,3 +26,14 @@ fi
 
 # 2. Did the GPU stack change since the last proven run?
 "$DIR/gpu-stack-changed" --notify >/dev/null 2>&1 || true
+
+# 3. Is the xHCI D3hot retry loop active? (AMD 151f controller, see xhci-check;
+#    fires when the udev rule is missing or stopped working after an update)
+xhci_recent=$(journalctl -k --since "-120s" --no-pager 2>/dev/null | grep -c "Refused to change power state")
+if [ "${xhci_recent:-0}" -gt 0 ]; then
+  notify-send -u critical -t 0 -a gpu-guard \
+    "xHCI D3hot retry loop active" \
+    "$xhci_recent refusals in last 2 min (burns CPU/battery).
+Fix: echo on | sudo tee /sys/bus/pci/devices/0000:67:00.0/power/control
+Or install udev rule from dotfiles linux_root/. Details: xhci-check" 2>/dev/null
+fi
