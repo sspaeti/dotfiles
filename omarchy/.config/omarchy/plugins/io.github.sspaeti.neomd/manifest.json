@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.sspaeti.neomd",
+  "name": "neomd Mail",
+  "version": "0.1.0",
+  "author": "Simon Späti",
+  "license": "MIT",
+  "description": "Calm mail peek for neomd: Inbox, ToScreen, Feed and PaperTrail tabs behind a static icon — no unread counter on the bar, ever. Screen senders in/out straight from the ToScreen tab.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "neomd Mail",
+    "description": "HEY-style mail tabs popup (read + screen)",
+    "category": "Info",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

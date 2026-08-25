@@ -75,35 +75,28 @@
       ],
       "right": [
         {
-          "id": "omarchy.tray"
+          "id": "omarchy.tray",
+          "pinned": [],
+          "hidden": [
+            "1Password_status_icon_1",
+            "chrome_status_icon_1",
+            "Claude_status_icon_2"
+          ]
         },
         {
-          "id": "io.github.sspaeti.goatcounter"
+          "id": "so.den",
+          "widgets": [
+            "io.github.teevans.apple-tv-remote",
+            "quickshell.spotify",
+            "io.github.kristoferlund.webcam",
+            "agx.screen-time"
+          ]
         },
         {
-          "id": "io.github.kristoferlund.webcam",
-          "device": "/dev/video4"
-        },
-        {
-          "id": "agx.screen-time",
-          "iconOnly": true
-        },
-        {
-          "id": "quickshell.spotify",
-          "deviceName": "Omarchy Spotify",
-          "idleShutdownMinutes": 15,
-          "showMiniPlayer": "Off",
-          "shortcutPlayer": "Omarchy Music app",
-          "shortcutHints": "On",
-          "showTrackTitle": "Off",
-          "showArtistName": "Off",
-          "scrollBarText": "Off",
-          "scrollSpeed": "1",
-          "maxBarTextWidth": "240",
-          "audioQuality": "320 kbps"
-        },
-        {
-          "id": "io.github.teevans.apple-tv-remote"
+          "id": "io.github.sspaeti.neomd",
+          "settings": {
+            "configPath": "~/.config/neomd-demo-hostpoint/config.toml"
+          }
         },
         {
           "id": "omarchy.bluetooth"
@@ -173,6 +166,18 @@
     },
     {
       "id": "sspaeti.idle"
+    },
+    {
+      "id": "io.github.teevans.apple-tv-remote"
+    },
+    {
+      "id": "quickshell.spotify"
+    },
+    {
+      "id": "io.github.kristoferlund.webcam"
+    },
+    {
+      "id": "agx.screen-time"
     }
   ],
   "version": 1,
