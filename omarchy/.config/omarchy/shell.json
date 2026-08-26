@@ -80,7 +80,8 @@
           "hidden": [
             "1Password_status_icon_1",
             "chrome_status_icon_1",
-            "Claude_status_icon_2"
+            "Claude_status_icon_2",
+            "kD6eTa86_5"
           ]
         },
         {
@@ -118,7 +119,7 @@
             "ssp.sh": 1000,
             "dedp": 150
           },
-          "refreshMinutes": 15
+          "refreshMinutes": 10 
         },
         {
           "id": "omarchy.agents"
