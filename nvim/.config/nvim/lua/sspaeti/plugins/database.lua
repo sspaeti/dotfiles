@@ -32,6 +32,12 @@ return {
         local_postgres_postgres = 'postgres://postgres@localhost:5432/postgres',
         duckdb_memory = 'duckdb:',
         duckdb_file = 'duckdb:///home/sspaeti/Documents/sandbox/duckdbs/default_nvim.duckdb',
+        -- Local Exasol (docker exasol/nano). Custom adapter in autoload/db/adapter/exasol.vim
+        -- shells out to usql; validateservercertificate=0 = DBeaver's driver property for
+        -- the self-signed cert. Credentials come from the environment (set in zsh).
+        exasol_local = 'exasol://' .. (os.getenv('EXASOL_NANO_USER') or '')
+            .. ':' .. (os.getenv('EXASOL_NANO_PW') or '')
+            .. '@127.0.0.1:8563?validateservercertificate=0',
       }
 
       vim.g.db_ui_execute_on_save = 0 --do not execute on save

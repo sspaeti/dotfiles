@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=SQL-Editor (nvim-dadbodui)
+Comment=SQL-Editor (nvim-dadbodui)
+Exec=xdg-terminal-exec --app-id=TUI.tile -e zsh -ic "nvim +DBUI"
+Terminal=false
+Type=Application
+Icon=nvim
+StartupNotify=true
