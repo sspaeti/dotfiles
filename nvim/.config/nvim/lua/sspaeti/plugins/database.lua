@@ -51,8 +51,10 @@ return {
       vim.api.nvim_set_keymap('x', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
       vim.api.nvim_set_keymap('x', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
-      -- Does not work: Define the custom key mapping for executing the query under the cursor
-      -- vim.api.nvim_set_keymap('n', '<leader><CR>', 'vip<leader>S', { noremap = true, silent = true })
+      -- Ctrl+Enter: run statement under cursor (paragraph) without selecting;
+      -- needs noremap=false so the <Plug> mapping expands
+      vim.api.nvim_set_keymap('n', '<C-CR>', 'vip<Plug>(DBUI_ExecuteQuery)', { noremap = false })
+      vim.api.nvim_set_keymap('x', '<C-CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
       -- Remap default action to open in vertical split
       -- vim.api.nvim_set_keymap('n', 'o', '<Plug>(DBUI_SelectLineVsplit)', {noremap = true})
