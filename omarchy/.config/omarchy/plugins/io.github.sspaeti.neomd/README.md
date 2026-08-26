@@ -37,6 +37,16 @@ omarchy plugin add https://github.com/sspaeti/omarchy-neomd-plugin.git --enable
 omarchy bar move io.github.sspaeti.neomd --section right
 ```
 
+## Uninstall
+
+```sh
+omarchy plugin remove io.github.sspaeti.neomd
+rm -rf ~/.local/state/omarchy/neomd   # cached mail headers/bodies
+```
+
+If you added the hotkey below, remove that binding too. Nothing else is
+written outside the plugin directory and the state dir above.
+
 ## Hotkey
 
 IPC: `omarchy-shell shell toggle io.github.sspaeti.neomd` — bind it in

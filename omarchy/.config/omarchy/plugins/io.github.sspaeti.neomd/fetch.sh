@@ -62,8 +62,8 @@ if [[ -n "$read_folder" ]]; then
     cat "$BCACHE"
     exit 0
   fi
-  out=$(timeout 60 neomd read --folder "$read_folder" --uid "$read_uid" 2>/dev/null) \
-    || fail "neomd read timed out"
+  out=$(timeout 60 neomd read --folder "$read_folder" --uid "$read_uid" 2>/dev/null \
+    | head -c 1048576) || fail "neomd read failed"
   [[ -n "$out" ]] || fail "neomd read produced no output"
   jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd read produced no JSON"
   if [[ $(jq -r '.ok' <<<"$out") == "true" ]]; then
@@ -85,8 +85,12 @@ if (( cached )) && [[ -f "$CACHE" ]]; then
   fi
 fi
 
-out=$(timeout 90 neomd list --folders "$folders" --limit "$limit" 2>/dev/null) \
-  || { [[ -f "$CACHE" ]] && { cat "$CACHE"; exit 0; }; fail "neomd list timed out"; }
+# head -c bounds how much of neomd's output this script (and the widget's
+# stdout collector) will ever hold in memory. Oversized output trips pipefail
+# (SIGPIPE) or the jq check, either way falling back to the stale cache.
+out=$(timeout 90 neomd list --folders "$folders" --limit "$limit" 2>/dev/null \
+  | head -c 4194304) \
+  || { [[ -f "$CACHE" ]] && { cat "$CACHE"; exit 0; }; fail "neomd list failed"; }
 [[ -n "$out" ]] || fail "neomd list produced no output"
 jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd list produced no JSON"
 

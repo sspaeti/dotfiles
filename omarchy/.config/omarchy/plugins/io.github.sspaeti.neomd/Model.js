@@ -12,13 +12,18 @@ function plainText(s) {
 //   ![alt](url)  -> "🖼 alt"   (plain text, nothing is downloaded)
 //   ![](url)     -> removed    (no alt = decoration or tracking pixel)
 //   [![alt](img)](href) collapses to a normal [🖼 alt](href) link
+// Reference-style images (![alt][ref], ![alt][], shortcut ![alt]) resolve
+// through [ref]: url definitions, so they are neutralized the same way.
 // <img> tags that survive in the markdown are stripped the same way.
 function sanitizeBody(md) {
+  function altText(_, alt) {
+    alt = alt.trim()
+    return alt === "" ? "" : "🖼 " + alt
+  }
   return String(md == null ? "" : md)
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, function(_, alt) {
-      alt = alt.trim()
-      return alt === "" ? "" : "🖼 " + alt
-    })
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, altText)   // inline ![alt](url)
+    .replace(/!\[([^\]]*)\] ?\[[^\]]*\]/g, altText) // reference ![alt][ref] / ![alt][]
+    .replace(/!\[([^\]]*)\]/g, altText)            // shortcut ![alt]
     .replace(/<img\b[^>]*\balt="([^"]+)"[^>]*>/gi, "🖼 $1")
     .replace(/<img\b[^>]*>/gi, "")
     // Image-only links whose image was dropped leave "[](href)" — remove.

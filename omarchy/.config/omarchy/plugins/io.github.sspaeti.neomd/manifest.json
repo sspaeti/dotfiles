@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Simon Späti",
   "license": "MIT",
-  "description": "Calm mail peek for neomd: Inbox, ToScreen, Feed and PaperTrail tabs behind a static icon — no unread counter on the bar, ever. Screen senders in/out straight from the ToScreen tab.",
+  "description": "Calm mail peek for neomd: HEY-style Inbox / ToScreen / Feed / PaperTrail tabs behind a static icon — no unread counter on the bar, ever. Strictly read-only with an in-panel reader (BODY.PEEK).",
   "kinds": [
     "bar-widget"
   ],
@@ -14,7 +14,7 @@
   },
   "barWidget": {
     "displayName": "neomd Mail",
-    "description": "HEY-style mail tabs popup (read + screen)",
+    "description": "HEY-style mail tabs popup (read-only)",
     "category": "Info",
     "allowMultiple": false,
     "defaultSection": "right"
