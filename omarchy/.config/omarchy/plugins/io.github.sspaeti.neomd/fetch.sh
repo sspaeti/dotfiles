@@ -51,6 +51,38 @@ CACHE="$STATE_DIR/mail.json"
 mkdir -p "$STATE_DIR"
 chmod 700 "$STATE_DIR"
 
+# ---- Sender-controlled header cap, enforced here rather than trusted from
+# the producer. From/Subject come straight off the wire, and the widget holds
+# them in memory, writes them to the cache and hands them to QML Text items.
+# neomd >= v0.9.1 already truncates both at 500 bytes, but this script must
+# hold on its own against any older or differently-built neomd on PATH — the
+# widget's bound cannot depend on which version happens to be installed. Every
+# code path below that prints list data pipes through clamp_headers, so
+# "fetch.sh never emits an unbounded header" is a property of this file alone.
+# The cap is in characters; jq slices codepoints, so a multibyte rune is
+# never split in half by the cut.
+HEADER_MAX=500
+CLAMP_JQ='
+  def clip: if type == "string" and (length > $n) then .[0:$n] + "…" else . end;
+  def clipmail:
+    if type == "object"
+    then (if has("from") then .from |= clip else . end
+          | if has("subject") then .subject |= clip else . end)
+    else . end;
+  if (.folders | type) == "array"
+  then .folders |= map(
+         if type == "object" and (.emails | type) == "array"
+         then .emails |= map(clipmail) else . end)
+  else . end
+'
+
+# clamp_headers [extra-jq] : JSON on stdin -> clamped JSON on stdout.
+# Exits nonzero (printing nothing) on unparseable input, so a corrupt cache
+# surfaces as an error instead of being emitted unclamped.
+clamp_headers() {
+  jq -c --argjson n "$HEADER_MAX" "$CLAMP_JQ${1:+ | $1}" 2>/dev/null
+}
+
 # ---- "--read <folder> <uid>": one message body via BODY.PEEK (never sets
 #      \Seen). Bodies are immutable, so cache per message; stale body files
 #      age out after two days.
@@ -80,7 +112,7 @@ fi
 if (( cached )) && [[ -f "$CACHE" ]]; then
   age=$(( $(date +%s) - $(stat -c %Y "$CACHE") ))
   if (( age < TTL )); then
-    cat "$CACHE"
+    clamp_headers <"$CACHE" || fail "cached mail is not JSON"
     exit 0
   fi
 fi
@@ -90,17 +122,18 @@ fi
 # (SIGPIPE) or the jq check, either way falling back to the stale cache.
 out=$(timeout 90 neomd list --folders "$folders" --limit "$limit" 2>/dev/null \
   | head -c 4194304) \
-  || { [[ -f "$CACHE" ]] && { cat "$CACHE"; exit 0; }; fail "neomd list failed"; }
+  || { [[ -f "$CACHE" ]] && { clamp_headers <"$CACHE" && exit 0; }; fail "neomd list failed"; }
 [[ -n "$out" ]] || fail "neomd list produced no output"
 jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd list produced no JSON"
 
 # On a transient IMAP failure keep the last good data (marked stale) rather
 # than wiping the panel.
 if [[ $(jq -r '.ok' <<<"$out") != "true" && -f "$CACHE" ]]; then
-  jq -c '. + {stale: true}' "$CACHE"
+  clamp_headers '. + {stale: true}' <"$CACHE" || fail "cached mail is not JSON"
   exit 0
 fi
 
+out=$(clamp_headers <<<"$out") || fail "could not clamp neomd output"
 out=$(jq -c --arg fetched "$(date -Is)" '. + {fetched: $fetched}' <<<"$out")
 
 tmp=$(mktemp "$STATE_DIR/.mail.XXXXXX")

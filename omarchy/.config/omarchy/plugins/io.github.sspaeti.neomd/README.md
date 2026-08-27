@@ -30,6 +30,12 @@ whatever arrives, the pill stays silent.
   `PATH` (`~/.local/bin` is added automatically)
 - `jq`
 
+`fetch.sh` bounds every sender-controlled field it passes on — From/Subject are
+capped at 500 characters and the whole `neomd` response at 4 MB — so a hostile
+mail cannot inflate what the widget buffers regardless of which `neomd` build
+is installed. Newer `neomd` caps the same headers itself; the widget does not
+rely on it.
+
 ## Install
 
 ```sh
