@@ -81,7 +81,9 @@
             "1Password_status_icon_1",
             "chrome_status_icon_1",
             "Claude_status_icon_2",
-            "kD6eTa86_5"
+            "kD6eTa86_5",
+            "4vPDJZj1zL",
+            "c-_GQg2tMW"
           ]
         },
         {
@@ -97,15 +99,6 @@
           "id": "io.github.sspaeti.neomd"
         },
         {
-          "id": "omarchy.bluetooth"
-        },
-        {
-          "id": "omarchy.network"
-        },
-        {
-          "id": "omarchy.audio"
-        },
-        {
           "id": "io.github.sspaeti.goatcounter",
           "hoverExpand": false,
           "siteLabels": {
@@ -119,7 +112,16 @@
             "ssp.sh": 1000,
             "dedp": 150
           },
-          "refreshMinutes": 10 
+          "refreshMinutes": 15
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
         },
         {
           "id": "omarchy.agents"
