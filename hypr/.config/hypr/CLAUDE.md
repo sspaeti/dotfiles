@@ -83,6 +83,20 @@ alone on its line:
 Pinning the literal (instead of layering an override elsewhere) is deliberate:
 it keeps upstream's machinery in agreement with us rather than racing it.
 
+**Do not bind the scale keys to `omarchy-hyprland-monitor-scaling up|down`.** It
+applies the new scale at `position = "auto"`, so Hyprland re-places the monitor and
+the external jumps to the right of the laptop — the office/home arrangement is
+destroyed on every scale step. `monitor-scale.sh up|down` steps the literal and
+reloads instead, so `monitors.lua` recomputes every position from the new scale.
+It also keeps a 5s sticky target (`$XDG_RUNTIME_DIR/monitor-scale-target`): scaling
+the external shrinks its logical width, the laptop slides left to stay flush, and
+the cursor can land on the laptop — without stickiness the next press would scale
+the wrong monitor. An unknown external (projector) has no profile geometry to
+protect and falls through to Omarchy's live path.
+
+`SUPER+ALT+3` (pin) remains for scale changes made via the Omarchy shell's monitor
+panel or menu, which still go through the `position = auto` path.
+
 Check after `omarchy update`: re-read `$(which omarchy-hyprland-monitor-clamshell)`
 and confirm `lua_local_value` / `configured_monitor_value` still resolve a bare
 `local <name> = <number>`. Verify live with:

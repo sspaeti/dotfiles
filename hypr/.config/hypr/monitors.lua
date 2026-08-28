@@ -278,23 +278,47 @@ o.bind("SUPER + ALT + 1", "Toggle laptop display", "omarchy-hyprland-monitor-int
 hl.unbind("SUPER + ALT + code:11") -- default: Switch to group window 2
 o.bind("SUPER + ALT + 2", "Toggle mirror (present)", "omarchy-hyprland-monitor-internal-mirror toggle")
 
--- Monitor scale: live preview with SUPER+CTRL+SLASH, then pin it if you want it
--- to survive reloads (theme change, clamshell poll, dock event, ...).
+-- Monitor scale. Deliberately NOT `omarchy-hyprland-monitor-scaling up`: that
+-- command applies the new scale at `position = "auto"`, which makes Hyprland
+-- re-place the monitor -- the external jumps to the right of the laptop and the
+-- office/home arrangement is destroyed on every single scale step.
+-- monitor-scale.sh steps the `*_scale` literal above instead and reloads, so
+-- every position is recomputed from the new scale and the arrangement survives.
 -- (Omarchy's default SUPER+SLASH / SUPER+ALT+SLASH are taken by 1Password here.)
-o.bind("SUPER + CTRL + SLASH", "Monitor scaling up", "omarchy-hyprland-monitor-scaling up")
-o.bind("SUPER + CTRL + ALT + SLASH", "Monitor scaling down", "omarchy-hyprland-monitor-scaling down")
+-- Primary chord: SUPER+CTRL+ALT +/-. One modifier out from SUPER+CTRL +/-,
+-- which is cursor zoom in bindings.lua, so the two "make it bigger" gestures sit
+-- next to each other. The SLASH pair is kept as an alias (Omarchy's own default
+-- for monitor scaling is on SLASH, so muscle memory from the stock config works).
+o.bind("SUPER + CTRL + ALT + EQUAL", "Monitor scaling up", "sh -c " .. o.shell_quote(scale_sh .. " up"))
+o.bind("SUPER + CTRL + ALT + MINUS", "Monitor scaling down", "sh -c " .. o.shell_quote(scale_sh .. " down"))
+o.bind("SUPER + CTRL + SLASH", "Monitor scaling up", "sh -c " .. o.shell_quote(scale_sh .. " up"))
+o.bind("SUPER + CTRL + ALT + SLASH", "Monitor scaling down", "sh -c " .. o.shell_quote(scale_sh .. " down"))
+
+-- Reset scale only, keeping the current profile (SUPER+ALT+0 resets scale AND
+-- clears the profile back to auto-detection).
+o.bind(
+  "SUPER + CTRL + ALT + 0",
+  "Monitor scaling reset",
+  "sh -c "
+    .. o.shell_quote(
+      scale_sh .. " reset && hyprctl reload && notify-send 'Monitor Setup' 'Scale reset to 1.6'"
+    )
+)
 
 -- SUPER+ALT+3: pin the CURRENT live scales into this file and reload, so the
--- layout is recomputed around them. Undo with any profile key or SUPER+ALT+0.
+-- layout is recomputed around them. Still useful when the scale was changed
+-- somewhere that does go through Omarchy's `position = auto` path -- the shell's
+-- monitor panel, or the Omarchy menu -- which leaves the layout skewed until
+-- this repairs it. Undo with any profile key or SUPER+ALT+0.
 hl.unbind("SUPER + ALT + code:12") -- default: Switch to group window 3
 o.bind("SUPER + ALT + 3", "Pin current scale", "sh -c " .. o.shell_quote(scale_sh .. " pin"))
 
 -- Text size: shell + GTK + terminal font in lockstep, geometry untouched. This
 -- is the knob for "make this readable in a screenshot" -- it does not move a
--- single window, unlike monitor scaling.
-o.bind("SUPER + CTRL + ALT + EQUAL", "Text size up", "sh -c " .. o.shell_quote(text_sh .. " up"))
-o.bind("SUPER + CTRL + ALT + MINUS", "Text size down", "sh -c " .. o.shell_quote(text_sh .. " down"))
-o.bind("SUPER + CTRL + ALT + 0", "Text size reset", "sh -c " .. o.shell_quote(text_sh .. " reset"))
+-- single window, unlike monitor scaling. Same chord as scaling plus SHIFT.
+o.bind("SUPER + CTRL + ALT + SHIFT + EQUAL", "Text size up", "sh -c " .. o.shell_quote(text_sh .. " up"))
+o.bind("SUPER + CTRL + ALT + SHIFT + MINUS", "Text size down", "sh -c " .. o.shell_quote(text_sh .. " down"))
+o.bind("SUPER + CTRL + ALT + SHIFT + 0", "Text size reset", "sh -c " .. o.shell_quote(text_sh .. " reset"))
 
 -- Scaling comparison on a 4K Dell:
 --   1.0 (native) 3840x2160 -- too small, text unreadable
