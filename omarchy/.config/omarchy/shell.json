@@ -88,20 +88,27 @@
         },
         {
           "id": "io.github.tyrichards.tray",
+          "order": [
+            "1Password_status_icon_1",
+            "quickshell.spotify",
+            "chrome_status_icon_1",
+            "crmne.hyprmoncfg"
+          ],
           "widgets": [
             {
               "entry": {
                 "id": "quickshell.spotify"
               },
               "listed": true
+            },
+            {
+              "entry": {
+                "id": "crmne.hyprmoncfg"
+              },
+              "listed": true
             }
           ],
-          "order": [
-            "1Password_status_icon_1",
-            "quickshell.spotify",
-            "chrome_status_icon_1",
-            "chrome_status_icon_1"
-          ]
+          "hidden": []
         },
         {
           "id": "io.github.sspaeti.neomd"
@@ -191,12 +198,15 @@
       "showMiniPlayer": "On",
       "shortcutPlayer": "Omarchy Music app",
       "shortcutHints": "Off",
-      "showTrackTitle": "On",
+      "showTrackTitle": "Off",
       "showArtistName": "Off",
       "scrollBarText": "Off",
       "scrollSpeed": "1",
       "maxBarTextWidth": "240",
       "audioQuality": "320 kbps"
+    },
+    {
+      "id": "crmne.hyprmoncfg"
     }
   ],
   "version": 1,
