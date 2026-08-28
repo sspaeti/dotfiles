@@ -55,10 +55,54 @@ no line-by-line diff needed.
 - `sspaeti/omarchy-menu-wrapper` → calls `omarchy-menu`, restores personal background after theme switch
 - `sspaeti/omasnap-capture.sh` → wraps `omasnap` (external fork, see below), sets monthly Printscreen save dir
 - `~/.config/omarchy/extensions/omarchy-menu.jsonc` → overrides menu entry `system.lock` to run our lock wrapper instead of stock `omarchy-system-lock` (else menu > System > Lock would lock 1Password)
+- `sspaeti/text-size-step.sh` → wraps `omarchy-display-text-size` (which only takes an absolute px value) to give up/down/reset stepping
+
+## 3b. Parser coupling to Omarchy internals (medium drift risk)
+
+`sspaeti/monitor-scale.sh` (SUPER+ALT+3 "pin scale") rewrites two bare literals in
+`monitors.lua`:
+
+```lua
+local ext_scale = 1.6
+local laptop_scale = 1.6
+```
+
+This shape is load-bearing for **two** parsers, so keep each one a bare number
+alone on its line:
+
+1. `monitor-scale.sh` itself — its `sed` target.
+2. **`omarchy-hyprland-monitor-clamshell`** (upstream) — text-parses `monitors.lua`
+   for the internal monitor's configured scale/position and re-asserts it with
+   `hyprctl eval` after every monitor event *and on a 2s poll while docked*.
+   Our `eDP-1` rules use `output = laptop` (a variable), which its rule regex
+   cannot match, so it falls through to the catch-all `hl.monitor({ output = "",
+   ... scale = laptop_scale })`. It resolves that bare word via
+   `local laptop_scale = <n>`. If it resolves to nothing it force-evals eDP-1 to
+   **scale 2 at `position = auto`**, i.e. it fights whatever we just set.
+
+Pinning the literal (instead of layering an override elsewhere) is deliberate:
+it keeps upstream's machinery in agreement with us rather than racing it.
+
+Check after `omarchy update`: re-read `$(which omarchy-hyprland-monitor-clamshell)`
+and confirm `lua_local_value` / `configured_monitor_value` still resolve a bare
+`local <name> = <number>`. Verify live with:
+
+```bash
+hyprctl eval 'hl.monitor({ output = "<ext>", mode = "...", position = "auto", scale = 2 })'
+~/.config/hypr/sspaeti/monitor-scale.sh pin
+sleep 6 && hyprctl monitors -j | jq -r '.[] | "\(.name) \(.x)x\(.y) \(.scale)"'  # must not have reverted
+~/.config/hypr/sspaeti/monitor-scale.sh reset && hyprctl reload
+```
 
 (`omarchy-update-sspaeti` deleted 2026-08-24: its `mise deactivate` was a no-op when run as a
 script — the subcommand only prints shell code — and upstream `omarchy-update` now has an
 explicit mise step.)
+
+(`monitor-hotplug-watcher.sh` deleted 2026-08-28: it wiped the stored monitor profile on every
+cable event, causing the layout/scale to reset at seemingly random moments. `monitors.lua` now
+keeps the profile until a key is pressed and only auto-detects when the stored profile's monitor
+is genuinely absent. Upstream `omarchy-hyprland-monitor-watch` still covers clamshell and
+dead-monitor recovery.)
 
 ## 4. External fork repos (separate git repos, own upstream tracking)
 

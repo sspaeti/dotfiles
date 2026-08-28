@@ -27,8 +27,12 @@ o.exec_on_start(ssp .. "/autostart-apps.sh")
 -- Restore personal background if in personal mode (overrides Omarchy's swaybg)
 o.exec_on_start(ssp .. "/bg-mode-toggle.sh restore")
 
--- Reset monitor profile to auto-detection on cable plug/unplug (see monitors.lua)
-o.exec_on_start(ssp .. "/monitor-hotplug-watcher.sh")
+-- REMOVED 2026-08-28: monitor-hotplug-watcher.sh. It wiped the stored monitor
+-- profile on every cable event, which is exactly the "it resets itself at random"
+-- behaviour. monitors.lua now keeps the profile until a key is pressed, and only
+-- falls back to auto-detection when the profile's monitor is genuinely absent.
+-- Omarchy's own omarchy-hyprland-monitor-watch still handles clamshell and
+-- dead-monitor recovery.
 
 -- Morgen calendar: do NOT launch it here.
 -- QUATTRO/uwsm now runs XDG autostart entries, so ~/.config/autostart/morgen.desktop
