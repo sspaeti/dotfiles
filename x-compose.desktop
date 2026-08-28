@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
-Name=Twitter/X
-Exec=omarchy-launch-webapp https://tw.ssp.sh/
+Name=Twitter/X Compose
+Exec=omarchy-launch-webapp https://x.com/compose/post
 Terminal=false
 Type=Application
 Icon=x

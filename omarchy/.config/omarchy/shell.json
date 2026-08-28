@@ -54,9 +54,9 @@
         },
         {
           "id": "eduardodallecort.weather-radar",
+          "alertMinIntensity": "Heavy",
           "alertRadiusKm": 50,
-          "alertsEnabled": true,
-          "alertMinIntensity": "Severe"
+          "alertsEnabled": true
         },
         {
           "id": "sspaeti.weather"
@@ -87,12 +87,20 @@
           ]
         },
         {
-          "id": "so.den",
+          "id": "io.github.tyrichards.tray",
           "widgets": [
-            "io.github.teevans.apple-tv-remote",
+            {
+              "entry": {
+                "id": "quickshell.spotify"
+              },
+              "listed": true
+            }
+          ],
+          "order": [
+            "1Password_status_icon_1",
             "quickshell.spotify",
-            "io.github.kristoferlund.webcam",
-            "agx.screen-time"
+            "chrome_status_icon_1",
+            "chrome_status_icon_1"
           ]
         },
         {
@@ -171,13 +179,24 @@
       "id": "io.github.teevans.apple-tv-remote"
     },
     {
-      "id": "quickshell.spotify"
-    },
-    {
       "id": "io.github.kristoferlund.webcam"
     },
     {
       "id": "agx.screen-time"
+    },
+    {
+      "id": "quickshell.spotify",
+      "deviceName": "Omarchy Spotify",
+      "idleShutdownMinutes": 15,
+      "showMiniPlayer": "On",
+      "shortcutPlayer": "Omarchy Music app",
+      "shortcutHints": "Off",
+      "showTrackTitle": "On",
+      "showArtistName": "Off",
+      "scrollBarText": "Off",
+      "scrollSpeed": "1",
+      "maxBarTextWidth": "240",
+      "audioQuality": "320 kbps"
     }
   ],
   "version": 1,
