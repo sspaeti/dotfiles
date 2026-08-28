@@ -16,6 +16,11 @@ umask 077
 
 TTL=240
 
+# Size bounds. LIST_MAX/BODY_MAX apply to neomd's live output AND to the
+# on-disk caches — every byte this script emits passes one of them.
+LIST_MAX=4194304   # 4 MB
+BODY_MAX=1048576   # 1 MB
+
 # Quickshell child processes are started by uwsm and do not necessarily
 # inherit the login shell's PATH, so add the usual install dirs back.
 for candidate in "$HOME/.local/bin" "$HOME/go/bin"; do
@@ -83,6 +88,33 @@ clamp_headers() {
   jq -c --argjson n "$HEADER_MAX" "$CLAMP_JQ${1:+ | $1}" 2>/dev/null
 }
 
+# ---- read_cache <file> <max-bytes> : print at most max-bytes of file.
+#
+# The cache lives in a 0700 dir, but the widget must not be wedged or blown up
+# by whatever happens to sit at that pathname — a leftover from another tool, a
+# botched restore, or a swapped-in special file. `[[ -f ]]` is not enough: it
+# follows symlinks (a link to a huge file passes the test), and even for FIFOs,
+# which it does reject, the answer is stale by the time the file is opened.
+#
+# dd does the open itself with O_NOFOLLOW (a symlink at the path fails outright
+# rather than redirecting the read) and O_NONBLOCK (a FIFO returns EOF instead
+# of hanging the helper, and with it the QML StdioCollector waiting on stdout).
+# head then bounds what an oversized file or an endless device node can push
+# into memory. Requires GNU dd for the iflags; this is an Arch/Omarchy plugin.
+read_cache() {
+  dd if="$1" iflag=nofollow,nonblock status=none 2>/dev/null | head -c "$2"
+}
+
+# ---- cache_json [extra-jq] : print the clamped list cache, or exit nonzero
+# without printing anything. Bounded read, then the same header clamp every
+# other path goes through.
+cache_json() {
+  local raw
+  raw=$(read_cache "$CACHE" "$LIST_MAX")
+  [[ -n "$raw" ]] || return 1
+  clamp_headers "${1:-}" <<<"$raw"
+}
+
 # ---- "--read <folder> <uid>": one message body via BODY.PEEK (never sets
 #      \Seen). Bodies are immutable, so cache per message; stale body files
 #      age out after two days.
@@ -90,12 +122,18 @@ if [[ -n "$read_folder" ]]; then
   [[ "$read_uid" =~ ^[0-9]+$ ]] || fail "bad uid"
   [[ "$read_folder" =~ ^[A-Za-z_]+$ ]] || fail "bad folder"
   BCACHE="$STATE_DIR/body-$read_folder-$read_uid.json"
+  # A cache hit is only taken if it survives the bounded read AND still parses
+  # as JSON; anything else falls through to a fresh fetch rather than handing
+  # the panel a truncated or foreign body.
   if [[ -f "$BCACHE" ]]; then
-    cat "$BCACHE"
-    exit 0
+    cached_body=$(read_cache "$BCACHE" "$BODY_MAX")
+    if [[ -n "$cached_body" ]] && jq -e . >/dev/null 2>&1 <<<"$cached_body"; then
+      printf '%s\n' "$cached_body"
+      exit 0
+    fi
   fi
   out=$(timeout 60 neomd read --folder "$read_folder" --uid "$read_uid" 2>/dev/null \
-    | head -c 1048576) || fail "neomd read failed"
+    | head -c "$BODY_MAX") || fail "neomd read failed"
   [[ -n "$out" ]] || fail "neomd read produced no output"
   jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd read produced no JSON"
   if [[ $(jq -r '.ok' <<<"$out") == "true" ]]; then
@@ -112,7 +150,7 @@ fi
 if (( cached )) && [[ -f "$CACHE" ]]; then
   age=$(( $(date +%s) - $(stat -c %Y "$CACHE") ))
   if (( age < TTL )); then
-    clamp_headers <"$CACHE" || fail "cached mail is not JSON"
+    cache_json || fail "cached mail is unusable"
     exit 0
   fi
 fi
@@ -121,15 +159,15 @@ fi
 # stdout collector) will ever hold in memory. Oversized output trips pipefail
 # (SIGPIPE) or the jq check, either way falling back to the stale cache.
 out=$(timeout 90 neomd list --folders "$folders" --limit "$limit" 2>/dev/null \
-  | head -c 4194304) \
-  || { [[ -f "$CACHE" ]] && { clamp_headers <"$CACHE" && exit 0; }; fail "neomd list failed"; }
+  | head -c "$LIST_MAX") \
+  || { [[ -f "$CACHE" ]] && { cache_json && exit 0; }; fail "neomd list failed"; }
 [[ -n "$out" ]] || fail "neomd list produced no output"
 jq -e . >/dev/null 2>&1 <<<"$out" || fail "neomd list produced no JSON"
 
 # On a transient IMAP failure keep the last good data (marked stale) rather
 # than wiping the panel.
 if [[ $(jq -r '.ok' <<<"$out") != "true" && -f "$CACHE" ]]; then
-  clamp_headers '. + {stale: true}' <"$CACHE" || fail "cached mail is not JSON"
+  cache_json '. + {stale: true}' || fail "cached mail is unusable"
   exit 0
 fi
 
