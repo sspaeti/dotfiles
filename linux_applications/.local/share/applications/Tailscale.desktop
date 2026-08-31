@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Tailscale
+Comment=Tailscale
+Exec=omarchy-launch-webapp https://login.tailscale.com/admin/machines
+Terminal=false
+Type=Application
+Icon=tailscale
+StartupNotify=true
