@@ -1,0 +1,17 @@
+# neomd out-of-office config — synced to the headless server with `make ooo`
+# (from the neomd repo). The daemon re-reads this file every sync cycle, so
+# changes apply without a restart. Replies go ONLY to screened-in senders,
+# once per sender per OOO period. Subject sent: the subject below, verbatim.
+
+enabled = true
+accounts = ["Work", "WorkInfo"]  # inboxes that get auto-replies: simon@ssp.sh + info@ssp.sh, each replying from its own address; empty = daemon's account (Personal)
+timezone = "Europe/Zurich"  # from/until mean THIS timezone, wherever the daemon runs; empty = daemon machine's local time
+from    = "2026-08-31 16:00"              # "YYYY-MM-DD" (midnight) or "YYYY-MM-DD HH:MM" — e.g. "2026-08-31 16:00"; empty = immediately
+until   = "2026-09-04"    # "YYYY-MM-DD" (through END of day) or exact "YYYY-MM-DD HH:MM"; empty = until enabled = false
+subject = "Out of Office"
+body    = """
+I'm currently out of office until Sep 4, and I will respond upon my return. 
+
+Thanks you for your message, and best regards,
+Simon
+"""
