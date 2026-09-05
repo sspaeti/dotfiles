@@ -88,11 +88,13 @@
         },
         {
           "id": "io.github.tyrichards.tray",
+          "hidden": [],
           "order": [
+            "crmne.hyprmoncfg",
             "1Password_status_icon_1",
             "quickshell.spotify",
             "chrome_status_icon_1",
-            "crmne.hyprmoncfg"
+            "io.github.teevans.apple-tv-remote"
           ],
           "widgets": [
             {
@@ -106,9 +108,14 @@
                 "id": "crmne.hyprmoncfg"
               },
               "listed": true
+            },
+            {
+              "entry": {
+                "id": "io.github.teevans.apple-tv-remote"
+              },
+              "listed": true
             }
-          ],
-          "hidden": []
+          ]
         },
         {
           "id": "io.github.sspaeti.neomd"
@@ -164,7 +171,7 @@
       ]
     },
     "position": "top",
-    "transparent": true
+    "transparent": false
   },
   "idle": {
     "lock": 600,
@@ -184,9 +191,6 @@
     },
     {
       "id": "sspaeti.idle"
-    },
-    {
-      "id": "io.github.teevans.apple-tv-remote"
     },
     {
       "id": "io.github.kristoferlund.webcam"
@@ -210,6 +214,9 @@
     },
     {
       "id": "crmne.hyprmoncfg"
+    },
+    {
+      "id": "io.github.teevans.apple-tv-remote"
     }
   ],
   "version": 1,
