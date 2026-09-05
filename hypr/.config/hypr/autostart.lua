@@ -35,11 +35,12 @@ o.exec_on_start(ssp .. "/bg-mode-toggle.sh restore")
 -- dead-monitor recovery.
 
 -- Morgen calendar: do NOT launch it here.
--- QUATTRO/uwsm now runs XDG autostart entries, so ~/.config/autostart/morgen.desktop
--- ("Exec=/opt/Morgen/morgen --hidden") already starts it in the background as
--- app-morgen@autostart.service. Morgen is single-instance, so a second
--- `uwsm app -- morgen` here did not start a second process -- it just told the
--- running one to un-hide, which is why a Morgen window popped up at login.
+-- 2026-09-05: no longer used (Google Calendar covers this now). The actual
+-- autostart source was never this file -- QUATTRO/uwsm runs XDG autostart
+-- entries, so ~/.config/autostart/morgen.desktop ("Exec=/opt/Morgen/morgen
+-- --hidden") started it in the background as app-morgen@autostart.service.
+-- Disabled it by adding `Hidden=true` to that .desktop file (standard XDG
+-- autostart spec, honored by systemd-xdg-autostart-generator).
 -- Verify with: systemctl --user status app-morgen@autostart.service
 -- o.launch_on_start("morgen")
 
