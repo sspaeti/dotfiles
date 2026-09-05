@@ -53,6 +53,10 @@ bind-key ^O quit
 bind-key s sort
 bind-key S rev-sort
 
+# yazi-style sort shortcuts (`,` is newsboat's macro prefix)
+macro m set article-sort-order date-asc -- "Sort by date desc"
+macro M set article-sort-order date-desc -- "Sort by date asc"
+
 # Vim-style gg and G for top/bottom
 bind gg everywhere home -- "Go to top of list"
 bind G everywhere end -- "Go to bottom of list"
