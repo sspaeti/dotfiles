@@ -34,6 +34,7 @@ kanata/.config/kanata/kanata.kbd
 
 neomd/.config/neomd/lists
 neomd/.config/neomd/contacts.csv
+neomd/.config/neomd/ooo.toml
 .stfolder
 *.swp
 zsh/.dotfiles/mutt/.lists-moved
@@ -63,6 +64,8 @@ w3m/.config/w3m/history
 
 #newsboat
 newsboat/.config/newsboat/urls
+# generated per-category OPML (same privacy as urls: don't publish feed list)
+newsboat/.config/newsboat/opml/
 
 #arch
 arch-orphans.txt
