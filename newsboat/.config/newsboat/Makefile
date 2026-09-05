@@ -1,5 +1,5 @@
-.DEFAULT_GOAL := save
-.PHONY: decrypt run freshrss urls save clean help
+.DEFAULT_GOAL := sync
+.PHONY: decrypt run freshrss urls save clean help status pull prune push opml sync
 
 # Default target - decrypt and run newsboat
 run: decrypt
@@ -50,6 +50,28 @@ save:
 		exit 1; \
 	fi
 
+# FreshRSS <-> urls sync (needs FRESHRSS_PASSWORD; FreshRSS server is master,
+# nothing is ever deleted: pull adds, prune comments out, push is manual)
+status:
+	@python3 freshrss-sync.py status
+
+pull:
+	@python3 freshrss-sync.py pull
+
+prune:
+	@python3 freshrss-sync.py prune
+
+push:
+	@python3 freshrss-sync.py push
+
+opml:
+	@python3 freshrss-sync.py opml
+
+# Default: full reconcile from FreshRSS + encrypt result
+sync:
+	@python3 freshrss-sync.py sync
+	@$(MAKE) --no-print-directory save
+
 # Clean decrypted urls file
 clean:
 	@rm -f urls
@@ -63,8 +85,14 @@ help:
 	@echo "  make decrypt  - Decrypt urls.gpg to urls (for editing)"
 	@echo "  make urls  - Decrypt urls.gpg to urls (for editing)"
 	@echo "  make run      - Decrypt and run newsboat"
-	@echo "  make save     - Encrypt urls to urls.gpg (default)"
+	@echo "  make save     - Encrypt urls to urls.gpg"
 	@echo "  make clean    - Remove decrypted urls file"
+	@echo "  make status   - Diff urls file vs FreshRSS server (read-only)"
+	@echo "  make pull     - Append FreshRSS-only feeds (e.g. added on mobile) to urls"
+	@echo "  make prune    - Comment out urls-only feeds (FreshRSS is master)"
+	@echo "  make push     - Subscribe urls-only feeds on FreshRSS (manual, additive)"
+	@echo "  make opml     - Generate opml/<category>.opml files from urls"
+	@echo "  make sync     - DEFAULT: pull + prune + opml + save (server is master)"
 	@echo ""
 	@echo "Workflow:"
 	@echo "  1. make decrypt   # Edit urls file"
