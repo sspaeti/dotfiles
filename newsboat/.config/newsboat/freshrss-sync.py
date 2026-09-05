@@ -5,6 +5,9 @@ and generate per-category OPML files.
 Commands:
   status      show diff between local urls file and FreshRSS (read-only)
   pull        append feeds that exist only on FreshRSS to the urls file
+  align       rewrite local feed URLs to the server's exact spelling (newsboat
+              matches urls lines to remote feeds by exact string, so http/https
+              or trailing-slash drift silently disables tags and hiding)
   prune       comment out local feeds that are not on FreshRSS (server is master)
   push        subscribe feeds that exist only locally on FreshRSS (with category)
   opml        write opml/<category>.opml files derived from the urls file
@@ -164,6 +167,22 @@ def cmd_status():
     if not server_only and not local_only:
         print("in sync: no differences.")
 
+    # warn about categories no query-feed group matches (hidden feeds there
+    # would be invisible in newsboat's group-only feedlist)
+    query_tags = set()
+    for raw in URLS_FILE.read_text().splitlines():
+        if raw.strip().startswith('"query:'):
+            query_tags.update(re.findall(r'\\"([^\\"]+)\\"', raw))
+    uncovered = set()
+    for f in server.values():
+        for label in f["categories"] or [UNCATEGORIZED]:
+            tokens = set(label.split()) | {slug(label), label}
+            if not tokens & query_tags and label.lower() != UNCATEGORIZED:
+                uncovered.add(label)
+    if uncovered:
+        print("\nwarning: no query-feed group matches these categories "
+              "(their feeds are invisible if hidden): " + ", ".join(sorted(uncovered)))
+
 
 def cmd_pull():
     local, _, server_only, _, _ = diff_feeds()
@@ -172,10 +191,11 @@ def cmd_pull():
         return
     lines = [f"\n# pulled from FreshRSS {date.today().isoformat()}"]
     for f in server_only.values():
-        parts = [f["url"]]
+        # "!" hides the single feed from the feedlist; the query-feed groups
+        # still aggregate hidden feeds, so only groups stay visible
+        parts = [f["url"], "!"]
         cats = [c for c in f["categories"] if c and c.lower() != UNCATEGORIZED]
-        if cats:
-            parts.append(slug(cats[0]))
+        parts.append(slug(cats[0]) if cats else UNCATEGORIZED)
         if f["title"]:
             parts.append('"~' + f["title"].replace('"', "'") + '"')
         lines.append(" ".join(parts))
@@ -210,6 +230,27 @@ def cmd_push():
             api(base, auth, "subscription/edit", post=edit)
         print(f"  + {f['url']}  [{f['tags'][0] if f['tags'] else UNCATEGORIZED}]")
     print(f"push: subscribed {len(local_only)} feed(s) on FreshRSS.")
+
+
+def cmd_align():
+    """Rewrite local URLs to the server's exact URL string where they differ."""
+    local, server, _, _, _ = diff_feeds()
+    exact = {k: v["url"] for k, v in server.items()}
+    out, n = [], 0
+    for raw in URLS_FILE.read_text().splitlines():
+        line = raw.strip()
+        if line and not line.startswith("#") and not line.startswith('"query:') and line != "---" and line.startswith("http"):
+            url = line.split()[0]
+            want = exact.get(norm(url))
+            if want and want != url:
+                out.append(want + raw[raw.index(url) + len(url):])
+                n += 1
+                print(f"  {url} -> {want}")
+                continue
+        out.append(raw)
+    if n:
+        URLS_FILE.write_text("\n".join(out) + "\n")
+    print(f"align: rewrote {n} URL(s) to match FreshRSS exactly.")
 
 
 def cmd_prune():
@@ -276,12 +317,15 @@ def main():
         cmd_pull()
     elif cmd == "push":
         cmd_push()
+    elif cmd == "align":
+        cmd_align()
     elif cmd == "prune":
         cmd_prune()
     elif cmd == "opml":
         cmd_opml()
     elif cmd == "sync":
         cmd_pull()
+        cmd_align()
         cmd_prune()
         cmd_opml()
     else:

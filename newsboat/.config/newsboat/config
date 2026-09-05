@@ -53,6 +53,13 @@ bind-key ^O quit
 bind-key s sort
 bind-key S rev-sort
 
+# Group-only feedlist: with urls-source freshrss, local feed lines (! hides,
+# tags) are IGNORED - only query lines are read. So we tag all query groups
+# with "group" and auto-select that tag to hide the single feeds.
+# Ctrl+T shows everything again (incl. Starred items); ,t re-applies groups.
+run-on-startup set-tag "group"
+macro t set-tag "group" -- "Show only feed groups"
+
 # yazi-style sort shortcuts (`,` is newsboat's macro prefix)
 macro m set article-sort-order date-asc -- "Sort by date desc"
 macro M set article-sort-order date-desc -- "Sort by date asc"
