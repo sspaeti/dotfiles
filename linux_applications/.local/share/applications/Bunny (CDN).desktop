@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Bunny (CDN)
+Comment=Bunny (CDN)
+Exec=omarchy-launch-webapp https://dash.bunny.net/
+Terminal=false
+Type=Application
+Icon=bunny-cdn
+StartupNotify=true
