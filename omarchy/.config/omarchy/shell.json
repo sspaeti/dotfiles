@@ -127,7 +127,7 @@
             "dedp": "DEDP"
           },
           "alertHourlyViews": {
-            "ssp.sh": 50,
+            "ssp.sh": 100,
             "dedp": 20
           },
           "alertDailyViews": {
@@ -170,8 +170,8 @@
         }
       ]
     },
-    "position": "top",
-    "transparent": false
+    "position": "right",
+    "transparent": true
   },
   "idle": {
     "lock": 600,
