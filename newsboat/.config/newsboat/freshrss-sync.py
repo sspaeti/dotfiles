@@ -4,6 +4,9 @@ and generate per-category OPML files.
 
 Commands:
   status      show diff between local urls file and FreshRSS (read-only)
+  stage       subscribe feeds staged in urls.add on FreshRSS, then move them
+              into urls (unambiguous "new feed" path, so prune never mistakes
+              them for feeds unsubscribed server-side)
   pull        append feeds that exist only on FreshRSS to the urls file
   align       rewrite local feed URLs to the server's exact spelling (newsboat
               matches urls lines to remote feeds by exact string, so http/https
@@ -11,10 +14,16 @@ Commands:
   prune       comment out local feeds that are not on FreshRSS (server is master)
   push        subscribe feeds that exist only locally on FreshRSS (with category)
   opml        write opml/<category>.opml files derived from the urls file
-  sync        pull + prune + opml (server-is-master reconcile)
+  sync        stage + pull + align + prune + opml (server-is-master reconcile)
 
-Nothing is ever deleted: pull/push only add, prune only comments lines out.
-Unsubscribing on the server stays a manual decision (push is manual too).
+Nothing is ever deleted: stage/pull/push only add, prune only comments lines
+out. Unsubscribing on the server stays a manual decision.
+
+New feeds: add lines to urls.add (same syntax as urls: url [!] [tag]
+["~Title"]). `make sync` pushes them to FreshRSS and moves them into urls.
+Adding straight to urls works too, but stays local-only (and gets commented
+out by prune) until you `make push` it yourself — prune can't tell "I just
+added this" apart from "I unsubscribed this on my phone".
 
 Credentials: reads freshrss-url/freshrss-login from the `config` file next to
 this script, and the password from $FRESHRSS_PASSWORD (same as newsboat's
@@ -35,6 +44,7 @@ from xml.sax.saxutils import escape, quoteattr
 
 DIR = Path(__file__).resolve().parent
 URLS_FILE = DIR / "urls"
+ADD_FILE = DIR / "urls.add"
 CONFIG_FILE = DIR / "config"
 OPML_DIR = DIR / "opml"
 
@@ -68,6 +78,33 @@ def parse_urls_file():
                 tags.append(t)
         feeds[norm(url)] = {"url": url, "tags": tags, "hidden": hidden, "title": title}
     return feeds
+
+
+def parse_add_lines():
+    """Return [(raw_line, url, tags, title), ...] for staged feed lines in urls.add."""
+    if not ADD_FILE.exists():
+        return []
+    entries = []
+    for raw in ADD_FILE.read_text().splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        try:
+            toks = shlex.split(line)
+        except ValueError:
+            toks = line.split()
+        if not toks or not toks[0].startswith("http"):
+            continue
+        url, tags, title = toks[0], [], None
+        for t in toks[1:]:
+            if t == "!":
+                continue
+            elif t.startswith("~"):
+                title = t[1:]
+            else:
+                tags.append(t)
+        entries.append((line, url, tags, title))
+    return entries
 
 
 def norm(url):
@@ -182,6 +219,54 @@ def cmd_status():
     if uncovered:
         print("\nwarning: no query-feed group matches these categories "
               "(their feeds are invisible if hidden): " + ", ".join(sorted(uncovered)))
+
+
+def cmd_stage():
+    """Subscribe feeds staged in urls.add on FreshRSS, then move them into urls.
+
+    Unlike adding straight to `urls`, staged feeds are unambiguously "new" -
+    prune never gets a chance to mistake them for a feed unsubscribed on the
+    server, since they only land in `urls` once they're already on FreshRSS.
+    """
+    entries = parse_add_lines()
+    if not entries:
+        return
+    existing = parse_urls_file()
+    base, login, password = read_config()
+    auth = api_login(base, login, password)
+    added, failed = [], []
+    for raw, url, tags, title in entries:
+        if norm(url) in existing:
+            print(f"  = {url} already in {URLS_FILE.name}, dropping from {ADD_FILE.name}")
+            continue
+        body = api(base, auth, "subscription/quickadd?"
+                   + urllib.parse.urlencode({"quickadd": url}), post={})
+        try:
+            stream_id = json.loads(body).get("streamId", "")
+        except json.JSONDecodeError:
+            stream_id = ""
+        if not stream_id:
+            print(f"  ! failed to add {url}: {body[:200]}")
+            failed.append(raw)
+            continue
+        edit = {"ac": "edit", "s": stream_id}
+        if tags:
+            edit["a"] = "user/-/label/" + tags[0]
+        if title:
+            edit["t"] = title
+        if len(edit) > 2:
+            api(base, auth, "subscription/edit", post=edit)
+        added.append(raw)
+        print(f"  + {url}  [{tags[0] if tags else UNCATEGORIZED}] (staged -> {URLS_FILE.name})")
+    if added:
+        with URLS_FILE.open("a") as fh:
+            fh.write("\n" + "\n".join(added) + "\n")
+    ADD_FILE.write_text("\n".join(failed) + ("\n" if failed else ""))
+    if added or failed:
+        msg = f"stage: pushed {len(added)} feed(s) from {ADD_FILE.name} into {URLS_FILE.name}"
+        if failed:
+            msg += f", {len(failed)} failed (left in {ADD_FILE.name})"
+        print(msg + ".")
 
 
 def cmd_pull():
@@ -313,6 +398,8 @@ def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "status"
     if cmd == "status":
         cmd_status()
+    elif cmd == "stage":
+        cmd_stage()
     elif cmd == "pull":
         cmd_pull()
     elif cmd == "push":
@@ -324,6 +411,7 @@ def main():
     elif cmd == "opml":
         cmd_opml()
     elif cmd == "sync":
+        cmd_stage()
         cmd_pull()
         cmd_align()
         cmd_prune()

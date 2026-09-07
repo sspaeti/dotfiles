@@ -64,6 +64,7 @@ w3m/.config/w3m/history
 
 #newsboat
 newsboat/.config/newsboat/urls
+newsboat/.config/newsboat/urls.add
 # generated per-category OPML (same privacy as urls: don't publish feed list)
 newsboat/.config/newsboat/opml/
 

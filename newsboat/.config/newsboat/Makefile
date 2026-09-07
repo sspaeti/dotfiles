@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := sync
-.PHONY: decrypt run freshrss urls save clean help status pull prune push opml sync
+.PHONY: decrypt run freshrss urls save clean help status stage pull prune push opml align sync
 
 # Default target - decrypt and run newsboat
 run: decrypt
@@ -9,9 +9,16 @@ run: decrypt
 freshrss:
 	@newsboat
 
-# Decrypt urls.gpg to urls using environment variable
+# Decrypt urls.gpg to urls using environment variable.
+# No-op if urls already exists, so this is safe to run (or depend on) without
+# clobbering edits you haven't `make save`d yet. Use `make clean decrypt` to
+# force a fresh decrypt.
 decrypt:
-	@if [ -z "$$NEWSBOAT_PASS" ]; then \
+	@if [ -f urls ]; then \
+		echo "urls already exists, skipping decrypt (make clean decrypt to force)"; \
+		exit 0; \
+	fi; \
+	if [ -z "$$NEWSBOAT_PASS" ]; then \
 		echo "Error: NEWSBOAT_PASS environment variable not set"; \
 		exit 1; \
 	fi; \
@@ -51,12 +58,22 @@ save:
 	fi
 
 # FreshRSS <-> urls sync (needs FRESHRSS_PASSWORD; FreshRSS server is master,
-# nothing is ever deleted: pull adds, prune comments out, push is manual)
+# nothing is ever deleted: stage/pull add, prune comments out, push is manual)
 status:
 	@python3 freshrss-sync.py status
 
+# Push feeds staged in urls.add to FreshRSS, then move them into urls.
+# This is how new feeds should be added: `urls.add` marks them unambiguously
+# "new", so prune can never mistake them for a feed you unsubscribed on your
+# phone (both would otherwise look identical: local-only, not on server).
+stage:
+	@python3 freshrss-sync.py stage
+
 pull:
 	@python3 freshrss-sync.py pull
+
+align:
+	@python3 freshrss-sync.py align
 
 prune:
 	@python3 freshrss-sync.py prune
@@ -67,8 +84,8 @@ push:
 opml:
 	@python3 freshrss-sync.py opml
 
-# Default: full reconcile from FreshRSS + encrypt result
-sync:
+# Default: decrypt (no-op if urls exists) + full reconcile from FreshRSS + encrypt result
+sync: decrypt
 	@python3 freshrss-sync.py sync
 	@$(MAKE) --no-print-directory save
 
@@ -88,14 +105,20 @@ help:
 	@echo "  make save     - Encrypt urls to urls.gpg"
 	@echo "  make clean    - Remove decrypted urls file"
 	@echo "  make status   - Diff urls file vs FreshRSS server (read-only)"
+	@echo "  make stage    - Push urls.add feeds to FreshRSS, move them into urls"
 	@echo "  make pull     - Append FreshRSS-only feeds (e.g. added on mobile) to urls"
+	@echo "  make align    - Rewrite local feed URLs to match FreshRSS exactly"
 	@echo "  make prune    - Comment out urls-only feeds (FreshRSS is master)"
 	@echo "  make push     - Subscribe urls-only feeds on FreshRSS (manual, additive)"
 	@echo "  make opml     - Generate opml/<category>.opml files from urls"
-	@echo "  make sync     - DEFAULT: pull + prune + opml + save (server is master)"
+	@echo "  make sync     - DEFAULT: stage + pull + align + prune + opml + save"
 	@echo ""
-	@echo "Workflow:"
-	@echo "  1. make decrypt   # Edit urls file"
+	@echo "Adding a new feed:"
+	@echo "  1. Add a line to urls.add (same syntax as urls: url [!] [tag] [\"~Title\"])"
+	@echo "  2. make sync      # pushes it to FreshRSS, moves it into urls, encrypts"
+	@echo ""
+	@echo "Editing existing feeds:"
+	@echo "  1. make decrypt   # Edit urls file (no-op if already decrypted)"
 	@echo "  2. make save      # Encrypt changes"
 	@echo "  3. git add & commit"
 	@echo ""
