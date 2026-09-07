@@ -246,6 +246,12 @@ o.bind("SUPER + SHIFT + X", "Bluesky", { webapp = "https://blue.ssp.sh" })
 -- Note: You must relaunch Hyprland after changing envs (use Super+Esc, then Relaunch)
 -- hl.env("MY_GLOBAL_ENV", "setting")
 
+-- Transcode: default searches ~/Pictures + ~/Videos, which is 3000+ files and
+-- blows the perl argv limit in omarchy-menu-select ("Argument list too long"),
+-- so the picker silently never opens. Scope to ~/Videos only, which fits.
+hl.unbind("SUPER + CTRL + PERIOD") -- default: Transcode
+o.bind("SUPER + CTRL + PERIOD", "Transcode video", "omarchy-transcode --path " .. home .. "/Videos")
+
 -- Cyrcle light for videocall
 hl.unbind("SUPER + SHIFT + Z")
 o.bind("SUPER + SHIFT + Z", "Edge light", home .. "/.local/bin/wayland-edge-light-videocalls/launch-edgelight.sh")
