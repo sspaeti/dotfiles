@@ -6,15 +6,18 @@
 
 export PATH="$HOME/.local/share/omarchy/bin:$PATH"
 
+SHUTDOWN_LOG="$HOME/.local/state/omarchy-shutdown.log"
+
 save_and_kill_tmux() {
     if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
         logger -t "omarchy-shutdown" "Found tmux sessions, saving and killing"
-        echo "$(date): Found tmux sessions, saving and killing" >> /var/log/omarchy-shutdown.log
-        tmux run-shell '~/.tmux/plugins/tmux-resurrect/scripts/save.sh'
+        mkdir -p "$(dirname "$SHUTDOWN_LOG")"
+        echo "$(date): Found tmux sessions, saving and killing" >> "$SHUTDOWN_LOG"
+        tmux run-shell "$TMUX_PLUGIN_MANAGER_PATH/tmux-resurrect/scripts/save.sh"
         sleep 2
         timeout 2s tmux kill-server || logger -t "omarchy-shutdown" "tmux kill-server timed out, forcing kill"
         logger -t "omarchy-shutdown" "tmux kill-server completed"
-        echo "$(date): tmux kill-server completed" >> /var/log/omarchy-shutdown.log
+        echo "$(date): tmux kill-server completed" >> "$SHUTDOWN_LOG"
     fi
 }
 
