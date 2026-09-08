@@ -75,26 +75,16 @@
       ],
       "right": [
         {
-          "id": "omarchy.tray",
-          "pinned": [],
-          "hidden": [
-            "1Password_status_icon_1",
-            "chrome_status_icon_1",
-            "Claude_status_icon_2",
-            "kD6eTa86_5",
-            "4vPDJZj1zL",
-            "c-_GQg2tMW"
-          ]
-        },
-        {
           "id": "io.github.tyrichards.tray",
           "hidden": [],
           "order": [
             "crmne.hyprmoncfg",
             "1Password_status_icon_1",
             "quickshell.spotify",
-            "chrome_status_icon_1",
-            "io.github.teevans.apple-tv-remote"
+            "io.github.teevans.apple-tv-remote",
+            "Claude_status_icon_3",
+            "omarchy.tray",
+            "jankeesvw.time-machine"
           ],
           "widgets": [
             {
@@ -112,6 +102,27 @@
             {
               "entry": {
                 "id": "io.github.teevans.apple-tv-remote"
+              },
+              "listed": true
+            },
+            {
+              "entry": {
+                "id": "jankeesvw.time-machine"
+              },
+              "listed": true
+            },
+            {
+              "entry": {
+                "id": "omarchy.tray",
+                "pinned": [],
+                "hidden": [
+                  "1Password_status_icon_1",
+                  "chrome_status_icon_1",
+                  "Claude_status_icon_2",
+                  "kD6eTa86_5",
+                  "4vPDJZj1zL",
+                  "c-_GQg2tMW"
+                ]
               },
               "listed": true
             }
@@ -217,6 +228,12 @@
     },
     {
       "id": "io.github.teevans.apple-tv-remote"
+    },
+    {
+      "id": "jankeesvw.time-machine"
+    },
+    {
+      "id": "omarchy.tray"
     }
   ],
   "version": 1,
