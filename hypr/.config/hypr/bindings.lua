@@ -216,11 +216,20 @@ o.bind("SUPER + CTRL + ALT + G", "Toggle window gaps", "omarchy-hyprland-window-
 hl.unbind("SUPER + T") -- default: Toggle window floating/tiling
 -- o.bind("SUPER + CTRL + T", "Pick new theme", ssp .. "/omarchy-menu-wrapper theme")
 o.bind("SUPER + ALT + T", "Theme menu", "omarchy-menu toggle theme")
--- toggle to my personal background images
---
+-- Backgrounds: personal photos now live in the pics-* themes (see
+-- ~/.config/omarchy/pics-themes/build.sh), so the stock per-theme cycling is
+-- enough. bg-mode-toggle.sh (personal/omarchy mode switch) is retired.
+-- Old personal-image bindings, kept in case the pics-* themes don't stick:
 -- o.bind("SUPER + ALT + CTRL + B", "Background mode switch", ssp .. "/bg-mode-toggle.sh switch")
-hl.unbind("SUPER + CTRL + ALT + T") -- default: Show Tim  
-o.bind("SUPER + ALT + CTRL + T", "Next background", ssp .. "/bg-mode-toggle.sh next")
+-- o.bind("SUPER + ALT + CTRL + T", "Next background", ssp .. "/bg-mode-toggle.sh next")
+hl.unbind("SUPER + CTRL + ALT + T") -- default: Show time
+-- Forked bg-next: upstream compares the symlink target (realpath) against raw
+-- theme-dir entries, which never match our symlinked pics-* backgrounds, so it
+-- got stuck on the first image. See the header of the script + CLAUDE.md.
+o.bind("SUPER + ALT + CTRL + T", "Next background", ssp .. "/omarchy-theme-bg-next")
+-- Picker popup over the current theme's backgrounds (stock SUPER+CTRL+SPACE is
+-- our emoji picker, so it lives on the Shift variant of the cycle chord).
+o.bind("SUPER + CTRL + SHIFT + T", "Background switcher", "omarchy-menu toggle background")
 
 -- Extra bindings
 hl.unbind("SUPER + W") -- default: Close window
