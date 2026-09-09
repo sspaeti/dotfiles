@@ -1,0 +1,32 @@
+# pics-misc — generated from personal desktop photos
+mode = "dark"
+
+accent = "#5b8fd6"
+selection = "#2d3a58"
+muted = "#72788a"
+
+background = "#131722"
+dark_background = "#0e1119"
+darker_background = "#0a0d13"
+lighter_background = "#282c35"
+
+foreground = "#e8e6e2"
+dark_foreground = "#acacac"
+light_foreground = "#eeece9"
+bright_foreground = "#f2f1ef"
+
+red = "#dc6e62"
+yellow = "#e2c46e"
+orange = "#dd9a58"
+green = "#93bd78"
+cyan = "#74c3cc"
+blue = "#6f9be0"
+magenta = "#c08cc4"
+brown = "#ad8f64"
+
+bright_red = "#e38b81"
+bright_yellow = "#e8cf8a"
+bright_green = "#a7c991"
+bright_cyan = "#8bcdd5"
+bright_blue = "#90b2e7"
+bright_magenta = "#cca2cf"

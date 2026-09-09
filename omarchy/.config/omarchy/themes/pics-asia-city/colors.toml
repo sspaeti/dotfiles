@@ -1,0 +1,32 @@
+# pics-asia-city — generated from personal desktop photos
+mode = "dark"
+
+accent = "#7aa2c8"
+selection = "#2f3a44"
+muted = "#6c777f"
+
+background = "#15181b"
+dark_background = "#101214"
+darker_background = "#0c0d0f"
+lighter_background = "#292c30"
+
+foreground = "#dfe4e8"
+dark_foreground = "#a6abaf"
+light_foreground = "#e7ebee"
+bright_foreground = "#edf0f2"
+
+red = "#e2726f"
+yellow = "#e3c76d"
+orange = "#e09a5c"
+green = "#8fc57a"
+cyan = "#72c4c9"
+blue = "#76a7d9"
+magenta = "#b892c8"
+brown = "#937d66"
+
+bright_red = "#e99391"
+bright_yellow = "#e8d289"
+bright_green = "#a5d195"
+bright_cyan = "#89ced2"
+bright_blue = "#95bbe2"
+bright_magenta = "#c7a9d4"

@@ -1,0 +1,32 @@
+# pics-alps-winter — generated from personal desktop photos
+mode = "dark"
+
+accent = "#6fa8dc"
+selection = "#2b3d55"
+muted = "#6e8199"
+
+background = "#0f1620"
+dark_background = "#0b1018"
+darker_background = "#080c12"
+lighter_background = "#252c36"
+
+foreground = "#e8eef7"
+dark_foreground = "#abb2bb"
+light_foreground = "#eef2f9"
+bright_foreground = "#f2f6fb"
+
+red = "#e07070"
+yellow = "#e9cf7a"
+orange = "#e39b62"
+green = "#8fca8a"
+cyan = "#7fd3e6"
+blue = "#6b9fdf"
+magenta = "#b797d9"
+brown = "#958559"
+
+bright_red = "#e79191"
+bright_yellow = "#eeda98"
+bright_green = "#aad7a6"
+bright_cyan = "#9dddec"
+bright_blue = "#8cb4e6"
+bright_magenta = "#cab2e3"

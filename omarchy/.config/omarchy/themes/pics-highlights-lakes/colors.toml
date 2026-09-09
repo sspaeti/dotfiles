@@ -1,0 +1,32 @@
+# pics-highlights-lakes — generated from personal desktop photos
+mode = "dark"
+
+accent = "#5aa9c4"
+selection = "#263f3a"
+muted = "#6a8079"
+
+background = "#101816"
+dark_background = "#0c1210"
+darker_background = "#090d0c"
+lighter_background = "#252d2b"
+
+foreground = "#e2ebe6"
+dark_foreground = "#a7b0ac"
+light_foreground = "#e9f0ec"
+bright_foreground = "#eff4f1"
+
+red = "#e0716a"
+yellow = "#e2c86d"
+orange = "#e39c5a"
+green = "#8ec86f"
+cyan = "#66c9c4"
+blue = "#6b9fd4"
+magenta = "#bb8fc7"
+brown = "#958757"
+
+bright_red = "#e7908b"
+bright_yellow = "#e8d389"
+bright_green = "#a3d28a"
+bright_cyan = "#7cd1cd"
+bright_blue = "#89b2dd"
+bright_magenta = "#c9a6d2"

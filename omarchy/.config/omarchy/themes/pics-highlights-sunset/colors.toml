@@ -1,0 +1,32 @@
+# pics-highlights-sunset — generated from personal desktop photos
+mode = "dark"
+
+accent = "#e0a55a"
+selection = "#47382a"
+muted = "#857560"
+
+background = "#1a1510"
+dark_background = "#14100c"
+darker_background = "#0e0c09"
+lighter_background = "#302a24"
+
+foreground = "#f3e9d8"
+dark_foreground = "#b6aea0"
+light_foreground = "#f6eee2"
+bright_foreground = "#f8f3ea"
+
+red = "#e06a5a"
+yellow = "#f0c66a"
+orange = "#ea9a4a"
+green = "#aac47a"
+cyan = "#86c7c3"
+blue = "#7f9fd0"
+magenta = "#cf90b0"
+brown = "#9a7a55"
+
+bright_red = "#e6877a"
+bright_yellow = "#f3d289"
+bright_green = "#bbd094"
+bright_cyan = "#9dd2ce"
+bright_blue = "#9cb5db"
+bright_magenta = "#daa9c1"

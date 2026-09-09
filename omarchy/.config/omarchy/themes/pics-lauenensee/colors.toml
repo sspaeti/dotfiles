@@ -1,0 +1,32 @@
+# pics-lauenensee — generated from personal desktop photos
+mode = "dark"
+
+accent = "#b8a24a"
+selection = "#3d3c26"
+muted = "#7d7c61"
+
+background = "#15160f"
+dark_background = "#10100b"
+darker_background = "#0c0c08"
+lighter_background = "#2a2b23"
+
+foreground = "#ebe9d9"
+dark_foreground = "#afaea0"
+light_foreground = "#f0eee2"
+bright_foreground = "#f4f3ea"
+
+red = "#d8705a"
+yellow = "#e0c25a"
+orange = "#dd9a48"
+green = "#9fb85a"
+cyan = "#78bfb0"
+blue = "#7ea0c4"
+magenta = "#bb90b0"
+brown = "#948b64"
+
+bright_red = "#df8a78"
+bright_yellow = "#e5cc74"
+bright_green = "#acc271"
+bright_cyan = "#8dc9bc"
+bright_blue = "#99b4d0"
+bright_magenta = "#c8a5bf"

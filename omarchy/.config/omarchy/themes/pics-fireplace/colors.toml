@@ -1,0 +1,32 @@
+# pics-fireplace — generated from personal desktop photos
+mode = "dark"
+
+accent = "#f07a2a"
+selection = "#4a1d10"
+muted = "#8a5c48"
+
+background = "#140806"
+dark_background = "#0f0605"
+darker_background = "#0b0403"
+lighter_background = "#2b1f1a"
+
+foreground = "#fbedca"
+dark_foreground = "#baad93"
+light_foreground = "#fcf2d7"
+bright_foreground = "#fdf5e2"
+
+red = "#e8452a"
+yellow = "#f7b955"
+orange = "#f5842e"
+green = "#b9b86a"
+cyan = "#d9b27c"
+blue = "#d07a4a"
+magenta = "#e08060"
+brown = "#7a3a1e"
+
+bright_red = "#eb5f48"
+bright_yellow = "#f8c675"
+bright_green = "#c4c382"
+bright_cyan = "#e1c296"
+bright_blue = "#d78e65"
+bright_magenta = "#e5957b"

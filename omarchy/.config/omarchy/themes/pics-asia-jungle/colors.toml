@@ -1,0 +1,32 @@
+# pics-asia-jungle — generated from personal desktop photos
+mode = "dark"
+
+accent = "#7fbf5a"
+selection = "#2b402a"
+muted = "#6f8468"
+
+background = "#111a12"
+dark_background = "#0d130e"
+darker_background = "#090e0a"
+lighter_background = "#262f26"
+
+foreground = "#e3ecdd"
+dark_foreground = "#a8b1a4"
+light_foreground = "#eaf1e6"
+bright_foreground = "#f0f5ec"
+
+red = "#e06c60"
+yellow = "#e6c86b"
+orange = "#e39a52"
+green = "#8fd46a"
+cyan = "#6fc9b6"
+blue = "#6fa3d6"
+magenta = "#c48bc7"
+brown = "#8f7a55"
+
+bright_red = "#e68a80"
+bright_yellow = "#ebd388"
+bright_green = "#a5dd88"
+bright_cyan = "#86d2c2"
+bright_blue = "#8db6df"
+bright_magenta = "#d0a2d2"

@@ -1,0 +1,32 @@
+# pics-asia-sunset — generated from personal desktop photos
+mode = "dark"
+
+accent = "#ff8a5c"
+selection = "#4a2c33"
+muted = "#8a6c6c"
+
+background = "#1a1216"
+dark_background = "#130d10"
+darker_background = "#0e0a0c"
+lighter_background = "#30272a"
+
+foreground = "#f6e6dc"
+dark_foreground = "#b8aba5"
+light_foreground = "#f8ece5"
+bright_foreground = "#faf1ec"
+
+red = "#ff6b6b"
+yellow = "#ffc857"
+orange = "#ff9950"
+green = "#9ccf7a"
+cyan = "#7fd0d8"
+blue = "#7fa0e8"
+magenta = "#e88bc0"
+brown = "#a07060"
+
+bright_red = "#ff9696"
+bright_yellow = "#ffd379"
+bright_green = "#b2d997"
+bright_cyan = "#99dae0"
+bright_blue = "#a4bbef"
+bright_magenta = "#eeaad1"

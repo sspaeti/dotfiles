@@ -1,0 +1,32 @@
+# pics-pabukid-sa-indahag — generated from personal desktop photos
+mode = "dark"
+
+accent = "#62b7c9"
+selection = "#274038"
+muted = "#6f7f78"
+
+background = "#101915"
+dark_background = "#0c1310"
+darker_background = "#090e0c"
+lighter_background = "#252e2a"
+
+foreground = "#e2ece7"
+dark_foreground = "#a7b1ac"
+light_foreground = "#e9f1ed"
+bright_foreground = "#eff5f2"
+
+red = "#e07068"
+yellow = "#e3c86f"
+orange = "#e39c5c"
+green = "#8fc978"
+cyan = "#6ccdd0"
+blue = "#64a0d0"
+magenta = "#bb90c8"
+brown = "#908f6a"
+
+bright_red = "#e78f89"
+bright_yellow = "#e9d38b"
+bright_green = "#a6d494"
+bright_cyan = "#84d5d8"
+bright_blue = "#80b1d9"
+bright_magenta = "#c9a7d3"

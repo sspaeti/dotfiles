@@ -1,0 +1,32 @@
+# pics-asia-lagoon — generated from personal desktop photos
+mode = "dark"
+
+accent = "#3fc1c9"
+selection = "#1f4048"
+muted = "#5f7f86"
+
+background = "#0e1b22"
+dark_background = "#0a141a"
+darker_background = "#080f13"
+lighter_background = "#233037"
+
+foreground = "#dcecf0"
+dark_foreground = "#a2b1b6"
+light_foreground = "#e5f1f4"
+bright_foreground = "#ecf5f7"
+
+red = "#ef7a70"
+yellow = "#f0d078"
+orange = "#f2a65a"
+green = "#8ccf6b"
+cyan = "#4fd6d3"
+blue = "#4aa3df"
+magenta = "#c98ad1"
+brown = "#a08a6a"
+
+bright_red = "#f39d96"
+bright_yellow = "#f4db98"
+bright_green = "#a2d887"
+bright_cyan = "#67dcd9"
+bright_blue = "#68b2e4"
+bright_magenta = "#d4a3db"

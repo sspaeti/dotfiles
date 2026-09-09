@@ -1,0 +1,32 @@
+# pics-costa-rica-jungle — generated from personal desktop photos
+mode = "dark"
+
+accent = "#8fbf47"
+selection = "#2e4223"
+muted = "#718162"
+
+background = "#121a0f"
+dark_background = "#0d130b"
+darker_background = "#0a0e08"
+lighter_background = "#272f24"
+
+foreground = "#e6ebdc"
+dark_foreground = "#abb0a3"
+light_foreground = "#ecf0e5"
+bright_foreground = "#f1f4ec"
+
+red = "#d9705f"
+yellow = "#dcc862"
+orange = "#e19c4d"
+green = "#9bd05a"
+cyan = "#6cc4a7"
+blue = "#6ea0cc"
+magenta = "#bd8cc4"
+brown = "#9a7f4c"
+
+bright_red = "#e08b7d"
+bright_yellow = "#e2d17c"
+bright_green = "#acd876"
+bright_cyan = "#82cdb4"
+bright_blue = "#8ab2d6"
+bright_magenta = "#caa2cf"

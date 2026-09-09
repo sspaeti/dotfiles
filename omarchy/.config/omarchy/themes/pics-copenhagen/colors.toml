@@ -1,0 +1,32 @@
+# pics-copenhagen — generated from personal desktop photos
+mode = "dark"
+
+accent = "#d8963a"
+selection = "#46372a"
+muted = "#80735f"
+
+background = "#1a1613"
+dark_background = "#13100e"
+darker_background = "#0e0c0a"
+lighter_background = "#2f2b27"
+
+foreground = "#efe6da"
+dark_foreground = "#b3aca2"
+light_foreground = "#f3ece3"
+bright_foreground = "#f6f1eb"
+
+red = "#d6544a"
+yellow = "#e8bf52"
+orange = "#e08a3a"
+green = "#93b86a"
+cyan = "#6dbfc8"
+blue = "#4c8fce"
+magenta = "#c085b6"
+brown = "#93632e"
+
+bright_red = "#dc6f66"
+bright_yellow = "#ecc96e"
+bright_green = "#a4c382"
+bright_cyan = "#83c9d0"
+bright_blue = "#67a0d5"
+bright_magenta = "#cb9ac3"

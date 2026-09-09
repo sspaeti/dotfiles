@@ -1,0 +1,32 @@
+# pics-toeff — generated from personal desktop photos
+mode = "dark"
+
+accent = "#b8b8bc"
+selection = "#35373a"
+muted = "#737578"
+
+background = "#121314"
+dark_background = "#0e0e0f"
+darker_background = "#0a0a0b"
+lighter_background = "#272829"
+
+foreground = "#e6e6e8"
+dark_foreground = "#ababad"
+light_foreground = "#ececee"
+bright_foreground = "#f1f1f2"
+
+red = "#d66c6c"
+yellow = "#d9c47a"
+orange = "#d69760"
+green = "#a2b36b"
+cyan = "#86bfc4"
+blue = "#86a3c8"
+magenta = "#b596bf"
+brown = "#8c8266"
+
+bright_red = "#de8a8a"
+bright_yellow = "#e1d094"
+bright_green = "#b0bf82"
+bright_cyan = "#9ccbcf"
+bright_blue = "#a2b8d5"
+bright_magenta = "#c4abcc"

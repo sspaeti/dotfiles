@@ -1,0 +1,32 @@
+# pics-costa-rica-sunset — generated from personal desktop photos
+mode = "dark"
+
+accent = "#f2a261"
+selection = "#4b2b45"
+muted = "#8c6f80"
+
+background = "#1d1220"
+dark_background = "#160e18"
+darker_background = "#100a12"
+lighter_background = "#332833"
+
+foreground = "#f8e9dc"
+dark_foreground = "#bbada7"
+light_foreground = "#faeee5"
+bright_foreground = "#fbf3ec"
+
+red = "#f26b6b"
+yellow = "#f7c96a"
+orange = "#f59a58"
+green = "#a4cf7c"
+cyan = "#82cfd6"
+blue = "#8f9fe6"
+magenta = "#d98bc4"
+brown = "#a5766a"
+
+bright_red = "#f59191"
+bright_yellow = "#f9d58c"
+bright_green = "#b8da99"
+bright_cyan = "#9cd9de"
+bright_blue = "#b4beee"
+bright_magenta = "#e2a6d2"

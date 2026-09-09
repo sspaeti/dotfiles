@@ -1,0 +1,32 @@
+# pics-asia-neon — generated from personal desktop photos
+mode = "dark"
+
+accent = "#a67bff"
+selection = "#3a2f5c"
+muted = "#6f6790"
+
+background = "#14111f"
+dark_background = "#0f0d17"
+darker_background = "#0b0911"
+lighter_background = "#292634"
+
+foreground = "#e6e0f5"
+dark_foreground = "#aba6b9"
+light_foreground = "#ece8f8"
+bright_foreground = "#f1eefa"
+
+red = "#ff6b8a"
+yellow = "#ffd166"
+orange = "#ff9f5a"
+green = "#6ee7a8"
+cyan = "#5cd8ff"
+blue = "#5a8cff"
+magenta = "#d67bff"
+brown = "#8a6f9a"
+
+bright_red = "#ff96ac"
+bright_yellow = "#ffdc8a"
+bright_green = "#91edbd"
+bright_cyan = "#7fe0ff"
+bright_blue = "#83a9ff"
+bright_magenta = "#e2a1ff"

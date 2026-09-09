@@ -1,0 +1,32 @@
+# pics-horizon — generated from personal desktop photos
+mode = "dark"
+
+accent = "#98b5d9"
+selection = "#303744"
+muted = "#737a86"
+
+background = "#14161b"
+dark_background = "#0f1014"
+darker_background = "#0b0c0f"
+lighter_background = "#292b30"
+
+foreground = "#e4e8ee"
+dark_foreground = "#aaadb3"
+light_foreground = "#ebeef2"
+bright_foreground = "#f0f2f6"
+
+red = "#e07474"
+yellow = "#e6cb7c"
+orange = "#e39d66"
+green = "#98c48a"
+cyan = "#7ccad4"
+blue = "#7ea6dc"
+magenta = "#b79bd3"
+brown = "#8c7f6c"
+
+bright_red = "#e79595"
+bright_yellow = "#ecd79a"
+bright_green = "#afd1a5"
+bright_cyan = "#95d4dc"
+bright_blue = "#9fbde5"
+bright_magenta = "#c9b4de"

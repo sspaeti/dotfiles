@@ -1,0 +1,32 @@
+# pics-boezingenberg — generated from personal desktop photos
+mode = "dark"
+
+accent = "#7297bb"
+selection = "#2c3c4c"
+muted = "#6f7f8f"
+
+background = "#12181f"
+dark_background = "#0d1217"
+darker_background = "#0a0d11"
+lighter_background = "#272d34"
+
+foreground = "#e6edf4"
+dark_foreground = "#abb1b8"
+light_foreground = "#ecf2f7"
+bright_foreground = "#f1f5f9"
+
+red = "#dd7373"
+yellow = "#e2cc80"
+orange = "#dd9c68"
+green = "#92c48c"
+cyan = "#7ccbd8"
+blue = "#7aa3d3"
+magenta = "#b498d1"
+brown = "#858071"
+
+bright_red = "#e59393"
+bright_yellow = "#e9d89d"
+bright_green = "#abd2a7"
+bright_cyan = "#96d5e0"
+bright_blue = "#98b8dd"
+bright_magenta = "#c6b1dc"

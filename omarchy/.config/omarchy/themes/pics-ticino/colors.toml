@@ -1,0 +1,32 @@
+# pics-ticino — generated from personal desktop photos
+mode = "dark"
+
+accent = "#6fa3c4"
+selection = "#2a3a44"
+muted = "#6f7f86"
+
+background = "#12171a"
+dark_background = "#0d1113"
+darker_background = "#0a0d0e"
+lighter_background = "#272c2f"
+
+foreground = "#e4eaec"
+dark_foreground = "#a9afb1"
+light_foreground = "#ebeff1"
+bright_foreground = "#f0f3f5"
+
+red = "#df7070"
+yellow = "#e4cb78"
+orange = "#e29d62"
+green = "#a1c464"
+cyan = "#74c8cc"
+blue = "#6e9fd0"
+magenta = "#b896c8"
+brown = "#8f8266"
+
+bright_red = "#e69191"
+bright_yellow = "#ead695"
+bright_green = "#b1ce7e"
+bright_cyan = "#8bd1d5"
+bright_blue = "#8bb2d9"
+bright_magenta = "#c8add4"

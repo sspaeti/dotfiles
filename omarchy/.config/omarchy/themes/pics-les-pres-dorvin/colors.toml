@@ -1,0 +1,32 @@
+# pics-les-pres-dorvin — generated from personal desktop photos
+mode = "dark"
+
+accent = "#8fa3c4"
+selection = "#333b4a"
+muted = "#7d8391"
+
+background = "#161a21"
+dark_background = "#101319"
+darker_background = "#0c0e12"
+lighter_background = "#2b2f36"
+
+foreground = "#eceef2"
+dark_foreground = "#b0b3b7"
+light_foreground = "#f1f2f5"
+bright_foreground = "#f5f6f8"
+
+red = "#e07a7a"
+yellow = "#e6cf88"
+orange = "#e2a06c"
+green = "#9cc79a"
+cyan = "#8ccfdb"
+blue = "#86aadb"
+magenta = "#b9a0d6"
+brown = "#8c8478"
+
+bright_red = "#e89c9c"
+bright_yellow = "#ecdba6"
+bright_green = "#b7d6b5"
+bright_cyan = "#a7dae4"
+bright_blue = "#a7c1e5"
+bright_magenta = "#ccbae1"
