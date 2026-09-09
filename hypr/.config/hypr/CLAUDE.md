@@ -22,6 +22,7 @@ These duplicate upstream logic, so upstream fixes do NOT reach us automatically.
 | `omarchy-system-menu` | `system.*` entries in `/usr/share/omarchy/default/omarchy/omarchy-menu.jsonc` + the `omarchy-system-*` binaries they call | tmux-aware shutdown/restart; Lock routes to the lock wrapper. Bound to SUPER+ESCAPE / SUPER+grave in `bindings.lua`. |
 | `omarchy-system-menu-intercept` | Same `system.*` entries (uses `omarchy-state` like upstream) | Intercepts to add tmux-aware shutdown/restart. |
 | `omarchy-menu` | Dispatcher over `$(which omarchy-menu)` | Routes "system" to our `omarchy-system-menu`, passes everything else through. Bound to SUPER+CTRL+ALT+SPACE. |
+| `omarchy-theme-bg-next` | `$(which omarchy-theme-bg-next)` | Compares backgrounds by `readlink -f` on both sides. Upstream compares the realpath stored by `bg-set` against raw theme-dir entries, which never match the symlinked pics-* backgrounds, so cycling got stuck on the first image. Bound to SUPER+ALT+CTRL+T. Drop the fork if upstream fixes the comparison. |
 
 Check: `diff <(cat "$(which <upstream>)") ~/.config/hypr/sspaeti/<local>` — anything beyond the documented delta = upstream drift.
 
