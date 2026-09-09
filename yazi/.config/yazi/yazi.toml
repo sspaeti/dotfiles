@@ -1,5 +1,22 @@
 [mgr]
 # show_hidden = true
+
+# Directory openers: shown via `O` on a hovered folder. First entry is the default.
+[open]
+prepend_rules = [
+	{ url = "*/", use = [ "terminal", "tmux-window", "tmux-split", "edit", "open", "reveal" ] },
+]
+
+[opener]
+terminal = [
+	{ run = 'setsid uwsm-app -- xdg-terminal-exec --dir=%s1 >/dev/null 2>&1 &', desc = "Open in new terminal", for = "linux", orphan = true },
+]
+tmux-window = [
+	{ run = 'if [ -n "$TMUX" ]; then tmux new-window -c %s1; else setsid uwsm-app -- xdg-terminal-exec --dir=%s1 tmux new-session -A -s Work -c %s1 >/dev/null 2>&1 & fi', desc = "Open in new tmux window", for = "linux", orphan = true },
+]
+tmux-split = [
+	{ run = 'tmux split-window -h -c %s1', desc = "Open in tmux split (right)", for = "linux", orphan = true },
+]
 [plugin]  
 prepend_previewers = [  
   { url = "*.csv", run = "duckdb" },  

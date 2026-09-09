@@ -9,6 +9,11 @@ prepend_keymap = [
 	{ on = [ ",", "M" ], run = "sort mtime --reverse=no", desc = "Sort by modified time (oldest first)" },
 	# Copy hovered image to clipboard as PNG (works for webp, jpg, etc.)
 	{ on = [ "c", "i" ], run = '''shell 'magick "$1" png:- | wl-copy --type image/png' --confirm''', desc = "Copy image to clipboard" },
+	# Open a new terminal in the hovered directory (or the current directory if a file is hovered).
+	# $0 = hovered entry; yazi runs the shell in the current tab's cwd, so $PWD is the fallback.
+	{ on = "<C-Enter>", run = '''shell 'd="$0"; [ -d "$d" ] || d="$PWD"; setsid uwsm-app -- xdg-terminal-exec --dir="$d" >/dev/null 2>&1 &' --orphan --confirm''', desc = "Open terminal here" },
+	# Same, but as a tmux split (right) in the current tmux window
+	{ on = "<A-Enter>", run = '''shell 'd="$0"; [ -d "$d" ] || d="$PWD"; tmux split-window -h -c "$d"' --orphan --confirm''', desc = "Open tmux split here" },
   # { on = "sr", run = 'S', desc = "fuzzy search ripgrep" },
 ]
 
