@@ -7,14 +7,14 @@
           "id": "omarchy.indicators"
         },
         {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
           "id": "tmn73.calendar",
           "announceLeadMinutes": 15,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
           "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
         },
         {
           "id": "omarchy.system-update"
@@ -234,17 +234,24 @@
     },
     {
       "id": "omarchy.tray"
+    },
+    {
+      "id": "io.github.sirjul1337.lock-explorer",
+      "avatar": "/home/sspaeti/Simon/Sync/Pics/Profile Photos/Programming/me_programming_swissalps_q.jpg",
+      "design": "poster"
     }
   ],
   "version": 1,
   "disabledPlugins": [
     "omarchy.emojis",
     "omarchy.clipboard",
-    "omarchy.idle"
+    "omarchy.idle",
+    "omarchy.lock"
   ],
   "cloneSourceRestores": [
     "sspaeti.emojis",
     "sspaeti.clipboard",
-    "sspaeti.idle"
+    "sspaeti.idle",
+    "io.github.sirjul1337.lock-explorer"
   ]
 }
