@@ -17,11 +17,14 @@ local ssp = home .. "/.config/hypr/sspaeti"
 
 
 -- use zsh shell by default -> check if omarchy is not touched by this change
+--
 hl.unbind("SUPER + RETURN") -- default: Terminal
 o.bind("SUPER + RETURN", "Terminal (zsh)", { tui = "zsh" })
 hl.unbind("SUPER + SHIFT + RETURN") -- default: Browser
-o.bind("SUPER + SHIFT + RETURN", "Neovim", { tui = "nvim" })
 hl.unbind("SUPER + SHIFT + N") -- default: Editor
+hl.unbind("SUPER + CTRL + RETURN") -- default: Herdr
+o.bind("SUPER + CTRL + RETURN", "Neovim", { tui = "nvim" })
+o.bind("SUPER + SHIFT + RETURN", "Neovim", { tui = "nvim" })
 o.bind("SUPER + SHIFT + N", "Neovim", { tui = "nvim" })
 
 hl.unbind("SUPER + O") -- default: Pop window out (float & pin)
