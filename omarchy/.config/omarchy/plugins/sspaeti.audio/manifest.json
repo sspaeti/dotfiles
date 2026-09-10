@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "sspaeti.audio",
+  "name": "My Audio",
+  "version": "1.0.0",
+  "author": "Omarchy",
+  "description": "Volume slider, output picker, per-app mixer",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "My Audio",
+    "description": "Volume slider, output picker, per-app mixer",
+    "category": "Audio",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.audio"
+  }
+}
