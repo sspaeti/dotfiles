@@ -81,9 +81,9 @@
             "1Password_status_icon_1",
             "quickshell.spotify",
             "io.github.teevans.apple-tv-remote",
-            "Claude_status_icon_3",
             "omarchy.tray",
-            "jankeesvw.time-machine"
+            "jankeesvw.time-machine",
+            "agx.screen-time"
           ],
           "widgets": [
             {
@@ -124,6 +124,13 @@
                 ]
               },
               "listed": true
+            },
+            {
+              "entry": {
+                "id": "agx.screen-time",
+                "iconOnly": true
+              },
+              "listed": true
             }
           ]
         },
@@ -147,23 +154,19 @@
           "refreshMinutes": 15
         },
         {
-          "id": "agx.screen-time",
-          "iconOnly": true
+          "id": "omarchy.tailscale"
         },
         {
-          "id": "omarchy.tailscale"
+          "id": "omarchy.agents"
+        },
+        {
+          "id": "sspaeti.audio"
         },
         {
           "id": "omarchy.bluetooth"
         },
         {
           "id": "omarchy.network"
-        },
-        {
-          "id": "sspaeti.audio"
-        },
-        {
-          "id": "omarchy.agents"
         },
         {
           "id": "omarchy.monitor"
@@ -239,6 +242,9 @@
       "id": "io.github.sirjul1337.lock-explorer",
       "avatar": "/home/sspaeti/Simon/Sync/Pics/Profile Photos/Programming/me_programming_swissalps_q.jpg",
       "design": "poster"
+    },
+    {
+      "id": "agx.screen-time"
     }
   ],
   "version": 1,
