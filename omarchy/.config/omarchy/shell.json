@@ -21,7 +21,6 @@
         },
         {
           "id": "io.github.sspaeti.timezones",
-          "icon": "",
           "hoverExpand": false,
           "homeZones": [
             "Europe/Zurich",
@@ -148,6 +147,10 @@
           "refreshMinutes": 15
         },
         {
+          "id": "agx.screen-time",
+          "iconOnly": true
+        },
+        {
           "id": "omarchy.tailscale"
         },
         {
@@ -205,9 +208,6 @@
     },
     {
       "id": "io.github.kristoferlund.webcam"
-    },
-    {
-      "id": "agx.screen-time"
     },
     {
       "id": "quickshell.spotify",
