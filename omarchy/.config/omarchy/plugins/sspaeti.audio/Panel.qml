@@ -39,7 +39,7 @@ Panel {
     }
     return null
   }
-  readonly property bool noiseCancelAvailable: noiseCancelNode !== null && noiseCancelTargetNode !== null
+  readonly property bool noiseCancelAvailable: noiseCancelNode !== null && candidateSources.length > 0
   readonly property bool noiseCancelOn: !!source && String(source.name || "") === noiseCancelName
   // Volume/mute/peak act on the real mic while the filter is active: the
   // filter's own volume is a software stage in front of nothing useful.
@@ -49,11 +49,30 @@ Panel {
     return Qt.resolvedUrl("noise-cancel.sh").toString().replace(/^file:\/\//, "")
   }
 
-  function setNoiseCancel(on) {
-    var node = on ? noiseCancelNode : noiseCancelTargetNode
-    if (!node) return
-    Pipewire.preferredDefaultAudioSource = node
-    Quickshell.execDetached(["bash", noiseCancelScript(), on ? "on" : "off"])
+  function isPhysicalMic(node) {
+    return !!node && String(node.name || "") !== noiseCancelName
+  }
+
+  // on: the filter captures from `mic` (default: the current default input,
+  // else whatever it captured from last) and becomes the default input.
+  function setNoiseCancel(on, mic) {
+    if (on) {
+      if (!noiseCancelNode) return
+      var target = mic ? mic : (isPhysicalMic(source) ? source : noiseCancelTargetNode)
+      if (target) noiseCancelTarget = String(target.name || "")
+      Pipewire.preferredDefaultAudioSource = noiseCancelNode
+      var args = ["bash", noiseCancelScript(), "on"]
+      if (target && target.name) args.push(String(target.name))
+      Quickshell.execDetached(args)
+    } else {
+      if (noiseCancelTargetNode) Pipewire.preferredDefaultAudioSource = noiseCancelTargetNode
+      Quickshell.execDetached(["bash", noiseCancelScript(), "off"])
+    }
+    noiseCancelRefresh.restart()
+  }
+
+  function refreshNoiseCancelTarget() {
+    if (!noiseCancelTargetProc.running) noiseCancelTargetProc.running = true
   }
   readonly property var mprisPlayers: Mpris.players ? Mpris.players.values : []
   readonly property var mediaService: bar?.shell?.firstPartyServiceFor("omarchy.media")
@@ -349,6 +368,7 @@ Panel {
 
   onOpenedChanged: {
     if (opened) {
+      refreshNoiseCancelTarget()
       refreshDisplayAudioModels()
       focusSection = "output"
       selectedIndex = -1  // first keyboard cursor reveal starts on the output slider
@@ -514,8 +534,12 @@ Panel {
 
   function setDefaultSource(node) {
     if (!node) return
+    // With the filter on, picking a mic re-points the filter at it instead
+    // of bypassing it.
+    if (noiseCancelOn && isPhysicalMic(node)) { setNoiseCancel(true, node); return }
     Pipewire.preferredDefaultAudioSource = node
     if (node.name) Quickshell.execDetached(["bash", noiseCancelScript(), "set", String(node.name)])
+    noiseCancelRefresh.restart()
   }
 
   function sinkAvailable(node) {
@@ -611,17 +635,29 @@ Panel {
   PwObjectTracker { objects: root.candidateSources }
   PwObjectTracker { objects: root.noiseCancelNode ? [root.noiseCancelNode] : [] }
 
-  // Which mic the filter captures from (target.object in the filter conf).
+  // Which mic the filter currently captures from (its capture stream's
+  // source). Re-read when the panel opens, the default input changes, and
+  // shortly after every switch so the highlight follows PipeWire.
   Process {
     id: noiseCancelTargetProc
     running: true
-    command: ["sed", "-n", "s/.*target\\.object *= *\"\\([^\"]*\\)\".*/\\1/p",
-      Quickshell.env("HOME") + "/.config/pipewire/pipewire.conf.d/99-input-denoising.conf"]
+    command: ["bash", root.noiseCancelScript(), "target"]
     stdout: StdioCollector {
       waitForEnd: true
-      onStreamFinished: root.noiseCancelTarget = String(text || "").trim().split("\n")[0]
+      onStreamFinished: {
+        var t = String(text || "").trim().split("\n")[0]
+        if (t) root.noiseCancelTarget = t
+      }
     }
   }
+
+  Timer {
+    id: noiseCancelRefresh
+    interval: 400
+    onTriggered: root.refreshNoiseCancelTarget()
+  }
+
+  onSourceChanged: noiseCancelRefresh.restart()
   PwObjectTracker { objects: root.audioStreams }
 
   PwNodePeakMonitor {
