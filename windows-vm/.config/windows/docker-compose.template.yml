@@ -1,0 +1,49 @@
+# Source of truth for the omarchy Windows VM compose.
+# omarchy >= Sep 2026 keeps the live compose root-owned at
+#   /var/lib/omarchy/windows/docker-compose.yml
+# and deletes ~/.config/windows/docker-compose.yml on migration, so this file
+# deliberately uses a different name. Apply it with ./apply-compose.sh.
+#
+# Only RAM/CPU/DISK/USERNAME/PASSWORD/TZ are carried over by omarchy itself;
+# extra volumes are NOT, hence this template. omarchy only regenerates the live
+# file on `omarchy-windows-vm install` (or a legacy migration). Re-run
+# apply-compose.sh after that.
+#
+# Do NOT change the /storage and /shared lines: omarchy-windows-vm verifies
+# them against its root-owned bind anchors and refuses to start otherwise.
+# PASSWORD placeholder is filled from ~/.config/windows/credentials (0600, git-ignored).
+services:
+  windows:
+    image: dockurr/windows
+    container_name: omarchy-windows
+    environment:
+      VERSION: "11"
+      RAM_SIZE: "32G"
+      CPU_CORES: "4"
+      DISK_SIZE: "32G"
+      USERNAME: "sspaeti"
+      PASSWORD: "__PASSWORD__"
+      PROTECT: "Y"
+      TZ: "Europe/Berlin"
+      ARGUMENTS: "-rtc base=localtime,clock=host,driftfix=slew"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 127.0.0.1:8006:8006
+      - 127.0.0.1:3389:3389/tcp
+      - 127.0.0.1:3389:3389/udp
+    volumes:
+      - /var/lib/omarchy/windows/mounts/users/1000/storage:/storage
+      - /var/lib/omarchy/windows/mounts/users/1000/shared:/shared
+      # Mount specific Sync subdirectories to avoid heavy I/O from git repos
+      - /home/sspaeti/Simon/Sync/1 Areas:/data/1 Areas
+      - /home/sspaeti/Simon/Sync/2 Project:/data/2 Project
+      - /home/sspaeti/Simon/Sync/3 Resources:/data/3 Resources
+      # - /home/sspaeti/Simon/Sync/Pics:/data/Pics
+      # - /home/sspaeti/Simon/Sync/PicsUpload:/data/PicsUpload
+      # 4 Archive excluded
+    restart: "no"
+    stop_grace_period: 2m

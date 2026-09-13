@@ -80,3 +80,7 @@ nvim/.config/nvim/spell
 
 # ignore omarchy screen time
 omarchy/.config/omarchy/screen-time/history.json
+windows-vm/.config/windows/credentials
+
+#windows vm (omarchy writes RDP creds + krb5 here)
+windows-vm/.config/windows/credentials
