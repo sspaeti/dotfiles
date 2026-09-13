@@ -6,3 +6,6 @@ gh = "latest"
 
 [settings]
 quiet = true #for running snack.nvim github cli `gh` pull pr
+
+[settings.upgrade]
+auto_prune = false
