@@ -11,10 +11,12 @@
         },
         {
           "id": "tmn73.calendar",
-          "announceLeadMinutes": 15,
+          "announceLeadMinutes": 0,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm"
+          "verticalFormat": "HH\n—\nmm",
+          "weekStartDay": "monday",
+          "showYearProgress": true
         },
         {
           "id": "omarchy.system-update"
