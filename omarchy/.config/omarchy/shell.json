@@ -137,9 +137,6 @@
           ]
         },
         {
-          "id": "io.github.sspaeti.neomd"
-        },
-        {
           "id": "io.github.sspaeti.goatcounter",
           "hoverExpand": false,
           "siteLabels": {
@@ -186,6 +183,9 @@
         },
         {
           "id": "omarchy.power"
+        },
+        {
+          "id": "io.github.sspaeti.neomd"
         }
       ]
     },
