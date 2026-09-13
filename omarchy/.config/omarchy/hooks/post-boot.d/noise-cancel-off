@@ -1,0 +1,18 @@
+#!/bin/bash
+# Start every session with the RNNoise mic filter OFF. WirePlumber remembers
+# the last default input across reboots, so a filter left on after a recording
+# would otherwise stay the default for calls and everything else.
+# Runs via omarchy-hook post-boot (~2s after Hyprland starts).
+
+script="$HOME/.config/omarchy/plugins/sspaeti.audio/noise-cancel.sh"
+[[ -x $script ]] || exit 0
+
+# Wait for PipeWire (and the filter's virtual source) to be up.
+for _ in $(seq 1 30); do
+  pactl info >/dev/null 2>&1 && break
+  sleep 0.5
+done
+
+if [[ $(pactl get-default-source 2>/dev/null) == rnnoise_source ]]; then
+  "$script" off && notify-send -u low "Noise cancel" "Turned off for this session"
+fi
