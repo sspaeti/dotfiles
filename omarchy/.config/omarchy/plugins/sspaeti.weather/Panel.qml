@@ -62,8 +62,16 @@ Panel {
     return false
   }
 
+  // An installed plugin may be handed a PluginBarApi facade rather than the
+  // Bar itself (Omarchy 4.x), and there this property is a read-only mirror —
+  // assigning to it throws, and the throw aborted close() before it reached
+  // controller.hide(), leaving the panel stuck open with its keyboard grab.
+  // Prefer the setter the facade exposes; keep the assignment for a host
+  // Bar with a writable property.
   function setCenterHoverRevealSuppressed(value) {
-    if (root.bar && "centerHoverRevealSuppressed" in root.bar)
+    if (root.bar && typeof root.bar.setCenterHoverRevealSuppressed === "function")
+      root.bar.setCenterHoverRevealSuppressed(value)
+    else if (root.bar && "centerHoverRevealSuppressed" in root.bar)
       root.bar.centerHoverRevealSuppressed = value
   }
 
