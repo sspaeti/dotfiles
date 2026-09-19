@@ -1,12 +1,26 @@
 # TUXEDO InfinityBook Pro 14 Gen10 AMD (Ryzen AI 9 HX 370)
-# Workaround: xHCI controller 0000:67:00.0 (AMD 1022:151f, USB4 complex)
-# refuses runtime suspend and the kernel retries every ~1.2s:
+# Workaround: the AMD USB4 complex at PCI slot 0000:67:00.* exposes FOUR
+# functions (one physical chip, one per xHCI/router role):
+#   .0  1022:151f  xHCI - internal-only devices (Genesys hub, Bluetooth)
+#   .3  1022:151a  xHCI - external USB-C port 1
+#   .4  1022:151b  xHCI - external USB-C port 2
+#   .6  1022:151d  USB4/Thunderbolt router
+# Originally only .0 was pinned (2026-08-25) after it spammed:
 #   xhci_hcd 0000:67:00.0: Refused to change power state from D0 to D3hot
-# Keeping the controller awake stops the retry loop (log spam, CPU wakeups).
+# every ~1.2s post-resume. .3/.4 stayed on runtime PM ("auto") and were
+# never protected -- turned out to be the ones actually driving the two
+# USB-C ports, and they're the ones behind the external-monitor/dock USB
+# devices dropping and re-enumerating (whole hub tree disconnects, new
+# device numbers) independent of which port or cable is used. Widened to
+# the whole 67:00.* function group 2026-09-16 since both external-port
+# functions share the same silicon and firmware as the already-confirmed-
+# bad .0 function.
 # No functional downside: all USB ports keep working; USB devices still
 # autosuspend individually. See linux_root/README.md for the "is it fixed
-# yet?" test and removal instructions. First seen 2026-08-22, workaround
-# applied 2026-08-25 (kernel 7.1.8-arch1-3, BIOS N.1.22A23).
+# yet?" test and removal instructions.
 #
 # Install: sudo cp <this file> /etc/udev/rules.d/ && sudo udevadm control --reload
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x151f", ATTR{power/control}="on"
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x151a", ATTR{power/control}="on"
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x151b", ATTR{power/control}="on"
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x151d", ATTR{power/control}="on"

@@ -33,6 +33,7 @@ kanata/.config/kanata/kanata.kbd
 
 
 neomd/.config/neomd/lists
+neomd/.config/neomd/merges.toml
 neomd/.config/neomd/contacts.csv
 neomd/.config/neomd/ooo.toml
 .stfolder
