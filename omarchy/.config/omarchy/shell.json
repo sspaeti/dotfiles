@@ -14,7 +14,7 @@
           "announceLeadMinutes": 0,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm",
+          "verticalFormat": "HH\n\u2014\nmm",
           "weekStartDay": "monday",
           "showYearProgress": true
         },
@@ -78,62 +78,45 @@
         {
           "id": "io.github.tyrichards.tray",
           "hidden": [],
-          "order": [
-            "crmne.hyprmoncfg",
-            "1Password_status_icon_1",
-            "quickshell.spotify",
-            "io.github.teevans.apple-tv-remote",
-            "omarchy.tray",
-            "jankeesvw.time-machine",
-            "agx.screen-time"
-          ],
+          "showTrayIcons": true,
           "widgets": [
             {
               "entry": {
-                "id": "quickshell.spotify"
-              },
-              "listed": true
+                "id": "zeru.portwatch"
+              }
             },
             {
               "entry": {
-                "id": "crmne.hyprmoncfg"
-              },
-              "listed": true
+                "id": "omaplug"
+              }
             },
             {
               "entry": {
-                "id": "io.github.teevans.apple-tv-remote"
-              },
-              "listed": true
+                "id": "quickshell.spotify",
+                "deviceName": "Omarchy Spotify",
+                "idleShutdownMinutes": 15,
+                "showMiniPlayer": "On",
+                "shortcutPlayer": "Omarchy Music app",
+                "shortcutHints": "Off",
+                "showTrackTitle": "Off",
+                "showArtistName": "Off",
+                "scrollBarText": "Off",
+                "scrollSpeed": "1",
+                "maxBarTextWidth": "240",
+                "audioQuality": "320 kbps"
+              }
             },
             {
               "entry": {
-                "id": "jankeesvw.time-machine"
-              },
-              "listed": true
-            },
-            {
-              "entry": {
-                "id": "omarchy.tray",
-                "pinned": [],
-                "hidden": [
-                  "1Password_status_icon_1",
-                  "chrome_status_icon_1",
-                  "Claude_status_icon_2",
-                  "kD6eTa86_5",
-                  "4vPDJZj1zL",
-                  "c-_GQg2tMW"
-                ]
-              },
-              "listed": true
-            },
-            {
-              "entry": {
-                "id": "agx.screen-time",
-                "iconOnly": true
-              },
-              "listed": true
+                "id": "agx.screen-time"
+              }
             }
+          ],
+          "order": [
+            "zeru.portwatch",
+            "omaplug",
+            "quickshell.spotify",
+            "agx.screen-time"
           ]
         },
         {
@@ -247,6 +230,12 @@
     },
     {
       "id": "agx.screen-time"
+    },
+    {
+      "id": "zeru.portwatch"
+    },
+    {
+      "id": "omaplug"
     }
   ],
   "version": 1,
