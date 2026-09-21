@@ -37,7 +37,8 @@ hl.config({
 -- "-default-opacity" (media players, etc). Targeting the tag instead of ".*"
 -- keeps those opt-outs working while still overriding Omarchy's own value,
 -- because this file loads after the defaults.
-o.window({ tag = "default-opacity" }, { opacity = "0.99 0.98 1.0" })
+-- Default transparency/translusent (0.99 is transparency 1.2%, 3/255, 0996 is 0.4%, 1/255)
+o.window({ tag = "default-opacity" }, { opacity = "0.996 0.996 1.0" })
 o.window("^(Chromium|chromium|google-chrome|google-chrome-unstable)$", { opacity = "1 0.99 1.0" })
 
 -- Clipboard -floating
