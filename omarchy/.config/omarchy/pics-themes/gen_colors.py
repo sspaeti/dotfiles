@@ -10,6 +10,8 @@ def mix(a,b,t):
     ra,rb = h2r(a),h2r(b); return r2h(tuple(x+(y-x)*t for x,y in zip(ra,rb)))
 
 # slug: (bg, fg, accent, selection, muted, red, orange, yellow, green, cyan, blue, magenta, brown, icons)
+# Slugs in LIGHT get mode = "light": pale background, dark foreground, saturated-but-darker hues.
+LIGHT = {"eiger-moench-jungfrau-light", "les-pres-dorvin-light"}
 THEMES = {
  "asia-neon":            ("#14111f","#e6e0f5","#a67bff","#3a2f5c","#6f6790","#ff6b8a","#ff9f5a","#ffd166","#6ee7a8","#5cd8ff","#5a8cff","#d67bff","#8a6f9a","Yaru-purple"),
  "asia-lagoon":          ("#0e1b22","#dcecf0","#3fc1c9","#1f4048","#5f7f86","#ef7a70","#f2a65a","#f0d078","#8ccf6b","#4fd6d3","#4aa3df","#c98ad1","#a08a6a","Yaru-prussiangreen"),
@@ -22,14 +24,14 @@ THEMES = {
  "fireplace":            ("#140806","#fbedca","#f07a2a","#4a1d10","#8a5c48","#e8452a","#f5842e","#f7b955","#b9b86a","#d9b27c","#d07a4a","#e08060","#7a3a1e","Yaru-red"),
  "alps-winter":          ("#0f1620","#e8eef7","#6fa8dc","#2b3d55","#6e8199","#e07070","#e39b62","#e9cf7a","#8fca8a","#7fd3e6","#6b9fdf","#b797d9","#958559","Yaru-blue"),
  "toeff":                ("#121314","#e6e6e8","#b8b8bc","#35373a","#737578","#d66c6c","#d69760","#d9c47a","#a2b36b","#86bfc4","#86a3c8","#b596bf","#8c8266","Yaru"),
- "misc":                 ("#131722","#e8e6e2","#5b8fd6","#2d3a58","#72788a","#dc6e62","#dd9a58","#e2c46e","#93bd78","#74c3cc","#6f9be0","#c08cc4","#ad8f64","Yaru-blue"),
+ "misc-ayia-australia":  ("#131722","#e8e6e2","#5b8fd6","#2d3a58","#72788a","#dc6e62","#dd9a58","#e2c46e","#93bd78","#74c3cc","#6f9be0","#c08cc4","#ad8f64","Yaru-blue"),
  "highlights-lakes":     ("#101816","#e2ebe6","#5aa9c4","#263f3a","#6a8079","#e0716a","#e39c5a","#e2c86d","#8ec86f","#66c9c4","#6b9fd4","#bb8fc7","#958757","Yaru-prussiangreen"),
  "highlights-sunset":    ("#1a1510","#f3e9d8","#e0a55a","#47382a","#857560","#e06a5a","#ea9a4a","#f0c66a","#aac47a","#86c7c3","#7f9fd0","#cf90b0","#9a7a55","Yaru-yellow"),
  "boezingenberg":        ("#12181f","#e6edf4","#7297bb","#2c3c4c","#6f7f8f","#dd7373","#dd9c68","#e2cc80","#92c48c","#7ccbd8","#7aa3d3","#b498d1","#858071","Yaru-blue"),
- "eiger-moench-jungfrau":("#0d1a2a","#eef3f8","#539ad6","#234466","#6c86a0","#e57373","#e8a065","#efd27e","#8fcf94","#7fd8ea","#5fa3e6","#b79ddf","#8f805a","Yaru-blue"),
- "horizon":              ("#14161b","#e4e8ee","#98b5d9","#303744","#737a86","#e07474","#e39d66","#e6cb7c","#98c48a","#7ccad4","#7ea6dc","#b79bd3","#8c7f6c","Yaru-blue"),
+ "eiger-moench-jungfrau-light":("#f7fafd","#14283c","#1f6fb8","#cfe0f2","#7a8fa6","#c94b4b","#d17a2e","#b8901a","#3d7d46","#1f8fa3","#2468b3","#8a5cb8","#7a5a35","Yaru-blue"),  # light: snow, sky, pine, wooden roof
+ "horizon-biel":         ("#14161b","#e4e8ee","#98b5d9","#303744","#737a86","#e07474","#e39d66","#e6cb7c","#98c48a","#7ccad4","#7ea6dc","#b79bd3","#8c7f6c","Yaru-blue"),
  "lauenensee":           ("#15160f","#ebe9d9","#b8a24a","#3d3c26","#7d7c61","#d8705a","#dd9a48","#e0c25a","#9fb85a","#78bfb0","#7ea0c4","#bb90b0","#948b64","Yaru-olive"),
- "les-pres-dorvin":      ("#161a21","#eceef2","#8fa3c4","#333b4a","#7d8391","#e07a7a","#e2a06c","#e6cf88","#9cc79a","#8ccfdb","#86aadb","#b9a0d6","#8c8478","Yaru-blue"),
+ "les-pres-dorvin-light":      ("#f8f7f5","#23272e","#4a6fa5","#d8dfe8","#848b96","#c65656","#d08236","#c09a2a","#4f7a5a","#2f8ea0","#3b6fb0","#8f66ad","#7a6650","Yaru-blue"),  # light: frosted forest, blue snow shadow, low sun
  "lido-vira-ticino":     ("#171716","#ede9e0","#c9a46a","#3d3a33","#7f8186","#dd7566","#e09c58","#e6c66e","#9dbf78","#7fc4cc","#7a97b8","#c092b8","#a08d73","Yaru-wartybrown"),
  "pabukid-sa-indahag":   ("#101915","#e2ece7","#62b7c9","#274038","#6f7f78","#e07068","#e39c5c","#e3c86f","#8fc978","#6ccdd0","#64a0d0","#bb90c8","#908f6a","Yaru-sage"),
  "ticino":               ("#12171a","#e4eaec","#6fa3c4","#2a3a44","#6f7f86","#df7070","#e29d62","#e4cb78","#a1c464","#74c8cc","#6e9fd0","#b896c8","#8f8266","Yaru-prussiangreen"),
@@ -37,22 +39,34 @@ THEMES = {
 
 for slug,(bg,fg,acc,sel,mut,red,orange,yellow,green,cyan,blue,magenta,brown,icons) in THEMES.items():
     d = f"{T}/pics-{slug}"
+    if not os.path.isdir(d):
+        print(slug, "SKIPPED (no theme dir)"); continue
+    if slug in LIGHT:
+        mode = "light"
+        dark_bg, darker_bg, lighter_bg = lum(bg,0.96), lum(bg,0.92), mix(bg,fg,0.10)
+        dark_fg, light_fg, bright_fg = mix(fg,bg,0.45), mix(fg,bg,0.20), fg
+        b = lambda c, f: lum(c, 1 + (f-1)*0.5)   # brights only slightly lighter on a pale background
+    else:
+        mode = "dark"
+        dark_bg, darker_bg, lighter_bg = lum(bg,0.75), lum(bg,0.55), mix(bg,fg,0.10)
+        dark_fg, light_fg, bright_fg = mix(fg,bg,0.28), mix(fg,'#ffffff',0.25), mix(fg,'#ffffff',0.45)
+        b = lum
     toml = f"""# pics-{slug} — generated from personal desktop photos
-mode = "dark"
+mode = "{mode}"
 
 accent = "{acc}"
 selection = "{sel}"
 muted = "{mut}"
 
 background = "{bg}"
-dark_background = "{lum(bg,0.75)}"
-darker_background = "{lum(bg,0.55)}"
-lighter_background = "{mix(bg,fg,0.10)}"
+dark_background = "{dark_bg}"
+darker_background = "{darker_bg}"
+lighter_background = "{lighter_bg}"
 
 foreground = "{fg}"
-dark_foreground = "{mix(fg,bg,0.28)}"
-light_foreground = "{mix(fg,'#ffffff',0.25)}"
-bright_foreground = "{mix(fg,'#ffffff',0.45)}"
+dark_foreground = "{dark_fg}"
+light_foreground = "{light_fg}"
+bright_foreground = "{bright_fg}"
 
 red = "{red}"
 yellow = "{yellow}"
@@ -63,12 +77,12 @@ blue = "{blue}"
 magenta = "{magenta}"
 brown = "{brown}"
 
-bright_red = "{lum(red,1.12)}"
-bright_yellow = "{lum(yellow,1.10)}"
-bright_green = "{lum(green,1.12)}"
-bright_cyan = "{lum(cyan,1.10)}"
-bright_blue = "{lum(blue,1.12)}"
-bright_magenta = "{lum(magenta,1.10)}"
+bright_red = "{b(red,1.12)}"
+bright_yellow = "{b(yellow,1.10)}"
+bright_green = "{b(green,1.12)}"
+bright_cyan = "{b(cyan,1.10)}"
+bright_blue = "{b(blue,1.12)}"
+bright_magenta = "{b(magenta,1.10)}"
 """
     open(f"{d}/colors.toml","w").write(toml)
     open(f"{d}/icons.theme","w").write(icons+"\n")

@@ -1,0 +1,32 @@
+# pics-eiger-moench-jungfrau-light — generated from personal desktop photos
+mode = "light"
+
+accent = "#1f6fb8"
+selection = "#cfe0f2"
+muted = "#7a8fa6"
+
+background = "#f7fafd"
+dark_background = "#e7f0f9"
+darker_background = "#d7e6f5"
+lighter_background = "#e0e5ea"
+
+foreground = "#14283c"
+dark_foreground = "#7a8693"
+light_foreground = "#415263"
+bright_foreground = "#14283c"
+
+red = "#c94b4b"
+yellow = "#b8901a"
+orange = "#d17a2e"
+green = "#3d7d46"
+cyan = "#1f8fa3"
+blue = "#2468b3"
+magenta = "#8a5cb8"
+brown = "#7a5a35"
+
+bright_red = "#cd5858"
+bright_yellow = "#c1971b"
+bright_green = "#41844a"
+bright_cyan = "#2196ab"
+bright_blue = "#266ebe"
+bright_magenta = "#9166bc"
