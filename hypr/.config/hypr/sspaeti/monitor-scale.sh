@@ -4,7 +4,8 @@
 #   up     step the FOCUSED monitor's scale one preset up, then apply
 #   down   ... and down
 #   pin    read the CURRENT live scales, write them into monitors.lua, reload
-#   reset  put both scales back to the default (no reload -- the caller does it)
+#   reset  put all scales back to their defaults (no reload -- the caller does it)
+#          Samsung 2 (5K: integer scale = pixel-perfect), Dell 1.6, laptop 1.6
 #
 # WHY up/down INSTEAD OF `omarchy-hyprland-monitor-scaling up`?
 # Because that command applies the new scale with `position = "auto"`:
@@ -32,7 +33,13 @@
 set -euo pipefail
 
 MONITORS_LUA="$HOME/.config/hypr/monitors.lua"
-DEFAULT_SCALE=1.6
+DEFAULT_SAMSUNG_SCALE=2
+DEFAULT_DELL_SCALE=1.6
+DEFAULT_LAPTOP_SCALE=1.6
+
+# Which literal in monitors.lua governs an external, by its EDID model string.
+SAMSUNG_MATCH='LS27H80xEF'
+DELL_MATCH='S2725QC'
 
 [[ -f $MONITORS_LUA ]] || {
   echo "not found: $MONITORS_LUA" >&2
@@ -53,11 +60,13 @@ read_scale() {
 }
 
 # Hyprland only accepts scales where the mode divides into whole logical pixels
-# (in 1/120 steps). Every preset below is clean for both our panels -- 4K
-# (3840x2160, gcd 86400) and the Tuxedo (2880x1800, gcd 43200) -- so no
-# clean_scale rounding is needed. Re-check with omarchy-hyprland-monitor-scaling's
-# clean_scale() if a monitor with a different mode is ever added here.
-SCALES=(1 1.25 1.6 2 3 4)
+# (in 1/120 steps); an unclean one is auto-corrected AND raises a config error.
+# Presets are therefore filtered per target against the panel's native mode in
+# step_scale() (same gcd rule as omarchy-hyprland-monitor-scaling's clean_scale):
+#   5K Samsung 5120x2880: 3 is unclean (1706.67 logical px), the rest are fine
+#   4K Dell    3840x2160: all clean
+#   Tuxedo     2880x1800: all clean
+SCALES=(1 1.25 1.6 2 2.5 3 4)
 
 # Sticky target for repeated presses.
 # Scaling the external changes its LOGICAL width (2400 -> 1920 at 1.6 -> 2), so
@@ -73,11 +82,12 @@ sticky_target() {
   ((age >= 0 && age <= STICKY_WINDOW)) || return 1
   local t
   t=$(<"$STICKY")
-  [[ $t == ext_scale || $t == laptop_scale ]] || return 1
+  [[ $t == samsung_scale || $t == dell_scale || $t == laptop_scale ]] || return 1
   printf '%s\n' "$t"
 }
 
-# Which literal governs the focused monitor: laptop_scale, ext_scale, or neither.
+# Which literal governs the focused monitor: laptop_scale, samsung_scale,
+# dell_scale, or neither.
 # "neither" means an unknown external (a projector, a colleague's screen) -- it
 # is driven by the catch-all rule, has no profile geometry to protect, so we let
 # Omarchy handle it live instead.
@@ -92,20 +102,46 @@ focused_target() {
   fi
 
   desc=$(hyprctl monitors -j | jq -r --arg n "$focused" '.[] | select(.name == $n) | .description')
-  # The two Dells are the only externals the profiles lay out.
-  if grep -qE 'S2722QC|S2725QC' <<<"$desc"; then
-    echo ext_scale
-    return 0
-  fi
+  # The home Samsung and the work Dell are the only externals the profiles lay out.
+  ext_target_for_desc "$desc" && return 0
 
   return 2
 }
 
+# Map a monitor description to its scale literal (externals only).
+ext_target_for_desc() {
+  case "$1" in
+  *"$SAMSUNG_MATCH"*) echo samsung_scale ;;
+  *"$DELL_MATCH"*) echo dell_scale ;;
+  *) return 2 ;;
+  esac
+}
+
+# Native pixel size of the monitor a scale literal governs: "W H".
+target_dims() {
+  local sel
+  case "$1" in
+  laptop_scale) sel='(.name | test("^(eDP|LVDS|DSI)-"))' ;;
+  samsung_scale) sel="(.description | contains(\"$SAMSUNG_MATCH\"))" ;;
+  dell_scale) sel="(.description | contains(\"$DELL_MATCH\"))" ;;
+  *) return 1 ;;
+  esac
+  hyprctl monitors all -j | jq -r "[.[] | select($sel and .disabled != true)][0] | \"\\(.width) \\(.height)\""
+}
+
 # Nearest preset to $1, stepped by $2 (up|down), clamped at both ends.
+# Only presets that are clean for the $3x$4 mode are considered.
 step_scale() {
-  awk -v cur="$1" -v dir="$2" -v list="${SCALES[*]}" '
+  awk -v cur="$1" -v dir="$2" -v w="${3:-0}" -v h="${4:-0}" -v list="${SCALES[*]}" '
+    function gcd(a, b, t) { while (b) { t = a % b; a = b; b = t } return a }
     BEGIN {
-      n = split(list, s, " ")
+      g = (w > 0 && h > 0) ? gcd(w * 120, h * 120) : 0
+      m = split(list, all, " ")
+      n = 0
+      for (i = 1; i <= m; i++) {
+        k = int(all[i] * 120 + 0.5)
+        if (g == 0 || g % k == 0) s[++n] = all[i]
+      }
       best = 1; bd = 1e9
       for (i = 1; i <= n; i++) {
         d = cur - s[i]; if (d < 0) d = -d
@@ -139,7 +175,8 @@ up | down)
   fi
 
   current=$(read_scale "$target")
-  new=$(step_scale "$current" "$1")
+  read -r dim_w dim_h < <(target_dims "$target")
+  new=$(step_scale "$current" "$1" "${dim_w:-0}" "${dim_h:-0}")
 
   if [[ $new == "$current" ]]; then
     notify-send "Monitor Setup" "Scale already at the $([[ $1 == up ]] && echo max || echo min) ($current)"
@@ -149,21 +186,17 @@ up | down)
   set_scale "$target" "$new"
   printf '%s' "$target" >"$STICKY"
   hyprctl reload >/dev/null
-  notify-send "Monitor Setup" "Scale $([[ $target == laptop_scale ]] && echo laptop || echo external): $current -> $new"
+  notify-send "Monitor Setup" "Scale ${target%_scale}: $current -> $new"
   ;;
 
 pin)
-  # Internal panel -> laptop_scale; first enabled external -> ext_scale.
+  # Internal panel -> laptop_scale; each known external -> its own literal.
   # `monitors all` so a disabled panel is still visible; mirrors are excluded by
-  # taking only enabled outputs.
+  # taking only enabled outputs. Unknown externals are not pinned.
   monitors=$(hyprctl monitors all -j)
 
   laptop_new=$(jq -r '
     [.[] | select((.name | test("^(eDP|LVDS|DSI)-")) and .disabled != true) | .scale][0] // empty
-  ' <<<"$monitors")
-
-  ext_new=$(jq -r '
-    [.[] | select((.name | test("^(eDP|LVDS|DSI)-") | not) and .disabled != true) | .scale][0] // empty
   ' <<<"$monitors")
 
   changed=()
@@ -171,10 +204,16 @@ pin)
     set_scale laptop_scale "$laptop_new"
     changed+=("laptop $laptop_new")
   fi
-  if [[ -n $ext_new ]]; then
-    set_scale ext_scale "$ext_new"
-    changed+=("external $ext_new")
-  fi
+  while IFS=$'\t' read -r desc scale; do
+    [[ -n $desc ]] || continue
+    if t=$(ext_target_for_desc "$desc"); then
+      set_scale "$t" "$scale"
+      changed+=("${t%_scale} $scale")
+    fi
+  done < <(jq -r '
+    .[] | select((.name | test("^(eDP|LVDS|DSI)-") | not) and .disabled != true)
+    | "\(.description)\t\(.scale)"
+  ' <<<"$monitors")
 
   if ((${#changed[@]} == 0)); then
     notify-send "Monitor Setup" "Nothing to pin -- no enabled monitor found"
@@ -186,13 +225,15 @@ pin)
   ;;
 
 reset)
-  set_scale laptop_scale "$DEFAULT_SCALE"
-  set_scale ext_scale "$DEFAULT_SCALE"
+  set_scale laptop_scale "$DEFAULT_LAPTOP_SCALE"
+  set_scale samsung_scale "$DEFAULT_SAMSUNG_SCALE"
+  set_scale dell_scale "$DEFAULT_DELL_SCALE"
   rm -f "$STICKY"
   ;;
 
 show | "")
-  printf 'ext_scale    %s\nlaptop_scale %s\n' "$(read_scale ext_scale)" "$(read_scale laptop_scale)"
+  printf 'samsung_scale %s\ndell_scale    %s\nlaptop_scale  %s\n' \
+    "$(read_scale samsung_scale)" "$(read_scale dell_scale)" "$(read_scale laptop_scale)"
   ;;
 
 *)

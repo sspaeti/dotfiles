@@ -60,11 +60,12 @@ no line-by-line diff needed.
 
 ## 3b. Parser coupling to Omarchy internals (medium drift risk)
 
-`sspaeti/monitor-scale.sh` (SUPER+ALT+3 "pin scale") rewrites two bare literals in
-`monitors.lua`:
+`sspaeti/monitor-scale.sh` (SUPER+ALT+3 "pin scale") rewrites three bare literals in
+`monitors.lua` (one per monitor: home Samsung 5K, work Dell 4K, laptop):
 
 ```lua
-local ext_scale = 1.6
+local samsung_scale = 2
+local dell_scale = 1.6
 local laptop_scale = 1.6
 ```
 
@@ -106,7 +107,7 @@ and confirm `lua_local_value` / `configured_monitor_value` still resolve a bare
 hyprctl eval 'hl.monitor({ output = "<ext>", mode = "...", position = "auto", scale = 2 })'
 ~/.config/hypr/sspaeti/monitor-scale.sh pin
 sleep 6 && hyprctl monitors -j | jq -r '.[] | "\(.name) \(.x)x\(.y) \(.scale)"'  # must not have reverted
-~/.config/hypr/sspaeti/monitor-scale.sh reset && hyprctl reload
+~/.config/hypr/sspaeti/monitor-scale.sh reset && hyprctl reload   # Samsung 2, Dell 1.6, laptop 1.6
 ```
 
 (`omarchy-update-sspaeti` deleted 2026-08-24: its `mise deactivate` was a no-op when run as a

@@ -9,7 +9,7 @@
 --   4. NOTHING resets the profile automatically except one safety check: on every
 --      reload the stored profile is validated against the monitors that are
 --      actually connected. If the monitor it needs is gone (cable pulled,
---      different desk) it falls back to auto-detection: home Dell -> HOME,
+--      different desk) it falls back to auto-detection: home Samsung -> HOME,
 --      work Dell -> OFFICE, none -> LAPTOP. Cable plug/unplug does NOT wipe your
 --      choice -- only pressing a profile key or SUPER+ALT+0 does.
 --   5. Scale is a bare literal below, rewritten in place by SUPER+ALT+3 (pin) and
@@ -30,7 +30,7 @@
 -- ============================================================================
 -- SCALES
 -- ============================================================================
--- SUPER+ALT+3 rewrites the two `local *_scale = <n>` lines below in place
+-- SUPER+ALT+3 rewrites the three `local *_scale = <n>` lines below in place
 -- (sspaeti/monitor-scale.sh), then reloads. Everything else in this file --
 -- including every position -- is derived from them, so a pinned scale keeps the
 -- layout flush instead of shoving the laptop off to the side.
@@ -48,9 +48,18 @@
 --      `position = auto`, i.e. it fights whatever we just set.
 --   Pinning the literal (rather than layering an override on top) is what keeps
 --   Omarchy's own machinery in agreement with us instead of racing it.
-local ext_scale = 1.6
+local samsung_scale = 2
+local dell_scale = 1.6
 local laptop_scale = 1.6
--- Reset target for SUPER+ALT+0 and any profile key: 1.6 (see monitor-scale.sh).
+-- One literal per monitor, because the two externals differ: the work Dell is
+-- still 4K and stays at 1.6 (2400x1350), while the home Samsung is 5K.
+-- Reset targets for SUPER+ALT+0 and any profile key (see monitor-scale.sh):
+-- Samsung 2, Dell 1.6, laptop 1.6. The Samsung is an INTEGER scale on purpose:
+-- 5K at 2 is 2560x1440 logical -- pixel-perfect for everything, including
+-- XWayland and non-fractional GTK apps that get rendered at 2x and downsampled
+-- (blurry) at 1.6 -- and still more room than the old 4K Dell at 1.6 (2400x1350).
+-- The same 5K panel at 1.6 would be 3200x1800 logical: tiny text, blurry X apps.
+-- Nothing else in this file assumes the two scales are equal.
 
 local omarchy_gdk_scale = 2
 hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
@@ -63,19 +72,35 @@ hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
 -- matter -- Hyprland resolves "desc:<substring>" to whatever port it is on.
 -- Confirm the description with: hyprctl monitors
 
--- --- HOME Dell (Dell S2722QC, 27" 4K UHD) ---
-local dell_home_match = "S2722QC" -- unique substring, used for auto-detection
-local dell_home_port = "desc:Dell Inc. DELL " .. dell_home_match
+-- Each external carries its native pixel size so the layout math below can
+-- derive logical sizes per monitor (the two externals no longer share a mode).
+-- `match` is the EDID model string used for sysfs auto-detection.
 
--- --- WORK Dell (Dell S2725QC, 4K UHD) ---
-local dell_work_match = "S2725QC"
-local dell_work_port = "desc:Dell Inc. DELL " .. dell_work_match .. " DTFF464"
+-- --- HOME Samsung (ViewFinity S80HF, 27" 5K 5120x2880@60) ---
+-- Replaced the 4K Dell S2722QC on 2026-09-21. Same physical size, 4x the
+-- pixels, so scale 2 is the sweet spot (see SCALES). Only mode is 5K@59.99.
+local samsung_home = {
+  match = "LS27H80xEF",
+  port = "desc:Samsung Electric Company LS27H80xEF",
+  w = 5120,
+  h = 2880,
+  mode = "5120x2880@60",
+  scale = samsung_scale,
+}
 
--- Both externals are 4K60.
-local ext_res = "3840x2160@60"
+-- --- WORK Dell (Dell S2725QC, 27" 4K UHD) ---
+local dell_work = {
+  match = "S2725QC",
+  port = "desc:Dell Inc. DELL S2725QC DTFF464",
+  w = 3840,
+  h = 2160,
+  mode = "3840x2160@60",
+  scale = dell_scale,
+}
 
 -- --- TUXEDO laptop internal ---
 local laptop = "eDP-1"
+local laptop_w, laptop_h = 2880, 1800
 local laptop_res = "2880x1800@120"
 
 -- --- Catch-all for unknown monitors (projectors, a colleague's screen, ...) ---
@@ -89,17 +114,27 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = laptop_
 -- Hyprland `position` is in SCALED coordinates, not native pixels, so every
 -- position is derived from resolution/scale. Pin a different scale and the
 -- monitors stay flush (no gaps, no laptop stranded off to the right).
---   Dell   3840x2160 @1.6 -> 2400x1350
---   Laptop 2880x1800 @1.6 -> 1800x1125
-local ext_w = math.floor(3840 / ext_scale)
-local ext_h = math.floor(2160 / ext_scale)
-local lt_w = math.floor(2880 / laptop_scale)
-local lt_h = math.floor(1800 / laptop_scale)
+--   Samsung 5120x2880 @2   -> 2560x1440
+--   Dell    3840x2160 @1.6 -> 2400x1350
+--   Laptop  2880x1800 @1.6 -> 1800x1125
+local lt_w = math.floor(laptop_w / laptop_scale)
+local lt_h = math.floor(laptop_h / laptop_scale)
+
+local function logical(ext)
+  return math.floor(ext.w / ext.scale), math.floor(ext.h / ext.scale)
+end
 
 -- laptop BELOW the external, horizontally centered under it (home stack)
-local pos_below = string.format("%dx%d", math.max(0, math.floor((ext_w - lt_w) / 2)), ext_h)
+local function pos_below(ext)
+  local w, h = logical(ext)
+  return string.format("%dx%d", math.max(0, math.floor((w - lt_w) / 2)), h)
+end
+
 -- laptop RIGHT of the external, vertically centered against it (office)
-local pos_right = string.format("%dx%d", ext_w, math.max(0, math.floor((ext_h - lt_h) / 2)))
+local function pos_right(ext)
+  local w, h = logical(ext)
+  return string.format("%dx%d", w, math.max(0, math.floor((h - lt_h) / 2)))
+end
 
 local function assign_workspaces(first, last, monitor)
   for ws = first, last do
@@ -108,8 +143,8 @@ local function assign_workspaces(first, last, monitor)
 end
 
 -- External at the origin, laptop wherever the profile wants it.
-local function layout_docked(ext_port, laptop_pos)
-  hl.monitor({ output = ext_port, mode = ext_res, position = "0x0", scale = ext_scale })
+local function layout_docked(ext, laptop_pos)
+  hl.monitor({ output = ext.port, mode = ext.mode, position = "0x0", scale = ext.scale })
   hl.monitor({ output = laptop, mode = laptop_res, position = laptop_pos, scale = laptop_scale })
 end
 
@@ -122,25 +157,25 @@ end
 -- stored profile literally cannot be applied.
 local profiles = {
   home = {
-    needs = "home_dell",
+    needs = "home_samsung",
     apply = function()
-      layout_docked(dell_home_port, pos_below)
-      assign_workspaces(1, 5, dell_home_port)
+      layout_docked(samsung_home, pos_below(samsung_home))
+      assign_workspaces(1, 5, samsung_home.port)
       assign_workspaces(6, 10, laptop)
     end,
   },
   office = {
     needs = "work_dell",
     apply = function()
-      layout_docked(dell_work_port, pos_right)
-      assign_workspaces(1, 5, dell_work_port)
+      layout_docked(dell_work, pos_right(dell_work))
+      assign_workspaces(1, 5, dell_work.port)
       assign_workspaces(6, 10, laptop)
     end,
   },
   laptop = {
     apply = function()
-      hl.monitor({ output = dell_home_port, disabled = true })
-      hl.monitor({ output = dell_work_port, disabled = true })
+      hl.monitor({ output = samsung_home.port, disabled = true })
+      hl.monitor({ output = dell_work.port, disabled = true })
       hl.monitor({ output = laptop, mode = laptop_res, position = "0x0", scale = laptop_scale })
       assign_workspaces(1, 10, laptop)
     end,
@@ -182,15 +217,15 @@ local function detect_monitors()
     return nil
   end
 
-  local present = { home_dell = false, work_dell = false }
+  local present = { home_samsung = false, work_dell = false }
   for dir in listing:gmatch("[^\n]+") do
     local status = read_file(dir .. "/status") or ""
     if status:find("^connected") then
       local edid = read_file(dir .. "/edid") or ""
-      if edid:find(dell_home_match, 1, true) then
-        present.home_dell = true
+      if edid:find(samsung_home.match, 1, true) then
+        present.home_samsung = true
       end
-      if edid:find(dell_work_match, 1, true) then
+      if edid:find(dell_work.match, 1, true) then
         present.work_dell = true
       end
     end
@@ -211,7 +246,7 @@ local function resolve_profile()
   end
 
   if not profile then
-    if present.home_dell then
+    if present.home_samsung then
       profile = profiles.home
     elseif present.work_dell then
       profile = profiles.office
@@ -301,7 +336,7 @@ o.bind(
   "Monitor scaling reset",
   "sh -c "
     .. o.shell_quote(
-      scale_sh .. " reset && hyprctl reload && notify-send 'Monitor Setup' 'Scale reset to 1.6'"
+      scale_sh .. " reset && hyprctl reload && notify-send 'Monitor Setup' 'Scale reset: Samsung 2, Dell 1.6, laptop 1.6'"
     )
 )
 
@@ -320,11 +355,16 @@ o.bind("SUPER + CTRL + ALT + SHIFT + EQUAL", "Text size up", "sh -c " .. o.shell
 o.bind("SUPER + CTRL + ALT + SHIFT + MINUS", "Text size down", "sh -c " .. o.shell_quote(text_sh .. " down"))
 o.bind("SUPER + CTRL + ALT + SHIFT + 0", "Text size reset", "sh -c " .. o.shell_quote(text_sh .. " reset"))
 
--- Scaling comparison on a 4K Dell:
---   1.0 (native) 3840x2160 -- too small, text unreadable
---   1.6          2400x1350 -- daily driver
---   2.0          1920x1080 -- screen recording / presentations
---   3.0          1280x720  -- demo-to-a-room big
+-- Scaling comparison, 27" 5K Samsung (5120x2880):
+--   1.0 (native) 5120x2880 -- unusable, ~217 PPI unscaled
+--   1.6          3200x1800 -- tiny text, XWayland/non-fractional apps blurry
+--   2.0          2560x1440 -- daily driver: integer scale, everything crisp
+--   2.5          2048x1152 -- screen recording / presentations
+--   4.0          1280x720  -- demo-to-a-room big
+--   3.0 is NOT a clean divisor for 5120x2880 (Hyprland would auto-correct it
+--   and raise a config error), so monitor-scale.sh skips it on this panel.
+-- 27" 4K Dell (3840x2160): 1.6 -> 2400x1350 (old daily driver), 2.0 -> 1920x1080,
+--   2.5 -> 1536x864, 3.0 -> 1280x720.
 
 -- ============================================================================
 -- STATIC DEFAULTS + PROFILE APPLICATION
@@ -332,7 +372,7 @@ o.bind("SUPER + CTRL + ALT + SHIFT + 0", "Text size reset", "sh -c " .. o.shell_
 -- Base workspace split, overridden by the profile below. Hyprland already falls
 -- back to an available monitor when a workspace rule names a disconnected one,
 -- so no extra fallback rules are needed.
-assign_workspaces(1, 5, dell_home_port)
+assign_workspaces(1, 5, samsung_home.port)
 assign_workspaces(6, 10, laptop)
 
 local profile = resolve_profile()
