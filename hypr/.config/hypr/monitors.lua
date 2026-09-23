@@ -84,7 +84,7 @@ local samsung_home = {
   port = "desc:Samsung Electric Company LS27H80xEF",
   w = 5120,
   h = 2880,
-  mode = "5120x2880@60",
+  mode = "5120x2880@59.99",
   scale = samsung_scale,
 }
 
