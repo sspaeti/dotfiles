@@ -173,6 +173,7 @@ alias gpu-check="~/.config/hypr/sspaeti/gpu-checks/gpu-health-check"
 alias gpu-stress="~/.config/hypr/sspaeti/gpu-checks/gpu-stress"
 alias gpu-stack-changed="~/.config/hypr/sspaeti/gpu-checks/gpu-stack-changed"
 alias kernel-rollback="~/.config/hypr/sspaeti/gpu-checks/kernel-rollback"
+alias kernel-check="~/.config/hypr/sspaeti/gpu-checks/kernel-check"
 
 alias cx=claude
 alias cl=claude

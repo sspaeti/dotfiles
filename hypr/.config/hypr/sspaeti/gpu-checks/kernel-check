@@ -1,0 +1,104 @@
+#!/bin/bash
+# kernel-check - is the kernel we booted the one we chose?
+#
+# Since 2026-09-23 this laptop runs the stock arch `linux` kernel (pinned via
+# IgnorePkg, boot order via BOOT_ORDER in /etc/default/limine) instead of
+# `linux-omarchy`, because linux-omarchy 7.2.5 wedged the Radeon 890M three
+# times in five days. Omarchy migrations can silently rewrite BOOT_ORDER or
+# `omarchy update` can drop the pin, so every login this verifies that:
+#
+#   1. the running kernel is the acked one       (uname -r vs expected-kernel)
+#   2. the installed `linux` pkg still matches   (pin lost -> next boot differs)
+#   3. BOOT_ORDER in /etc/default/limine still puts `linux` first
+#   4. IgnorePkg still pins linux + linux-headers
+#
+#   kernel-check           -> print status, exit 1 on any mismatch
+#   kernel-check --notify  -> also send a desktop notification on mismatch
+#   kernel-check --ack     -> record the running kernel as the expected one
+#
+# Called from gpu-session-check at login. No sudo needed, read-only.
+
+set -uo pipefail
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/gpu-guard"
+EXPECTED_FILE="$STATE_DIR/expected-kernel"
+LIMINE_DEFAULT=/etc/default/limine
+PACMAN_CONF=/etc/pacman.conf
+
+mkdir -p "$STATE_DIR"
+
+RUNNING=$(uname -r)
+
+case "${1:-}" in
+--ack)
+  printf '%s\n' "$RUNNING" >"$EXPECTED_FILE"
+  echo "Expected kernel set to: $RUNNING"
+  exit 0
+  ;;
+esac
+
+if [[ ! -f $EXPECTED_FILE ]]; then
+  echo "No expected kernel recorded. Run: kernel-check --ack"
+  exit 1
+fi
+EXPECTED=$(<"$EXPECTED_FILE")
+
+problems=()
+
+# 1. running kernel
+if [[ $RUNNING != "$EXPECTED" ]]; then
+  problems+=("Running $RUNNING, expected $EXPECTED")
+fi
+
+# 2. installed `linux` pkg vs running (only meaningful when we expect stock linux)
+#    pacman version 7.1.8.arch1-3 <-> uname 7.1.8-arch1-3
+if [[ $EXPECTED != *-omarchy ]]; then
+  pkg_ver=$(pacman -Q linux 2>/dev/null | awk '{print $2}')
+  pkg_as_uname=${pkg_ver/.arch/-arch}
+  if [[ -n $pkg_ver && $pkg_as_uname != "$EXPECTED" ]]; then
+    problems+=("Installed linux pkg is $pkg_ver, next boot will not be $EXPECTED")
+  fi
+fi
+
+# 3. BOOT_ORDER
+if [[ -r $LIMINE_DEFAULT ]]; then
+  boot_order=$(grep -E '^BOOT_ORDER=' "$LIMINE_DEFAULT" | head -1)
+  want_first="linux"
+  [[ $EXPECTED == *-omarchy ]] && want_first="linux-omarchy"
+  if [[ $boot_order != "BOOT_ORDER=\"$want_first,"* ]]; then
+    problems+=("BOOT_ORDER does not start with '$want_first': ${boot_order:-missing}")
+  elif [[ ! $boot_order =~ ^BOOT_ORDER=\"[^\"]*\"$ ]]; then
+    problems+=("BOOT_ORDER line is malformed (stray quotes/trailing text): $boot_order")
+  fi
+fi
+
+# 4. IgnorePkg pin (only when we expect stock linux)
+if [[ $EXPECTED != *-omarchy ]]; then
+  if ! grep -qE '^\s*IgnorePkg\s*=.*\blinux\b' "$PACMAN_CONF" 2>/dev/null; then
+    problems+=("IgnorePkg pin for linux missing in $PACMAN_CONF")
+  fi
+fi
+
+if [[ ${#problems[@]} -eq 0 ]]; then
+  echo "Kernel OK: $RUNNING (expected, pinned, boot order intact)"
+  exit 0
+fi
+
+echo "Kernel CHECK FAILED (running $RUNNING):"
+printf '  %s\n' "${problems[@]}"
+echo
+echo "Fix boot order: sudo bash ~/.config/hypr/sspaeti/gpu-checks/fix-boot-order.sh   (rewrites BOOT_ORDER in $LIMINE_DEFAULT, runs limine-update)"
+echo "Re-pin:         ~/.config/hypr/sspaeti/gpu-checks/downgrade-kernel-7.1.8.sh  (or kernel-rollback --pin)"
+echo "Accept new:     kernel-check --ack"
+
+if [[ ${1:-} == --notify ]]; then
+  urgency=normal
+  [[ $RUNNING != "$EXPECTED" ]] && urgency=critical
+  notify-send -u "$urgency" -t 0 -a gpu-guard \
+    "Kernel: $RUNNING" \
+    "$(printf '%s\n' "${problems[@]}")
+
+Expected $EXPECTED. Details: kernel-check" 2>/dev/null
+fi
+
+exit 1

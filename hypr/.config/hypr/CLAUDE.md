@@ -19,6 +19,7 @@ These duplicate upstream logic, so upstream fixes do NOT reach us automatically.
 | Local (in `sspaeti/`) | Upstream | Intentional delta |
 |---|---|---|
 | `omarchy-system-lock-wrapper.sh` | `$(which omarchy-system-lock)` | Skips `1password --lock` (no fingerprint reader; master password every unlock unacceptable). Header documents the diff command. |
+| `omarchy-system-lid-close-wrapper.sh` | `$(which omarchy-system-lid-close)` | Lid close (Omarchy 4.0.4+) locks via our lock wrapper instead of stock `omarchy-system-lock`, so it doesn't run `1password --lock`. Bound to `switch:on:Lid Switch` in `bindings.lua` (stock bind unbound). |
 | `omarchy-system-menu` | `system.*` entries in `/usr/share/omarchy/default/omarchy/omarchy-menu.jsonc` + the `omarchy-system-*` binaries they call | tmux-aware shutdown/restart; Lock routes to the lock wrapper. Bound to SUPER+ESCAPE / SUPER+grave in `bindings.lua`. |
 | `omarchy-system-menu-intercept` | Same `system.*` entries (uses `omarchy-state` like upstream) | Intercepts to add tmux-aware shutdown/restart. |
 | `omarchy-menu` | Dispatcher over `$(which omarchy-menu)` | Routes "system" to our `omarchy-system-menu`, passes everything else through. Bound to SUPER+CTRL+ALT+SPACE. |

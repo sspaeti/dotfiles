@@ -110,6 +110,10 @@ o.bind_toggle("SUPER + SHIFT + ESCAPE", "Toggle locking on idle", "idle")
 o.bind_toggle("SUPER + SHIFT + grave", "Toggle locking on idle", "idle")
 hl.unbind("SUPER + CTRL + L") -- default: Lock system
 o.bind("SUPER + CTRL + L", "Locking computer", ssp .. "/omarchy-system-lock-wrapper.sh")
+-- Omarchy 4.0.4+ locks on lid close via omarchy-system-lid-close, which calls stock
+-- omarchy-system-lock (and thus `1password --lock`). Route it through our wrapper.
+hl.unbind("switch:on:Lid Switch") -- default: omarchy-system-lid-close
+o.bind("switch:on:Lid Switch", nil, ssp .. "/omarchy-system-lid-close-wrapper.sh", { locked = true })
 -- Also check out ~/.dotfiles/helpers/bin/caffeinate to turn off for Xminuts with `caffeinate 30` or `caffeinate off`
 
 -- QUATTRO: the hyprctl setprop one-liner is now a shipped command.

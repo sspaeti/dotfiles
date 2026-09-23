@@ -46,5 +46,11 @@ o.exec_on_start(ssp .. "/bg-mode-toggle.sh restore")
 
 -- GPU guard: one-shot check ~20s after login. Warns if the GPU is already
 -- degraded this boot, or if kernel/mesa/firmware changed and is untested.
+-- Since 2026-09-23 also runs gpu-checks/kernel-check: we boot the stock arch
+-- `linux` kernel (pinned, BOOT_ORDER first) instead of linux-omarchy because
+-- 7.2.5-omarchy wedged the 890M 3x in 5 days. Critical popup if the running
+-- kernel is not the acked one (omarchy update flipped it back), normal popup
+-- if only the next boot would drift (BOOT_ORDER / IgnorePkg lost).
+-- After a deliberate kernel change: `kernel-check --ack`.
 -- Silent when everything is fine. No background process.
 o.exec_on_start(ssp .. "/gpu-checks/gpu-session-check")

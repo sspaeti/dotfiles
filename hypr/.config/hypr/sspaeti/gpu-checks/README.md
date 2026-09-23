@@ -89,6 +89,10 @@ each fixed a real, separate problem along the way.
 | `gpu-stack-changed` | manual / from session check | compares the installed GPU package set against the last acked one |
 | `gpu-stress` | manual, after an update | churns concurrent short-lived `vkcube` contexts, diffs the kernel log |
 | `kernel-rollback` | manual, when a kernel goes bad | downgrades `linux` + `linux-headers` from pacman cache, rebuilds the UKI |
+| `fix-boot-order.sh` | manual, `sudo` | rewrites `BOOT_ORDER` in `/etc/default/limine` so `linux` boots before `linux-omarchy`, runs `limine-update`. Use this instead of a `sed` one-liner: the `!` prompt / zsh strips `*` from inline commands |
+| `downgrade-kernel-7.1.8.sh` | manual, `sudo` | `pacman -U` linux 7.1.8 + headers from cache, adds `IgnorePkg`. One-off from 2026-09-23; `kernel-rollback --to 7.1.8.arch1-3 --pin` does the same generically |
+| `disable-panel-replay.sh` | manual, `sudo` | appends `amdgpu.dcdebugmask=0x400` to the cmdline (external-monitor Replay regression in 7.2.x, unrelated to MES) |
+| `kernel-check` | login, via `gpu-session-check` | verifies `uname -r` == acked kernel, `linux` pkg still that version, `BOOT_ORDER` puts `linux` first, `IgnorePkg` pin present. `--ack` records the running kernel |
 
 Aliases are in `zsh/.dotfiles/zsh/aliases.shrc`.
 
@@ -101,6 +105,21 @@ gpu-stack-changed --ack # if it survived, record this package set as proven
 
 From then on, any `-Syu` touching `linux`, `mesa`, `vulkan-radeon`, `linux-firmware-amdgpu` or
 `hyprland` produces a login notification saying the stack is unproven.
+
+### Two kernels installed (since 2026-09-23)
+
+`linux-omarchy` (Omarchy's patched kernel, default on a stock install) and stock arch `linux`
+are both installed. `linux-omarchy 7.2.5-3` wedged the 890M three times in five days
+(Sep 16–21 2026); arch `linux` 7.1.8 ran clean for a month before. So we boot `linux`:
+
+- `linux` + `linux-headers` pinned with `IgnorePkg` in `/etc/pacman.conf`
+- `BOOT_ORDER="linux, linux-omarchy, ..."` in `/etc/default/limine`, then `sudo limine-update`
+  (limine's menu is hidden, so BOOT_ORDER alone decides what boots)
+- `kernel-check --ack` once, then every login `kernel-check` complains if any of that drifted
+  (Omarchy migrations rewrite `/etc/default/limine`; `omarchy update` may touch pacman.conf)
+
+`linux-omarchy` keeps updating in the background as a fallback. Switch back: reverse BOOT_ORDER,
+`sudo limine-update`, drop the IgnorePkg line, `kernel-check --ack` after reboot.
 
 ### When a kernel turns out to be bad
 
@@ -133,9 +152,9 @@ running follower was not wanted.
 
 Things that will need editing, and the signal that it's time:
 
-- **`DEFAULT_TARGET` in `kernel-rollback`** — currently `7.0.10.arch1-1`, the last version with
-  zero MES failures across three weeks of uptime (boots -9..-2, Jul 22 – Aug 12 2026). Bump it once
-  a newer kernel has survived a comparable stretch.
+- **`DEFAULT_TARGET` in `kernel-rollback`** — currently `7.1.8.arch1-3` (zero MES failures
+  Aug 14 – Sep 13 2026; bumped 2026-09-23 from 7.0.10). Bump it once a newer kernel has survived
+  a comparable stretch.
 - **Log patterns** — `gpu-health-check` and `gpu-stress` grep literal amdgpu strings. These change
   between kernel versions. After a major kernel bump, re-verify both directions against a known
   crash boot:

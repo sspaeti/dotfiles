@@ -17,9 +17,9 @@
 
 set -uo pipefail
 
-# Last version with no MES failures across 3 weeks of uptime (boots -9..-2,
-# Jul 22 - Aug 12 2026). 7.1.4 crashed 22 minutes into its first boot.
-DEFAULT_TARGET="7.0.10.arch1-1"
+# 7.1.8: zero MES failures Aug 14 - Sep 13 2026 (a month). 7.0.10 was the
+# previous known-good (Jul 22 - Aug 12). 7.1.4 crashed 22 min into first boot.
+DEFAULT_TARGET="7.1.8.arch1-3"
 
 CACHE=/var/cache/pacman/pkg
 PACMAN_CONF=/etc/pacman.conf
