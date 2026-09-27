@@ -1,0 +1,68 @@
+#!/bin/bash
+# aquamarine-check - are aquamarine/hyprland/hyprtoolkit still pinned to the
+# downgrade, and still IgnorePkg-protected from being pulled back up?
+#
+# Background: aquamarine 0.15.0-2 crashes (SIGSEGV in
+# CDRMBackend::flushAsyncCommitEvents, via SDRMConnector::disconnect) when
+# tearing down a flapping DRM connector -- which is exactly what the 5K
+# Samsung's USB-C/DP-Alt-Mode link does. Downgraded 2026-09-23 to:
+#   aquamarine 0.14.0-2, hyprland 0.56.2-1, hyprtoolkit 0.5.4-4
+# `IgnorePkg` in /etc/pacman.conf pins all three so `pacman -Syu` can't pull
+# 0.15.0-2 back in. An `omarchy update` or manual `pacman -S aquamarine` can
+# still override the pin, so this checks both: what's actually installed,
+# and whether the pin protecting it is still in place.
+#
+#   aquamarine-check           -> print status, exit 1 on any mismatch
+#   aquamarine-check --notify  -> also send a desktop notification on mismatch
+#
+# Called from gpu-session-check at login. No sudo needed, read-only.
+
+set -uo pipefail
+
+PACMAN_CONF=/etc/pacman.conf
+
+EXPECTED_AQUAMARINE="0.14.0-2"
+EXPECTED_HYPRLAND="0.56.2-1"
+EXPECTED_HYPRTOOLKIT="0.5.4-4"
+
+problems=()
+
+check_version() {
+  local pkg="$1" expected="$2"
+  local installed
+  installed=$(pacman -Q "$pkg" 2>/dev/null | awk '{print $2}')
+  if [[ -z $installed ]]; then
+    problems+=("$pkg not installed (expected $expected)")
+  elif [[ $installed != "$expected" ]]; then
+    problems+=("$pkg is $installed, expected $expected")
+  fi
+}
+
+check_version aquamarine "$EXPECTED_AQUAMARINE"
+check_version hyprland "$EXPECTED_HYPRLAND"
+check_version hyprtoolkit "$EXPECTED_HYPRTOOLKIT"
+
+if ! grep -qE '^\s*IgnorePkg\s*=.*\baquamarine\b' "$PACMAN_CONF" 2>/dev/null; then
+  problems+=("IgnorePkg pin for aquamarine missing in $PACMAN_CONF")
+fi
+
+if [[ ${#problems[@]} -eq 0 ]]; then
+  echo "Aquamarine pin OK: $EXPECTED_AQUAMARINE (hyprland $EXPECTED_HYPRLAND, hyprtoolkit $EXPECTED_HYPRTOOLKIT), pin intact"
+  exit 0
+fi
+
+echo "Aquamarine pin CHECK FAILED:"
+printf '  %s\n' "${problems[@]}"
+echo
+echo "Re-downgrade: sudo pacman -U /var/cache/pacman/pkg/aquamarine-${EXPECTED_AQUAMARINE}-x86_64.pkg.tar.zst /var/cache/pacman/pkg/hyprland-${EXPECTED_HYPRLAND}-x86_64.pkg.tar.zst /var/cache/pacman/pkg/hyprtoolkit-${EXPECTED_HYPRTOOLKIT}-x86_64.pkg.tar.zst"
+echo "Re-pin:       sudo sed -i '/^IgnorePkg/s/\$/ aquamarine hyprland hyprtoolkit/' $PACMAN_CONF   (check first -- don't duplicate an existing pin)"
+
+if [[ ${1:-} == --notify ]]; then
+  notify-send -u critical -t 0 -a gpu-guard \
+    "Aquamarine not on the pinned 0.14.0 build" \
+    "$(printf '%s\n' "${problems[@]}")
+
+0.15.0 crashes on the 5K monitor's flapping DP connector. Details: aquamarine-check" 2>/dev/null
+fi
+
+exit 1

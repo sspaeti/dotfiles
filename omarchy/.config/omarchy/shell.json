@@ -173,11 +173,11 @@
       ]
     },
     "position": "top",
-    "transparent": true
+    "transparent": false
   },
   "idle": {
     "lock": 600,
-    "screensaver": 360
+    "screensaver": 600
   },
   "plugins": [
     {

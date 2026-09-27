@@ -33,6 +33,12 @@ fi
 #     Critical if the running kernel differs, normal if only the next boot would.
 "$DIR/kernel-check" --notify >/dev/null 2>&1 || true
 
+# 2c. Is aquamarine still pinned to the 0.14.0 downgrade? 0.15.0 segfaults
+#     tearing down the 5K Samsung's flapping DP connector (see aquamarine-check
+#     for the full story). An update or lost IgnorePkg pin can pull 0.15.0
+#     back in silently.
+"$DIR/aquamarine-check" --notify >/dev/null 2>&1 || true
+
 # 3. Is the xHCI D3hot retry loop active? (AMD 151f controller, see xhci-check;
 #    fires when the udev rule is missing or stopped working after an update)
 xhci_recent=$(journalctl -k --since "-120s" --no-pager 2>/dev/null | grep -c "Refused to change power state")
