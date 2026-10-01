@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+# usb-format: wipe a USB stick and create ONE partition with a filesystem.
+#
+# Usage: usb-format <device> <fat32|exfat|ext4> <label>
+#   device: sda or /dev/sda  (the whole disk, NOT a partition like sda1)
+#   fs:     fat32 | exfat | ext4
+#   label:  volume name, e.g. TUXEDO
+#
+# Safety guards (all must pass, no override flag on purpose):
+#   1. target must be a whole disk (TYPE=disk), not a partition
+#   2. target must be removable (RM=1) AND attached via USB (TRAN=usb)
+#   3. target must not be an ancestor of any OS mount (/, /boot, /home, /var, /usr, /nix, /swap, ...)
+#      - follows LUKS/LVM/btrfs stacks, so encrypted root on nvme0n1p2 -> nvme0n1 is detected
+#   4. target must not hold any active swap device
+#   5. nothing on the target may be mounted outside /run/media, /media, /mnt
+#   6. user must type the device name to confirm
+set -euo pipefail
+
+usage() { echo "Usage: usb-format <device> <fat32|exfat|ext4> <label>" >&2; exit 1; }
+die()   { echo "REFUSED: $*" >&2; exit 1; }
+
+[[ $# -eq 3 ]] || usage
+dev="/dev/${1#/dev/}"
+fs="$2"
+label="$3"
+
+case "$fs" in fat32|exfat|ext4) ;; *) die "unknown fs '$fs' (use fat32, exfat, ext4)";; esac
+[[ -b "$dev" ]] || die "$dev is not a block device"
+
+# ---- guard 1: whole disk only -------------------------------------------
+[[ "$(lsblk -dno TYPE "$dev")" == "disk" ]] || die "$dev is not a whole disk (pass sda, not sda1)"
+
+# ---- guard 2: removable + usb transport ---------------------------------
+[[ "$(lsblk -dno RM "$dev")" == "1" ]]    || die "$dev is not flagged removable"
+[[ "$(lsblk -dno TRAN "$dev")" == "usb" ]] || die "$dev is not attached via USB (TRAN=$(lsblk -dno TRAN "$dev"))"
+
+# ---- guard 3: not the disk the OS lives on ------------------------------
+# Resolve the top-level disk for a given block device by walking its parents
+# (handles crypt/lvm/md/btrfs stacks).
+top_disk() { lsblk -slno NAME "$1" 2>/dev/null | tail -n1; }
+
+os_disks=()
+for mp in / /boot /boot/efi /efi /home /var /usr /opt /nix /swap /srv; do
+  src="$(findmnt -no SOURCE "$mp" 2>/dev/null | sed 's/\[.*\]//')" || true
+  [[ -n "$src" && -b "$src" ]] || continue
+  os_disks+=("$(top_disk "$src")")
+done
+# ---- guard 4: swap devices ----------------------------------------------
+while read -r swapdev _; do
+  [[ "$swapdev" == /dev/* && -b "$swapdev" ]] || continue
+  os_disks+=("$(top_disk "$swapdev")")
+done < <(tail -n +2 /proc/swaps)
+
+target="$(basename "$dev")"
+for d in "${os_disks[@]}"; do
+  [[ "$d" == "$target" ]] && die "$dev holds the operating system (/, /boot, /home, swap, ...)"
+done
+
+# ---- guard 5: nothing mounted outside removable-media paths -------------
+while read -r mp; do
+  [[ -z "$mp" ]] && continue
+  case "$mp" in
+    /run/media/*|/media/*|/mnt/*) ;;
+    *) die "$dev has a partition mounted at '$mp' (not a removable-media path)";;
+  esac
+done < <(lsblk -no MOUNTPOINTS "$dev")
+
+# ---- guard 6: explicit confirmation -------------------------------------
+echo "This will WIPE $dev and create one $fs partition labeled '$label':"
+echo
+lsblk -o NAME,SIZE,RM,TRAN,FSTYPE,LABEL,MOUNTPOINTS "$dev"
+echo
+read -rp "Type the device name ($target) to confirm: " answer
+[[ "$answer" == "$target" ]] || { echo "Aborted."; exit 1; }
+
+# ---- do it ---------------------------------------------------------------
+while read -r mp; do
+  [[ -n "$mp" ]] && sudo umount "$mp"
+done < <(lsblk -no MOUNTPOINTS "$dev")
+
+sudo wipefs -a "$dev"
+sudo parted "$dev" --script mklabel msdos mkpart primary 1MiB 100%
+sudo partprobe "$dev"
+sleep 1
+
+part="${dev}1"
+[[ -b "$part" ]] || part="${dev}p1"   # e.g. mmcblk0p1 style naming
+case "$fs" in
+  fat32) sudo mkfs.vfat -F 32 -n "$label" "$part" ;;
+  exfat) sudo mkfs.exfat -n "$label" "$part" ;;
+  ext4)  sudo mkfs.ext4 -L "$label" "$part" ;;
+esac
+
+echo
+echo "Done:"
+lsblk -o NAME,SIZE,FSTYPE,LABEL "$dev"
