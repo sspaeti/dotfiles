@@ -110,17 +110,20 @@
               "entry": {
                 "id": "agx.screen-time"
               }
+            },
+            {
+              "entry": {
+                "id": "jankeesvw.time-machine"
+              }
             }
           ],
           "order": [
             "zeru.portwatch",
             "omaplug",
             "quickshell.spotify",
-            "agx.screen-time"
+            "agx.screen-time",
+            "jankeesvw.time-machine"
           ]
-        },
-        {
-          "id": "jankeesvw.time-machine"
         },
         {
           "id": "io.github.sspaeti.neomd"
