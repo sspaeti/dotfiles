@@ -108,7 +108,7 @@
             },
             {
               "entry": {
-                "id": "agx.screen-time"
+                "id": "castr.indicator"
               }
             },
             {
@@ -121,7 +121,7 @@
             "zeru.portwatch",
             "omaplug",
             "quickshell.spotify",
-            "agx.screen-time",
+            "castr.indicator",
             "jankeesvw.time-machine"
           ]
         },
@@ -233,9 +233,6 @@
       "id": "io.github.sirjul1337.lock-explorer",
       "avatar": "/home/sspaeti/Simon/Sync/Pics/Profile Photos/Programming/me_programming_swissalps_q.jpg",
       "design": "poster"
-    },
-    {
-      "id": "agx.screen-time"
     },
     {
       "id": "zeru.portwatch"
