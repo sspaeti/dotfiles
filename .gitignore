@@ -85,3 +85,5 @@ windows-vm/.config/windows/credentials
 
 #windows vm (omarchy writes RDP creds + krb5 here)
 windows-vm/.config/windows/credentials
+
+omarchy/.config/omarchy/lock-explorer.json
