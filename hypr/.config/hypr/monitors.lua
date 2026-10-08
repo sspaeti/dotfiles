@@ -304,7 +304,10 @@ o.bind(
 
 -- Omarchy's own orthogonal toggles. They layer on top of the active profile via
 -- ~/.local/state/omarchy/toggles/hypr/, so they compose with home/office/laptop
--- and undo cleanly. Both auto-recover when the external monitor disappears.
+-- and undo cleanly. Both are MEANT to auto-recover when the external monitor
+-- disappears, but the laptop-off one does not on Hyprland 0.56 (headless
+-- "FALLBACK" output fools omarchy-hyprland-monitor-external-active), so
+-- sspaeti/monitor-unplug-recover.sh (autostart.lua) clears it on unplug.
 hl.unbind("SUPER + ALT + code:10") -- default: Switch to group window 1
 o.bind("SUPER + ALT + 1", "Toggle laptop display", "omarchy-hyprland-monitor-internal toggle")
 

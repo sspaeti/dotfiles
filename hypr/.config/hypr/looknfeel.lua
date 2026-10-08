@@ -39,7 +39,7 @@ hl.config({
 -- because this file loads after the defaults.
 -- Default transparency/translusent (0.99 is transparency 1.2%, 3/255, 0996 is 0.4%, 1/255)
 o.window({ tag = "default-opacity" }, { opacity = "0.996 0.996 1.0" })
-o.window("^(Chromium|chromium|google-chrome|google-chrome-unstable)$", { opacity = "1 0.99 1.0" })
+o.window("^(Chromium|chromium|google-chrome|google-chrome-unstable)$", { opacity = "1 0.996 1.0" })
 
 -- Clipboard -floating
 o.window("(clipse)", { name = "windowrule-ssp-3", float = true }) -- ensure you have a floating window class set if you want this behavior

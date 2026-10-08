@@ -58,6 +58,7 @@ no line-by-line diff needed.
 - `sspaeti/omasnap-capture.sh` → wraps `omasnap` (external fork, see below), sets monthly Printscreen save dir
 - `~/.config/omarchy/extensions/omarchy-menu.jsonc` → overrides menu entry `system.lock` to run our lock wrapper instead of stock `omarchy-system-lock` (else menu > System > Lock would lock 1Password)
 - `sspaeti/text-size-step.sh` → wraps `omarchy-display-text-size` (which only takes an absolute px value) to give up/down/reset stepping
+- `sspaeti/monitor-unplug-recover.sh` (autostart.lua) → listens to Hyprland `monitorremoved` and clears the `internal-monitor-disable` toggle when no real external is left. Works around `omarchy-hyprland-monitor-external-active` counting Hyprland's headless `FALLBACK` output (created when the last enabled output goes away) as a live external, which makes upstream `omarchy-hyprland-monitor-internal recover` a no-op → black screen after unplug with SUPER+ALT+1 on. **Drop it once upstream's `external-active` filter excludes `^FALLBACK$`** (check with `cat "$(which omarchy-hyprland-monitor-external-active)"` after updates).
 
 ## 3b. Parser coupling to Omarchy internals (medium drift risk)
 

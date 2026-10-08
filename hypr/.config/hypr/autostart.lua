@@ -34,6 +34,14 @@ o.exec_on_start(ssp .. "/bg-mode-toggle.sh restore")
 -- Omarchy's own omarchy-hyprland-monitor-watch still handles clamshell and
 -- dead-monitor recovery.
 
+-- Unplug recovery for SUPER+ALT+1 (laptop panel disabled): when the last real
+-- external goes away, Omarchy's own recover() is fooled by Hyprland's headless
+-- "FALLBACK" output and leaves the laptop off -> black screen. This watcher
+-- clears the toggle instead. Details + manual test in the script header.
+-- Registered in CLAUDE.md section 3. Survives `hyprctl reload` only as a running
+-- process; after editing the script: pkill -f monitor-unplug-recover; relaunch.
+o.launch_on_start(ssp .. "/monitor-unplug-recover.sh")
+
 -- Morgen calendar: do NOT launch it here.
 -- 2026-09-05: no longer used (Google Calendar covers this now). The actual
 -- autostart source was never this file -- QUATTRO/uwsm runs XDG autostart
