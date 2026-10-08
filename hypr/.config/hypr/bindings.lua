@@ -137,6 +137,7 @@ o.bind("SUPER + CTRL + C", "Google Calendar", { webapp = "https://calendar.googl
 hl.unbind("SUPER + CTRL + SPACE") -- default: Background switcher
 -- Edit the emoji list here: ~/.config/omarchy/plugins/sspaeti.emojis/emojis.json
 -- Enter/click copies the emoji (wl-copy, paste manually with Ctrl+V); Shift+Enter/Shift+Click types it directly via wtype.
+-- Tab / Ctrl+T toggles to a Nerd Fonts tab (glyph search, adapted from https://github.com/farangkao/omarchy-emojis-nerd).
 o.bind("SUPER + CTRL + SPACE", "Emoji picker", "omarchy-shell shell toggle sspaeti.emojis")
 
 --plugins
