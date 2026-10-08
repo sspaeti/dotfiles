@@ -132,11 +132,11 @@ default_from = "simon@ssp.sh"
   scheduled = "Scheduled"
   someday = "Someday"
   spam = "spam"
-  tab_order = ["inbox", "to_screen", "waiting", "someday", "scheduled", "feed", "papertrail", "work", "archive", "sent","screened_out", "trash"]
+  tab_order = ["inbox", "to_screen", "someday", "waiting", "scheduled", "feed", "papertrail", "work", "archive", "sent","screened_out", "trash"]
 
 [ui]
   # theme = "dark"
-  theme = "gruvbox" # kanagawa default, kanagawa-paper, rose-pine, gruvbox, osaka-jade
+  theme = "rose-pine" # kanagawa default, kanagawa-paper, rose-pine, gruvbox, osaka-jade
   inbox_count = 200
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
   bg_sync_interval     = 2

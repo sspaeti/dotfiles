@@ -6,4 +6,3 @@ Comment=Morgen Startup Script
 Exec=/opt/Morgen/morgen --hidden
 StartupNotify=false
 Terminal=false
-Hidden=true
