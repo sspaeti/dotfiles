@@ -1,19 +1,11 @@
-return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    lazy = false,
-    build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter").install({
-        "markdown", "markdown_inline", "vimdoc", "lua", "vim",
-      })
+-- No nvim-treesitter plugin: nvim 0.12 bundles markdown + markdown_inline
+-- parsers and queries in $VIMRUNTIME. Builtin vim.treesitter does highlight
+-- and folds. Avoids compiling parsers (needs tree-sitter CLI) on the Pi.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown" },
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
 
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
-    end,
-  },
-}
+return {}

@@ -28,7 +28,7 @@ vim.opt.laststatus = 3 -- 3: Only show global status line in acitve window 2: Al
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 5
 vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- search related
 vim.opt.hlsearch = true
