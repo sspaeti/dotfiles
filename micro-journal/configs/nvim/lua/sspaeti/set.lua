@@ -13,7 +13,7 @@ vim.opt.clipboard = "unnamedplus" --" Copy paste between vim and everything else
 
 -- vim.opt.relativenumber = true
 vim.opt.number = false
-vim.opt.colorcolumn = "100"
+--vim.opt.colorcolumn = "100"
 
 -- vim.opt.numberwidth = 2  -- Minimal number of columns to use for the line number
 
@@ -28,7 +28,7 @@ vim.opt.laststatus = 3 -- 3: Only show global status line in acitve window 2: Al
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 5
 vim.wo.foldmethod = "expr"
-vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- search related
 vim.opt.hlsearch = true
@@ -123,7 +123,7 @@ end, {})
 -- ]])
 
 
--- move window with christoomey/vim-tmux-navigator to align tmux and nvim
+-- move window ith christoomey/vim-tmux-navigator to align tmux and nvim
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.tmux_navigator_preserve_zoom = 1
 

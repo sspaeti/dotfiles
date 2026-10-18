@@ -1,12 +1,11 @@
 --color scheme, themes,
 return {
-  { "rebelot/kanagawa.nvim",    lazy = false },
-  { "ellisonleao/gruvbox.nvim", lazy = false, event = "VeryLazy" },
-  { "sainnhe/gruvbox-material", lazy = false, event = "VeryLazy", version = "*" },
+  { "rebelot/kanagawa.nvim", lazy = true },
+  { "ellisonleao/gruvbox.nvim", lazy = true },
+  { "sainnhe/gruvbox-material", lazy = true, version = "*" },
   {
     "rose-pine/neovim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     config = function()
       require("rose-pine").setup({
         variant = "auto",      -- auto, main, moon, or dawn
@@ -14,12 +13,12 @@ return {
       })
     end
   },
-  { "AlexvZyl/nordic.nvim",           lazy = false,        priority = 1000 },
-  { "navarasu/onedark.nvim",          event = "VeryLazy" },
-  { "catppuccin/nvim",                name = "catppuccin", event = "VeryLazy" }, --light theme
-  { "craftzdog/solarized-osaka.nvim", lazy = false,        priority = 1000 },
-  { "projekt0n/github-nvim-theme",    event = "VeryLazy",  version = "*" },
-  { "sho-87/kanagawa-paper.nvim"    , lazy = false, priority = 1000, opts = {}, }
+  { "AlexvZyl/nordic.nvim",           lazy = true },
+  { "navarasu/onedark.nvim", lazy = true },
+  { "catppuccin/nvim", lazy = true,                name = "catppuccin" }, --light theme
+  { "craftzdog/solarized-osaka.nvim", lazy = true },
+  { "projekt0n/github-nvim-theme", lazy = true,  version = "*" },
+  { "sho-87/kanagawa-paper.nvim"    , lazy = true, opts = {}, }
   -- { "ColorMyPencil",
   --   function ColorMyPencils(color)
   --     color = color or "kanagawa"

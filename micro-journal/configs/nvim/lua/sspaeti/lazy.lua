@@ -15,7 +15,7 @@ vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappin
 
 
 --lazy stuff
-require("lazy").setup({ { import = "sspaeti.plugins" }, { import = "sspaeti.plugins.lsp" } }, {
+require("lazy").setup({ { import = "sspaeti.plugins" } }, {
   install = {
     colorscheme = { "vim" },
   },

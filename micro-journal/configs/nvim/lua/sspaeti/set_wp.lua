@@ -27,7 +27,7 @@ vim.opt.showtabline = 1
 
 
 --enter text vertically to maximize focus on current line
-vim.opt.scrolloff = 5 --default: 8
+vim.opt.scrolloff = 0 --default: 8
 
 
 -- This removes the currly underline below a Markdown link, but keeps the color and icon effect
@@ -52,6 +52,8 @@ end, 100)
 
 --set vim colorscheme as it works with bold and other markdown highlights
 vim.cmd("colorscheme vim")
+-- regex syntax off: treesitter highlights markdown, saves ~160ms on Pi
+vim.cmd("syntax off")
 
 ---- Auto-enable ZenMode on startup with a slight delay
 --vim.api.nvim_create_autocmd("VimEnter", {

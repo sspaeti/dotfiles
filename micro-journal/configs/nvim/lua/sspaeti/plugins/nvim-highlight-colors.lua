@@ -1,5 +1,6 @@
 return {
   "brenoprata10/nvim-highlight-colors",
+  enabled = false, -- not useful on the typewriter
   event = "VeryLazy",
   config = function()
     require("nvim-highlight-colors").setup({
