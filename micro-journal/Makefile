@@ -13,6 +13,11 @@ PI_NVIM_CONFIG_DIR = ~/.config/nvim
 SECONDBRAIN_DIR = $(HOME)/Simon/SecondBrain
 NVIM_REPO_DIR   = $(CURDIR)/configs/nvim
 
+# What dots-from-mj / dots-to-mj cover: ~/.config/<app> <-> configs/<app>, ~/<file> <-> dotfiles/<file>
+CONFIG_APPS = nvim yazi lazygit ranger
+DOT_FILES   = .bashrc .aliases.shrc
+RSYNC_EXCLUDES = --exclude='.git' --exclude='*.bak-*' --exclude='*.orig-*'
+
 DRY ?=
 
 # Default target
@@ -21,8 +26,10 @@ help:
 	@echo "micro-journal Makefile (run from the laptop, Pi = mj)"
 	@echo "====================================================="
 	@echo "  sync-secondbrain-to-mj : Push SecondBrain (*.md, *.txt only) to the Pi, --delete on Pi side"
-	@echo "  nvim-from-mj           : Backup Pi ~/.config/nvim -> configs/nvim (git keeps history)"
-	@echo "  nvim-to-mj             : Deploy configs/nvim -> Pi ~/.config/nvim (timestamped backup on Pi first)"
+	@echo "  dots-from-mj           : Backup Pi configs ($(CONFIG_APPS)) + $(DOT_FILES) -> configs/ and dotfiles/"
+	@echo "  dots-to-mj             : Deploy configs/ + dotfiles/ -> Pi (timestamped backup on Pi first)"
+	@echo "  nvim-from-mj           : Same as dots-from-mj, nvim only"
+	@echo "  nvim-to-mj             : Same as dots-to-mj, nvim only"
 	@echo "  install                : Install required packages from install/wp-packages.txt (run on the Pi)"
 	@echo "  help                   : Show this help"
 	@echo ""
@@ -36,6 +43,33 @@ sync-secondbrain-to-mj:
 	rsync -avz$(DRY) --delete --include="*.md" --include="*.txt" --include="*/" --exclude="*" "$(SECONDBRAIN_DIR)/" mj:$(PI_SECONDBRAIN_DIR)/
 	@echo "Writing last-loaded.md with timestamp..."
 	@ssh mj "echo '$$(date)' > $(PI_SECONDBRAIN_DIR)/last-loaded.md"
+	@echo "=== done ==="
+
+# All Pi configs: Pi -> repo. configs/<app> and dotfiles/ are the Pi's canonical configs.
+.PHONY: dots-from-mj
+dots-from-mj:
+	@for a in $(CONFIG_APPS); do \
+		echo "=== Pi ~/.config/$$a -> configs/$$a ==="; \
+		rsync -ai$(DRY) --delete $(RSYNC_EXCLUDES) mj:~/.config/$$a/ "$(CURDIR)/configs/$$a/" | grep -v '^\.d' || true; \
+	done
+	@for f in $(DOT_FILES); do \
+		echo "=== Pi ~/$$f -> dotfiles/$$f ==="; \
+		rsync -ai$(DRY) mj:~/$$f "$(CURDIR)/dotfiles/$$f" || true; \
+	done
+	@echo "=== done, review with: git -C $(CURDIR) status --short configs dotfiles ==="
+
+# All Pi configs: repo -> Pi. Backs up the Pi's copies first.
+.PHONY: dots-to-mj
+dots-to-mj:
+	@ssh mj 'B=~/.config-backup-$$(date +%F-%H%M); mkdir -p $$B; for a in $(CONFIG_APPS); do [ -d ~/.config/$$a ] && cp -a ~/.config/$$a $$B/; done; for f in $(DOT_FILES); do [ -f ~/$$f ] && cp -a ~/$$f $$B/; done; echo "Pi backup: $$B"'
+	@for a in $(CONFIG_APPS); do \
+		echo "=== configs/$$a -> Pi ~/.config/$$a ==="; \
+		rsync -ai$(DRY) --delete $(RSYNC_EXCLUDES) "$(CURDIR)/configs/$$a/" mj:~/.config/$$a/ | grep -v '^\.d' || true; \
+	done
+	@for f in $(DOT_FILES); do \
+		echo "=== dotfiles/$$f -> Pi ~/$$f ==="; \
+		rsync -ai$(DRY) "$(CURDIR)/dotfiles/$$f" mj:~/$$f || true; \
+	done
 	@echo "=== done ==="
 
 # nvim config: Pi -> repo. configs/nvim is the Pi's canonical config.
