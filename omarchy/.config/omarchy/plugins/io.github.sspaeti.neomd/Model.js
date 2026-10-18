@@ -15,19 +15,35 @@ function plainText(s) {
 // Reference-style images (![alt][ref], ![alt][], shortcut ![alt]) resolve
 // through [ref]: url definitions, so they are neutralized the same way.
 // <img> tags that survive in the markdown are stripped the same way.
+// Removing one construct can splice its neighbours into a new one
+// ("!<img>[alt](url)" -> "![alt](url)"), so the passes repeat until the text
+// stops changing, and whatever still looks like image syntax is escaped.
 function sanitizeBody(md) {
   function altText(_, alt) {
     alt = alt.trim()
     return alt === "" ? "" : "🖼 " + alt
   }
-  return String(md == null ? "" : md)
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, altText)   // inline ![alt](url)
-    .replace(/!\[([^\]]*)\] ?\[[^\]]*\]/g, altText) // reference ![alt][ref] / ![alt][]
-    .replace(/!\[([^\]]*)\]/g, altText)            // shortcut ![alt]
-    .replace(/<img\b[^>]*\balt="([^"]+)"[^>]*>/gi, "🖼 $1")
-    .replace(/<img\b[^>]*>/gi, "")
-    // Image-only links whose image was dropped leave "[](href)" — remove.
-    .replace(/\[\s*\]\([^)]*\)/g, "")
+  function pass(s) {
+    return s
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, altText)   // inline ![alt](url)
+      .replace(/!\[([^\]]*)\] ?\[[^\]]*\]/g, altText) // reference ![alt][ref] / ![alt][]
+      .replace(/!\[([^\]]*)\]/g, altText)            // shortcut ![alt]
+      .replace(/<img\b[^>]*\balt="([^"]+)"[^>]*>/gi, "🖼 $1")
+      .replace(/<img\b[^>]*>/gi, "")
+      // Image-only links whose image was dropped leave "[](href)" — remove.
+      .replace(/\[\s*\]\([^)]*\)/g, "")
+  }
+  var out = String(md == null ? "" : md)
+  // Every pass that changes something shortens the text, so this converges;
+  // the cap only bounds pathological nesting.
+  for (var i = 0; i < 16; i++) {
+    var prev = out
+    out = pass(out)
+    if (out === prev) break
+  }
+  // Hard stop: "\[" is a literal bracket in CommonMark and "&lt;" is a
+  // literal "<", so neither can start an image any more.
+  return out.replace(/!\[/g, "!\\[").replace(/<img\b/gi, "&lt;img")
 }
 
 // "Jane Doe <jane@example.com>" -> "Jane Doe"; bare address -> "jane"

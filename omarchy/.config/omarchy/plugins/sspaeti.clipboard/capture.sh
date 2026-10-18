@@ -65,9 +65,11 @@ emit_image() {
 
   ocr=$(ocr_image "$file")
 
-  jq -cn --arg mime "$mime" --arg path "$file" --arg captured_at "$(date +'%A %H:%M')" --arg ocr "$ocr" \
+  # OCR text goes in via the environment, not --arg: argv is world-readable
+  # through /proc/<pid>/cmdline, the environment is not.
+  OCR_TEXT="$ocr" jq -cn --arg mime "$mime" --arg path "$file" --arg captured_at "$(date +'%A %H:%M')" \
     '{type:"image", mime:$mime, path:$path, capturedAt:$captured_at}
-     + (if ($ocr | length) > 0 then {ocrText:$ocr} else {} end)'
+     + (if ($ENV.OCR_TEXT | length) > 0 then {ocrText:$ENV.OCR_TEXT} else {} end)'
 }
 
 emit_text() {
