@@ -27,4 +27,11 @@ require("lazy").setup({ { import = "sspaeti.plugins" } }, {
   change_detection = {
     notify = false,
   },
+  performance = {
+    rtp = {
+      -- runtime plugins we never use on the typewriter; matchparen fires on every
+      -- cursor move (vim.g.loaded_matchparen in set.lua ran too late to stop it)
+      disabled_plugins = { "matchparen", "gzip", "tarPlugin", "zipPlugin", "tohtml", "tutor" },
+    },
+  },
 })

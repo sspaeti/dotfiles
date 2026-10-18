@@ -30,6 +30,10 @@ return {
       time_format = "%H:%M",
     },
 
+    -- render-markdown.nvim draws checkboxes/bullets already; obsidian's own UI
+    -- would redo the same work on every TextChanged.
+    ui = { enable = false },
+
   -- Optional, alternatively you can customize the frontmatter data.
   ---@return table
   note_frontmatter_func = function(note)

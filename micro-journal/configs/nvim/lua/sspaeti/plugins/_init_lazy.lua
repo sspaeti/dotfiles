@@ -26,19 +26,6 @@ return {
     end,
   },
   "farmergreg/vim-lastplace", --remember last cursor position
-  {
-    "jcdickinson/wpm.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("wpm").setup({
-        sections = {
-          lualine_x = {
-            require("wpm").wpm,
-            require("wpm").historic_graph,
-          },
-        },
-      })
-    end,
-  },
-
+  -- wpm.nvim removed: its InsertCharPre handler cost ~34ms per keystroke on a
+  -- 4k-word chapter on the Pi, and lualine shows nvim-prose counts, not wpm.
 }

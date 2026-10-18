@@ -4,7 +4,6 @@
 vim.opt.listchars = { tab = "→  ", trail = "·", extends = "$" }
 
 --markdown
-vim.opt.syntax = "on" -- Enables syntax highlighing
 vim.opt.smartcase = true -- Do not ignore case with capitals
 vim.opt.conceallevel = 2 -- Markdown files behave like Obsidian, *italic*, **bold** and even [links](https...) are hidden. Amaziing!
 
