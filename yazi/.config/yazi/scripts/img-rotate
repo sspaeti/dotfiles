@@ -1,0 +1,52 @@
+#!/bin/sh
+# img-rotate <left|right> FILE...
+# Rotate images in place by 90°, losslessly where the format allows:
+#   JPEG  -> jpegtran (no re-encode). EXIF Orientation is folded into the pixels
+#            (exiftool), so the result shows the same everywhere.
+#   PNG   -> mogrify (PNG is lossless)
+#   WEBP  -> mogrify with webp:lossless (bigger file if source was lossy)
+#   other -> mogrify (re-encode; warns)
+set -u
+case "${1:-}" in
+	right) user=90 ;;
+	left)  user=270 ;;
+	*) echo "usage: img-rotate <left|right> FILE..." >&2; exit 2 ;;
+esac
+shift
+[ $# -gt 0 ] || { echo "img-rotate: no files given" >&2; exit 2; }
+
+rc=0
+for f in "$@"; do
+	[ -f "$f" ] || { echo "skip (not a file): $f" >&2; rc=1; continue; }
+	lower=$(printf '%s' "$f" | tr '[:upper:]' '[:lower:]')
+	case "$lower" in
+		*.jpg|*.jpeg)
+			# EXIF 1=0°, 6=90°CW, 3=180°, 8=270°CW (mirrored 2,4,5,7 unsupported -> treated as 0)
+			exif=$(exiftool -s3 -n -Orientation "$f" 2>/dev/null)
+			case "$exif" in 6) base=90 ;; 3) base=180 ;; 8) base=270 ;; *) base=0 ;; esac
+			deg=$(( (base + user) % 360 ))
+			tmp="$f.rot.tmp"
+			if [ "$deg" -eq 0 ]; then
+				cp -p "$f" "$tmp"
+			elif ! jpegtran -perfect -rotate "$deg" -copy all -outfile "$tmp" "$f" 2>/dev/null; then
+				# dimensions not a multiple of the MCU block: lossless except for a trimmed edge strip (<16px)
+				echo "note: $f: odd size, trimming partial edge blocks (<16px) to stay lossless" >&2
+				jpegtran -trim -rotate "$deg" -copy all -outfile "$tmp" "$f" || { rm -f "$tmp"; echo "FAILED: $f" >&2; rc=1; continue; }
+			fi
+			# pixels are now upright -> reset the EXIF flag so viewers don't rotate again
+			[ "${exif:-1}" = 1 ] || exiftool -q -overwrite_original -n -Orientation=1 "$tmp"
+			mv -f "$tmp" "$f"
+			;;
+		*.png)
+			mogrify -rotate "$user" "$f" || { echo "FAILED: $f" >&2; rc=1; }
+			;;
+		*.webp)
+			mogrify -define webp:lossless=true -rotate "$user" "$f" || { echo "FAILED: $f" >&2; rc=1; }
+			;;
+		*)
+			echo "note: $f: no lossless rotate for this format, re-encoding with mogrify" >&2
+			mogrify -auto-orient -rotate "$user" "$f" || { echo "FAILED: $f" >&2; rc=1; }
+			;;
+	esac
+done
+exit $rc
