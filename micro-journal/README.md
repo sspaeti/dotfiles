@@ -1,5 +1,8 @@
-
 # Micro Journal Scripts
+
+These scripts are synced with [My Distraction-Free Micro Journal](https://www.ssp.sh/brain/my-distraction-free-typewriter-micro-journal/) and with `make nvim-from-mj` I sync nvim configs to this dotfiles repo.
+
+If you search for nvim to use as wordprocessor on normal hardware and laptop, check out [dotfiles/nvim/.config/nvim-wp](https://wp.ssp.sh), which I use on my modern laptops with aliased to wp with `alias wp='NVIM_APPNAME=nvim-wp nvim'`, so I can run `nvim` for coding, and `wp` for writing.
 
 ## Troubleshoot
 ### Size
