@@ -141,8 +141,40 @@ default_from = "simon@ssp.sh"
   mark_as_read_after_secs = 7  # wait 10 seconds (default)
   bg_sync_interval     = 2
 
+[tags]
+enabled = true
+nerd_pill = false
+mono = true
 
+[tags.work]
+enabled = true
+display = ""
+fg = "#FF9900"
+bg = "none"
 
+[tags.data]
+enabled = true
+display = ""
+fg = "#FF9900"
+bg = "none"
+
+[tags.important]
+enabled = true
+display = "\uF071"
+fg = "#FF9944"
+bg = "none"
+
+[tags.test]
+enabled = true
+display = ""
+fg = "#00FF00"
+bg = "none"
+
+[tags.help]
+enabled = true
+display = ""
+fg = "#777777"
+bg = "none"
 
 [notifications]
 enabled  = true                     # opt-in; default off
@@ -173,3 +205,4 @@ list_ids = [2, 4]
 [[listmonk.triggers]]
 address = "listmonk-test@ssp.sh"
 list_ids = [6]  # just for testing
+

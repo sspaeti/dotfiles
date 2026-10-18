@@ -36,6 +36,7 @@ neomd/.config/neomd/lists
 neomd/.config/neomd/merges.toml
 neomd/.config/neomd/contacts.csv
 neomd/.config/neomd/ooo.toml
+neomd/.config/neomd/tags/*
 .stfolder
 *.swp
 zsh/.dotfiles/mutt/.lists-moved
