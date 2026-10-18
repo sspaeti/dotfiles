@@ -120,7 +120,9 @@ source ~/.secrets.shrc
 #set vim mode
 #set -o vi
 
-export EDITOR="nvim"
+export EDITOR="/snap/nvim/current/usr/bin/nvim"
+# native yazi (installed in parallel to the snap; ~/.local/bin wins over /snap/bin)
+export PATH="$HOME/.local/bin:$PATH"
 
 #path
 export sync=~/microjournal/documents/sync/
@@ -128,7 +130,7 @@ export sync=~/microjournal/documents/sync/
 #eval "$(zoxide init bash)"
 
 # Startup app - ranger
-cd ~/microjournal
+cd ~/microjournal/documents/
 y
 
 

@@ -1,4 +1,5 @@
-
+# direct snap binary: skips the ~200ms snap launcher on the Pi
+alias nvim=/snap/nvim/current/usr/bin/nvim
 alias vim=nvim
 alias v=nvim
 alias wp=nvim
