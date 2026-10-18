@@ -1,98 +1,60 @@
-# Makefile for Raspberry Pi Pico Typewriter Syncing
+# Makefile for the micro-journal (Raspberry Pi Zero 2W typewriter)
+#
+# Run from the laptop. The Pi is reachable as `mj` via ~/.ssh/config
+# (its network must be on: scripts/startnetwork.sh on the Pi).
+#
+# Dry-run any rsync target with DRY=n, e.g.  make nvim-to-mj DRY=n
 
-# Path definitions for Pi
-PI_WRITING_DIR = $(HOME)/microjournal/writing
-PI_NVIM_CONFIG_DIR = $(HOME)/config/nvim
-PI_CONFIG_DIR = $(HOME)/microjournal/config
+# Paths on the Pi
 PI_SECONDBRAIN_DIR = ~/microjournal/documents/SecondBrain
+PI_NVIM_CONFIG_DIR = ~/.config/nvim
 
-# Mac connection details
-MAC_USER = your_mac_username
-MAC_HOST = your_mac_hostname_or_ip
-PI_USER = microjournal
-PI_HOST = mj
-# Path definitions for Mac (remote)
-MAC_NVIM_CONFIG_GIT = $(MAC_USER)@$(MAC_HOST):$(HOME)/Documents/git/general/dotfiles/nvim-wp
-MAC_TYPEWRITER_CONFIG = $(MAC_USER)@$(MAC_HOST):$(HOME)/Documents/git/general/dotfiles/nvim-wp/micro-journal-scripts
-MAC_WRITING_DIR = $(MAC_USER)@$(MAC_HOST):$(HOME)/Simon/SecondBrain/⚛️\ Areas/✍🏻\ Writing/micro-journal
-MAC_SECONDBRAIN_DIR = ~/Simon/SecondBrain
+# Paths on the laptop
+SECONDBRAIN_DIR = $(HOME)/Simon/SecondBrain
+NVIM_REPO_DIR   = $(CURDIR)/configs/nvim
+
+DRY ?=
 
 # Default target
 .PHONY: help
 help:
-	@echo "Typewriter Sync Makefile"
-	@echo "========================"
-	@echo "Available targets:"
-	@echo "  to-mac       : Sync writing from Pi to Mac"
-	@echo "  from-mac     : Sync configs and SecondBrain from Mac to Pi"
-	@echo "  sync-all     : Run both to-mac and from-mac syncs"
-	@echo "  install      : Install required packages from wp-packages.txt"
-	@echo "  network-on   : Start network connection"
-	@echo "  network-off  : Stop network connection"
-	@echo "  time-sync    : Synchronize system time"
-	@echo "  help         : Show this help information"
+	@echo "micro-journal Makefile (run from the laptop, Pi = mj)"
+	@echo "====================================================="
+	@echo "  sync-secondbrain-to-mj : Push SecondBrain (*.md, *.txt only) to the Pi, --delete on Pi side"
+	@echo "  nvim-from-mj           : Backup Pi ~/.config/nvim -> configs/nvim (git keeps history)"
+	@echo "  nvim-to-mj             : Deploy configs/nvim -> Pi ~/.config/nvim (timestamped backup on Pi first)"
+	@echo "  install                : Install required packages from install/wp-packages.txt (run on the Pi)"
+	@echo "  help                   : Show this help"
+	@echo ""
+	@echo "  Add DRY=n to any rsync target for a dry run."
 
-# Network management
-# .PHONY: network-on
-# network-on:
-# 	@echo "Starting network connection..."
-# 	@./startnetwork.sh
-# 	@echo "Waiting for network connection..."
-# 	@for i in $$(seq 1 15); do \
-# 		if ping -c 1 google.com > /dev/null 2>&1; then \
-# 			echo "Network is ready."; \
-# 			break; \
-# 		fi; \
-# 		if [ $$i -eq 15 ]; then \
-# 			echo "WARNING: Network may not be fully ready, but continuing..."; \
-# 		fi; \
-# 		sleep 1; \
-# 	done
-
-# .PHONY: network-off
-# network-off:
-# 	@echo "Stopping network connection..."
-# 	@./stopnetwork.sh
-
-# Time synchronization
-.PHONY: time-sync
-time-sync: network-on
-	@echo "Synchronizing system time..."
-	@sudo ./time.sh
-
-# Sync from Pi to Mac
-# .PHONY: to-mac
-# to-mac: network-on time-sync
-# 	@echo "=== Starting Pi to Mac sync process ==="
-# 	@echo "Syncing writing files - writing..."
-# 	@rsync -avz --delete "$(PI_WRITING_DIR)/" "$(MAC_WRITING_DIR)/"
-# 	@echo "Syncing nvim-wp files..."
-# 	@rsync -avz --delete "$(PI_NVIM_CONFIG_DIR)/" "$(MAC_NVIM_CONFIG_GIT)/"
-# 	@echo "Writing files sync completed!"
-# 	@make -s network-off
-# 	@echo "=== Pi to Mac sync process completed successfully! ==="
-
-# Sync from Mac to Pi
-
+# SecondBrain: laptop -> Pi, one-way. Notes created on the Pi inside
+# SecondBrain are deleted by --delete; ~/microjournal/writing is untouched.
 .PHONY: sync-secondbrain-to-mj
-sync-secondbrain-to-mj: 
-	@echo "=== Starting Mac to Pi sync process ==="
-	
-	@echo "Syncing SecondBrain contents..."
-	@rsync -avz --delete --include="*.md" --include="*.txt" --include="*/" --exclude="*" $(MAC_SECONDBRAIN_DIR)/ mj:$(PI_SECONDBRAIN_DIR)/
-	@echo "SecondBrain contents sync completed!"
-
-	@echo "Creating last-loaded.md file with timestamp..."
+sync-secondbrain-to-mj:
+	@echo "=== SecondBrain -> mj ==="
+	rsync -avz$(DRY) --delete --include="*.md" --include="*.txt" --include="*/" --exclude="*" "$(SECONDBRAIN_DIR)/" mj:$(PI_SECONDBRAIN_DIR)/
+	@echo "Writing last-loaded.md with timestamp..."
 	@ssh mj "echo '$$(date)' > $(PI_SECONDBRAIN_DIR)/last-loaded.md"
-	@echo "Timestamp file created!"
-	
-	@echo "=== Mac to Pi sync process completed successfully! ==="
+	@echo "=== done ==="
 
-# Complete sync in both directions
-.PHONY: sync-all
-sync-all: network-on time-sync to-mac from-mac network-off
+# nvim config: Pi -> repo. configs/nvim is the Pi's canonical config.
+# nvim/.config/nvim-wp (laptop writing mode) has diverged; do not deploy it to the Pi.
+.PHONY: nvim-from-mj
+nvim-from-mj:
+	@echo "=== Pi $(PI_NVIM_CONFIG_DIR) -> $(NVIM_REPO_DIR) ==="
+	rsync -av$(DRY) --delete --exclude=".git" mj:$(PI_NVIM_CONFIG_DIR)/ "$(NVIM_REPO_DIR)/"
+	@echo "=== done, review with: git -C $(CURDIR) diff --stat configs/nvim ==="
 
-# Install packages
+# nvim config: repo -> Pi. Backs up the Pi's current config first.
+.PHONY: nvim-to-mj
+nvim-to-mj:
+	@echo "=== $(NVIM_REPO_DIR) -> Pi $(PI_NVIM_CONFIG_DIR) ==="
+	@ssh mj 'cp -a $(PI_NVIM_CONFIG_DIR) $(PI_NVIM_CONFIG_DIR)-backup-$$(date +%F-%H%M) && echo "Pi backup: $(PI_NVIM_CONFIG_DIR)-backup-$$(date +%F-%H%M)"'
+	rsync -av$(DRY) --delete --exclude=".git" "$(NVIM_REPO_DIR)/" mj:$(PI_NVIM_CONFIG_DIR)/
+	@echo "=== done ==="
+
+# Install packages (run this one on the Pi)
 .PHONY: install
 install:
 	@echo "Installing required packages..."
