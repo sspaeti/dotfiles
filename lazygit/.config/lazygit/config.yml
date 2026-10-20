@@ -4,6 +4,10 @@ git:
       command: delta --dark --paging=never
       # pager: hunk pager
   overrideGpg: true
+  merging:
+    # "M" menu: put non-fast-forward merge (merge commit "Merge branch 'x' into main")
+    # as first option; fast-forward still available as second option
+    args: "--no-ff"
 customCommands:
   - key: "H"
     context: "files"
