@@ -1,7 +1,14 @@
 #!/bin/bash
 # Switch Obsidian to a dedicated community theme when the Omarchy theme
 # has a better native counterpart; anything else falls back to the
-# auto-synced "Omarchy" theme.
+# auto-synced "Omarchy" theme. Also align Obsidian's base color scheme
+# (dark "obsidian" / light "moonstone") with the Omarchy theme mode: the
+# synced Omarchy theme.css only overrides some variables, so a dark theme on
+# top of the light base scheme leaves form fields and buttons white.
+#
+# Written straight to each vault's appearance.json: Obsidian watches that
+# file and applies changes live. The CLI `eval` route is not used because it
+# ignores vault= and only ever hits the last-focused window.
 
 THEME_SLUG="$1"
 
@@ -12,21 +19,16 @@ gruvbox) OBSIDIAN_THEME="Obsidian gruvbox" ;;
 *) OBSIDIAN_THEME="Omarchy" ;;
 esac
 
-# The /bin/obsidian wrapper injects user-flags.conf flags before CLI args,
-# which breaks Obsidian's CLI parsing — so call electron directly.
-ELECTRON=$(awk '/^exec electron/ {print $2}' /bin/obsidian 2>/dev/null)
-ELECTRON=${ELECTRON:-electron43}
-
-# Obsidian running: switch live via its CLI (persists to appearance.json).
-if pgrep -f '/usr/lib/obsidian/app.asar' >/dev/null; then
-  "$ELECTRON" /usr/lib/obsidian/app.asar eval \
-    code="app.customCss.setTheme('$OBSIDIAN_THEME')" >/dev/null 2>&1 && exit 0
+# colors.toml mode = "light" | "dark" (hook runs after current/theme is swapped)
+if [[ $(omarchy-theme-color mode dark 2>/dev/null) == "light" ]]; then
+  BASE_THEME="moonstone"
+else
+  BASE_THEME="obsidian"
 fi
 
-# Obsidian closed: write appearance.json for every vault directly.
 jq -r '.vaults | values[].path' ~/.config/obsidian/obsidian.json 2>/dev/null | while read -r vault_path; do
   appearance="$vault_path/.obsidian/appearance.json"
   [[ -f $appearance ]] || continue
   tmp=$(mktemp)
-  jq --arg t "$OBSIDIAN_THEME" '.cssTheme = $t' "$appearance" >"$tmp" && mv "$tmp" "$appearance"
+  jq --arg t "$OBSIDIAN_THEME" --arg b "$BASE_THEME" '.cssTheme = $t | .theme = $b' "$appearance" >"$tmp" && mv "$tmp" "$appearance"
 done
