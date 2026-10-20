@@ -274,8 +274,18 @@ local scale_sh = o.shell_quote(ssp .. "/monitor-scale.sh")
 local text_sh = o.shell_quote(ssp .. "/text-size-step.sh")
 local state_file_q = o.shell_quote(state_file)
 
+-- Every profile key first drops the SUPER+ALT+1 "laptop off" toggle. That toggle
+-- is required AFTER this file, so it wins: pressing SUPER+ALT+9 (laptop profile
+-- disables the externals) while it is set leaves Hyprland with ZERO outputs ->
+-- headless FALLBACK -> SEGV in CLayerSurface::onUnmap/refocusLastWindow
+-- (Hyprland 0.56.2, 2026-10-20, crash report 1685). Removing the flag file is
+-- all omarchy-hyprland-toggle does besides a reload, and the reload follows anyway.
+local laptop_off_flag_q = o.shell_quote(home .. "/.local/state/omarchy/toggles/hypr/internal-monitor-disable.lua")
+local clear_laptop_off = "rm -f " .. laptop_off_flag_q .. " && "
+
 local function bind_profile(keys, description, profile_name, message)
-  local cmd = scale_sh
+  local cmd = clear_laptop_off
+    .. scale_sh
     .. " reset && printf '%s' "
     .. profile_name
     .. " > "
@@ -295,7 +305,8 @@ o.bind(
   "Auto Setup",
   "sh -c "
     .. o.shell_quote(
-      scale_sh
+      clear_laptop_off
+        .. scale_sh
         .. " reset && rm -f "
         .. state_file_q
         .. " && hyprctl reload && notify-send 'Monitor Setup' 'AUTO: detected from connected monitors'"
