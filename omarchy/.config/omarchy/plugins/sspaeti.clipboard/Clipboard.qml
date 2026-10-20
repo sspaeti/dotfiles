@@ -46,15 +46,14 @@ Item {
   property int rowHeight: Math.max(Style.space(50), Style.font.body + Style.font.caption + Style.spacing.rowPaddingX * 2)
   // Settings come from this plugin's entry in shell.json, e.g.
   //   "plugins": [{ "id": "sspaeti.clipboard", "historyLimit": 1000, "maxRows": 50 }]
-  // shell.shellConfig re-parses when shell.json is saved, so these are live.
-  readonly property var pluginSettings: {
-    var cfg = root.shell ? root.shell.shellConfig : null
-    var list = cfg && Array.isArray(cfg.plugins) ? cfg.plugins : []
-    var id = root.manifest && root.manifest.id ? String(root.manifest.id) : "sspaeti.clipboard"
-    for (var i = 0; i < list.length; i++)
-      if (list[i] && list[i].id === id) return list[i]
-    return ({})
-  }
+  // Omarchy hands third-party plugins a sandboxed shell API without
+  // shellConfig, so shell.json is read directly (shellConfigFile below, watched
+  // for changes so edits stay live).
+  property string shellConfigPath: Quickshell.env("XDG_CONFIG_HOME") || (Quickshell.env("HOME") + "/.config")
+  property string shellConfigText: ""
+  readonly property var pluginSettings: ClipboardHistory.pluginSettings(
+    root.shellConfigText,
+    root.manifest && root.manifest.id ? String(root.manifest.id) : "sspaeti.clipboard")
   property int historyLimit: Number(root.pluginSettings.historyLimit) > 0 ? Math.floor(Number(root.pluginSettings.historyLimit)) : 500
   property int maxRows: Number(root.pluginSettings.maxRows) > 0 ? Math.floor(Number(root.pluginSettings.maxRows)) : 50
   // true = Enter/click auto-pastes like stock omarchy; false (default) =
@@ -296,6 +295,16 @@ Item {
   PointerMoveGate {
     id: pointerGate
     referenceItem: card
+  }
+
+  FileView {
+    id: shellConfigFile
+    path: root.shellConfigPath + "/omarchy/shell.json"
+    watchChanges: true
+    printErrors: false
+    onLoaded: root.shellConfigText = text()
+    onLoadFailed: root.shellConfigText = ""
+    onFileChanged: reload()
   }
 
   FileView {

@@ -214,8 +214,23 @@ function displayRows(history, query, limit, typeFilter) {
   return rows
 }
 
+// Settings live on this plugin's entry in shell.json plugins[]. Third-party
+// plugins only get a sandboxed shell API from omarchy (no shellConfig), so the
+// plugin reads and parses shell.json itself. Returns {} on any failure.
+function pluginSettings(raw, pluginId) {
+  var id = String(pluginId || "sspaeti.clipboard")
+  try {
+    var parsed = JSON.parse(String(raw || ""))
+    var list = parsed && Array.isArray(parsed.plugins) ? parsed.plugins : []
+    for (var i = 0; i < list.length; i++)
+      if (list[i] && typeof list[i] === "object" && list[i].id === id) return list[i]
+  } catch (e) {}
+  return {}
+}
+
 if (typeof module !== "undefined") {
   module.exports = {
+    pluginSettings: pluginSettings,
     normalizeEntry: normalizeEntry,
     entryKey: entryKey,
     parseHistory: parseHistory,
