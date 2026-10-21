@@ -108,6 +108,14 @@ nmap gh viw"zs==<C-r>z==<Esc>
 vmap gw "zs[[<C-r>z]]<Esc>
 nmap gw viw"zs[[<C-r>z]]<Esc>
 
+" Map trouble
+exmap next_item obcommand trouble-tags:next-item
+exmap prev_item obcommand trouble-tags:previous-item
+nmap } :next_item<CR>
+nmap { :prev_item<CR>
+nmap ]t :next_item<CR>
+nmap [t :prev_item<CR>
+
 " Explorer/file tree (<leader>e)
 " exmap toggle_sidebar obcommand app:toggle-left-sidebar
 " nmap <Space>e :toggle_sidebar<CR>
