@@ -53,7 +53,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim", -- preview with a Browser
-    event = "VeryLazy",
+    ft = { "markdown" },
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = "cd app && npm install",
     config = function()

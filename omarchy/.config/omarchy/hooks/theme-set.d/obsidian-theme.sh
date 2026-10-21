@@ -16,6 +16,8 @@ case "$THEME_SLUG" in
 kanagawa) OBSIDIAN_THEME="Kanagawa" ;;
 osaka-jade) OBSIDIAN_THEME="Osaka Jade" ;;
 gruvbox) OBSIDIAN_THEME="Obsidian gruvbox" ;;
+pics-asia-neon | asia-neon) OBSIDIAN_THEME="Asia Neon" ;;
+pics-fireplace | fireplace) OBSIDIAN_THEME="Fireplace" ;;
 *) OBSIDIAN_THEME="Omarchy" ;;
 esac
 
