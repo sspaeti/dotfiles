@@ -55,6 +55,7 @@ no line-by-line diff needed.
 - `sspaeti/omarchy-capture-screenshot-wrapper.sh` → calls `omarchy-capture-screenshot`, then opens annotation editor
 - `sspaeti/omarchy-capture-screenrecording-kdenlive` → wraps `omarchy-capture-screenrecording` for Kdenlive-friendly output
 - `sspaeti/omarchy-menu-wrapper` → calls `omarchy-menu`, restores personal background after theme switch
+- `sspaeti/autostart-apps.sh` → resolves the default browser via `omarchy-cmd-default-browser` (upstream `hidden=true` helper; falls back to `XDG_CURRENT_DESKTOP= xdg-settings get default-web-browser`). Plain `xdg-settings` inside the session returns the `omarchy-browser.desktop` link-handoff shim since 4.0.6 (`~/.config/hyprland-mimeapps.list`), which is no binary and has no `StartupWMClass` → browser never launched + 60s window-wait timeout. Script now fails fast with a notification if the resolved name is not a command. Check after updates: `omarchy-cmd-default-browser` still prints a real `*.desktop` (not `omarchy-browser.desktop`).
 - `sspaeti/omasnap-capture.sh` → wraps `omasnap` (external fork, see below), sets monthly Printscreen save dir
 - `~/.config/omarchy/extensions/omarchy-menu.jsonc` → overrides menu entry `system.lock` to run our lock wrapper instead of stock `omarchy-system-lock` (else menu > System > Lock would lock 1Password)
 - `sspaeti/text-size-step.sh` → wraps `omarchy-display-text-size` (which only takes an absolute px value) to give up/down/reset stepping
