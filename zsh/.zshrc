@@ -140,8 +140,7 @@ source $ZSH/oh-my-zsh.sh
 #
 source ~/.dotfiles/zsh/paths.shrc
 source ~/.dotfiles/zsh/aliases.shrc
-source ~/.dotfiles/zsh/.secrets
-source ~/.dotfiles/zsh/.secrets_work
+source ~/.dotfiles/zsh/secrets.zsh
 
 source ~/.dotfiles/zsh/omarchy.shrc
 

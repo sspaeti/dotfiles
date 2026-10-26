@@ -1,5 +1,11 @@
 
 zsh/.secrets
+zsh/.dotfiles/zsh/.secrets
+zsh/.dotfiles/zsh/.secrets_edit
+zsh/.dotfiles/zsh/*.age
+zsh/.dotfiles/zsh/*.secrets.pub
+zsh/.dotfiles/mutt/.lists-moved
+zsh/.dotfiles/mutt/.lists.bak
 .ssh
 **/.claude
 
@@ -40,8 +46,6 @@ neomd/.config/neomd/tags/*
 neomd/.config/neomd/notes/
 .stfolder
 *.swp
-zsh/.dotfiles/mutt/.lists-moved
-zsh/.dotfiles/mutt/.lists.bak
 # mutt and email
 mutt/.config/mutt/logs
 mutt/.config/mutt/**/*.txt
