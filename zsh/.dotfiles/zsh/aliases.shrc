@@ -181,6 +181,8 @@ alias cl=claude
 # backup with restic
 alias tm=~/.config/omarchy/plugins/jankeesvw.time-machine/bin/omarchy-time-machine
 
+alias keypress-show=showmethekey-gtk
+
 # use open as on macOs to open pdf, videos, images, and directories (send output to dev and start in background for file manager (nautilus))
 open() { xdg-open "$@" &>/dev/null & }
 

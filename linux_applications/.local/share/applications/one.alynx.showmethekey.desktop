@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Show Me The Key (Keypress)
+GenericName=Show Me The Key
+Comment=Show keys you typed on screen.
+Icon=one.alynx.showmethekey
+Exec=/usr/bin/showmethekey-gtk
+TryExec=/usr/bin/showmethekey-gtk
+StartupNotify=false
+Terminal=false
+Categories=Utility;Accessibility;
+Keywords=keypress;keys;screenkey;keyboard;overlay;screencast;
