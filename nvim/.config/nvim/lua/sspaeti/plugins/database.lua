@@ -51,9 +51,37 @@ return {
       vim.api.nvim_set_keymap('x', '<leader>S', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
       vim.api.nvim_set_keymap('x', '<leader><CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
-      -- Ctrl+Enter: run statement under cursor (paragraph) without selecting;
-      -- needs noremap=false so the <Plug> mapping expands
-      vim.api.nvim_set_keymap('n', '<C-CR>', 'vip<Plug>(DBUI_ExecuteQuery)', { noremap = false })
+      -- Ctrl+Enter: run the statement under cursor without selecting.
+      -- Statement = lines between the previous and the next line ending in ';'
+      -- (blank lines inside a statement are fine). Buffers without any ';'
+      -- fall back to the paragraph (vip) behaviour.
+      local function run_statement_under_cursor()
+        local plug = vim.api.nvim_replace_termcodes('<Plug>(DBUI_ExecuteQuery)', true, false, true)
+        local ends_statement = function(lnum)
+          return vim.fn.getline(lnum):match(';%s*$') ~= nil
+        end
+
+        if vim.fn.search(';\\s*$', 'nw') == 0 then
+          vim.cmd('normal! vip')
+          vim.api.nvim_feedkeys(plug, 'x', false)
+          return
+        end
+
+        local cur, last = vim.fn.line('.'), vim.fn.line('$')
+        local first = cur
+        while first > 1 and not ends_statement(first - 1) do
+          first = first - 1
+        end
+        local final = cur
+        while final < last and not ends_statement(final) do
+          final = final + 1
+        end
+
+        vim.cmd(string.format('normal! %dGV%dG', first, final))
+        vim.api.nvim_feedkeys(plug, 'x', false)
+      end
+
+      vim.keymap.set('n', '<C-CR>', run_statement_under_cursor, { desc = 'DB: run statement under cursor' })
       vim.api.nvim_set_keymap('x', '<C-CR>', '<Plug>(DBUI_ExecuteQuery)', { noremap = true })
 
       -- Remap default action to open in vertical split
