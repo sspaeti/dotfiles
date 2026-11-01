@@ -1,6 +1,5 @@
 [
   "obsidian-vimrc-support",
-  "remember-cursor-position",
   "obsidian-scroll-offset",
   "obsidian-hider",
   "templater-obsidian",
@@ -17,7 +16,6 @@
   "obsidian-footnotes",
   "blockreffer",
   "obsidian-linter",
-  "obsidian-list-callouts",
   "obsidian-open-specific-notes",
   "obsidian-theme-design-utilities",
   "obsidian-reading-time",
@@ -25,7 +23,6 @@
   "open-specific-notes",
   "trouble-tags",
   "duckdb-motherduck",
-  "omnisearch",
   "better-export-pdf",
   "image-converter",
   "dataview",
@@ -33,5 +30,9 @@
   "statusbar-organizer",
   "obsidian-auto-link-title",
   "lazy-plugins",
+  "list-callouts-improved",
+  "obsidian-list-callouts",
+  "omnisearch",
+  "remember-cursor-position",
   "cursor-smith"
 ]

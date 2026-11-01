@@ -36,8 +36,7 @@
   "switcher:open": [
     {
       "modifiers": [
-        "Alt",
-        "Mod"
+        "Alt"
       ],
       "key": "O"
     }
@@ -87,27 +86,6 @@
     }
   ],
   "editor:delete-paragraph": [],
-  "omnisearch:show-modal": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "O"
-    },
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "O"
-    },
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "N"
-    }
-  ],
   "workspace:new-tab": [],
   "workspace:toggle-stacked-tabs": [
     {
@@ -382,6 +360,14 @@
     {
       "modifiers": [
         "Alt",
+        "Mod",
+        "Shift"
+      ],
+      "key": "R"
+    },
+    {
+      "modifiers": [
+        "Alt",
         "Mod"
       ],
       "key": "R"
@@ -462,5 +448,67 @@
     }
   ],
   "file-explorer:new-file": [],
-  "obsidian-auto-link-title-fixed:enhance-url-with-title": []
+  "obsidian-auto-link-title-fixed:enhance-url-with-title": [],
+  "fast-find-10k:search": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
+  ],
+  "fast-find-10k:search-files": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "O"
+    }
+  ],
+  "fast-find-10k:search-resume": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
+  ],
+  "fast-find:search-files": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "O"
+    }
+  ],
+  "fast-find:search-resume": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "N"
+    }
+  ],
+  "fast-find:search": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod",
+        "Shift"
+      ],
+      "key": "O"
+    }
+  ]
 }
