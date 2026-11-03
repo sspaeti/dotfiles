@@ -1,0 +1,13 @@
+[tools]
+claude = "latest"
+codex = "latest"
+erlang = "latest"
+gemini = { version = "latest", allow_builds = ["@github/keytar", "node-pty"] }
+gh = "latest"
+"github:basecamp/hey-cli" = "latest"
+
+[settings]
+quiet = true #for running snack.nvim github cli `gh` pull pr
+
+[settings.upgrade]
+auto_prune = false

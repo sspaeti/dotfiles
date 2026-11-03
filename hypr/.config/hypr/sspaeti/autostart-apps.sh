@@ -48,6 +48,20 @@ focus_ws 1
 TERM_CLASS=$(grep -v '^#' ~/.config/xdg-terminals.list 2>/dev/null | grep -v '^$' | head -1 | sed 's/\.desktop$//')
 TERM_CLASS=${TERM_CLASS:-foot}
 
+# Unlock the keyring and fill the age secrets cache ONCE before tmux starts.
+# sddm autologin never unlocks gnome-keyring (no password at login), so the
+# first secret-tool call pops the unlock prompt. Doing it here means: one
+# prompt, one decrypt, and the ~90 shells tmux-resurrect restores afterwards
+# just source the cache instead of all blocking on the prompt. Bounded so a
+# dismissed prompt or broken keyring cannot keep the terminal from appearing;
+# secrets.zsh retries per shell in that case.
+while ! systemctl --user is-active --quiet gnome-keyring-daemon.service; do
+    sleep 0.2
+done
+if ! timeout 120 zsh -c 'source ~/.dotfiles/zsh/secrets.zsh'; then
+    notify-send "Autostart" "Secrets cache not primed (keyring prompt dismissed or timed out)" &
+fi
+
 # Launch default terminal with tmux → workspace 1
 uwsm app -- xdg-terminal-exec tmux &
 term_addr=$(wait_for_window "^${TERM_CLASS}$") && move_to_ws 1 "$term_addr"

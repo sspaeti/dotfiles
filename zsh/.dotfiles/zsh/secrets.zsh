@@ -19,12 +19,21 @@ for _sec_name in $_sec_files; do
 
   if [[ -f $_sec_src ]]; then
     if [[ ! -s $_sec_cache || $_sec_src -nt $_sec_cache ]]; then
+      # Serialize: at login tmux-resurrect restores ~90 shells at once, and all
+      # of them block on the same keyring-unlock prompt. Without the lock they
+      # then all decrypt into one shared .tmp and every mv but the first fails
+      # with "cannot stat". With it, the first shell decrypts (secret-tool waits
+      # for the keyring password), the rest wait on the lock and source the cache.
       (
         umask 077
         mkdir -p "$_sec_cache_dir"
-        age -d -i <(secret-tool lookup service "$_sec_keyring_service" key default) "$_sec_src" > "$_sec_cache.tmp" 2>/dev/null \
-          && mv -f "$_sec_cache.tmp" "$_sec_cache" \
-          || { rm -f "$_sec_cache.tmp"; echo "secrets: failed to decrypt $_sec_name.age (keyring locked? age installed?)" >&2; }
+        exec 9>"$_sec_cache.lock"
+        flock 9
+        [[ -s $_sec_cache && ! $_sec_src -nt $_sec_cache ]] && exit 0   # another shell just did it
+        _sec_tmp="$_sec_cache.$$.tmp"
+        age -d -i <(secret-tool lookup service "$_sec_keyring_service" key default) "$_sec_src" > "$_sec_tmp" 2>/dev/null \
+          && mv -f "$_sec_tmp" "$_sec_cache" \
+          || { rm -f "$_sec_tmp"; echo "secrets: failed to decrypt $_sec_name.age (keyring locked? age installed?)" >&2; }
       )
     fi
     [[ -s $_sec_cache ]] && source "$_sec_cache"
