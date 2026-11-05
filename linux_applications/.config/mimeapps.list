@@ -64,3 +64,15 @@ audio/x-vorbis+ogg=org.strawberrymusicplayer.strawberry.desktop
 audio/aac=org.strawberrymusicplayer.strawberry.desktop
 audio/x-m4a=org.strawberrymusicplayer.strawberry.desktop
 x-scheme-handler/codex=chatgpt.desktop
+# office -> libreoffice (calibre-bin claims docx and sorts first in mimeinfo.cache)
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+application/vnd.ms-word.document.macroenabled.12=libreoffice-writer.desktop
+# comics/djvu -> evince
+image/vnd.djvu=org.gnome.Evince.desktop
+application/x-cbz=org.gnome.Evince.desktop
+application/x-cbr=org.gnome.Evince.desktop
+application/x-cb7=org.gnome.Evince.desktop
+# ebooks -> calibre viewer, not editor
+application/epub+zip=calibre-ebook-viewer.desktop
+application/x-mobipocket-ebook=calibre-ebook-viewer.desktop
+application/x-mobi8-ebook=calibre-ebook-viewer.desktop
