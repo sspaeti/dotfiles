@@ -38,10 +38,33 @@ set -uo pipefail
 # refuses to run inside search results -- the plugin bails on
 # `cwd.spec.is_virtual`, and a finished search is a `search://` URL. So browse
 # mode fires the plugin while the cwd is still the real SEARCH_ROOT.
+#
+# The term prompt with search history:
+#   The stock `omarchy-menu-input` popup cannot be pre-filled and has no key
+#   handling for history -- Menu.qml's openDmenu() resets filterText to "" and
+#   the payload has no initial-text field. Adding that would mean cloning the
+#   whole omarchy.menu plugin (frozen fork of every Omarchy menu), so the prompt
+#   runs as fzf INSIDE the finder terminal instead, before yazi takes over:
+#     Up/Down  walk the previous searches (newest first), copying each into the
+#              query line like a shell history (Up = last search)
+#     Enter    search for whatever is on the query line (history pick or typed)
+#     Ctrl+Z   skip the term and drop into browse mode (yazi fzf plugin)
+#     Esc      cancel, closes the window
+#   fzf runs with --disabled so typing never filters the history away; the
+#   blank first row is the "nothing recalled yet" position, like an empty
+#   readline before the first Up.
+#   History: $XDG_STATE_HOME/fuzzy-file-names/history, newest last, deduped,
+#   capped at HISTORY_MAX entries.
+#
+# Invocation layout:
+#   fuzzy-file-names.sh [search|browse]   from the keybinding: opens the floating
+#                                         terminal and re-runs itself inside with
+#   fuzzy-file-names.sh --inner <mode>    prompt -> history -> ya emit-to -> yazi
 
 SSP="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SEARCH_ROOT="$HOME"
-MODE="${1:-search}"
+HISTORY_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/fuzzy-file-names/history"
+HISTORY_MAX=50
 
 # The fzf plugin spawns a bare `Command("fzf")` with stdin INHERIT, so fzf falls
 # back to its own walker -- which crawls every dotdir (6.2M entries here and
@@ -55,33 +78,72 @@ FD_SOURCE+=" --exclude target --exclude __pycache__ --exclude .venv --exclude 'T
 FZF_OPTS="--layout=reverse --info=inline --preview '$SSP/fuzzy-file-preview-fzf.sh {}'"
 FZF_OPTS+=" --preview-window=right,55%,border-left"
 
-if [ "$MODE" = "browse" ]; then
-    ACTION=(plugin fzf)
-else
-    QUERY=$(omarchy-menu-input "Search files & folders") || exit 0
-    [ -n "$QUERY" ] || exit 0
-    ACTION=(search_do "$QUERY" --via=fd)
+BROWSE_SENTINEL=$'\x1fbrowse'
+
+prompt_for_term() {
+    # Prints the chosen term, or BROWSE_SENTINEL on Ctrl+Z. Exit 1 on cancel.
+    local history=""
+    [ -s "$HISTORY_FILE" ] && history=$(tac "$HISTORY_FILE")
+    # A blank leading row, then newest-first history. Default (bottom-up) layout:
+    # the list sits above the prompt, so Up walks away from it into the past.
+    { echo; [ -z "$history" ] || printf '%s\n' "$history"; } |
+        FZF_DEFAULT_OPTS= fzf --disabled --no-info --no-sort \
+            --prompt 'Search files & folders > ' \
+            --header 'Up/Down: previous searches   Enter: search   Ctrl+Z: fuzzy browse   Esc: cancel' \
+            --bind 'up:up+replace-query,down:down+replace-query' \
+            --bind 'enter:print-query' \
+            --bind "ctrl-z:become(printf '\\x1fbrowse\\n')"
+}
+
+remember_term() {
+    local term="$1" tmp
+    mkdir -p "$(dirname "$HISTORY_FILE")"
+    tmp=$(mktemp) || return
+    { [ -f "$HISTORY_FILE" ] && grep -Fxv -- "$term" "$HISTORY_FILE"; printf '%s\n' "$term"; } |
+        tail -n "$HISTORY_MAX" > "$tmp" && mv "$tmp" "$HISTORY_FILE"
+}
+
+inner() {
+    local mode="$1" action query
+    if [ "$mode" = "browse" ]; then
+        action=(plugin fzf)
+    else
+        query=$(prompt_for_term) || exit 0
+        if [ "$query" = "$BROWSE_SENTINEL" ]; then
+            action=(plugin fzf)
+        else
+            query="${query#"${query%%[![:space:]]*}"}"   # trim leading
+            query="${query%"${query##*[![:space:]]}"}"   # trim trailing
+            [ -n "$query" ] || exit 0
+            remember_term "$query"
+            action=(search_do "$query" --via=fd)
+        fi
+    fi
+
+    # `ya emit-to` addresses a yazi instance by its client id, so pick one up
+    # front. It exits 1 with "Connection refused" until the instance is
+    # listening, so poll in the background while yazi comes up in this terminal.
+    local client_id=$((RANDOM + 20000))
+    (
+        for _ in $(seq 1 100); do
+            ya emit-to "$client_id" "${action[@]}" 2>/dev/null && exit 0
+            sleep 0.1
+        done
+        notify-send "File Search" "yazi did not come up in time"
+    ) >/dev/null 2>&1 &
+
+    export FZF_DEFAULT_COMMAND="$FD_SOURCE"
+    export FZF_DEFAULT_OPTS="$FZF_OPTS"
+    exec yazi --client-id "$client_id" "$SEARCH_ROOT"
+}
+
+if [ "${1:-}" = "--inner" ]; then
+    inner "${2:-search}"
 fi
 
-# `ya emit-to` addresses a yazi instance by its client id, so pick one up front.
-CLIENT_ID=$((RANDOM + 20000))
+MODE="${1:-search}"
 
-# yazi is wrapped in a shell so the fzf env reaches it -- uwsm-app hands the
-# terminal off to systemd, which does not carry arbitrary exported vars across.
-# The app-id is what looknfeel.lua floats and sizes.
-setsid omarchy-launch-tui --app-id=org.omarchy.finder bash -c "
-    export FZF_DEFAULT_COMMAND=$(printf '%q' "$FD_SOURCE")
-    export FZF_DEFAULT_OPTS=$(printf '%q' "$FZF_OPTS")
-    exec yazi --client-id $CLIENT_ID $(printf '%q' "$SEARCH_ROOT")
-" >/dev/null 2>&1 &
-
-# `ya emit-to` exits 1 with "Connection refused" until the instance is listening,
-# so poll rather than guess at a fixed sleep.
-for _ in $(seq 1 100); do
-    if ya emit-to "$CLIENT_ID" "${ACTION[@]}" 2>/dev/null; then
-        exit 0
-    fi
-    sleep 0.1
-done
-
-notify-send "File Search" "yazi did not come up in time"
+# The app-id is what looknfeel.lua floats and sizes. The script re-enters itself
+# inside the terminal (--inner), so exported env reaches yazi -- uwsm-app hands
+# the terminal off to systemd, which does not carry arbitrary vars across.
+exec setsid omarchy-launch-tui --app-id=org.omarchy.finder "$SSP/fuzzy-file-names.sh" --inner "$MODE" >/dev/null 2>&1

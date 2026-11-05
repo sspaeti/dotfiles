@@ -169,6 +169,9 @@ hl.unbind("SUPER + CTRL + F") -- default: Tiled full screen
 -- prompting for a term, then priming a yazi instance with `ya emit-to <id>
 -- search_do <term> --via=fd` -- so you get real previews (images, PDFs, and the
 -- duckdb previewer from yazi.toml) plus yazi's native open/reveal keys.
+-- The term prompt is fzf inside the finder terminal (the stock omarchy-menu-input
+-- popup can't be prefilled): Up/Down walk the last 50 searches (Up = last one),
+-- Enter searches, Ctrl+Z skips into browse mode, Esc closes.
 -- NOTE: no omarchy-launch-tui wrapper here -- the script opens its own terminal.
 -- Floating size for org.omarchy.finder is set in looknfeel.lua.
 o.bind("SUPER + CTRL + F", "Search Files (Finder)", ssp .. "/fuzzy-file-names.sh")
