@@ -1,5 +1,6 @@
 auto_bcc = "simon.spaeti@gmail.com"
 default_from = "simon@ssp.sh" 
+alternative_emails = ["inquiries@ssp.sh", "hello@ssp.sh", "hello@sspaeti.com"]
 
 [[accounts]]
   name = "Personal"
