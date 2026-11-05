@@ -53,6 +53,11 @@ set -uo pipefail
 #   fzf runs with --disabled so typing never filters the history away; the
 #   blank first row is the "nothing recalled yet" position, like an empty
 #   readline before the first Up.
+#   The preview pane runs the same fd search for the highlighted term (and for
+#   whatever is typed: the preview takes `{q}`, the query line) and lists the hits, so you see
+#   what a term finds before committing to it. fd's defaults mirror yazi's
+#   `search_do --via=fd` (regex, smart case, no hidden files), so the list is
+#   the one yazi will show.
 #   History: $XDG_STATE_HOME/fuzzy-file-names/history, newest last, deduped,
 #   capped at HISTORY_MAX entries.
 #
@@ -60,6 +65,7 @@ set -uo pipefail
 #   fuzzy-file-names.sh [search|browse]   from the keybinding: opens the floating
 #                                         terminal and re-runs itself inside with
 #   fuzzy-file-names.sh --inner <mode>    prompt -> history -> ya emit-to -> yazi
+#   fuzzy-file-names.sh --preview <term>  fzf preview command for the prompt
 
 SSP="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SEARCH_ROOT="$HOME"
@@ -71,14 +77,37 @@ HISTORY_MAX=50
 # still counting). FZF_DEFAULT_COMMAND replaces that with fd, which does the
 # same job in ~50ms and honours these excludes. Keep this list in sync with the
 # EXCLUDES array in fuzzy-file-names-fzf.sh.
-FD_SOURCE="fd --type f --type d --exclude node_modules --exclude .git"
-FD_SOURCE+=" --exclude target --exclude __pycache__ --exclude .venv --exclude 'Trash*'"
+FD_ARGS=(fd --type f --type d --exclude node_modules --exclude .git
+        --exclude target --exclude __pycache__ --exclude .venv --exclude 'Trash*')
+FD_SOURCE=$(printf '%q ' "${FD_ARGS[@]}")
 
 # The plugin passes no --preview of its own, so hand fzf one through the env.
 FZF_OPTS="--layout=reverse --info=inline --preview '$SSP/fuzzy-file-preview-fzf.sh {}'"
 FZF_OPTS+=" --preview-window=right,55%,border-left"
 
 BROWSE_SENTINEL=$'\x1fbrowse'
+
+PREVIEW_MAX=300
+
+preview_term() {
+    local term="$1" hits n
+    if [ -z "${term// /}" ]; then
+        printf 'Up/Down recalls a previous search, or type a term.\nMatches show up here.\n'
+        return 0
+    fi
+    hits=$(cd "$SEARCH_ROOT" && "${FD_ARGS[@]}" --color=always --max-results "$PREVIEW_MAX" -- "$term" 2>/dev/null)
+    if [ -z "$hits" ]; then
+        printf 'No matches for "%s" in ~\n' "$term"
+        return 0
+    fi
+    n=$(printf '%s\n' "$hits" | wc -l)
+    if [ "$n" -ge "$PREVIEW_MAX" ]; then
+        printf '%d+ matches for "%s" in ~ (showing first %d)\n\n' "$n" "$term" "$PREVIEW_MAX"
+    else
+        printf '%d match%s for "%s" in ~\n\n' "$n" "$([ "$n" = 1 ] || echo es)" "$term"
+    fi
+    printf '%s\n' "$hits"
+}
 
 prompt_for_term() {
     # Prints the chosen term, or BROWSE_SENTINEL on Ctrl+Z. Exit 1 on cancel.
@@ -90,6 +119,8 @@ prompt_for_term() {
         FZF_DEFAULT_OPTS= fzf --disabled --no-info --no-sort \
             --prompt 'Search files & folders > ' \
             --header 'Up/Down: previous searches   Enter: search   Ctrl+Z: fuzzy browse   Esc: cancel' \
+            --preview "$SSP/fuzzy-file-names.sh --preview {q}" \
+            --preview-window 'right,60%,border-left,wrap' \
             --bind 'up:up+replace-query,down:down+replace-query' \
             --bind 'enter:print-query' \
             --bind "ctrl-z:become(printf '\\x1fbrowse\\n')"
@@ -137,9 +168,10 @@ inner() {
     exec yazi --client-id "$client_id" "$SEARCH_ROOT"
 }
 
-if [ "${1:-}" = "--inner" ]; then
-    inner "${2:-search}"
-fi
+case "${1:-}" in
+    --inner) inner "${2:-search}" ;;
+    --preview) preview_term "${2:-}"; exit 0 ;;
+esac
 
 MODE="${1:-search}"
 
