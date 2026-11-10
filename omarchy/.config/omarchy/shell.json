@@ -159,6 +159,9 @@
           "id": "omarchy.agents"
         },
         {
+          "id": "io.github.sspaeti.agent-ide"
+        },
+        {
           "id": "sspaeti.audio"
         },
         {

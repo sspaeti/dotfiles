@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.sspaeti.agent-ide",
+  "name": "Agent-IDE status",
+  "version": "0.1.0",
+  "author": "Simon Späti",
+  "license": "MIT",
+  "description": "One coloured dot for all your AI coding agents: green all good, yellow running, orange a result waits, violet input needed (with a count). Reads the status files of Agent-IDE.nvim and `claude agents --json`; read-only.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Agent-IDE status",
+    "description": "Do any of my agents need me? Dot colour and count, panel with the sessions",
+    "category": "AI",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
