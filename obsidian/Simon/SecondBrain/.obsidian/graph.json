@@ -1,6 +1,6 @@
 {
   "collapse-filter": false,
-  "search": "-\"🗑 Archive\"",
+  "search": "-\"🗑 Archive\" ",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": true,
@@ -39,6 +39,6 @@
   "repelStrength": 10.4107759100523,
   "linkStrength": 0.864230408837599,
   "linkDistance": 169,
-  "scale": 0.09349117238491983,
-  "close": true
+  "scale": 0.13536899078633838,
+  "close": false
 }

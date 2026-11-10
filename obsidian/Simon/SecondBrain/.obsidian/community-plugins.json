@@ -1,6 +1,5 @@
 [
   "obsidian-vimrc-support",
-  "obsidian-scroll-offset",
   "obsidian-hider",
   "templater-obsidian",
   "obsidian-admonition",
@@ -34,5 +33,6 @@
   "omnisearch",
   "remember-cursor-position",
   "cursor-smith",
-  "fast-find"
+  "fast-find",
+  "obsidian-scroll-offset"
 ]
