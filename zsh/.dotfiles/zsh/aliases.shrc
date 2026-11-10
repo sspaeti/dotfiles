@@ -186,3 +186,7 @@ alias keypress-show=showmethekey-gtk
 # use open as on macOs to open pdf, videos, images, and directories (send output to dev and start in background for file manager (nautilus))
 open() { xdg-open "$@" &>/dev/null & }
 
+
+# saltmon: live per-device bandwidth TUI for the Salt Fibre Box (~/git/stuff/salt-network-scanner)
+# saltmon            -> TUI      saltmon --once -> one table      saltmon --unblock-all
+saltmon() { uv run --directory "$HOME/git/stuff/salt-network-scanner" saltmon.py "$@"; }
