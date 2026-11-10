@@ -13,6 +13,11 @@ prepend_keymap = [
 	# %s = selected files, falls back to hovered (yazi >= 25.x; the old $@/$n are no longer expanded).
 	{ on = [ "i", "r" ], run = "shell '~/.config/yazi/scripts/img-rotate right %s' --block", desc = "Rotate image(s) 90° right (lossless)" },
 	{ on = [ "i", "l" ], run = "shell '~/.config/yazi/scripts/img-rotate left %s' --block", desc = "Rotate image(s) 90° left (lossless)" },
+	# WebP for blog/hero images (quality 80, no resize). See scripts/img-to-webp.
+	# i w: write NAME.webp next to each selected (or hovered) image, original untouched.
+	# c w: copy hovered image to the clipboard as a .webp file (paste attaches the real webp).
+	{ on = [ "i", "w" ], run = "shell '~/.config/yazi/scripts/img-to-webp --notify %s'", desc = "Convert image(s) to WebP (next to original)" },
+	{ on = [ "c", "w" ], run = "shell '~/.config/yazi/scripts/img-to-webp --copy --notify %h'", desc = "Copy image to clipboard as WebP file" },
 	# Open a new terminal in the hovered directory (or the current directory if a file is hovered).
 	# %h = hovered entry; yazi runs the shell in the current tab's cwd, so $PWD is the fallback.
 	{ on = "<C-Enter>", run = '''shell 'd=%h; [ -d "$d" ] || d="$PWD"; setsid uwsm-app -- xdg-terminal-exec --dir="$d" >/dev/null 2>&1 &' --orphan''', desc = "Open terminal here" },

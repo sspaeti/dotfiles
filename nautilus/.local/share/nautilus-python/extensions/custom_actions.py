@@ -49,22 +49,20 @@ class CustomActions(GObject.GObject, Nautilus.MenuProvider):
                 shell=True,
             )
 
-    # --- Copy Image as WebP to Clipboard ---
+    # --- WebP (shared script, also used by yazi) ---
+    IMG_TO_WEBP = os.path.expanduser('~/.config/yazi/scripts/img-to-webp')
+
+    # Copy as a .webp *file* (text/uri-list): raw image/webp on the clipboard is ignored by most apps.
     def _copy_image_as_webp_to_clipboard(self, _menu, files):
         path = files[0].get_location().get_path()
-        if not path:
-            return
-        tmp = '/tmp/nautilus-copy.webp'
-        # Convert synchronously (avoids pipe race when called from Nautilus context).
-        subprocess.run(
-            ['magick', path, '-quality', '80', '-define', 'webp:method=6', tmp],
-            check=False,
-        )
-        # wl-copy reads from a file (no pipe), forks to background to serve clipboard.
-        subprocess.Popen(
-            f'wl-copy --type image/webp < {shlex.quote(tmp)}',
-            shell=True,
-        )
+        if path:
+            subprocess.Popen([self.IMG_TO_WEBP, '--copy', '--notify', path])
+
+    # Write NAME.webp next to each selected image (originals untouched).
+    def _convert_to_webp(self, _menu, files):
+        paths = [f.get_location().get_path() for f in files if f.get_location().get_path()]
+        if paths:
+            subprocess.Popen([self.IMG_TO_WEBP, '--notify', '--'] + paths)
 
     def get_file_items(self, *args):
         files = args[0] if len(args) == 1 else args[1]
@@ -99,6 +97,11 @@ class CustomActions(GObject.GObject, Nautilus.MenuProvider):
             webp_item = Nautilus.MenuItem(name='Custom::copy_image_webp', label='Copy Image as WebP', icon='edit-copy')
             webp_item.connect('activate', self._copy_image_as_webp_to_clipboard, files)
             items.append(webp_item)
+
+        if all((f.get_mime_type() or '').startswith('image/') for f in files):
+            convert_item = Nautilus.MenuItem(name='Custom::convert_webp', label='Convert to WebP', icon='image-x-generic')
+            convert_item.connect('activate', self._convert_to_webp, files)
+            items.append(convert_item)
 
         return items
 

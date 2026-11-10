@@ -1,0 +1,89 @@
+#!/bin/sh
+# img-to-webp [--copy] [--notify] FILE...
+# Make a small, visually near-identical WebP of each image (blog/hero images).
+#   default  -> writes NAME.webp next to the original (original untouched, never overwrites)
+#   --copy   -> converts the first file into ~/.cache/img-to-webp/ and puts it on the
+#               clipboard as a file (text/uri-list), so pasting attaches the real .webp.
+#               (Raw image/webp on the clipboard is ignored by most apps, they only take image/png.)
+#   --notify -> also report via notify-send (for Nautilus / non-blocking yazi)
+# Used by yazi (keymap.toml) and Nautilus (nautilus-python/extensions/custom_actions.py).
+# Quality: IMG_WEBP_QUALITY (default 80). No resizing.
+set -u
+quality="${IMG_WEBP_QUALITY:-80}"
+copy=0
+notify=0
+while [ $# -gt 0 ]; do
+	case "$1" in
+		--copy) copy=1 ;;
+		--notify) notify=1 ;;
+		--) shift; break ;;
+		-*) echo "usage: img-to-webp [--copy] [--notify] FILE..." >&2; exit 2 ;;
+		*) break ;;
+	esac
+	shift
+done
+[ $# -gt 0 ] || { echo "img-to-webp: no files given" >&2; exit 2; }
+
+say() {
+	echo "$1"
+	[ "$notify" -eq 0 ] || notify-send -a img-to-webp "WebP" "$1" 2>/dev/null
+}
+
+human() { numfmt --to=iec --suffix=B "$1"; }
+
+# encode SRC DST: -auto-orient folds EXIF rotation into the pixels before -strip drops the metadata
+encode() {
+	magick "$1" -auto-orient -strip -quality "$quality" \
+		-define webp:method=6 -define webp:use-sharp-yuv=true "$2"
+}
+
+if [ "$copy" -eq 1 ]; then
+	f=$1
+	[ -f "$f" ] || { say "not a file: $f"; exit 1; }
+	case "$(printf '%s' "$f" | tr '[:upper:]' '[:lower:]')" in
+		*.webp) out=$(realpath "$f") ;;
+		*)
+			dir="${XDG_CACHE_HOME:-$HOME/.cache}/img-to-webp"
+			mkdir -p "$dir"
+			base=$(basename "$f")
+			out="$dir/${base%.*}.webp"
+			encode "$f" "$out" || { say "FAILED: $f"; exit 1; }
+			;;
+	esac
+	uri=$(python3 -c 'import sys, pathlib; print(pathlib.Path(sys.argv[1]).as_uri())' "$out")
+	printf '%s\r\n' "$uri" | wl-copy --type text/uri-list
+	say "Copied $(basename "$out") ($(human "$(stat -c %s "$f")") -> $(human "$(stat -c %s "$out")"))"
+	exit 0
+fi
+
+rc=0
+msg=""
+for f in "$@"; do
+	[ -f "$f" ] || { msg="$msg
+skip (not a file): $f"; rc=1; continue; }
+	base=$(basename "$f")
+	case "$(printf '%s' "$f" | tr '[:upper:]' '[:lower:]')" in
+		*.webp) msg="$msg
+skip (already webp): $base"; continue ;;
+	esac
+	out="${f%.*}.webp"
+	[ ! -e "$out" ] || { msg="$msg
+skip (exists): $(basename "$out")"; rc=1; continue; }
+	if ! encode "$f" "$out"; then
+		rm -f "$out"
+		msg="$msg
+FAILED: $base"; rc=1; continue
+	fi
+	old=$(stat -c %s "$f")
+	new=$(stat -c %s "$out")
+	if [ "$new" -ge "$old" ]; then
+		rm -f "$out"
+		msg="$msg
+skip (webp not smaller): $base"
+		continue
+	fi
+	msg="$msg
+$(basename "$out"): $(human "$old") -> $(human "$new") (-$(( (old - new) * 100 / old ))%)"
+done
+say "${msg#?}"
+exit $rc
