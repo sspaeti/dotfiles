@@ -110,6 +110,26 @@ return {
       color = { fg = "#ff9e64", gui = "bold" },
     }
 
+    -- Agent-IDE footer: agents state and Claude quota, coloured by level; shown once the
+    -- plugin is loaded (never loads it), so lualine works without the plugin
+    local agent_ide = {
+      function()
+        local ok, ai = pcall(require, "agent-ide")
+        return ok and ai.statusline() or ""
+      end,
+      cond = function()
+        return package.loaded["agent-ide"] ~= nil
+      end,
+      color = function()
+        local ok, ai = pcall(require, "agent-ide")
+        if not ok then
+          return nil
+        end
+        local hl = vim.api.nvim_get_hl(0, { name = ai.statusline_hl(), link = false })
+        return hl.fg and { fg = string.format("#%06x", hl.fg) } or nil
+      end,
+    }
+
     --old config
     require("lualine").setup({
       options = {
@@ -124,7 +144,7 @@ return {
         lualine_a = { "mode", recording },
         lualine_b = {},
         lualine_c = { branch, active_lsp, filename },
-        lualine_x = { neomd_words, neomd_reading, wpm.historic_graph, diff, diagnostics, { get_venv, color = { gui = "bold" } }, filetype },
+        lualine_x = { agent_ide, neomd_words, neomd_reading, wpm.historic_graph, diff, diagnostics, { get_venv, color = { gui = "bold" } }, filetype },
         lualine_y = {},
         lualine_z = { progress, location },
       },
