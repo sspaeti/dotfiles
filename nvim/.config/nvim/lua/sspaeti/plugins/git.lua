@@ -8,8 +8,20 @@ return {
         local map = function(mode, l, r, desc)
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
-        map("n", "]h", gs.next_hunk, "Next git hunk")
-        map("n", "[h", gs.prev_hunk, "Previous git hunk")
+        -- ]c / [c: native diff jump in diff mode (diffview, :Gdiff), git hunk jump otherwise
+        local function nav(dir, key)
+          return function()
+            if vim.wo.diff then
+              vim.cmd.normal({ key, bang = true })
+            else
+              gs.nav_hunk(dir)
+            end
+          end
+        end
+        map("n", "]c", nav("next", "]c"), "Next git hunk / diff change")
+        map("n", "[c", nav("prev", "[c"), "Previous git hunk / diff change")
+        map("n", "]h", nav("next", "]c"), "Next git hunk")
+        map("n", "[h", nav("prev", "[c"), "Previous git hunk")
         map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Git blame line (popup)")
       end,
     },

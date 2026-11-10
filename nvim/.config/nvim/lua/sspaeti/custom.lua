@@ -95,6 +95,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
     -- Word count + reading time is handled by lualine (see plugins/lualine.lua)
   end,
 })
+--insert html signature
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "neomd-*.md",
+  callback = function()
+    vim.keymap.set("n", "<leader>as", "o[sig]<Esc>", { buffer = true, desc = "insert HTML signature marker" })
+  end,
+})
 -- ── end neomd ──────────────────────────────────────────────────────────────
 
 --custom function to set colortheme based on session session_name
