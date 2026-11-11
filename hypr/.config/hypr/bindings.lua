@@ -145,6 +145,8 @@ o.bind("SUPER + CTRL + G", "GoatCounter stats", "omarchy-shell shell toggle io.g
 hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE our bind, or it wipes it
 o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle io.github.sspaeti.timezones")
 o.bind("SUPER + CTRL + ALT + M", "neomd Mail panel", "omarchy-shell shell toggle io.github.sspaeti.neomd")
+hl.unbind("SUPER + SHIFT + CTRL + A") -- default: Agent (omarchy-agent --pick)
+o.bind("SUPER + CTRL + SHIFT + A", "AI agents usage", "omarchy-shell shell toggle omarchy.agents")
 
 
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding

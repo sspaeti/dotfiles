@@ -9,6 +9,7 @@ return {
       prompts = { library_dir = '~/git/skills/my-skills/prompts' },
       quota = { file = '~/.local/state/omarchy/agents/usage/claude.json' },
       scope = 'project',
+      sound = { waiting = true, chime = 'soft', cmd = nil },
     },
   },
 }
