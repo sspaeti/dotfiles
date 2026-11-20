@@ -35,8 +35,8 @@ return {
 
   },
   keys = {
-    { "<leader>mm", ":Noice<CR>", desc = "Show recent messages" },
-    { "<leader>ma", ":NoiceAll<CR>", desc = "Show recent messages" },
+    { "<leader>mm", ":NoiceAll<CR>", desc = "Show all messages" },
+    { "<leader>ma", ":Noice<CR>", desc = "Show recent messages (notifications, errors)" },
     { "<leader>lm", ":Noice<CR>", desc = "Show recent messages" },
   },
 
