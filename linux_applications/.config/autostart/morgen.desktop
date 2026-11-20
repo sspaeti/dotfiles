@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=Morgen
-Comment=Morgen Startup Script
-Exec=/opt/Morgen/morgen --hidden
-StartupNotify=false
-Terminal=false

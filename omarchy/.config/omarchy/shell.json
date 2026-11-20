@@ -215,20 +215,6 @@
       "id": "io.github.kristoferlund.webcam"
     },
     {
-      "id": "quickshell.spotify",
-      "deviceName": "Omarchy Spotify",
-      "idleShutdownMinutes": 15,
-      "showMiniPlayer": "On",
-      "shortcutPlayer": "Omarchy Music app",
-      "shortcutHints": "Off",
-      "showTrackTitle": "Off",
-      "showArtistName": "Off",
-      "scrollBarText": "Off",
-      "scrollSpeed": "1",
-      "maxBarTextWidth": "240",
-      "audioQuality": "320 kbps"
-    },
-    {
       "id": "crmne.hyprmoncfg"
     },
     {
