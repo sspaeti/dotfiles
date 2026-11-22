@@ -3,6 +3,7 @@ Version=1.0
 Name=Grammarly
 Comment=Grammarly
 Exec=omarchy-launch-webapp "https://app.grammarly.com/ddocs/2881779475"
+StartupWMClass=chrome-app.grammarly.com__ddocs_2881779475-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Grammarly.png

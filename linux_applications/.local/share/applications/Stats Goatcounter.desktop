@@ -3,6 +3,7 @@ Version=1.0
 Name=Stats Goatcounter
 Comment=Stats Goatcounter
 Exec=omarchy-launch-webapp https://goatcounter.ssp.sh/
+StartupWMClass=chrome-goatcounter.ssp.sh__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Stats Goatcounter.png

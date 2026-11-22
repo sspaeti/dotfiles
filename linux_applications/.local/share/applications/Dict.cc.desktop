@@ -3,6 +3,7 @@ Version=1.0
 Name=Dict.cc
 Comment=Dict.cc
 Exec=omarchy-launch-webapp https://www.dict.cc/
+StartupWMClass=chrome-www.dict.cc__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Dict.cc.png

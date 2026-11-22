@@ -3,6 +3,7 @@ Version=1.0
 Name=Translate (DeepL)
 Comment=Translate (DeepL)
 Exec=omarchy-launch-webapp https://www.deepl.com/en/translator
+StartupWMClass=chrome-www.deepl.com__en_translator-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Translate (DeepL).png

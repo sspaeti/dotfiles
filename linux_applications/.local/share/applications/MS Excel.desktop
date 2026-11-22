@@ -3,6 +3,7 @@ Version=1.0
 Name=MS Excel
 Comment=MS Excel
 Exec=omarchy-launch-webapp https://excel.cloud.microsoft/en-us
+StartupWMClass=chrome-excel.cloud.microsoft__en-us-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/MS Excel.png

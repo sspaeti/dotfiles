@@ -3,6 +3,7 @@ Version=1.0
 Name=Small Bets
 Comment=Small Bets
 Exec=omarchy-launch-webapp https://smallbets.com/rooms/708
+StartupWMClass=chrome-smallbets.com__rooms_708-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Small Bets.png

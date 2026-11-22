@@ -3,6 +3,7 @@ Version=1.0
 Name=SSP
 Comment=SSP
 Exec=omarchy-launch-webapp "https://www.ssp.sh"
+StartupWMClass=chrome-www.ssp.sh__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/SSP.png

@@ -3,6 +3,7 @@ Version=1.0
 Name=HackMD
 Comment=HackMD
 Exec=omarchy-launch-webapp https://hackmd.io/
+StartupWMClass=chrome-hackmd.io__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/HackMD.png

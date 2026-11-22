@@ -2,6 +2,7 @@
 Version=1.0
 Name=Basecamp
 Exec=omarchy-launch-webapp https://app.basecamp.com/5803421/projects/38153828
+StartupWMClass=chrome-app.basecamp.com__5803421_projects_38153828-Default
 Terminal=false
 Type=Application
 Icon=basecamp

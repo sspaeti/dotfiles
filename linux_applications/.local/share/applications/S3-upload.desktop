@@ -3,6 +3,7 @@ Version=1.0
 Name=S3-Upload
 Comment=S3 webapp for upload
 Exec=omarchy-launch-webapp "https://eu-central-1.console.aws.amazon.com/s3/buckets?region=eu-central-1&bucketType=general"
+StartupWMClass=chrome-eu-central-1.console.aws.amazon.com__s3_buckets-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/S3.png

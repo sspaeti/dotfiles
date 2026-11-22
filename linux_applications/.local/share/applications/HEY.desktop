@@ -7,3 +7,4 @@ Type=Application
 Icon=hey
 StartupNotify=true
 MimeType=x-scheme-handler/mailto
+StartupWMClass=chrome-app.hey.com__-Default

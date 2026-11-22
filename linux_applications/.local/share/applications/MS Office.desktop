@@ -3,6 +3,7 @@ Version=1.0
 Name=MS Office
 Comment=MS Office
 Exec=omarchy-launch-webapp https://m365.cloud.microsoft/search
+StartupWMClass=chrome-m365.cloud.microsoft__search-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/MS Office.png

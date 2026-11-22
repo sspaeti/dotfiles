@@ -3,6 +3,7 @@ Version=1.0
 Name=Messenger FB
 Comment=Messenger FB
 Exec=omarchy-launch-webapp https://www.facebook.com/messages
+StartupWMClass=chrome-www.facebook.com__messages-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Messenger FB.png

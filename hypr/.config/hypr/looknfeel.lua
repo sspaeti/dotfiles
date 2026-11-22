@@ -75,3 +75,8 @@ o.window("^(org\\.omarchy\\.finder)$", { size = { 1600, 1000 } })
 
 -- Make the default floating-window box bigger than omarchy's 875x600 (used by image viewer, About, generic floats).
 o.window({ tag = "floating-window" }, { size = { 1300, 900 } })
+
+-- Opt another application in to Omarchy's standard transparency.
+-- Find its class with: hyprctl clients
+-- o.transparent_window("my-app")
+-- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.

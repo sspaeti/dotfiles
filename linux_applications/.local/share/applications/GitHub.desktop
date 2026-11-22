@@ -3,6 +3,7 @@ Version=1.0
 Name=GitHub
 Comment=GitHub
 Exec=omarchy-launch-webapp "https://github.com/"
+StartupWMClass=chrome-github.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/GitHub.png

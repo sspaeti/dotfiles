@@ -3,6 +3,7 @@ Version=1.0
 Name=Hacker News
 Comment=Hacker News
 Exec=omarchy-launch-webapp https://news.ycombinator.com/news
+StartupWMClass=chrome-news.ycombinator.com__news-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Hacker News.png

@@ -3,6 +3,7 @@ Version=1.0
 Name=MS Teams
 Comment=MS Teams
 Exec=omarchy-launch-webapp https://teams.live.com/v2/
+StartupWMClass=chrome-teams.live.com__v2_-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/MS Teams.png

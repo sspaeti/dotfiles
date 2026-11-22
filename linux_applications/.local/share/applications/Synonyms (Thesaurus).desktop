@@ -3,6 +3,7 @@ Version=1.0
 Name=Synonyms (Thesaurus)
 Comment=Synonyms (Thesaurus)
 Exec=omarchy-launch-webapp https://www.thesaurus.com/browse
+StartupWMClass=chrome-www.thesaurus.com__browse-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Synonyms (Thesaurus).png

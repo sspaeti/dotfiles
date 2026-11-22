@@ -3,6 +3,7 @@ Version=1.0
 Name=Drive (Google)
 Comment=Drive (Google)
 Exec=omarchy-launch-webapp https://drive.google.com/
+StartupWMClass=chrome-drive.google.com__-Default
 Terminal=false
 Type=Application
 Icon=drive-google

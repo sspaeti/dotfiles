@@ -3,6 +3,7 @@ Version=1.0
 Name=Canva
 Comment=Canva
 Exec=omarchy-launch-webapp https://www.canva.com/projects
+StartupWMClass=chrome-www.canva.com__projects-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Canva.png

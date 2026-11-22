@@ -3,6 +3,7 @@ Version=1.0
 Name=SSP Brain
 Comment=SSP
 Exec=omarchy-launch-webapp "http://ssp.sh/brain/"
+StartupWMClass=chrome-ssp.sh__brain_-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/SSP.png

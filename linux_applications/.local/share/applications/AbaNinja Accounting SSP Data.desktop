@@ -3,6 +3,7 @@ Version=1.0
 Name=AbaNinja Accounting SSP Data
 Comment=AbaNinja Accounting SSP Data
 Exec=omarchy-launch-webapp https://app.abaninja.ch/finances/payments/open
+StartupWMClass=chrome-app.abaninja.ch__finances_payments_open-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/abaninja.png

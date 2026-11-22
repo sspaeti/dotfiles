@@ -2,6 +2,7 @@
 Version=1.0
 Name=Twitter/X
 Exec=omarchy-launch-webapp https://tw.ssp.sh/
+StartupWMClass=chrome-tw.ssp.sh__-Default
 Terminal=false
 Type=Application
 Icon=x

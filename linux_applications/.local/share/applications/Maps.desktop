@@ -3,6 +3,7 @@ Version=1.0
 Name=Maps
 Comment=Maps
 Exec=omarchy-launch-webapp https://maps.google.com/
+StartupWMClass=chrome-maps.google.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Maps.png

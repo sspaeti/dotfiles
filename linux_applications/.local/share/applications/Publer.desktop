@@ -3,6 +3,7 @@ Version=1.0
 Name=Publer
 Comment=Publer
 Exec=omarchy-launch-webapp https://app.publer.com/#/calendar/week
+StartupWMClass=chrome-app.publer.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Publer.png

@@ -3,6 +3,7 @@ Version=1.0
 Name=Google Calendar
 Comment=Google Calendar
 Exec=omarchy-launch-webapp https://calendar.google.com/
+StartupWMClass=chrome-calendar.google.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Google Calendar.png

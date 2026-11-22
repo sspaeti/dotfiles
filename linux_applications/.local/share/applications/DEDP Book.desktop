@@ -3,6 +3,7 @@ Version=1.0
 Name=DEDP Book
 Comment=DEDP Book
 Exec=omarchy-launch-webapp https://www.dedp.online
+StartupWMClass=chrome-www.dedp.online__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/DEDP Book.png

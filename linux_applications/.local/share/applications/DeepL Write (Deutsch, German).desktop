@@ -3,6 +3,7 @@ Version=1.0
 Name=DeepL Write (Deutsch, German)
 Comment=DeepL Write (Deutsch, German)
 Exec=omarchy-launch-webapp https://www.deepl.com/en/write
+StartupWMClass=chrome-www.deepl.com__en_write-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/DeepL Write (Deutsch, German).png

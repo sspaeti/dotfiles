@@ -3,6 +3,7 @@ Version=1.0
 Name=NirvanaHQ Todo
 Comment=NirvanaHQ Todo
 Exec=omarchy-launch-webapp "https://focus.nirvanahq.com/"
+StartupWMClass=chrome-focus.nirvanahq.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/NirvanaHQ Todo.png

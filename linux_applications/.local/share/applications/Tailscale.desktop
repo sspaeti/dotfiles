@@ -3,6 +3,7 @@ Version=1.0
 Name=Tailscale
 Comment=Tailscale
 Exec=omarchy-launch-webapp https://login.tailscale.com/admin/machines
+StartupWMClass=chrome-login.tailscale.com__admin_machines-Default
 Terminal=false
 Type=Application
 Icon=tailscale

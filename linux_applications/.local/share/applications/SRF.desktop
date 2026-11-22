@@ -3,6 +3,7 @@ Version=1.0
 Name=SRF Play
 Comment=SRF TV
 Exec=omarchy-launch-webapp "https://www.srf.ch/play/tv"
+StartupWMClass=chrome-www.srf.ch__play_tv-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/SRF.png

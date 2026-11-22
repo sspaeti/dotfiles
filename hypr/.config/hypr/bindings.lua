@@ -305,3 +305,10 @@ o.bind("SUPER + CTRL + mouse_down", "Zoom out (scroll)", zoom_step(1 / 1.25))
 o.bind("SUPER + CTRL + BACKSPACE", "Zoom reset", function()
   hl.config({ cursor = { zoom_factor = 1 } })
 end)
+
+-- Dictation keys from before Alt + Space and Right Alt became the defaults.
+-- Remove these lines to give the keys back to applications.
+if o.dictation_installed and o.dictation_installed() then
+  o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
+  o.bind_hold("F9", "Start dictation (push-to-talk)", "omarchy-dictation start", "Stop dictation (push-to-talk)", "omarchy-dictation stop")
+end

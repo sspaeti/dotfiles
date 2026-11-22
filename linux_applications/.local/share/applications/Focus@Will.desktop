@@ -3,6 +3,7 @@ Version=1.0
 Name=Focus@Will
 Comment=Focus@Will
 Exec=omarchy-launch-webapp "https://www.focusatwill.com/music/"
+StartupWMClass=chrome-www.focusatwill.com__music_-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Focus@Will.png

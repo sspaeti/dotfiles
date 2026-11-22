@@ -1,14 +1,7 @@
 {
   "bar": {
-    "centerAnchor": "tmn73.calendar",
     "layout": {
       "center": [
-        {
-          "id": "omarchy.indicators"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
-        },
         {
           "id": "tmn73.calendar",
           "announceLeadMinutes": 5,
@@ -19,50 +12,6 @@
           "lifeExpectancy": 85,
           "showWorkingLocation": false,
           "weekStartDay": "Monday"
-        },
-        {
-          "id": "omarchy.system-update"
-        },
-        {
-          "id": "io.github.sspaeti.timezones",
-          "hoverExpand": false,
-          "homeZones": [
-            "Europe/Zurich",
-            "Europe/Berlin"
-          ],
-          "zones": [
-            {
-              "label": "Switzerland",
-              "shortLabel": "CH",
-              "zone": "",
-              "home": true
-            },
-            {
-              "label": "East Coast",
-              "shortLabel": "NY",
-              "zone": "America/New_York"
-            },
-            {
-              "label": "West Coast",
-              "shortLabel": "SF",
-              "zone": "America/Los_Angeles"
-            },
-            {
-              "label": "Cagayan de Oro",
-              "shortLabel": "CDO",
-              "zone": "Asia/Manila",
-              "abbr": "PHT"
-            }
-          ]
-        },
-        {
-          "id": "eduardodallecort.weather-radar",
-          "alertMinIntensity": "Heavy",
-          "alertRadiusKm": 50,
-          "alertsEnabled": true
-        },
-        {
-          "id": "sspaeti.weather"
         }
       ],
       "left": [
@@ -77,6 +26,9 @@
         }
       ],
       "right": [
+        {
+          "id": "omarchy.keyboard-layout"
+        },
         {
           "id": "io.github.tyrichards.tray",
           "hidden": [],
@@ -186,6 +138,82 @@
         },
         {
           "id": "io.github.sspaeti.battery"
+        },
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Berlin",
+              "zone": "Europe/Berlin"
+            },
+            {
+              "name": "Dubai",
+              "zone": "Asia/Dubai"
+            },
+            {
+              "name": "Tokyo",
+              "zone": "Asia/Tokyo"
+            },
+            {
+              "name": "Los Angeles",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "name": "New York",
+              "zone": "America/New_York"
+            }
+          ]
+        }
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "io.github.sspaeti.timezones",
+          "hoverExpand": false,
+          "homeZones": [
+            "Europe/Zurich",
+            "Europe/Berlin"
+          ],
+          "zones": [
+            {
+              "label": "Switzerland",
+              "shortLabel": "CH",
+              "zone": "",
+              "home": true
+            },
+            {
+              "label": "East Coast",
+              "shortLabel": "NY",
+              "zone": "America/New_York"
+            },
+            {
+              "label": "West Coast",
+              "shortLabel": "SF",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "label": "Cagayan de Oro",
+              "shortLabel": "CDO",
+              "zone": "Asia/Manila",
+              "abbr": "PHT"
+            }
+          ]
+        },
+        {
+          "id": "eduardodallecort.weather-radar",
+          "alertMinIntensity": "Heavy",
+          "alertRadiusKm": 50,
+          "alertsEnabled": true
+        },
+        {
+          "id": "sspaeti.weather"
         }
       ]
     },

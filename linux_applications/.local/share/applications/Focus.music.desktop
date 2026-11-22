@@ -3,6 +3,7 @@ Version=1.0
 Name=Focus.music
 Comment=Focus.music
 Exec=omarchy-launch-webapp https://focus.music/
+StartupWMClass=chrome-focus.music__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Focus.music.png

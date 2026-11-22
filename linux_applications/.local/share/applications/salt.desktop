@@ -3,6 +3,7 @@ Version=1.0
 Name=Salt TV
 Comment=Stream TV
 Exec=omarchy-launch-webapp "https://tv.salt.ch/channels/favorites"
+StartupWMClass=chrome-tv.salt.ch__channels_favorites-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/salt.png

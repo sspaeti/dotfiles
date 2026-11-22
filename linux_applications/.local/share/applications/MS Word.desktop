@@ -3,6 +3,7 @@ Version=1.0
 Name=MS Word
 Comment=MS Word
 Exec=omarchy-launch-webapp https://word.cloud.microsoft/
+StartupWMClass=chrome-word.cloud.microsoft__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/MS Word.png

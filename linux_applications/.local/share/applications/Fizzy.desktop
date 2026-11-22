@@ -3,6 +3,7 @@ Version=1.0
 Name=Fizzy
 Comment=Fizzy
 Exec=omarchy-launch-webapp https://app.fizzy.do/
+StartupWMClass=chrome-app.fizzy.do__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Fizzy.png

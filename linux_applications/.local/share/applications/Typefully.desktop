@@ -3,6 +3,7 @@ Version=1.0
 Name=Typefully
 Comment=Typefully
 Exec=omarchy-launch-webapp https://typefully.com/
+StartupWMClass=chrome-typefully.com__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Typefully.png

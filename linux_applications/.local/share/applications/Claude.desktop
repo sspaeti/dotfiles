@@ -3,6 +3,7 @@ Version=1.0
 Name=Claude
 Comment=Claude AI
 Exec=omarchy-launch-webapp "https://claude.ai/"
+StartupWMClass=chrome-claude.ai__-Default
 Terminal=false
 Type=Application
 Icon=/home/sspaeti/.local/share/applications/icons/Claude AI.png
