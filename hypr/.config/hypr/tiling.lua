@@ -8,6 +8,7 @@
 
 -- Close window
 hl.unbind("SUPER + W") -- Quattro default: Close active window (moved to SUPER+Q here)
+hl.unbind("SUPER + Q") -- 4.5 default: Close window (same action; without unbind it fires twice and closes 2 windows)
 o.bind("SUPER + Q", "Close active window", hl.dsp.window.close())
 
 -- Control tiling
@@ -20,6 +21,7 @@ hl.unbind("SUPER + P") -- default: Pseudo window
 hl.unbind("SUPER + I")
 o.bind("SUPER + I", "Toggle window split", hl.dsp.layout("togglesplit")) -- dwindle
 o.bind("SUPER + P", "Pseudo window", hl.dsp.window.pseudo()) -- dwindle
+hl.unbind("SUPER + SHIFT + T") -- 4.5 default: Activity (btop)
 o.bind("SUPER + SHIFT + T", "Toggle window floating/tiling", hl.dsp.window.float({ action = "toggle" }))
 hl.unbind("SUPER + SHIFT + P") -- default: Google Photos
 o.bind("SUPER + SHIFT + P", "Pop window out (float & pin)", "omarchy-hyprland-window-pop")
@@ -68,6 +70,7 @@ o.bind("SUPER + SHIFT + G", "Toggle window grouping", hl.dsp.group.toggle())
 
 -- Join groups
 o.bind("SUPER + ALT + H", "Move window to group on left", hl.dsp.window.move({ into_group = "l" }))
+hl.unbind("SUPER + ALT + L") -- 4.5 default: Cycle workspace layout back
 o.bind("SUPER + ALT + L", "Move window to group on right", hl.dsp.window.move({ into_group = "r" }))
 hl.unbind("SUPER + ALT + K") -- default: Tmux keybindings
 o.bind("SUPER + ALT + K", "Move window to group on top", hl.dsp.window.move({ into_group = "u" }))

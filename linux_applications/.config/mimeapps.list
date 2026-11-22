@@ -76,3 +76,4 @@ application/x-cb7=org.gnome.Evince.desktop
 application/epub+zip=calibre-ebook-viewer.desktop
 application/x-mobipocket-ebook=calibre-ebook-viewer.desktop
 application/x-mobi8-ebook=calibre-ebook-viewer.desktop
+x-scheme-handler/superwhisper=superwhisper-url.desktop

@@ -45,6 +45,7 @@ o.bind("SUPER + Z", "Zen browser", { launch = "zen-browser", focus = "zen" })
 hl.unbind("SUPER + SLASH") -- default: Monitor scaling up
 o.bind("SUPER + SLASH", "1Password", { launch = "1password" })
 
+hl.unbind("SUPER + M") -- 4.5 default: Minimize window to the dock
 o.bind("SUPER + M", "Email (tmux)", ssp .. "/jump-to-email-tmux.sh") -- launching neomd
 --
 -- music and audio
@@ -65,6 +66,17 @@ hl.unbind("SUPER + comma") -- default: Dismiss last notification
 o.bind("SUPER + comma", "Volume down", "omarchy-audio-output-volume lower", { locked = true, repeating = true })
 o.bind("SUPER + PERIOD", "Volume up", "omarchy-audio-output-volume raise", { locked = true, repeating = true })
 
+-- 4.5 reshuffled the notification keys: restore 4.0 layout
+hl.unbind("SUPER + ALT + comma") -- 4.5 default: Dismiss last notification
+o.bind("SUPER + ALT + comma", "Invoke last notification", { ipc = "notifications.invokeLast" })
+hl.unbind("SUPER + CTRL + comma") -- 4.5 default: Control notifications with the keyboard
+o.bind_toggle("SUPER + CTRL + comma", "Toggle silencing notifications", "notification-silencing")
+hl.unbind("SUPER + CTRL + ALT + comma") -- 4.5 default: Toggle silencing notifications (moved back to SUPER+CTRL+comma)
+
+-- 4.5 moved Calculator to SUPER+SHIFT+Q (too close to SUPER+Q close): restore 4.0 key
+hl.unbind("SUPER + SHIFT + Q") -- 4.5 default: Calculator
+o.bind("SUPER + CTRL + Q", "Calculator", "omacalc")
+
 -- QUATTRO: swayosd --playerctl -> omarchy-shell media
 hl.unbind("SUPER + CTRL + P") -- default: Power panel
 o.bind("SUPER + CTRL + P", "Play", "omarchy-shell media playPause", { locked = true })
@@ -74,6 +86,11 @@ hl.unbind("SUPER + LEFT") -- default: Focus on left window
 o.bind("SUPER + LEFT", "Previous track", "omarchy-shell media previous", { locked = true })
 
 -- Shortcuts for system settings : replaced by default omarchy (SUPER CTRL + W, B, A)
+-- 4.5 moved Network to SUPER+CTRL+N (W became Background switcher) and dropped the nightlight key: restore 4.0 layout
+hl.unbind("SUPER + CTRL + W") -- 4.5 default: Background switcher (ours is SUPER+CTRL+SHIFT+T)
+o.bind("SUPER + CTRL + W", "Network", { panel = "omarchy.network" })
+hl.unbind("SUPER + CTRL + N") -- 4.5 default: Network
+o.bind_toggle("SUPER + CTRL + N", "Toggle nightlight", "nightlight")
 
 -- o.bind("SUPER + A", "Activity", { tui = "btop" })
 hl.unbind("SUPER + A")
@@ -98,6 +115,7 @@ o.bind("SUPER + ESCAPE", "Power menu", ssp .. "/omarchy-system-menu")
 -- omarchy menu
 o.bind("SUPER + CTRL + ALT + SPACE", "Omarchy menu (custom)", ssp .. "/omarchy-menu")
 -- fix for using SUPER ESC on KBDFans Keyboard
+hl.unbind("SUPER + grave") -- 4.5 default: Toggle Quake console
 o.bind("SUPER + grave", "Power menu", ssp .. "/omarchy-system-menu")
 
 -- Control scratchpad
@@ -107,6 +125,7 @@ o.bind("SUPER + grave", "Power menu", ssp .. "/omarchy-system-menu")
 -- keep awake
 hl.unbind("SUPER + CTRL + I") -- default: Toggle locking on idle
 o.bind_toggle("SUPER + SHIFT + ESCAPE", "Toggle locking on idle", "idle")
+hl.unbind("SUPER + SHIFT + grave") -- 4.5 default: Move window to Quake console
 o.bind_toggle("SUPER + SHIFT + grave", "Toggle locking on idle", "idle")
 hl.unbind("SUPER + CTRL + L") -- default: Lock system
 o.bind("SUPER + CTRL + L", "Locking computer", ssp .. "/omarchy-system-lock-wrapper.sh")
@@ -146,7 +165,7 @@ hl.unbind("SUPER + CTRL + T") -- default: Activity (btop) -- must come BEFORE ou
 o.bind("SUPER + CTRL + T", "Timezones", "omarchy-shell shell toggle io.github.sspaeti.timezones")
 o.bind("SUPER + CTRL + ALT + M", "neomd Mail panel", "omarchy-shell shell toggle io.github.sspaeti.neomd")
 hl.unbind("SUPER + SHIFT + CTRL + A") -- default: Agent (omarchy-agent --pick)
-o.bind("SUPER + CTRL + SHIFT + A", "AI agents usage", "omarchy-shell shell toggle omarchy.agents")
+o.bind("SUPER + CTRL + SHIFT + A", "AI agents usage", "omarchy-shell shell toggle sspaeti.agents")
 
 
 hl.unbind("SUPER + ALT + SHIFT + F") -- default: File manager (cwd) -- NOTE: hl.unbind matches the modifier order used by the default binding
@@ -200,6 +219,7 @@ o.bind("SUPER + ALT + P", "Screenshot", ssp .. "/omasnap-capture.sh")
 o.bind("SUPER + ALT + SHIFT + P", "Screenshot (copy only)", ssp .. "/omasnap-capture.sh --copy")
 -- o.bind("SUPER + PRINT", "Color picking", "pkill hyprpicker || hyprpicker -a")
 o.bind("SUPER + ALT + CTRL + X", "Cut-out image (omapic)", ssp .. "/omapic-capture-cut.sh")
+hl.unbind("SUPER + CTRL + ALT + C") -- 4.5 default: Screenshot (unbind must match default modifier order)
 o.bind("SUPER + ALT + CTRL + C", "Copy last screenshot path", ssp .. "/copy-last-screenshot-path.sh")
 -- Print videos - Screen recordings
 hl.unbind("SUPER + BACKSPACE") -- default: Toggle window transparency
@@ -302,6 +322,7 @@ o.bind("SUPER + CTRL + EQUAL", "Zoom in", zoom_step(1.25))
 o.bind("SUPER + CTRL + MINUS", "Zoom out", zoom_step(1 / 1.25))
 o.bind("SUPER + CTRL + mouse_up", "Zoom in (scroll)", zoom_step(1.25))
 o.bind("SUPER + CTRL + mouse_down", "Zoom out (scroll)", zoom_step(1 / 1.25))
+hl.unbind("SUPER + CTRL + BACKSPACE") -- 4.5 default: Toggle single-window square aspect
 o.bind("SUPER + CTRL + BACKSPACE", "Zoom reset", function()
   hl.config({ cursor = { zoom_factor = 1 } })
 end)
@@ -309,6 +330,7 @@ end)
 -- Dictation keys from before Alt + Space and Right Alt became the defaults.
 -- Remove these lines to give the keys back to applications.
 if o.dictation_installed and o.dictation_installed() then
+  hl.unbind("ALT + SPACE") -- 4.5 default: Toggle dictation; keep ALT+SPACE for apps, use SUPER+CTRL+X instead
   o.bind("SUPER + CTRL + X", "Toggle dictation", "omarchy-dictation toggle")
   o.bind_hold("F9", "Start dictation (push-to-talk)", "omarchy-dictation start", "Stop dictation (push-to-talk)", "omarchy-dictation stop")
 end

@@ -108,7 +108,7 @@
           "id": "omarchy.tailscale"
         },
         {
-          "id": "omarchy.agents"
+          "id": "sspaeti.agents"
         },
         {
           "id": "io.github.sspaeti.agent-ide"
@@ -145,22 +145,6 @@
             {
               "name": "Berlin",
               "zone": "Europe/Berlin"
-            },
-            {
-              "name": "Dubai",
-              "zone": "Asia/Dubai"
-            },
-            {
-              "name": "Tokyo",
-              "zone": "Asia/Tokyo"
-            },
-            {
-              "name": "Los Angeles",
-              "zone": "America/Los_Angeles"
-            },
-            {
-              "name": "New York",
-              "zone": "America/New_York"
             }
           ]
         }
@@ -215,6 +199,11 @@
         {
           "id": "sspaeti.weather"
         }
+      ],
+      "tray": [
+        {
+          "id": "superwhisper.panel"
+        }
       ]
     },
     "position": "top",
@@ -267,6 +256,9 @@
     },
     {
       "id": "omaplug"
+    },
+    {
+      "id": "io.voxtype.settings"
     }
   ],
   "version": 1,
@@ -274,7 +266,8 @@
     "omarchy.emojis",
     "omarchy.clipboard",
     "omarchy.idle",
-    "omarchy.lock"
+    "omarchy.lock",
+    "omarchy.agents"
   ],
   "cloneSourceRestores": [
     "sspaeti.emojis",
