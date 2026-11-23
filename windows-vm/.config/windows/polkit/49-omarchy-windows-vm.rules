@@ -1,0 +1,20 @@
+// Skip the polkit password prompt for the Windows VM's start/stop/status steps.
+// Install: sudo install -m 0644 -o root -g root \
+//   ~/.config/windows/polkit/49-omarchy-windows-vm.rules /etc/polkit-1/rules.d/
+// write_compose and remove are deliberately NOT listed: they keep prompting,
+// so a rogue process can't rewrite the compose or delete the VM silently.
+polkit.addRule(function (action, subject) {
+  if (action.id != "org.freedesktop.policykit.exec") return;
+  if (action.lookup("program") != "/usr/bin/omarchy-windows-vm") return;
+  if (subject.user != "sspaeti" || !subject.local || !subject.active) return;
+
+  var allowed = [
+    "/usr/bin/omarchy-windows-vm __priv up",
+    "/usr/bin/omarchy-windows-vm __priv up_wait",
+    "/usr/bin/omarchy-windows-vm __priv down",
+    "/usr/bin/omarchy-windows-vm __priv status",
+  ];
+  if (allowed.indexOf(action.lookup("command_line")) >= 0) {
+    return polkit.Result.YES;
+  }
+});

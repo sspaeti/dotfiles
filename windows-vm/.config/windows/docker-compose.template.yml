@@ -29,6 +29,9 @@ services:
     devices:
       - /dev/kvm
       - /dev/net/tun
+      # Kernel vhost-net for the tap NIC (NAT mode). Without it QEMU moves every
+      # packet in userspace, which makes the VM's network slow.
+      - /dev/vhost-net
     cap_add:
       - NET_ADMIN
     ports:

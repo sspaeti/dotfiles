@@ -20,6 +20,36 @@ root). That's why the template plus `apply-compose.sh` exist.
 Check the container with `sudo docker ps` (my user is not in the `docker` group,
 so every VM action goes through a polkit prompt).
 
+### No password prompt for start/stop
+
+`polkit/49-omarchy-windows-vm.rules` lets `pkexec omarchy-windows-vm __priv
+up|up_wait|down|status` run without a prompt (my user, local active session only).
+`write_compose` and `remove` still prompt. Install once:
+
+```sh
+sudo install -m 0644 -o root -g root ~/.config/windows/polkit/49-omarchy-windows-vm.rules /etc/polkit-1/rules.d/
+```
+
+### Networking speed
+
+The template adds `/dev/vhost-net` (not in omarchy's generated compose), so the
+NAT tap NIC runs through kernel vhost instead of QEMU userspace. If the VM is
+slow, check which network mode it's using:
+`sudo docker logs omarchy-windows 2>&1 | grep -iE 'falling back|passt|slirp|user-mode'`.
+Any hit there means NAT failed and it fell back to user-mode networking (slow).
+
+Root cause found 2026-11-23: the container uses `iptables-legacy`, but the host
+(nftables) doesn't load `ip_tables`/`iptable_nat` by default, so NAT setup fails
+with "can't initialize iptables table `nat'". Fix, persistent across reboots:
+
+```sh
+printf 'ip_tables\niptable_nat\n' | sudo tee /etc/modules-load.d/omarchy-windows-vm.conf
+sudo modprobe -a ip_tables iptable_nat
+```
+
+After a kernel update, re-check if the warning comes back (modules must exist
+for the running kernel: `modinfo -n iptable_nat`).
+
 Removed 2026-11-23: `docker-compose-omarchy.yml` and `docker-compose-sspaeti.yml`
 (pre-Sep-2026 layout). `~/Documents/VMs/windows` is an old, unused VM disk from
 Aug 2025 (user `docker`).
