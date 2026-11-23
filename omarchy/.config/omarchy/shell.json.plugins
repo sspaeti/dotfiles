@@ -14,3 +14,14 @@ potential:
           "id": "jmaeder.swissweather"
         }
  ]
+,
+        {
+          "id": "omarchy.elsewhen",
+          "cities": [
+            {
+              "name": "Berlin",
+              "zone": "Europe/Berlin"
+            }
+          ]
+        }
+

@@ -138,17 +138,7 @@
         },
         {
           "id": "io.github.sspaeti.battery"
-        },
-        {
-          "id": "omarchy.elsewhen",
-          "cities": [
-            {
-              "name": "Berlin",
-              "zone": "Europe/Berlin"
-            }
-          ]
-        }
-      ],
+        }      ],
       "centerBegin": [
         {
           "id": "omarchy.indicators"
