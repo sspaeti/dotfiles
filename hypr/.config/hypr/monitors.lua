@@ -393,3 +393,31 @@ local profile = resolve_profile()
 if profile then
   profile.apply()
 end
+
+-- ============================================================================
+-- OPT OUT OF OMARCHY 4.5 PER-MONITOR WORKSPACES
+-- ============================================================================
+-- Omarchy 4.5 (default/hypr/monitor-workspaces.lua) gives every monitor its own
+-- block of ten workspace ids (laptop 1-10, next monitor 11-20, ...) and makes
+-- SUPER+N mean "slot N on the focused monitor". Its reconcile() runs on every
+-- reload / monitor event and renumbers any workspace sitting outside its owner's
+-- block -- so the profile rules above (1-5 external, 6-10 laptop) got renamed to
+-- 11-15 and SUPER+6 stayed on the external. There is no setting to turn it off.
+--
+-- Restore the pre-4.5 global model:
+--   1. Stub reconcile. The stock hl.on handlers look up M.reconcile at call time
+--      and o.workspaces IS that table, so this disables all renumbering.
+--   2. Rebind SUPER(+SHIFT)(+ALT)+1..0 to plain global workspace ids.
+-- Couples to Omarchy internals -- see CLAUDE.md registry, check after updates.
+o.workspaces.reconcile = function() end
+for ws = 1, 10 do
+  local key = "code:" .. (ws + 9)
+  local id = tostring(ws)
+  o.rebind("SUPER + " .. key, "Switch to workspace " .. ws, hl.dsp.focus({ workspace = id }))
+  o.rebind("SUPER + SHIFT + " .. key, "Move window to workspace " .. ws, hl.dsp.window.move({ workspace = id, follow = true }))
+  o.rebind(
+    "SUPER + SHIFT + ALT + " .. key,
+    "Move window silently to workspace " .. ws,
+    hl.dsp.window.move({ workspace = id, follow = false })
+  )
+end

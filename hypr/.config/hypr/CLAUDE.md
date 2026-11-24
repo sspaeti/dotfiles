@@ -41,7 +41,7 @@ repo, not hypr). Created with `omarchy plugin clone`; the stock plugin is disabl
 | `sspaeti.clock` | `/usr/share/omarchy/shell/plugins/panels/clock/` | Custom `BarWidget.qml` (clock format). |
 | `sspaeti.weather` | `/usr/share/omarchy/shell/plugins/panels/weather/` | Custom `BarWidget.qml`. |
 | `sspaeti.agents` | Omarchy **4.0.6** `/usr/share/omarchy/shell/plugins/agents/` (from `/var/cache/pacman/pkg/omarchy-4.0.6-1-x86_64.pkg.tar.zst`, NOT the current 4.5 one) | Deliberately frozen at the 4.0 layout: provider tabs, limits, tokens by day, tokens by model. 4.5 replaced that with a provider list plus Theme/Plugin/App "starter prompt" buttons. Only change: `ipcTarget` is `sspaeti.agents`. Data still comes from the stock `omarchy-agent-usage-update` collectors (`~/.local/state/omarchy/agents/usage/*.json`, which need `modelUsage`/`limits`/`recentDays`). Stock `omarchy.agents` is in `disabledPlugins`. After updates, check that the record fields still exist (`jq keys ~/.local/state/omarchy/agents/usage/claude.json`). Drift diffing against upstream doesn't apply. |
-| `sspaeti.workspaces` | `/usr/share/omarchy/shell/plugins/bar/widgets/Workspaces.qml` | Custom `Workspaces.qml` rendering. |
+| `sspaeti.workspaces` | `/usr/share/omarchy/shell/plugins/bar/widgets/Workspaces.qml` (pre-4.5 base; 4.5 upstream is per-monitor-block based and NOT used, see 3c) | Global ids 1-10. Each bar shows only its monitor's share: 2+ monitors → external 1-5, eDP 6-10; single monitor → 1-10; plus any workspace currently on that monitor. Active glyph = workspace *shown* on that monitor (not just the focused one). Monitor via `QsWindow.window.screen` + `Hyprland.monitorFor` (borrowed from 4.5 upstream). If the split in `monitors.lua` profiles changes, update `workspaceIds()`. |
 
 Check (per plugin): `diff -ru --exclude=manifest.json <upstream-dir> ~/.config/omarchy/plugins/<clone>/`
 (`manifest.json` always differs: id/clonedFrom rewrite. For `sspaeti.workspaces`, diff `Workspaces.qml` against the single upstream file.)
@@ -115,6 +115,25 @@ hyprctl eval 'hl.monitor({ output = "<ext>", mode = "...", position = "auto", sc
 sleep 6 && hyprctl monitors -j | jq -r '.[] | "\(.name) \(.x)x\(.y) \(.scale)"'  # must not have reverted
 ~/.config/hypr/sspaeti/monitor-scale.sh reset && hyprctl reload   # Samsung 2, Dell 1.6, laptop 1.6
 ```
+
+## 3c. Opt-out of Omarchy 4.5 per-monitor workspaces (medium drift risk)
+
+Omarchy 4.5 `default/hypr/monitor-workspaces.lua` gives each monitor a block of ten
+ids (laptop 1-10, next 11-20; blocks persisted in `~/.local/state/omarchy/monitor-workspaces`)
+and binds SUPER+N to "slot N on the focused monitor". Its `reconcile()` renumbers on every
+reload/monitor event, which broke our profile rules (1-5 external, 6-10 laptop → renamed to 11-15).
+No config switch exists (`SLOTS = 10` is a local).
+
+End of `monitors.lua` restores the pre-4.5 global model:
+- `o.workspaces.reconcile = function() end` — stock `hl.on` handlers call `M.reconcile`
+  at runtime and `o.workspaces` is `M`, so this stops all renumbering.
+- `o.rebind` SUPER / SUPER+SHIFT / SUPER+SHIFT+ALT + `code:10..19` to plain
+  `hl.dsp.focus` / `hl.dsp.window.move` with global ids.
+
+Check after `omarchy update`: `grep -n "M.reconcile\|o.workspaces = M\|code:" /usr/share/omarchy/default/hypr/monitor-workspaces.lua /usr/share/omarchy/default/hypr/bindings/tiling.lua`
+— handlers must still call `M.reconcile(...)` via the table (not a local function), and stock
+workspace binds must still be keyed `SUPER + code:N`. Verify live: `hyprctl reload; hyprctl workspaces -j | jq -c '.[]|{id,monitor}'` → 1-5 on external, 6-10 on eDP-1, nothing ≥11.
+If workspaces ever end up as 11-15 again: `hyprctl dispatch 'hl.dsp.workspace.change_id({ workspace = "11", id = 1 })'` etc.
 
 (`omarchy-update-sspaeti` deleted 2026-08-24: its `mise deactivate` was a no-op when run as a
 script — the subcommand only prints shell code — and upstream `omarchy-update` now has an
