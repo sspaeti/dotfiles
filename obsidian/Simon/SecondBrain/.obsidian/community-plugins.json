@@ -3,7 +3,6 @@
   "obsidian-hider",
   "templater-obsidian",
   "obsidian-admonition",
-  "nldates-obsidian",
   "obsidian-pandoc",
   "obsidian-projects",
   "obsidian-style-settings",
@@ -33,6 +32,7 @@
   "omnisearch",
   "remember-cursor-position",
   "cursor-smith",
-  "fast-find",
-  "obsidian-scroll-offset"
+  "obsidian-scroll-offset",
+  "nldates-obsidian",
+  "fast-find"
 ]
