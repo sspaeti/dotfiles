@@ -94,6 +94,7 @@ o.bind_toggle("SUPER + CTRL + N", "Toggle nightlight", "nightlight")
 
 -- o.bind("SUPER + A", "Activity", { tui = "btop" })
 hl.unbind("SUPER + A")
+o.bind("SUPER + A", "Agent IDE drawer (tmux)", ssp .. "/jump-to-email-tmux.sh agent-ide-nvim:drawer")
 hl.unbind("SUPER + SHIFT + A") -- default: ChatGPT
 o.bind("SUPER + SHIFT + A", "Activity", { tui = "btop" })
 o.bind("SUPER + D", "Docker", { tui = "lazydocker" })

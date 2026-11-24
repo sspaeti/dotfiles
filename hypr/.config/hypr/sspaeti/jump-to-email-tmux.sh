@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Jump to the terminal window hosting tmux and switch to the email session.
 
-SESSION_TARGET="neomd:reading" # Change this if your session name is different
+SESSION_TARGET="${1:-neomd:reading}" # optional arg, e.g. agent-ide-nvim:drawer
 
 # QUATTRO NOTE: with the Lua config, `hyprctl dispatch` parses its argument as
 # Lua, not the old conf syntax. `hyprctl dispatch focuswindow "address:0x.."`
