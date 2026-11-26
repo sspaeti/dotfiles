@@ -1,17 +1,69 @@
 {
   "bar": {
+    "background": "opaque",
     "layout": {
       "center": [
         {
-          "id": "tmn73.calendar",
           "announceLeadMinutes": 5,
           "format": "ddd d MMM HH:mm",
           "formatAlt": "dddd HH:mm 'W'ww",
-          "verticalFormat": "HH\n—\nmm",
-          "showYearProgress": true,
+          "id": "tmn73.calendar",
           "lifeExpectancy": 85,
           "showWorkingLocation": false,
+          "showYearProgress": true,
+          "verticalFormat": "HH\n—\nmm",
           "weekStartDay": "Monday"
+        }
+      ],
+      "centerBegin": [
+        {
+          "id": "omarchy.indicators"
+        }
+      ],
+      "centerEnd": [
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "homeZones": [
+            "Europe/Zurich",
+            "Europe/Berlin"
+          ],
+          "hoverExpand": false,
+          "id": "io.github.sspaeti.timezones",
+          "zones": [
+            {
+              "home": true,
+              "label": "Switzerland",
+              "shortLabel": "CH",
+              "zone": ""
+            },
+            {
+              "label": "East Coast",
+              "shortLabel": "NY",
+              "zone": "America/New_York"
+            },
+            {
+              "label": "West Coast",
+              "shortLabel": "SF",
+              "zone": "America/Los_Angeles"
+            },
+            {
+              "abbr": "PHT",
+              "label": "Cagayan de Oro",
+              "shortLabel": "CDO",
+              "zone": "Asia/Manila"
+            }
+          ]
+        },
+        {
+          "alertMinIntensity": "Heavy",
+          "alertRadiusKm": 50,
+          "alertsEnabled": true,
+          "id": "eduardodallecort.weather-radar"
+        },
+        {
+          "id": "sspaeti.weather"
         }
       ],
       "left": [
@@ -30,8 +82,16 @@
           "id": "omarchy.keyboard-layout"
         },
         {
-          "id": "io.github.tyrichards.tray",
           "hidden": [],
+          "id": "io.github.tyrichards.tray",
+          "order": [
+            "zeru.portwatch",
+            "omaplug",
+            "quickshell.spotify",
+            "castr.indicator",
+            "jankeesvw.time-machine",
+            "io.github.kristoferlund.webcam"
+          ],
           "showTrayIcons": true,
           "widgets": [
             {
@@ -46,18 +106,18 @@
             },
             {
               "entry": {
-                "id": "quickshell.spotify",
+                "audioQuality": "320 kbps",
                 "deviceName": "Omarchy Spotify",
+                "id": "quickshell.spotify",
                 "idleShutdownMinutes": 15,
-                "showMiniPlayer": "On",
-                "shortcutPlayer": "Omarchy Music app",
-                "shortcutHints": "Off",
-                "showTrackTitle": "Off",
-                "showArtistName": "Off",
+                "maxBarTextWidth": "240",
                 "scrollBarText": "Off",
                 "scrollSpeed": "1",
-                "maxBarTextWidth": "240",
-                "audioQuality": "320 kbps"
+                "shortcutHints": "Off",
+                "shortcutPlayer": "Omarchy Music app",
+                "showArtistName": "Off",
+                "showMiniPlayer": "On",
+                "showTrackTitle": "Off"
               }
             },
             {
@@ -75,34 +135,26 @@
                 "id": "io.github.kristoferlund.webcam"
               }
             }
-          ],
-          "order": [
-            "zeru.portwatch",
-            "omaplug",
-            "quickshell.spotify",
-            "castr.indicator",
-            "jankeesvw.time-machine",
-            "io.github.kristoferlund.webcam"
           ]
         },
         {
           "id": "io.github.sspaeti.neomd"
         },
         {
-          "id": "io.github.sspaeti.goatcounter",
-          "hoverExpand": false,
-          "siteLabels": {
-            "dedp": "DEDP"
+          "alertDailyViews": {
+            "dedp": 150,
+            "ssp.sh": 1000
           },
           "alertHourlyViews": {
-            "ssp.sh": 100,
-            "dedp": 20
+            "dedp": 20,
+            "ssp.sh": 100
           },
-          "alertDailyViews": {
-            "ssp.sh": 1000,
-            "dedp": 150
-          },
-          "refreshMinutes": 15
+          "hoverExpand": false,
+          "id": "io.github.sspaeti.goatcounter",
+          "refreshMinutes": 15,
+          "siteLabels": {
+            "dedp": "DEDP"
+          }
         },
         {
           "id": "omarchy.tailscale"
@@ -126,12 +178,12 @@
           "id": "omarchy.monitor"
         },
         {
-          "id": "cpu-temp",
-          "type": "command",
           "exec": "~/.config/omarchy/bar/scripts/cpu-temp.sh",
+          "id": "cpu-temp",
           "interval": 5,
           "onClick": "omarchy-launch-or-focus-tui btop",
-          "onRightClick": "omarchy-launch-or-focus tuxedo tuxedo-control-center"
+          "onRightClick": "omarchy-launch-or-focus tuxedo tuxedo-control-center",
+          "type": "command"
         },
         {
           "id": "sspaeti.tuxedo-profile"
@@ -140,66 +192,27 @@
           "id": "io.github.sspaeti.battery"
         }
       ],
-      "centerBegin": [
-        {
-          "id": "omarchy.indicators"
-        }
-      ],
-      "centerEnd": [
-        {
-          "id": "omarchy.system-update"
-        },
-        {
-          "id": "io.github.sspaeti.timezones",
-          "hoverExpand": false,
-          "homeZones": [
-            "Europe/Zurich",
-            "Europe/Berlin"
-          ],
-          "zones": [
-            {
-              "label": "Switzerland",
-              "shortLabel": "CH",
-              "zone": "",
-              "home": true
-            },
-            {
-              "label": "East Coast",
-              "shortLabel": "NY",
-              "zone": "America/New_York"
-            },
-            {
-              "label": "West Coast",
-              "shortLabel": "SF",
-              "zone": "America/Los_Angeles"
-            },
-            {
-              "label": "Cagayan de Oro",
-              "shortLabel": "CDO",
-              "zone": "Asia/Manila",
-              "abbr": "PHT"
-            }
-          ]
-        },
-        {
-          "id": "eduardodallecort.weather-radar",
-          "alertMinIntensity": "Heavy",
-          "alertRadiusKm": 50,
-          "alertsEnabled": true
-        },
-        {
-          "id": "sspaeti.weather"
-        }
-      ],
       "tray": [
         {
           "id": "superwhisper.panel"
         }
       ]
     },
-    "position": "top",
-    "transparent": false
+    "position": "top"
   },
+  "cloneSourceRestores": [
+    "sspaeti.emojis",
+    "sspaeti.clipboard",
+    "sspaeti.idle",
+    "io.github.sirjul1337.lock-explorer"
+  ],
+  "disabledPlugins": [
+    "omarchy.emojis",
+    "omarchy.clipboard",
+    "omarchy.idle",
+    "omarchy.lock",
+    "omarchy.agents"
+  ],
   "idle": {
     "lock": 600,
     "screensaver": 600
@@ -209,10 +222,10 @@
       "id": "sspaeti.emojis"
     },
     {
-      "id": "sspaeti.clipboard",
-      "historyLimit": 2000,
-      "maxRows": 100,
       "autoPaste": false,
+      "historyLimit": 2000,
+      "id": "sspaeti.clipboard",
+      "maxRows": 100,
       "ocr": true,
       "ocrLang": "eng+deu"
     },
@@ -238,9 +251,9 @@
       "id": "omarchy.tray"
     },
     {
-      "id": "io.github.sirjul1337.lock-explorer",
       "avatar": "/home/sspaeti/Simon/Sync/Pics/Profile Photos/Programming/me_programming_swissalps_q.jpg",
-      "design": "poster"
+      "design": "poster",
+      "id": "io.github.sirjul1337.lock-explorer"
     },
     {
       "id": "zeru.portwatch"
@@ -252,18 +265,5 @@
       "id": "io.voxtype.settings"
     }
   ],
-  "version": 1,
-  "disabledPlugins": [
-    "omarchy.emojis",
-    "omarchy.clipboard",
-    "omarchy.idle",
-    "omarchy.lock",
-    "omarchy.agents"
-  ],
-  "cloneSourceRestores": [
-    "sspaeti.emojis",
-    "sspaeti.clipboard",
-    "sspaeti.idle",
-    "io.github.sirjul1337.lock-explorer"
-  ]
+  "version": 1
 }
