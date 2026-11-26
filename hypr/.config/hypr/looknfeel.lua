@@ -33,12 +33,13 @@ hl.config({
 -- --------WINDOWS-------------------
 --
 -- Just dash of opacity.
--- Omarchy tags every window "+default-opacity" and lets apps opt out with
--- "-default-opacity" (media players, etc). Targeting the tag instead of ".*"
--- keeps those opt-outs working while still overriding Omarchy's own value,
--- because this file loads after the defaults.
+-- Omarchy 4.5 dropped the "default-opacity" tag that every window used to
+-- carry. Only terminals, 1Password, Nautilus and omawrite are see-through now
+-- (tag "transparent-window", 0.985 0.96), everything else is opaque. So match
+-- every class here, and the tag as well so Omarchy's stronger value loses.
 -- Default transparency/translusent (0.99 is transparency 1.2%, 3/255, 0996 is 0.4%, 1/255)
-o.window({ tag = "default-opacity" }, { opacity = "0.996 0.996 1.0" })
+o.window(".*", { opacity = "0.996 0.996 1.0" })
+o.window({ tag = "transparent-window" }, { opacity = "0.996 0.996 1.0" })
 o.window("^(Chromium|chromium|google-chrome|google-chrome-unstable)$", { opacity = "1 0.996 1.0" })
 
 -- Clipboard -floating
